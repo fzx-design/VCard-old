@@ -7,6 +7,7 @@
 //
 
 #import "PushBoxAppDelegate.h"
+#import "WeiboClient.h"
 
 @implementation PushBoxAppDelegate
 
@@ -19,6 +20,11 @@
 {
     // Override point for customization after application launch.
     [self.window makeKeyAndVisible];
+    
+    WeiboClient *client = [WeiboClient client];
+    
+    [client authWithUsername:@"david092956@gmail.com" password:@"660606xc" autosave:YES];
+    
     return YES;
 }
 

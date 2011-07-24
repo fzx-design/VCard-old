@@ -1,4 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="562" systemVersion="11A511" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Comment">
+        <attribute name="createdAt" attributeType="Date"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="source" optional="YES" attributeType="String"/>
+        <attribute name="text" attributeType="String"/>
+        <relationship name="author" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="comments" inverseEntity="User"/>
+        <relationship name="targetStatus" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Status" inverseName="comments" inverseEntity="Status"/>
+    </entity>
+    <entity name="Status">
+        <attribute name="bmiddlePicURL" optional="YES" attributeType="String"/>
+        <attribute name="createdAt" attributeType="Date"/>
+        <attribute name="favorited" optional="YES" attributeType="Boolean"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="originalPicURL" optional="YES" attributeType="String"/>
+        <attribute name="source" optional="YES" attributeType="String"/>
+        <attribute name="text" attributeType="String"/>
+        <attribute name="thumbnailPicURL" optional="YES" attributeType="String"/>
+        <relationship name="author" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="statuses" inverseEntity="User"/>
+        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="targetStatus" inverseEntity="Comment"/>
+        <relationship name="repostStatus" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Status"/>
+    </entity>
+    <entity name="User">
+        <attribute name="blogURL" optional="YES" attributeType="String"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date"/>
+        <attribute name="domainURL" optional="YES" attributeType="String"/>
+        <attribute name="favouritesCount" optional="YES" attributeType="String"/>
+        <attribute name="followersCount" optional="YES" attributeType="String"/>
+        <attribute name="following" optional="YES" attributeType="Boolean"/>
+        <attribute name="friendsCount" optional="YES" attributeType="String"/>
+        <attribute name="gender" optional="YES" attributeType="String"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="location" optional="YES" attributeType="String"/>
+        <attribute name="profileImageURL" optional="YES" attributeType="String"/>
+        <attribute name="screenName" attributeType="String"/>
+        <attribute name="selfDescription" optional="YES" attributeType="String"/>
+        <attribute name="statusesCount" optional="YES" attributeType="String"/>
+        <attribute name="verified" optional="YES" attributeType="Boolean"/>
+        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="author" inverseEntity="Comment"/>
+        <relationship name="statuses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Status" inverseName="author" inverseEntity="Status"/>
+    </entity>
+    <elements>
+        <element name="Status" positionX="223" positionY="81" width="128" height="210"/>
+        <element name="User" positionX="-18" positionY="414" width="128" height="300"/>
+        <element name="Comment" positionX="-11" positionY="207" width="128" height="135"/>
+    </elements>
 </model>

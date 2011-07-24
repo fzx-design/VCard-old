@@ -161,10 +161,9 @@
 				CBDA5B1B13DBECBC00FAE221 /* ASIHTTPRequest */,
 				CBDA5B3213DBECBD00FAE221 /* JSON */,
 				CBDA5B5B13DBECFF00FAE221 /* WeiboClient */,
+				CBDA5B5C13DBED1600FAE221 /* Nibs */,
 				CBDA5B0313DBEC1300FAE221 /* PushBoxAppDelegate.h */,
 				CBDA5B0413DBEC1300FAE221 /* PushBoxAppDelegate.m */,
-				CBDA5B5C13DBED1600FAE221 /* Nibs */,
-				CBDA5B0913DBEC1300FAE221 /* PushBox.xcdatamodeld */,
 				CBDA5AFB13DBEC1300FAE221 /* Supporting Files */,
 			);
 			path = PushBox;
@@ -173,6 +172,7 @@
 		CBDA5AFB13DBEC1300FAE221 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CBDA5B0913DBEC1300FAE221 /* PushBox.xcdatamodeld */,
 				CBDA5AFC13DBEC1300FAE221 /* PushBox-Info.plist */,
 				CBDA5AFD13DBEC1300FAE221 /* InfoPlist.strings */,
 				CBDA5B0013DBEC1300FAE221 /* main.m */,
