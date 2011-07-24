@@ -34,6 +34,11 @@
 		CBDA5B4913DBECBD00FAE221 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B3913DBECBD00FAE221 /* SBJsonBase.m */; };
 		CBDA5B4A13DBECBD00FAE221 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B3B13DBECBD00FAE221 /* SBJsonParser.m */; };
 		CBDA5B4B13DBECBD00FAE221 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B3D13DBECBD00FAE221 /* SBJsonWriter.m */; };
+		CBDA5B5613DBECEE00FAE221 /* OARequestParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B4D13DBECEE00FAE221 /* OARequestParameter.m */; };
+		CBDA5B5713DBECEE00FAE221 /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B4E13DBECEE00FAE221 /* Base64Transcoder.c */; };
+		CBDA5B5813DBECEE00FAE221 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B5113DBECEE00FAE221 /* NSString+URLEncoding.m */; };
+		CBDA5B5913DBECEE00FAE221 /* OAuthHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B5313DBECEE00FAE221 /* OAuthHTTPRequest.m */; };
+		CBDA5B5A13DBECEE00FAE221 /* WeiboClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B5513DBECEE00FAE221 /* WeiboClient.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,7 +58,6 @@
 		CBDA5B1113DBEC2500FAE221 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		CBDA5B1313DBEC2B00FAE221 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CBDA5B1513DBEC3A00FAE221 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		CBDA5B1713DBEC4400FAE221 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = usr/lib/libz.1.dylib; sourceTree = SDKROOT; };
 		CBDA5B1913DBEC4D00FAE221 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		CBDA5B1C13DBECBC00FAE221 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		CBDA5B1D13DBECBC00FAE221 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
@@ -88,6 +92,16 @@
 		CBDA5B3B13DBECBD00FAE221 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
 		CBDA5B3C13DBECBD00FAE221 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		CBDA5B3D13DBECBD00FAE221 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		CBDA5B4C13DBECEE00FAE221 /* OARequestParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OARequestParameter.h; sourceTree = "<group>"; };
+		CBDA5B4D13DBECEE00FAE221 /* OARequestParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OARequestParameter.m; sourceTree = "<group>"; };
+		CBDA5B4E13DBECEE00FAE221 /* Base64Transcoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Base64Transcoder.c; sourceTree = "<group>"; };
+		CBDA5B4F13DBECEE00FAE221 /* Base64Transcoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Transcoder.h; sourceTree = "<group>"; };
+		CBDA5B5013DBECEE00FAE221 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
+		CBDA5B5113DBECEE00FAE221 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };
+		CBDA5B5213DBECEE00FAE221 /* OAuthHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthHTTPRequest.h; sourceTree = "<group>"; };
+		CBDA5B5313DBECEE00FAE221 /* OAuthHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthHTTPRequest.m; sourceTree = "<group>"; };
+		CBDA5B5413DBECEE00FAE221 /* WeiboClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboClient.h; sourceTree = "<group>"; };
+		CBDA5B5513DBECEE00FAE221 /* WeiboClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboClient.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,7 +144,6 @@
 			isa = PBXGroup;
 			children = (
 				CBDA5B1913DBEC4D00FAE221 /* libz.1.2.3.dylib */,
-				CBDA5B1713DBEC4400FAE221 /* libz.1.dylib */,
 				CBDA5B1513DBEC3A00FAE221 /* CFNetwork.framework */,
 				CBDA5B1313DBEC2B00FAE221 /* SystemConfiguration.framework */,
 				CBDA5B1113DBEC2500FAE221 /* MobileCoreServices.framework */,
@@ -147,9 +160,10 @@
 			children = (
 				CBDA5B1B13DBECBC00FAE221 /* ASIHTTPRequest */,
 				CBDA5B3213DBECBD00FAE221 /* JSON */,
+				CBDA5B5B13DBECFF00FAE221 /* WeiboClient */,
 				CBDA5B0313DBEC1300FAE221 /* PushBoxAppDelegate.h */,
 				CBDA5B0413DBEC1300FAE221 /* PushBoxAppDelegate.m */,
-				CBDA5B0613DBEC1300FAE221 /* MainWindow.xib */,
+				CBDA5B5C13DBED1600FAE221 /* Nibs */,
 				CBDA5B0913DBEC1300FAE221 /* PushBox.xcdatamodeld */,
 				CBDA5AFB13DBEC1300FAE221 /* Supporting Files */,
 			);
@@ -212,6 +226,31 @@
 				CBDA5B3D13DBECBD00FAE221 /* SBJsonWriter.m */,
 			);
 			path = JSON;
+			sourceTree = "<group>";
+		};
+		CBDA5B5B13DBECFF00FAE221 /* WeiboClient */ = {
+			isa = PBXGroup;
+			children = (
+				CBDA5B4C13DBECEE00FAE221 /* OARequestParameter.h */,
+				CBDA5B4D13DBECEE00FAE221 /* OARequestParameter.m */,
+				CBDA5B4E13DBECEE00FAE221 /* Base64Transcoder.c */,
+				CBDA5B4F13DBECEE00FAE221 /* Base64Transcoder.h */,
+				CBDA5B5013DBECEE00FAE221 /* NSString+URLEncoding.h */,
+				CBDA5B5113DBECEE00FAE221 /* NSString+URLEncoding.m */,
+				CBDA5B5213DBECEE00FAE221 /* OAuthHTTPRequest.h */,
+				CBDA5B5313DBECEE00FAE221 /* OAuthHTTPRequest.m */,
+				CBDA5B5413DBECEE00FAE221 /* WeiboClient.h */,
+				CBDA5B5513DBECEE00FAE221 /* WeiboClient.m */,
+			);
+			name = WeiboClient;
+			sourceTree = "<group>";
+		};
+		CBDA5B5C13DBED1600FAE221 /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				CBDA5B0613DBEC1300FAE221 /* MainWindow.xib */,
+			);
+			name = Nibs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,6 +332,11 @@
 				CBDA5B4913DBECBD00FAE221 /* SBJsonBase.m in Sources */,
 				CBDA5B4A13DBECBD00FAE221 /* SBJsonParser.m in Sources */,
 				CBDA5B4B13DBECBD00FAE221 /* SBJsonWriter.m in Sources */,
+				CBDA5B5613DBECEE00FAE221 /* OARequestParameter.m in Sources */,
+				CBDA5B5713DBECEE00FAE221 /* Base64Transcoder.c in Sources */,
+				CBDA5B5813DBECEE00FAE221 /* NSString+URLEncoding.m in Sources */,
+				CBDA5B5913DBECEE00FAE221 /* OAuthHTTPRequest.m in Sources */,
+				CBDA5B5A13DBECEE00FAE221 /* WeiboClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
