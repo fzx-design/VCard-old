@@ -16,6 +16,10 @@
 		CBDA5B0513DBEC1300FAE221 /* PushBoxAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B0413DBEC1300FAE221 /* PushBoxAppDelegate.m */; };
 		CBDA5B0813DBEC1300FAE221 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBDA5B0613DBEC1300FAE221 /* MainWindow.xib */; };
 		CBDA5B0B13DBEC1300FAE221 /* PushBox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B0913DBEC1300FAE221 /* PushBox.xcdatamodeld */; };
+		CBDA5B1213DBEC2500FAE221 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBDA5B1113DBEC2500FAE221 /* MobileCoreServices.framework */; };
+		CBDA5B1413DBEC2B00FAE221 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBDA5B1313DBEC2B00FAE221 /* SystemConfiguration.framework */; };
+		CBDA5B1613DBEC3A00FAE221 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBDA5B1513DBEC3A00FAE221 /* CFNetwork.framework */; };
+		CBDA5B1A13DBEC4D00FAE221 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CBDA5B1913DBEC4D00FAE221 /* libz.1.2.3.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,14 +28,19 @@
 		CBDA5AF413DBEC1300FAE221 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CBDA5AF613DBEC1300FAE221 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CBDA5AF813DBEC1300FAE221 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		CBDA5AFC13DBEC1300FAE221 /* PushBox-Info.plist */ = {isa = PBXFileReference; path = "PushBox-Info.plist"; sourceTree = "<group>"; };
+		CBDA5AFC13DBEC1300FAE221 /* PushBox-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PushBox-Info.plist"; sourceTree = "<group>"; };
 		CBDA5AFE13DBEC1300FAE221 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CBDA5B0013DBEC1300FAE221 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		CBDA5B0213DBEC1300FAE221 /* PushBox-Prefix.pch */ = {isa = PBXFileReference; path = "PushBox-Prefix.pch"; sourceTree = "<group>"; };
-		CBDA5B0313DBEC1300FAE221 /* PushBoxAppDelegate.h */ = {isa = PBXFileReference; path = PushBoxAppDelegate.h; sourceTree = "<group>"; };
+		CBDA5B0213DBEC1300FAE221 /* PushBox-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PushBox-Prefix.pch"; sourceTree = "<group>"; };
+		CBDA5B0313DBEC1300FAE221 /* PushBoxAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushBoxAppDelegate.h; sourceTree = "<group>"; };
 		CBDA5B0413DBEC1300FAE221 /* PushBoxAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PushBoxAppDelegate.m; sourceTree = "<group>"; };
 		CBDA5B0713DBEC1300FAE221 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		CBDA5B0A13DBEC1300FAE221 /* PushBox.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PushBox.xcdatamodel; sourceTree = "<group>"; };
+		CBDA5B1113DBEC2500FAE221 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		CBDA5B1313DBEC2B00FAE221 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		CBDA5B1513DBEC3A00FAE221 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		CBDA5B1713DBEC4400FAE221 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = usr/lib/libz.1.dylib; sourceTree = SDKROOT; };
+		CBDA5B1913DBEC4D00FAE221 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +48,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBDA5B1A13DBEC4D00FAE221 /* libz.1.2.3.dylib in Frameworks */,
+				CBDA5B1613DBEC3A00FAE221 /* CFNetwork.framework in Frameworks */,
+				CBDA5B1413DBEC2B00FAE221 /* SystemConfiguration.framework in Frameworks */,
+				CBDA5B1213DBEC2500FAE221 /* MobileCoreServices.framework in Frameworks */,
 				CBDA5AF313DBEC1300FAE221 /* UIKit.framework in Frameworks */,
 				CBDA5AF513DBEC1300FAE221 /* Foundation.framework in Frameworks */,
 				CBDA5AF713DBEC1300FAE221 /* CoreGraphics.framework in Frameworks */,
@@ -69,6 +82,11 @@
 		CBDA5AF113DBEC1300FAE221 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CBDA5B1913DBEC4D00FAE221 /* libz.1.2.3.dylib */,
+				CBDA5B1713DBEC4400FAE221 /* libz.1.dylib */,
+				CBDA5B1513DBEC3A00FAE221 /* CFNetwork.framework */,
+				CBDA5B1313DBEC2B00FAE221 /* SystemConfiguration.framework */,
+				CBDA5B1113DBEC2500FAE221 /* MobileCoreServices.framework */,
 				CBDA5AF213DBEC1300FAE221 /* UIKit.framework */,
 				CBDA5AF413DBEC1300FAE221 /* Foundation.framework */,
 				CBDA5AF613DBEC1300FAE221 /* CoreGraphics.framework */,
