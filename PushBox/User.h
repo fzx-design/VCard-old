@@ -14,7 +14,8 @@
 @interface User : NSManagedObject {
 @private
 }
-@property (nonatomic, retain) NSString * id;
+
+@property (nonatomic, retain) NSString * userID;
 @property (nonatomic, retain) NSString * screenName;
 @property (nonatomic, retain) NSString * location;
 @property (nonatomic, retain) NSString * selfDescription;
@@ -31,6 +32,11 @@
 @property (nonatomic, retain) NSNumber * following;
 @property (nonatomic, retain) NSSet *statuses;
 @property (nonatomic, retain) NSSet *comments;
+@property (nonatomic, retain) NSSet *friendsStatuses;
+
++ (User *)insertUser:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context;
++ (User *)userWithID:(NSString *)userID inManagedObjectContext:(NSManagedObjectContext *)context;
+
 @end
 
 @interface User (CoreDataGeneratedAccessors)
@@ -44,5 +50,10 @@
 - (void)removeCommentsObject:(NSManagedObject *)value;
 - (void)addComments:(NSSet *)values;
 - (void)removeComments:(NSSet *)values;
+
+- (void)addFriendsStatusesObject:(Status *)value;
+- (void)removeFriendsStatusesObject:(Status *)value;
+- (void)addFriendsStatuses:(NSSet *)values;
+- (void)removeFriendsStatuses:(NSSet *)values;
 
 @end

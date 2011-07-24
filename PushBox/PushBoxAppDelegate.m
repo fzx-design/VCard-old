@@ -8,6 +8,7 @@
 
 #import "PushBoxAppDelegate.h"
 #import "WeiboClient.h"
+#import "Status.h"
 
 @implementation PushBoxAppDelegate
 
@@ -22,8 +23,13 @@
     [self.window makeKeyAndVisible];
     
     WeiboClient *client = [WeiboClient client];
-    
-    [client authWithUsername:@"david092956@gmail.com" password:@"660606xc" autosave:YES];
+
+    if ([client authorized]) {
+        [client setCompletionBlock:^(WeiboClient *client) {
+            NSLog(@"%@", client.responseJSONObject);
+        }];
+        [client getUser:@"1751197843"];
+    }
     
     return YES;
 }

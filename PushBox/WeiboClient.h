@@ -36,9 +36,17 @@ typedef void (^WCCompletionBlock)(WeiboClient *client);
 + (id)client;
 
 // return true if user already logged in
-+ (BOOL)authorized;
-+ (void)signout;
+- (BOOL)authorized;
+- (void)signout;
 
 - (void)authWithUsername:(NSString *)username password:(NSString *)password autosave:(BOOL)autosave;
+
+- (void)getFollowedTimelineSinceID:(NSString *)sinceID 
+					 withMaximumID:(NSString *)maxID 
+                    startingAtPage:(int)page 
+                             count:(int)count
+                           feature:(int)feature;
+
+- (void)getUser:(NSString *)userID;
 
 @end

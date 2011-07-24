@@ -14,7 +14,7 @@
 @interface Comment : NSManagedObject {
 @private
 }
-@property (nonatomic, retain) NSString * id;
+@property (nonatomic, retain) NSString * commentID;
 @property (nonatomic, retain) NSString * text;
 @property (nonatomic, retain) NSString * source;
 @property (nonatomic, retain) NSDate * createdAt;

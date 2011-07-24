@@ -13,9 +13,11 @@
 
 @interface Status : NSManagedObject {
 @private
+    
 }
+
 @property (nonatomic, retain) NSDate * createdAt;
-@property (nonatomic, retain) NSString * id;
+@property (nonatomic, retain) NSString * statusID;
 @property (nonatomic, retain) NSString * text;
 @property (nonatomic, retain) NSString * source;
 @property (nonatomic, retain) NSNumber * favorited;
@@ -25,6 +27,11 @@
 @property (nonatomic, retain) NSManagedObject *author;
 @property (nonatomic, retain) Status *repostStatus;
 @property (nonatomic, retain) NSSet *comments;
+@property (nonatomic, retain) NSManagedObject *isFriendsStatusOf;
+
++ (Status *)insertStatus:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context;
++ (Status *)statusWithID:(NSString *)statudID inManagedObjectContext:(NSManagedObjectContext *)context;
+
 @end
 
 @interface Status (CoreDataGeneratedAccessors)

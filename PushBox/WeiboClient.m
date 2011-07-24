@@ -35,8 +35,9 @@ typedef enum {
 @property (nonatomic, retain) OAuthHTTPRequest *request;
 @property (nonatomic, assign) HTTPMethod httpMethod;
 @property (nonatomic, assign, getter=isSynchronized) BOOL synchronized;
+@property (nonatomic, copy) WCCompletionBlock preCompletionBlock;
 
-+ (void)setTokenWithHTTPResponseString:(NSString *)responseString;
+- (void)setTokenWithHTTPResponseString:(NSString *)responseString;
 - (void)buildURL;
 - (void)sendRequest;
 
@@ -51,6 +52,7 @@ typedef enum {
 @synthesize path = _path;
 @synthesize httpMethod = _httpMethod;
 @synthesize synchronized = _synchronized;
+@synthesize preCompletionBlock = _preCompletionBlock;
 
 @synthesize responseJSONObject = _responseJSONObject;
 @synthesize completionBlock = _completionBlock;
@@ -58,7 +60,7 @@ typedef enum {
 @synthesize hasError = _hasError;
 @synthesize errorDesc = _errorDesc;
 
-+ (void)setTokenWithHTTPResponseString:(NSString *)responseString
+- (void)setTokenWithHTTPResponseString:(NSString *)responseString
 {
     NSArray *pairs = [responseString componentsSeparatedByString:@"&"];
     
@@ -66,8 +68,10 @@ typedef enum {
         NSArray *elements = [pair componentsSeparatedByString:@"="];
         if ([[elements objectAtIndex:0] isEqualToString:@"oauth_token"]) {
             OAuthTokenKey = [[elements objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            self.request.oauthTokenKey = OAuthTokenKey;
         } else if ([[elements objectAtIndex:0] isEqualToString:@"oauth_token_secret"]) {
             OAuthTokenSecret = [[elements objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            self.request.oauthTokenSecret = OAuthTokenSecret;
         } else if ([[elements objectAtIndex:0] isEqualToString:@"user_id"]) {
             UserID = [elements objectAtIndex:1];
         }
@@ -90,6 +94,7 @@ typedef enum {
     _hasError = NO;
     _responseStatusCode = 0;
     _synchronized = NO;
+    _httpMethod = HTTPMethodGet;
     
     _request = [[OAuthHTTPRequest alloc] initWithURL:nil];
     _request.consumerKey = AppKey;
@@ -110,6 +115,7 @@ typedef enum {
     [_completionBlock release];
     [_path release];
     [_errorDesc release];
+    [_preCompletionBlock release];
     [super dealloc];
 }
 
@@ -117,6 +123,9 @@ typedef enum {
 
 - (void)reportCompletion
 {
+    if (_preCompletionBlock) {
+        _preCompletionBlock(self);
+    }
     if (_completionBlock) {
         _completionBlock(self);
     }
@@ -125,7 +134,7 @@ typedef enum {
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
     NSLog(@"Request Finished");
-    NSLog(@"Response raw string:\n%@", [request responseString]);
+    //NSLog(@"Response raw string:\n%@", [request responseString]);
     
     switch (request.responseStatusCode) {
         case 401: // Not Authorized: either you need to provide authentication credentials, or the credentials provided aren't valid.
@@ -217,7 +226,7 @@ report_completion:
                           self.secureConnection ? @"https" : @"http", 
                           APIDomain, self.path];
     
-    if (self.httpMethod == HTTPMethodGet) {
+    if (self.httpMethod == HTTPMethodGet && [self.params count]) {
         url = [NSString stringWithFormat:@"%@?%@", url, [self queryString]];
     }
 
@@ -263,7 +272,7 @@ report_completion:
 
 #pragma mark APIs
 
-+ (BOOL)authorized
+- (BOOL)authorized
 {
     if (UserID != nil) {
         return YES;
@@ -272,13 +281,13 @@ report_completion:
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSString *tokenResponseString = [ud objectForKey:kUserDefaultKeyTokenResponseString];
     if (tokenResponseString) {
-        [self.class setTokenWithHTTPResponseString:tokenResponseString];
+        [self setTokenWithHTTPResponseString:tokenResponseString];
     }
     
     return UserID != nil;
 }
 
-+ (void)signout
+- (void)signout
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setObject:nil forKey:kUserDefaultKeyTokenResponseString];
@@ -293,8 +302,6 @@ report_completion:
 {
     self.path = @"oauth/access_token";
     self.httpMethod = HTTPMethodPost;
-    self.synchronized = YES; //
-    self.request.delegate = nil;
     
     [self.params setObject:username forKey:@"x_auth_username"];
     [self.params setObject:password forKey:@"x_auth_password"];
@@ -302,31 +309,63 @@ report_completion:
     
     self.request.extraOAuthParams = self.params;
     
-    [self sendRequest];
-    
-    if (!self.request.error) {
-        [self.class setTokenWithHTTPResponseString:self.request.responseString];
-        
-        NSLog(@"auth response string: %@", self.request.responseString);
-        
-        if (UserID) {
-            if (autosave) {
-                NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-                [ud setObject:_request.responseString
-                       forKey:kUserDefaultKeyTokenResponseString];
-                [ud synchronize];
+    [self setPreCompletionBlock:^(WeiboClient *client) {
+        if (!client.hasError) {
+            NSString *responseString = [client.responseJSONObject JSONRepresentation];
+            [client setTokenWithHTTPResponseString:responseString];
+            if (UserID) {
+                if (autosave) {
+                    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+                    [ud setObject:responseString
+                           forKey:kUserDefaultKeyTokenResponseString];
+                    [ud synchronize];
+                }
+            }
+            else {
+                self.hasError = YES;
+                self.errorDesc = NSLocalizedString(@"ERROR_AUTH_FAILED", nil);
             }
         }
-        
-        [self reportCompletion];
-    }
-    else {
-        NSLog(@"connection failed");
-    }
+    }];
     
-    [self autorelease];
+    [self sendRequest];
 }
 
+- (void)getFollowedTimelineSinceID:(NSString *)sinceID 
+					 withMaximumID:(NSString *)maxID 
+                    startingAtPage:(int)page 
+                             count:(int)count
+                           feature:(int)feature
+{
+    self.path = @"statuses/friends_timeline.json";
+	
+    if (sinceID) {
+        [self.params setObject:sinceID forKey:@"since_id"];
+    }
+    if (maxID) {
+        [self.params setObject:maxID forKey:@"max_id"];
+    }
+    if (page > 0) {
+        [self.params setObject:[NSString stringWithFormat:@"%d", page] forKey:@"page"];
+    }
+    if (count > 0) {
+        [self.params setObject:[NSString stringWithFormat:@"%d", count] forKey:@"count"];
+    }
+    if (feature > 0) {
+        [self.params setObject:[NSString stringWithFormat:@"%d", feature] forKey:@"feature"];
+    }
+    
+    [self sendRequest];
+}
+
+- (void)getUser:(NSString *)userID
+{
+    self.path = @"users/show.json";
+    
+    [self.params setObject:userID forKey:@"user_id"];
+    
+    [self sendRequest];
+}
 
 @end
 

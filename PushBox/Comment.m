@@ -12,7 +12,7 @@
 
 
 @implementation Comment
-@dynamic id;
+@dynamic commentID;
 @dynamic text;
 @dynamic source;
 @dynamic createdAt;

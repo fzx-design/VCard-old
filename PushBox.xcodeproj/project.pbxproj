@@ -238,12 +238,7 @@
 		CBDA5B5B13DBECFF00FAE221 /* WeiboClient */ = {
 			isa = PBXGroup;
 			children = (
-				CBDA5B4E13DBECEE00FAE221 /* Base64Transcoder.c */,
-				CBDA5B4F13DBECEE00FAE221 /* Base64Transcoder.h */,
-				CBDA5B5013DBECEE00FAE221 /* NSString+URLEncoding.h */,
-				CBDA5B5113DBECEE00FAE221 /* NSString+URLEncoding.m */,
-				CBDA5B5213DBECEE00FAE221 /* OAuthHTTPRequest.h */,
-				CBDA5B5313DBECEE00FAE221 /* OAuthHTTPRequest.m */,
+				CBDA5B6A13DBF79F00FAE221 /* OARequest */,
 				CBDA5B5413DBECEE00FAE221 /* WeiboClient.h */,
 				CBDA5B5513DBECEE00FAE221 /* WeiboClient.m */,
 			);
@@ -269,6 +264,19 @@
 				CBDA5B5E13DBF47D00FAE221 /* Status.m */,
 			);
 			name = "Core Data Models";
+			sourceTree = "<group>";
+		};
+		CBDA5B6A13DBF79F00FAE221 /* OARequest */ = {
+			isa = PBXGroup;
+			children = (
+				CBDA5B4E13DBECEE00FAE221 /* Base64Transcoder.c */,
+				CBDA5B4F13DBECEE00FAE221 /* Base64Transcoder.h */,
+				CBDA5B5013DBECEE00FAE221 /* NSString+URLEncoding.h */,
+				CBDA5B5113DBECEE00FAE221 /* NSString+URLEncoding.m */,
+				CBDA5B5213DBECEE00FAE221 /* OAuthHTTPRequest.h */,
+				CBDA5B5313DBECEE00FAE221 /* OAuthHTTPRequest.m */,
+			);
+			name = OARequest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
