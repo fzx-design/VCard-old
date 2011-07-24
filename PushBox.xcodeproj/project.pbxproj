@@ -41,6 +41,8 @@
 		CBDA5B5F13DBF47D00FAE221 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B5E13DBF47D00FAE221 /* Status.m */; };
 		CBDA5B6213DBF47E00FAE221 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B6113DBF47E00FAE221 /* User.m */; };
 		CBDA5B6513DBF47E00FAE221 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B6413DBF47E00FAE221 /* Comment.m */; };
+		CBDA5B7313DC25C600FAE221 /* CoreDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B7213DC25C500FAE221 /* CoreDataViewController.m */; };
+		CBDA5B7613DC25FA00FAE221 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B7513DC25FA00FAE221 /* CoreDataTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +110,10 @@
 		CBDA5B6113DBF47E00FAE221 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		CBDA5B6313DBF47E00FAE221 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		CBDA5B6413DBF47E00FAE221 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		CBDA5B7113DC25C500FAE221 /* CoreDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataViewController.h; sourceTree = "<group>"; };
+		CBDA5B7213DC25C500FAE221 /* CoreDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataViewController.m; sourceTree = "<group>"; };
+		CBDA5B7413DC25FA00FAE221 /* CoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataTableViewController.h; sourceTree = "<group>"; };
+		CBDA5B7513DC25FA00FAE221 /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +177,10 @@
 				CBDA5B5C13DBED1600FAE221 /* Nibs */,
 				CBDA5B0313DBEC1300FAE221 /* PushBoxAppDelegate.h */,
 				CBDA5B0413DBEC1300FAE221 /* PushBoxAppDelegate.m */,
+				CBDA5B7413DC25FA00FAE221 /* CoreDataTableViewController.h */,
+				CBDA5B7513DC25FA00FAE221 /* CoreDataTableViewController.m */,
+				CBDA5B7113DC25C500FAE221 /* CoreDataViewController.h */,
+				CBDA5B7213DC25C500FAE221 /* CoreDataViewController.m */,
 				CBDA5AFB13DBEC1300FAE221 /* Supporting Files */,
 			);
 			path = PushBox;
@@ -365,6 +375,8 @@
 				CBDA5B5F13DBF47D00FAE221 /* Status.m in Sources */,
 				CBDA5B6213DBF47E00FAE221 /* User.m in Sources */,
 				CBDA5B6513DBF47E00FAE221 /* Comment.m in Sources */,
+				CBDA5B7313DC25C600FAE221 /* CoreDataViewController.m in Sources */,
+				CBDA5B7613DC25FA00FAE221 /* CoreDataTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
