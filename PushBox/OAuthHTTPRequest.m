@@ -9,7 +9,6 @@
 #import "OAuthHTTPRequest.h"
 #import <CommonCrypto/CommonHMAC.h>
 #import "NSString+URLEncoding.h"
-#import "OARequestParameter.h"
 #import "Base64Transcoder.h"
 
 @implementation OAuthHTTPRequest
@@ -75,26 +74,37 @@
 {
     NSMutableArray *parameterPairs = [NSMutableArray array];
     
-	[parameterPairs addObject:[[OARequestParameter requestParameterWithName:@"oauth_consumer_key" 
-                                                                      value:self.consumerKey] URLEncodedNameValuePair]];
-	[parameterPairs addObject:[[OARequestParameter requestParameterWithName:@"oauth_signature_method" 
-                                                                      value:[self signatureProviderName]] URLEncodedNameValuePair]];
-	[parameterPairs addObject:[[OARequestParameter requestParameterWithName:@"oauth_timestamp" 
-                                                                      value:self.timestamp] URLEncodedNameValuePair]];
-	[parameterPairs addObject:[[OARequestParameter requestParameterWithName:@"oauth_nonce" 
-                                                                      value:self.nonce] URLEncodedNameValuePair]];
-	[parameterPairs addObject:[[OARequestParameter requestParameterWithName:@"oauth_version" 
-                                                                      value:@"1.0"] URLEncodedNameValuePair]];
+    [parameterPairs addObject:[NSString stringWithFormat:@"%@=%@", 
+                               [@"oauth_consumer_key" URLEncodedString], 
+                               [self.consumerKey URLEncodedString]]];
+    
+    [parameterPairs addObject:[NSString stringWithFormat:@"%@=%@", 
+                               [@"oauth_signature_method" URLEncodedString], 
+                               [[self signatureProviderName] URLEncodedString]]];
+    
+    [parameterPairs addObject:[NSString stringWithFormat:@"%@=%@", 
+                               [@"oauth_timestamp" URLEncodedString], 
+                               [self.timestamp URLEncodedString]]];
+    
+    [parameterPairs addObject:[NSString stringWithFormat:@"%@=%@", 
+                               [@"oauth_nonce" URLEncodedString], 
+                               [self.nonce URLEncodedString]]];
+    
+    [parameterPairs addObject:[NSString stringWithFormat:@"%@=%@", 
+                               [@"oauth_version" URLEncodedString], 
+                               [@"1.0" URLEncodedString]]];
     
     if (self.oauthTokenKey && ![self.oauthTokenKey isEqualToString:@""]) {
-        [parameterPairs addObject:[[OARequestParameter requestParameterWithName:@"oauth_token" 
-                                                                          value:self.oauthTokenKey] URLEncodedNameValuePair]];
+        [parameterPairs addObject:[NSString stringWithFormat:@"%@=%@", 
+                                   [@"oauth_token" URLEncodedString], 
+                                   [self.oauthTokenKey URLEncodedString]]];
     }
     
     [[self.requestParams allKeys] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSString *key = obj;
-        [parameterPairs addObject:[[OARequestParameter requestParameterWithName:key
-                                                                          value:[self.requestParams objectForKey:key]] URLEncodedNameValuePair]];
+        [parameterPairs addObject:[NSString stringWithFormat:@"%@=%@", 
+                                   [key URLEncodedString], 
+                                   [[self.requestParams objectForKey:key] URLEncodedString]]];
     }];
     
     NSArray *sortedPairs = [parameterPairs sortedArrayUsingSelector:@selector(compare:)];

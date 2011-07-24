@@ -34,11 +34,13 @@
 		CBDA5B4913DBECBD00FAE221 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B3913DBECBD00FAE221 /* SBJsonBase.m */; };
 		CBDA5B4A13DBECBD00FAE221 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B3B13DBECBD00FAE221 /* SBJsonParser.m */; };
 		CBDA5B4B13DBECBD00FAE221 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B3D13DBECBD00FAE221 /* SBJsonWriter.m */; };
-		CBDA5B5613DBECEE00FAE221 /* OARequestParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B4D13DBECEE00FAE221 /* OARequestParameter.m */; };
 		CBDA5B5713DBECEE00FAE221 /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B4E13DBECEE00FAE221 /* Base64Transcoder.c */; };
 		CBDA5B5813DBECEE00FAE221 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B5113DBECEE00FAE221 /* NSString+URLEncoding.m */; };
 		CBDA5B5913DBECEE00FAE221 /* OAuthHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B5313DBECEE00FAE221 /* OAuthHTTPRequest.m */; };
 		CBDA5B5A13DBECEE00FAE221 /* WeiboClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B5513DBECEE00FAE221 /* WeiboClient.m */; };
+		CBDA5B5F13DBF47D00FAE221 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B5E13DBF47D00FAE221 /* Status.m */; };
+		CBDA5B6213DBF47E00FAE221 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B6113DBF47E00FAE221 /* User.m */; };
+		CBDA5B6513DBF47E00FAE221 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B6413DBF47E00FAE221 /* Comment.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,8 +94,6 @@
 		CBDA5B3B13DBECBD00FAE221 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
 		CBDA5B3C13DBECBD00FAE221 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		CBDA5B3D13DBECBD00FAE221 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
-		CBDA5B4C13DBECEE00FAE221 /* OARequestParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OARequestParameter.h; sourceTree = "<group>"; };
-		CBDA5B4D13DBECEE00FAE221 /* OARequestParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OARequestParameter.m; sourceTree = "<group>"; };
 		CBDA5B4E13DBECEE00FAE221 /* Base64Transcoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Base64Transcoder.c; sourceTree = "<group>"; };
 		CBDA5B4F13DBECEE00FAE221 /* Base64Transcoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Transcoder.h; sourceTree = "<group>"; };
 		CBDA5B5013DBECEE00FAE221 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
@@ -102,6 +102,12 @@
 		CBDA5B5313DBECEE00FAE221 /* OAuthHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthHTTPRequest.m; sourceTree = "<group>"; };
 		CBDA5B5413DBECEE00FAE221 /* WeiboClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboClient.h; sourceTree = "<group>"; };
 		CBDA5B5513DBECEE00FAE221 /* WeiboClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboClient.m; sourceTree = "<group>"; };
+		CBDA5B5D13DBF47D00FAE221 /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
+		CBDA5B5E13DBF47D00FAE221 /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
+		CBDA5B6013DBF47E00FAE221 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		CBDA5B6113DBF47E00FAE221 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		CBDA5B6313DBF47E00FAE221 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		CBDA5B6413DBF47E00FAE221 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +167,7 @@
 				CBDA5B1B13DBECBC00FAE221 /* ASIHTTPRequest */,
 				CBDA5B3213DBECBD00FAE221 /* JSON */,
 				CBDA5B5B13DBECFF00FAE221 /* WeiboClient */,
+				CBDA5B6613DBF48D00FAE221 /* Core Data Models */,
 				CBDA5B5C13DBED1600FAE221 /* Nibs */,
 				CBDA5B0313DBEC1300FAE221 /* PushBoxAppDelegate.h */,
 				CBDA5B0413DBEC1300FAE221 /* PushBoxAppDelegate.m */,
@@ -231,8 +238,6 @@
 		CBDA5B5B13DBECFF00FAE221 /* WeiboClient */ = {
 			isa = PBXGroup;
 			children = (
-				CBDA5B4C13DBECEE00FAE221 /* OARequestParameter.h */,
-				CBDA5B4D13DBECEE00FAE221 /* OARequestParameter.m */,
 				CBDA5B4E13DBECEE00FAE221 /* Base64Transcoder.c */,
 				CBDA5B4F13DBECEE00FAE221 /* Base64Transcoder.h */,
 				CBDA5B5013DBECEE00FAE221 /* NSString+URLEncoding.h */,
@@ -251,6 +256,19 @@
 				CBDA5B0613DBEC1300FAE221 /* MainWindow.xib */,
 			);
 			name = Nibs;
+			sourceTree = "<group>";
+		};
+		CBDA5B6613DBF48D00FAE221 /* Core Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				CBDA5B6313DBF47E00FAE221 /* Comment.h */,
+				CBDA5B6413DBF47E00FAE221 /* Comment.m */,
+				CBDA5B6013DBF47E00FAE221 /* User.h */,
+				CBDA5B6113DBF47E00FAE221 /* User.m */,
+				CBDA5B5D13DBF47D00FAE221 /* Status.h */,
+				CBDA5B5E13DBF47D00FAE221 /* Status.m */,
+			);
+			name = "Core Data Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -332,11 +350,13 @@
 				CBDA5B4913DBECBD00FAE221 /* SBJsonBase.m in Sources */,
 				CBDA5B4A13DBECBD00FAE221 /* SBJsonParser.m in Sources */,
 				CBDA5B4B13DBECBD00FAE221 /* SBJsonWriter.m in Sources */,
-				CBDA5B5613DBECEE00FAE221 /* OARequestParameter.m in Sources */,
 				CBDA5B5713DBECEE00FAE221 /* Base64Transcoder.c in Sources */,
 				CBDA5B5813DBECEE00FAE221 /* NSString+URLEncoding.m in Sources */,
 				CBDA5B5913DBECEE00FAE221 /* OAuthHTTPRequest.m in Sources */,
 				CBDA5B5A13DBECEE00FAE221 /* WeiboClient.m in Sources */,
+				CBDA5B5F13DBF47D00FAE221 /* Status.m in Sources */,
+				CBDA5B6213DBF47E00FAE221 /* User.m in Sources */,
+				CBDA5B6513DBF47E00FAE221 /* Comment.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
