@@ -7,8 +7,7 @@
 //
 
 #import "PushBoxAppDelegate.h"
-#import "WeiboClient.h"
-#import "Status.h"
+#import "RootViewController.h"
 
 @implementation PushBoxAppDelegate
 
@@ -16,20 +15,16 @@
 @synthesize managedObjectContext = __managedObjectContext;
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
+@synthesize rootViewController = _rootViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     [self.window makeKeyAndVisible];
     
-    WeiboClient *client = [WeiboClient client];
-
-    if ([client authorized]) {
-        [client setCompletionBlock:^(WeiboClient *client) {
-            NSLog(@"%@", client.responseJSONObject);
-        }];
-        [client getUser:@"1751197843"];
-    }
+    _rootViewController = [[RootViewController alloc] init];
+    _rootViewController.managedObjectContext = self.managedObjectContext;
+    [self.window addSubview:_rootViewController.view];
     
     return YES;
 }
@@ -76,6 +71,7 @@
     [__managedObjectContext release];
     [__managedObjectModel release];
     [__persistentStoreCoordinator release];
+    [_rootViewController release];
     [super dealloc];
 }
 

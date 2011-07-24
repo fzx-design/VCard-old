@@ -37,7 +37,7 @@ typedef enum {
 @property (nonatomic, assign, getter=isSynchronized) BOOL synchronized;
 @property (nonatomic, copy) WCCompletionBlock preCompletionBlock;
 
-- (void)setTokenWithHTTPResponseString:(NSString *)responseString;
++ (void)setTokenWithHTTPResponseString:(NSString *)responseString;
 - (void)buildURL;
 - (void)sendRequest;
 
@@ -60,20 +60,23 @@ typedef enum {
 @synthesize hasError = _hasError;
 @synthesize errorDesc = _errorDesc;
 
-- (void)setTokenWithHTTPResponseString:(NSString *)responseString
++ (void)setTokenWithHTTPResponseString:(NSString *)responseString
 {
     NSArray *pairs = [responseString componentsSeparatedByString:@"&"];
     
     for (NSString *pair in pairs) {
         NSArray *elements = [pair componentsSeparatedByString:@"="];
         if ([[elements objectAtIndex:0] isEqualToString:@"oauth_token"]) {
-            OAuthTokenKey = [[elements objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            self.request.oauthTokenKey = OAuthTokenKey;
+            [OAuthTokenKey release];
+            OAuthTokenKey = [[[elements objectAtIndex:1] 
+                              stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] retain];
         } else if ([[elements objectAtIndex:0] isEqualToString:@"oauth_token_secret"]) {
-            OAuthTokenSecret = [[elements objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            self.request.oauthTokenSecret = OAuthTokenSecret;
+            [OAuthTokenSecret release];
+            OAuthTokenSecret = [[[elements objectAtIndex:1] 
+                                 stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] retain];
         } else if ([[elements objectAtIndex:0] isEqualToString:@"user_id"]) {
-            UserID = [elements objectAtIndex:1];
+            [UserID release];
+            UserID = [[elements objectAtIndex:1] retain];
         }
     }
 }
@@ -97,10 +100,6 @@ typedef enum {
     _httpMethod = HTTPMethodGet;
     
     _request = [[OAuthHTTPRequest alloc] initWithURL:nil];
-    _request.consumerKey = AppKey;
-    _request.consumerSecret = AppSecret;
-    _request.oauthTokenKey = OAuthTokenKey;
-    _request.oauthTokenSecret = OAuthTokenSecret;
     _request.delegate = self;
     
     return self;
@@ -134,7 +133,7 @@ typedef enum {
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
     NSLog(@"Request Finished");
-    //NSLog(@"Response raw string:\n%@", [request responseString]);
+    NSLog(@"Response raw string:\n%@", [request responseString]);
     
     switch (request.responseStatusCode) {
         case 401: // Not Authorized: either you need to provide authentication credentials, or the credentials provided aren't valid.
@@ -259,6 +258,10 @@ report_completion:
     }
     
     if (self.authRequired) {
+        _request.consumerKey = AppKey;
+        _request.consumerSecret = AppSecret;
+        _request.oauthTokenKey = OAuthTokenKey;
+        _request.oauthTokenSecret = OAuthTokenSecret;
         [self.request generateOAuthHeader];
     }
 
@@ -272,7 +275,7 @@ report_completion:
 
 #pragma mark APIs
 
-- (BOOL)authorized
++ (BOOL)authorized
 {
     if (UserID != nil) {
         return YES;
@@ -287,7 +290,7 @@ report_completion:
     return UserID != nil;
 }
 
-- (void)signout
++ (void)signout
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setObject:nil forKey:kUserDefaultKeyTokenResponseString];
@@ -311,8 +314,8 @@ report_completion:
     
     [self setPreCompletionBlock:^(WeiboClient *client) {
         if (!client.hasError) {
-            NSString *responseString = [client.responseJSONObject JSONRepresentation];
-            [client setTokenWithHTTPResponseString:responseString];
+            NSString *responseString = client.request.responseString;
+            [WeiboClient setTokenWithHTTPResponseString:responseString];
             if (UserID) {
                 if (autosave) {
                     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
@@ -322,8 +325,8 @@ report_completion:
                 }
             }
             else {
-                self.hasError = YES;
-                self.errorDesc = NSLocalizedString(@"ERROR_AUTH_FAILED", nil);
+                client.hasError = YES;
+                client.errorDesc = NSLocalizedString(@"ERROR_AUTH_FAILED", nil);
             }
         }
     }];
