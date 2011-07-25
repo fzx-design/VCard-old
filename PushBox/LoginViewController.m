@@ -44,7 +44,7 @@
 {
     [super viewDidLoad];
     
-    self.providerLabel.text = @"新浪微博";
+    self.providerLabel.text = NSLocalizedString(@"新浪微博", nil);
 	BOOL autoSave = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeyAutoSave];
     self.autoSaveSwitch.on = autoSave;
 }
@@ -66,10 +66,10 @@
     
     [client setCompletionBlock:^(WeiboClient *client) {
         if (client.hasError || ![WeiboClient authorized]) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"验证失败" 
-                                                             message:@"请检查用户名密码或网络设定" //to do
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"验证失败", nil)
+                                                            message:NSLocalizedString(@"请检查用户名或网络设置", nil)
                                                             delegate:nil 
-                                                   cancelButtonTitle:@"关闭"
+                                                  cancelButtonTitle:NSLocalizedString(@"关闭", nil)
                                                    otherButtonTitles:nil];
             [alert show];
             [alert release];

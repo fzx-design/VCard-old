@@ -9,10 +9,12 @@
 #import "RootViewController.h"
 #import "WeiboClient.h"
 
-#define kLoginViewCenter CGPointMake(512.0f, 370.0f)
+#define kLoginViewCenter CGPointMake(512.0, 370.0)
+#define kDockViewFrameOriginY 625.0
 
 @interface RootViewController(private)
 - (void)showLoginView;
+- (void)showDockView;
 @end
 
 @implementation RootViewController
@@ -23,6 +25,7 @@
 @synthesize loadingActivityIndicator = _loadingActivityIndicator;
 
 @synthesize loginViewController = _loginViewController;
+@synthesize dockViewController = _dockViewController;
 
 #pragma mark - View lifecycle
 
@@ -32,7 +35,9 @@
     [_pushBoxHDImageView release];
     [_loadingImageView release];
     [_loadingActivityIndicator release];
+    
     [_loginViewController release];
+    [_dockViewController release];
     [super dealloc];
 }
 
@@ -56,12 +61,37 @@
     }
     else {
         [self showLoginView];
+        [self showDockView];
     }
+    
+    
+}
+
+- (void)showDockView
+{
+    if (!_dockViewController) {
+        _dockViewController = [[DockViewController alloc] init];
+    }
+    CGRect frame = self.dockViewController.view.frame;
+    frame.origin.y = kDockViewFrameOriginY;
+    self.dockViewController.view.frame = frame;
+    
+    //delegate
+    [self.view addSubview:self.dockViewController.view];
+    
+    self.dockViewController.view.alpha = 0.0;
+    
+    [UIView animateWithDuration:1.0 animations:^{
+        self.dockViewController.view.alpha = 1.0;
+    }];
+    
 }
 
 - (void)showLoginView
 {
-    _loginViewController = [[LoginViewController alloc] init];
+    if (!_loginViewController) {
+        _loginViewController = [[LoginViewController alloc] init];
+    }
     self.loginViewController.view.center = kLoginViewCenter;
     self.loginViewController.delegate = self;
     [self.view addSubview:self.loginViewController.view];
@@ -79,9 +109,6 @@
 {
     NSLog(@"login succ");
 }
-
-
-
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

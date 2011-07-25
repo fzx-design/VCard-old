@@ -8,6 +8,7 @@
 
 #import "CoreDataViewController.h"
 #import "LoginViewController.h"
+#import "DockViewController.h"
 
 @interface RootViewController : CoreDataViewController<LoginViewControllerDelegate> {
     UIImageView *_backgroundImageView;
@@ -17,6 +18,7 @@
     UIActivityIndicatorView *_loadingActivityIndicator;
     
     LoginViewController *_loginViewController;
+    DockViewController *_dockViewController;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView* backgroundImageView;
@@ -25,5 +27,6 @@
 @property(nonatomic, retain) IBOutlet UIActivityIndicatorView* loadingActivityIndicator;
 
 @property(nonatomic, retain) LoginViewController* loginViewController;
+@property(nonatomic, retain) DockViewController *dockViewController;
 
 @end

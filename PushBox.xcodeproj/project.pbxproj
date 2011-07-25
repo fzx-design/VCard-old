@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB018DD613DD3CC9004217E0 /* DockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB018DD413DD3CC8004217E0 /* DockViewController.m */; };
+		CB018DD713DD3CC9004217E0 /* DockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB018DD513DD3CC8004217E0 /* DockViewController.xib */; };
+		CB018DDB13DDCCCD004217E0 /* dock_slider_thumb_HL.png in Resources */ = {isa = PBXBuildFile; fileRef = CB018DD913DDCCCD004217E0 /* dock_slider_thumb_HL.png */; };
+		CB018DDC13DDCCCD004217E0 /* dock_slider_thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = CB018DDA13DDCCCD004217E0 /* dock_slider_thumb.png */; };
+		CB018DDE13DDCD27004217E0 /* transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = CB018DDD13DDCD27004217E0 /* transparent.png */; };
 		CB4AAC4013DC671F0053E3A6 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4AAC3E13DC671F0053E3A6 /* RootViewController.m */; };
 		CB4AAC4113DC671F0053E3A6 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB4AAC3F13DC671F0053E3A6 /* RootViewController.xib */; };
 		CB4AAC5913DC6AF20053E3A6 /* bg_default.png in Resources */ = {isa = PBXBuildFile; fileRef = CB4AAC5313DC6AF20053E3A6 /* bg_default.png */; };
@@ -85,6 +90,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CB018DD313DD3CC8004217E0 /* DockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DockViewController.h; sourceTree = "<group>"; };
+		CB018DD413DD3CC8004217E0 /* DockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DockViewController.m; sourceTree = "<group>"; };
+		CB018DD513DD3CC8004217E0 /* DockViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DockViewController.xib; sourceTree = "<group>"; };
+		CB018DD913DDCCCD004217E0 /* dock_slider_thumb_HL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dock_slider_thumb_HL.png; sourceTree = "<group>"; };
+		CB018DDA13DDCCCD004217E0 /* dock_slider_thumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dock_slider_thumb.png; sourceTree = "<group>"; };
+		CB018DDD13DDCD27004217E0 /* transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparent.png; sourceTree = "<group>"; };
 		CB4AAC3D13DC671F0053E3A6 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		CB4AAC3E13DC671F0053E3A6 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		CB4AAC3F13DC671F0053E3A6 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
@@ -226,6 +237,7 @@
 		CB4AAC5213DC6AF20053E3A6 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				CB018DDD13DDCD27004217E0 /* transparent.png */,
 				CB4AAC6513DC6FF80053E3A6 /* button_done.png */,
 				CB4AAC9A13DC7CE30053E3A6 /* button_back.png */,
 				CB4AAC9C13DC7D2C0053E3A6 /* button_black_bg.png */,
@@ -248,6 +260,8 @@
 		CB4AAC8D13DC7B2E0053E3A6 /* dock */ = {
 			isa = PBXGroup;
 			children = (
+				CB018DD913DDCCCD004217E0 /* dock_slider_thumb_HL.png */,
+				CB018DDA13DDCCCD004217E0 /* dock_slider_thumb.png */,
 				CB4AAC6D13DC72520053E3A6 /* dock_bg.png */,
 				CB4AAC7313DC76DB0053E3A6 /* dock_button_new_HL.png */,
 				CB4AAC7413DC76DB0053E3A6 /* dock_button_new.png */,
@@ -326,6 +340,8 @@
 				CB4AAC3E13DC671F0053E3A6 /* RootViewController.m */,
 				CB4AAC8F13DC7BE50053E3A6 /* LoginViewController.h */,
 				CB4AAC9013DC7BE60053E3A6 /* LoginViewController.m */,
+				CB018DD313DD3CC8004217E0 /* DockViewController.h */,
+				CB018DD413DD3CC8004217E0 /* DockViewController.m */,
 				CBDA5B7413DC25FA00FAE221 /* CoreDataTableViewController.h */,
 				CBDA5B7513DC25FA00FAE221 /* CoreDataTableViewController.m */,
 				CBDA5B7113DC25C500FAE221 /* CoreDataViewController.h */,
@@ -409,6 +425,7 @@
 		CBDA5B5C13DBED1600FAE221 /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
+				CB018DD513DD3CC8004217E0 /* DockViewController.xib */,
 				CB4AAC3F13DC671F0053E3A6 /* RootViewController.xib */,
 				CBDA5B0613DBEC1300FAE221 /* MainWindow.xib */,
 				CB4AAC9113DC7BE60053E3A6 /* LoginViewController.xib */,
@@ -531,6 +548,10 @@
 				CB4AAC9B13DC7CE40053E3A6 /* button_back.png in Resources */,
 				CB4AAC9D13DC7D2D0053E3A6 /* button_black_bg.png in Resources */,
 				CB4AAC9F13DC7D5B0053E3A6 /* login_button_confirm.png in Resources */,
+				CB018DD713DD3CC9004217E0 /* DockViewController.xib in Resources */,
+				CB018DDB13DDCCCD004217E0 /* dock_slider_thumb_HL.png in Resources */,
+				CB018DDC13DDCCCD004217E0 /* dock_slider_thumb.png in Resources */,
+				CB018DDE13DDCD27004217E0 /* transparent.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -569,6 +590,7 @@
 				CBDA5B7613DC25FA00FAE221 /* CoreDataTableViewController.m in Sources */,
 				CB4AAC4013DC671F0053E3A6 /* RootViewController.m in Sources */,
 				CB4AAC9213DC7BE60053E3A6 /* LoginViewController.m in Sources */,
+				CB018DD613DD3CC9004217E0 /* DockViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
