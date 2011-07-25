@@ -19,7 +19,7 @@ static NSString* const APIDomain = @"api.t.sina.com.cn";
 static NSString* OAuthTokenKey = nil;
 static NSString* OAuthTokenSecret = nil;
 
-static NSString *UserID = nil;
+static NSString* UserID = nil;
 
 typedef enum {
     HTTPMethodPost,
@@ -79,6 +79,20 @@ typedef enum {
             UserID = [[elements objectAtIndex:1] retain];
         }
     }
+}
+
++ (void)fetchTokenFromUserDefault
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSString *tokenResponseString = [ud objectForKey:kUserDefaultKeyTokenResponseString];
+    if (tokenResponseString) {
+        [self setTokenWithHTTPResponseString:tokenResponseString];
+    }
+}
+
++ (void)initialize
+{
+    [WeiboClient fetchTokenFromUserDefault];
 }
 
 + (id)client
@@ -252,8 +266,17 @@ report_completion:
     
     if (self.httpMethod == HTTPMethodPost) {
         self.request.requestMethod = @"POST";
+        
+        [self.request addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
+        
         NSString *postBody = [self queryString];
         NSMutableData *postData = [[NSMutableData alloc] initWithData:[postBody dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        int contentLength = [postBody lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+        
+        [self.request addRequestHeader:@"Content-Length"
+                                 value:[NSString stringWithFormat:@"%d", contentLength]];
+        
         [self.request setPostBody:postData];
     }
     
@@ -265,6 +288,8 @@ report_completion:
         [self.request generateOAuthHeader];
     }
 
+    //NSLog(@"request headers:\n%@", [self.request requestHeaders]);
+    
     if (self.isSynchronized) {
         [_request startSynchronous];
     }
@@ -281,11 +306,7 @@ report_completion:
         return YES;
     }
     
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    NSString *tokenResponseString = [ud objectForKey:kUserDefaultKeyTokenResponseString];
-    if (tokenResponseString) {
-        [self setTokenWithHTTPResponseString:tokenResponseString];
-    }
+    [self fetchTokenFromUserDefault];
     
     return UserID != nil;
 }
@@ -364,9 +385,15 @@ report_completion:
 - (void)getUser:(NSString *)userID
 {
     self.path = @"users/show.json";
-    
     [self.params setObject:userID forKey:@"user_id"];
-    
+    [self sendRequest];
+}
+
+- (void)follow:(NSString *)userID
+{
+    self.httpMethod = HTTPMethodPost;
+    self.path = @"friendships/create.json";
+    [self.params setObject:userID forKey:@"user_id"];
     [self sendRequest];
 }
 

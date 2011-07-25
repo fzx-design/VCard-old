@@ -157,6 +157,7 @@
 
 - (void)dealloc
 {
+    NSLog(@"OAuthHTTPRequest dealloc");
     [_consumerKey release];
     [_consumerSecret release];
     [_oauthTokenKey release];

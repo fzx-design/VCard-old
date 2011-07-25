@@ -6,9 +6,9 @@
 //  Copyright 2011年 同济大学. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "OptionsTableViewController.h"
 
-@interface DockViewController : UIViewController {
+@interface DockViewController : UIViewController<UIPopoverControllerDelegate> {
     UIButton *_refreshButton;
     UIButton *_newTweetButton;
     UIButton *_playButton;

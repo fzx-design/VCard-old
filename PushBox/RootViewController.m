@@ -54,15 +54,16 @@
 {
     [super viewDidLoad];
     
-    [WeiboClient signout];
+//    WeiboClient *client = [WeiboClient client];
+//    [client follow:@"1951041147"];
     
-    if ([WeiboClient authorized]) {
-        //show table
-    }
-    else {
+//    if ([WeiboClient authorized]) {
+//        //show table
+//    }
+//    else {
         [self showLoginView];
         [self showDockView];
-    }
+   //}
     
     
 }
@@ -107,7 +108,7 @@
 
 - (void)loginViewControllerDidLogin:(UIViewController *)vc
 {
-    NSLog(@"login succ");
+
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

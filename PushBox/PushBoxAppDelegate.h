@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RootViewController.h"
 
-@interface PushBoxAppDelegate : NSObject <UIApplicationDelegate>
+@interface PushBoxAppDelegate : NSObject <UIApplicationDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) RootViewController *rootViewController;

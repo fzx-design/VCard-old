@@ -49,4 +49,6 @@ typedef void (^WCCompletionBlock)(WeiboClient *client);
 
 - (void)getUser:(NSString *)userID;
 
+- (void)follow:(NSString *)userID;
+
 @end

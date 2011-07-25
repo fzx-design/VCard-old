@@ -9,6 +9,8 @@
 #import "PushBoxAppDelegate.h"
 #import "RootViewController.h"
 
+#define kUserDefaultKeyLoginCount @"kUserDefaultKeyLoginCount"
+
 @implementation PushBoxAppDelegate
 
 @synthesize window = _window;
@@ -16,6 +18,23 @@
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 @synthesize rootViewController = _rootViewController;
+
++ (void)initialize
+{
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+	NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:30];
+	[dict setObject:[NSNumber numberWithInt:PBBackgroundImageDefault] forKey:kUserDefaultKeyBackground];
+	[dict setObject:[NSNumber numberWithInt:3] forKey:kUserDefaultKeySiidePlayTimeInterval];
+    [dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultKeySoundEnabled];
+	[dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultKeyImageDownloadingEnabled];    
+    
+	//[dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultIsFirstLogin];
+    //[dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultIsFistUsingRefreshTable];
+    
+	[dict setObject:[NSNumber numberWithInt:0] forKey:kUserDefaultKeyLoginCount];
+	
+	[userDefault registerDefaults:dict];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -54,9 +73,32 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    /*
-     Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-     */
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+	int loginCount = [userDefault integerForKey:kUserDefaultKeyLoginCount];
+	loginCount++;
+	[userDefault setInteger:loginCount forKey:kUserDefaultKeyLoginCount];
+	
+	if (loginCount == 10) {
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"评分", nil)
+														message:NSLocalizedString(@"喜欢Pushbox HD？在App Store为它评分", nil)
+													   delegate:self
+											  cancelButtonTitle:NSLocalizedString(@"不，谢谢", nil)
+											  otherButtonTitles:NSLocalizedString(@"好", nil), nil];
+		[alert show];
+		[alert release];
+	}
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+	if (buttonIndex == alertView.cancelButtonIndex) {
+		return;
+	}
+	else {
+		NSString *urlString = @"http://itunes.apple.com/us/app/id420598288?mt=8";
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+	}
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

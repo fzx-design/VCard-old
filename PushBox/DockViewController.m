@@ -8,6 +8,7 @@
 
 #import "DockViewController.h"
 
+
 @implementation DockViewController
 
 @synthesize refreshButton = _refreshButton;
@@ -80,23 +81,29 @@
 }
 
 - (IBAction)optionsButtonClicked:(id)sender {
-//    OptionsTableViewController *otvc = [[OptionsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-//    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:otvc];
-//    
-//    pc = [[UIPopoverController alloc] initWithContentViewController:nc];
-//    pc.delegate = self;
-//    
-//	CGRect rect = _optionsButton.bounds;
-//	rect.origin.x += 7;
-//	rect.origin.y += 10;
-//	rect.size.width -= 30;
-//	rect.size.height -= 30;
-//    [pc presentPopoverFromRect:rect
-//                        inView:_optionsButton
-//      permittedArrowDirections:UIPopoverArrowDirectionAny
-//                      animated:YES];
-//    [otvc release];
-//    [nc release];
+    OptionsTableViewController *otvc = [[OptionsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:otvc];
+    
+    _optionsPopoverController = [[UIPopoverController alloc] initWithContentViewController:nc];
+    self.optionsPopoverController.delegate = self;
+    
+	CGRect rect = self.optionsButton.bounds;
+	rect.origin.x += 7;
+	rect.origin.y += 10;
+	rect.size.width -= 30;
+	rect.size.height -= 30;
+    [self.optionsPopoverController presentPopoverFromRect:rect
+                                                   inView:self.optionsButton
+                                 permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                 animated:YES];
+    [otvc release];
+    [nc release];
 }
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    self.optionsPopoverController = nil;
+}
+
 
 @end
