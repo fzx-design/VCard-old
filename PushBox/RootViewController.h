@@ -14,17 +14,12 @@
     UIImageView *_backgroundImageView;
     UIImageView *_pushBoxHDImageView;
     
-    UIImageView *_loadingImageView;
-    UIActivityIndicatorView *_loadingActivityIndicator;
-    
     LoginViewController *_loginViewController;
     DockViewController *_dockViewController;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView* backgroundImageView;
 @property(nonatomic, retain) IBOutlet UIImageView* pushBoxHDImageView;
-@property(nonatomic, retain) IBOutlet UIImageView* loadingImageView;
-@property(nonatomic, retain) IBOutlet UIActivityIndicatorView* loadingActivityIndicator;
 
 @property(nonatomic, retain) LoginViewController* loginViewController;
 @property(nonatomic, retain) DockViewController *dockViewController;

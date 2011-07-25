@@ -12,13 +12,12 @@
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<string>IBUIView</string>
-			<string>IBUIImageView</string>
-			<string>IBProxyObject</string>
 			<string>IBUILabel</string>
-			<string>IBUIActivityIndicatorView</string>
 			<string>IBUITableView</string>
+			<string>IBUIImageView</string>
+			<string>IBUIView</string>
 			<string>IBUIButton</string>
+			<string>IBProxyObject</string>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -66,7 +65,7 @@
 						<string key="NSFrame">{{268, 136}, {489, 340}}</string>
 						<reference key="NSSuperview" ref="420341332"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="392168059"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">4</int>
@@ -247,36 +246,6 @@
 						</object>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
-					<object class="IBUIImageView" id="392168059">
-						<reference key="NSNextResponder" ref="420341332"/>
-						<int key="NSvFlags">-2147483392</int>
-						<string key="NSFrame">{{446, 278}, {132, 131}}</string>
-						<reference key="NSSuperview" ref="420341332"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="561801559"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">4</int>
-						<bool key="IBUIMultipleTouchEnabled">YES</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<object class="NSCustomResource" key="IBUIImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">root_loading_bg.png</string>
-						</object>
-					</object>
-					<object class="IBUIActivityIndicatorView" id="561801559">
-						<reference key="NSNextResponder" ref="420341332"/>
-						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{493, 314}, {37, 37}}</string>
-						<reference key="NSSuperview" ref="420341332"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<bool key="IBUIHidesWhenStopped">NO</bool>
-						<bool key="IBUIAnimating">YES</bool>
-						<int key="IBUIStyle">0</int>
-					</object>
 				</object>
 				<string key="NSFrame">{{0, 20}, {1024, 748}}</string>
 				<reference key="NSSuperview"/>
@@ -314,22 +283,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">loadingActivityIndicator</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="561801559"/>
-					</object>
-					<int key="connectionID">44</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">loadingImageView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="392168059"/>
-					</object>
-					<int key="connectionID">45</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">pushBoxHDImageView</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="819067164"/>
@@ -363,14 +316,12 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="72760619"/>
-							<reference ref="561801559"/>
 							<reference ref="249622028"/>
 							<reference ref="40676935"/>
 							<reference ref="590836205"/>
 							<reference ref="337355186"/>
 							<reference ref="819067164"/>
 							<reference ref="928190392"/>
-							<reference ref="392168059"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -385,16 +336,6 @@
 						</object>
 						<reference key="parent" ref="420341332"/>
 						<string key="objectName">botton state view</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">7</int>
-						<reference key="object" ref="561801559"/>
-						<reference key="parent" ref="420341332"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">8</int>
-						<reference key="object" ref="392168059"/>
-						<reference key="parent" ref="420341332"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">9</int>
@@ -463,8 +404,6 @@
 					<string>32.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
-					<string>7.IBPluginDependency</string>
-					<string>8.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
@@ -472,8 +411,6 @@
 					<string>RootViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -521,14 +458,10 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>backgroundImageView</string>
-							<string>loadingActivityIndicator</string>
-							<string>loadingImageView</string>
 							<string>pushBoxHDImageView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UIImageView</string>
-							<string>UIActivityIndicatorView</string>
 							<string>UIImageView</string>
 							<string>UIImageView</string>
 						</object>
@@ -538,22 +471,12 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>backgroundImageView</string>
-							<string>loadingActivityIndicator</string>
-							<string>loadingImageView</string>
 							<string>pushBoxHDImageView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
 								<string key="name">backgroundImageView</string>
-								<string key="candidateClassName">UIImageView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">loadingActivityIndicator</string>
-								<string key="candidateClassName">UIActivityIndicatorView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">loadingImageView</string>
 								<string key="candidateClassName">UIImageView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
@@ -585,7 +508,6 @@
 				<string>button_done.png</string>
 				<string>root_bottom_bar_bg.png</string>
 				<string>root_cards_blur_bg.png</string>
-				<string>root_loading_bg.png</string>
 				<string>root_pushbox.png</string>
 				<string>root_shadow_left.png</string>
 				<string>root_shadow_right.png</string>
@@ -596,7 +518,6 @@
 				<string>{52, 30}</string>
 				<string>{1024, 46}</string>
 				<string>{1024, 318}</string>
-				<string>{132, 131}</string>
 				<string>{483, 334}</string>
 				<string>{78, 653}</string>
 				<string>{78, 653}</string>

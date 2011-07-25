@@ -8,6 +8,8 @@
 
 #import "RootViewController.h"
 #import "WeiboClient.h"
+#import "UIApplicationAddition.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define kLoginViewCenter CGPointMake(512.0, 370.0)
 #define kDockViewFrameOriginY 625.0
@@ -15,14 +17,13 @@
 @interface RootViewController(private)
 - (void)showLoginView;
 - (void)showDockView;
+- (void)updateBackgroundImageAnimated:(BOOL)animated;
 @end
 
 @implementation RootViewController
 
 @synthesize backgroundImageView = _backgroundImageView;
 @synthesize pushBoxHDImageView = _pushBoxHDImageView;
-@synthesize loadingImageView = _loadingImageView;
-@synthesize loadingActivityIndicator = _loadingActivityIndicator;
 
 @synthesize loginViewController = _loginViewController;
 @synthesize dockViewController = _dockViewController;
@@ -33,8 +34,6 @@
 {
     [_backgroundImageView release];
     [_pushBoxHDImageView release];
-    [_loadingImageView release];
-    [_loadingActivityIndicator release];
     
     [_loginViewController release];
     [_dockViewController release];
@@ -46,16 +45,20 @@
     [super viewDidUnload];
     self.backgroundImageView = nil;
     self.pushBoxHDImageView = nil;
-    self.loadingImageView = nil;
-    self.loadingActivityIndicator = nil;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    [self updateBackgroundImageAnimated:NO];
 //    WeiboClient *client = [WeiboClient client];
 //    [client follow:@"1951041147"];
+    
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+	[center addObserver:self selector:@selector(backgroundChangedNotification:) 
+				   name:kNotificationNameBackgroundChanged 
+				 object:nil];
     
 //    if ([WeiboClient authorized]) {
 //        //show table
@@ -65,7 +68,31 @@
         [self showDockView];
    //}
     
+}
+
+- (void)updateBackgroundImageAnimated:(BOOL)animated
+{
+    int enumValue = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeyBackground];
     
+	NSString *fileName = [BackgroundManViewController backgroundImageFilePathFromEnum:enumValue];
+	NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"png"];
+	UIImage *img = [UIImage imageWithContentsOfFile:path];
+	
+	if (animated) {
+        CATransition *transition = [CATransition animation];
+        transition.duration = 1.0;
+        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        transition.type = kCATransitionFade;
+        [self.backgroundImageView.layer addAnimation:transition forKey:nil];
+    }
+    
+	self.backgroundImageView.image = img;
+}
+
+
+- (void)backgroundChangedNotification:(id)sender
+{
+	[self updateBackgroundImageAnimated:YES];
 }
 
 - (void)showDockView

@@ -44,6 +44,7 @@
     _rootViewController = [[RootViewController alloc] init];
     _rootViewController.managedObjectContext = self.managedObjectContext;
     [self.window addSubview:_rootViewController.view];
+
     
     return YES;
 }

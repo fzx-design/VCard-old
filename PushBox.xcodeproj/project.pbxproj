@@ -28,6 +28,8 @@
 		CB018DFF13DDE468004217E0 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB018DFE13DDE468004217E0 /* AboutViewController.xib */; };
 		CB018E0113DDE4E8004217E0 /* about_button_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CB018E0013DDE4E8004217E0 /* about_button_bg.png */; };
 		CB018E0313DDE524004217E0 /* about_pb_title.png in Resources */ = {isa = PBXBuildFile; fileRef = CB018E0213DDE523004217E0 /* about_pb_title.png */; };
+		CB018E0513DDEAA5004217E0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB018E0413DDEAA5004217E0 /* QuartzCore.framework */; };
+		CB018E0B13DDEFEE004217E0 /* UIApplicationAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = CB018E0A13DDEFEB004217E0 /* UIApplicationAddition.m */; };
 		CB4AAC4013DC671F0053E3A6 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4AAC3E13DC671F0053E3A6 /* RootViewController.m */; };
 		CB4AAC4113DC671F0053E3A6 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB4AAC3F13DC671F0053E3A6 /* RootViewController.xib */; };
 		CB4AAC5913DC6AF20053E3A6 /* bg_default.png in Resources */ = {isa = PBXBuildFile; fileRef = CB4AAC5313DC6AF20053E3A6 /* bg_default.png */; };
@@ -132,6 +134,9 @@
 		CB018DFE13DDE468004217E0 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
 		CB018E0013DDE4E8004217E0 /* about_button_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_button_bg.png; sourceTree = "<group>"; };
 		CB018E0213DDE523004217E0 /* about_pb_title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_pb_title.png; sourceTree = "<group>"; };
+		CB018E0413DDEAA5004217E0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CB018E0913DDEFEA004217E0 /* UIApplicationAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; path = UIApplicationAddition.h; sourceTree = "<group>"; };
+		CB018E0A13DDEFEB004217E0 /* UIApplicationAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIApplicationAddition.m; sourceTree = "<group>"; };
 		CB4AAC3D13DC671F0053E3A6 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		CB4AAC3E13DC671F0053E3A6 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		CB4AAC3F13DC671F0053E3A6 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
@@ -248,6 +253,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB018E0513DDEAA5004217E0 /* QuartzCore.framework in Frameworks */,
 				CBDA5B1A13DBEC4D00FAE221 /* libz.1.2.3.dylib in Frameworks */,
 				CBDA5B1613DBEC3A00FAE221 /* CFNetwork.framework in Frameworks */,
 				CBDA5B1413DBEC2B00FAE221 /* SystemConfiguration.framework in Frameworks */,
@@ -378,6 +384,7 @@
 			isa = PBXGroup;
 			children = (
 				CBDA5B1913DBEC4D00FAE221 /* libz.1.2.3.dylib */,
+				CB018E0413DDEAA5004217E0 /* QuartzCore.framework */,
 				CBDA5B1513DBEC3A00FAE221 /* CFNetwork.framework */,
 				CBDA5B1313DBEC2B00FAE221 /* SystemConfiguration.framework */,
 				CBDA5B1113DBEC2500FAE221 /* MobileCoreServices.framework */,
@@ -398,13 +405,15 @@
 				CBDA5B6613DBF48D00FAE221 /* Core Data Models */,
 				CB4AAC4313DC6A360053E3A6 /* Resources */,
 				CBDA5B5C13DBED1600FAE221 /* Nibs */,
+				CB018DDF13DDD015004217E0 /* options view controllers */,
 				CB4AAC3D13DC671F0053E3A6 /* RootViewController.h */,
 				CB4AAC3E13DC671F0053E3A6 /* RootViewController.m */,
-				CB018DDF13DDD015004217E0 /* options view controllers */,
 				CB4AAC8F13DC7BE50053E3A6 /* LoginViewController.h */,
 				CB4AAC9013DC7BE60053E3A6 /* LoginViewController.m */,
 				CB018DD313DD3CC8004217E0 /* DockViewController.h */,
 				CB018DD413DD3CC8004217E0 /* DockViewController.m */,
+				CB018E0913DDEFEA004217E0 /* UIApplicationAddition.h */,
+				CB018E0A13DDEFEB004217E0 /* UIApplicationAddition.m */,
 				CBDA5B7413DC25FA00FAE221 /* CoreDataTableViewController.h */,
 				CBDA5B7513DC25FA00FAE221 /* CoreDataTableViewController.m */,
 				CBDA5B7113DC25C500FAE221 /* CoreDataViewController.h */,
@@ -671,6 +680,7 @@
 				CB018DE913DDD028004217E0 /* BackgroundManViewController.m in Sources */,
 				CB018DEA13DDD028004217E0 /* IntervalManViewController.m in Sources */,
 				CB018DEB13DDD028004217E0 /* OptionsTableViewController.m in Sources */,
+				CB018E0B13DDEFEE004217E0 /* UIApplicationAddition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
