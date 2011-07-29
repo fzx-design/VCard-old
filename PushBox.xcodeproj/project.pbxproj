@@ -30,6 +30,12 @@
 		CB018E0313DDE524004217E0 /* about_pb_title.png in Resources */ = {isa = PBXBuildFile; fileRef = CB018E0213DDE523004217E0 /* about_pb_title.png */; };
 		CB018E0513DDEAA5004217E0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB018E0413DDEAA5004217E0 /* QuartzCore.framework */; };
 		CB018E0B13DDEFEE004217E0 /* UIApplicationAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = CB018E0A13DDEFEB004217E0 /* UIApplicationAddition.m */; };
+		CB018E0E13DE0066004217E0 /* CardTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB018E0D13DE0064004217E0 /* CardTableViewController.m */; };
+		CB018E1013DE00F0004217E0 /* CardTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB018E0F13DE00F0004217E0 /* CardTableViewController.xib */; };
+		CB26224C13DF063F0062EDE7 /* CardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB26224B13DF063F0062EDE7 /* CardTableViewCell.m */; };
+		CB26225013DF06780062EDE7 /* StatusCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB26224E13DF06780062EDE7 /* StatusCardViewController.m */; };
+		CB26225113DF06780062EDE7 /* StatusCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB26224F13DF06780062EDE7 /* StatusCardViewController.xib */; };
+		CB26225313DF07820062EDE7 /* CardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB26225213DF07820062EDE7 /* CardTableViewCell.xib */; };
 		CB4AAC4013DC671F0053E3A6 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4AAC3E13DC671F0053E3A6 /* RootViewController.m */; };
 		CB4AAC4113DC671F0053E3A6 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB4AAC3F13DC671F0053E3A6 /* RootViewController.xib */; };
 		CB4AAC5913DC6AF20053E3A6 /* bg_default.png in Resources */ = {isa = PBXBuildFile; fileRef = CB4AAC5313DC6AF20053E3A6 /* bg_default.png */; };
@@ -69,6 +75,35 @@
 		CB4AAC9B13DC7CE40053E3A6 /* button_back.png in Resources */ = {isa = PBXBuildFile; fileRef = CB4AAC9A13DC7CE30053E3A6 /* button_back.png */; };
 		CB4AAC9D13DC7D2D0053E3A6 /* button_black_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CB4AAC9C13DC7D2C0053E3A6 /* button_black_bg.png */; };
 		CB4AAC9F13DC7D5B0053E3A6 /* login_button_confirm.png in Resources */ = {isa = PBXBuildFile; fileRef = CB4AAC9E13DC7D5B0053E3A6 /* login_button_confirm.png */; };
+		CB9DCAA913DFEF5D00DA3D3D /* status_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCAA313DFEF5D00DA3D3D /* status_bg.png */; };
+		CB9DCAAA13DFEF5D00DA3D3D /* status_button_action.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCAA413DFEF5D00DA3D3D /* status_button_action.png */; };
+		CB9DCAAB13DFEF5D00DA3D3D /* status_button_comment.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCAA513DFEF5D00DA3D3D /* status_button_comment.png */; };
+		CB9DCAAC13DFEF5D00DA3D3D /* status_button_fav.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCAA613DFEF5D00DA3D3D /* status_button_fav.png */; };
+		CB9DCAAD13DFEF5D00DA3D3D /* status_button_repost.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCAA713DFEF5D00DA3D3D /* status_button_repost.png */; };
+		CB9DCAAE13DFEF5D00DA3D3D /* status_repost_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCAA813DFEF5D00DA3D3D /* status_repost_bg.png */; };
+		CB9DCAB413DFF08C00DA3D3D /* repost_cover_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCAB013DFF08C00DA3D3D /* repost_cover_bottom.png */; };
+		CB9DCAB513DFF08C00DA3D3D /* repost_cover_top.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCAB113DFF08C00DA3D3D /* repost_cover_top.png */; };
+		CB9DCAB613DFF08C00DA3D3D /* card_cover_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCAB213DFF08C00DA3D3D /* card_cover_bottom.png */; };
+		CB9DCAB713DFF08C00DA3D3D /* card_cover_top.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCAB313DFF08C00DA3D3D /* card_cover_top.png */; };
+		CB9DCABA13DFF27F00DA3D3D /* card_profile_cover_large.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCAB813DFF27F00DA3D3D /* card_profile_cover_large.png */; };
+		CB9DCABB13DFF27F00DA3D3D /* card_profile_cover.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCAB913DFF27F00DA3D3D /* card_profile_cover.png */; };
+		CB9DCABD13DFF30E00DA3D3D /* status_button_unfav.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCABC13DFF30E00DA3D3D /* status_button_unfav.png */; };
+		CB9DCAC613E171A100DA3D3D /* UIImageViewAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9DCAC513E171A100DA3D3D /* UIImageViewAddition.m */; };
+		CB9DCAC913E1C36200DA3D3D /* NSDateAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9DCAC813E1C36200DA3D3D /* NSDateAddition.m */; };
+		CB9DCACC13E1E4DE00DA3D3D /* DetailImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9DCACB13E1E4DE00DA3D3D /* DetailImageViewController.m */; };
+		CB9DCACE13E1E54700DA3D3D /* DetailImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCACD13E1E54700DA3D3D /* DetailImageViewController.xib */; };
+		CB9DCAD013E1E5D000DA3D3D /* detail_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCACF13E1E5D000DA3D3D /* detail_bg.png */; };
+		CB9DCAD213E1E5F000DA3D3D /* detail_save_done.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCAD113E1E5F000DA3D3D /* detail_save_done.png */; };
+		CB9DCAD413E1E62100DA3D3D /* detail_console_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCAD313E1E62000DA3D3D /* detail_console_bg.png */; };
+		CB9DCAD713E1E64B00DA3D3D /* detail_button_return.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCAD513E1E64B00DA3D3D /* detail_button_return.png */; };
+		CB9DCAD813E1E64B00DA3D3D /* detail_button_save.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCAD613E1E64B00DA3D3D /* detail_button_save.png */; };
+		CB9DCADA13E1ED6800DA3D3D /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9DCAD913E1ED6800DA3D3D /* MessageUI.framework */; };
+		CB9DCADE13E2C15F00DA3D3D /* UserCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9DCADC13E2C15B00DA3D3D /* UserCardViewController.m */; };
+		CB9DCADF13E2C15F00DA3D3D /* UserCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCADD13E2C15C00DA3D3D /* UserCardViewController.xib */; };
+		CBBA01BF13E2C80000641923 /* usercard_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01BE13E2C80000641923 /* usercard_bg.png */; };
+		CBBA01C313E2C87000641923 /* usercard_button_follow.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01C113E2C87000641923 /* usercard_button_follow.png */; };
+		CBBA01C413E2C87000641923 /* usercard_button_unfollow.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01C213E2C87000641923 /* usercard_button_unfollow.png */; };
+		CBBA01C613E2C8C700641923 /* usercard_pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01C513E2C8C700641923 /* usercard_pointer.png */; };
 		CBDA5AF313DBEC1300FAE221 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBDA5AF213DBEC1300FAE221 /* UIKit.framework */; };
 		CBDA5AF513DBEC1300FAE221 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBDA5AF413DBEC1300FAE221 /* Foundation.framework */; };
 		CBDA5AF713DBEC1300FAE221 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBDA5AF613DBEC1300FAE221 /* CoreGraphics.framework */; };
@@ -135,8 +170,17 @@
 		CB018E0013DDE4E8004217E0 /* about_button_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_button_bg.png; sourceTree = "<group>"; };
 		CB018E0213DDE523004217E0 /* about_pb_title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_pb_title.png; sourceTree = "<group>"; };
 		CB018E0413DDEAA5004217E0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		CB018E0913DDEFEA004217E0 /* UIApplicationAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; path = UIApplicationAddition.h; sourceTree = "<group>"; };
+		CB018E0913DDEFEA004217E0 /* UIApplicationAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIApplicationAddition.h; sourceTree = "<group>"; };
 		CB018E0A13DDEFEB004217E0 /* UIApplicationAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIApplicationAddition.m; sourceTree = "<group>"; };
+		CB018E0C13DE0063004217E0 /* CardTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTableViewController.h; sourceTree = "<group>"; };
+		CB018E0D13DE0064004217E0 /* CardTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardTableViewController.m; sourceTree = "<group>"; };
+		CB018E0F13DE00F0004217E0 /* CardTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardTableViewController.xib; sourceTree = "<group>"; };
+		CB26224A13DF063F0062EDE7 /* CardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTableViewCell.h; sourceTree = "<group>"; };
+		CB26224B13DF063F0062EDE7 /* CardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardTableViewCell.m; sourceTree = "<group>"; };
+		CB26224D13DF06780062EDE7 /* StatusCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusCardViewController.h; sourceTree = "<group>"; };
+		CB26224E13DF06780062EDE7 /* StatusCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusCardViewController.m; sourceTree = "<group>"; };
+		CB26224F13DF06780062EDE7 /* StatusCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusCardViewController.xib; sourceTree = "<group>"; };
+		CB26225213DF07820062EDE7 /* CardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardTableViewCell.xib; sourceTree = "<group>"; };
 		CB4AAC3D13DC671F0053E3A6 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		CB4AAC3E13DC671F0053E3A6 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		CB4AAC3F13DC671F0053E3A6 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
@@ -178,6 +222,39 @@
 		CB4AAC9A13DC7CE30053E3A6 /* button_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_back.png; sourceTree = "<group>"; };
 		CB4AAC9C13DC7D2C0053E3A6 /* button_black_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_black_bg.png; sourceTree = "<group>"; };
 		CB4AAC9E13DC7D5B0053E3A6 /* login_button_confirm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_button_confirm.png; sourceTree = "<group>"; };
+		CB9DCAA313DFEF5D00DA3D3D /* status_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_bg.png; sourceTree = "<group>"; };
+		CB9DCAA413DFEF5D00DA3D3D /* status_button_action.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_button_action.png; sourceTree = "<group>"; };
+		CB9DCAA513DFEF5D00DA3D3D /* status_button_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_button_comment.png; sourceTree = "<group>"; };
+		CB9DCAA613DFEF5D00DA3D3D /* status_button_fav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_button_fav.png; sourceTree = "<group>"; };
+		CB9DCAA713DFEF5D00DA3D3D /* status_button_repost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_button_repost.png; sourceTree = "<group>"; };
+		CB9DCAA813DFEF5D00DA3D3D /* status_repost_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_repost_bg.png; sourceTree = "<group>"; };
+		CB9DCAB013DFF08C00DA3D3D /* repost_cover_bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = repost_cover_bottom.png; sourceTree = "<group>"; };
+		CB9DCAB113DFF08C00DA3D3D /* repost_cover_top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = repost_cover_top.png; sourceTree = "<group>"; };
+		CB9DCAB213DFF08C00DA3D3D /* card_cover_bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = card_cover_bottom.png; sourceTree = "<group>"; };
+		CB9DCAB313DFF08C00DA3D3D /* card_cover_top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = card_cover_top.png; sourceTree = "<group>"; };
+		CB9DCAB813DFF27F00DA3D3D /* card_profile_cover_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = card_profile_cover_large.png; sourceTree = "<group>"; };
+		CB9DCAB913DFF27F00DA3D3D /* card_profile_cover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = card_profile_cover.png; sourceTree = "<group>"; };
+		CB9DCABC13DFF30E00DA3D3D /* status_button_unfav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_button_unfav.png; sourceTree = "<group>"; };
+		CB9DCAC413E171A100DA3D3D /* UIImageViewAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageViewAddition.h; sourceTree = "<group>"; };
+		CB9DCAC513E171A100DA3D3D /* UIImageViewAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageViewAddition.m; sourceTree = "<group>"; };
+		CB9DCAC713E1C36200DA3D3D /* NSDateAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDateAddition.h; sourceTree = "<group>"; };
+		CB9DCAC813E1C36200DA3D3D /* NSDateAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDateAddition.m; sourceTree = "<group>"; };
+		CB9DCACA13E1E4DD00DA3D3D /* DetailImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailImageViewController.h; sourceTree = "<group>"; };
+		CB9DCACB13E1E4DE00DA3D3D /* DetailImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailImageViewController.m; sourceTree = "<group>"; };
+		CB9DCACD13E1E54700DA3D3D /* DetailImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailImageViewController.xib; sourceTree = "<group>"; };
+		CB9DCACF13E1E5D000DA3D3D /* detail_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detail_bg.png; sourceTree = "<group>"; };
+		CB9DCAD113E1E5F000DA3D3D /* detail_save_done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detail_save_done.png; sourceTree = "<group>"; };
+		CB9DCAD313E1E62000DA3D3D /* detail_console_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detail_console_bg.png; sourceTree = "<group>"; };
+		CB9DCAD513E1E64B00DA3D3D /* detail_button_return.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detail_button_return.png; sourceTree = "<group>"; };
+		CB9DCAD613E1E64B00DA3D3D /* detail_button_save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detail_button_save.png; sourceTree = "<group>"; };
+		CB9DCAD913E1ED6800DA3D3D /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		CB9DCADB13E2C15900DA3D3D /* UserCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCardViewController.h; sourceTree = "<group>"; };
+		CB9DCADC13E2C15B00DA3D3D /* UserCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCardViewController.m; sourceTree = "<group>"; };
+		CB9DCADD13E2C15C00DA3D3D /* UserCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCardViewController.xib; sourceTree = "<group>"; };
+		CBBA01BE13E2C80000641923 /* usercard_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = usercard_bg.png; sourceTree = "<group>"; };
+		CBBA01C113E2C87000641923 /* usercard_button_follow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = usercard_button_follow.png; sourceTree = "<group>"; };
+		CBBA01C213E2C87000641923 /* usercard_button_unfollow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = usercard_button_unfollow.png; sourceTree = "<group>"; };
+		CBBA01C513E2C8C700641923 /* usercard_pointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = usercard_pointer.png; sourceTree = "<group>"; };
 		CBDA5AEE13DBEC1300FAE221 /* PushBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBDA5AF213DBEC1300FAE221 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CBDA5AF413DBEC1300FAE221 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -253,6 +330,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB9DCADA13E1ED6800DA3D3D /* MessageUI.framework in Frameworks */,
 				CB018E0513DDEAA5004217E0 /* QuartzCore.framework in Frameworks */,
 				CBDA5B1A13DBEC4D00FAE221 /* libz.1.2.3.dylib in Frameworks */,
 				CBDA5B1613DBEC3A00FAE221 /* CFNetwork.framework in Frameworks */,
@@ -301,6 +379,14 @@
 				CB4AAC6513DC6FF80053E3A6 /* button_done.png */,
 				CB4AAC9A13DC7CE30053E3A6 /* button_back.png */,
 				CB4AAC9C13DC7D2C0053E3A6 /* button_black_bg.png */,
+				CBBA01C113E2C87000641923 /* usercard_button_follow.png */,
+				CBBA01C213E2C87000641923 /* usercard_button_unfollow.png */,
+				CBBA01C513E2C8C700641923 /* usercard_pointer.png */,
+				CB9DCACF13E1E5D000DA3D3D /* detail_bg.png */,
+				CB9DCAD113E1E5F000DA3D3D /* detail_save_done.png */,
+				CB9DCAD313E1E62000DA3D3D /* detail_console_bg.png */,
+				CB9DCAD513E1E64B00DA3D3D /* detail_button_return.png */,
+				CB9DCAD613E1E64B00DA3D3D /* detail_button_save.png */,
 				CB4AAC8E13DC7B4A0053E3A6 /* bg */,
 				CB4AAC8D13DC7B2E0053E3A6 /* dock */,
 				CB4AAC6B13DC71680053E3A6 /* root_cards_blur_bg.png */,
@@ -309,12 +395,26 @@
 				CB4AAC6313DC6FD00053E3A6 /* root_bottom_bar_bg.png */,
 				CB4AAC6713DC70310053E3A6 /* root_shadow_left.png */,
 				CB4AAC6813DC70310053E3A6 /* root_shadow_right.png */,
+				CBBA01BE13E2C80000641923 /* usercard_bg.png */,
 				CB4AAC9413DC7C880053E3A6 /* login_bg.png */,
 				CB4AAC9513DC7C880053E3A6 /* login_input_bg.png */,
 				CB4AAC9E13DC7D5B0053E3A6 /* login_button_confirm.png */,
 				CB018E0013DDE4E8004217E0 /* about_button_bg.png */,
 				CB018E0213DDE523004217E0 /* about_pb_title.png */,
 				CB4AAC9813DC7CAD0053E3A6 /* flag_sina.png */,
+				CB9DCAA313DFEF5D00DA3D3D /* status_bg.png */,
+				CB9DCAA413DFEF5D00DA3D3D /* status_button_action.png */,
+				CB9DCAA513DFEF5D00DA3D3D /* status_button_comment.png */,
+				CB9DCAA613DFEF5D00DA3D3D /* status_button_fav.png */,
+				CB9DCABC13DFF30E00DA3D3D /* status_button_unfav.png */,
+				CB9DCAA713DFEF5D00DA3D3D /* status_button_repost.png */,
+				CB9DCAA813DFEF5D00DA3D3D /* status_repost_bg.png */,
+				CB9DCAB013DFF08C00DA3D3D /* repost_cover_bottom.png */,
+				CB9DCAB113DFF08C00DA3D3D /* repost_cover_top.png */,
+				CB9DCAB813DFF27F00DA3D3D /* card_profile_cover_large.png */,
+				CB9DCAB913DFF27F00DA3D3D /* card_profile_cover.png */,
+				CB9DCAB213DFF08C00DA3D3D /* card_cover_bottom.png */,
+				CB9DCAB313DFF08C00DA3D3D /* card_cover_top.png */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -384,6 +484,7 @@
 			isa = PBXGroup;
 			children = (
 				CBDA5B1913DBEC4D00FAE221 /* libz.1.2.3.dylib */,
+				CB9DCAD913E1ED6800DA3D3D /* MessageUI.framework */,
 				CB018E0413DDEAA5004217E0 /* QuartzCore.framework */,
 				CBDA5B1513DBEC3A00FAE221 /* CFNetwork.framework */,
 				CBDA5B1313DBEC2B00FAE221 /* SystemConfiguration.framework */,
@@ -408,16 +509,30 @@
 				CB018DDF13DDD015004217E0 /* options view controllers */,
 				CB4AAC3D13DC671F0053E3A6 /* RootViewController.h */,
 				CB4AAC3E13DC671F0053E3A6 /* RootViewController.m */,
+				CB9DCACA13E1E4DD00DA3D3D /* DetailImageViewController.h */,
+				CB9DCACB13E1E4DE00DA3D3D /* DetailImageViewController.m */,
+				CB9DCADB13E2C15900DA3D3D /* UserCardViewController.h */,
+				CB9DCADC13E2C15B00DA3D3D /* UserCardViewController.m */,
+				CB26224D13DF06780062EDE7 /* StatusCardViewController.h */,
+				CB26224E13DF06780062EDE7 /* StatusCardViewController.m */,
+				CB26224A13DF063F0062EDE7 /* CardTableViewCell.h */,
+				CB26224B13DF063F0062EDE7 /* CardTableViewCell.m */,
 				CB4AAC8F13DC7BE50053E3A6 /* LoginViewController.h */,
 				CB4AAC9013DC7BE60053E3A6 /* LoginViewController.m */,
+				CB9DCAC413E171A100DA3D3D /* UIImageViewAddition.h */,
+				CB9DCAC713E1C36200DA3D3D /* NSDateAddition.h */,
+				CB9DCAC813E1C36200DA3D3D /* NSDateAddition.m */,
+				CB9DCAC513E171A100DA3D3D /* UIImageViewAddition.m */,
 				CB018DD313DD3CC8004217E0 /* DockViewController.h */,
 				CB018DD413DD3CC8004217E0 /* DockViewController.m */,
 				CB018E0913DDEFEA004217E0 /* UIApplicationAddition.h */,
 				CB018E0A13DDEFEB004217E0 /* UIApplicationAddition.m */,
-				CBDA5B7413DC25FA00FAE221 /* CoreDataTableViewController.h */,
-				CBDA5B7513DC25FA00FAE221 /* CoreDataTableViewController.m */,
 				CBDA5B7113DC25C500FAE221 /* CoreDataViewController.h */,
 				CBDA5B7213DC25C500FAE221 /* CoreDataViewController.m */,
+				CBDA5B7413DC25FA00FAE221 /* CoreDataTableViewController.h */,
+				CBDA5B7513DC25FA00FAE221 /* CoreDataTableViewController.m */,
+				CB018E0C13DE0063004217E0 /* CardTableViewController.h */,
+				CB018E0D13DE0064004217E0 /* CardTableViewController.m */,
 				CBDA5AFB13DBEC1300FAE221 /* Supporting Files */,
 			);
 			path = PushBox;
@@ -499,9 +614,14 @@
 			children = (
 				CB018DFE13DDE468004217E0 /* AboutViewController.xib */,
 				CB018DD513DD3CC8004217E0 /* DockViewController.xib */,
+				CB018E0F13DE00F0004217E0 /* CardTableViewController.xib */,
 				CB4AAC3F13DC671F0053E3A6 /* RootViewController.xib */,
+				CB26225213DF07820062EDE7 /* CardTableViewCell.xib */,
 				CBDA5B0613DBEC1300FAE221 /* MainWindow.xib */,
 				CB4AAC9113DC7BE60053E3A6 /* LoginViewController.xib */,
+				CB9DCADD13E2C15C00DA3D3D /* UserCardViewController.xib */,
+				CB9DCACD13E1E54700DA3D3D /* DetailImageViewController.xib */,
+				CB26224F13DF06780062EDE7 /* StatusCardViewController.xib */,
 			);
 			name = Nibs;
 			sourceTree = "<group>";
@@ -637,6 +757,33 @@
 				CB018DFF13DDE468004217E0 /* AboutViewController.xib in Resources */,
 				CB018E0113DDE4E8004217E0 /* about_button_bg.png in Resources */,
 				CB018E0313DDE524004217E0 /* about_pb_title.png in Resources */,
+				CB018E1013DE00F0004217E0 /* CardTableViewController.xib in Resources */,
+				CB26225113DF06780062EDE7 /* StatusCardViewController.xib in Resources */,
+				CB26225313DF07820062EDE7 /* CardTableViewCell.xib in Resources */,
+				CB9DCAA913DFEF5D00DA3D3D /* status_bg.png in Resources */,
+				CB9DCAAA13DFEF5D00DA3D3D /* status_button_action.png in Resources */,
+				CB9DCAAB13DFEF5D00DA3D3D /* status_button_comment.png in Resources */,
+				CB9DCAAC13DFEF5D00DA3D3D /* status_button_fav.png in Resources */,
+				CB9DCAAD13DFEF5D00DA3D3D /* status_button_repost.png in Resources */,
+				CB9DCAAE13DFEF5D00DA3D3D /* status_repost_bg.png in Resources */,
+				CB9DCAB413DFF08C00DA3D3D /* repost_cover_bottom.png in Resources */,
+				CB9DCAB513DFF08C00DA3D3D /* repost_cover_top.png in Resources */,
+				CB9DCAB613DFF08C00DA3D3D /* card_cover_bottom.png in Resources */,
+				CB9DCAB713DFF08C00DA3D3D /* card_cover_top.png in Resources */,
+				CB9DCABA13DFF27F00DA3D3D /* card_profile_cover_large.png in Resources */,
+				CB9DCABB13DFF27F00DA3D3D /* card_profile_cover.png in Resources */,
+				CB9DCABD13DFF30E00DA3D3D /* status_button_unfav.png in Resources */,
+				CB9DCACE13E1E54700DA3D3D /* DetailImageViewController.xib in Resources */,
+				CB9DCAD013E1E5D000DA3D3D /* detail_bg.png in Resources */,
+				CB9DCAD213E1E5F000DA3D3D /* detail_save_done.png in Resources */,
+				CB9DCAD413E1E62100DA3D3D /* detail_console_bg.png in Resources */,
+				CB9DCAD713E1E64B00DA3D3D /* detail_button_return.png in Resources */,
+				CB9DCAD813E1E64B00DA3D3D /* detail_button_save.png in Resources */,
+				CB9DCADF13E2C15F00DA3D3D /* UserCardViewController.xib in Resources */,
+				CBBA01BF13E2C80000641923 /* usercard_bg.png in Resources */,
+				CBBA01C313E2C87000641923 /* usercard_button_follow.png in Resources */,
+				CBBA01C413E2C87000641923 /* usercard_button_unfollow.png in Resources */,
+				CBBA01C613E2C8C700641923 /* usercard_pointer.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -681,6 +828,13 @@
 				CB018DEA13DDD028004217E0 /* IntervalManViewController.m in Sources */,
 				CB018DEB13DDD028004217E0 /* OptionsTableViewController.m in Sources */,
 				CB018E0B13DDEFEE004217E0 /* UIApplicationAddition.m in Sources */,
+				CB018E0E13DE0066004217E0 /* CardTableViewController.m in Sources */,
+				CB26224C13DF063F0062EDE7 /* CardTableViewCell.m in Sources */,
+				CB26225013DF06780062EDE7 /* StatusCardViewController.m in Sources */,
+				CB9DCAC613E171A100DA3D3D /* UIImageViewAddition.m in Sources */,
+				CB9DCAC913E1C36200DA3D3D /* NSDateAddition.m in Sources */,
+				CB9DCACC13E1E4DE00DA3D3D /* DetailImageViewController.m in Sources */,
+				CB9DCADE13E2C15F00DA3D3D /* UserCardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

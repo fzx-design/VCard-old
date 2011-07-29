@@ -8,7 +8,7 @@
 
 #import "User.h"
 #import "Status.h"
-
+#import "NSDateAddition.h"
 
 @implementation User
 @dynamic userID;
@@ -44,7 +44,8 @@
     result.userID = userID;
     result.screenName = [dict objectForKey:@"screen_name"];
     
-    //result.createdAt = 
+    NSString *dateString = [dict objectForKey:@"created_at"];
+    result.createdAt = [NSDate dateFromStringRepresentation:dateString];
     
     result.profileImageURL = [dict objectForKey:@"profile_image_url"];
     result.gender = [dict objectForKey:@"gender"];

@@ -11,6 +11,7 @@
 @interface UIApplication(UIApplicationAddition)
 
 - (UIView *)rootView;
+- (UIViewController *)rootViewController;
 
 - (void)showLoadingView;
 - (void)hideLoadingView;

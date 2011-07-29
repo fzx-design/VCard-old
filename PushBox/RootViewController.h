@@ -9,6 +9,7 @@
 #import "CoreDataViewController.h"
 #import "LoginViewController.h"
 #import "DockViewController.h"
+#import "CardTableViewController.h"
 
 @interface RootViewController : CoreDataViewController<LoginViewControllerDelegate> {
     UIImageView *_backgroundImageView;
@@ -16,6 +17,7 @@
     
     LoginViewController *_loginViewController;
     DockViewController *_dockViewController;
+    CardTableViewController *_cardTableViewController;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView* backgroundImageView;
@@ -23,5 +25,6 @@
 
 @property(nonatomic, retain) LoginViewController* loginViewController;
 @property(nonatomic, retain) DockViewController *dockViewController;
+@property(nonatomic, retain) CardTableViewController* cardTableViewController;
 
 @end

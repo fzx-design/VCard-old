@@ -9,6 +9,7 @@
 #import "OAuthHTTPRequest.h"
 
 @class WeiboClient;
+@class User;
 
 typedef void (^WCCompletionBlock)(WeiboClient *client);
 
@@ -29,26 +30,49 @@ typedef void (^WCCompletionBlock)(WeiboClient *client);
 // NSDictionary or NSArray
 @property (nonatomic, retain) id responseJSONObject;
 
-// This block will be called on response with no errors
-@property (nonatomic, copy) WCCompletionBlock completionBlock;
+- (void)setCompletionBlock:(void (^)(WeiboClient* client))completionBlock;
+- (WCCompletionBlock)completionBlock;
 
 // return an autoreleased object, while gets released after one of following calls complete
 + (id)client;
 
 // return true if user already logged in
 + (BOOL)authorized;
++ (User *)currentUserInManagedObjectContext:(NSManagedObjectContext *)context;
 + (void)signout;
 
 - (void)authWithUsername:(NSString *)username password:(NSString *)password autosave:(BOOL)autosave;
 
-- (void)getFollowedTimelineSinceID:(NSString *)sinceID 
-					 withMaximumID:(NSString *)maxID 
-                    startingAtPage:(int)page 
-                             count:(int)count
-                           feature:(int)feature;
+- (void)getFriendsTimelineSinceID:(NSString *)sinceID 
+                    withMaximumID:(NSString *)maxID 
+                   startingAtPage:(int)page 
+                            count:(int)count
+                          feature:(int)feature;
+
+- (void)getUserTimeline:(NSString *)userID 
+				SinceID:(NSString *)sinceID 
+		  withMaximumID:(NSString *)maxID 
+		 startingAtPage:(int)page 
+				  count:(int)count
+                feature:(int)feature;
+
+- (void)getCommentsAndRepostsCount:(NSArray *)statusIDs;
 
 - (void)getUser:(NSString *)userID;
 
 - (void)follow:(NSString *)userID;
+- (void)unfollow:(NSString *)userID;
+
+- (void)favorite:(NSString *)statusID;
+- (void)unFavorite:(NSString *)statusID;
+
+- (void)post:(NSString *)text;
+- (void)destroyStatus:(NSString *)statusID;
+
+- (void)getFavoritesByPage:(int)page;
+
+- (void)getRelationshipWithUser:(NSString *)userID;
+
+
 
 @end

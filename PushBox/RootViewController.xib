@@ -12,11 +12,10 @@
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<string>IBUILabel</string>
-			<string>IBUITableView</string>
+			<string>IBUIButton</string>
 			<string>IBUIImageView</string>
 			<string>IBUIView</string>
-			<string>IBUIButton</string>
+			<string>IBUILabel</string>
 			<string>IBProxyObject</string>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
@@ -51,7 +50,7 @@
 						<string key="NSFrameSize">{1024, 748}</string>
 						<reference key="NSSuperview" ref="420341332"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="337355186"/>
+						<reference key="NSNextKeyView" ref="249622028"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
@@ -65,7 +64,7 @@
 						<string key="NSFrame">{{268, 136}, {489, 340}}</string>
 						<reference key="NSSuperview" ref="420341332"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="72760619"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">4</int>
@@ -91,59 +90,6 @@
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">root_cards_blur_bg.png</string>
-						</object>
-					</object>
-					<object class="IBUITableView" id="40676935">
-						<reference key="NSNextResponder" ref="420341332"/>
-						<int key="NSvFlags">-2147483374</int>
-						<string key="NSFrame">{{0, 37}, {1024, 640}}</string>
-						<reference key="NSSuperview" ref="420341332"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="249622028"/>
-						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MCAwAA</bytes>
-						</object>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<bool key="IBUIAlwaysBounceVertical">YES</bool>
-						<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
-						<int key="IBUISectionIndexMinimumDisplayRowCount">0</int>
-						<float key="IBUIRowHeight">560</float>
-					</object>
-					<object class="IBUIImageView" id="337355186">
-						<reference key="NSNextResponder" ref="420341332"/>
-						<int key="NSvFlags">-2147483392</int>
-						<string key="NSFrame">{{0, 13}, {78, 688}}</string>
-						<reference key="NSSuperview" ref="420341332"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="40676935"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">4</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<object class="NSCustomResource" key="IBUIImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">root_shadow_left.png</string>
-						</object>
-					</object>
-					<object class="IBUIImageView" id="590836205">
-						<reference key="NSNextResponder" ref="420341332"/>
-						<int key="NSvFlags">-2147483392</int>
-						<string key="NSFrame">{{946, 13}, {78, 688}}</string>
-						<reference key="NSSuperview" ref="420341332"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">4</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<object class="NSCustomResource" key="IBUIImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">root_shadow_right.png</string>
 						</object>
 					</object>
 					<object class="IBUIView" id="72760619">
@@ -208,7 +154,7 @@
 								<string key="NSFrame">{{963, 3}, {60, 37}}</string>
 								<reference key="NSSuperview" ref="72760619"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="590836205"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
@@ -317,9 +263,6 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="72760619"/>
 							<reference ref="249622028"/>
-							<reference ref="40676935"/>
-							<reference ref="590836205"/>
-							<reference ref="337355186"/>
 							<reference ref="819067164"/>
 							<reference ref="928190392"/>
 						</object>
@@ -340,22 +283,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">9</int>
 						<reference key="object" ref="249622028"/>
-						<reference key="parent" ref="420341332"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">10</int>
-						<reference key="object" ref="40676935"/>
-						<reference key="parent" ref="420341332"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">12</int>
-						<reference key="object" ref="590836205"/>
-						<reference key="parent" ref="420341332"/>
-						<string key="objectName">Image View - root_shadow_right.png</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">13</int>
-						<reference key="object" ref="337355186"/>
 						<reference key="parent" ref="420341332"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -394,9 +321,6 @@
 					<string>-1.IBPluginDependency</string>
 					<string>-2.CustomClassName</string>
 					<string>-2.IBPluginDependency</string>
-					<string>10.IBPluginDependency</string>
-					<string>12.IBPluginDependency</string>
-					<string>13.IBPluginDependency</string>
 					<string>14.IBPluginDependency</string>
 					<string>15.IBPluginDependency</string>
 					<string>30.IBPluginDependency</string>
@@ -411,9 +335,6 @@
 					<string>RootViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -509,8 +430,6 @@
 				<string>root_bottom_bar_bg.png</string>
 				<string>root_cards_blur_bg.png</string>
 				<string>root_pushbox.png</string>
-				<string>root_shadow_left.png</string>
-				<string>root_shadow_right.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
@@ -519,8 +438,6 @@
 				<string>{1024, 46}</string>
 				<string>{1024, 318}</string>
 				<string>{483, 334}</string>
-				<string>{78, 653}</string>
-				<string>{78, 653}</string>
 			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">534</string>

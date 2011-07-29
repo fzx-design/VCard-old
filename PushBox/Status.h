@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Status;
+@class User;
 
 @interface Status : NSManagedObject {
 @private
@@ -24,11 +24,14 @@
 @property (nonatomic, retain) NSString * thumbnailPicURL;
 @property (nonatomic, retain) NSString * bmiddlePicURL;
 @property (nonatomic, retain) NSString * originalPicURL;
-@property (nonatomic, retain) NSManagedObject *author;
+@property (nonatomic, retain) User *author;
 @property (nonatomic, retain) Status *repostStatus;
 @property (nonatomic, retain) NSSet *comments;
-@property (nonatomic, retain) NSManagedObject *isFriendsStatusOf;
+@property (nonatomic, retain) User *isFriendsStatusOf;
+@property (nonatomic, retain) NSString * commentsCount;
+@property (nonatomic, retain) NSString * repostsCount;
 
+- (BOOL)isEqualToStatus:(Status *)status;
 + (Status *)insertStatus:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context;
 + (Status *)statusWithID:(NSString *)statudID inManagedObjectContext:(NSManagedObjectContext *)context;
 

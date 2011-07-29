@@ -17,6 +17,9 @@ UITableViewDelegate, UITableViewDataSource> {
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
 
+//methods to override
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+- (void)configureRequest:(NSFetchRequest *)request;
+- (NSString *)customCellClassName;
 
 @end

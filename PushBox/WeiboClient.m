@@ -9,6 +9,7 @@
 #import "WeiboClient.h"
 #import "JSON.h"
 #import "NSString+URLEncoding.h"
+#import "User.h"
 
 #define kUserDefaultKeyTokenResponseString @"kUserDefaultKeyTokenResponseString"
 
@@ -20,9 +21,11 @@ static NSString* OAuthTokenKey = nil;
 static NSString* OAuthTokenSecret = nil;
 
 static NSString* UserID = nil;
+static User *UserObj = nil;
 
 typedef enum {
     HTTPMethodPost,
+    HTTPMethodForm,
     HTTPMethodGet,
 } HTTPMethod;
 
@@ -55,10 +58,20 @@ typedef enum {
 @synthesize preCompletionBlock = _preCompletionBlock;
 
 @synthesize responseJSONObject = _responseJSONObject;
-@synthesize completionBlock = _completionBlock;
 @synthesize responseStatusCode = _responseStatusCode;
 @synthesize hasError = _hasError;
 @synthesize errorDesc = _errorDesc;
+
+- (void)setCompletionBlock:(void (^)(WeiboClient* client))completionBlock
+{
+    [_completionBlock autorelease];
+    _completionBlock = [completionBlock copy];
+}
+
+- (WCCompletionBlock)completionBlock
+{
+    return _completionBlock;
+}
 
 + (void)setTokenWithHTTPResponseString:(NSString *)responseString
 {
@@ -125,9 +138,9 @@ typedef enum {
     [_responseJSONObject release];
     [_params release];
     [_request release];
-    [_completionBlock release];
     [_path release];
     [_errorDesc release];
+    [_completionBlock release];
     [_preCompletionBlock release];
     [super dealloc];
 }
@@ -147,7 +160,7 @@ typedef enum {
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
     NSLog(@"Request Finished");
-    NSLog(@"Response raw string:\n%@", [request responseString]);
+    //NSLog(@"Response raw string:\n%@", [request responseString]);
     
     switch (request.responseStatusCode) {
         case 401: // Not Authorized: either you need to provide authentication credentials, or the credentials provided aren't valid.
@@ -196,7 +209,9 @@ typedef enum {
 report_completion:
     [self reportCompletion];
     
-    [self autorelease];
+    if (!self.synchronized) {
+        [self autorelease];
+    }
 }
 
 //failed due to network connection or other issues
@@ -211,7 +226,9 @@ report_completion:
     //same block called when failed
     [self reportCompletion];
     
-    [self autorelease];
+    if (!self.synchronized) {
+        [self autorelease];
+    }
 }
 
 #pragma mark URL-generation
@@ -264,22 +281,22 @@ report_completion:
     
     self.request.requestParams = self.params;
     
-    if (self.httpMethod == HTTPMethodPost) {
+    if (self.httpMethod == HTTPMethodPost || self.httpMethod == HTTPMethodForm) {
         self.request.requestMethod = @"POST";
-        
         [self.request addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
         
-        NSString *postBody = [self queryString];
-        NSMutableData *postData = [[NSMutableData alloc] initWithData:[postBody dataUsingEncoding:NSUTF8StringEncoding]];
+        if (self.httpMethod == HTTPMethodPost) {
+            NSString *postBody = [self queryString];
+            NSMutableData *postData = [[NSMutableData alloc] initWithData:[postBody dataUsingEncoding:NSUTF8StringEncoding]];
+            [self.request setPostBody:postData];
+        }
         
-        int contentLength = [postBody lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
-        
+        int contentLength = [self.request.postBody length];
         [self.request addRequestHeader:@"Content-Length"
                                  value:[NSString stringWithFormat:@"%d", contentLength]];
         
-        [self.request setPostBody:postData];
     }
-    
+
     if (self.authRequired) {
         _request.consumerKey = AppKey;
         _request.consumerSecret = AppSecret;
@@ -320,6 +337,32 @@ report_completion:
     OAuthTokenKey = nil;
     OAuthTokenSecret = nil;
     UserID = nil;
+    [UserObj release];
+    UserObj = nil;
+}
+
+
++ (User *)currentUserInManagedObjectContext:(NSManagedObjectContext *)context
+{
+    if (!UserID) {
+        return nil;
+    }
+    
+    if (UserObj) {
+        return UserObj;
+    }
+    
+    WeiboClient *client = [WeiboClient client];
+    client.synchronized = YES;
+    [client getUser:UserID];
+    
+    if (!client.hasError) {
+        UserObj = [[User insertUser:client.responseJSONObject inManagedObjectContext:context] retain];
+    }
+    
+    [client release];
+    
+    return UserObj;
 }
 
 - (void)authWithUsername:(NSString *)username password:(NSString *)password autosave:(BOOL)autosave
@@ -355,11 +398,55 @@ report_completion:
     [self sendRequest];
 }
 
-- (void)getFollowedTimelineSinceID:(NSString *)sinceID 
-					 withMaximumID:(NSString *)maxID 
-                    startingAtPage:(int)page 
-                             count:(int)count
-                           feature:(int)feature
+- (void)getCommentsAndRepostsCountForStatusesDict:(NSArray *)statusesDict
+{
+    NSMutableArray *statusIDArray = [NSMutableArray arrayWithCapacity:[statusesDict count]];
+    for (NSDictionary *statusDict in statusesDict) {
+        NSString *statusID = [statusDict objectForKey:@"id"];
+        [statusIDArray addObject:statusID];
+    }
+    
+    [self setPreCompletionBlock:^(WeiboClient *client) {
+        if (!client.hasError) {
+            NSArray *countsArray = client.responseJSONObject;
+            NSMutableArray *resultStatusesDict = [NSMutableArray arrayWithCapacity:[countsArray count]];
+            
+            for (NSDictionary *countsDict in countsArray) {
+                
+                NSString *statusID = [[countsDict objectForKey:@"id"] stringValue];
+                NSDictionary *originalStatusDict = nil;
+                
+                for (NSDictionary *statusDict in statusesDict) {
+                    if ([[[statusDict objectForKey:@"id"] stringValue] isEqualToString:statusID]) {
+                        originalStatusDict = statusDict;
+                        break;
+                    }
+                }
+                
+                NSMutableDictionary *resultStatusDict = [NSMutableDictionary dictionaryWithDictionary:originalStatusDict];
+                
+                NSString *commentsCount = [[countsDict objectForKey:@"comments"] stringValue];
+                [resultStatusDict setObject:commentsCount forKey:@"comment_count"];
+                
+                NSString *repostsCount = [[countsDict objectForKey:@"rt"] stringValue];
+                [resultStatusDict setObject:repostsCount forKey:@"repost_count"];
+                
+                [resultStatusesDict addObject:resultStatusDict];
+            }
+            
+            client.responseJSONObject = resultStatusesDict;
+        }
+    }];
+    
+    [self getCommentsAndRepostsCount:statusIDArray];
+
+}
+
+- (void)getFriendsTimelineSinceID:(NSString *)sinceID 
+                    withMaximumID:(NSString *)maxID 
+                   startingAtPage:(int)page 
+                            count:(int)count
+                          feature:(int)feature;
 {
     self.path = @"statuses/friends_timeline.json";
 	
@@ -379,7 +466,67 @@ report_completion:
         [self.params setObject:[NSString stringWithFormat:@"%d", feature] forKey:@"feature"];
     }
     
+    [self setPreCompletionBlock:^(WeiboClient *client1) {
+        if (!client1.hasError) {            
+            WeiboClient *client2 = [WeiboClient client];
+            [client2 setCompletionBlock:client1.completionBlock];
+            [client1 setCompletionBlock:NULL];
+            
+            NSArray *statusesDict = client1.responseJSONObject;
+            [client2 getCommentsAndRepostsCountForStatusesDict:statusesDict];
+        }
+    }];
+    
     [self sendRequest];
+}
+
+- (void)getUserTimeline:(NSString *)userID 
+				SinceID:(NSString *)sinceID 
+		  withMaximumID:(NSString *)maxID 
+		 startingAtPage:(int)page 
+				  count:(int)count
+                feature:(int)feature
+{
+    self.path = @"statuses/user_timeline.json";
+    [self.params setObject:userID forKey:@"user_id"];
+	
+    if (sinceID) {
+        [self.params setObject:sinceID forKey:@"since_id"];
+    }
+    if (maxID) {
+        [self.params setObject:maxID forKey:@"max_id"];
+    }
+    if (page > 0) {
+        [self.params setObject:[NSString stringWithFormat:@"%d", page] forKey:@"page"];
+    }
+    if (count > 0) {
+        [self.params setObject:[NSString stringWithFormat:@"%d", count] forKey:@"count"];
+    }
+    if (feature > 0) {
+        [self.params setObject:[NSString stringWithFormat:@"%d", feature] forKey:@"feature"];
+    }
+    
+    [self setPreCompletionBlock:^(WeiboClient *client1) {
+        if (!client1.hasError) {            
+            WeiboClient *client2 = [WeiboClient client];
+            [client2 setCompletionBlock:client1.completionBlock];
+            [client1 setCompletionBlock:NULL];
+            
+            NSArray *statusesDict = client1.responseJSONObject;
+            [client2 getCommentsAndRepostsCountForStatusesDict:statusesDict];
+        }
+    }];
+    
+    [self sendRequest];
+}
+
+- (void)getCommentsAndRepostsCount:(NSArray *)statusIDs
+{
+    self.path = @"statuses/counts.json";
+    NSString *ids = [statusIDs componentsJoinedByString:@","];
+    [self.params setObject:ids forKey:@"ids"];
+    [self sendRequest];
+    
 }
 
 - (void)getUser:(NSString *)userID
@@ -394,6 +541,81 @@ report_completion:
     self.httpMethod = HTTPMethodPost;
     self.path = @"friendships/create.json";
     [self.params setObject:userID forKey:@"user_id"];
+    [self sendRequest];
+}
+
+- (void)unfollow:(NSString *)userID
+{
+    self.httpMethod = HTTPMethodPost;
+    self.path = @"friendships/destroy.json";
+    [self.params setObject:userID forKey:@"user_id"];
+    [self sendRequest];
+}
+
+- (void)favorite:(NSString *)statusID
+{
+    self.httpMethod = HTTPMethodPost;
+    self.path = @"favorites/create.json";
+    [self.params setObject:statusID forKey:@"id"];
+    [self sendRequest];
+}
+
+- (void)unFavorite:(NSString *)statusID
+{
+    self.httpMethod = HTTPMethodPost;
+    self.path = [NSString stringWithFormat:@"favorites/destroy/%@.json", statusID];
+    [self sendRequest];
+}
+
+- (void)post:(NSString *)text
+{
+    self.httpMethod = HTTPMethodPost;
+    self.path = @"statuses/update.json";
+    [self.params setObject:[text URLEncodedString] forKey:@"status"];
+	[self sendRequest];
+}
+
+- (void)post:(NSString *)text withImage:(UIImage *)image
+{
+    self.httpMethod = HTTPMethodForm;
+    NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+    self.path = [NSString stringWithFormat:@"statuses/upload.json"];
+    [self.request setPostValue:[text URLEncodedString] forKey:@"status"];        
+    [self.request setData:imageData withFileName:@"image.jpg" andContentType:@"image/jpeg" forKey:@"pic"];
+    [self sendRequest];
+}
+
+- (void)destroyStatus:(NSString *)statusID
+{
+    self.path = [NSString stringWithFormat:@"statuses/destroy/%@.json", statusID];
+    [self sendRequest];
+}
+
+- (void)getFavoritesByPage:(int)page
+{
+    self.path = [NSString stringWithFormat:@"favorites.json"];
+    if (page > 0) {
+        [self.params setObject:[NSString stringWithFormat:@"%d", page] forKey:@"page"];
+    }
+    
+    [self setPreCompletionBlock:^(WeiboClient *client1) {
+        if (!client1.hasError) {            
+            WeiboClient *client2 = [WeiboClient client];
+            [client2 setCompletionBlock:client1.completionBlock];
+            [client1 setCompletionBlock:NULL];
+            
+            NSArray *statusesDict = client1.responseJSONObject;
+            [client2 getCommentsAndRepostsCountForStatusesDict:statusesDict];
+        }
+    }];
+    
+    [self sendRequest];
+}
+
+- (void)getRelationshipWithUser:(NSString *)userID
+{
+    self.path = @"friendships/show.json";
+    [self.params setObject:userID forKey:@"target_id"];
     [self sendRequest];
 }
 

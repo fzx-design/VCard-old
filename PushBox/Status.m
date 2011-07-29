@@ -8,6 +8,7 @@
 
 #import "Status.h"
 #import "User.h"
+#import "NSDateAddition.h"
 
 @implementation Status
 @dynamic createdAt;
@@ -22,6 +23,13 @@
 @dynamic repostStatus;
 @dynamic comments;
 @dynamic isFriendsStatusOf;
+@dynamic commentsCount;
+@dynamic repostsCount;
+
+- (BOOL)isEqualToStatus:(Status *)status
+{
+    return [self.statusID isEqualToString:status.statusID];
+}
 
 + (Status *)statusWithID:(NSString *)statudID inManagedObjectContext:(NSManagedObjectContext *)context
 {
@@ -45,19 +53,21 @@
     if (result) {
         return result; 
     }
-
-    result = [NSEntityDescription insertNewObjectForEntityForName:@"Status" inManagedObjectContext:context];
     
+    result = [NSEntityDescription insertNewObjectForEntityForName:@"Status" inManagedObjectContext:context];
     result.statusID = statusID;
     
-//    result.createdAt = 
+    NSString *dateString = [dict objectForKey:@"created_at"];
+    result.createdAt = [NSDate dateFromStringRepresentation:dateString];
     
     result.text = [dict objectForKey:@"text"];
-    NSLog(@"text:%@", result.text);
     
     result.source = [dict objectForKey:@"source"];
     
     result.favorited = [NSNumber numberWithBool:[[dict objectForKey:@"favorited"] boolValue]];
+    
+    result.commentsCount = [dict objectForKey:@"comment_count"];
+    result.repostsCount = [dict objectForKey:@"repost_count"];
 
     result.thumbnailPicURL = [dict objectForKey:@"thumbnail_pic"];
     result.bmiddlePicURL = [dict objectForKey:@"bmiddle_pic"];

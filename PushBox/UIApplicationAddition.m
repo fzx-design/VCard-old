@@ -7,6 +7,7 @@
 //
 
 #import "UIApplicationAddition.h"
+#import "PushBoxAppDelegate.h"
 
 #define kXModifier 3
 #define kAnimationDuration 0.5
@@ -23,6 +24,12 @@ static UIView *_backView;
 - (UIView *)rootView
 {
     return [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
+}
+
+- (UIViewController *)rootViewController
+{
+    PushBoxAppDelegate *appDelegate = (PushBoxAppDelegate *)[[UIApplication sharedApplication] delegate];
+    return appDelegate.rootViewController;
 }
 
 - (void)showLoadingView
