@@ -41,8 +41,7 @@
 
 - (void)configureRequest:(NSFetchRequest *)request
 {
-    request.sortDescriptors = [NSArray array];
-    request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.managedObjectContext];
+    
 }
 
 - (NSString *)customCellClassName
@@ -108,47 +107,46 @@
     return cell;
 }
 
-//- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-//    [self.tableView beginUpdates];
-//    NSLog(@"%d", [self.fetchedResultsController.fetchedObjects count]);
-//}
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView beginUpdates];
+    //NSLog(@"%d", [self.fetchedResultsController.fetchedObjects count]);
+}
 
-//- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
-//       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
-//      newIndexPath:(NSIndexPath *)newIndexPath {
-//    
-//    UITableView *tableView = self.tableView;
-//    
-//    switch(type) {
-//            
-//        case NSFetchedResultsChangeInsert:
-//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-//                             withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//            
-//        case NSFetchedResultsChangeDelete:
-//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-//                             withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//            
-//        case NSFetchedResultsChangeUpdate:
-//            [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
-//                    atIndexPath:indexPath];
-//            break;
-//            
-//        case NSFetchedResultsChangeMove:
-//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-//                             withRowAnimation:UITableViewRowAnimationFade];
-//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-//                             withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//    }
-//}
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath {
+    
+    UITableView *tableView = self.tableView;
+    
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                             withRowAnimation:UITableViewRowAnimationTop];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
+                    atIndexPath:indexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
 
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    //[self.tableView endUpdates];
-    [self.tableView reloadData];
+    [self.tableView endUpdates];
+    //[self.tableView reloadData];
 }
 
 @end

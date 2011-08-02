@@ -33,9 +33,15 @@
 @property (nonatomic, retain) NSSet *statuses;
 @property (nonatomic, retain) NSSet *comments;
 @property (nonatomic, retain) NSSet *friendsStatuses;
+@property (nonatomic, retain) NSDate * updateDate;
+@property (nonatomic, retain) NSSet *followers;
+@property (nonatomic, retain) NSSet *friends;
+
 
 + (User *)insertUser:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context;
 + (User *)userWithID:(NSString *)userID inManagedObjectContext:(NSManagedObjectContext *)context;
++ (void)deleteAllObjectsInManagedObjectContext:(NSManagedObjectContext *)context;
+- (BOOL)isEqualToUser:(User *)user;
 
 @end
 
@@ -55,5 +61,17 @@
 - (void)removeFriendsStatusesObject:(Status *)value;
 - (void)addFriendsStatuses:(NSSet *)values;
 - (void)removeFriendsStatuses:(NSSet *)values;
+
+- (void)addFollowersObject:(User *)value;
+- (void)removeFollowersObject:(User *)value;
+- (void)addFollowers:(NSSet *)values;
+- (void)removeFollowers:(NSSet *)values;
+
+- (void)addFriendsObject:(User *)value;
+- (void)removeFriendsObject:(User *)value;
+- (void)addFriends:(NSSet *)values;
+- (void)removeFriends:(NSSet *)values;
+
+
 
 @end

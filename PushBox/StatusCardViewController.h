@@ -9,6 +9,9 @@
 #import "CoreDataViewController.h"
 #import "UserCardViewController.h"
 #import "DetailImageViewController.h"
+#import "CommentsTableViewController.h"
+#import "CommentViewController.h"
+#import "PostViewController.h"
 #import <MessageUI/MessageUI.h>
 
 @class Status;

@@ -282,19 +282,13 @@ report_completion:
     self.request.requestParams = self.params;
     
     if (self.httpMethod == HTTPMethodPost || self.httpMethod == HTTPMethodForm) {
-        self.request.requestMethod = @"POST";
-        [self.request addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
-        
         if (self.httpMethod == HTTPMethodPost) {
+            [self.request addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
+            self.request.requestMethod = @"POST";
             NSString *postBody = [self queryString];
             NSMutableData *postData = [[NSMutableData alloc] initWithData:[postBody dataUsingEncoding:NSUTF8StringEncoding]];
             [self.request setPostBody:postData];
         }
-        
-        int contentLength = [self.request.postBody length];
-        [self.request addRequestHeader:@"Content-Length"
-                                 value:[NSString stringWithFormat:@"%d", contentLength]];
-        
     }
 
     if (self.authRequired) {
@@ -520,6 +514,21 @@ report_completion:
     [self sendRequest];
 }
 
+- (void)getCommentsOfStatus:(NSString *)statusID
+                       page:(int)page
+                      count:(int)count
+{
+    self.path = @"statuses/comments.json";
+    [self.params setObject:statusID forKey:@"id"];
+    if (page) {
+        [self.params setObject:[NSString stringWithFormat:@"%d", page] forKey:@"page"];
+    }
+    if (count) {
+        [self.params setObject:[NSString stringWithFormat:@"%d", count] forKey:@"count"];
+    }
+    [self sendRequest];
+}
+
 - (void)getCommentsAndRepostsCount:(NSArray *)statusIDs
 {
     self.path = @"statuses/counts.json";
@@ -533,6 +542,28 @@ report_completion:
 {
     self.path = @"users/show.json";
     [self.params setObject:userID forKey:@"user_id"];
+    [self sendRequest];
+}
+
+- (void)getFriendsOfUser:(NSString *)userID cursor:(int)cursor count:(int)count
+{
+    self.path = @"statuses/friends.json";
+    [self.params setObject:userID forKey:@"user_id"];
+    [self.params setObject:[NSString stringWithFormat:@"%d", cursor] forKey:@"cursor"];
+    if (count) {
+        [self.params setObject:[NSString stringWithFormat:@"%d", count] forKey:@"count"];
+    }
+    [self sendRequest];
+}
+
+- (void)getFollowersOfUser:(NSString *)userID cursor:(int)cursor count:(int)count
+{
+    self.path = @"statuses/followers.json";
+    [self.params setObject:userID forKey:@"user_id"];
+    [self.params setObject:[NSString stringWithFormat:@"%d", cursor] forKey:@"cursor"];
+    if (count) {
+        [self.params setObject:[NSString stringWithFormat:@"%d", count] forKey:@"count"];
+    }
     [self sendRequest];
 }
 
@@ -577,16 +608,61 @@ report_completion:
 
 - (void)post:(NSString *)text withImage:(UIImage *)image
 {
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.2);
     self.httpMethod = HTTPMethodForm;
-    NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+    self.request.postFormat = ASIMultipartFormDataPostFormat;
     self.path = [NSString stringWithFormat:@"statuses/upload.json"];
-    [self.request setPostValue:[text URLEncodedString] forKey:@"status"];        
+    [self.request setPostValue:[text URLEncodedString] forKey:@"status"]; 
+    NSLog(@"%d\n",    [self.request.postBody length]);
     [self.request setData:imageData withFileName:@"image.jpg" andContentType:@"image/jpeg" forKey:@"pic"];
+    [self sendRequest];
+}
+
+- (void)repost:(NSString *)statusID 
+          text:(NSString *)text 
+ commentStatus:(BOOL)commentStatus 
+ commentOrigin:(BOOL)commentOrigin
+{
+    self.path = @"statuses/repost.json";
+    self.httpMethod = HTTPMethodPost;
+    [self.params setObject:statusID forKey:@"id"];
+    [self.params setObject:text forKey:@"status"];
+    
+    int value = 0;
+    if (commentStatus) {
+        value += 1;
+    }
+    if (commentOrigin) {
+        value += 2;
+    }
+    
+    [self.params setObject:[NSString stringWithFormat:@"%d", value] forKey:@"is_comment"];
+    [self sendRequest];
+}
+
+- (void)comment:(NSString *)statusID 
+            cid:(NSString *)cid 
+           text:(NSString *)text
+  commentOrigin:(BOOL)commentOrigin
+{
+    self.httpMethod = HTTPMethodPost;
+    self.path = @"statuses/comment.json";
+    if (statusID) {
+        [self.params setObject:statusID forKey:@"id"];
+    }
+    if (cid) {
+        [self.params setObject:cid forKey:@"cir"];
+    }
+    [self.params setObject:text forKey:@"comment"];
+    if (commentOrigin) {
+        [self.params setObject:@"1" forKey:@"comment_ori"];
+    }
     [self sendRequest];
 }
 
 - (void)destroyStatus:(NSString *)statusID
 {
+    self.httpMethod = HTTPMethodPost;
     self.path = [NSString stringWithFormat:@"statuses/destroy/%@.json", statusID];
     [self sendRequest];
 }

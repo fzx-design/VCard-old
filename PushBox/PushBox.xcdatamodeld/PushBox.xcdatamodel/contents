@@ -5,6 +5,7 @@
         <attribute name="createdAt" attributeType="Date"/>
         <attribute name="source" optional="YES" attributeType="String"/>
         <attribute name="text" attributeType="String"/>
+        <attribute name="updateDate" attributeType="Date"/>
         <relationship name="author" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="comments" inverseEntity="User"/>
         <relationship name="targetStatus" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Status" inverseName="comments" inverseEntity="Status"/>
     </entity>
@@ -19,6 +20,7 @@
         <attribute name="statusID" attributeType="String"/>
         <attribute name="text" attributeType="String"/>
         <attribute name="thumbnailPicURL" optional="YES" attributeType="String"/>
+        <attribute name="updateDate" attributeType="Date"/>
         <relationship name="author" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="statuses" inverseEntity="User"/>
         <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="targetStatus" inverseEntity="Comment"/>
         <relationship name="isFriendsStatusOf" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="friendsStatuses" inverseEntity="User"/>
@@ -39,16 +41,19 @@
         <attribute name="screenName" attributeType="String"/>
         <attribute name="selfDescription" optional="YES" attributeType="String"/>
         <attribute name="statusesCount" optional="YES" attributeType="String"/>
+        <attribute name="updateDate" attributeType="Date"/>
         <attribute name="userID" attributeType="String"/>
         <attribute name="verified" optional="YES" attributeType="Boolean"/>
         <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="author" inverseEntity="Comment"/>
+        <relationship name="followers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="friends" inverseEntity="User"/>
+        <relationship name="friends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="followers" inverseEntity="User"/>
         <relationship name="friendsStatuses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Status" inverseName="isFriendsStatusOf" inverseEntity="Status"/>
         <relationship name="statuses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Status" inverseName="author" inverseEntity="Status"/>
     </entity>
     <fetchRequest name="FetchRequest" entity="Status" predicateString="statusID == &quot;&quot;"/>
     <elements>
-        <element name="Comment" positionX="-11" positionY="207" width="128" height="164"/>
-        <element name="Status" positionX="223" positionY="81" width="128" height="270"/>
-        <element name="User" positionX="-18" positionY="414" width="128" height="315"/>
+        <element name="Comment" positionX="-11" positionY="207" width="128" height="150"/>
+        <element name="Status" positionX="223" positionY="81" width="128" height="285"/>
+        <element name="User" positionX="-18" positionY="414" width="128" height="360"/>
     </elements>
 </model>

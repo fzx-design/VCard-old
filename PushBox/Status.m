@@ -11,6 +11,7 @@
 #import "NSDateAddition.h"
 
 @implementation Status
+
 @dynamic createdAt;
 @dynamic statusID;
 @dynamic text;
@@ -25,6 +26,8 @@
 @dynamic isFriendsStatusOf;
 @dynamic commentsCount;
 @dynamic repostsCount;
+@dynamic updateDate;
+
 
 - (BOOL)isEqualToStatus:(Status *)status
 {
@@ -49,12 +52,17 @@
 {
     NSString *statusID = [[dict objectForKey:@"id"] stringValue];
     
-    Status *result = [Status statusWithID:statusID inManagedObjectContext:context];
-    if (result) {
-        return result; 
+    if (!statusID || [statusID isEqualToString:@""]) {
+        return nil;
     }
     
-    result = [NSEntityDescription insertNewObjectForEntityForName:@"Status" inManagedObjectContext:context];
+    Status *result = [Status statusWithID:statusID inManagedObjectContext:context];
+    if (!result) {
+        result = [NSEntityDescription insertNewObjectForEntityForName:@"Status" inManagedObjectContext:context];
+    }
+
+    result.updateDate = [NSDate date];
+    
     result.statusID = statusID;
     
     NSString *dateString = [dict objectForKey:@"created_at"];
@@ -83,6 +91,20 @@
     }
     
     return result;
+}
+
++ (void)deleteAllObjectsInManagedObjectContext:(NSManagedObjectContext *)context
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    NSArray *items = [context executeFetchRequest:fetchRequest error:NULL];
+    [fetchRequest release];
+    
+    for (NSManagedObject *managedObject in items) {
+        [context deleteObject:managedObject];
+    }
 }
 
 

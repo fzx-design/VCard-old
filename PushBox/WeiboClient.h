@@ -56,9 +56,16 @@ typedef void (^WCCompletionBlock)(WeiboClient *client);
 				  count:(int)count
                 feature:(int)feature;
 
+- (void)getCommentsOfStatus:(NSString *)statusID
+                       page:(int)page
+                      count:(int)count;
+
 - (void)getCommentsAndRepostsCount:(NSArray *)statusIDs;
 
 - (void)getUser:(NSString *)userID;
+
+- (void)getFriendsOfUser:(NSString *)userID cursor:(int)cursor count:(int)count;
+- (void)getFollowersOfUser:(NSString *)userID cursor:(int)cursor count:(int)count;
 
 - (void)follow:(NSString *)userID;
 - (void)unfollow:(NSString *)userID;
@@ -67,6 +74,17 @@ typedef void (^WCCompletionBlock)(WeiboClient *client);
 - (void)unFavorite:(NSString *)statusID;
 
 - (void)post:(NSString *)text;
+- (void)post:(NSString *)text withImage:(UIImage *)image;
+- (void)repost:(NSString *)statusID 
+          text:(NSString *)text 
+ commentStatus:(BOOL)commentStatus 
+ commentOrigin:(BOOL)commentOrigin;
+
+- (void)comment:(NSString *)statusID 
+            cid:(NSString *)cid 
+           text:(NSString *)text
+  commentOrigin:(BOOL)commentOrigin;
+
 - (void)destroyStatus:(NSString *)statusID;
 
 - (void)getFavoritesByPage:(int)page;

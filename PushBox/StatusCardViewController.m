@@ -291,8 +291,8 @@
 	MFMailComposeViewController *picker = nil;
 	switch (buttonIndex) {
 		case 0:
-//			[[NSNotificationCenter defaultCenter] postNotificationName:kCommentViewShouldShowupNotification
-//																object:_status];
+            
+            
 			break;
 		case 1:
 //			[[NSNotificationCenter defaultCenter] postNotificationName:kRepostViewShouldShopupNotification
@@ -350,9 +350,11 @@
 	{
 		case MFMailComposeResultSaved:
 			message = NSLocalizedString(@"保存成功", nil);
+            [[[UIApplication sharedApplication] rootViewController] dismissModalViewControllerAnimated:YES];
 			break;
 		case MFMailComposeResultSent:
 			message = NSLocalizedString(@"发送成功", nil);
+            [[[UIApplication sharedApplication] rootViewController] dismissModalViewControllerAnimated:YES];
 			break;
 		case MFMailComposeResultFailed:
 			message = NSLocalizedString(@"发送失败", nil);
@@ -364,31 +366,55 @@
 	
 	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:message 
 														message:nil
-													   delegate:self
+													   delegate:nil
 											  cancelButtonTitle:NSLocalizedString(@"确定", nil)
 											  otherButtonTitles:nil];
-	alertView.tag = -1;
 	[alertView show];
 	[alertView release];
 }
 
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != alertView.cancelButtonIndex) {
+        WeiboClient *client = [WeiboClient client];
+        [client setCompletionBlock:^(WeiboClient *client) {
+            if (!client.hasError) {
+                [self.managedObjectContext deleteObject:self.status];
+                [self.managedObjectContext processPendingChanges];
+            }
+        }];
+        [client destroyStatus:self.status.statusID];
+    }
+}
 
 - (IBAction)profileImageButtonClicked:(id)sender {
     UserCardViewController *vc = [[UserCardViewController alloc] initWithUsr:self.status.author];
-    
+    vc.managedObjectContext = self.managedObjectContext;
     vc.modalPresentationStyle = UIModalPresentationCurrentContext;
 	vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    
+    vc.managedObjectContext = self.managedObjectContext;
     [self presentModalViewController:vc animated:YES];
     [vc release];
 }
 
 - (IBAction)commentButtonClicked:(id)sender {
+    CommentsTableViewController *vc = [[CommentsTableViewController alloc] init];
+    vc.managedObjectContext = self.managedObjectContext;
+    vc.status = self.status;
+    vc.modalPresentationStyle = UIModalPresentationCurrentContext;
+    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentModalViewController:vc animated:YES];
+    [vc release];
 }
 
 - (IBAction)repostButtonClicked:(id)sender {
+    PostViewController *vc = [[PostViewController alloc] initWithType:(RelationshipViewType)PostViewTypeRepost];
+    vc.targetStatus = self.status;
+    [[UIApplication sharedApplication] presentModalViewController:vc atHeight:kModalViewHeight];
+    [vc release];
 }
 
 - (IBAction)addFavButtonClicked:(id)sender {
+    
 }
 @end

@@ -29,7 +29,6 @@
 	[dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultKeyImageDownloadingEnabled];    
     
 	//[dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultIsFirstLogin];
-    //[dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultIsFistUsingRefreshTable];
     
 	[dict setObject:[NSNumber numberWithInt:0] forKey:kUserDefaultKeyLoginCount];
 	
@@ -193,7 +192,7 @@
         return __persistentStoreCoordinator;
     }
     
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"PushBox1.sqlite"];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"PushBox122s233.sqlite"];
     
     NSError *error = nil;
     __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];

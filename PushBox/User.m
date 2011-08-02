@@ -29,17 +29,25 @@
 @dynamic statuses;
 @dynamic comments;
 @dynamic friendsStatuses;
+@dynamic updateDate;
+@dynamic followers;
+@dynamic friends;
+
 
 + (User *)insertUser:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSString *userID = [[dict objectForKey:@"id"] stringValue];
     
-    User *result = [User userWithID:userID inManagedObjectContext:context];
-    if (result) {
-        return result; 
+    if (!userID || [userID isEqualToString:@""]) {
+        return nil;
     }
     
-    result = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
+    User *result = [User userWithID:userID inManagedObjectContext:context];
+    if (!result) {
+        result = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
+    }
+    
+    result.updateDate = [NSDate date];
     
     result.userID = userID;
     result.screenName = [dict objectForKey:@"screen_name"];
@@ -87,5 +95,25 @@
     
     return res;
 }
+
++ (void)deleteAllObjectsInManagedObjectContext:(NSManagedObjectContext *)context
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    NSArray *items = [context executeFetchRequest:fetchRequest error:NULL];
+    [fetchRequest release];
+    
+    for (NSManagedObject *managedObject in items) {
+        [context deleteObject:managedObject];
+    }
+}
+
+- (BOOL)isEqualToUser:(User *)user
+{
+    return [self.userID isEqualToString:user.userID];
+}
+
 
 @end

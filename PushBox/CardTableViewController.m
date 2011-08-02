@@ -13,7 +13,7 @@
 
 #define kCardWidth 570
 #define kCardHeight 640
-#define kHeaderAndFooterWidth 227.0
+#define kHeaderAndFooterWidth 229.0
 
 @interface CardTableViewController()
 @property(nonatomic, retain) User* currentUser;
@@ -92,7 +92,7 @@
                                   animated:YES];
     
     if ([self.tableView numberOfRowsInSection:0] == indexPath.row+1) {
-        [self performSelector:@selector(loadMoreData) withObject:nil afterDelay:2.0];
+        [self performSelector:@selector(loadMoreData) withObject:nil afterDelay:1.5];
     }
     //		_shouldAnimateScrolling = YES;
     
@@ -108,11 +108,11 @@
 	NSIndexPath *nextIndex = [indexArray lastObject];
     
     //still have status
-    if (nextIndex.row+1 < [self.tableView numberOfRowsInSection:0]) {
-        NSIndexPath *nextNextIndex = [NSIndexPath indexPathForRow:nextIndex.row+1 inSection:0];
-        self.tempCell = [super tableView:self.tableView cellForRowAtIndexPath:nextNextIndex];
-    }
-    
+//    if (nextIndex.row+1 < [self.tableView numberOfRowsInSection:0]) {
+//        NSIndexPath *nextNextIndex = [NSIndexPath indexPathForRow:nextIndex.row+1 inSection:0];
+//        self.tempCell = [super tableView:self.tableView cellForRowAtIndexPath:nextNextIndex];
+//    }
+//    
     [self scrollToRowAtIndexPath:nextIndex];
 }
 
@@ -121,10 +121,10 @@
 	NSArray *indexArray = [self.tableView indexPathsForVisibleRows];
 	NSIndexPath *nextIndex = [indexArray objectAtIndex:0];
     
-    if (nextIndex.row > 0) {
-        NSIndexPath *nextNextIndex = [NSIndexPath indexPathForRow:nextIndex.row-1 inSection:0];
-        self.tempCell = [self tableView:self.tableView cellForRowAtIndexPath:nextNextIndex];
-    }
+//    if (nextIndex.row > 0) {
+//        NSIndexPath *nextNextIndex = [NSIndexPath indexPathForRow:nextIndex.row-1 inSection:0];
+//        self.tempCell = [self tableView:self.tableView cellForRowAtIndexPath:nextNextIndex];
+//    }
     
     [self scrollToRowAtIndexPath:nextIndex];
 }
@@ -162,6 +162,7 @@
 - (void)clearData
 {
     [self.currentUser removeFriendsStatuses:self.currentUser.friendsStatuses];
+    [self.managedObjectContext processPendingChanges];
 }
 
 - (void)refresh
@@ -188,22 +189,53 @@
     request.predicate = [NSPredicate predicateWithFormat:@"isFriendsStatusOf == %@", self.currentUser];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (self.tempCell) {
-        [_tempCell autorelease];
-        id temp = _tempCell;
-        _tempCell = nil;
-        return temp;
-    }
-    else {
-        return [super tableView:tableView cellForRowAtIndexPath:indexPath];
-    }
-}
-
 - (NSString *)customCellClassName
 {
     return @"CardTableViewCell";
 }
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    //[self.tableView beginUpdates];
+    //NSLog(@"%d", [self.fetchedResultsController.fetchedObjects count]);
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath {
+//    
+//    UITableView *tableView = self.tableView;
+//    
+//    switch(type) {
+//            
+//        case NSFetchedResultsChangeInsert:
+//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+//                             withRowAnimation:UITableViewRowAnimationFade];
+//            break;
+//            
+//        case NSFetchedResultsChangeDelete:
+//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+//                             withRowAnimation:UITableViewRowAnimationFade];
+//            break;
+//            
+//        case NSFetchedResultsChangeUpdate:
+//            [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
+//                    atIndexPath:indexPath];
+//            break;
+//            
+//        case NSFetchedResultsChangeMove:
+//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+//                             withRowAnimation:UITableViewRowAnimationFade];
+//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+//                             withRowAnimation:UITableViewRowAnimationFade];
+//            break;
+//    }
+}
+
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    //[self.tableView endUpdates];
+    [self.tableView reloadData];
+}
+
 
 @end

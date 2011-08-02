@@ -7,6 +7,7 @@
 //
 
 #import "CoreDataViewController.h"
+#import "UIApplicationAddition.h"
 
 @implementation CoreDataViewController
 
@@ -17,5 +18,15 @@
     [_managedObjectContext release];
     [super dealloc];
 }
+
+//- (NSManagedObjectContext *)managedObjectContext
+//{
+//    if (!_managedObjectContext) {
+//        _managedObjectContext = [[NSManagedObjectContext alloc] init];
+//        _managedObjectContext.persistentStoreCoordinator = [[UIApplication sharedApplication] persistentStoreCoordinator];
+//    }
+//    
+//    return _managedObjectContext;
+//}
 
 @end

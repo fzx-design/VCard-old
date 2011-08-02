@@ -89,7 +89,9 @@
             self.unFollowButton.hidden = NO;
         }
         else {
-            self.followButton.hidden = NO;
+            if (![self.user isEqualToUser:[WeiboClient currentUserInManagedObjectContext:self.managedObjectContext]]) {
+                self.followButton.hidden = NO;
+            }
         }
         
         NSString *state = nil;
@@ -129,9 +131,25 @@
 }
 
 - (IBAction)followButtonClicked:(id)sender {
+    WeiboClient *client = [WeiboClient client];
+    [client setCompletionBlock:^(WeiboClient *client) {
+        if (!client.hasError) {
+            self.unFollowButton.hidden = NO;
+            self.followButton.hidden = YES;
+        }
+    }];
+    [client follow:self.user.userID];
 }
 
 - (IBAction)unfollowButtonClicked:(id)sender {
+    WeiboClient *client = [WeiboClient client];
+    [client setCompletionBlock:^(WeiboClient *client) {
+        if (!client.hasError) {
+            self.unFollowButton.hidden = YES;
+            self.followButton.hidden = NO;
+        }
+    }];
+    [client unfollow:self.user.userID];
 }
 
 - (IBAction)backButtonClicked:(id)sender {
@@ -139,12 +157,27 @@
 }
 
 - (IBAction)showFriendsButtonClicked:(id)sender {
+    RelationshipTableViewController *vc = [[RelationshipTableViewController alloc] initWithType:RelationshipViewTypeFriends];
+    vc.user = self.user;
+    vc.modalPresentationStyle = UIModalPresentationCurrentContext;
+    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    vc.managedObjectContext = self.managedObjectContext;
+    [self presentModalViewController:vc animated:YES];
+    [vc release];
 }
 
 - (IBAction)showFollowersButtonClicked:(id)sender {
+    RelationshipTableViewController *vc = [[RelationshipTableViewController alloc] initWithType:RelationshipViewTypeFollowers];
+    vc.user = self.user;
+    vc.modalPresentationStyle = UIModalPresentationCurrentContext;
+    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    vc.managedObjectContext = self.managedObjectContext;
+    [self presentModalViewController:vc animated:YES];
+    [vc release];
 }
 
 - (IBAction)showStatusesButtonClicked:(id)sender {
+
 }
 
 

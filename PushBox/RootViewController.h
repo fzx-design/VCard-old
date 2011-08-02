@@ -10,6 +10,7 @@
 #import "LoginViewController.h"
 #import "DockViewController.h"
 #import "CardTableViewController.h"
+#import "PostViewController.h"
 
 @interface RootViewController : CoreDataViewController<LoginViewControllerDelegate> {
     UIImageView *_backgroundImageView;

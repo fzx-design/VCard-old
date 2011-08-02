@@ -104,6 +104,35 @@
 		CBBA01C313E2C87000641923 /* usercard_button_follow.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01C113E2C87000641923 /* usercard_button_follow.png */; };
 		CBBA01C413E2C87000641923 /* usercard_button_unfollow.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01C213E2C87000641923 /* usercard_button_unfollow.png */; };
 		CBBA01C613E2C8C700641923 /* usercard_pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01C513E2C8C700641923 /* usercard_pointer.png */; };
+		CBBA01CA13E3463500641923 /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBA01C813E3463200641923 /* PostViewController.m */; };
+		CBBA01CB13E3463500641923 /* PostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01C913E3463300641923 /* PostViewController.xib */; };
+		CBBA01D213E34AA200641923 /* post_button_@.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01CD13E34A9F00641923 /* post_button_@.png */; };
+		CBBA01D313E34AA200641923 /* post_button_#.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01CE13E34AA000641923 /* post_button_#.png */; };
+		CBBA01D413E34AA200641923 /* post_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01CF13E34AA000641923 /* post_bg.png */; };
+		CBBA01D513E34AA200641923 /* post_right_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01D013E34AA100641923 /* post_right_bg.png */; };
+		CBBA01D613E34AA200641923 /* post_button_camara.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01D113E34AA200641923 /* post_button_camara.png */; };
+		CBBA01D913E34AE200641923 /* button_add.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01D713E34AE100641923 /* button_add.png */; };
+		CBBA01DA13E34AE200641923 /* button_cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01D813E34AE100641923 /* button_cancel.png */; };
+		CBBA01DC13E34D0C00641923 /* post_right_button_remove.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01DB13E34D0B00641923 /* post_right_button_remove.png */; };
+		CBBA01E313E4187800641923 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBA01E113E4187800641923 /* EGORefreshTableHeaderView.m */; };
+		CBBA01EA13E44C1900641923 /* EGOTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBA01E913E44C1600641923 /* EGOTableViewController.m */; };
+		CBBA01EC13E4519B00641923 /* refresh_help.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01EB13E4519B00641923 /* refresh_help.png */; };
+		CBBA01F513E454FD00641923 /* RelationshipTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBA01F313E454FB00641923 /* RelationshipTableViewController.m */; };
+		CBBA01F613E454FD00641923 /* RelationshipTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01F413E454FC00641923 /* RelationshipTableViewController.xib */; };
+		CBBA01F813E46F2100641923 /* card_general_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01F713E46F2000641923 /* card_general_bg.png */; };
+		CBBA01FA13E470F100641923 /* RelationshipTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01F913E470F100641923 /* RelationshipTableViewCell.xib */; };
+		CBBA01FC13E473BB00641923 /* cell_separator_line.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01FB13E473BB00641923 /* cell_separator_line.png */; };
+		CBBA01FF13E4742F00641923 /* RelationshipTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBA01FE13E4742E00641923 /* RelationshipTableViewCell.m */; };
+		CBBA020113E52AF300641923 /* usercard_button_HL.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBA020013E52AF300641923 /* usercard_button_HL.png */; };
+		CBBA020513E52F8300641923 /* CommentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBA020313E52F7D00641923 /* CommentsTableViewController.m */; };
+		CBBA020613E52F8300641923 /* CommentsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBBA020413E52F8100641923 /* CommentsTableViewController.xib */; };
+		CBBA020813E5312400641923 /* usercard_follower_noti_new.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBA020713E5312300641923 /* usercard_follower_noti_new.png */; };
+		CBBA020A13E5313600641923 /* comment_new_noti.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBA020913E5313600641923 /* comment_new_noti.png */; };
+		CBBA020C13E5323000641923 /* CommentsTableViewCCController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBBA020B13E5323000641923 /* CommentsTableViewCCController.xib */; };
+		CBBA020F13E53C0F00641923 /* CommentsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBA020E13E53C0800641923 /* CommentsTableViewCell.m */; };
+		CBBA021113E53F2900641923 /* CommentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBBA021013E53F2900641923 /* CommentsTableViewCell.xib */; };
+		CBD36F1113E697F6008BB428 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD36F0F13E697F5008BB428 /* CommentViewController.m */; };
+		CBD36F1213E697F6008BB428 /* CommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD36F1013E697F5008BB428 /* CommentViewController.xib */; };
 		CBDA5AF313DBEC1300FAE221 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBDA5AF213DBEC1300FAE221 /* UIKit.framework */; };
 		CBDA5AF513DBEC1300FAE221 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBDA5AF413DBEC1300FAE221 /* Foundation.framework */; };
 		CBDA5AF713DBEC1300FAE221 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBDA5AF613DBEC1300FAE221 /* CoreGraphics.framework */; };
@@ -255,6 +284,43 @@
 		CBBA01C113E2C87000641923 /* usercard_button_follow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = usercard_button_follow.png; sourceTree = "<group>"; };
 		CBBA01C213E2C87000641923 /* usercard_button_unfollow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = usercard_button_unfollow.png; sourceTree = "<group>"; };
 		CBBA01C513E2C8C700641923 /* usercard_pointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = usercard_pointer.png; sourceTree = "<group>"; };
+		CBBA01C713E3463100641923 /* PostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostViewController.h; sourceTree = "<group>"; };
+		CBBA01C813E3463200641923 /* PostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostViewController.m; sourceTree = "<group>"; };
+		CBBA01C913E3463300641923 /* PostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostViewController.xib; sourceTree = "<group>"; };
+		CBBA01CD13E34A9F00641923 /* post_button_@.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "post_button_@.png"; sourceTree = "<group>"; };
+		CBBA01CE13E34AA000641923 /* post_button_#.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "post_button_#.png"; sourceTree = "<group>"; };
+		CBBA01CF13E34AA000641923 /* post_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = post_bg.png; sourceTree = "<group>"; };
+		CBBA01D013E34AA100641923 /* post_right_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = post_right_bg.png; sourceTree = "<group>"; };
+		CBBA01D113E34AA200641923 /* post_button_camara.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = post_button_camara.png; sourceTree = "<group>"; };
+		CBBA01D713E34AE100641923 /* button_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_add.png; sourceTree = "<group>"; };
+		CBBA01D813E34AE100641923 /* button_cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_cancel.png; sourceTree = "<group>"; };
+		CBBA01DB13E34D0B00641923 /* post_right_button_remove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = post_right_button_remove.png; sourceTree = "<group>"; };
+		CBBA01E113E4187800641923 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
+		CBBA01E213E4187800641923 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
+		CBBA01E813E44C1500641923 /* EGOTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOTableViewController.h; sourceTree = "<group>"; };
+		CBBA01E913E44C1600641923 /* EGOTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOTableViewController.m; sourceTree = "<group>"; };
+		CBBA01EB13E4519B00641923 /* refresh_help.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh_help.png; sourceTree = "<group>"; };
+		CBBA01F213E454FA00641923 /* RelationshipTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelationshipTableViewController.h; sourceTree = "<group>"; };
+		CBBA01F313E454FB00641923 /* RelationshipTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelationshipTableViewController.m; sourceTree = "<group>"; };
+		CBBA01F413E454FC00641923 /* RelationshipTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RelationshipTableViewController.xib; sourceTree = "<group>"; };
+		CBBA01F713E46F2000641923 /* card_general_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = card_general_bg.png; sourceTree = "<group>"; };
+		CBBA01F913E470F100641923 /* RelationshipTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RelationshipTableViewCell.xib; sourceTree = "<group>"; };
+		CBBA01FB13E473BB00641923 /* cell_separator_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_separator_line.png; sourceTree = "<group>"; };
+		CBBA01FD13E4742D00641923 /* RelationshipTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelationshipTableViewCell.h; sourceTree = "<group>"; };
+		CBBA01FE13E4742E00641923 /* RelationshipTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelationshipTableViewCell.m; sourceTree = "<group>"; };
+		CBBA020013E52AF300641923 /* usercard_button_HL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = usercard_button_HL.png; sourceTree = "<group>"; };
+		CBBA020213E52F7B00641923 /* CommentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsTableViewController.h; sourceTree = "<group>"; };
+		CBBA020313E52F7D00641923 /* CommentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsTableViewController.m; sourceTree = "<group>"; };
+		CBBA020413E52F8100641923 /* CommentsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsTableViewController.xib; sourceTree = "<group>"; };
+		CBBA020713E5312300641923 /* usercard_follower_noti_new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = usercard_follower_noti_new.png; sourceTree = "<group>"; };
+		CBBA020913E5313600641923 /* comment_new_noti.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comment_new_noti.png; sourceTree = "<group>"; };
+		CBBA020B13E5323000641923 /* CommentsTableViewCCController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsTableViewCCController.xib; sourceTree = "<group>"; };
+		CBBA020D13E53C0700641923 /* CommentsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsTableViewCell.h; sourceTree = "<group>"; };
+		CBBA020E13E53C0800641923 /* CommentsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsTableViewCell.m; sourceTree = "<group>"; };
+		CBBA021013E53F2900641923 /* CommentsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsTableViewCell.xib; sourceTree = "<group>"; };
+		CBD36F0E13E697F5008BB428 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
+		CBD36F0F13E697F5008BB428 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
+		CBD36F1013E697F5008BB428 /* CommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentViewController.xib; sourceTree = "<group>"; };
 		CBDA5AEE13DBEC1300FAE221 /* PushBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBDA5AF213DBEC1300FAE221 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CBDA5AF413DBEC1300FAE221 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -346,7 +412,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CB018DDF13DDD015004217E0 /* options view controllers */ = {
+		CB018DDF13DDD015004217E0 /* Options view controllers */ = {
 			isa = PBXGroup;
 			children = (
 				CB018DE013DDD028004217E0 /* AboutViewController.h */,
@@ -358,7 +424,7 @@
 				CB018DE613DDD028004217E0 /* OptionsTableViewController.h */,
 				CB018DE713DDD028004217E0 /* OptionsTableViewController.m */,
 			);
-			name = "options view controllers";
+			name = "Options view controllers";
 			sourceTree = "<group>";
 		};
 		CB4AAC4313DC6A360053E3A6 /* Resources */ = {
@@ -372,49 +438,34 @@
 		CB4AAC5213DC6AF20053E3A6 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				CB018DDD13DDCD27004217E0 /* transparent.png */,
-				CB018DF813DDD70F004217E0 /* options_icon_image.png */,
-				CB018DF913DDD70F004217E0 /* options_icon_sound.png */,
-				CB018DFA13DDD710004217E0 /* options_icon_time.png */,
-				CB4AAC6513DC6FF80053E3A6 /* button_done.png */,
-				CB4AAC9A13DC7CE30053E3A6 /* button_back.png */,
-				CB4AAC9C13DC7D2C0053E3A6 /* button_black_bg.png */,
-				CBBA01C113E2C87000641923 /* usercard_button_follow.png */,
-				CBBA01C213E2C87000641923 /* usercard_button_unfollow.png */,
-				CBBA01C513E2C8C700641923 /* usercard_pointer.png */,
-				CB9DCACF13E1E5D000DA3D3D /* detail_bg.png */,
-				CB9DCAD113E1E5F000DA3D3D /* detail_save_done.png */,
-				CB9DCAD313E1E62000DA3D3D /* detail_console_bg.png */,
-				CB9DCAD513E1E64B00DA3D3D /* detail_button_return.png */,
-				CB9DCAD613E1E64B00DA3D3D /* detail_button_save.png */,
+				CBBA01F113E4530700641923 /* status */,
+				CBBA01ED13E451AA00641923 /* buttons */,
+				CBBA01EE13E451BD00641923 /* usercard */,
+				CBBA01F013E451D700641923 /* post */,
+				CBBA01EF13E451C900641923 /* detail image */,
 				CB4AAC8E13DC7B4A0053E3A6 /* bg */,
 				CB4AAC8D13DC7B2E0053E3A6 /* dock */,
 				CB4AAC6B13DC71680053E3A6 /* root_cards_blur_bg.png */,
+				CBBA01F713E46F2000641923 /* card_general_bg.png */,
+				CB018DDD13DDCD27004217E0 /* transparent.png */,
+				CBBA01EB13E4519B00641923 /* refresh_help.png */,
+				CB018DF813DDD70F004217E0 /* options_icon_image.png */,
+				CB018DF913DDD70F004217E0 /* options_icon_sound.png */,
+				CB018DFA13DDD710004217E0 /* options_icon_time.png */,
 				CB4AAC5F13DC6C4D0053E3A6 /* root_pushbox.png */,
 				CB4AAC6113DC6FA30053E3A6 /* root_loading_bg.png */,
 				CB4AAC6313DC6FD00053E3A6 /* root_bottom_bar_bg.png */,
 				CB4AAC6713DC70310053E3A6 /* root_shadow_left.png */,
 				CB4AAC6813DC70310053E3A6 /* root_shadow_right.png */,
-				CBBA01BE13E2C80000641923 /* usercard_bg.png */,
 				CB4AAC9413DC7C880053E3A6 /* login_bg.png */,
 				CB4AAC9513DC7C880053E3A6 /* login_input_bg.png */,
+				CBBA01FB13E473BB00641923 /* cell_separator_line.png */,
 				CB4AAC9E13DC7D5B0053E3A6 /* login_button_confirm.png */,
+				CBBA020713E5312300641923 /* usercard_follower_noti_new.png */,
+				CBBA020913E5313600641923 /* comment_new_noti.png */,
 				CB018E0013DDE4E8004217E0 /* about_button_bg.png */,
 				CB018E0213DDE523004217E0 /* about_pb_title.png */,
 				CB4AAC9813DC7CAD0053E3A6 /* flag_sina.png */,
-				CB9DCAA313DFEF5D00DA3D3D /* status_bg.png */,
-				CB9DCAA413DFEF5D00DA3D3D /* status_button_action.png */,
-				CB9DCAA513DFEF5D00DA3D3D /* status_button_comment.png */,
-				CB9DCAA613DFEF5D00DA3D3D /* status_button_fav.png */,
-				CB9DCABC13DFF30E00DA3D3D /* status_button_unfav.png */,
-				CB9DCAA713DFEF5D00DA3D3D /* status_button_repost.png */,
-				CB9DCAA813DFEF5D00DA3D3D /* status_repost_bg.png */,
-				CB9DCAB013DFF08C00DA3D3D /* repost_cover_bottom.png */,
-				CB9DCAB113DFF08C00DA3D3D /* repost_cover_top.png */,
-				CB9DCAB813DFF27F00DA3D3D /* card_profile_cover_large.png */,
-				CB9DCAB913DFF27F00DA3D3D /* card_profile_cover.png */,
-				CB9DCAB213DFF08C00DA3D3D /* card_cover_bottom.png */,
-				CB9DCAB313DFF08C00DA3D3D /* card_cover_top.png */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -463,6 +514,88 @@
 			name = bg;
 			sourceTree = "<group>";
 		};
+		CBBA01CC13E3463F00641923 /* Catagories */ = {
+			isa = PBXGroup;
+			children = (
+				CB9DCAC413E171A100DA3D3D /* UIImageViewAddition.h */,
+				CB9DCAC513E171A100DA3D3D /* UIImageViewAddition.m */,
+				CB018E0913DDEFEA004217E0 /* UIApplicationAddition.h */,
+				CB018E0A13DDEFEB004217E0 /* UIApplicationAddition.m */,
+				CB9DCAC713E1C36200DA3D3D /* NSDateAddition.h */,
+				CB9DCAC813E1C36200DA3D3D /* NSDateAddition.m */,
+			);
+			name = Catagories;
+			sourceTree = "<group>";
+		};
+		CBBA01ED13E451AA00641923 /* buttons */ = {
+			isa = PBXGroup;
+			children = (
+				CB4AAC6513DC6FF80053E3A6 /* button_done.png */,
+				CBBA01D713E34AE100641923 /* button_add.png */,
+				CBBA01D813E34AE100641923 /* button_cancel.png */,
+				CB4AAC9A13DC7CE30053E3A6 /* button_back.png */,
+				CB4AAC9C13DC7D2C0053E3A6 /* button_black_bg.png */,
+			);
+			name = buttons;
+			sourceTree = "<group>";
+		};
+		CBBA01EE13E451BD00641923 /* usercard */ = {
+			isa = PBXGroup;
+			children = (
+				CBBA020013E52AF300641923 /* usercard_button_HL.png */,
+				CBBA01C113E2C87000641923 /* usercard_button_follow.png */,
+				CBBA01BE13E2C80000641923 /* usercard_bg.png */,
+				CBBA01C213E2C87000641923 /* usercard_button_unfollow.png */,
+				CBBA01C513E2C8C700641923 /* usercard_pointer.png */,
+			);
+			name = usercard;
+			sourceTree = "<group>";
+		};
+		CBBA01EF13E451C900641923 /* detail image */ = {
+			isa = PBXGroup;
+			children = (
+				CB9DCACF13E1E5D000DA3D3D /* detail_bg.png */,
+				CB9DCAD113E1E5F000DA3D3D /* detail_save_done.png */,
+				CB9DCAD313E1E62000DA3D3D /* detail_console_bg.png */,
+				CB9DCAD513E1E64B00DA3D3D /* detail_button_return.png */,
+				CB9DCAD613E1E64B00DA3D3D /* detail_button_save.png */,
+			);
+			name = "detail image";
+			sourceTree = "<group>";
+		};
+		CBBA01F013E451D700641923 /* post */ = {
+			isa = PBXGroup;
+			children = (
+				CBBA01CD13E34A9F00641923 /* post_button_@.png */,
+				CBBA01CE13E34AA000641923 /* post_button_#.png */,
+				CBBA01CF13E34AA000641923 /* post_bg.png */,
+				CBBA01D013E34AA100641923 /* post_right_bg.png */,
+				CBBA01DB13E34D0B00641923 /* post_right_button_remove.png */,
+				CBBA01D113E34AA200641923 /* post_button_camara.png */,
+			);
+			name = post;
+			sourceTree = "<group>";
+		};
+		CBBA01F113E4530700641923 /* status */ = {
+			isa = PBXGroup;
+			children = (
+				CB9DCAB813DFF27F00DA3D3D /* card_profile_cover_large.png */,
+				CB9DCAB913DFF27F00DA3D3D /* card_profile_cover.png */,
+				CB9DCAB213DFF08C00DA3D3D /* card_cover_bottom.png */,
+				CB9DCAB313DFF08C00DA3D3D /* card_cover_top.png */,
+				CB9DCAA313DFEF5D00DA3D3D /* status_bg.png */,
+				CB9DCAA413DFEF5D00DA3D3D /* status_button_action.png */,
+				CB9DCAA513DFEF5D00DA3D3D /* status_button_comment.png */,
+				CB9DCAA613DFEF5D00DA3D3D /* status_button_fav.png */,
+				CB9DCABC13DFF30E00DA3D3D /* status_button_unfav.png */,
+				CB9DCAA713DFEF5D00DA3D3D /* status_button_repost.png */,
+				CB9DCAA813DFEF5D00DA3D3D /* status_repost_bg.png */,
+				CB9DCAB013DFF08C00DA3D3D /* repost_cover_bottom.png */,
+				CB9DCAB113DFF08C00DA3D3D /* repost_cover_top.png */,
+			);
+			name = status;
+			sourceTree = "<group>";
+		};
 		CBDA5AE313DBEC1300FAE221 = {
 			isa = PBXGroup;
 			children = (
@@ -506,27 +639,38 @@
 				CBDA5B6613DBF48D00FAE221 /* Core Data Models */,
 				CB4AAC4313DC6A360053E3A6 /* Resources */,
 				CBDA5B5C13DBED1600FAE221 /* Nibs */,
-				CB018DDF13DDD015004217E0 /* options view controllers */,
+				CB018DDF13DDD015004217E0 /* Options view controllers */,
+				CBBA01CC13E3463F00641923 /* Catagories */,
 				CB4AAC3D13DC671F0053E3A6 /* RootViewController.h */,
 				CB4AAC3E13DC671F0053E3A6 /* RootViewController.m */,
+				CBBA01E113E4187800641923 /* EGORefreshTableHeaderView.m */,
+				CBBA01E213E4187800641923 /* EGORefreshTableHeaderView.h */,
+				CBBA01E813E44C1500641923 /* EGOTableViewController.h */,
+				CBBA01E913E44C1600641923 /* EGOTableViewController.m */,
+				CBBA01FD13E4742D00641923 /* RelationshipTableViewCell.h */,
+				CBBA01FE13E4742E00641923 /* RelationshipTableViewCell.m */,
+				CBBA020213E52F7B00641923 /* CommentsTableViewController.h */,
+				CBD36F0E13E697F5008BB428 /* CommentViewController.h */,
+				CBD36F0F13E697F5008BB428 /* CommentViewController.m */,
+				CBBA020313E52F7D00641923 /* CommentsTableViewController.m */,
+				CBBA020D13E53C0700641923 /* CommentsTableViewCell.h */,
+				CBBA020E13E53C0800641923 /* CommentsTableViewCell.m */,
 				CB9DCACA13E1E4DD00DA3D3D /* DetailImageViewController.h */,
 				CB9DCACB13E1E4DE00DA3D3D /* DetailImageViewController.m */,
 				CB9DCADB13E2C15900DA3D3D /* UserCardViewController.h */,
+				CBBA01F213E454FA00641923 /* RelationshipTableViewController.h */,
+				CBBA01F313E454FB00641923 /* RelationshipTableViewController.m */,
 				CB9DCADC13E2C15B00DA3D3D /* UserCardViewController.m */,
 				CB26224D13DF06780062EDE7 /* StatusCardViewController.h */,
 				CB26224E13DF06780062EDE7 /* StatusCardViewController.m */,
+				CBBA01C713E3463100641923 /* PostViewController.h */,
+				CBBA01C813E3463200641923 /* PostViewController.m */,
 				CB26224A13DF063F0062EDE7 /* CardTableViewCell.h */,
 				CB26224B13DF063F0062EDE7 /* CardTableViewCell.m */,
 				CB4AAC8F13DC7BE50053E3A6 /* LoginViewController.h */,
 				CB4AAC9013DC7BE60053E3A6 /* LoginViewController.m */,
-				CB9DCAC413E171A100DA3D3D /* UIImageViewAddition.h */,
-				CB9DCAC713E1C36200DA3D3D /* NSDateAddition.h */,
-				CB9DCAC813E1C36200DA3D3D /* NSDateAddition.m */,
-				CB9DCAC513E171A100DA3D3D /* UIImageViewAddition.m */,
 				CB018DD313DD3CC8004217E0 /* DockViewController.h */,
 				CB018DD413DD3CC8004217E0 /* DockViewController.m */,
-				CB018E0913DDEFEA004217E0 /* UIApplicationAddition.h */,
-				CB018E0A13DDEFEB004217E0 /* UIApplicationAddition.m */,
 				CBDA5B7113DC25C500FAE221 /* CoreDataViewController.h */,
 				CBDA5B7213DC25C500FAE221 /* CoreDataViewController.m */,
 				CBDA5B7413DC25FA00FAE221 /* CoreDataTableViewController.h */,
@@ -612,6 +756,8 @@
 		CBDA5B5C13DBED1600FAE221 /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
+				CBD36F1013E697F5008BB428 /* CommentViewController.xib */,
+				CBBA01F913E470F100641923 /* RelationshipTableViewCell.xib */,
 				CB018DFE13DDE468004217E0 /* AboutViewController.xib */,
 				CB018DD513DD3CC8004217E0 /* DockViewController.xib */,
 				CB018E0F13DE00F0004217E0 /* CardTableViewController.xib */,
@@ -619,6 +765,11 @@
 				CB26225213DF07820062EDE7 /* CardTableViewCell.xib */,
 				CBDA5B0613DBEC1300FAE221 /* MainWindow.xib */,
 				CB4AAC9113DC7BE60053E3A6 /* LoginViewController.xib */,
+				CBBA020B13E5323000641923 /* CommentsTableViewCCController.xib */,
+				CBBA020413E52F8100641923 /* CommentsTableViewController.xib */,
+				CBBA021013E53F2900641923 /* CommentsTableViewCell.xib */,
+				CBBA01C913E3463300641923 /* PostViewController.xib */,
+				CBBA01F413E454FC00641923 /* RelationshipTableViewController.xib */,
 				CB9DCADD13E2C15C00DA3D3D /* UserCardViewController.xib */,
 				CB9DCACD13E1E54700DA3D3D /* DetailImageViewController.xib */,
 				CB26224F13DF06780062EDE7 /* StatusCardViewController.xib */,
@@ -784,6 +935,27 @@
 				CBBA01C313E2C87000641923 /* usercard_button_follow.png in Resources */,
 				CBBA01C413E2C87000641923 /* usercard_button_unfollow.png in Resources */,
 				CBBA01C613E2C8C700641923 /* usercard_pointer.png in Resources */,
+				CBBA01CB13E3463500641923 /* PostViewController.xib in Resources */,
+				CBBA01D213E34AA200641923 /* post_button_@.png in Resources */,
+				CBBA01D313E34AA200641923 /* post_button_#.png in Resources */,
+				CBBA01D413E34AA200641923 /* post_bg.png in Resources */,
+				CBBA01D513E34AA200641923 /* post_right_bg.png in Resources */,
+				CBBA01D613E34AA200641923 /* post_button_camara.png in Resources */,
+				CBBA01D913E34AE200641923 /* button_add.png in Resources */,
+				CBBA01DA13E34AE200641923 /* button_cancel.png in Resources */,
+				CBBA01DC13E34D0C00641923 /* post_right_button_remove.png in Resources */,
+				CBBA01EC13E4519B00641923 /* refresh_help.png in Resources */,
+				CBBA01F613E454FD00641923 /* RelationshipTableViewController.xib in Resources */,
+				CBBA01F813E46F2100641923 /* card_general_bg.png in Resources */,
+				CBBA01FA13E470F100641923 /* RelationshipTableViewCell.xib in Resources */,
+				CBBA01FC13E473BB00641923 /* cell_separator_line.png in Resources */,
+				CBBA020113E52AF300641923 /* usercard_button_HL.png in Resources */,
+				CBBA020613E52F8300641923 /* CommentsTableViewController.xib in Resources */,
+				CBBA020813E5312400641923 /* usercard_follower_noti_new.png in Resources */,
+				CBBA020A13E5313600641923 /* comment_new_noti.png in Resources */,
+				CBBA020C13E5323000641923 /* CommentsTableViewCCController.xib in Resources */,
+				CBBA021113E53F2900641923 /* CommentsTableViewCell.xib in Resources */,
+				CBD36F1213E697F6008BB428 /* CommentViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -835,6 +1007,14 @@
 				CB9DCAC913E1C36200DA3D3D /* NSDateAddition.m in Sources */,
 				CB9DCACC13E1E4DE00DA3D3D /* DetailImageViewController.m in Sources */,
 				CB9DCADE13E2C15F00DA3D3D /* UserCardViewController.m in Sources */,
+				CBBA01CA13E3463500641923 /* PostViewController.m in Sources */,
+				CBBA01E313E4187800641923 /* EGORefreshTableHeaderView.m in Sources */,
+				CBBA01EA13E44C1900641923 /* EGOTableViewController.m in Sources */,
+				CBBA01F513E454FD00641923 /* RelationshipTableViewController.m in Sources */,
+				CBBA01FF13E4742F00641923 /* RelationshipTableViewCell.m in Sources */,
+				CBBA020513E52F8300641923 /* CommentsTableViewController.m in Sources */,
+				CBBA020F13E53C0F00641923 /* CommentsTableViewCell.m in Sources */,
+				CBD36F1113E697F6008BB428 /* CommentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

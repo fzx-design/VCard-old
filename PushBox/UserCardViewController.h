@@ -6,11 +6,12 @@
 //  Copyright 2011年 同济大学. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "CoreDataViewController.h"
+#import "RelationshipTableViewController.h"
 
 @class User;
 
-@interface UserCardViewController : UIViewController
+@interface UserCardViewController : CoreDataViewController
 {
     UIImageView *_profileImageView;
 	UIButton *_followButton;

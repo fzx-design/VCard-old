@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#define kModalViewHeight 39
+
 @interface UIApplication(UIApplicationAddition)
+
+//- (NSPersistentStoreCoordinator *)persistentStoreCoordinator;
 
 - (UIView *)rootView;
 - (UIViewController *)rootViewController;

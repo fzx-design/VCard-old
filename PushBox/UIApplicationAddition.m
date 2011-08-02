@@ -9,7 +9,7 @@
 #import "UIApplicationAddition.h"
 #import "PushBoxAppDelegate.h"
 
-#define kXModifier 3
+#define kXModifier -4.0
 #define kAnimationDuration 0.5
 #define kBackViewAlpha 0.5
 
@@ -20,6 +20,12 @@ static UIViewController *_modalViewController;
 static UIView *_backView;
 
 @implementation UIApplication (UIApplication_RootView)
+//
+//- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
+//{
+//    PushBoxAppDelegate *appDelegate = (PushBoxAppDelegate *)[[UIApplication sharedApplication] delegate];
+//    return appDelegate.persistentStoreCoordinator;
+//}
 
 - (UIView *)rootView
 {

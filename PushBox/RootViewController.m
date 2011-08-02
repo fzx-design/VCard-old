@@ -16,6 +16,7 @@
 
 #define kCardTableViewFrameOriginY 37.0
 
+
 @interface RootViewController(private)
 - (void)showLoginView;
 - (void)hideLoginView;
@@ -68,12 +69,12 @@
     
     if ([WeiboClient authorized]) {
         self.pushBoxHDImageView.alpha = 0.0;
+        [self showDockView];
         [self showCardTableView];
         [self.cardTableViewController refresh];
     }
     else {
         [self showLoginView];
-        [self showDockView];
     }
 }
 
@@ -102,6 +103,18 @@
 	[self updateBackgroundImageAnimated:YES];
 }
 
+- (void)refresh
+{
+    [self.cardTableViewController refresh];
+}
+
+- (void)post
+{
+    PostViewController *vc = [[PostViewController alloc] init];
+    [[UIApplication sharedApplication] presentModalViewController:vc atHeight:kModalViewHeight];
+    [vc release];
+}
+
 - (void)showDockView
 {
     if (!_dockViewController) {
@@ -110,6 +123,15 @@
         frame.origin.y = kDockViewFrameOriginY;
         self.dockViewController.view.frame = frame;
         self.dockViewController.view.alpha = 0.0;
+        
+        [self.dockViewController.refreshButton addTarget:self 
+                                                  action:@selector(refresh) 
+                                        forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.dockViewController.newTweetButton addTarget:self
+                                                   action:@selector(post)
+                                         forControlEvents:UIControlEventTouchUpInside];
+        
     }
     
     [self.view addSubview:self.dockViewController.view];
@@ -195,6 +217,9 @@
 - (void)loginViewControllerDidLogin:(UIViewController *)vc
 {
     [self hideLoginView];
+    [self showDockView];
+    [self showCardTableView];
+    [self.cardTableViewController refresh];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

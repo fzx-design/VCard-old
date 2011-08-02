@@ -30,10 +30,12 @@
 @property (nonatomic, retain) User *isFriendsStatusOf;
 @property (nonatomic, retain) NSString * commentsCount;
 @property (nonatomic, retain) NSString * repostsCount;
+@property (nonatomic, retain) NSDate * updateDate;
 
 - (BOOL)isEqualToStatus:(Status *)status;
 + (Status *)insertStatus:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context;
 + (Status *)statusWithID:(NSString *)statudID inManagedObjectContext:(NSManagedObjectContext *)context;
++ (void)deleteAllObjectsInManagedObjectContext:(NSManagedObjectContext *)context;
 
 @end
 
@@ -45,3 +47,4 @@
 - (void)removeComments:(NSSet *)values;
 
 @end
+
