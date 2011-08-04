@@ -9,6 +9,11 @@
         <relationship name="author" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="comments" inverseEntity="User"/>
         <relationship name="targetStatus" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Status" inverseName="comments" inverseEntity="Status"/>
     </entity>
+    <entity name="Image" representedClassName="Image">
+        <attribute name="data" attributeType="Binary"/>
+        <attribute name="updateDate" attributeType="Date"/>
+        <attribute name="url" attributeType="String"/>
+    </entity>
     <entity name="Status" representedClassName="Status">
         <attribute name="bmiddlePicURL" optional="YES" attributeType="String"/>
         <attribute name="commentsCount" optional="YES" attributeType="String"/>
@@ -23,6 +28,7 @@
         <attribute name="updateDate" attributeType="Date"/>
         <relationship name="author" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="statuses" inverseEntity="User"/>
         <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="targetStatus" inverseEntity="Comment"/>
+        <relationship name="favoritedBy" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="favorites" inverseEntity="User"/>
         <relationship name="isFriendsStatusOf" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="friendsStatuses" inverseEntity="User"/>
         <relationship name="repostedBy" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Status" inverseName="repostStatus" inverseEntity="Status"/>
         <relationship name="repostStatus" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Status" inverseName="repostedBy" inverseEntity="Status"/>
@@ -44,16 +50,17 @@
         <attribute name="updateDate" attributeType="Date"/>
         <attribute name="userID" attributeType="String"/>
         <attribute name="verified" optional="YES" attributeType="Boolean"/>
-        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="author" inverseEntity="Comment"/>
+        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Comment" inverseName="author" inverseEntity="Comment"/>
+        <relationship name="favorites" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Status" inverseName="favoritedBy" inverseEntity="Status"/>
         <relationship name="followers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="friends" inverseEntity="User"/>
         <relationship name="friends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="followers" inverseEntity="User"/>
         <relationship name="friendsStatuses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Status" inverseName="isFriendsStatusOf" inverseEntity="Status"/>
-        <relationship name="statuses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Status" inverseName="author" inverseEntity="Status"/>
+        <relationship name="statuses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Status" inverseName="author" inverseEntity="Status"/>
     </entity>
-    <fetchRequest name="FetchRequest" entity="Status" predicateString="statusID == &quot;&quot;"/>
     <elements>
         <element name="Comment" positionX="-11" positionY="207" width="128" height="150"/>
+        <element name="Image" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Status" positionX="223" positionY="81" width="128" height="285"/>
-        <element name="User" positionX="-18" positionY="414" width="128" height="360"/>
+        <element name="User" positionX="-18" positionY="414" width="128" height="375"/>
     </elements>
 </model>

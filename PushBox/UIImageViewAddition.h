@@ -10,6 +10,8 @@
 
 @interface UIImageView (UIImageViewAddition)
 
-- (void)loadImageFromURL:(NSString *)url completion:(void (^)())completion;
+- (void)loadImageFromURL:(NSString *)urlString 
+              completion:(void (^)())completion 
+          cacheInContext:(NSManagedObjectContext *)context;
 
 @end

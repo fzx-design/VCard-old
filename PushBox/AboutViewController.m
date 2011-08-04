@@ -8,6 +8,8 @@
 
 #import "AboutViewController.h"
 #import "WeiboClient.h"
+#import "PostViewController.h"
+#import "UIApplicationAddition.h"
 
 @implementation AboutViewController
 
@@ -53,9 +55,12 @@
 
 - (IBAction)tellFriends:(UIButton *)sender
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameTellFriends
-														object:self];
-	
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameShouldDismissPopoverView object:self];
+    
+	PostViewController *vc = [[PostViewController alloc] initWithType:PostViewTypePost];
+    [[UIApplication sharedApplication] presentModalViewController:vc atHeight:kModalViewHeight];
+	vc.textView.text = @"我正在用Pushbox HD（新浪微博iPad客户端），下载地址http://itunes.apple.com/us/app/id420598288?mt=8";
+	[vc release];
 }
 
 - (IBAction)otherApps:(UIButton *)sender

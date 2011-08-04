@@ -39,6 +39,7 @@ typedef void (^WCCompletionBlock)(WeiboClient *client);
 // return true if user already logged in
 + (BOOL)authorized;
 + (User *)currentUserInManagedObjectContext:(NSManagedObjectContext *)context;
++ (void)clearUser;
 + (void)signout;
 
 - (void)authWithUsername:(NSString *)username password:(NSString *)password autosave:(BOOL)autosave;

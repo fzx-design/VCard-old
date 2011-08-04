@@ -10,16 +10,24 @@
 #import "CommentsTableViewCell.h"
 #import "CommentViewController.h"
 
+@class CommentsTableViewController;
+@protocol CommentsTableViewControllerDelegate
+- (void)commentsTableViewControllerDidDismiss:(CommentsTableViewController *)vc;
+@end
+
 @class Status;
 
 @interface CommentsTableViewController : EGOTableViewController<CommentsTableViewCellDelegats> {
     UILabel *_titleLabel;
     Status *_status;
     int _nextPage;
+    
+    id _delegate;
 }
 
 @property(nonatomic, retain) IBOutlet UILabel *titleLabel;
 @property(nonatomic, retain) Status *status;
+@property(nonatomic, assign) id<CommentsTableViewControllerDelegate> delegate;
 
 - (IBAction)commentButtonClicked:(id)sender;
 - (IBAction)backButtonClicked:(id)sender;

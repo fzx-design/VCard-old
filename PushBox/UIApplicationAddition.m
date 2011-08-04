@@ -29,7 +29,7 @@ static UIView *_backView;
 
 - (UIView *)rootView
 {
-    return [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
+    return [[self rootViewController] view];
 }
 
 - (UIViewController *)rootViewController

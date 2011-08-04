@@ -27,6 +27,7 @@
 @synthesize statusesCountLabel = _statusesCountLabel;
 @synthesize descriptionTextView = _descriptionTextView;
 @synthesize user = _user;
+@synthesize delegate = _delegate;
 
 - (void)dealloc
 {
@@ -111,7 +112,9 @@
 {
     [super viewDidLoad];
     
-    [self.profileImageView loadImageFromURL:self.user.profileImageURL completion:NULL];
+    [self.profileImageView loadImageFromURL:self.user.profileImageURL 
+                                 completion:NULL
+                             cacheInContext:self.managedObjectContext];
     
     self.followButton.hidden = YES;
     self.unFollowButton.hidden = YES;
@@ -154,6 +157,7 @@
 
 - (IBAction)backButtonClicked:(id)sender {
     [self.parentViewController dismissModalViewControllerAnimated:YES];
+    [self.delegate userCardViewControllerDidDismiss:self];
 }
 
 - (IBAction)showFriendsButtonClicked:(id)sender {
@@ -177,7 +181,8 @@
 }
 
 - (IBAction)showStatusesButtonClicked:(id)sender {
-
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameShouldDismissUserCard object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameShouldShowUserTimeline object:self.user];
 }
 
 

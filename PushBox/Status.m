@@ -27,7 +27,7 @@
 @dynamic commentsCount;
 @dynamic repostsCount;
 @dynamic updateDate;
-
+@dynamic favoritedBy;
 
 - (BOOL)isEqualToStatus:(Status *)status
 {

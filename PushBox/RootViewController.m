@@ -10,11 +10,20 @@
 #import "WeiboClient.h"
 #import "UIApplicationAddition.h"
 #import <QuartzCore/QuartzCore.h>
+#import "Status.h"
+#import "User.h"
 
 #define kLoginViewCenter CGPointMake(512.0, 370.0)
+
 #define kDockViewFrameOriginY 625.0
 
+#define kDockViewOffsetY 635.0
+#define kDockAnimationInterval 0.3
+
 #define kCardTableViewFrameOriginY 37.0
+#define kCardTableViewOffsetY 650.0
+
+#define kUserDefaultKeyFirstTime @"kUserDefaultKeyFirstTime"
 
 
 @interface RootViewController(private)
@@ -22,6 +31,8 @@
 - (void)hideLoginView;
 - (void)showDockView;
 - (void)hideDockView;
+- (void)showCommandCenter;
+- (void)hideCommandCenter;
 - (void)showCardTableView;
 - (void)hideCardTableView;
 - (void)updateBackgroundImageAnimated:(BOOL)animated;
@@ -31,7 +42,8 @@
 
 @synthesize backgroundImageView = _backgroundImageView;
 @synthesize pushBoxHDImageView = _pushBoxHDImageView;
-
+@synthesize bottomStateView = _bottomStateView;
+@synthesize bottomStateLabel = _bottomStateLabel;
 @synthesize loginViewController = _loginViewController;
 @synthesize dockViewController = _dockViewController;
 @synthesize cardTableViewController = _cardTableViewController;
@@ -42,7 +54,8 @@
 {
     [_backgroundImageView release];
     [_pushBoxHDImageView release];
-    
+    [_bottomStateView release];
+    [_bottomStateLabel release];
     [_loginViewController release];
     [_dockViewController release];
     [_cardTableViewController release];
@@ -54,6 +67,25 @@
     [super viewDidUnload];
     self.backgroundImageView = nil;
     self.pushBoxHDImageView = nil;
+    self.bottomStateView = nil;
+    self.bottomStateLabel = nil;
+}
+
++ (void)initialize {
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+	NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:30];
+	[dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultKeyFirstTime];
+	[userDefault registerDefaults:dict];
+}
+
+- (void)start
+{
+    [self showDockView];
+    self.cardTableViewController.dataSource = CardTableViewDataSourceFriendsTimeline;
+    //self.cardTableViewController.user = [WeiboClient currentUserInManagedObjectContext:self.managedObjectContext];
+    [self showCardTableView];
+    [self.cardTableViewController loadAllFavoritesWithCompletion:NULL];
+    [self.cardTableViewController refresh];
 }
 
 - (void)viewDidLoad
@@ -67,14 +99,84 @@
 				   name:kNotificationNameBackgroundChanged 
 				 object:nil];
     
+    [center addObserver:self
+               selector:@selector(modalCardViewPresentedNotification:)
+                   name:kNotificationNameModalCardPresented
+                 object:nil];
+    
+    [center addObserver:self
+               selector:@selector(modalCardViewDismissedNotification:) 
+                   name:kNotificationNameModalCardDismissed
+                 object:nil];
+    
+    [center addObserver:self
+               selector:@selector(shouldShowUserTimelineNotification:)
+                   name:kNotificationNameShouldShowUserTimeline
+                 object:nil];
+    
     if ([WeiboClient authorized]) {
         self.pushBoxHDImageView.alpha = 0.0;
-        [self showDockView];
-        [self showCardTableView];
-        [self.cardTableViewController refresh];
+        [self start];
     }
     else {
         [self showLoginView];
+    }
+}
+
+- (void)shouldShowUserTimelineNotification:(id)sender
+{
+    if (self.dockViewController.commandCenterButton.selected) {
+        [self hideCommandCenter];
+    }
+    [self performSelector:@selector(showUserTimeline:) withObject:[sender object] afterDelay:1.0];
+}
+
+- (void)showUserTimeline:(User *)user
+{
+    self.cardTableViewController.dataSource = CardTableViewDataSourceUserTimeline;
+    self.cardTableViewController.user = user;
+    [self.cardTableViewController pushCardWithCompletion:NULL];
+}
+
+- (void)modalCardViewPresentedNotification:(id)sender
+{
+    if (!_holeImageView) {
+		UIImage *image = [UIImage imageNamed:@"card_hole_bg"];
+		_holeImageView = [[UIImageView alloc] initWithImage:image];
+		_holeImageView.frame = CGRectMake(0, 0, 1024, 768);
+		_holeImageView.userInteractionEnabled = NO;
+		_holeImageView.alpha = 0.0;
+		[self.view addSubview:_holeImageView];
+	}
+    self.dockViewController.view.userInteractionEnabled = NO;
+	self.bottomStateView.userInteractionEnabled = NO;
+    self.cardTableViewController.swipeEnabled = NO;
+	[UIView animateWithDuration:0.5 animations:^{
+		_holeImageView.alpha = 1.0;
+	}];
+}
+
+- (void)modalCardViewDismissedNotification:(id)sender
+{
+    [UIView animateWithDuration:0.5 animations:^{
+		_holeImageView.alpha = 0.0;
+	}];
+	self.bottomStateView.userInteractionEnabled = YES;
+    self.dockViewController.view.userInteractionEnabled = YES;
+    self.cardTableViewController.swipeEnabled = YES;
+}
+
+- (void)cardTableViewController:(CardTableViewController *)vc didScrollToRow:(int)row withNumberOfRows:(int)numberOfRows
+{
+    UISlider *slider = self.dockViewController.slider;
+    [slider setMaximumValue:numberOfRows-1];
+    [slider setMinimumValue:0];
+    if (row == slider.value) {
+        [slider setValue:row+1 animated:NO];
+        [slider setValue:row animated:NO];
+    }
+    else {
+        [slider setValue:row animated:YES];
     }
 }
 
@@ -98,6 +200,7 @@
 }
 
 
+
 - (void)backgroundChangedNotification:(id)sender
 {
 	[self updateBackgroundImageAnimated:YES];
@@ -115,30 +218,73 @@
     [vc release];
 }
 
+- (void)setPlayTimerEnabled:(BOOL)enabled
+{
+	if (enabled) {
+		int interval = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeySiidePlayTimeInterval];
+		_playTimer = [NSTimer scheduledTimerWithTimeInterval:interval 
+												  target:self 
+												selector:@selector(timerFired:) 
+												userInfo:nil 
+												 repeats:YES];
+		[_playTimer fire];
+		self.dockViewController.slider.highlighted = YES;
+	}
+	else {
+		[_playTimer invalidate];
+		self.dockViewController.slider.highlighted = NO;
+		_playTimer = nil;
+	}
+}
+
+- (void)timerFired:(NSTimer *)timer
+{
+	[self.cardTableViewController showNextCard];
+}
+
+- (void)play
+{
+    [self setPlayTimerEnabled:YES];
+    self.dockViewController.playButton.selected = YES;		
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(0, 0, 1024, 768);
+    [button addTarget:self action:@selector(playCanceled:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    
+}
+
+- (void)playCanceled:(UIButton *)sender
+{
+	[sender removeFromSuperview];
+	self.dockViewController.playButton.selected = NO;
+	[self setPlayTimerEnabled:NO];
+}
+
+- (void)sliderValueChanged:(UISlider *)slider
+{
+    int index = slider.value;
+    [self.cardTableViewController scrollToRow:index];
+}
+
 - (void)showDockView
 {
-    if (!_dockViewController) {
-        _dockViewController = [[DockViewController alloc] init];
-        CGRect frame = self.dockViewController.view.frame;
-        frame.origin.y = kDockViewFrameOriginY;
-        self.dockViewController.view.frame = frame;
-        self.dockViewController.view.alpha = 0.0;
-        
-        [self.dockViewController.refreshButton addTarget:self 
-                                                  action:@selector(refresh) 
-                                        forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.dockViewController.newTweetButton addTarget:self
-                                                   action:@selector(post)
-                                         forControlEvents:UIControlEventTouchUpInside];
-        
-    }
-    
     [self.view addSubview:self.dockViewController.view];
-    
     [UIView animateWithDuration:1.0 animations:^{
         self.dockViewController.view.alpha = 1.0;
     }];
+}
+
+- (void)showFavorites:(UIButton *)button
+{
+    if (button.selected) {
+        [self.cardTableViewController popCardWithCompletion:NULL];
+        button.selected = NO;
+    }
+    else {
+        self.cardTableViewController.dataSource = CardTableViewDataSourceFavorites;
+        [self.cardTableViewController pushCardWithCompletion:NULL];
+        button.selected = YES;
+    }
 }
 
 - (void)hideDockView
@@ -153,16 +299,70 @@
     }];
 }
 
+- (void)commandCenterButtonClicked:(UIButton *)button
+{
+    if (button.selected) {
+        [self hideCommandCenter];
+    }
+    else {
+        [self showCommandCenter];
+    }
+}
+
+- (void)showCommandCenter
+{
+    [UIView animateWithDuration:kDockAnimationInterval
+                          delay:0 
+                        options:UIViewAnimationCurveEaseInOut 
+                     animations:^{
+                         self.dockViewController.commandCenterButton.selected = YES;
+                         
+                         CGRect frame = self.dockViewController.view.frame;
+                         frame.origin.y -= kDockViewOffsetY;
+                         self.dockViewController.view.frame = frame;
+                         
+                         frame = self.cardTableViewController.view.frame;
+                         frame.origin.y -= kCardTableViewOffsetY;
+                         self.cardTableViewController.view.frame = frame;
+                         
+                         frame = self.bottomStateView.frame;
+                         frame.origin.y -= kDockViewOffsetY;
+                         self.bottomStateView.frame = frame;
+                     }
+                     completion:NULL];
+    self.dockViewController.playButton.enabled = NO;
+    self.dockViewController.slider.enabled = NO;
+    self.dockViewController.refreshButton.enabled = NO;
+}
+
+- (void)hideCommandCenter
+{
+    [UIView animateWithDuration:kDockAnimationInterval
+                          delay:0 
+                        options:UIViewAnimationCurveEaseInOut 
+                     animations:^{
+                         self.dockViewController.commandCenterButton.selected = NO;
+                         
+                         CGRect frame = self.dockViewController.view.frame;
+                         frame.origin.y += kDockViewOffsetY;
+                         self.dockViewController.view.frame = frame;
+                         
+                         frame = self.cardTableViewController.view.frame;
+                         frame.origin.y += kCardTableViewOffsetY;
+                         self.cardTableViewController.view.frame = frame;
+                         
+                         frame = self.bottomStateView.frame;
+                         frame.origin.y += kDockViewOffsetY;
+                         self.bottomStateView.frame = frame;
+                     }
+                     completion:NULL];
+    self.dockViewController.playButton.enabled = YES;
+    self.dockViewController.slider.enabled = NO;
+    self.dockViewController.refreshButton.enabled = YES;
+}
+
 - (void)showLoginView
 {
-    if (!_loginViewController) {
-        _loginViewController = [[LoginViewController alloc] init];
-        self.loginViewController.view.center = kLoginViewCenter;
-        self.loginViewController.delegate = self;
-        self.loginViewController.view.alpha = 0.0;
-        self.pushBoxHDImageView.alpha = 0.0;
-    }
-
     [self.view addSubview:self.loginViewController.view];
 
     [UIView animateWithDuration:1.0 animations:^{
@@ -185,21 +385,40 @@
 }
 
 - (void)showCardTableView
-{
-    if (!_cardTableViewController) {
-        _cardTableViewController = [[CardTableViewController alloc] init];
-        self.cardTableViewController.managedObjectContext = self.managedObjectContext;
-        CGRect frame = self.cardTableViewController.view.frame;
-        frame.origin.y = kCardTableViewFrameOriginY;
-        self.cardTableViewController.view.frame = frame;
-        self.cardTableViewController.view.alpha = 0.0;
-    }
-    
+{    
     [self.view addSubview:self.cardTableViewController.view];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL firstTime = [defaults boolForKey:kUserDefaultKeyFirstTime];
+    UIButton *button = nil;
+    if (firstTime) {
+        button = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIImage *img = [UIImage imageNamed:@"root_help"];
+        [button setImage:img forState:UIControlStateNormal];
+        [button setImage:img forState:UIControlStateHighlighted];
+        button.frame = CGRectMake(0, -15, 1024, 768);
+        button.alpha = 0.0;
+        [button addTarget:self action:@selector(helpButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:button];
+    }
     
     [UIView animateWithDuration:1.0 animations:^{
         self.cardTableViewController.view.alpha = 1.0;
+        button.alpha = 1.0;
     }];
+}
+
+- (void)helpButtonClicked:(UIButton *)button
+{
+    [UIView animateWithDuration:1.0 animations:^{
+		button.alpha  = 0.0;
+	} completion:^(BOOL fin) {
+		if (fin) {
+			[button removeFromSuperview];
+			[[NSUserDefaults standardUserDefaults] setBool:NO forKey:kUserDefaultKeyFirstTime];
+			[[NSUserDefaults standardUserDefaults] synchronize];
+		}
+	}];
 }
 
 - (void)hideCardTableView
@@ -217,14 +436,76 @@
 - (void)loginViewControllerDidLogin:(UIViewController *)vc
 {
     [self hideLoginView];
-    [self showDockView];
-    [self showCardTableView];
-    [self.cardTableViewController refresh];
+    [self start];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+}
+
+
+
+- (DockViewController *)dockViewController
+{
+    if (!_dockViewController) {
+        _dockViewController = [[DockViewController alloc] init];
+        CGRect frame = self.dockViewController.view.frame;
+        frame.origin.y = kDockViewFrameOriginY;
+        self.dockViewController.view.frame = frame;
+        self.dockViewController.view.alpha = 0.0;
+        
+        [self.dockViewController.refreshButton addTarget:self 
+                                                  action:@selector(refresh) 
+                                        forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.dockViewController.newTweetButton addTarget:self
+                                                   action:@selector(post)
+                                         forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.dockViewController.playButton addTarget:self
+                                               action:@selector(play)
+                                     forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.dockViewController.commandCenterButton addTarget:self
+                                                        action:@selector(commandCenterButtonClicked:)
+                                              forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.dockViewController.slider addTarget:self 
+                                           action:@selector(sliderValueChanged:)
+                                 forControlEvents:UIControlEventValueChanged];
+        
+        [self.dockViewController.showFavoritesButton addTarget:self
+                                                        action:@selector(showFavorites:)
+                                              forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _dockViewController;
+}
+
+- (LoginViewController *)loginViewController
+{
+    if (!_loginViewController) {
+        _loginViewController = [[LoginViewController alloc] init];
+        self.loginViewController.view.center = kLoginViewCenter;
+        self.loginViewController.delegate = self;
+        self.loginViewController.view.alpha = 0.0;
+        self.pushBoxHDImageView.alpha = 0.0;
+    }
+    return _loginViewController;
+}
+
+- (CardTableViewController *)cardTableViewController
+{
+    if (!_cardTableViewController) {
+        _cardTableViewController = [[CardTableViewController alloc] init];
+        self.cardTableViewController.managedObjectContext = self.managedObjectContext;
+        self.cardTableViewController.delegate = self;
+        CGRect frame = self.cardTableViewController.view.frame;
+        frame.origin.y = kCardTableViewFrameOriginY;
+        self.cardTableViewController.view.frame = frame;
+        self.cardTableViewController.view.alpha = 0.0;
+    }
+    return _cardTableViewController;
 }
 
 

@@ -143,7 +143,9 @@
     User *usr = [self.fetchedResultsController objectAtIndexPath:indexPath];
     relationshipCell.screenNameLabel.text = usr.screenName;
     relationshipCell.descriptionLabel.text = usr.selfDescription;
-    [relationshipCell.profileImageView loadImageFromURL:usr.profileImageURL completion:NULL];
+    [relationshipCell.profileImageView loadImageFromURL:usr.profileImageURL 
+                                             completion:NULL 
+                                         cacheInContext:self.managedObjectContext];
 }
 
 - (NSString *)customCellClassName

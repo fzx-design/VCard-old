@@ -152,6 +152,7 @@ typedef enum {
     if (_preCompletionBlock) {
         _preCompletionBlock(self);
     }
+    NSLog(@"%d", [_completionBlock retainCount]);
     if (_completionBlock) {
         _completionBlock(self);
     }
@@ -359,6 +360,11 @@ report_completion:
     return UserObj;
 }
 
++ (void)clearUser
+{
+    UserObj = nil;
+}
+
 - (void)authWithUsername:(NSString *)username password:(NSString *)password autosave:(BOOL)autosave
 {
     self.path = @"oauth/access_token";
@@ -462,12 +468,13 @@ report_completion:
     
     [self setPreCompletionBlock:^(WeiboClient *client1) {
         if (!client1.hasError) {            
-            WeiboClient *client2 = [WeiboClient client];
-            [client2 setCompletionBlock:client1.completionBlock];
-            [client1 setCompletionBlock:NULL];
-            
             NSArray *statusesDict = client1.responseJSONObject;
-            [client2 getCommentsAndRepostsCountForStatusesDict:statusesDict];
+            if (statusesDict) {
+                WeiboClient *client2 = [WeiboClient client];
+                [client2 setCompletionBlock:client1.completionBlock];
+                [client1 setCompletionBlock:NULL];
+                [client2 getCommentsAndRepostsCountForStatusesDict:statusesDict];
+            }
         }
     }];
     
@@ -501,13 +508,14 @@ report_completion:
     }
     
     [self setPreCompletionBlock:^(WeiboClient *client1) {
-        if (!client1.hasError) {            
-            WeiboClient *client2 = [WeiboClient client];
-            [client2 setCompletionBlock:client1.completionBlock];
-            [client1 setCompletionBlock:NULL];
-            
+        if (!client1.hasError) {
             NSArray *statusesDict = client1.responseJSONObject;
-            [client2 getCommentsAndRepostsCountForStatusesDict:statusesDict];
+            if ([statusesDict count]) {
+                WeiboClient *client2 = [WeiboClient client];
+                [client2 setCompletionBlock:client1.completionBlock];
+                [client1 setCompletionBlock:NULL];
+                [client2 getCommentsAndRepostsCountForStatusesDict:statusesDict];
+            }
         }
     }];
     
@@ -676,12 +684,13 @@ report_completion:
     
     [self setPreCompletionBlock:^(WeiboClient *client1) {
         if (!client1.hasError) {            
-            WeiboClient *client2 = [WeiboClient client];
-            [client2 setCompletionBlock:client1.completionBlock];
-            [client1 setCompletionBlock:NULL];
-            
             NSArray *statusesDict = client1.responseJSONObject;
-            [client2 getCommentsAndRepostsCountForStatusesDict:statusesDict];
+            if ([statusesDict count]) {
+                WeiboClient *client2 = [WeiboClient client];
+                [client2 setCompletionBlock:client1.completionBlock];
+                [client1 setCompletionBlock:NULL];
+                [client2 getCommentsAndRepostsCountForStatusesDict:statusesDict];
+            };
         }
     }];
     

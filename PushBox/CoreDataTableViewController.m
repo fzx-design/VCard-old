@@ -109,7 +109,6 @@
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView beginUpdates];
-    //NSLog(@"%d", [self.fetchedResultsController.fetchedObjects count]);
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
@@ -146,7 +145,6 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
-    //[self.tableView reloadData];
 }
 
 @end

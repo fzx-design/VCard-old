@@ -17,6 +17,7 @@
 @implementation CommentsTableViewController
 @synthesize status = _status;
 @synthesize titleLabel = _titleLabel;
+@synthesize delegate = _delegate;
 
 - (void)dealloc
 {
@@ -145,6 +146,7 @@
 
 - (IBAction)backButtonClicked:(id)sender {
     [self.parentViewController dismissModalViewControllerAnimated:YES];
+    [self.delegate commentsTableViewControllerDidDismiss:self];
 }
 
 - (NSString *)customCellClassName

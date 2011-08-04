@@ -32,6 +32,7 @@
 @dynamic updateDate;
 @dynamic followers;
 @dynamic friends;
+@dynamic favorites;
 
 
 + (User *)insertUser:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context

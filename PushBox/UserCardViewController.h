@@ -9,6 +9,14 @@
 #import "CoreDataViewController.h"
 #import "RelationshipTableViewController.h"
 
+#define kNotificationNameShouldShowUserTimeline @"kNotificationNameShouldShowUserTimeline"
+#define kNotificationNameShouldDismissUserCard @"kNotificationNameShouldDismissUserCard"
+
+@class UserCardViewController;
+@protocol UserCardViewControllerDelegate
+- (void)userCardViewControllerDidDismiss:(UserCardViewController *)vc;
+@end
+
 @class User;
 
 @interface UserCardViewController : CoreDataViewController
@@ -28,6 +36,7 @@
 	UITextView *_descriptionTextView;
 	
     User *_user;
+    id<UserCardViewControllerDelegate> _delegate;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView* profileImageView;
@@ -44,6 +53,7 @@
 @property(nonatomic, retain) IBOutlet UILabel* statusesCountLabel;
 @property(nonatomic, retain) IBOutlet UITextView* descriptionTextView;
 @property(nonatomic, retain) User* user;
+@property(nonatomic, assign) id<UserCardViewControllerDelegate> delegate;
 
 - (id)initWithUsr:(User *)user;
 

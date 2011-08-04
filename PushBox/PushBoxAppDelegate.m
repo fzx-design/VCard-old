@@ -27,9 +27,6 @@
 	[dict setObject:[NSNumber numberWithInt:3] forKey:kUserDefaultKeySiidePlayTimeInterval];
     [dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultKeySoundEnabled];
 	[dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultKeyImageDownloadingEnabled];    
-    
-	//[dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultIsFirstLogin];
-    
 	[dict setObject:[NSNumber numberWithInt:0] forKey:kUserDefaultKeyLoginCount];
 	
 	[userDefault registerDefaults:dict];
@@ -192,7 +189,7 @@
         return __persistentStoreCoordinator;
     }
     
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"PushBox122s233.sqlite"];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"PushBox12s21s233.sqlite"];
     
     NSError *error = nil;
     __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];

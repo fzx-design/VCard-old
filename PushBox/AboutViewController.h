@@ -10,6 +10,7 @@
 #import <MessageUI/MessageUI.h>
 
 #define kNotificationNameTellFriends @"kNotificationNameTellAFriend"
+#define kNotificationNameShouldDismissPopoverView @"kNotificationNameShouldDismissPopoverView"
 
 @interface AboutViewController : UIViewController <MFMailComposeViewControllerDelegate, UIAlertViewDelegate> {
 	

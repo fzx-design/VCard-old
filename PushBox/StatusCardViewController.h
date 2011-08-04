@@ -14,10 +14,13 @@
 #import "PostViewController.h"
 #import <MessageUI/MessageUI.h>
 
+#define kNotificationNameModalCardPresented @"kNotificationNameModalCardPresented"
+#define kNotificationNameModalCardDismissed @"kNotificationNameModalCardDismissed"
+
 @class Status;
 
 @interface StatusCardViewController : CoreDataViewController<DetailImageViewControllerDelegate, 
-UIActionSheetDelegate, MFMailComposeViewControllerDelegate> {
+UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControllerDelegate, CommentsTableViewControllerDelegate> {
     UIImageView *_profileImageView;
     UILabel *_screenNameLabel;
     UILabel *_dateLabel;
@@ -55,7 +58,7 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate> {
 - (IBAction)profileImageButtonClicked:(id)sender;
 - (IBAction)commentButtonClicked:(id)sender;
 - (IBAction)repostButtonClicked:(id)sender;
-- (IBAction)addFavButtonClicked:(id)sender;
+- (IBAction)addFavButtonClicked:(UIButton *)sender;
 
 
 @end

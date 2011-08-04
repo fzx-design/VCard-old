@@ -48,6 +48,12 @@
 	[self.slider setThumbImage:[UIImage imageNamed:@"dock_slider_thumb_HL.png"] forState:UIControlStateHighlighted];
 	[self.slider setMinimumTrackImage:[UIImage imageNamed:@"transparent.png"] forState:UIControlStateNormal];
 	[self.slider setMaximumTrackImage:[UIImage imageNamed:@"transparent.png"] forState:UIControlStateNormal];
+    
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    
+    [center addObserver:self selector:@selector(dismissPopoverNotification:) 
+                   name:kNotificationNameShouldDismissPopoverView 
+                 object:nil];
 	
 }
 
@@ -64,6 +70,11 @@
     self.refreshNotiImageView = nil;
     self.commandCenterNotiImageView = nil;
     self.controlContainerView = nil;
+}
+
+- (void)dismissPopoverNotification:(id)sender
+{
+    [self.optionsPopoverController dismissPopoverAnimated:YES];
 }
 
 - (void)showControlsAnimated:(BOOL)animated;

@@ -36,7 +36,7 @@
 @property (nonatomic, retain) NSDate * updateDate;
 @property (nonatomic, retain) NSSet *followers;
 @property (nonatomic, retain) NSSet *friends;
-
+@property (nonatomic, retain) NSSet *favorites;
 
 + (User *)insertUser:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context;
 + (User *)userWithID:(NSString *)userID inManagedObjectContext:(NSManagedObjectContext *)context;
@@ -72,6 +72,9 @@
 - (void)addFriends:(NSSet *)values;
 - (void)removeFriends:(NSSet *)values;
 
-
+- (void)addFavoritesObject:(Status *)value;
+- (void)removeFavoritesObject:(Status *)value;
+- (void)addFavorites:(NSSet *)values;
+- (void)removeFavorites:(NSSet *)values;
 
 @end

@@ -116,7 +116,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
 	if (buttonIndex == actionSheet.destructiveButtonIndex) {
-        [[UIApplication sharedApplication] dismissModalViewController];
+        [self dismissView];
 	}
 }
 

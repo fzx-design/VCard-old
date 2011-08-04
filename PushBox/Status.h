@@ -31,6 +31,7 @@
 @property (nonatomic, retain) NSString * commentsCount;
 @property (nonatomic, retain) NSString * repostsCount;
 @property (nonatomic, retain) NSDate * updateDate;
+@property (nonatomic, retain) User *favoritedBy;
 
 - (BOOL)isEqualToStatus:(Status *)status;
 + (Status *)insertStatus:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context;

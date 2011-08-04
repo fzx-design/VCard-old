@@ -7,13 +7,27 @@
 //
 
 #import "UIImageViewAddition.h"
+#import "Image.h"
 
 @implementation UIImageView (UIImageViewAddition)
 
-- (void)loadImageFromURL:(NSString *)urlString completion:(void (^)())completion
+- (void)loadImageFromURL:(NSString *)urlString 
+              completion:(void (^)())completion 
+          cacheInContext:(NSManagedObjectContext *)context
 {
 	
 	self.backgroundColor = [UIColor clearColor];
+    
+    Image *imageObject = [Image imageWithURL:urlString inManagedObjectContext:context];
+    if (imageObject) {
+        NSData *imageData = imageObject.data;
+        UIImage *img = [UIImage imageWithData:imageData];
+        self.image = img;
+        if (completion) {
+            completion();
+        }
+        return;
+    }
 	
     NSURL *url = [NSURL URLWithString:urlString];
 		
@@ -22,8 +36,9 @@
     dispatch_async(downloadQueue, ^{ 
         NSData *imageData = [NSData dataWithContentsOfURL:url];
         UIImage *img = [UIImage imageWithData:imageData];
-        
         dispatch_async(dispatch_get_main_queue(), ^{
+            [Image insertImage:imageData withURL:urlString inManagedObjectContext:context];
+            NSLog(@"cache image url:%@", urlString);
             self.image = img;
             if (completion) {
                 completion();

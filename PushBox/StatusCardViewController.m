@@ -91,6 +91,11 @@
     
     self.tweetTextView.font = [self.tweetTextView.font fontWithSize:18];
 	self.repostTextView.font = [self.repostTextView.font fontWithSize:14];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(shouldDismissUserCardNotification:)
+                                                 name:kNotificationNameShouldDismissUserCard
+                                               object:nil];
 }
 
 - (void)imageViewClicked:(UIGestureRecognizer *)ges
@@ -142,15 +147,27 @@
     self.repostCountLabel.text = self.status.repostsCount;
 	
 	self.tweetTextView.text = @"";
-	self.addFavourateButton.selected = NO;
+    
+    User *currentUser = [WeiboClient currentUserInManagedObjectContext:self.managedObjectContext];
+    
+    if ([currentUser.favorites containsObject:self.status]) {
+        self.addFavourateButton.selected = YES;
+    }
+    else {
+        self.addFavourateButton.selected = NO;
+    }
     
     NSString *profileImageString = self.status.author.profileImageURL;
-    [self.profileImageView loadImageFromURL:profileImageString completion:NULL];
+    [self.profileImageView loadImageFromURL:profileImageString 
+                                 completion:NULL
+                             cacheInContext:self.managedObjectContext];
 }
 
 - (void)loadStatusImage
 {
-    [self.tweetImageView loadImageFromURL:self.status.originalPicURL completion:^(void) {
+    [self.tweetImageView loadImageFromURL:self.status.originalPicURL 
+                               completion:^(void) 
+    {
         CGFloat maxWidth = 390;
         //CGFloat maxHeight = tweetScrollView.frame.size.height - tweetImageView.frame.origin.y - 30;
         
@@ -172,13 +189,16 @@
         CGFloat height = abs(self.tweetImageView.frame.origin.y) + self.tweetImageView.frame.size.height;
         self.tweetScrollView.contentSize = CGSizeMake(self.tweetScrollView.frame.size.width, height);
         self.tweetScrollView.contentOffset = CGPointMake(0, 0);
-    }];
+    } 
+                           cacheInContext:self.managedObjectContext];
 }
 
 - (void)loadRepostStautsImage
 {
     Status *repostStatus = self.status.repostStatus;
-    [self.repostTweetImageView loadImageFromURL:repostStatus.originalPicURL completion:^(void) {
+    [self.repostTweetImageView loadImageFromURL:repostStatus.originalPicURL 
+                                     completion:^(void) 
+    {
         CGFloat maxWidth = 350;
         CGFloat maxHeight = self.repostView.frame.size.height - self.repostTweetImageView.frame.origin.y - 30;
         
@@ -196,7 +216,8 @@
         CGRect frame = self.repostTweetImageView.frame;
         frame.size = size;
         self.repostTweetImageView.frame = frame;
-    }];
+    }
+                                 cacheInContext:self.managedObjectContext];
 }
 
 - (void)update
@@ -291,12 +312,10 @@
 	MFMailComposeViewController *picker = nil;
 	switch (buttonIndex) {
 		case 0:
-            
-            
+            [self commentButtonClicked:nil];
 			break;
 		case 1:
-//			[[NSNotificationCenter defaultCenter] postNotificationName:kRepostViewShouldShopupNotification
-//																object:_status];
+            [self repostButtonClicked:nil];
 			break;
 		case 2:
 			picker = [[MFMailComposeViewController alloc] init];
@@ -393,18 +412,42 @@
     vc.modalPresentationStyle = UIModalPresentationCurrentContext;
 	vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     vc.managedObjectContext = self.managedObjectContext;
+    vc.delegate = self;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardPresented object:self];
+    
     [self presentModalViewController:vc animated:YES];
     [vc release];
+}
+
+- (void)userCardViewControllerDidDismiss:(UserCardViewController *)vc
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardDismissed object:self];    
+}
+
+- (void)shouldDismissUserCardNotification:(id)sender 
+{
+    [self dismissModalViewControllerAnimated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardDismissed object:self];
 }
 
 - (IBAction)commentButtonClicked:(id)sender {
     CommentsTableViewController *vc = [[CommentsTableViewController alloc] init];
     vc.managedObjectContext = self.managedObjectContext;
+    vc.delegate = self;
     vc.status = self.status;
     vc.modalPresentationStyle = UIModalPresentationCurrentContext;
     vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardPresented object:self];
+    
     [self presentModalViewController:vc animated:YES];
     [vc release];
+}
+
+- (void)commentsTableViewControllerDidDismiss:(CommentsTableViewController *)vc
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardDismissed object:self];
 }
 
 - (IBAction)repostButtonClicked:(id)sender {
@@ -414,7 +457,34 @@
     [vc release];
 }
 
-- (IBAction)addFavButtonClicked:(id)sender {
+- (IBAction)addFavButtonClicked:(UIButton *)sender {
+    if (sender.selected) {
+        WeiboClient *client = [WeiboClient client];
+        [client setCompletionBlock:^(WeiboClient *client) {
+            if (!client.hasError) {
+                [[WeiboClient currentUserInManagedObjectContext:self.managedObjectContext] removeFavoritesObject:self.status];
+                sender.selected = NO;
+            }
+        }];
+        [client unFavorite:self.status.statusID];
+    }
+    else {
+        WeiboClient *client = [WeiboClient client];
+        [client setCompletionBlock:^(WeiboClient *client) {
+            if (!client.hasError) {
+                [[WeiboClient currentUserInManagedObjectContext:self.managedObjectContext] addFavoritesObject:self.status];
+                sender.selected = YES;
+                
+                UIImage *img = [UIImage imageNamed:@"status_msg_addfav"];
+                UIImageView *imageView = [[UIImageView alloc] initWithImage:img];
+                imageView.center = self.view.center;
+                [self.view addSubview:imageView];
+                [imageView release];
+                [imageView performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:2.0];
+            }
+        }];
+        [client favorite:self.status.statusID];
+    }
     
 }
 @end
