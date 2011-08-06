@@ -158,10 +158,7 @@
     } completion:^(BOOL fin) {
         [self clearData];
         [self.tableView reloadData];
-        [self loadMoreData];
-        if (completion) {
-            completion();
-        }
+        [self loadMoreDataCompletion:completion];
         self.tableView.transform = CGAffineTransformScale(self.tableView.transform, kBlurImageViewScale, kBlurImageViewScale);
         self.tableView.alpha = 1.0;
     }];
@@ -223,7 +220,7 @@
 - (void)scrollToRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self.tableView numberOfRowsInSection:0] == indexPath.row+1) {
-        [self performSelector:@selector(loadMoreData) withObject:nil afterDelay:1.5];
+        [self performSelector:@selector(loadMoreDataCompletion:) withObject:nil afterDelay:1.5];
     }
     
     [self.tableView scrollToRowAtIndexPath:indexPath 
@@ -303,7 +300,7 @@
     [client getFavoritesByPage:_nextPage++];
 }
 
-- (void)loadMoreData
+- (void)loadMoreDataCompletion:(void (^)())completion
 {
     if (self.dataSource == CardTableViewDataSourceFavorites) {
         [self loadAllFavoritesWithCompletion:^(void) {
@@ -312,6 +309,9 @@
             [self.delegate cardTableViewController:self 
                                     didScrollToRow:self.currentRowIndex
                                   withNumberOfRows:[self numberOfRows]];
+            if (completion) {
+                completion();
+            }
         }];
         return;
     }
@@ -340,6 +340,10 @@
                 [self.delegate cardTableViewController:self 
                                         didScrollToRow:self.currentRowIndex
                                       withNumberOfRows:[self numberOfRows]];
+                
+                if (completion) {
+                    completion();
+                }
             }
         }];
         
@@ -363,6 +367,10 @@
                 [self.delegate cardTableViewController:self 
                                         didScrollToRow:self.currentRowIndex
                                       withNumberOfRows:[self numberOfRows]];
+                
+                if (completion) {
+                    completion();
+                }
             }
         }];
         
@@ -395,7 +403,7 @@
 - (void)refresh
 {
     [self clearData];
-    [self loadMoreData];
+    [self loadMoreDataCompletion:NULL];
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath

@@ -86,11 +86,13 @@
             NSDictionary *userDict = client.responseJSONObject;
             self.currentUser = [User insertUser:userDict inManagedObjectContext:self.managedObjectContext];
             
-            [self showDockView];
             self.cardTableViewController.dataSource = CardTableViewDataSourceFriendsTimeline;
             [self showCardTableView];
-            [self.cardTableViewController loadAllFavoritesWithCompletion:NULL];
-            [self.cardTableViewController refresh];
+            [self.cardTableViewController loadMoreDataCompletion:^(void) {
+                [self.cardTableViewController loadAllFavoritesWithCompletion:NULL];
+                [self showDockView];
+                [self.cardTableViewController getUnread];
+            }];;
         }
     }];
     [client getUser:[WeiboClient currentUserID]];

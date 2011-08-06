@@ -60,7 +60,7 @@ typedef enum {
 - (void)getUnread;
 
 - (void)loadAllFavoritesWithCompletion:(void (^)())completion;
-- (void)loadMoreData;
+- (void)loadMoreDataCompletion:(void (^)())completion;
 - (void)clearData;
 - (void)refresh;
 

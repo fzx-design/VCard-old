@@ -24,11 +24,16 @@
     [super viewDidUnload];
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.newFriendsImageView.hidden = YES;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.user = self.currentUser;
-    self.newFriendsImageView.hidden = YES;
     [self configureView];
 }
 
