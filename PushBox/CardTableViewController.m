@@ -10,6 +10,7 @@
 #import "WeiboClient.h"
 #import "Status.h"
 #import "User.h"
+#import "UIApplicationAddition.h"
 
 #define kCardWidth 570
 #define kCardHeight 640
@@ -131,6 +132,7 @@
         if (self.fetchedResultsController.fetchedObjects.count) {
             Status *newest = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
             sinceID = newest.statusID;
+            NSLog(@"%@", newest.text);
         }
     }
     [client getUnreadCountSinceStatusID:sinceID];
@@ -327,6 +329,7 @@
     }
     
     if (self.dataSource == CardTableViewDataSourceFriendsTimeline) {
+        [[UIApplication sharedApplication] showLoadingView];
         [client setCompletionBlock:^(WeiboClient *client) {
             if (!client.hasError) {
                 NSArray *dictArray = client.responseJSONObject;
@@ -344,6 +347,7 @@
                 if (completion) {
                     completion();
                 }
+                [[UIApplication sharedApplication] hideLoadingView];
             }
         }];
         

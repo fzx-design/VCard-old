@@ -87,9 +87,9 @@
             self.currentUser = [User insertUser:userDict inManagedObjectContext:self.managedObjectContext];
             
             self.cardTableViewController.dataSource = CardTableViewDataSourceFriendsTimeline;
-            [self showCardTableView];
             [self.cardTableViewController loadMoreDataCompletion:^(void) {
                 [self.cardTableViewController loadAllFavoritesWithCompletion:NULL];
+                [self showCardTableView];
                 [self showDockView];
                 [self.cardTableViewController getUnread];
             }];;

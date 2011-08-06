@@ -41,6 +41,8 @@
 {
     [super showFollowersButtonClicked:sender];
     self.newFriendsImageView.hidden = YES;
+    WeiboClient *client = [WeiboClient client];
+    [client resetUnreadCount:ResetUnreadCountTypeFollowers];
 }
 
 @end

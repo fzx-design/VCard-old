@@ -65,6 +65,8 @@
     [self clearData];
     [self loadMoreData];
     self.newCommentsImageView.hidden = YES;
+    WeiboClient *client = [WeiboClient client];
+    [client resetUnreadCount:ResetUnreadCountTypeComments];
 }
 
 - (void)loadMoreData
