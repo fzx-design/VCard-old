@@ -84,15 +84,6 @@
     return header;
 }
 
-//- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
-//{
-//    NSString *footer = nil;
-//    if (section == 0) {
-//        footer = NSLocalizedString(@"此版本中暂不能添加多个服务商。", nil);
-//    }
-//    return footer;
-//}
-
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -114,22 +105,6 @@
                     cell.detailTextLabel.text = NSLocalizedString(@"注销", nil);
                     cell.imageView.image = [UIImage imageNamed:@"flag_sina.png"];
                     break;
-//                case 1:
-//					cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//                    cell.textLabel.text = @"Twitter";
-//					cell.textLabel.enabled = NO;
-//                    cell.detailTextLabel.text = @"添加"; //to do
-//					cell.detailTextLabel.enabled = NO;
-//                    cell.imageView.image = [UIImage imageNamed:@"flag_twitter.png"];
-//                    break;
-//                case 2:
-//					cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//                    cell.textLabel.text = @"腾讯微博";
-//					cell.textLabel.enabled = NO;
-//                    cell.detailTextLabel.text = @"添加"; //to mod
-//					cell.detailTextLabel.enabled = NO;
-//                    cell.imageView.image = [UIImage imageNamed:@"flag_tencent.png"];
-//                    break;
             }
             break;
         case 1:

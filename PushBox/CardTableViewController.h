@@ -41,6 +41,7 @@ typedef enum {
     int _prevRowIndex;
     
     NSTimer *_timer;
+    BOOL _loading;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView *blurImageView;

@@ -21,7 +21,6 @@ static NSString* OAuthTokenKey = nil;
 static NSString* OAuthTokenSecret = nil;
 
 static NSString* UserID = nil;
-static User *UserObj = nil;
 
 typedef enum {
     HTTPMethodPost,
@@ -332,8 +331,6 @@ report_completion:
     OAuthTokenKey = nil;
     OAuthTokenSecret = nil;
     UserID = nil;
-    [UserObj release];
-    UserObj = nil;
 }
 
 + (NSString *)currentUserID

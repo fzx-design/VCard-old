@@ -95,6 +95,7 @@
     self.swipeEnabled = YES;
     self.blurImageView.alpha = 0.0;
     _nextPage = 1;
+    _loading = NO;
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:5
                                      target:self 
@@ -304,7 +305,14 @@
 
 - (void)loadMoreDataCompletion:(void (^)())completion
 {
+    if (_loading) {
+        return;
+    }
+    
+    _loading = YES;
+    
     if (self.dataSource == CardTableViewDataSourceFavorites) {
+        [[UIApplication sharedApplication] showLoadingView];
         [self loadAllFavoritesWithCompletion:^(void) {
             [self.managedObjectContext processPendingChanges];
             [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
@@ -314,6 +322,8 @@
             if (completion) {
                 completion();
             }
+            [[UIApplication sharedApplication] hideLoadingView];
+            _loading = NO;
         }];
         return;
     }
@@ -348,6 +358,7 @@
                     completion();
                 }
                 [[UIApplication sharedApplication] hideLoadingView];
+                _loading = NO;
             }
         }];
         
@@ -359,6 +370,7 @@
     }
     
     if (self.dataSource == CardTableViewDataSourceUserTimeline) {
+        [[UIApplication sharedApplication] showLoadingView];
         [client setCompletionBlock:^(WeiboClient *client) {
             if (!client.hasError) {
                 NSArray *dictArray = client.responseJSONObject;
@@ -375,6 +387,8 @@
                 if (completion) {
                     completion();
                 }
+                [[UIApplication sharedApplication] hideLoadingView];
+                _loading = NO;
             }
         }];
         

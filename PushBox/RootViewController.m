@@ -27,6 +27,8 @@
 
 
 @interface RootViewController(private)
+- (void)showBottomStateView;
+- (void)hideBottomStateView;
 - (void)showLoginView;
 - (void)hideLoginView;
 - (void)showDockView;
@@ -124,6 +126,11 @@
                    name:kNotificationNameShouldShowUserTimeline
                  object:nil];
     
+    [center addObserver:self
+               selector:@selector(userSignoutNotification:) 
+                   name:kNotificationNameUserSignedOut 
+                 object:nil];
+    
     self.bottomStateView.alpha = 0.0;
     
     if ([WeiboClient authorized]) {
@@ -135,16 +142,27 @@
     }
 }
 
+- (void)userSignoutNotification:(id)sender
+{
+    [WeiboClient signout];
+    [self hideDockView];
+    [self hideCardTableView];
+    [self hideBottomStateView];
+    self.currentUser = nil;
+    [User deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
+    [self performSelector:@selector(showLoginView) withObject:nil afterDelay:1.0];
+}
+
 - (void)showBottomStateView
 {
-    [UIView animateWithDuration:0.5 animations:^(void) {
+    [UIView animateWithDuration:1.0 animations:^(void) {
         self.bottomStateView.alpha = 1.0;
     }];
 }
 
 - (void)hideBottomStateView
 {
-    [UIView animateWithDuration:0.5 animations:^(void) {
+    [UIView animateWithDuration:1.0 animations:^(void) {
         self.bottomStateView.alpha = 0.0;
     }];
 }
@@ -163,6 +181,7 @@
     [self hideBottomStateView];
     [self.cardTableViewController popCardWithCompletion:^{
         self.dockViewController.showFavoritesButton.selected = NO;
+        self.dockViewController.showFavoritesButton.userInteractionEnabled = YES;
     }];
 }
 
@@ -174,6 +193,16 @@
         self.bottomStateLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@的微博", nil), user.screenName];
         self.dockViewController.showFavoritesButton.selected = NO;
         [self showBottomStateView];
+    }];
+}
+
+- (void)showFavorites
+{
+    self.cardTableViewController.dataSource = CardTableViewDataSourceFavorites;
+    [self.cardTableViewController pushCardWithCompletion:^{
+        self.bottomStateLabel.text = NSLocalizedString(@"我的收藏", nil);
+        [self showBottomStateView];
+        self.dockViewController.showFavoritesButton.userInteractionEnabled = YES;
     }];
 }
 
@@ -315,6 +344,7 @@
 
 - (void)showFavorites:(UIButton *)button
 {
+    button.userInteractionEnabled = NO;
     if (self.dockViewController.commandCenterButton.selected) {
         [self hideCommandCenter];
     }
@@ -328,16 +358,9 @@
     }
 }
 
-- (void)showFavorites
-{
-    self.cardTableViewController.dataSource = CardTableViewDataSourceFavorites;
-    [self.cardTableViewController pushCardWithCompletion:^{
-        self.bottomStateLabel.text = NSLocalizedString(@"我的收藏", nil);
-    }];
-}
-
 - (void)hideDockView
 {
+    [self.dockViewController.optionsPopoverController dismissPopoverAnimated:YES];
     [UIView animateWithDuration:1.0 animations:^{
         self.dockViewController.view.alpha = 0.0;
     } completion:^(BOOL finished) {
