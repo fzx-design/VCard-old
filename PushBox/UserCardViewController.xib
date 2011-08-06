@@ -343,7 +343,6 @@
 						<string key="NSFrame">{{232, 409}, {250, 144}}</string>
 						<reference key="NSSuperview" ref="317278890"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<reference key="IBUIBackgroundColor" ref="410786381"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -1052,24 +1051,18 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">UserCardViewController</string>
+					<string key="className">UserCardBaseViewController</string>
 					<string key="superclassName">CoreDataViewController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>backButtonClicked:</string>
-							<string>followButtonClicked:</string>
 							<string>showFollowersButtonClicked:</string>
 							<string>showFriendsButtonClicked:</string>
 							<string>showStatusesButtonClicked:</string>
-							<string>unfollowButtonClicked:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -1079,23 +1072,12 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>backButtonClicked:</string>
-							<string>followButtonClicked:</string>
 							<string>showFollowersButtonClicked:</string>
 							<string>showFriendsButtonClicked:</string>
 							<string>showStatusesButtonClicked:</string>
-							<string>unfollowButtonClicked:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBActionInfo">
-								<string key="name">backButtonClicked:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">followButtonClicked:</string>
-								<string key="candidateClassName">id</string>
-							</object>
 							<object class="IBActionInfo">
 								<string key="name">showFollowersButtonClicked:</string>
 								<string key="candidateClassName">id</string>
@@ -1108,36 +1090,26 @@
 								<string key="name">showStatusesButtonClicked:</string>
 								<string key="candidateClassName">id</string>
 							</object>
-							<object class="IBActionInfo">
-								<string key="name">unfollowButtonClicked:</string>
-								<string key="candidateClassName">id</string>
-							</object>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>backButton</string>
 							<string>descriptionTextView</string>
 							<string>emailLabel</string>
-							<string>followButton</string>
 							<string>followersCountLabel</string>
 							<string>friendsCountLabel</string>
 							<string>homePageLabel</string>
 							<string>locationLabel</string>
 							<string>profileImageView</string>
-							<string>relationshipStateLabel</string>
 							<string>screenNameLabel</string>
 							<string>statusesCountLabel</string>
-							<string>unFollowButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UIButton</string>
 							<string>UITextView</string>
 							<string>UILabel</string>
-							<string>UIButton</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
@@ -1145,34 +1117,24 @@
 							<string>UIImageView</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
-							<string>UILabel</string>
-							<string>UIButton</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>backButton</string>
 							<string>descriptionTextView</string>
 							<string>emailLabel</string>
-							<string>followButton</string>
 							<string>followersCountLabel</string>
 							<string>friendsCountLabel</string>
 							<string>homePageLabel</string>
 							<string>locationLabel</string>
 							<string>profileImageView</string>
-							<string>relationshipStateLabel</string>
 							<string>screenNameLabel</string>
 							<string>statusesCountLabel</string>
-							<string>unFollowButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">backButton</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">descriptionTextView</string>
 								<string key="candidateClassName">UITextView</string>
@@ -1180,10 +1142,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">emailLabel</string>
 								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">followButton</string>
-								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">followersCountLabel</string>
@@ -1206,15 +1164,100 @@
 								<string key="candidateClassName">UIImageView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">relationshipStateLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
 								<string key="name">screenNameLabel</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">statusesCountLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/UserCardBaseViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UserCardViewController</string>
+					<string key="superclassName">UserCardBaseViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>backButtonClicked:</string>
+							<string>followButtonClicked:</string>
+							<string>unfollowButtonClicked:</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>backButtonClicked:</string>
+							<string>followButtonClicked:</string>
+							<string>unfollowButtonClicked:</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">backButtonClicked:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">followButtonClicked:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">unfollowButtonClicked:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>backButton</string>
+							<string>followButton</string>
+							<string>relationshipStateLabel</string>
+							<string>unFollowButton</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIButton</string>
+							<string>UIButton</string>
+							<string>UILabel</string>
+							<string>UIButton</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>backButton</string>
+							<string>followButton</string>
+							<string>relationshipStateLabel</string>
+							<string>unFollowButton</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">backButton</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">followButton</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">relationshipStateLabel</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">

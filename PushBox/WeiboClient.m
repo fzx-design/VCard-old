@@ -336,33 +336,9 @@ report_completion:
     UserObj = nil;
 }
 
-
-+ (User *)currentUserInManagedObjectContext:(NSManagedObjectContext *)context
++ (NSString *)currentUserID
 {
-    if (!UserID) {
-        return nil;
-    }
-    
-    if (UserObj) {
-        return UserObj;
-    }
-    
-    WeiboClient *client = [WeiboClient client];
-    client.synchronized = YES;
-    [client getUser:UserID];
-    
-    if (!client.hasError) {
-        UserObj = [[User insertUser:client.responseJSONObject inManagedObjectContext:context] retain];
-    }
-    
-    [client release];
-    
-    return UserObj;
-}
-
-+ (void)clearUser
-{
-    UserObj = nil;
+    return UserID;
 }
 
 - (void)authWithUsername:(NSString *)username password:(NSString *)password autosave:(BOOL)autosave
@@ -443,7 +419,7 @@ report_completion:
 }
 
 - (void)getFriendsTimelineSinceID:(NSString *)sinceID 
-                    withMaximumID:(NSString *)maxID 
+                    maxID:(NSString *)maxID 
                    startingAtPage:(int)page 
                             count:(int)count
                           feature:(int)feature;
@@ -483,7 +459,7 @@ report_completion:
 
 - (void)getUserTimeline:(NSString *)userID 
 				SinceID:(NSString *)sinceID 
-		  withMaximumID:(NSString *)maxID 
+		  maxID:(NSString *)maxID 
 		 startingAtPage:(int)page 
 				  count:(int)count
                 feature:(int)feature
@@ -528,6 +504,27 @@ report_completion:
 {
     self.path = @"statuses/comments.json";
     [self.params setObject:statusID forKey:@"id"];
+    if (page) {
+        [self.params setObject:[NSString stringWithFormat:@"%d", page] forKey:@"page"];
+    }
+    if (count) {
+        [self.params setObject:[NSString stringWithFormat:@"%d", count] forKey:@"count"];
+    }
+    [self sendRequest];
+}
+
+- (void)getCommentsToMeSinceID:(NSString *)sinceID 
+                         maxID:(NSString *)maxID 
+                          page:(int)page 
+                         count:(int)count
+{
+    self.path = @"statuses/comments_to_me.json";
+    if (sinceID) {
+        [self.params setObject:sinceID forKey:@"since_id"];
+    }
+    if (maxID) {
+        [self.params setObject:maxID forKey:@"max_id"];
+    }
     if (page) {
         [self.params setObject:[NSString stringWithFormat:@"%d", page] forKey:@"page"];
     }
@@ -701,6 +698,24 @@ report_completion:
 {
     self.path = @"friendships/show.json";
     [self.params setObject:userID forKey:@"target_id"];
+    [self sendRequest];
+}
+
+- (void)getUnreadCountSinceStatusID:(NSString *)statusID
+{
+    self.path = @"statuses/unread.json";
+    if (statusID) {
+        [self.params setObject:@"1" forKey:@"with_new_status"];
+        [self.params setObject:statusID forKey:@"since_id"];
+    }
+    [self sendRequest];
+}
+
+- (void)resetUnreadCount:(int)type
+{
+    self.path = @"statuses/reset_count.json";
+    self.httpMethod = HTTPMethodPost;
+    [self.params setObject:[NSString stringWithFormat:@"%d", type] forKey:@"type"];
     [self sendRequest];
 }
 

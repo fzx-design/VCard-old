@@ -11,6 +11,13 @@
 @class WeiboClient;
 @class User;
 
+enum {
+    ResetUnreadCountTypeComments = 1,
+    ResetUnreadCountTypeReferMe = 2,
+    ResetUnreadCountTypeDirectMessage = 3,
+    ResetUnreadCountTypeFollowers = 4,
+};
+
 typedef void (^WCCompletionBlock)(WeiboClient *client);
 
 @interface WeiboClient : NSObject <ASIHTTPRequestDelegate> {
@@ -38,24 +45,28 @@ typedef void (^WCCompletionBlock)(WeiboClient *client);
 
 // return true if user already logged in
 + (BOOL)authorized;
-+ (User *)currentUserInManagedObjectContext:(NSManagedObjectContext *)context;
-+ (void)clearUser;
 + (void)signout;
++ (NSString *)currentUserID;
 
 - (void)authWithUsername:(NSString *)username password:(NSString *)password autosave:(BOOL)autosave;
 
 - (void)getFriendsTimelineSinceID:(NSString *)sinceID 
-                    withMaximumID:(NSString *)maxID 
+                            maxID:(NSString *)maxID 
                    startingAtPage:(int)page 
                             count:(int)count
                           feature:(int)feature;
 
 - (void)getUserTimeline:(NSString *)userID 
 				SinceID:(NSString *)sinceID 
-		  withMaximumID:(NSString *)maxID 
+                  maxID:(NSString *)maxID 
 		 startingAtPage:(int)page 
 				  count:(int)count
                 feature:(int)feature;
+
+- (void)getCommentsToMeSinceID:(NSString *)sinceID 
+                         maxID:(NSString *)maxID 
+                          page:(int)page 
+                         count:(int)count;
 
 - (void)getCommentsOfStatus:(NSString *)statusID
                        page:(int)page
@@ -91,6 +102,10 @@ typedef void (^WCCompletionBlock)(WeiboClient *client);
 - (void)getFavoritesByPage:(int)page;
 
 - (void)getRelationshipWithUser:(NSString *)userID;
+
+- (void)getUnreadCountSinceStatusID:(NSString *)statusID;
+- (void)resetUnreadCount:(int)type;
+
 
 
 

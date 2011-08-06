@@ -157,8 +157,9 @@
 {
     User *usr = [self.fetchedResultsController objectAtIndexPath:indexPath];
     UserCardViewController *vc = [[UserCardViewController alloc] initWithUsr:usr];
+    vc.currentUser = self.currentUser;
     vc.modalPresentationStyle = UIModalPresentationCurrentContext;
-    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    vc.modalTransitionStyle = self.modalTransitionStyle;
     [self presentModalViewController:vc animated:YES];
     [vc release];
 }

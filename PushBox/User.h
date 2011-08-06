@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 
 @class Status;
+@class Comment;
 
 @interface User : NSManagedObject {
 @private
@@ -37,6 +38,7 @@
 @property (nonatomic, retain) NSSet *followers;
 @property (nonatomic, retain) NSSet *friends;
 @property (nonatomic, retain) NSSet *favorites;
+@property (nonatomic, retain) NSSet *commentsToMe;
 
 + (User *)insertUser:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context;
 + (User *)userWithID:(NSString *)userID inManagedObjectContext:(NSManagedObjectContext *)context;
@@ -76,5 +78,10 @@
 - (void)removeFavoritesObject:(Status *)value;
 - (void)addFavorites:(NSSet *)values;
 - (void)removeFavorites:(NSSet *)values;
+
+- (void)addCommentsToMeObject:(Comment *)value;
+- (void)removeCommentsToMeObject:(Comment *)value;
+- (void)addCommentsToMe:(NSSet *)values;
+- (void)removeCommentsToMe:(NSSet *)values;
 
 @end

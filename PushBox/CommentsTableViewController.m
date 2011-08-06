@@ -17,13 +17,16 @@
 @implementation CommentsTableViewController
 @synthesize status = _status;
 @synthesize titleLabel = _titleLabel;
+@synthesize dataSource = _dataSource;
 @synthesize delegate = _delegate;
+@synthesize newCommentsImageView = _newCommentsImageView;
 
 - (void)dealloc
 {
     NSLog(@"CommentsTableViewController dealloc");
     [_titleLabel release];
     [_status release];
+    [_newCommentsImageView release];
     [super dealloc];
 }
 
@@ -40,20 +43,28 @@
     
     _nextPage = 1;
     [self performSelector:@selector(loadMoreData) withObject:nil afterDelay:0.5];
-    [self hideLoadMoreDataButton];
+    [self performSelector:@selector(hideLoadMoreDataButton) withObject:nil afterDelay:0.1];
+    
+    self.newCommentsImageView.hidden = YES;
 }
 
 - (void)clearData
 {
     _nextPage = 1;
     [self hideLoadMoreDataButton];
-    [self.status removeComments:self.status.comments];
+    if (self.dataSource == CommentsTableViewDataSourceCommentsOfStatus) {
+        [self.status removeComments:self.status.comments];
+    }
+    else {
+        [self.currentUser removeCommentsToMe:self.currentUser.commentsToMe];
+    }
 }
 
 - (void)refresh
 {
     [self clearData];
     [self loadMoreData];
+    self.newCommentsImageView.hidden = YES;
 }
 
 - (void)loadMoreData
@@ -78,7 +89,7 @@
             }
             
             for (NSDictionary *dict in dictArray) {
-                [self.status addCommentsObject:[Comment insertComment:dict inManagedObjectContext:self.managedObjectContext]];
+                [Comment insertComment:dict inManagedObjectContext:self.managedObjectContext];
             }
             _nextPage++;
             
@@ -87,7 +98,12 @@
         }
     }];
     
-    [client getCommentsOfStatus:self.status.statusID page:_nextPage count:20];
+    if (self.dataSource == CommentsTableViewDataSourceCommentsOfStatus) {
+        [client getCommentsOfStatus:self.status.statusID page:_nextPage count:20];
+    }
+    else {
+        [client getCommentsToMeSinceID:nil maxID:nil page:_nextPage count:20];
+    }
 }
 
 - (void)configureRequest:(NSFetchRequest *)request
@@ -96,7 +112,12 @@
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updateDate" ascending:YES];
     request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     
-    request.predicate = [NSPredicate predicateWithFormat:@"targetStatus == %@", self.status];
+    if (self.dataSource == CommentsTableViewDataSourceCommentsOfStatus) {
+        request.predicate = [NSPredicate predicateWithFormat:@"targetStatus == %@", self.status];
+    }
+    else {
+        request.predicate = [NSPredicate predicateWithFormat:@"targetUser == %@", self.currentUser];
+    }
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath

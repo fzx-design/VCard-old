@@ -15,18 +15,16 @@
 #define kCardHeight 640
 #define kHeaderAndFooterWidth 229.0
 
-#define kStatusCountPerRequest 5
+#define kStatusCountPerRequest 10
 
 #define kBlurImageViewScale 2.27
 
 @interface CardTableViewController()
-@property(nonatomic, retain) User* currentUser;
 @property(nonatomic, retain) UITableViewCell *tempCell;  
 @end
 
 @implementation CardTableViewController
 
-@synthesize currentUser = _currentUser;
 @synthesize tempCell = _tempCell;
 @synthesize delegate = _delegate;
 @synthesize currentRowIndex = _currentRowIndex;
@@ -40,11 +38,11 @@
 - (void)dealloc
 {
     NSLog(@"CardTableViewController dealloc");
-    [_currentUser release];
     [_tempCell release];
     [_blurImageView release];
     [_user release];
     [_prevFetchedResultsController release];
+    [_timer invalidate];
     [super dealloc];
 }
 
@@ -57,7 +55,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.currentUser = [WeiboClient currentUserInManagedObjectContext:self.managedObjectContext];
     
     self.tableView.scrollEnabled = NO;
 	
@@ -97,6 +94,46 @@
     self.swipeEnabled = YES;
     self.blurImageView.alpha = 0.0;
     _nextPage = 1;
+    
+    _timer = [NSTimer scheduledTimerWithTimeInterval:5
+                                     target:self 
+                                   selector:@selector(timerFired:) 
+                                   userInfo:nil 
+                                    repeats:YES];
+}
+
+- (void)timerFired:(NSTimer *)timer
+{
+    [self getUnread];
+}
+
+- (void)getUnread
+{
+    WeiboClient *client = [WeiboClient client];
+    [client setCompletionBlock:^(WeiboClient *client) {
+        if (!client.hasError) {
+            NSDictionary *dict = client.responseJSONObject;
+            NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+            if ([[dict objectForKey:@"comments"] intValue]) {
+                [center postNotificationName:kNotificationNameNewCommentsToMe object:self];
+            }
+            if ([[dict objectForKey:@"followers"] intValue]) {
+                [center postNotificationName:kNotificationNameNewFollowers object:self];
+            }
+            if ([[dict objectForKey:@"new_status"] intValue]) {
+                [center postNotificationName:kNotificationNameNewStatuses object:self];
+            }
+        }
+    }];
+    
+    NSString *sinceID = nil;
+    if (self.dataSource == CardTableViewDataSourceFriendsTimeline) {
+        if (self.fetchedResultsController.fetchedObjects.count) {
+            Status *newest = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
+            sinceID = newest.statusID;
+        }
+    }
+    [client getUnreadCountSinceStatusID:sinceID];
 }
 
 - (void)pushCardWithCompletion:(void (^)())completion
@@ -165,17 +202,6 @@
             }
         }];
 	}];
-}
-
-- (User *)currentUser
-{
-    if (_currentUser) {
-        return _currentUser;
-    }
-    else {
-        self.currentUser = [WeiboClient currentUserInManagedObjectContext:self.managedObjectContext];
-        return _currentUser;
-    }
 }
 
 - (int)numberOfRows
@@ -253,7 +279,6 @@
 - (void)loadAllFavoritesWithCompletion:(void (^)())completion
 {
     WeiboClient *client = [WeiboClient client];
-    User *currentUser = [WeiboClient currentUserInManagedObjectContext:self.managedObjectContext];
     
     WCCompletionBlock block = ^(WeiboClient *client) {
         if (!client.hasError) {
@@ -261,7 +286,7 @@
             if ([dictsArray count]) {
                 for (NSDictionary *dict in dictsArray) {
                     Status *status = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-                    [currentUser addFavoritesObject:status];
+                    [self.currentUser addFavoritesObject:status];
                 }
                 [self loadAllFavoritesWithCompletion:completion];
             }
@@ -319,7 +344,7 @@
         }];
         
         [client getFriendsTimelineSinceID:nil
-                            withMaximumID:[NSString stringWithFormat:@"%lld", maxID]
+                            maxID:[NSString stringWithFormat:@"%lld", maxID]
                            startingAtPage:0 
                                     count:kStatusCountPerRequest
                                   feature:0];
@@ -343,7 +368,7 @@
         
         [client getUserTimeline:self.user.userID
                         SinceID:nil
-                  withMaximumID:[NSString stringWithFormat:@"%lld", maxID]
+                  maxID:[NSString stringWithFormat:@"%lld", maxID]
                  startingAtPage:0
                           count:kStatusCountPerRequest
                         feature:0];
@@ -378,7 +403,7 @@
     //NSLog(@"card table view configure cell");
     
     CardTableViewCell *tableViewCell = (CardTableViewCell *)cell;
-    tableViewCell.statusCardViewController.managedObjectContext = self.managedObjectContext;
+    tableViewCell.statusCardViewController.currentUser = self.currentUser;
     tableViewCell.statusCardViewController.status = [self.fetchedResultsController objectAtIndexPath:indexPath];
 }
 

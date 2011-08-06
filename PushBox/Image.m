@@ -61,10 +61,10 @@
     
     NSArray *resultArray = [context executeFetchRequest:request error:NULL];
     
-    if (resultArray.count > 15) {
+    if (resultArray.count > 40) {
         [resultArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             [context deleteObject:obj];
-            if (idx > 5) {
+            if (idx > 10) {
                 *stop = YES;
             }
         }];

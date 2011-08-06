@@ -8,6 +8,7 @@
         <attribute name="updateDate" attributeType="Date"/>
         <relationship name="author" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="comments" inverseEntity="User"/>
         <relationship name="targetStatus" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Status" inverseName="comments" inverseEntity="Status"/>
+        <relationship name="targetUser" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="commentsToMe" inverseEntity="User"/>
     </entity>
     <entity name="Image" representedClassName="Image">
         <attribute name="data" attributeType="Binary"/>
@@ -51,6 +52,7 @@
         <attribute name="userID" attributeType="String"/>
         <attribute name="verified" optional="YES" attributeType="Boolean"/>
         <relationship name="comments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Comment" inverseName="author" inverseEntity="Comment"/>
+        <relationship name="commentsToMe" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="targetUser" inverseEntity="Comment"/>
         <relationship name="favorites" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Status" inverseName="favoritedBy" inverseEntity="Status"/>
         <relationship name="followers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="friends" inverseEntity="User"/>
         <relationship name="friends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="followers" inverseEntity="User"/>
@@ -58,9 +60,9 @@
         <relationship name="statuses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Status" inverseName="author" inverseEntity="Status"/>
     </entity>
     <elements>
-        <element name="Comment" positionX="-11" positionY="207" width="128" height="150"/>
+        <element name="Comment" positionX="-11" positionY="207" width="128" height="165"/>
         <element name="Image" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Status" positionX="223" positionY="81" width="128" height="285"/>
-        <element name="User" positionX="-18" positionY="414" width="128" height="375"/>
+        <element name="User" positionX="-18" positionY="414" width="128" height="390"/>
     </elements>
 </model>

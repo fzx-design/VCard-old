@@ -9,6 +9,10 @@
 #import "CoreDataTableViewController.h"
 #import "CardTableViewCell.h"
 
+#define kNotificationNameNewCommentsToMe @"kNotificationNameNewCommentsToMe"
+#define kNotificationNameNewStatuses @"kNotificationNameNewStatuses"
+#define kNotificationNameNewFollowers @"kNotificationNameNewFollowers"
+
 typedef enum {
     CardTableViewDataSourceFriendsTimeline,
     CardTableViewDataSourceUserTimeline,
@@ -35,6 +39,8 @@ typedef enum {
     
     NSFetchedResultsController *_prevFetchedResultsController;
     int _prevRowIndex;
+    
+    NSTimer *_timer;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView *blurImageView;
@@ -50,6 +56,8 @@ typedef enum {
 - (void)popCardWithCompletion:(void (^)())completion;
 
 - (int)numberOfRows;
+
+- (void)getUnread;
 
 - (void)loadAllFavoritesWithCompletion:(void (^)())completion;
 - (void)loadMoreData;

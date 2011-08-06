@@ -20,6 +20,8 @@
 @property (nonatomic, retain) User *author;
 @property (nonatomic, retain) Status *targetStatus;
 @property (nonatomic, retain) NSDate * updateDate;
+@property (nonatomic, retain) User *targetUser;
+
 
 + (Comment *)insertComment:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context;
 + (Comment *)commentWithID:(NSString *)commentID inManagedObjectContext:(NSManagedObjectContext *)context;

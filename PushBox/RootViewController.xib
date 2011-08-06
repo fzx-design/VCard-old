@@ -50,7 +50,6 @@
 						<string key="NSFrameSize">{1024, 748}</string>
 						<reference key="NSSuperview" ref="420341332"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
@@ -77,7 +76,7 @@
 					</object>
 					<object class="IBUIView" id="72760619">
 						<reference key="NSNextResponder" ref="420341332"/>
-						<int key="NSvFlags">-2147483356</int>
+						<int key="NSvFlags">292</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUIImageView" id="35991125">
@@ -233,6 +232,15 @@
 					</object>
 					<int key="connectionID">48</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">showFriendsTimeline:</string>
+						<reference key="source" ref="902454433"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">49</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -316,6 +324,7 @@
 					<string>14.IBPluginDependency</string>
 					<string>15.IBPluginDependency</string>
 					<string>30.IBPluginDependency</string>
+					<string>30.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>31.IBPluginDependency</string>
 					<string>32.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
@@ -330,6 +339,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<real value="0.0"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -348,7 +358,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">48</int>
+			<int key="maxID">49</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -364,6 +374,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">RootViewController</string>
 					<string key="superclassName">CoreDataViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">showFriendsTimeline:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">showFriendsTimeline:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">showFriendsTimeline:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
@@ -376,7 +397,7 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIImageView</string>
-							<string>UIView</string>
+							<string>UILabel</string>
 							<string>UIView</string>
 							<string>UIImageView</string>
 						</object>
@@ -398,7 +419,7 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">bottomStateLabel</string>
-								<string key="candidateClassName">UIView</string>
+								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">bottomStateView</string>

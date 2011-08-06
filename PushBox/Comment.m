@@ -19,6 +19,8 @@
 @dynamic author;
 @dynamic targetStatus;
 @dynamic updateDate;
+@dynamic targetUser;
+
 
 + (Comment *)insertComment:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context
 {
@@ -46,6 +48,7 @@
     
     if (statusDict) {
         result.targetStatus = [Status insertStatus:statusDict inManagedObjectContext:context];
+        result.targetUser = result.targetStatus.author;
     }
     
     NSDictionary *userDict = [dict objectForKey:@"user"];

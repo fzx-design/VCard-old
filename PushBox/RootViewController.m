@@ -80,12 +80,20 @@
 
 - (void)start
 {
-    [self showDockView];
-    self.cardTableViewController.dataSource = CardTableViewDataSourceFriendsTimeline;
-    //self.cardTableViewController.user = [WeiboClient currentUserInManagedObjectContext:self.managedObjectContext];
-    [self showCardTableView];
-    [self.cardTableViewController loadAllFavoritesWithCompletion:NULL];
-    [self.cardTableViewController refresh];
+    WeiboClient *client = [WeiboClient client];
+    [client setCompletionBlock:^(WeiboClient *client) {
+        if (!client.hasError) {
+            NSDictionary *userDict = client.responseJSONObject;
+            self.currentUser = [User insertUser:userDict inManagedObjectContext:self.managedObjectContext];
+            
+            [self showDockView];
+            self.cardTableViewController.dataSource = CardTableViewDataSourceFriendsTimeline;
+            [self showCardTableView];
+            [self.cardTableViewController loadAllFavoritesWithCompletion:NULL];
+            [self.cardTableViewController refresh];
+        }
+    }];
+    [client getUser:[WeiboClient currentUserID]];
 }
 
 - (void)viewDidLoad
@@ -114,6 +122,8 @@
                    name:kNotificationNameShouldShowUserTimeline
                  object:nil];
     
+    self.bottomStateView.alpha = 0.0;
+    
     if ([WeiboClient authorized]) {
         self.pushBoxHDImageView.alpha = 0.0;
         [self start];
@@ -121,6 +131,20 @@
     else {
         [self showLoginView];
     }
+}
+
+- (void)showBottomStateView
+{
+    [UIView animateWithDuration:0.5 animations:^(void) {
+        self.bottomStateView.alpha = 1.0;
+    }];
+}
+
+- (void)hideBottomStateView
+{
+    [UIView animateWithDuration:0.5 animations:^(void) {
+        self.bottomStateView.alpha = 0.0;
+    }];
 }
 
 - (void)shouldShowUserTimelineNotification:(id)sender
@@ -131,11 +155,24 @@
     [self performSelector:@selector(showUserTimeline:) withObject:[sender object] afterDelay:1.0];
 }
 
+- (void)showFriendsTimeline:(id)sender
+{
+    self.cardTableViewController.dataSource = CardTableViewDataSourceFriendsTimeline;
+    [self hideBottomStateView];
+    [self.cardTableViewController popCardWithCompletion:^{
+        self.dockViewController.showFavoritesButton.selected = NO;
+    }];
+}
+
 - (void)showUserTimeline:(User *)user
 {
     self.cardTableViewController.dataSource = CardTableViewDataSourceUserTimeline;
     self.cardTableViewController.user = user;
-    [self.cardTableViewController pushCardWithCompletion:NULL];
+    [self.cardTableViewController pushCardWithCompletion:^{
+        self.bottomStateLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@的微博", nil), user.screenName];
+        self.dockViewController.showFavoritesButton.selected = NO;
+        [self showBottomStateView];
+    }];
 }
 
 - (void)modalCardViewPresentedNotification:(id)sender
@@ -268,7 +305,7 @@
 
 - (void)showDockView
 {
-    [self.view addSubview:self.dockViewController.view];
+    [self.view insertSubview:self.dockViewController.view belowSubview:self.bottomStateView];
     [UIView animateWithDuration:1.0 animations:^{
         self.dockViewController.view.alpha = 1.0;
     }];
@@ -276,15 +313,25 @@
 
 - (void)showFavorites:(UIButton *)button
 {
+    if (self.dockViewController.commandCenterButton.selected) {
+        [self hideCommandCenter];
+    }
     if (button.selected) {
-        [self.cardTableViewController popCardWithCompletion:NULL];
+        [self performSelector:@selector(showFriendsTimeline:) withObject:nil afterDelay:1.0];
         button.selected = NO;
     }
     else {
-        self.cardTableViewController.dataSource = CardTableViewDataSourceFavorites;
-        [self.cardTableViewController pushCardWithCompletion:NULL];
+        [self performSelector:@selector(showFavorites) withObject:nil afterDelay:1.0];
         button.selected = YES;
     }
+}
+
+- (void)showFavorites
+{
+    self.cardTableViewController.dataSource = CardTableViewDataSourceFavorites;
+    [self.cardTableViewController pushCardWithCompletion:^{
+        self.bottomStateLabel.text = NSLocalizedString(@"我的收藏", nil);
+    }];
 }
 
 - (void)hideDockView
@@ -311,6 +358,10 @@
 
 - (void)showCommandCenter
 {
+    [self.dockViewController viewWillAppear:YES];
+    if (self.cardTableViewController.dataSource != CardTableViewDataSourceFriendsTimeline) {
+        [self hideBottomStateView];
+    }
     [UIView animateWithDuration:kDockAnimationInterval
                           delay:0 
                         options:UIViewAnimationCurveEaseInOut 
@@ -329,7 +380,11 @@
                          frame.origin.y -= kDockViewOffsetY;
                          self.bottomStateView.frame = frame;
                      }
-                     completion:NULL];
+                     completion:^(BOOL finished) {
+                         if (finished) {
+                             [self.dockViewController viewDidAppear:YES];
+                         }
+                     }];
     self.dockViewController.playButton.enabled = NO;
     self.dockViewController.slider.enabled = NO;
     self.dockViewController.refreshButton.enabled = NO;
@@ -337,6 +392,10 @@
 
 - (void)hideCommandCenter
 {
+    if (self.cardTableViewController.dataSource != CardTableViewDataSourceFriendsTimeline) {
+        [self showBottomStateView];
+    }
+    [self.dockViewController viewWillDisappear:YES];
     [UIView animateWithDuration:kDockAnimationInterval
                           delay:0 
                         options:UIViewAnimationCurveEaseInOut 
@@ -355,9 +414,13 @@
                          frame.origin.y += kDockViewOffsetY;
                          self.bottomStateView.frame = frame;
                      }
-                     completion:NULL];
+                     completion:^(BOOL finished) {
+                         if (finished) {
+                             [self.dockViewController viewDidDisappear:YES];
+                         }
+                     }];
     self.dockViewController.playButton.enabled = YES;
-    self.dockViewController.slider.enabled = NO;
+    self.dockViewController.slider.enabled = YES;
     self.dockViewController.refreshButton.enabled = YES;
 }
 
@@ -386,7 +449,7 @@
 
 - (void)showCardTableView
 {    
-    [self.view addSubview:self.cardTableViewController.view];
+    [self.view insertSubview:self.cardTableViewController.view belowSubview:self.bottomStateView];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL firstTime = [defaults boolForKey:kUserDefaultKeyFirstTime];
@@ -444,12 +507,11 @@
 	return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
-
-
 - (DockViewController *)dockViewController
 {
     if (!_dockViewController) {
         _dockViewController = [[DockViewController alloc] init];
+        self.dockViewController.currentUser = self.currentUser;
         CGRect frame = self.dockViewController.view.frame;
         frame.origin.y = kDockViewFrameOriginY;
         self.dockViewController.view.frame = frame;
@@ -498,7 +560,7 @@
 {
     if (!_cardTableViewController) {
         _cardTableViewController = [[CardTableViewController alloc] init];
-        self.cardTableViewController.managedObjectContext = self.managedObjectContext;
+        self.cardTableViewController.currentUser = self.currentUser;
         self.cardTableViewController.delegate = self;
         CGRect frame = self.cardTableViewController.view.frame;
         frame.origin.y = kCardTableViewFrameOriginY;

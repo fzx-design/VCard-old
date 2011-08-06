@@ -33,6 +33,7 @@
 @dynamic followers;
 @dynamic friends;
 @dynamic favorites;
+@dynamic commentsToMe;
 
 
 + (User *)insertUser:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context

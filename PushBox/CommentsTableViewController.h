@@ -10,6 +10,11 @@
 #import "CommentsTableViewCell.h"
 #import "CommentViewController.h"
 
+typedef enum {
+    CommentsTableViewDataSourceCommentsToMe,
+    CommentsTableViewDataSourceCommentsOfStatus,
+} CommentsTableViewDataSource;
+
 @class CommentsTableViewController;
 @protocol CommentsTableViewControllerDelegate
 - (void)commentsTableViewControllerDidDismiss:(CommentsTableViewController *)vc;
@@ -21,13 +26,17 @@
     UILabel *_titleLabel;
     Status *_status;
     int _nextPage;
-    
+    CommentsTableViewDataSource _dataSource;
     id _delegate;
+    
+    UIImageView *_newCommentsImageView;
 }
 
 @property(nonatomic, retain) IBOutlet UILabel *titleLabel;
 @property(nonatomic, retain) Status *status;
+@property(nonatomic, assign) CommentsTableViewDataSource dataSource;
 @property(nonatomic, assign) id<CommentsTableViewControllerDelegate> delegate;
+@property(nonatomic, retain) IBOutlet UIImageView* newCommentsImageView;
 
 - (IBAction)commentButtonClicked:(id)sender;
 - (IBAction)backButtonClicked:(id)sender;

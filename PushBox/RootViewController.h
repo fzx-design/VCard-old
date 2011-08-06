@@ -17,7 +17,7 @@
     UIImageView *_pushBoxHDImageView;
     
     UIView *_bottomStateView;
-    UIView *_bottomStateLabel;
+    UILabel *_bottomStateLabel;
     
     UIImageView *_holeImageView;
     
@@ -31,10 +31,12 @@
 @property(nonatomic, retain) IBOutlet UIImageView* backgroundImageView;
 @property(nonatomic, retain) IBOutlet UIImageView* pushBoxHDImageView;
 @property(nonatomic, retain) IBOutlet UIView* bottomStateView;
-@property(nonatomic, retain) IBOutlet UIView* bottomStateLabel;
+@property(nonatomic, retain) IBOutlet UILabel* bottomStateLabel;
 
 @property(nonatomic, retain) LoginViewController* loginViewController;
 @property(nonatomic, retain) DockViewController *dockViewController;
 @property(nonatomic, retain) CardTableViewController* cardTableViewController;
+
+- (IBAction)showFriendsTimeline:(id)sender;
 
 @end

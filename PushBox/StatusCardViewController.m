@@ -148,9 +148,7 @@
 	
 	self.tweetTextView.text = @"";
     
-    User *currentUser = [WeiboClient currentUserInManagedObjectContext:self.managedObjectContext];
-    
-    if ([currentUser.favorites containsObject:self.status]) {
+    if ([self.currentUser.favorites containsObject:self.status]) {
         self.addFavourateButton.selected = YES;
     }
     else {
@@ -296,8 +294,7 @@
 	[actionSheet addButtonWithTitle:NSLocalizedString(@"评论", nil)];
 	[actionSheet addButtonWithTitle:NSLocalizedString(@"转发", nil)];
 	[actionSheet addButtonWithTitle:NSLocalizedString(@"邮件分享", nil)];
-    User *currentUser = [WeiboClient currentUserInManagedObjectContext:self.managedObjectContext];
-	if ([self.status.author.userID isEqualToString:currentUser.userID]) {
+	if ([self.status.author.userID isEqualToString:self.currentUser.userID]) {
 		[actionSheet addButtonWithTitle:NSLocalizedString(@"删除微博", nil)];
 		actionSheet.destructiveButtonIndex = 3;
 	}
@@ -408,10 +405,9 @@
 
 - (IBAction)profileImageButtonClicked:(id)sender {
     UserCardViewController *vc = [[UserCardViewController alloc] initWithUsr:self.status.author];
-    vc.managedObjectContext = self.managedObjectContext;
+    vc.currentUser = self.currentUser;
     vc.modalPresentationStyle = UIModalPresentationCurrentContext;
 	vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    vc.managedObjectContext = self.managedObjectContext;
     vc.delegate = self;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardPresented object:self];
@@ -433,7 +429,8 @@
 
 - (IBAction)commentButtonClicked:(id)sender {
     CommentsTableViewController *vc = [[CommentsTableViewController alloc] init];
-    vc.managedObjectContext = self.managedObjectContext;
+    vc.dataSource = CommentsTableViewDataSourceCommentsOfStatus;
+    vc.currentUser = self.currentUser;
     vc.delegate = self;
     vc.status = self.status;
     vc.modalPresentationStyle = UIModalPresentationCurrentContext;
@@ -451,7 +448,7 @@
 }
 
 - (IBAction)repostButtonClicked:(id)sender {
-    PostViewController *vc = [[PostViewController alloc] initWithType:(RelationshipViewType)PostViewTypeRepost];
+    PostViewController *vc = [[PostViewController alloc] initWithType:PostViewTypeRepost];
     vc.targetStatus = self.status;
     [[UIApplication sharedApplication] presentModalViewController:vc atHeight:kModalViewHeight];
     [vc release];
@@ -462,7 +459,7 @@
         WeiboClient *client = [WeiboClient client];
         [client setCompletionBlock:^(WeiboClient *client) {
             if (!client.hasError) {
-                [[WeiboClient currentUserInManagedObjectContext:self.managedObjectContext] removeFavoritesObject:self.status];
+                [self.currentUser removeFavoritesObject:self.status];
                 sender.selected = NO;
             }
         }];
@@ -472,7 +469,7 @@
         WeiboClient *client = [WeiboClient client];
         [client setCompletionBlock:^(WeiboClient *client) {
             if (!client.hasError) {
-                [[WeiboClient currentUserInManagedObjectContext:self.managedObjectContext] addFavoritesObject:self.status];
+                [self.currentUser addFavoritesObject:self.status];
                 sender.selected = YES;
                 
                 UIImage *img = [UIImage imageNamed:@"status_msg_addfav"];

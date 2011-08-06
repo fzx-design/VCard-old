@@ -7,26 +7,29 @@
 //
 
 #import "CoreDataViewController.h"
-#import "UIApplicationAddition.h"
+#import "User.h"
 
 @implementation CoreDataViewController
 
 @synthesize managedObjectContext = _managedObjectContext;
+@synthesize currentUser = _currentUser;
 
 - (void)dealloc
 {
     [_managedObjectContext release];
+    [_currentUser release];
     [super dealloc];
 }
 
-//- (NSManagedObjectContext *)managedObjectContext
-//{
-//    if (!_managedObjectContext) {
-//        _managedObjectContext = [[NSManagedObjectContext alloc] init];
-//        _managedObjectContext.persistentStoreCoordinator = [[UIApplication sharedApplication] persistentStoreCoordinator];
-//    }
-//    
-//    return _managedObjectContext;
-//}
+- (void)setCurrentUser:(User *)currentUser
+{
+    if (_currentUser != currentUser) {
+        [_currentUser release];
+        _currentUser = [currentUser retain];
+        if (!self.managedObjectContext) {
+            self.managedObjectContext = currentUser.managedObjectContext;
+        }
+    }
+}
 
 @end

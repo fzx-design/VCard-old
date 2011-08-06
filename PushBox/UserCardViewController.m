@@ -7,65 +7,35 @@
 //
 
 #import "UserCardViewController.h"
-#import "UIImageViewAddition.h"
 #import "User.h"
 #import "WeiboClient.h"
 
 @implementation UserCardViewController
 
-@synthesize profileImageView = _profileImageView;
 @synthesize followButton = _followButton;
 @synthesize unFollowButton = _unFollowButton;
 @synthesize backButton = _backButton;
-@synthesize screenNameLabel = _screenNameLabel;
 @synthesize relationshipStateLabel = _relationshipStateLabel;
-@synthesize locationLabel = _locationLabel;
-@synthesize homePageLabel = _homePageLabel;
-@synthesize emailLabel = _emailLabel;
-@synthesize friendsCountLabel = _friendsCountLabel;
-@synthesize followersCountLabel = _followersCountLabel;
-@synthesize statusesCountLabel = _statusesCountLabel;
-@synthesize descriptionTextView = _descriptionTextView;
-@synthesize user = _user;
 @synthesize delegate = _delegate;
 
 - (void)dealloc
 {
     NSLog(@"UserCardViewController dealloc");
     
-    [_profileImageView release];
     [_followButton release];
     [_unFollowButton release];
     [_backButton release];
-    [_screenNameLabel release];
     [_relationshipStateLabel release];
-    [_locationLabel release];
-    [_homePageLabel release];
-    [_emailLabel release];
-    [_friendsCountLabel release];
-    [_followersCountLabel release];
-    [_statusesCountLabel release];
-    [_descriptionTextView release];
-    [_user release];
     [super dealloc];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    self.profileImageView = nil;
     self.followButton = nil;
     self.unFollowButton = nil;
     self.backButton = nil;
-    self.screenNameLabel = nil;
     self.relationshipStateLabel = nil;
-    self.locationLabel = nil;
-    self.homePageLabel = nil;
-    self.emailLabel = nil;
-    self.friendsCountLabel = nil;
-    self.followersCountLabel = nil;
-    self.statusesCountLabel = nil;
-    self.descriptionTextView = nil;
 }
 
 - (id)initWithUsr:(User *)user
@@ -90,7 +60,7 @@
             self.unFollowButton.hidden = NO;
         }
         else {
-            if (![self.user isEqualToUser:[WeiboClient currentUserInManagedObjectContext:self.managedObjectContext]]) {
+            if (![self.user isEqualToUser:self.currentUser]) {
                 self.followButton.hidden = NO;
             }
         }
@@ -108,29 +78,19 @@
     [client getRelationshipWithUser:self.user.userID];
 }
 
-- (void)viewDidLoad
+- (void)configureView
 {
-    [super viewDidLoad];
-    
-    [self.profileImageView loadImageFromURL:self.user.profileImageURL 
-                                 completion:NULL
-                             cacheInContext:self.managedObjectContext];
-    
+    [super configureView];
     self.followButton.hidden = YES;
     self.unFollowButton.hidden = YES;
     self.relationshipStateLabel.text = @"";
-    
-    self.screenNameLabel.text = self.user.screenName;
-    self.locationLabel.text = self.user.location;
-    self.homePageLabel.text = self.user.blogURL;
-    self.emailLabel.text = @"无";
-    self.descriptionTextView.text = self.user.selfDescription;
-    
-    self.friendsCountLabel.text = self.user.friendsCount;
-    self.followersCountLabel.text = self.user.followersCount;
-    self.statusesCountLabel.text = self.user.statusesCount;
-    
     [self setRelationshipState];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self configureView];
 }
 
 - (IBAction)followButtonClicked:(id)sender {
@@ -159,34 +119,5 @@
     [self.parentViewController dismissModalViewControllerAnimated:YES];
     [self.delegate userCardViewControllerDidDismiss:self];
 }
-
-- (IBAction)showFriendsButtonClicked:(id)sender {
-    RelationshipTableViewController *vc = [[RelationshipTableViewController alloc] initWithType:RelationshipViewTypeFriends];
-    vc.user = self.user;
-    vc.modalPresentationStyle = UIModalPresentationCurrentContext;
-    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    vc.managedObjectContext = self.managedObjectContext;
-    [self presentModalViewController:vc animated:YES];
-    [vc release];
-}
-
-- (IBAction)showFollowersButtonClicked:(id)sender {
-    RelationshipTableViewController *vc = [[RelationshipTableViewController alloc] initWithType:RelationshipViewTypeFollowers];
-    vc.user = self.user;
-    vc.modalPresentationStyle = UIModalPresentationCurrentContext;
-    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    vc.managedObjectContext = self.managedObjectContext;
-    [self presentModalViewController:vc animated:YES];
-    [vc release];
-}
-
-- (IBAction)showStatusesButtonClicked:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameShouldDismissUserCard object:self];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameShouldShowUserTimeline object:self.user];
-}
-
-
-
-
 
 @end
