@@ -304,11 +304,11 @@
 			</array>
 		</dict>
 		<string>PrimaryDocumentSelectedCharacterRange</string>
-		<string>PrimaryDocumentVisibleCharacterRange</string>
 		<string>PrimaryDocumentTimestamp</string>
+		<string>PrimaryDocumentVisibleCharacterRange</string>
 		<string>{0, 0}</string>
-		<string>{0, 666}</string>
-		<real>334387225.80410498</real>
+		<real>334387291.82879102</real>
+		<string>{6166, 707}</string>
 		<dict>
 			<key>$classes</key>
 			<array>
@@ -2191,7 +2191,7 @@
 		<string>IDESCMStatusFilteringEnabled</string>
 		<string>IDESelectedObjects</string>
 		<string>IDEExpandedItemsSet</string>
-		<string>{{0, 1192}, {299, 698}}</string>
+		<string>{{0, 688}, {325, 698}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -2704,7 +2704,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>315</real>
+		<real>341</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -2734,7 +2734,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>1085</real>
+		<real>1059</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -3348,7 +3348,7 @@
 				</dict>
 			</array>
 		</dict>
-		<string>{{0, 0}, {1085, 742}}</string>
+		<string>{{0, 0}, {1059, 742}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -3507,7 +3507,7 @@
 			</array>
 		</dict>
 		<string>VariablesView</string>
-		<real>542</real>
+		<real>529</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -3538,7 +3538,7 @@
 			</array>
 		</dict>
 		<string>ConsoleArea</string>
-		<real>542</real>
+		<real>529</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -3607,7 +3607,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>542</real>
+		<real>529</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -3637,7 +3637,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>542</real>
+		<real>529</real>
 		<dict>
 			<key>$class</key>
 			<dict>
