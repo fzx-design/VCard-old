@@ -273,7 +273,7 @@
 						<int key="IBUITag">1</int>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<string key="IBUIText">david092956@gmail.com</string>
+						<string key="IBUIText"/>
 						<string key="IBUIPlaceholder">用户名</string>
 						<reference key="IBUITextColor" ref="1002033801"/>
 						<object class="NSFont" key="IBUIFont">
@@ -303,7 +303,7 @@
 						<int key="IBUITag">2</int>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<string key="IBUIText">660606xc</string>
+						<string key="IBUIText"/>
 						<string key="IBUIPlaceholder">密码</string>
 						<reference key="IBUITextColor" ref="1002033801"/>
 						<object class="NSFont" key="IBUIFont">
