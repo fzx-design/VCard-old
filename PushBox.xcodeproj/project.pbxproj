@@ -440,6 +440,42 @@
 			name = "Options view controllers";
 			sourceTree = "<group>";
 		};
+		CB1164DA13F11CF100884118 /* root */ = {
+			isa = PBXGroup;
+			children = (
+				CB4AAC6B13DC71680053E3A6 /* root_cards_blur_bg.png */,
+				CB7C49FA13EA719F00BD329A /* root_help.png */,
+				CB4AAC5F13DC6C4D0053E3A6 /* root_pushbox.png */,
+				CB4AAC6113DC6FA30053E3A6 /* root_loading_bg.png */,
+				CB4AAC6313DC6FD00053E3A6 /* root_bottom_bar_bg.png */,
+				CB4AAC6713DC70310053E3A6 /* root_shadow_left.png */,
+				CB4AAC6813DC70310053E3A6 /* root_shadow_right.png */,
+			);
+			name = root;
+			sourceTree = "<group>";
+		};
+		CB1164DC13F11D0300884118 /* login */ = {
+			isa = PBXGroup;
+			children = (
+				CB4AAC9413DC7C880053E3A6 /* login_bg.png */,
+				CB4AAC9513DC7C880053E3A6 /* login_input_bg.png */,
+				CB4AAC9E13DC7D5B0053E3A6 /* login_button_confirm.png */,
+			);
+			name = login;
+			sourceTree = "<group>";
+		};
+		CB1164DD13F11D1E00884118 /* options */ = {
+			isa = PBXGroup;
+			children = (
+				CB018E0013DDE4E8004217E0 /* about_button_bg.png */,
+				CB018E0213DDE523004217E0 /* about_pb_title.png */,
+				CB018DF813DDD70F004217E0 /* options_icon_image.png */,
+				CB018DF913DDD70F004217E0 /* options_icon_sound.png */,
+				CB018DFA13DDD710004217E0 /* options_icon_time.png */,
+			);
+			name = options;
+			sourceTree = "<group>";
+		};
 		CB4AAC4313DC6A360053E3A6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -451,35 +487,22 @@
 		CB4AAC5213DC6AF20053E3A6 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				CBBA01F113E4530700641923 /* status */,
+				CBBA01F113E4530700641923 /* statuscard */,
 				CBBA01ED13E451AA00641923 /* buttons */,
 				CBBA01EE13E451BD00641923 /* usercard */,
 				CBBA01F013E451D700641923 /* post */,
 				CBBA01EF13E451C900641923 /* detail image */,
 				CB4AAC8E13DC7B4A0053E3A6 /* bg */,
 				CB4AAC8D13DC7B2E0053E3A6 /* dock */,
-				CB4AAC6B13DC71680053E3A6 /* root_cards_blur_bg.png */,
+				CB1164DA13F11CF100884118 /* root */,
+				CB1164DC13F11D0300884118 /* login */,
+				CB1164DD13F11D1E00884118 /* options */,
 				CBBA01F713E46F2000641923 /* card_general_bg.png */,
-				CB018DDD13DDCD27004217E0 /* transparent.png */,
-				CBBA01EB13E4519B00641923 /* refresh_help.png */,
-				CB018DF813DDD70F004217E0 /* options_icon_image.png */,
-				CB018DF913DDD70F004217E0 /* options_icon_sound.png */,
 				CB9E33D213E9CBE900AAE64C /* card_hole_bg.png */,
-				CB018DFA13DDD710004217E0 /* options_icon_time.png */,
-				CB7C49FA13EA719F00BD329A /* root_help.png */,
-				CB4AAC5F13DC6C4D0053E3A6 /* root_pushbox.png */,
-				CB4AAC6113DC6FA30053E3A6 /* root_loading_bg.png */,
-				CB4AAC6313DC6FD00053E3A6 /* root_bottom_bar_bg.png */,
-				CB4AAC6713DC70310053E3A6 /* root_shadow_left.png */,
-				CB4AAC6813DC70310053E3A6 /* root_shadow_right.png */,
-				CB4AAC9413DC7C880053E3A6 /* login_bg.png */,
-				CB4AAC9513DC7C880053E3A6 /* login_input_bg.png */,
 				CBBA01FB13E473BB00641923 /* cell_separator_line.png */,
-				CB4AAC9E13DC7D5B0053E3A6 /* login_button_confirm.png */,
-				CBBA020713E5312300641923 /* usercard_follower_noti_new.png */,
 				CBBA020913E5313600641923 /* comment_new_noti.png */,
-				CB018E0013DDE4E8004217E0 /* about_button_bg.png */,
-				CB018E0213DDE523004217E0 /* about_pb_title.png */,
+				CBBA01EB13E4519B00641923 /* refresh_help.png */,
+				CB018DDD13DDCD27004217E0 /* transparent.png */,
 				CB4AAC9813DC7CAD0053E3A6 /* flag_sina.png */,
 			);
 			path = images;
@@ -557,6 +580,7 @@
 		CBBA01EE13E451BD00641923 /* usercard */ = {
 			isa = PBXGroup;
 			children = (
+				CBBA020713E5312300641923 /* usercard_follower_noti_new.png */,
 				CBBA020013E52AF300641923 /* usercard_button_HL.png */,
 				CBBA01C113E2C87000641923 /* usercard_button_follow.png */,
 				CBBA01BE13E2C80000641923 /* usercard_bg.png */,
@@ -591,7 +615,7 @@
 			name = post;
 			sourceTree = "<group>";
 		};
-		CBBA01F113E4530700641923 /* status */ = {
+		CBBA01F113E4530700641923 /* statuscard */ = {
 			isa = PBXGroup;
 			children = (
 				CB9E33D413E9E26100AAE64C /* status_msg_addfav.png */,
@@ -609,7 +633,7 @@
 				CB9DCAB013DFF08C00DA3D3D /* repost_cover_bottom.png */,
 				CB9DCAB113DFF08C00DA3D3D /* repost_cover_top.png */,
 			);
-			name = status;
+			name = statuscard;
 			sourceTree = "<group>";
 		};
 		CBDA5AE313DBEC1300FAE221 = {
