@@ -4761,7 +4761,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>334575893.13993502</real>
+		<real>334575893.17869401</real>
 		<string>{0, 667}</string>
 		<dict>
 			<key>$class</key>
@@ -4970,7 +4970,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>889</real>
+		<real>598</real>
 		<string>Xcode3TargetEditor</string>
 		<dict>
 			<key>$class</key>
@@ -5009,7 +5009,7 @@
 			</dict>
 		</dict>
 		<string>file://localhost/Users/Hasky/Desktop/vcardev/PushBox.xcodeproj/</string>
-		<real>334575893.13973302</real>
+		<real>334575914.91544199</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -5759,7 +5759,7 @@
 		<string>IDEActiveWorkspaceTabController</string>
 		<string>IDEWindowToolbarIsVisible</string>
 		<string>IDEWindowTabBarIsVisible</string>
-		<string>{{20, 60}, {1400, 818}}</string>
+		<string>{{20, 211}, {1109, 667}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -6380,7 +6380,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>889</real>
+		<real>598</real>
 		<string>Xcode3TargetEditor</string>
 		<dict>
 			<key>$class</key>
@@ -6418,7 +6418,7 @@
 				<integer>518</integer>
 			</dict>
 		</dict>
-		<real>334575893.14459997</real>
+		<real>334575914.91963702</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -6494,7 +6494,7 @@
 				</dict>
 			</array>
 		</dict>
-		<string>{{0, 0}, {1059, 742}}</string>
+		<string>{{0, 0}, {768, 591}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -6653,7 +6653,7 @@
 			</array>
 		</dict>
 		<string>VariablesView</string>
-		<real>529</real>
+		<real>384</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -6684,7 +6684,7 @@
 			</array>
 		</dict>
 		<string>ConsoleArea</string>
-		<real>529</real>
+		<real>383</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -6753,7 +6753,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>529</real>
+		<real>384</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -6783,7 +6783,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>529</real>
+		<real>383</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -8306,7 +8306,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>518</real>
+		<real>367</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -8444,7 +8444,7 @@
 		<string>IDESCMStatusFilteringEnabled</string>
 		<string>IDESelectedObjects</string>
 		<string>IDEExpandedItemsSet</string>
-		<string>{{0, 0}, {325, 698}}</string>
+		<string>{{0, 0}, {325, 547}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -8717,7 +8717,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>1059</real>
+		<real>768</real>
 		<dict>
 			<key>$class</key>
 			<dict>
