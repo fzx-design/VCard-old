@@ -476,6 +476,42 @@
 			name = options;
 			sourceTree = "<group>";
 		};
+		CB1164DE13F1340500884118 /* Card controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CBD36F0E13E697F5008BB428 /* CommentViewController.h */,
+				CBD36F0F13E697F5008BB428 /* CommentViewController.m */,
+				CB9DCADB13E2C15900DA3D3D /* UserCardViewController.h */,
+				CB9DCADC13E2C15B00DA3D3D /* UserCardViewController.m */,
+				CB7C4A0613EBDE2B00BD329A /* UserCardBaseViewController.h */,
+				CB7C4A0713EBDE2B00BD329A /* UserCardBaseViewController.m */,
+				CBBA01F213E454FA00641923 /* RelationshipTableViewController.h */,
+				CBBA01F313E454FB00641923 /* RelationshipTableViewController.m */,
+				CB7C4A0313EBD19500BD329A /* CCUserCardViewController.h */,
+				CB7C4A0413EBD19600BD329A /* CCUserCardViewController.m */,
+				CBBA020213E52F7B00641923 /* CommentsTableViewController.h */,
+				CBBA020313E52F7D00641923 /* CommentsTableViewController.m */,
+				CBBA01C713E3463100641923 /* PostViewController.h */,
+				CBBA01C813E3463200641923 /* PostViewController.m */,
+				CB26224D13DF06780062EDE7 /* StatusCardViewController.h */,
+				CB26224E13DF06780062EDE7 /* StatusCardViewController.m */,
+			);
+			name = "Card controllers";
+			sourceTree = "<group>";
+		};
+		CB1164DF13F1347100884118 /* Table view cells */ = {
+			isa = PBXGroup;
+			children = (
+				CBBA01FD13E4742D00641923 /* RelationshipTableViewCell.h */,
+				CBBA01FE13E4742E00641923 /* RelationshipTableViewCell.m */,
+				CBBA020D13E53C0700641923 /* CommentsTableViewCell.h */,
+				CBBA020E13E53C0800641923 /* CommentsTableViewCell.m */,
+				CB26224A13DF063F0062EDE7 /* CardTableViewCell.h */,
+				CB26224B13DF063F0062EDE7 /* CardTableViewCell.m */,
+			);
+			name = "Table view cells";
+			sourceTree = "<group>";
+		};
 		CB4AAC4313DC6A360053E3A6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -676,41 +712,21 @@
 				CBDA5B1B13DBECBC00FAE221 /* ASIHTTPRequest */,
 				CBDA5B3213DBECBD00FAE221 /* JSON */,
 				CBDA5B5B13DBECFF00FAE221 /* WeiboClient */,
-				CBDA5B6613DBF48D00FAE221 /* Core Data Models */,
 				CB4AAC4313DC6A360053E3A6 /* Resources */,
+				CBDA5B6613DBF48D00FAE221 /* Core Data Models */,
 				CBDA5B5C13DBED1600FAE221 /* Nibs */,
-				CB018DDF13DDD015004217E0 /* Options view controllers */,
 				CBBA01CC13E3463F00641923 /* Catagories */,
+				CB1164DF13F1347100884118 /* Table view cells */,
+				CB1164DE13F1340500884118 /* Card controllers */,
+				CB018DDF13DDD015004217E0 /* Options view controllers */,
 				CB4AAC3D13DC671F0053E3A6 /* RootViewController.h */,
 				CB4AAC3E13DC671F0053E3A6 /* RootViewController.m */,
 				CBBA01E113E4187800641923 /* EGORefreshTableHeaderView.m */,
 				CBBA01E213E4187800641923 /* EGORefreshTableHeaderView.h */,
 				CBBA01E813E44C1500641923 /* EGOTableViewController.h */,
 				CBBA01E913E44C1600641923 /* EGOTableViewController.m */,
-				CBBA01FD13E4742D00641923 /* RelationshipTableViewCell.h */,
-				CBBA01FE13E4742E00641923 /* RelationshipTableViewCell.m */,
-				CBBA020213E52F7B00641923 /* CommentsTableViewController.h */,
-				CBD36F0E13E697F5008BB428 /* CommentViewController.h */,
-				CBD36F0F13E697F5008BB428 /* CommentViewController.m */,
-				CBBA020313E52F7D00641923 /* CommentsTableViewController.m */,
-				CBBA020D13E53C0700641923 /* CommentsTableViewCell.h */,
-				CBBA020E13E53C0800641923 /* CommentsTableViewCell.m */,
 				CB9DCACB13E1E4DE00DA3D3D /* DetailImageViewController.m */,
 				CB9DCACA13E1E4DD00DA3D3D /* DetailImageViewController.h */,
-				CB7C4A0613EBDE2B00BD329A /* UserCardBaseViewController.h */,
-				CB7C4A0713EBDE2B00BD329A /* UserCardBaseViewController.m */,
-				CB9DCADB13E2C15900DA3D3D /* UserCardViewController.h */,
-				CBBA01F213E454FA00641923 /* RelationshipTableViewController.h */,
-				CBBA01F313E454FB00641923 /* RelationshipTableViewController.m */,
-				CB9DCADC13E2C15B00DA3D3D /* UserCardViewController.m */,
-				CB7C4A0313EBD19500BD329A /* CCUserCardViewController.h */,
-				CB7C4A0413EBD19600BD329A /* CCUserCardViewController.m */,
-				CB26224D13DF06780062EDE7 /* StatusCardViewController.h */,
-				CB26224E13DF06780062EDE7 /* StatusCardViewController.m */,
-				CBBA01C713E3463100641923 /* PostViewController.h */,
-				CBBA01C813E3463200641923 /* PostViewController.m */,
-				CB26224A13DF063F0062EDE7 /* CardTableViewCell.h */,
-				CB26224B13DF063F0062EDE7 /* CardTableViewCell.m */,
 				CB4AAC8F13DC7BE50053E3A6 /* LoginViewController.h */,
 				CB4AAC9013DC7BE60053E3A6 /* LoginViewController.m */,
 				CB018DD313DD3CC8004217E0 /* DockViewController.h */,
@@ -721,6 +737,8 @@
 				CBDA5B7513DC25FA00FAE221 /* CoreDataTableViewController.m */,
 				CB018E0C13DE0063004217E0 /* CardTableViewController.h */,
 				CB018E0D13DE0064004217E0 /* CardTableViewController.m */,
+				CBDA5B0313DBEC1300FAE221 /* PushBoxAppDelegate.h */,
+				CBDA5B0413DBEC1300FAE221 /* PushBoxAppDelegate.m */,
 				CBDA5AFB13DBEC1300FAE221 /* Supporting Files */,
 			);
 			path = PushBox;
@@ -729,8 +747,6 @@
 		CBDA5AFB13DBEC1300FAE221 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				CBDA5B0313DBEC1300FAE221 /* PushBoxAppDelegate.h */,
-				CBDA5B0413DBEC1300FAE221 /* PushBoxAppDelegate.m */,
 				CBDA5B0913DBEC1300FAE221 /* PushBox.xcdatamodeld */,
 				CBDA5AFC13DBEC1300FAE221 /* PushBox-Info.plist */,
 				CBDA5AFD13DBEC1300FAE221 /* InfoPlist.strings */,
