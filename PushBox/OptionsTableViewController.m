@@ -29,7 +29,7 @@
 																			target:self
 																			action:@selector(showAbout)];
 	
-    self.title = NSLocalizedString(@"PushBox", nil);
+    self.title = NSLocalizedString(@"VCard HD", nil);
     self.contentSizeForViewInPopover = kContentSizeForViewInPopover;
 }
 

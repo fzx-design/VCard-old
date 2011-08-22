@@ -77,7 +77,7 @@
 	
 	if (loginCount == 10) {
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"评分", nil)
-														message:NSLocalizedString(@"喜欢Pushbox HD？在App Store为它评分", nil)
+														message:NSLocalizedString(@"喜欢VCard HD？在App Store为它评分", nil)
 													   delegate:self
 											  cancelButtonTitle:NSLocalizedString(@"不，谢谢", nil)
 											  otherButtonTitles:NSLocalizedString(@"好", nil), nil];

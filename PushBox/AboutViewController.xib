@@ -121,7 +121,7 @@
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<reference key="IBUIFont" ref="209286729"/>
 						<string key="IBUITitleShadowOffset">{0, 1}</string>
-						<string key="IBUINormalTitle">为 PushBox 评分</string>
+						<string key="IBUINormalTitle">为 VCard HD 评分</string>
 						<reference key="IBUIHighlightedTitleColor" ref="476146521"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>

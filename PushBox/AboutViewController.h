@@ -1,6 +1,6 @@
 //
 //  AboutViewController.h
-//  PushBox
+//  VCard HD
 //
 //  Created by Hasky on 11-3-1.
 //  Copyright 2011 同济大学. All rights reserved.

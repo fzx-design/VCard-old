@@ -1,6 +1,6 @@
     //
 //  AboutViewController.m
-//  PushBox
+//  VCard HD
 //
 //  Created by Hasky on 11-3-1.
 //  Copyright 2011 同济大学. All rights reserved.
@@ -59,7 +59,7 @@
     
 	PostViewController *vc = [[PostViewController alloc] initWithType:PostViewTypePost];
     [[UIApplication sharedApplication] presentModalViewController:vc atHeight:kModalViewHeight];
-	vc.textView.text = @"我正在用Pushbox HD（新浪微博iPad客户端），下载地址http://itunes.apple.com/us/app/id420598288?mt=8";
+	vc.textView.text = @"我正在用VCard HD（新浪微博iPad客户端），下载地址http://itunes.apple.com/us/app/id420598288?mt=8";
 	[vc release];
 }
 
