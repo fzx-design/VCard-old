@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		208A300314178B96005805A8 /* icon_72.png in Resources */ = {isa = PBXBuildFile; fileRef = 208A300214178B96005805A8 /* icon_72.png */; };
+		208A300514178B99005805A8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 208A300414178B99005805A8 /* Default-Landscape~ipad.png */; };
 		CB018DD613DD3CC9004217E0 /* DockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB018DD413DD3CC8004217E0 /* DockViewController.m */; };
 		CB018DD713DD3CC9004217E0 /* DockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB018DD513DD3CC8004217E0 /* DockViewController.xib */; };
 		CB018DDB13DDCCCD004217E0 /* dock_slider_thumb_HL.png in Resources */ = {isa = PBXBuildFile; fileRef = CB018DD913DDCCCD004217E0 /* dock_slider_thumb_HL.png */; };
@@ -177,6 +179,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		208A300214178B96005805A8 /* icon_72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_72.png; sourceTree = "<group>"; };
+		208A300414178B99005805A8 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		CB018DD313DD3CC8004217E0 /* DockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DockViewController.h; sourceTree = "<group>"; };
 		CB018DD413DD3CC8004217E0 /* DockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DockViewController.m; sourceTree = "<group>"; };
 		CB018DD513DD3CC8004217E0 /* DockViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DockViewController.xib; sourceTree = "<group>"; };
@@ -675,6 +679,8 @@
 		CBDA5AE313DBEC1300FAE221 = {
 			isa = PBXGroup;
 			children = (
+				208A300414178B99005805A8 /* Default-Landscape~ipad.png */,
+				208A300214178B96005805A8 /* icon_72.png */,
 				CBDA5AFA13DBEC1300FAE221 /* PushBox */,
 				CBDA5AF113DBEC1300FAE221 /* Frameworks */,
 				CBDA5AEF13DBEC1300FAE221 /* Products */,
@@ -1019,6 +1025,8 @@
 				CB9E33D313E9CBE900AAE64C /* card_hole_bg.png in Resources */,
 				CB9E33D513E9E26100AAE64C /* status_msg_addfav.png in Resources */,
 				CB7C49FB13EA719F00BD329A /* root_help.png in Resources */,
+				208A300314178B96005805A8 /* icon_72.png in Resources */,
+				208A300514178B99005805A8 /* Default-Landscape~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
