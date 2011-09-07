@@ -35,6 +35,7 @@
 @synthesize user = _user;
 @synthesize prevFetchedResultsController = _prevFetchedResultsController;
 @synthesize prevRowIndex = _prevRowIndex;
+@synthesize insertionAnimationEnabled = _insertionAnimationEnabled;
 
 - (void)dealloc
 {
@@ -94,6 +95,7 @@
     self.currentRowIndex = 0;
     self.swipeEnabled = YES;
     self.blurImageView.alpha = 0.0;
+    self.insertionAnimationEnabled = YES;
     _nextPage = 1;
     _loading = NO;
     
@@ -102,6 +104,11 @@
                                    selector:@selector(timerFired:) 
                                    userInfo:nil 
                                     repeats:YES];
+}
+
+- (BOOL)insertionAnimationEnabled
+{
+    return [[self.fetchedResultsController fetchedObjects] count] < 2;
 }
 
 - (void)timerFired:(NSTimer *)timer
@@ -346,6 +353,9 @@
                 for (NSDictionary *dict in dictArray) {
                     Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
                     [self.currentUser addFriendsStatusesObject:newStatus];
+                    if (self.insertionAnimationEnabled) {
+                        [self.managedObjectContext processPendingChanges];
+                    }
                 }
                 [self.managedObjectContext processPendingChanges];
                 
@@ -458,46 +468,45 @@
 }
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    //[self.tableView beginUpdates];
-    //NSLog(@"%d", [self.fetchedResultsController.fetchedObjects count]);
+    [self.tableView beginUpdates];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath {
-//    
-//    UITableView *tableView = self.tableView;
-//    
-//    switch(type) {
-//            
-//        case NSFetchedResultsChangeInsert:
-//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-//                             withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//            
-//        case NSFetchedResultsChangeDelete:
-//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-//                             withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//            
-//        case NSFetchedResultsChangeUpdate:
-//            [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
-//                    atIndexPath:indexPath];
-//            break;
-//            
-//        case NSFetchedResultsChangeMove:
-//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-//                             withRowAnimation:UITableViewRowAnimationFade];
-//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-//                             withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//    }
+    
+    UITableView *tableView = self.tableView;
+    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
+                    atIndexPath:indexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
 }
 
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    //[self.tableView endUpdates];
-    [self.tableView reloadData];
+    [self.tableView endUpdates];
+    //[self.tableView reloadData];
 }
 
 

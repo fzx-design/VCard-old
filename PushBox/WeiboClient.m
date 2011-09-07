@@ -9,7 +9,6 @@
 #import "WeiboClient.h"
 #import "JSON.h"
 #import "NSString+URLEncoding.h"
-#import "User.h"
 
 #define kUserDefaultKeyTokenResponseString @"kUserDefaultKeyTokenResponseString"
 
@@ -151,7 +150,6 @@ typedef enum {
     if (_preCompletionBlock) {
         _preCompletionBlock(self);
     }
-    NSLog(@"%d", [_completionBlock retainCount]);
     if (_completionBlock) {
         _completionBlock(self);
     }

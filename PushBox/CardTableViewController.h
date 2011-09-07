@@ -42,7 +42,10 @@ typedef enum {
     
     NSTimer *_timer;
     BOOL _loading;
+    
+    BOOL _insertionAnimationEnabled;
 }
+
 
 @property(nonatomic, retain) IBOutlet UIImageView *blurImageView;
 @property(nonatomic, assign) id<CardTableViewControllerDelegate> delegate;
@@ -52,6 +55,7 @@ typedef enum {
 @property(nonatomic, retain) User *user;
 @property(nonatomic, retain) NSFetchedResultsController* prevFetchedResultsController;
 @property(nonatomic, assign) int prevRowIndex;
+@property(nonatomic, assign) BOOL insertionAnimationEnabled;
 
 - (void)pushCardWithCompletion:(void (^)())completion;
 - (void)popCardWithCompletion:(void (^)())completion;

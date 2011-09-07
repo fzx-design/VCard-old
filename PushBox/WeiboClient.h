@@ -9,7 +9,6 @@
 #import "OAuthHTTPRequest.h"
 
 @class WeiboClient;
-@class User;
 
 enum {
     ResetUnreadCountTypeComments = 1,

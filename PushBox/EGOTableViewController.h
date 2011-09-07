@@ -15,6 +15,7 @@
     BOOL _loading;
     
     UIButton *_loadMoreDataButton;
+    
 }
 
 @property(nonatomic, retain) EGORefreshTableHeaderView *egoHeaderView;
