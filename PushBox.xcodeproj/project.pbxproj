@@ -338,7 +338,7 @@
 		CBD36F0E13E697F5008BB428 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
 		CBD36F0F13E697F5008BB428 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 		CBD36F1013E697F5008BB428 /* CommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentViewController.xib; sourceTree = "<group>"; };
-		CBDA5AEE13DBEC1300FAE221 /* PushBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CBDA5AEE13DBEC1300FAE221 /* VCard 新浪微博.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VCard 新浪微博.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBDA5AF213DBEC1300FAE221 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CBDA5AF413DBEC1300FAE221 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CBDA5AF613DBEC1300FAE221 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -690,7 +690,7 @@
 		CBDA5AEF13DBEC1300FAE221 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CBDA5AEE13DBEC1300FAE221 /* PushBox.app */,
+				CBDA5AEE13DBEC1300FAE221 /* VCard 新浪微博.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -887,7 +887,7 @@
 			);
 			name = PushBox;
 			productName = PushBox;
-			productReference = CBDA5AEE13DBEC1300FAE221 /* PushBox.app */;
+			productReference = CBDA5AEE13DBEC1300FAE221 /* VCard 新浪微博.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1165,7 +1165,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PushBox/PushBox-Prefix.pch";
 				INFOPLIST_FILE = "PushBox/PushBox-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "VCard 新浪微博";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1176,7 +1176,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PushBox/PushBox-Prefix.pch";
 				INFOPLIST_FILE = "PushBox/PushBox-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "VCard 新浪微博";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
