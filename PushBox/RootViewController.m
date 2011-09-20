@@ -200,7 +200,7 @@
 {
     self.cardTableViewController.dataSource = CardTableViewDataSourceFavorites;
     [self.cardTableViewController pushCardWithCompletion:^{
-        self.bottomStateLabel.text = NSLocalizedString(@"我的收藏", nil);
+        self.bottomStateLabel.text = NSLocalizedString(@"收藏", nil);
         [self showBottomStateView];
         self.dockViewController.showFavoritesButton.userInteractionEnabled = YES;
     }];

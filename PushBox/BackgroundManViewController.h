@@ -10,11 +10,11 @@
 
 enum PBBackgroundImage {
 	PBBackgroundImageDefault,
-	PBBackgroundImageDream,
-	PBBackgroundImageLake,
-	PBBackgroundImageMask,
-	PBBackgroundImagePencils,
-	PBBackgroundImageWooden,
+	PBBackgroundImageAmbers,
+	PBBackgroundImageAurora,
+	PBBackgroundImageMist,
+	PBBackgroundImageChampagne,
+	PBBackgroundImageTwilight,
 };
 
 #define kUserDefaultKeyBackground @"kUserDefaultKeyBackground"

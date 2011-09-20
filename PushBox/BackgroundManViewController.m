@@ -25,20 +25,20 @@
             case PBBackgroundImageDefault:
                 imageName = NSLocalizedString(@"默认", nil);
                 break;
-            case PBBackgroundImageDream:
-                imageName = NSLocalizedString(@"梦幻", nil);
+            case PBBackgroundImageAmbers:
+                imageName = NSLocalizedString(@"琥珀", nil);
                 break;
-            case PBBackgroundImageLake:
-                imageName = NSLocalizedString(@"湖面", nil);
+            case PBBackgroundImageAurora:
+                imageName = NSLocalizedString(@"极光", nil);
                 break;
-            case PBBackgroundImageMask:
-                imageName = NSLocalizedString(@"蓝色马赛克", nil);
+            case PBBackgroundImageChampagne:
+                imageName = NSLocalizedString(@"香槟", nil);
                 break;
-            case PBBackgroundImagePencils:
-                imageName = NSLocalizedString(@"彩色铅笔", nil);
+            case PBBackgroundImageMist:
+                imageName = NSLocalizedString(@"薄雾", nil);
                 break;
-            case PBBackgroundImageWooden:
-                imageName = NSLocalizedString(@"木制桌面", nil);
+            case PBBackgroundImageTwilight:
+                imageName = NSLocalizedString(@"暮色", nil);
                 break;
         }
         return imageName;
@@ -53,20 +53,20 @@
 		case PBBackgroundImageDefault:
 			imageName = @"bg_default";
 			break;
-		case PBBackgroundImageDream:
-			imageName = @"bg_dream";
+		case PBBackgroundImageAmbers:
+			imageName = @"bg_ambers";
 			break;
-		case PBBackgroundImageLake:
-			imageName = @"bg_lake";
+		case PBBackgroundImageAurora:
+			imageName = @"bg_aurora";
 			break;
-		case PBBackgroundImageMask:
-			imageName = @"bg_mask";
+		case PBBackgroundImageChampagne:
+			imageName = @"bg_champagne";
 			break;
-		case PBBackgroundImagePencils:
-			imageName = @"bg_pencils";
+		case PBBackgroundImageMist:
+			imageName = @"bg_mist";
 			break;
-		case PBBackgroundImageWooden:
-			imageName = @"bg_wooden";
+		case PBBackgroundImageTwilight:
+			imageName = @"bg_twilight";
 			break;
 	}
 	return imageName;
@@ -79,20 +79,20 @@
 		case PBBackgroundImageDefault:
 			imageName = @"bg_icon_default";
 			break;
-		case PBBackgroundImageDream:
-			imageName = @"bg_icon_dream";
+		case PBBackgroundImageAmbers:
+			imageName = @"bg_icon_ambers";
 			break;
-		case PBBackgroundImageLake:
-			imageName = @"bg_icon_lake";
+		case PBBackgroundImageAurora:
+			imageName = @"bg_icon_aurora";
 			break;
-		case PBBackgroundImageMask:
-			imageName = @"bg_icon_mask";
+		case PBBackgroundImageChampagne:
+			imageName = @"bg_icon_champagne";
 			break;
-		case PBBackgroundImagePencils:
-			imageName = @"bg_icon_pencils";
+		case PBBackgroundImageMist:
+			imageName = @"bg_icon_mist";
 			break;
-		case PBBackgroundImageWooden:
-			imageName = @"bg_icon_desk";
+		case PBBackgroundImageTwilight:
+			imageName = @"bg_icon_twilight";
 			break;
 	}
 	return imageName;
@@ -105,7 +105,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.title = NSLocalizedString(@"背景", nil);
+    self.title = NSLocalizedString(@"色彩", nil);
 }
 
 #pragma mark -
