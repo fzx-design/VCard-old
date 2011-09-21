@@ -19,6 +19,7 @@
 		203B641A1428B69800CD8426 /* bg_icon_mist.png in Resources */ = {isa = PBXBuildFile; fileRef = 203B64141428B69800CD8426 /* bg_icon_mist.png */; };
 		203B641B1428B69800CD8426 /* bg_icon_twilight.png in Resources */ = {isa = PBXBuildFile; fileRef = 203B64151428B69800CD8426 /* bg_icon_twilight.png */; };
 		208A300514178B99005805A8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 208A300414178B99005805A8 /* Default-Landscape~ipad.png */; };
+		20C8D9101429FE9C00C94B86 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C8D90F1429FE9C00C94B86 /* libz.dylib */; };
 		20DC1AED1428BE8E00213358 /* title_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DC1AEC1428BE8E00213358 /* title_small.png */; };
 		20EB93521417A370003E541D /* icon_72.png in Resources */ = {isa = PBXBuildFile; fileRef = 20EB93511417A370003E541D /* icon_72.png */; };
 		CB018DD613DD3CC9004217E0 /* DockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB018DD413DD3CC8004217E0 /* DockViewController.m */; };
@@ -153,7 +154,6 @@
 		CBDA5B1213DBEC2500FAE221 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBDA5B1113DBEC2500FAE221 /* MobileCoreServices.framework */; };
 		CBDA5B1413DBEC2B00FAE221 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBDA5B1313DBEC2B00FAE221 /* SystemConfiguration.framework */; };
 		CBDA5B1613DBEC3A00FAE221 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBDA5B1513DBEC3A00FAE221 /* CFNetwork.framework */; };
-		CBDA5B1A13DBEC4D00FAE221 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CBDA5B1913DBEC4D00FAE221 /* libz.1.2.3.dylib */; };
 		CBDA5B3E13DBECBD00FAE221 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B1D13DBECBC00FAE221 /* ASIAuthenticationDialog.m */; };
 		CBDA5B3F13DBECBD00FAE221 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B2013DBECBC00FAE221 /* ASIDataCompressor.m */; };
 		CBDA5B4013DBECBD00FAE221 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B2213DBECBC00FAE221 /* ASIDataDecompressor.m */; };
@@ -192,6 +192,7 @@
 		203B64141428B69800CD8426 /* bg_icon_mist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_icon_mist.png; sourceTree = "<group>"; };
 		203B64151428B69800CD8426 /* bg_icon_twilight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_icon_twilight.png; sourceTree = "<group>"; };
 		208A300414178B99005805A8 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		20C8D90F1429FE9C00C94B86 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		20DC1AEC1428BE8E00213358 /* title_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_small.png; sourceTree = "<group>"; };
 		20EB93511417A370003E541D /* icon_72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_72.png; sourceTree = "<group>"; };
 		CB018DD313DD3CC8004217E0 /* DockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DockViewController.h; sourceTree = "<group>"; };
@@ -356,7 +357,6 @@
 		CBDA5B1113DBEC2500FAE221 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		CBDA5B1313DBEC2B00FAE221 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CBDA5B1513DBEC3A00FAE221 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		CBDA5B1913DBEC4D00FAE221 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		CBDA5B1C13DBECBC00FAE221 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		CBDA5B1D13DBECBC00FAE221 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
 		CBDA5B1E13DBECBC00FAE221 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
@@ -415,9 +415,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20C8D9101429FE9C00C94B86 /* libz.dylib in Frameworks */,
 				CB9DCADA13E1ED6800DA3D3D /* MessageUI.framework in Frameworks */,
 				CB018E0513DDEAA5004217E0 /* QuartzCore.framework in Frameworks */,
-				CBDA5B1A13DBEC4D00FAE221 /* libz.1.2.3.dylib in Frameworks */,
 				CBDA5B1613DBEC3A00FAE221 /* CFNetwork.framework in Frameworks */,
 				CBDA5B1413DBEC2B00FAE221 /* SystemConfiguration.framework in Frameworks */,
 				CBDA5B1213DBEC2500FAE221 /* MobileCoreServices.framework in Frameworks */,
@@ -701,7 +701,7 @@
 		CBDA5AF113DBEC1300FAE221 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CBDA5B1913DBEC4D00FAE221 /* libz.1.2.3.dylib */,
+				20C8D90F1429FE9C00C94B86 /* libz.dylib */,
 				CB9DCAD913E1ED6800DA3D3D /* MessageUI.framework */,
 				CB018E0413DDEAA5004217E0 /* QuartzCore.framework */,
 				CBDA5B1513DBEC3A00FAE221 /* CFNetwork.framework */,

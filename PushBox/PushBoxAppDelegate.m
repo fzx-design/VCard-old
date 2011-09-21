@@ -41,6 +41,11 @@
     _rootViewController.managedObjectContext = self.managedObjectContext;
     [self.window addSubview:_rootViewController.view];
 
+    // 20110921, Dennis did this.
+    //[[UIDevice currentDevice] performSelector:@selector(setOrientation:)
+    //                               withObject:(id)UIInterfaceOrientationLandscapeLeft];
+    //CGAffineTransform transform = CGAffineTransformMakeRotation(3.14159);
+    //self.window.transform = transform;
     
     return YES;
 }
