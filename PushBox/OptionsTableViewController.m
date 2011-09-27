@@ -109,7 +109,7 @@
             break;
         case 1:
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.textLabel.text = NSLocalizedString(@"背景", nil);
+            cell.textLabel.text = NSLocalizedString(@"色彩", nil);
 			int enumValue = [[userDefault objectForKey:kUserDefaultKeyBackground] intValue];
 			NSString *desc = [BackgroundManViewController backgroundDescriptionFromEnum:enumValue];
             cell.detailTextLabel.text = desc;
