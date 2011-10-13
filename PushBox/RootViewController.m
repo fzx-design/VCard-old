@@ -410,7 +410,8 @@
     [self.view insertSubview:self.messagesViewController.view belowSubview:self.bottomStateView];
     [UIView animateWithDuration:1.0 animations:^{
         self.messagesViewController.view.alpha = 1.0;
-    }];}
+    }];
+}
 
 - (void)hideMessagesView
 {

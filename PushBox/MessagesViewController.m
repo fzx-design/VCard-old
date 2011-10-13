@@ -43,8 +43,8 @@
 {
     [super viewDidLoad];
 
-    [self.view addSubview:self.contactsTableViewController.view];
-    [self.view addSubview:self.dialogTableViewController.view];
+    [self.view insertSubview:self.contactsTableViewController.view belowSubview:self.errorImageView];
+    [self.view insertSubview:self.dialogTableViewController.view belowSubview:self.errorImageView];
 }
 
 - (void)viewDidUnload
