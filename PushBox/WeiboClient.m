@@ -508,6 +508,27 @@ report_completion:
     [self sendRequest];
 }
 
+- (void)getMessagesByUserSinceID:(NSString *)sinceID 
+                           maxID:(NSString *)maxID 
+                           count:(int)count
+                            page:(int)page
+{
+    self.path = @"direct_messages/sent.json";
+    if (sinceID) {
+    [self.params setObject:sinceID forKey:@"since_id"];
+    }
+    if (maxID) {
+        [self.params setObject:sinceID forKey:@"max_id"];
+    }
+    if (page) {
+        [self.params setObject:[NSString stringWithFormat:@"%d", page] forKey:@"page"];
+    }
+    if (count) {
+        [self.params setObject:[NSString stringWithFormat:@"%d", count] forKey:@"count"];
+    }
+    [self sendRequest];}
+
+
 - (void)getCommentsToMeSinceID:(NSString *)sinceID 
                          maxID:(NSString *)maxID 
                           page:(int)page 

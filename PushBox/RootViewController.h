@@ -11,6 +11,7 @@
 #import "DockViewController.h"
 #import "CardTableViewController.h"
 #import "PostViewController.h"
+#import "MessagesViewController.h"
 
 @interface RootViewController : CoreDataViewController<LoginViewControllerDelegate, CardTableViewControllerDelegate> {
     UIImageView *_backgroundImageView;
@@ -23,6 +24,7 @@
     
     LoginViewController *_loginViewController;
     DockViewController *_dockViewController;
+    MessagesViewController *_messagesViewController;
     CardTableViewController *_cardTableViewController;
     
     NSTimer *_playTimer;
@@ -35,6 +37,7 @@
 
 @property(nonatomic, retain) LoginViewController* loginViewController;
 @property(nonatomic, retain) DockViewController *dockViewController;
+@property(nonatomic, retain) MessagesViewController *messagesViewController;
 @property(nonatomic, retain) CardTableViewController* cardTableViewController;
 
 - (IBAction)showFriendsTimeline:(id)sender;

@@ -40,7 +40,7 @@
     _rootViewController = [[RootViewController alloc] init];
     _rootViewController.managedObjectContext = self.managedObjectContext;
     [self.window addSubview:_rootViewController.view];
-
+    
     // 20110921, Dennis did this.
     //[[UIDevice currentDevice] performSelector:@selector(setOrientation:)
     //                               withObject:(id)UIInterfaceOrientationLandscapeLeft];
@@ -124,7 +124,7 @@
     /*
      Typically you should set up the Core Data stack here, usually by passing the managed object context to the first view controller.
      self.<#View controller#>.managedObjectContext = self.managedObjectContext;
-    */
+     */
 }
 
 - (void)saveContext
@@ -196,9 +196,12 @@
     
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"PushBox.sqlite"];
     
+    //
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+    
     NSError *error = nil;
     __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    if (![__persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error])
+    if (![__persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error])
     {
         /*
          Replace this implementation with code to handle the error appropriately.

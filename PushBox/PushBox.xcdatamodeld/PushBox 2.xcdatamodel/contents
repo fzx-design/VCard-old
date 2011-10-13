@@ -15,6 +15,17 @@
         <attribute name="updateDate" attributeType="Date"/>
         <attribute name="url" attributeType="String"/>
     </entity>
+    <entity name="Message" representedClassName="Message">
+        <attribute name="created_at" optional="YES" attributeType="Date"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="recipient_id" optional="YES" attributeType="String"/>
+        <attribute name="recipient_screen_name" optional="YES" attributeType="String"/>
+        <attribute name="sender_id" optional="YES" attributeType="String"/>
+        <attribute name="sender_screen_name" optional="YES" attributeType="String"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <relationship name="recipient" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="isRecipientOf" inverseEntity="User"/>
+        <relationship name="sender" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="isSenderOf" inverseEntity="User"/>
+    </entity>
     <entity name="Status" representedClassName="Status">
         <attribute name="bmiddlePicURL" optional="YES" attributeType="String"/>
         <attribute name="commentsCount" optional="YES" attributeType="String"/>
@@ -57,11 +68,14 @@
         <relationship name="followers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="friends" inverseEntity="User"/>
         <relationship name="friends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="followers" inverseEntity="User"/>
         <relationship name="friendsStatuses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Status" inverseName="isFriendsStatusOf" inverseEntity="Status"/>
+        <relationship name="isRecipientOf" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Message" inverseName="recipient" inverseEntity="Message"/>
+        <relationship name="isSenderOf" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Message" inverseName="sender" inverseEntity="Message"/>
         <relationship name="statuses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Status" inverseName="author" inverseEntity="Status"/>
     </entity>
     <elements>
         <element name="Comment" positionX="-11" positionY="207" width="128" height="165"/>
         <element name="Image" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="Message" positionX="160" positionY="192" width="128" height="45"/>
         <element name="Status" positionX="223" positionY="81" width="128" height="285"/>
         <element name="User" positionX="-18" positionY="414" width="128" height="390"/>
     </elements>

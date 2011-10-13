@@ -105,7 +105,9 @@ typedef void (^WCCompletionBlock)(WeiboClient *client);
 - (void)getUnreadCountSinceStatusID:(NSString *)statusID;
 - (void)resetUnreadCount:(int)type;
 
-
-
+- (void)getMessagesByUserSinceID:(NSString *)sinceID 
+                           maxID:(NSString *)maxID 
+                           count:(int)count
+                            page:(int)page;
 
 @end

@@ -16,6 +16,7 @@
     UIButton *_newTweetButton;
     UIButton *_playButton;
     UIButton *_commandCenterButton;
+    UIButton *_messagesCenterButton;
     UIButton *_showFavoritesButton;
     UIButton *_optionsButton;
     UISlider *_slider;
@@ -32,6 +33,7 @@
 @property(nonatomic, retain) IBOutlet UIButton* newTweetButton;
 @property(nonatomic, retain) IBOutlet UIButton* playButton;
 @property(nonatomic, retain) IBOutlet UIButton* commandCenterButton;
+@property(nonatomic, retain) IBOutlet UIButton* messagesCenterButton;
 @property(nonatomic, retain) IBOutlet UIButton* showFavoritesButton;
 @property(nonatomic, retain) IBOutlet UIButton* optionsButton;
 @property(nonatomic, retain) IBOutlet UISlider* slider;

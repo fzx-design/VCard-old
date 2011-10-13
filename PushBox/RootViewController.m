@@ -23,6 +23,9 @@
 #define kCardTableViewFrameOriginY 37.0
 #define kCardTableViewOffsetY 650.0
 
+#define kMessagesViewCenter CGPointMake(512.0 - 1024.0, 350.0)
+#define kMessagesViewOffsetx 1024.0
+
 #define kUserDefaultKeyFirstTime @"kUserDefaultKeyFirstTime"
 
 
@@ -33,6 +36,10 @@
 - (void)hideLoginView;
 - (void)showDockView;
 - (void)hideDockView;
+- (void)showMessagesView;
+- (void)hideMessagesView;
+- (void)showMessagesCenter;
+- (void)hideMessagesCenter;
 - (void)showCommandCenter;
 - (void)hideCommandCenter;
 - (void)showCardTableView;
@@ -48,6 +55,7 @@
 @synthesize bottomStateLabel = _bottomStateLabel;
 @synthesize loginViewController = _loginViewController;
 @synthesize dockViewController = _dockViewController;
+@synthesize messagesViewController = _messagesViewController;
 @synthesize cardTableViewController = _cardTableViewController;
 
 #pragma mark - View lifecycle
@@ -93,6 +101,7 @@
                 [self.cardTableViewController loadAllFavoritesWithCompletion:NULL];
                 [self showCardTableView];
                 [self showDockView];
+                [self showMessagesView];
                 [self.cardTableViewController getUnread];
             }];;
         }
@@ -105,7 +114,7 @@
     [super viewDidLoad];
     
     [self updateBackgroundImageAnimated:NO];
-
+    
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:self selector:@selector(backgroundChangedNotification:) 
 				   name:kNotificationNameBackgroundChanged 
@@ -291,10 +300,10 @@
 	if (enabled) {
 		int interval = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeySiidePlayTimeInterval];
 		_playTimer = [NSTimer scheduledTimerWithTimeInterval:interval 
-												  target:self 
-												selector:@selector(timerFired:) 
-												userInfo:nil 
-												 repeats:YES];
+                                                      target:self 
+                                                    selector:@selector(timerFired:) 
+                                                    userInfo:nil 
+                                                     repeats:YES];
 		[_playTimer fire];
 		self.dockViewController.slider.highlighted = YES;
 	}
@@ -371,8 +380,113 @@
     }];
 }
 
+- (void)messagesCenterButtonClicked:(UIButton *)button
+{
+    // Test messages request
+//        WeiboClient *client = [WeiboClient client];
+//        [client getMessagesByUserSinceID:nil maxID:nil count:20 page:0];
+//        
+//        [client setCompletionBlock:^(WeiboClient *client) {
+//            if (!client.hasError) {
+//                NSArray *dictArray = client.responseJSONObject;
+//                
+//                int count = [dictArray count];
+//                NSLog(@"-----------------------------------");
+//                NSLog(@"%d", count);
+//                NSLog(@"-----------------------------------");
+//            }
+//        }];
+    
+    if (button.selected) {
+        [self hideMessagesCenter];
+    }
+    else {
+        [self showMessagesCenter];
+    }
+}
+
+- (void)showMessagesView
+{
+    [self.view insertSubview:self.messagesViewController.view belowSubview:self.bottomStateView];
+    [UIView animateWithDuration:1.0 animations:^{
+        self.messagesViewController.view.alpha = 1.0;
+    }];}
+
+- (void)hideMessagesView
+{
+    [UIView animateWithDuration:1.0 animations:^{
+        self.messagesViewController.view.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            [self.messagesViewController.view removeFromSuperview];
+            self.messagesViewController = nil;
+        }
+    }];
+}
+
+- (void)showMessagesCenter
+{
+    [self.messagesViewController viewWillAppear:YES];
+    //    if (self.cardTableViewController.dataSource != CardTableViewDataSourceFriendsTimeline) {
+    //        [self hideBottomStateView];
+    //    }
+    [UIView animateWithDuration:kDockAnimationInterval
+                          delay:0 
+                        options:UIViewAnimationCurveEaseInOut 
+                     animations:^{
+                         self.dockViewController.messagesCenterButton.selected = YES;
+                         
+                         CGRect frame = self.messagesViewController.view.frame;
+                         frame.origin.x += kMessagesViewOffsetx;
+                         self.messagesViewController.view.frame = frame;
+                         
+                         frame = self.cardTableViewController.view.frame;
+                         frame.origin.x += kMessagesViewOffsetx;
+                         self.cardTableViewController.view.frame = frame;
+                     }
+                     completion:^(BOOL finished) {
+                         if (finished) {
+                             [self.messagesViewController viewDidAppear:YES];
+                         }
+                     }];
+    
+    [self.dockViewController.commandCenterButton setEnabled:NO];
+}
+
+- (void)hideMessagesCenter
+{
+    //    if (self.cardTableViewController.dataSource != CardTableViewDataSourceFriendsTimeline) {
+    //        [self showBottomStateView];
+    //    }
+    [self.messagesViewController viewWillDisappear:YES];
+    [UIView animateWithDuration:kDockAnimationInterval
+                          delay:0 
+                        options:UIViewAnimationCurveEaseInOut 
+                     animations:^{
+                         self.dockViewController.messagesCenterButton.selected = NO;
+                         
+                         CGRect frame = self.messagesViewController.view.frame;
+                         frame.origin.x -= kMessagesViewOffsetx;
+                         self.messagesViewController.view.frame = frame;
+                         
+                         frame = self.cardTableViewController.view.frame;
+                         frame.origin.x -= kMessagesViewOffsetx;
+                         self.cardTableViewController.view.frame = frame;
+                     }
+                     completion:^(BOOL finished) {
+                         if (finished) {
+                             [self.messagesViewController viewDidDisappear:YES];
+                         }
+                     }];
+    [self.dockViewController.commandCenterButton setEnabled:YES];
+}
+
 - (void)commandCenterButtonClicked:(UIButton *)button
 {
+    if (self.dockViewController.messagesCenterButton.selected) {
+        [self hideMessagesCenter];
+    }
+    
     if (button.selected) {
         [self hideCommandCenter];
     }
@@ -413,6 +527,7 @@
     self.dockViewController.playButton.enabled = NO;
     self.dockViewController.slider.enabled = NO;
     self.dockViewController.refreshButton.enabled = NO;
+    self.dockViewController.messagesCenterButton.enabled = NO;
 }
 
 - (void)hideCommandCenter
@@ -436,7 +551,7 @@
                          self.cardTableViewController.view.frame = frame;
                          
                          frame = self.bottomStateView.frame;
-                         frame.origin.y += kDockViewOffsetY;
+                         frame.origin.y += kDockViewOffsetY; 
                          self.bottomStateView.frame = frame;
                      }
                      completion:^(BOOL finished) {
@@ -447,12 +562,13 @@
     self.dockViewController.playButton.enabled = YES;
     self.dockViewController.slider.enabled = YES;
     self.dockViewController.refreshButton.enabled = YES;
+    self.dockViewController.messagesCenterButton.enabled = YES;
 }
 
 - (void)showLoginView
 {
     [self.view addSubview:self.loginViewController.view];
-
+    
     [UIView animateWithDuration:1.0 animations:^{
         self.pushBoxHDImageView.alpha = 1.0;
         self.loginViewController.view.alpha = 1.0;
@@ -558,6 +674,10 @@
                                                         action:@selector(commandCenterButtonClicked:)
                                               forControlEvents:UIControlEventTouchUpInside];
         
+        [self.dockViewController.messagesCenterButton addTarget:self
+                                                         action:@selector(messagesCenterButtonClicked:)
+                                               forControlEvents:UIControlEventTouchUpInside];
+        
         [self.dockViewController.slider addTarget:self 
                                            action:@selector(sliderValueChanged:)
                                  forControlEvents:UIControlEventValueChanged];
@@ -595,5 +715,20 @@
     return _cardTableViewController;
 }
 
+- (MessagesViewController *)messagesViewController
+{
+    if (!_messagesViewController) {
+        _messagesViewController = [[MessagesViewController alloc] init];
+        self.messagesViewController.view.center = kMessagesViewCenter;
+        
+        self.messagesViewController.contactsTableViewController.delegate = self;
+        self.messagesViewController.dialogTableViewController.delegate = self;
+        
+        self.messagesViewController.currentUser = self.currentUser;
+        self.messagesViewController.contactsTableViewController.currentUser = self.currentUser;
+        self.messagesViewController.dialogTableViewController.currentUser = self.currentUser;
+    }
+    return _messagesViewController;
+}
 
 @end

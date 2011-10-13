@@ -15,6 +15,7 @@
 @synthesize newTweetButton = _newTweetButton;
 @synthesize playButton = _playButton;
 @synthesize commandCenterButton = _commandCenterButton;
+@synthesize messagesCenterButton = _messagesCenterButton;
 @synthesize showFavoritesButton = _showFavoritesButton;
 @synthesize optionsButton = _optionsButton;
 @synthesize slider = _slider;
@@ -34,6 +35,7 @@
     [_newTweetButton release];
     [_playButton release];
     [_commandCenterButton release];
+    [_messagesCenterButton release];
     [_showFavoritesButton release];
     [_optionsButton release];
     [_slider release];
@@ -53,6 +55,7 @@
     self.newTweetButton = nil;
     self.playButton = nil;
     self.commandCenterButton = nil;
+    self.messagesCenterButton = nil;
     self.showFavoritesButton = nil;
     self.optionsButton = nil;
     self.slider = nil;
