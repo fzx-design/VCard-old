@@ -184,10 +184,39 @@
 		CBDA5B5913DBECEE00FAE221 /* OAuthHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B5313DBECEE00FAE221 /* OAuthHTTPRequest.m */; };
 		CBDA5B5A13DBECEE00FAE221 /* WeiboClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B5513DBECEE00FAE221 /* WeiboClient.m */; };
 		CBDA5B5F13DBF47D00FAE221 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B5E13DBF47D00FAE221 /* Status.m */; };
-		CBDA5B6213DBF47E00FAE221 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B6113DBF47E00FAE221 /* User.m */; };
 		CBDA5B6513DBF47E00FAE221 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B6413DBF47E00FAE221 /* Comment.m */; };
 		CBDA5B7313DC25C600FAE221 /* CoreDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B7213DC25C500FAE221 /* CoreDataViewController.m */; };
 		CBDA5B7613DC25FA00FAE221 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B7513DC25FA00FAE221 /* CoreDataTableViewController.m */; };
+		FE1E629914441E2600A48CF9 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1E629814441E2600A48CF9 /* Message.m */; };
+		FE1E629C14441E3F00A48CF9 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1E629B14441E3F00A48CF9 /* User.m */; };
+		FE8F6D42144327B4001A62FD /* MessagesContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE8F6D40144327B3001A62FD /* MessagesContactsTableViewController.m */; };
+		FE8F6D43144327B4001A62FD /* MessagesContactsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE8F6D41144327B4001A62FD /* MessagesContactsTableViewController.xib */; };
+		FE9B26B1144481F70028C9B9 /* msg_sina.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9B26B0144481F70028C9B9 /* msg_sina.png */; };
+		FEA42654144320E7002E80B3 /* MessagesContactsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA42653144320E7002E80B3 /* MessagesContactsTableViewCell.m */; };
+		FEA4265614432103002E80B3 /* MessagesContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEA4265514432103002E80B3 /* MessagesContactsTableViewCell.xib */; };
+		FEFB310B1443117D00440DD5 /* button_new_msg_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFB30F81443117D00440DD5 /* button_new_msg_grey.png */; };
+		FEFB310C1443117D00440DD5 /* button_new_msg_silver.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFB30F91443117D00440DD5 /* button_new_msg_silver.png */; };
+		FEFB310E1443117D00440DD5 /* grey_card_lines_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFB30FB1443117D00440DD5 /* grey_card_lines_bg.png */; };
+		FEFB310F1443117D00440DD5 /* head_cover_card.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFB30FC1443117D00440DD5 /* head_cover_card.png */; };
+		FEFB31101443117D00440DD5 /* msg_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFB30FD1443117D00440DD5 /* msg_arrow.png */; };
+		FEFB31111443117D00440DD5 /* msg_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFB30FE1443117D00440DD5 /* msg_bg.png */; };
+		FEFB31121443117D00440DD5 /* msg_cell_from_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFB30FF1443117D00440DD5 /* msg_cell_from_bottom.png */; };
+		FEFB31131443117D00440DD5 /* msg_cell_from_content_repeat_y.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFB31001443117D00440DD5 /* msg_cell_from_content_repeat_y.png */; };
+		FEFB31141443117D00440DD5 /* msg_cell_from_top.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFB31011443117D00440DD5 /* msg_cell_from_top.png */; };
+		FEFB31151443117D00440DD5 /* msg_cell_to_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFB31021443117D00440DD5 /* msg_cell_to_bottom.png */; };
+		FEFB31161443117D00440DD5 /* msg_cell_to_content_repeat_y.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFB31031443117D00440DD5 /* msg_cell_to_content_repeat_y.png */; };
+		FEFB31171443117D00440DD5 /* msg_cell_to_top.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFB31041443117D00440DD5 /* msg_cell_to_top.png */; };
+		FEFB31181443117D00440DD5 /* msg_icon_new.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFB31051443117D00440DD5 /* msg_icon_new.png */; };
+		FEFB31191443117D00440DD5 /* msg_info_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFB31061443117D00440DD5 /* msg_info_bg.png */; };
+		FEFB311B1443117D00440DD5 /* tableview_divider.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFB31081443117D00440DD5 /* tableview_divider.png */; };
+		FEFB3120144311D600440DD5 /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEFB311E144311D600440DD5 /* MessagesViewController.m */; };
+		FEFB3121144311D600440DD5 /* MessagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEFB311F144311D600440DD5 /* MessagesViewController.xib */; };
+		FEFB31251443130700440DD5 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEFB31231443130700440DD5 /* MessageViewController.m */; };
+		FEFB31261443130700440DD5 /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEFB31241443130700440DD5 /* MessageViewController.xib */; };
+		FEFDACA91443F775009CF7CD /* MessagesDialogTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEFDACA71443F775009CF7CD /* MessagesDialogTableViewController.m */; };
+		FEFDACAA1443F775009CF7CD /* MessagesDialogTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEFDACA81443F775009CF7CD /* MessagesDialogTableViewController.xib */; };
+		FEFDACAF1443F7A5009CF7CD /* MessagesDialogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FEFDACAD1443F7A5009CF7CD /* MessagesDialogTableViewCell.m */; };
+		FEFDACB01443F7A5009CF7CD /* MessagesDialogTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEFDACAE1443F7A5009CF7CD /* MessagesDialogTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -422,14 +451,51 @@
 		CBDA5B5513DBECEE00FAE221 /* WeiboClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboClient.m; sourceTree = "<group>"; };
 		CBDA5B5D13DBF47D00FAE221 /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
 		CBDA5B5E13DBF47D00FAE221 /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
-		CBDA5B6013DBF47E00FAE221 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		CBDA5B6113DBF47E00FAE221 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		CBDA5B6313DBF47E00FAE221 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		CBDA5B6413DBF47E00FAE221 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		CBDA5B7113DC25C500FAE221 /* CoreDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataViewController.h; sourceTree = "<group>"; };
 		CBDA5B7213DC25C500FAE221 /* CoreDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataViewController.m; sourceTree = "<group>"; };
 		CBDA5B7413DC25FA00FAE221 /* CoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataTableViewController.h; sourceTree = "<group>"; };
 		CBDA5B7513DC25FA00FAE221 /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
+		FE1E628D14441BCD00A48CF9 /* PushBox 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PushBox 2.xcdatamodel"; sourceTree = "<group>"; };
+		FE1E629714441E2500A48CF9 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		FE1E629814441E2600A48CF9 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		FE1E629A14441E3F00A48CF9 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		FE1E629B14441E3F00A48CF9 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		FE8F6D3F144327B3001A62FD /* MessagesContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesContactsTableViewController.h; sourceTree = "<group>"; };
+		FE8F6D40144327B3001A62FD /* MessagesContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesContactsTableViewController.m; sourceTree = "<group>"; };
+		FE8F6D41144327B4001A62FD /* MessagesContactsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesContactsTableViewController.xib; sourceTree = "<group>"; };
+		FE9B26B0144481F70028C9B9 /* msg_sina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = msg_sina.png; sourceTree = "<group>"; };
+		FEA42652144320E7002E80B3 /* MessagesContactsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesContactsTableViewCell.h; sourceTree = "<group>"; };
+		FEA42653144320E7002E80B3 /* MessagesContactsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesContactsTableViewCell.m; sourceTree = "<group>"; };
+		FEA4265514432103002E80B3 /* MessagesContactsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesContactsTableViewCell.xib; sourceTree = "<group>"; };
+		FEFB30F81443117D00440DD5 /* button_new_msg_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_new_msg_grey.png; sourceTree = "<group>"; };
+		FEFB30F91443117D00440DD5 /* button_new_msg_silver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_new_msg_silver.png; sourceTree = "<group>"; };
+		FEFB30FB1443117D00440DD5 /* grey_card_lines_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grey_card_lines_bg.png; sourceTree = "<group>"; };
+		FEFB30FC1443117D00440DD5 /* head_cover_card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = head_cover_card.png; sourceTree = "<group>"; };
+		FEFB30FD1443117D00440DD5 /* msg_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = msg_arrow.png; sourceTree = "<group>"; };
+		FEFB30FE1443117D00440DD5 /* msg_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = msg_bg.png; sourceTree = "<group>"; };
+		FEFB30FF1443117D00440DD5 /* msg_cell_from_bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = msg_cell_from_bottom.png; sourceTree = "<group>"; };
+		FEFB31001443117D00440DD5 /* msg_cell_from_content_repeat_y.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = msg_cell_from_content_repeat_y.png; sourceTree = "<group>"; };
+		FEFB31011443117D00440DD5 /* msg_cell_from_top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = msg_cell_from_top.png; sourceTree = "<group>"; };
+		FEFB31021443117D00440DD5 /* msg_cell_to_bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = msg_cell_to_bottom.png; sourceTree = "<group>"; };
+		FEFB31031443117D00440DD5 /* msg_cell_to_content_repeat_y.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = msg_cell_to_content_repeat_y.png; sourceTree = "<group>"; };
+		FEFB31041443117D00440DD5 /* msg_cell_to_top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = msg_cell_to_top.png; sourceTree = "<group>"; };
+		FEFB31051443117D00440DD5 /* msg_icon_new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = msg_icon_new.png; sourceTree = "<group>"; };
+		FEFB31061443117D00440DD5 /* msg_info_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = msg_info_bg.png; sourceTree = "<group>"; };
+		FEFB31081443117D00440DD5 /* tableview_divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tableview_divider.png; sourceTree = "<group>"; };
+		FEFB311D144311D600440DD5 /* MessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesViewController.h; sourceTree = "<group>"; };
+		FEFB311E144311D600440DD5 /* MessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesViewController.m; sourceTree = "<group>"; };
+		FEFB311F144311D600440DD5 /* MessagesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesViewController.xib; sourceTree = "<group>"; };
+		FEFB31221443130700440DD5 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
+		FEFB31231443130700440DD5 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
+		FEFB31241443130700440DD5 /* MessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageViewController.xib; sourceTree = "<group>"; };
+		FEFDACA61443F775009CF7CD /* MessagesDialogTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesDialogTableViewController.h; sourceTree = "<group>"; };
+		FEFDACA71443F775009CF7CD /* MessagesDialogTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesDialogTableViewController.m; sourceTree = "<group>"; };
+		FEFDACA81443F775009CF7CD /* MessagesDialogTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesDialogTableViewController.xib; sourceTree = "<group>"; };
+		FEFDACAC1443F7A5009CF7CD /* MessagesDialogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesDialogTableViewCell.h; sourceTree = "<group>"; };
+		FEFDACAD1443F7A5009CF7CD /* MessagesDialogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesDialogTableViewCell.m; sourceTree = "<group>"; };
+		FEFDACAE1443F7A5009CF7CD /* MessagesDialogTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesDialogTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -526,6 +592,7 @@
 				CBBA01C813E3463200641923 /* PostViewController.m */,
 				CB26224D13DF06780062EDE7 /* StatusCardViewController.h */,
 				CB26224E13DF06780062EDE7 /* StatusCardViewController.m */,
+				FE8F6D45144327B8001A62FD /* msg */,
 			);
 			name = "Card controllers";
 			sourceTree = "<group>";
@@ -554,6 +621,7 @@
 		CB4AAC5213DC6AF20053E3A6 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				FEFB30F51443117D00440DD5 /* msg */,
 				CBBA01F113E4530700641923 /* statuscard */,
 				CBBA01ED13E451AA00641923 /* buttons */,
 				CBBA01EE13E451BD00641923 /* usercard */,
@@ -763,12 +831,12 @@
 				CB018DDF13DDD015004217E0 /* Options view controllers */,
 				CB4AAC3D13DC671F0053E3A6 /* RootViewController.h */,
 				CB4AAC3E13DC671F0053E3A6 /* RootViewController.m */,
-				CBBA01E113E4187800641923 /* EGORefreshTableHeaderView.m */,
 				CBBA01E213E4187800641923 /* EGORefreshTableHeaderView.h */,
+				CBBA01E113E4187800641923 /* EGORefreshTableHeaderView.m */,
 				CBBA01E813E44C1500641923 /* EGOTableViewController.h */,
 				CBBA01E913E44C1600641923 /* EGOTableViewController.m */,
-				CB9DCACB13E1E4DE00DA3D3D /* DetailImageViewController.m */,
 				CB9DCACA13E1E4DD00DA3D3D /* DetailImageViewController.h */,
+				CB9DCACB13E1E4DE00DA3D3D /* DetailImageViewController.m */,
 				CB4AAC8F13DC7BE50053E3A6 /* LoginViewController.h */,
 				CB4AAC9013DC7BE60053E3A6 /* LoginViewController.m */,
 				CB018DD313DD3CC8004217E0 /* DockViewController.h */,
@@ -885,10 +953,12 @@
 				CB9E33D013E87F5C00AAE64C /* Image.m */,
 				CBDA5B6313DBF47E00FAE221 /* Comment.h */,
 				CBDA5B6413DBF47E00FAE221 /* Comment.m */,
-				CBDA5B6013DBF47E00FAE221 /* User.h */,
-				CBDA5B6113DBF47E00FAE221 /* User.m */,
+				FE1E629A14441E3F00A48CF9 /* User.h */,
+				FE1E629B14441E3F00A48CF9 /* User.m */,
 				CBDA5B5D13DBF47D00FAE221 /* Status.h */,
 				CBDA5B5E13DBF47D00FAE221 /* Status.m */,
+				FE1E629714441E2500A48CF9 /* Message.h */,
+				FE1E629814441E2600A48CF9 /* Message.m */,
 			);
 			name = "Core Data Models";
 			sourceTree = "<group>";
@@ -904,6 +974,55 @@
 				CBDA5B5313DBECEE00FAE221 /* OAuthHTTPRequest.m */,
 			);
 			name = OARequest;
+			sourceTree = "<group>";
+		};
+		FE8F6D45144327B8001A62FD /* msg */ = {
+			isa = PBXGroup;
+			children = (
+				FEFB311D144311D600440DD5 /* MessagesViewController.h */,
+				FEFB311E144311D600440DD5 /* MessagesViewController.m */,
+				FEFB311F144311D600440DD5 /* MessagesViewController.xib */,
+				FE8F6D3F144327B3001A62FD /* MessagesContactsTableViewController.h */,
+				FE8F6D40144327B3001A62FD /* MessagesContactsTableViewController.m */,
+				FE8F6D41144327B4001A62FD /* MessagesContactsTableViewController.xib */,
+				FEA42652144320E7002E80B3 /* MessagesContactsTableViewCell.h */,
+				FEA42653144320E7002E80B3 /* MessagesContactsTableViewCell.m */,
+				FEA4265514432103002E80B3 /* MessagesContactsTableViewCell.xib */,
+				FEFDACA61443F775009CF7CD /* MessagesDialogTableViewController.h */,
+				FEFDACA71443F775009CF7CD /* MessagesDialogTableViewController.m */,
+				FEFDACA81443F775009CF7CD /* MessagesDialogTableViewController.xib */,
+				FEFDACAC1443F7A5009CF7CD /* MessagesDialogTableViewCell.h */,
+				FEFDACAD1443F7A5009CF7CD /* MessagesDialogTableViewCell.m */,
+				FEFDACAE1443F7A5009CF7CD /* MessagesDialogTableViewCell.xib */,
+				FEFB31221443130700440DD5 /* MessageViewController.h */,
+				FEFB31231443130700440DD5 /* MessageViewController.m */,
+				FEFB31241443130700440DD5 /* MessageViewController.xib */,
+			);
+			name = msg;
+			sourceTree = "<group>";
+		};
+		FEFB30F51443117D00440DD5 /* msg */ = {
+			isa = PBXGroup;
+			children = (
+				FE9B26B0144481F70028C9B9 /* msg_sina.png */,
+				FEFB30F81443117D00440DD5 /* button_new_msg_grey.png */,
+				FEFB30F91443117D00440DD5 /* button_new_msg_silver.png */,
+				FEFB30FB1443117D00440DD5 /* grey_card_lines_bg.png */,
+				FEFB30FC1443117D00440DD5 /* head_cover_card.png */,
+				FEFB30FD1443117D00440DD5 /* msg_arrow.png */,
+				FEFB30FE1443117D00440DD5 /* msg_bg.png */,
+				FEFB30FF1443117D00440DD5 /* msg_cell_from_bottom.png */,
+				FEFB31001443117D00440DD5 /* msg_cell_from_content_repeat_y.png */,
+				FEFB31011443117D00440DD5 /* msg_cell_from_top.png */,
+				FEFB31021443117D00440DD5 /* msg_cell_to_bottom.png */,
+				FEFB31031443117D00440DD5 /* msg_cell_to_content_repeat_y.png */,
+				FEFB31041443117D00440DD5 /* msg_cell_to_top.png */,
+				FEFB31051443117D00440DD5 /* msg_icon_new.png */,
+				FEFB31061443117D00440DD5 /* msg_info_bg.png */,
+				FEFB31081443117D00440DD5 /* tableview_divider.png */,
+			);
+			name = msg;
+			path = Msg;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1076,6 +1195,28 @@
 				201D2336142B3BA40016F6DE /* greycard_bg_upper.png in Resources */,
 				201D2339142B40060016F6DE /* modify_head.png in Resources */,
 				201D233B142B40B80016F6DE /* user_detail_bg.png in Resources */,
+				FEFB310B1443117D00440DD5 /* button_new_msg_grey.png in Resources */,
+				FEFB310C1443117D00440DD5 /* button_new_msg_silver.png in Resources */,
+				FEFB310E1443117D00440DD5 /* grey_card_lines_bg.png in Resources */,
+				FEFB310F1443117D00440DD5 /* head_cover_card.png in Resources */,
+				FEFB31101443117D00440DD5 /* msg_arrow.png in Resources */,
+				FEFB31111443117D00440DD5 /* msg_bg.png in Resources */,
+				FEFB31121443117D00440DD5 /* msg_cell_from_bottom.png in Resources */,
+				FEFB31131443117D00440DD5 /* msg_cell_from_content_repeat_y.png in Resources */,
+				FEFB31141443117D00440DD5 /* msg_cell_from_top.png in Resources */,
+				FEFB31151443117D00440DD5 /* msg_cell_to_bottom.png in Resources */,
+				FEFB31161443117D00440DD5 /* msg_cell_to_content_repeat_y.png in Resources */,
+				FEFB31171443117D00440DD5 /* msg_cell_to_top.png in Resources */,
+				FEFB31181443117D00440DD5 /* msg_icon_new.png in Resources */,
+				FEFB31191443117D00440DD5 /* msg_info_bg.png in Resources */,
+				FEFB311B1443117D00440DD5 /* tableview_divider.png in Resources */,
+				FEFB3121144311D600440DD5 /* MessagesViewController.xib in Resources */,
+				FEFB31261443130700440DD5 /* MessageViewController.xib in Resources */,
+				FEA4265614432103002E80B3 /* MessagesContactsTableViewCell.xib in Resources */,
+				FE8F6D43144327B4001A62FD /* MessagesContactsTableViewController.xib in Resources */,
+				FEFDACAA1443F775009CF7CD /* MessagesDialogTableViewController.xib in Resources */,
+				FEFDACB01443F7A5009CF7CD /* MessagesDialogTableViewCell.xib in Resources */,
+				FE9B26B1144481F70028C9B9 /* msg_sina.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1108,7 +1249,6 @@
 				CBDA5B5913DBECEE00FAE221 /* OAuthHTTPRequest.m in Sources */,
 				CBDA5B5A13DBECEE00FAE221 /* WeiboClient.m in Sources */,
 				CBDA5B5F13DBF47D00FAE221 /* Status.m in Sources */,
-				CBDA5B6213DBF47E00FAE221 /* User.m in Sources */,
 				CBDA5B6513DBF47E00FAE221 /* Comment.m in Sources */,
 				CBDA5B7313DC25C600FAE221 /* CoreDataViewController.m in Sources */,
 				CBDA5B7613DC25FA00FAE221 /* CoreDataTableViewController.m in Sources */,
@@ -1138,6 +1278,14 @@
 				CB9E33D113E87F5C00AAE64C /* Image.m in Sources */,
 				CB7C4A0513EBD19600BD329A /* CCUserCardViewController.m in Sources */,
 				CB7C4A0813EBDE2C00BD329A /* UserCardBaseViewController.m in Sources */,
+				FEFB3120144311D600440DD5 /* MessagesViewController.m in Sources */,
+				FEFB31251443130700440DD5 /* MessageViewController.m in Sources */,
+				FEA42654144320E7002E80B3 /* MessagesContactsTableViewCell.m in Sources */,
+				FE8F6D42144327B4001A62FD /* MessagesContactsTableViewController.m in Sources */,
+				FEFDACA91443F775009CF7CD /* MessagesDialogTableViewController.m in Sources */,
+				FEFDACAF1443F7A5009CF7CD /* MessagesDialogTableViewCell.m in Sources */,
+				FE1E629914441E2600A48CF9 /* Message.m in Sources */,
+				FE1E629C14441E3F00A48CF9 /* User.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1259,9 +1407,10 @@
 		CBDA5B0913DBEC1300FAE221 /* PushBox.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				FE1E628D14441BCD00A48CF9 /* PushBox 2.xcdatamodel */,
 				CBDA5B0A13DBEC1300FAE221 /* PushBox.xcdatamodel */,
 			);
-			currentVersion = CBDA5B0A13DBEC1300FAE221 /* PushBox.xcdatamodel */;
+			currentVersion = FE1E628D14441BCD00A48CF9 /* PushBox 2.xcdatamodel */;
 			path = PushBox.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
