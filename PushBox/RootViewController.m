@@ -53,6 +53,7 @@
 @synthesize pushBoxHDImageView = _pushBoxHDImageView;
 @synthesize bottomStateView = _bottomStateView;
 @synthesize bottomStateLabel = _bottomStateLabel;
+@synthesize bottomStateTextField = _bottomStateTextField;
 @synthesize loginViewController = _loginViewController;
 @synthesize dockViewController = _dockViewController;
 @synthesize messagesViewController = _messagesViewController;
@@ -166,6 +167,30 @@
 {
     [UIView animateWithDuration:1.0 animations:^(void) {
         self.bottomStateView.alpha = 1.0;
+    }];
+}
+
+- (void)showBottomStateViewForSearch
+{
+    self.dockViewController.searchButton.selected = YES;
+    
+    [UIView animateWithDuration:0.3 animations:^(void) {
+        self.bottomStateView.alpha = 1.0;
+        CGRect frame = self.bottomStateView.frame;
+        frame.origin.y = 768 - 352 - 46 - 18;
+        [self.bottomStateView setFrame:frame];
+    }];
+}
+
+- (void)hideBottomStateViewForSearch
+{
+    self.dockViewController.searchButton.selected = NO;
+    
+    [UIView animateWithDuration:0.3 animations:^(void) {
+        self.bottomStateView.alpha = 1.0;
+        CGRect frame = self.bottomStateView.frame;
+        frame.origin.y = 626 - 352;
+        [self.bottomStateView setFrame:frame];
     }];
 }
 
@@ -382,20 +407,23 @@
 
 - (void)messagesCenterButtonClicked:(UIButton *)button
 {
-    // Test messages request
-//        WeiboClient *client = [WeiboClient client];
-//        [client getMessagesByUserSinceID:nil maxID:nil count:20 page:0];
-//        
-//        [client setCompletionBlock:^(WeiboClient *client) {
-//            if (!client.hasError) {
-//                NSArray *dictArray = client.responseJSONObject;
-//                
-//                int count = [dictArray count];
-//                NSLog(@"-----------------------------------");
-//                NSLog(@"%d", count);
-//                NSLog(@"-----------------------------------");
-//            }
-//        }];
+    if (YES)
+    {   
+        // Test messages request
+        WeiboClient *client = [WeiboClient client];
+        [client getMessagesByUserSinceID:nil maxID:nil count:20 page:0];
+        
+        [client setCompletionBlock:^(WeiboClient *client) {
+            if (!client.hasError) {
+                NSArray *dictArray = client.responseJSONObject;
+                
+                int count = [dictArray count];
+                NSLog(@"-----------------------------------");
+                NSLog(@"%d", count);
+                NSLog(@"-----------------------------------");
+            }
+        }];
+    }
     
     if (button.selected) {
         [self hideMessagesCenter];
@@ -493,6 +521,19 @@
     }
     else {
         [self showCommandCenter];
+    }
+}
+
+- (void)searchButtonClicked:(UIButton *)button
+{
+    self.bottomStateView.alpha = 1.0;
+    [self.bottomStateTextField becomeFirstResponder];
+    
+    if (button.selected) {
+        [self hideBottomStateViewForSearch];
+    }
+    else {
+        [self showBottomStateViewForSearch];
     }
 }
 
@@ -678,6 +719,10 @@
         [self.dockViewController.messagesCenterButton addTarget:self
                                                          action:@selector(messagesCenterButtonClicked:)
                                                forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.dockViewController.searchButton addTarget:self
+                                                 action:@selector(searchButtonClicked:)
+                                       forControlEvents:UIControlEventTouchUpInside];
         
         [self.dockViewController.slider addTarget:self 
                                            action:@selector(sliderValueChanged:)

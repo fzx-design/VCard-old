@@ -19,6 +19,7 @@
     
     UIView *_bottomStateView;
     UILabel *_bottomStateLabel;
+    UITextField *_bottomStateTextField;
     
     UIImageView *_holeImageView;
     
@@ -34,6 +35,7 @@
 @property(nonatomic, retain) IBOutlet UIImageView* pushBoxHDImageView;
 @property(nonatomic, retain) IBOutlet UIView* bottomStateView;
 @property(nonatomic, retain) IBOutlet UILabel* bottomStateLabel;
+@property(nonatomic, retain) IBOutlet UITextField* bottomStateTextField;
 
 @property(nonatomic, retain) LoginViewController* loginViewController;
 @property(nonatomic, retain) DockViewController *dockViewController;

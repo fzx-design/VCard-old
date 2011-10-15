@@ -18,6 +18,7 @@
 @synthesize messagesCenterButton = _messagesCenterButton;
 @synthesize showFavoritesButton = _showFavoritesButton;
 @synthesize optionsButton = _optionsButton;
+@synthesize searchButton = _searchButton;
 @synthesize slider = _slider;
 @synthesize refreshNotiImageView = _refreshNotiImageView;
 @synthesize commandCenterNotiImageView = _commandCenterNotiImageView;
