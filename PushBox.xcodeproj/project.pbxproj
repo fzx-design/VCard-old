@@ -21,7 +21,6 @@
 		203B64191428B69800CD8426 /* bg_icon_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 203B64131428B69700CD8426 /* bg_icon_default.png */; };
 		203B641A1428B69800CD8426 /* bg_icon_mist.png in Resources */ = {isa = PBXBuildFile; fileRef = 203B64141428B69800CD8426 /* bg_icon_mist.png */; };
 		203B641B1428B69800CD8426 /* bg_icon_twilight.png in Resources */ = {isa = PBXBuildFile; fileRef = 203B64151428B69800CD8426 /* bg_icon_twilight.png */; };
-		208A300514178B99005805A8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 208A300414178B99005805A8 /* Default-Landscape~ipad.png */; };
 		20C8D9101429FE9C00C94B86 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C8D90F1429FE9C00C94B86 /* libz.dylib */; };
 		20D54764142ADC35006A79A1 /* autologin_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D54762142ADC35006A79A1 /* autologin_on.png */; };
 		20D54765142ADC35006A79A1 /* autologin_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D54763142ADC35006A79A1 /* autologin_off.png */; };
@@ -33,6 +32,7 @@
 		20D54772142B3547006A79A1 /* dock_button_msg_HL.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D5476E142B3547006A79A1 /* dock_button_msg_HL.png */; };
 		20DC1AED1428BE8E00213358 /* title_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DC1AEC1428BE8E00213358 /* title_small.png */; };
 		20EB93521417A370003E541D /* icon_72.png in Resources */ = {isa = PBXBuildFile; fileRef = 20EB93511417A370003E541D /* icon_72.png */; };
+		9B5F2E2014497374008AC0B8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F2E1F14497373008AC0B8 /* Default-Landscape~ipad.png */; };
 		CB018DD613DD3CC9004217E0 /* DockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB018DD413DD3CC8004217E0 /* DockViewController.m */; };
 		CB018DD713DD3CC9004217E0 /* DockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB018DD513DD3CC8004217E0 /* DockViewController.xib */; };
 		CB018DDB13DDCCCD004217E0 /* dock_slider_thumb_HL.png in Resources */ = {isa = PBXBuildFile; fileRef = CB018DD913DDCCCD004217E0 /* dock_slider_thumb_HL.png */; };
@@ -234,7 +234,6 @@
 		203B64131428B69700CD8426 /* bg_icon_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_icon_default.png; sourceTree = "<group>"; };
 		203B64141428B69800CD8426 /* bg_icon_mist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_icon_mist.png; sourceTree = "<group>"; };
 		203B64151428B69800CD8426 /* bg_icon_twilight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_icon_twilight.png; sourceTree = "<group>"; };
-		208A300414178B99005805A8 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		20C8D90F1429FE9C00C94B86 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		20D54762142ADC35006A79A1 /* autologin_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autologin_on.png; sourceTree = "<group>"; };
 		20D54763142ADC35006A79A1 /* autologin_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autologin_off.png; sourceTree = "<group>"; };
@@ -246,6 +245,7 @@
 		20D5476E142B3547006A79A1 /* dock_button_msg_HL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dock_button_msg_HL.png; sourceTree = "<group>"; };
 		20DC1AEC1428BE8E00213358 /* title_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_small.png; sourceTree = "<group>"; };
 		20EB93511417A370003E541D /* icon_72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_72.png; sourceTree = "<group>"; };
+		9B5F2E1F14497373008AC0B8 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		CB018DD313DD3CC8004217E0 /* DockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DockViewController.h; sourceTree = "<group>"; };
 		CB018DD413DD3CC8004217E0 /* DockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DockViewController.m; sourceTree = "<group>"; };
 		CB018DD513DD3CC8004217E0 /* DockViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DockViewController.xib; sourceTree = "<group>"; };
@@ -784,7 +784,7 @@
 			isa = PBXGroup;
 			children = (
 				20EB93511417A370003E541D /* icon_72.png */,
-				208A300414178B99005805A8 /* Default-Landscape~ipad.png */,
+				9B5F2E1F14497373008AC0B8 /* Default-Landscape~ipad.png */,
 				CBDA5AFA13DBEC1300FAE221 /* PushBox */,
 				CBDA5AF113DBEC1300FAE221 /* Frameworks */,
 				CBDA5AEF13DBEC1300FAE221 /* Products */,
@@ -1170,7 +1170,6 @@
 				CB9E33D313E9CBE900AAE64C /* card_hole_bg.png in Resources */,
 				CB9E33D513E9E26100AAE64C /* status_msg_addfav.png in Resources */,
 				CB7C49FB13EA719F00BD329A /* root_help.png in Resources */,
-				208A300514178B99005805A8 /* Default-Landscape~ipad.png in Resources */,
 				20EB93521417A370003E541D /* icon_72.png in Resources */,
 				203B640B1428B26400CD8426 /* bg_twilight.png in Resources */,
 				203B640C1428B26400CD8426 /* bg_mist.png in Resources */,
@@ -1217,6 +1216,7 @@
 				FEFDACAA1443F775009CF7CD /* MessagesDialogTableViewController.xib in Resources */,
 				FEFDACB01443F7A5009CF7CD /* MessagesDialogTableViewCell.xib in Resources */,
 				FE9B26B1144481F70028C9B9 /* msg_sina.png in Resources */,
+				9B5F2E2014497374008AC0B8 /* Default-Landscape~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
