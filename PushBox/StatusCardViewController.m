@@ -404,16 +404,38 @@
 }
 
 - (IBAction)profileImageButtonClicked:(id)sender {
+//    UserCardViewController *vc = [[UserCardViewController alloc] initWithUsr:self.status.author];
+//    vc.currentUser = self.currentUser;
+//    vc.modalPresentationStyle = UIModalPresentationCurrentContext;
+//	vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//    vc.delegate = self;
+//    
+//    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardPresented object:self];
+//    
+//    [self presentModalViewController:vc animated:YES];
+//    [vc release];
+	
     UserCardViewController *vc = [[UserCardViewController alloc] initWithUsr:self.status.author];
     vc.currentUser = self.currentUser;
     vc.modalPresentationStyle = UIModalPresentationCurrentContext;
 	vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     vc.delegate = self;
+	
+	UINavigationController* navcon = [[UINavigationController alloc] initWithRootViewController:vc];
+	navcon.navigationBarHidden = YES;
+	
+	UserCardNaviViewController *navi = [[UserCardNaviViewController alloc] init];
+	[navi.contentViewController.view addSubview:navcon.view];
+    navi.modalPresentationStyle = UIModalPresentationCurrentContext;
+	navi.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardPresented object:self];
     
-    [self presentModalViewController:vc animated:YES];
-    [vc release];
+    [self presentModalViewController:navi animated:YES];
+	[navi release];
+	[vc release];
+//	[navcon release];
 }
 
 - (void)userCardViewControllerDidDismiss:(UserCardViewController *)vc

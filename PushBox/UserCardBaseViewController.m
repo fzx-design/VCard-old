@@ -76,8 +76,9 @@
     vc.user = self.user;
     vc.modalPresentationStyle = UIModalPresentationCurrentContext;
     vc.modalTransitionStyle = self.modalTransitionStyle;
-    [self presentModalViewController:vc animated:YES];
-    [vc release];
+//    [self presentModalViewController:vc animated:YES];
+	[self.navigationController pushViewController:vc animated:YES];
+	[vc release];
 }
 
 - (IBAction)showFollowersButtonClicked:(id)sender {
@@ -86,7 +87,8 @@
     vc.user = self.user;
     vc.modalPresentationStyle = UIModalPresentationCurrentContext;
     vc.modalTransitionStyle = self.modalTransitionStyle;
-    [self presentModalViewController:vc animated:YES];
+//    [self presentModalViewController:vc animated:YES];
+	[self.navigationController pushViewController:vc animated:YES];
     [vc release];
 }
 

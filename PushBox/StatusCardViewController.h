@@ -8,6 +8,7 @@
 
 #import "CoreDataViewController.h"
 #import "UserCardViewController.h"
+#import "UserCardNaviViewController.h"
 #import "DetailImageViewController.h"
 #import "CommentsTableViewController.h"
 #import "CommentViewController.h"

@@ -244,7 +244,7 @@
 	self.bottomStateView.userInteractionEnabled = YES;
     self.dockViewController.view.userInteractionEnabled = YES;
 	self.cardTableViewController.tableView.scrollEnabled = YES;
-    self.cardTableViewController.swipeEnabled = YES;
+	self.cardTableViewController.swipeEnabled = YES;
 }
 
 - (void)cardTableViewController:(CardTableViewController *)vc didScrollToRow:(int)row withNumberOfRows:(int)numberOfRows
