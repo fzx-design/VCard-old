@@ -10,6 +10,15 @@
 		201D2336142B3BA40016F6DE /* greycard_bg_upper.png in Resources */ = {isa = PBXBuildFile; fileRef = 201D2335142B3BA40016F6DE /* greycard_bg_upper.png */; };
 		201D2339142B40060016F6DE /* modify_head.png in Resources */ = {isa = PBXBuildFile; fileRef = 201D2338142B40060016F6DE /* modify_head.png */; };
 		201D233B142B40B80016F6DE /* user_detail_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 201D233A142B40B80016F6DE /* user_detail_bg.png */; };
+		20375C771449B333002081C7 /* new_tools_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 20375C761449B333002081C7 /* new_tools_bg.png */; };
+		20375C7A1449B539002081C7 /* switch_small_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 20375C781449B539002081C7 /* switch_small_off.png */; };
+		20375C7B1449B539002081C7 /* switch_small_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 20375C791449B539002081C7 /* switch_small_on.png */; };
+		20375C7D1449B960002081C7 /* atpop_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 20375C7C1449B960002081C7 /* atpop_bg.png */; };
+		20375C7F1449BFAB002081C7 /* v_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 20375C7E1449BFAB002081C7 /* v_big.png */; };
+		20375C811449C147002081C7 /* button_send_msg.png in Resources */ = {isa = PBXBuildFile; fileRef = 20375C801449C147002081C7 /* button_send_msg.png */; };
+		20375C831449CA0B002081C7 /* SmartCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20375C821449CA0A002081C7 /* SmartCardViewController.xib */; };
+		20375C851449CAA2002081C7 /* smartcard_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 20375C841449CAA2002081C7 /* smartcard_bg.png */; };
+		20375C871449CC19002081C7 /* smartcard_actions.png in Resources */ = {isa = PBXBuildFile; fileRef = 20375C861449CC19002081C7 /* smartcard_actions.png */; };
 		203B640B1428B26400CD8426 /* bg_twilight.png in Resources */ = {isa = PBXBuildFile; fileRef = 203B64061428B26300CD8426 /* bg_twilight.png */; };
 		203B640C1428B26400CD8426 /* bg_mist.png in Resources */ = {isa = PBXBuildFile; fileRef = 203B64071428B26300CD8426 /* bg_mist.png */; };
 		203B640D1428B26400CD8426 /* bg_champagne.png in Resources */ = {isa = PBXBuildFile; fileRef = 203B64081428B26300CD8426 /* bg_champagne.png */; };
@@ -140,7 +149,6 @@
 		CBBA01EC13E4519B00641923 /* refresh_help.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01EB13E4519B00641923 /* refresh_help.png */; };
 		CBBA01F513E454FD00641923 /* RelationshipTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBA01F313E454FB00641923 /* RelationshipTableViewController.m */; };
 		CBBA01F613E454FD00641923 /* RelationshipTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01F413E454FC00641923 /* RelationshipTableViewController.xib */; };
-		CBBA01F813E46F2100641923 /* card_general_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01F713E46F2000641923 /* card_general_bg.png */; };
 		CBBA01FA13E470F100641923 /* RelationshipTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01F913E470F100641923 /* RelationshipTableViewCell.xib */; };
 		CBBA01FC13E473BB00641923 /* cell_separator_line.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBA01FB13E473BB00641923 /* cell_separator_line.png */; };
 		CBBA01FF13E4742F00641923 /* RelationshipTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBA01FE13E4742E00641923 /* RelationshipTableViewCell.m */; };
@@ -223,6 +231,15 @@
 		201D2335142B3BA40016F6DE /* greycard_bg_upper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greycard_bg_upper.png; sourceTree = "<group>"; };
 		201D2338142B40060016F6DE /* modify_head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modify_head.png; sourceTree = "<group>"; };
 		201D233A142B40B80016F6DE /* user_detail_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_detail_bg.png; sourceTree = "<group>"; };
+		20375C761449B333002081C7 /* new_tools_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = new_tools_bg.png; sourceTree = "<group>"; };
+		20375C781449B539002081C7 /* switch_small_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch_small_off.png; sourceTree = "<group>"; };
+		20375C791449B539002081C7 /* switch_small_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch_small_on.png; sourceTree = "<group>"; };
+		20375C7C1449B960002081C7 /* atpop_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = atpop_bg.png; sourceTree = "<group>"; };
+		20375C7E1449BFAB002081C7 /* v_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v_big.png; sourceTree = "<group>"; };
+		20375C801449C147002081C7 /* button_send_msg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_send_msg.png; sourceTree = "<group>"; };
+		20375C821449CA0A002081C7 /* SmartCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmartCardViewController.xib; sourceTree = "<group>"; };
+		20375C841449CAA2002081C7 /* smartcard_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smartcard_bg.png; sourceTree = "<group>"; };
+		20375C861449CC19002081C7 /* smartcard_actions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smartcard_actions.png; sourceTree = "<group>"; };
 		203B64061428B26300CD8426 /* bg_twilight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_twilight.png; sourceTree = "<group>"; };
 		203B64071428B26300CD8426 /* bg_mist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_mist.png; sourceTree = "<group>"; };
 		203B64081428B26300CD8426 /* bg_champagne.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_champagne.png; sourceTree = "<group>"; };
@@ -375,7 +392,6 @@
 		CBBA01F213E454FA00641923 /* RelationshipTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelationshipTableViewController.h; sourceTree = "<group>"; };
 		CBBA01F313E454FB00641923 /* RelationshipTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelationshipTableViewController.m; sourceTree = "<group>"; };
 		CBBA01F413E454FC00641923 /* RelationshipTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RelationshipTableViewController.xib; sourceTree = "<group>"; };
-		CBBA01F713E46F2000641923 /* card_general_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = card_general_bg.png; sourceTree = "<group>"; };
 		CBBA01F913E470F100641923 /* RelationshipTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RelationshipTableViewCell.xib; sourceTree = "<group>"; };
 		CBBA01FB13E473BB00641923 /* cell_separator_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_separator_line.png; sourceTree = "<group>"; };
 		CBBA01FD13E4742D00641923 /* RelationshipTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelationshipTableViewCell.h; sourceTree = "<group>"; };
@@ -632,9 +648,10 @@
 				CB1164DA13F11CF100884118 /* root */,
 				CB1164DC13F11D0300884118 /* login */,
 				CB1164DD13F11D1E00884118 /* options */,
-				CBBA01F713E46F2000641923 /* card_general_bg.png */,
 				20DC1AEC1428BE8E00213358 /* title_small.png */,
 				CB9E33D213E9CBE900AAE64C /* card_hole_bg.png */,
+				20375C781449B539002081C7 /* switch_small_off.png */,
+				20375C791449B539002081C7 /* switch_small_on.png */,
 				CBBA01FB13E473BB00641923 /* cell_separator_line.png */,
 				CBBA020913E5313600641923 /* comment_new_noti.png */,
 				CBBA01EB13E4519B00641923 /* refresh_help.png */,
@@ -720,6 +737,7 @@
 		CBBA01EE13E451BD00641923 /* usercard */ = {
 			isa = PBXGroup;
 			children = (
+				20375C7E1449BFAB002081C7 /* v_big.png */,
 				201D2335142B3BA40016F6DE /* greycard_bg_upper.png */,
 				201D2338142B40060016F6DE /* modify_head.png */,
 				20D54769142AE597006A79A1 /* greycard_bg.png */,
@@ -728,6 +746,7 @@
 				CBBA01C113E2C87000641923 /* usercard_button_follow.png */,
 				201D233A142B40B80016F6DE /* user_detail_bg.png */,
 				CBBA01BE13E2C80000641923 /* usercard_bg.png */,
+				20375C801449C147002081C7 /* button_send_msg.png */,
 				CBBA01C213E2C87000641923 /* usercard_button_unfollow.png */,
 				CBBA01C513E2C8C700641923 /* usercard_pointer.png */,
 			);
@@ -750,8 +769,10 @@
 			isa = PBXGroup;
 			children = (
 				CBBA01CD13E34A9F00641923 /* post_button_@.png */,
+				20375C761449B333002081C7 /* new_tools_bg.png */,
 				CBBA01CE13E34AA000641923 /* post_button_#.png */,
 				CBBA01CF13E34AA000641923 /* post_bg.png */,
+				20375C7C1449B960002081C7 /* atpop_bg.png */,
 				CBBA01D013E34AA100641923 /* post_right_bg.png */,
 				CBBA01DB13E34D0B00641923 /* post_right_button_remove.png */,
 				CBBA01D113E34AA200641923 /* post_button_camara.png */,
@@ -763,12 +784,14 @@
 			isa = PBXGroup;
 			children = (
 				CB9E33D413E9E26100AAE64C /* status_msg_addfav.png */,
+				20375C861449CC19002081C7 /* smartcard_actions.png */,
 				CB9DCAB813DFF27F00DA3D3D /* card_profile_cover_large.png */,
 				CB9DCAB913DFF27F00DA3D3D /* card_profile_cover.png */,
 				CB9DCAB213DFF08C00DA3D3D /* card_cover_bottom.png */,
 				CB9DCAB313DFF08C00DA3D3D /* card_cover_top.png */,
 				CB9DCAA313DFEF5D00DA3D3D /* status_bg.png */,
 				CB9DCAA413DFEF5D00DA3D3D /* status_button_action.png */,
+				20375C841449CAA2002081C7 /* smartcard_bg.png */,
 				CB9DCAA513DFEF5D00DA3D3D /* status_button_comment.png */,
 				CB9DCAA613DFEF5D00DA3D3D /* status_button_fav.png */,
 				CB9DCABC13DFF30E00DA3D3D /* status_button_unfav.png */,
@@ -942,6 +965,7 @@
 				CB9DCADD13E2C15C00DA3D3D /* UserCardViewController.xib */,
 				CB9DCACD13E1E54700DA3D3D /* DetailImageViewController.xib */,
 				CB26224F13DF06780062EDE7 /* StatusCardViewController.xib */,
+				20375C821449CA0A002081C7 /* SmartCardViewController.xib */,
 			);
 			name = Nibs;
 			sourceTree = "<group>";
@@ -1158,7 +1182,6 @@
 				CBBA01DC13E34D0C00641923 /* post_right_button_remove.png in Resources */,
 				CBBA01EC13E4519B00641923 /* refresh_help.png in Resources */,
 				CBBA01F613E454FD00641923 /* RelationshipTableViewController.xib in Resources */,
-				CBBA01F813E46F2100641923 /* card_general_bg.png in Resources */,
 				CBBA01FA13E470F100641923 /* RelationshipTableViewCell.xib in Resources */,
 				CBBA01FC13E473BB00641923 /* cell_separator_line.png in Resources */,
 				CBBA020113E52AF300641923 /* usercard_button_HL.png in Resources */,
@@ -1217,6 +1240,15 @@
 				FEFDACB01443F7A5009CF7CD /* MessagesDialogTableViewCell.xib in Resources */,
 				FE9B26B1144481F70028C9B9 /* msg_sina.png in Resources */,
 				9B5F2E2014497374008AC0B8 /* Default-Landscape~ipad.png in Resources */,
+				20375C771449B333002081C7 /* new_tools_bg.png in Resources */,
+				20375C7A1449B539002081C7 /* switch_small_off.png in Resources */,
+				20375C7B1449B539002081C7 /* switch_small_on.png in Resources */,
+				20375C7D1449B960002081C7 /* atpop_bg.png in Resources */,
+				20375C7F1449BFAB002081C7 /* v_big.png in Resources */,
+				20375C811449C147002081C7 /* button_send_msg.png in Resources */,
+				20375C831449CA0B002081C7 /* SmartCardViewController.xib in Resources */,
+				20375C851449CAA2002081C7 /* smartcard_bg.png in Resources */,
+				20375C871449CC19002081C7 /* smartcard_actions.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
