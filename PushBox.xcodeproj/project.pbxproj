@@ -33,6 +33,8 @@
 		20DC1AED1428BE8E00213358 /* title_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DC1AEC1428BE8E00213358 /* title_small.png */; };
 		20EB93521417A370003E541D /* icon_72.png in Resources */ = {isa = PBXBuildFile; fileRef = 20EB93511417A370003E541D /* icon_72.png */; };
 		9B5F2E2014497374008AC0B8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F2E1F14497373008AC0B8 /* Default-Landscape~ipad.png */; };
+		9B5F2E2A14498949008AC0B8 /* UserCardNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F2E2814498949008AC0B8 /* UserCardNaviViewController.m */; };
+		9B5F2E2B14498949008AC0B8 /* UserCardNaviViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F2E2914498949008AC0B8 /* UserCardNaviViewController.xib */; };
 		CB018DD613DD3CC9004217E0 /* DockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB018DD413DD3CC8004217E0 /* DockViewController.m */; };
 		CB018DD713DD3CC9004217E0 /* DockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB018DD513DD3CC8004217E0 /* DockViewController.xib */; };
 		CB018DDB13DDCCCD004217E0 /* dock_slider_thumb_HL.png in Resources */ = {isa = PBXBuildFile; fileRef = CB018DD913DDCCCD004217E0 /* dock_slider_thumb_HL.png */; };
@@ -246,6 +248,9 @@
 		20DC1AEC1428BE8E00213358 /* title_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_small.png; sourceTree = "<group>"; };
 		20EB93511417A370003E541D /* icon_72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_72.png; sourceTree = "<group>"; };
 		9B5F2E1F14497373008AC0B8 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		9B5F2E2714498949008AC0B8 /* UserCardNaviViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCardNaviViewController.h; sourceTree = "<group>"; };
+		9B5F2E2814498949008AC0B8 /* UserCardNaviViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCardNaviViewController.m; sourceTree = "<group>"; };
+		9B5F2E2914498949008AC0B8 /* UserCardNaviViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCardNaviViewController.xib; sourceTree = "<group>"; };
 		CB018DD313DD3CC8004217E0 /* DockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DockViewController.h; sourceTree = "<group>"; };
 		CB018DD413DD3CC8004217E0 /* DockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DockViewController.m; sourceTree = "<group>"; };
 		CB018DD513DD3CC8004217E0 /* DockViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DockViewController.xib; sourceTree = "<group>"; };
@@ -578,6 +583,8 @@
 			children = (
 				CBD36F0E13E697F5008BB428 /* CommentViewController.h */,
 				CBD36F0F13E697F5008BB428 /* CommentViewController.m */,
+				9B5F2E2714498949008AC0B8 /* UserCardNaviViewController.h */,
+				9B5F2E2814498949008AC0B8 /* UserCardNaviViewController.m */,
 				CB9DCADB13E2C15900DA3D3D /* UserCardViewController.h */,
 				CB9DCADC13E2C15B00DA3D3D /* UserCardViewController.m */,
 				CB7C4A0613EBDE2B00BD329A /* UserCardBaseViewController.h */,
@@ -942,6 +949,7 @@
 				CB9DCADD13E2C15C00DA3D3D /* UserCardViewController.xib */,
 				CB9DCACD13E1E54700DA3D3D /* DetailImageViewController.xib */,
 				CB26224F13DF06780062EDE7 /* StatusCardViewController.xib */,
+				9B5F2E2914498949008AC0B8 /* UserCardNaviViewController.xib */,
 			);
 			name = Nibs;
 			sourceTree = "<group>";
@@ -1217,6 +1225,7 @@
 				FEFDACB01443F7A5009CF7CD /* MessagesDialogTableViewCell.xib in Resources */,
 				FE9B26B1144481F70028C9B9 /* msg_sina.png in Resources */,
 				9B5F2E2014497374008AC0B8 /* Default-Landscape~ipad.png in Resources */,
+				9B5F2E2B14498949008AC0B8 /* UserCardNaviViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1286,6 +1295,7 @@
 				FEFDACAF1443F7A5009CF7CD /* MessagesDialogTableViewCell.m in Sources */,
 				FE1E629914441E2600A48CF9 /* Message.m in Sources */,
 				FE1E629C14441E3F00A48CF9 /* User.m in Sources */,
+				9B5F2E2A14498949008AC0B8 /* UserCardNaviViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

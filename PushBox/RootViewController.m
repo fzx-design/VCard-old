@@ -44,7 +44,7 @@
 - (void)hideCommandCenter;
 - (void)showCardTableView;
 - (void)hideCardTableView;
-- (void)setDefaultBackgroundImage;
+- (void)setDefaultBackgroundImage:(BOOL)animated;
 - (void)updateBackgroundImageAnimated:(BOOL)animated;
 @end
 
@@ -114,7 +114,7 @@
 {
     [super viewDidLoad];
     
-    [self setDefaultBackgroundImage];
+    [self setDefaultBackgroundImage:NO];
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:self selector:@selector(backgroundChangedNotification:) 
@@ -158,6 +158,7 @@
     [self hideDockView];
     [self hideCardTableView];
     [self hideBottomStateView];
+	[self setDefaultBackgroundImage:YES];
     self.currentUser = nil;
     [User deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
     [self performSelector:@selector(showLoginView) withObject:nil afterDelay:1.0];
@@ -260,11 +261,19 @@
     }
 }
 
-- (void)setDefaultBackgroundImage
+- (void)setDefaultBackgroundImage:(BOOL)animated
 {
 	NSString *fileName = [BackgroundManViewController backgroundImageFilePathFromEnum:PBBackgroundImageDefault];
 	NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"png"];
 	UIImage *img = [UIImage imageWithContentsOfFile:path];
+	
+	if (animated) {
+        CATransition *transition = [CATransition animation];
+        transition.duration = 1.0;
+        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        transition.type = kCATransitionFade;
+        [self.backgroundImageView.layer addAnimation:transition forKey:nil];
+    }
 	
 	self.backgroundImageView.image = img;
 }
