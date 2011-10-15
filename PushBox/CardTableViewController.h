@@ -44,6 +44,11 @@ typedef enum {
     BOOL _loading;
     
     BOOL _insertionAnimationEnabled;
+	
+	BOOL _checkingDirection;
+	NSInteger _direction;
+	CGFloat dragStartOffset;
+	CGFloat preDiff;
 }
 
 

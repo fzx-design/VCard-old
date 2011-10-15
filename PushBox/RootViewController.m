@@ -44,6 +44,7 @@
 - (void)hideCommandCenter;
 - (void)showCardTableView;
 - (void)hideCardTableView;
+- (void)setDefaultBackgroundImage:(BOOL)animated;
 - (void)updateBackgroundImageAnimated:(BOOL)animated;
 @end
 
@@ -96,7 +97,7 @@
         if (!client.hasError) {
             NSDictionary *userDict = client.responseJSONObject;
             self.currentUser = [User insertUser:userDict inManagedObjectContext:self.managedObjectContext];
-            
+            [self updateBackgroundImageAnimated:YES];
             self.cardTableViewController.dataSource = CardTableViewDataSourceFriendsTimeline;
             [self.cardTableViewController loadMoreDataCompletion:^(void) {
                 [self.cardTableViewController loadAllFavoritesWithCompletion:NULL];
@@ -114,7 +115,7 @@
 {
     [super viewDidLoad];
     
-    [self updateBackgroundImageAnimated:NO];
+    [self setDefaultBackgroundImage:NO];
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:self selector:@selector(backgroundChangedNotification:) 
@@ -158,6 +159,7 @@
     [self hideDockView];
     [self hideCardTableView];
     [self hideBottomStateView];
+	[self setDefaultBackgroundImage:YES];
     self.currentUser = nil;
     [User deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
     [self performSelector:@selector(showLoginView) withObject:nil afterDelay:1.0];
@@ -252,6 +254,7 @@
 	}
     self.dockViewController.view.userInteractionEnabled = NO;
 	self.bottomStateView.userInteractionEnabled = NO;
+	self.cardTableViewController.tableView.scrollEnabled = NO;
     self.cardTableViewController.swipeEnabled = NO;
 	[UIView animateWithDuration:0.5 animations:^{
 		_holeImageView.alpha = 1.0;
@@ -265,6 +268,7 @@
 	}];
 	self.bottomStateView.userInteractionEnabled = YES;
     self.dockViewController.view.userInteractionEnabled = YES;
+	self.cardTableViewController.tableView.scrollEnabled = YES;
     self.cardTableViewController.swipeEnabled = YES;
 }
 
@@ -280,6 +284,23 @@
     else {
         [slider setValue:row animated:YES];
     }
+}
+
+- (void)setDefaultBackgroundImage:(BOOL)animated
+{
+	NSString *fileName = [BackgroundManViewController backgroundImageFilePathFromEnum:PBBackgroundImageDefault];
+	NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"png"];
+	UIImage *img = [UIImage imageWithContentsOfFile:path];
+	
+	if (animated) {
+        CATransition *transition = [CATransition animation];
+        transition.duration = 1.0;
+        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        transition.type = kCATransitionFade;
+        [self.backgroundImageView.layer addAnimation:transition forKey:nil];
+    }
+	
+	self.backgroundImageView.image = img;
 }
 
 - (void)updateBackgroundImageAnimated:(BOOL)animated
@@ -300,8 +321,6 @@
     
 	self.backgroundImageView.image = img;
 }
-
-
 
 - (void)backgroundChangedNotification:(id)sender
 {
