@@ -44,6 +44,7 @@
 - (void)hideCommandCenter;
 - (void)showCardTableView;
 - (void)hideCardTableView;
+- (void)setDefaultBackgroundImage;
 - (void)updateBackgroundImageAnimated:(BOOL)animated;
 @end
 
@@ -95,7 +96,7 @@
         if (!client.hasError) {
             NSDictionary *userDict = client.responseJSONObject;
             self.currentUser = [User insertUser:userDict inManagedObjectContext:self.managedObjectContext];
-            
+            [self updateBackgroundImageAnimated:YES];
             self.cardTableViewController.dataSource = CardTableViewDataSourceFriendsTimeline;
             [self.cardTableViewController loadMoreDataCompletion:^(void) {
                 [self.cardTableViewController loadAllFavoritesWithCompletion:NULL];
@@ -113,7 +114,7 @@
 {
     [super viewDidLoad];
     
-    [self updateBackgroundImageAnimated:NO];
+    [self setDefaultBackgroundImage];
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:self selector:@selector(backgroundChangedNotification:) 
@@ -259,6 +260,15 @@
     }
 }
 
+- (void)setDefaultBackgroundImage
+{
+	NSString *fileName = [BackgroundManViewController backgroundImageFilePathFromEnum:PBBackgroundImageDefault];
+	NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"png"];
+	UIImage *img = [UIImage imageWithContentsOfFile:path];
+	
+	self.backgroundImageView.image = img;
+}
+
 - (void)updateBackgroundImageAnimated:(BOOL)animated
 {
     int enumValue = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeyBackground];
@@ -277,8 +287,6 @@
     
 	self.backgroundImageView.image = img;
 }
-
-
 
 - (void)backgroundChangedNotification:(id)sender
 {
