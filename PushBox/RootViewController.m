@@ -227,6 +227,7 @@
 	}
     self.dockViewController.view.userInteractionEnabled = NO;
 	self.bottomStateView.userInteractionEnabled = NO;
+	self.cardTableViewController.tableView.scrollEnabled = NO;
     self.cardTableViewController.swipeEnabled = NO;
 	[UIView animateWithDuration:0.5 animations:^{
 		_holeImageView.alpha = 1.0;
@@ -240,6 +241,7 @@
 	}];
 	self.bottomStateView.userInteractionEnabled = YES;
     self.dockViewController.view.userInteractionEnabled = YES;
+	self.cardTableViewController.tableView.scrollEnabled = YES;
     self.cardTableViewController.swipeEnabled = YES;
 }
 

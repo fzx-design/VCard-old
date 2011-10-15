@@ -14,14 +14,16 @@
 
 #define kCardWidth 570
 #define kCardHeight 640
-#define kHeaderAndFooterWidth 229.0
+#define kHeaderAndFooterWidth 232.0
 
 #define kStatusCountPerRequest 10
 
 #define kBlurImageViewScale 2.27
 
-@interface CardTableViewController()
-@property(nonatomic, retain) UITableViewCell *tempCell;  
+@interface CardTableViewController(){
+	CGPoint startPoint;
+}
+@property(nonatomic, retain) UITableViewCell *tempCell;
 @end
 
 @implementation CardTableViewController
@@ -57,8 +59,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.tableView.scrollEnabled = NO;
+
+    self.tableView.scrollEnabled = YES;
+	self.tableView.pagingEnabled = YES;
 	
 	CGRect oldFrame = self.tableView.frame;
     self.tableView.transform = CGAffineTransformMakeRotation(-M_PI_2);
@@ -78,19 +81,22 @@
     [self.tableView setTableFooterView:footer];
     [footer release];
 	
-	UISwipeGestureRecognizer *swipeRigthGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self 
-																							action:@selector(swipeRight:)];
-	swipeRigthGesture.direction = UISwipeGestureRecognizerDirectionUp;
-	swipeRigthGesture.numberOfTouchesRequired = 1;
-	[self.tableView addGestureRecognizer:swipeRigthGesture];
-	[swipeRigthGesture release];
+	//TODO
+	//Need to add pan gesture to the controller
 	
-	UISwipeGestureRecognizer *swipeLeftGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self
-																						   action:@selector(swipeLeft:)];
-	swipeLeftGesture.direction = UISwipeGestureRecognizerDirectionDown;
-	swipeLeftGesture.numberOfTouchesRequired = 1;
-	[self.tableView addGestureRecognizer:swipeLeftGesture];
-	[swipeLeftGesture release];
+	//	UISwipeGestureRecognizer *swipeRigthGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self 
+	//																							action:@selector(swipeRight:)];
+	//	swipeRigthGesture.direction = UISwipeGestureRecognizerDirectionUp;
+	//	swipeRigthGesture.numberOfTouchesRequired = 1;
+	//	[self.tableView addGestureRecognizer:swipeRigthGesture];
+	//	[swipeRigthGesture release];
+	//	
+	//	UISwipeGestureRecognizer *swipeLeftGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self
+	//																						   action:@selector(swipeLeft:)];
+	//	swipeLeftGesture.direction = UISwipeGestureRecognizerDirectionDown;
+	//	swipeLeftGesture.numberOfTouchesRequired = 1;
+	//	[self.tableView addGestureRecognizer:swipeLeftGesture];
+	//	[swipeLeftGesture release];
     
     self.currentRowIndex = 0;
     self.swipeEnabled = YES;
@@ -98,12 +104,13 @@
     self.insertionAnimationEnabled = YES;
     _nextPage = 1;
     _loading = NO;
+	_checkingDirection = NO;
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:5
-                                     target:self 
-                                   selector:@selector(timerFired:) 
-                                   userInfo:nil 
-                                    repeats:YES];
+											  target:self 
+											selector:@selector(timerFired:) 
+											userInfo:nil 
+											 repeats:YES];
 }
 
 - (BOOL)insertionAnimationEnabled
@@ -146,17 +153,53 @@
     [client getUnreadCountSinceStatusID:sinceID];
 }
 
+
+
+-(void)setHeaderViewWithOffset{
+	self.tableView.tableHeaderView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 232 + 464 * self.currentRowIndex)] autorelease];
+}
+
+- (void)scrollToRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([self.tableView numberOfRowsInSection:0] == indexPath.row + 1) {
+        [self performSelector:@selector(loadMoreDataCompletion:) withObject:nil afterDelay:1.5];
+    }
+	
+	NSInteger indexDiff = indexPath.row - self.currentRowIndex;
+	CGFloat diff = self.tableView.contentOffset.y + 464 * indexDiff;
+	
+	self.currentRowIndex += indexDiff;
+	[self setHeaderViewWithOffset];
+	[self.tableView setContentOffset:CGPointMake(self.tableView.contentOffset.x, diff) animated:NO];
+	[self.tableView setContentOffset:CGPointMake(self.tableView.contentOffset.x, self.currentRowIndex * 1024) animated:YES];
+	
+	[self.delegate cardTableViewController:self didScrollToRow:self.currentRowIndex withNumberOfRows:[self numberOfRows]];
+	[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
+	NSLog(@"indexDiff**************%d   currentIndex**********%d", indexDiff, self.currentRowIndex);
+}
+
+- (void)scrollToRow:(int)row
+{
+    if (row == self.currentRowIndex) {
+        return;
+    }
+    if (row >= 0 && row < [self numberOfRows]) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+        [self scrollToRowAtIndexPath:indexPath];
+    }
+}
+
 - (void)pushCardWithCompletion:(void (^)())completion
 {
     if (!self.prevFetchedResultsController) {
         self.prevFetchedResultsController = self.fetchedResultsController;
         self.prevRowIndex = self.currentRowIndex;
     }
-    
+	
     self.fetchedResultsController.delegate = nil;
     self.fetchedResultsController = nil;
     self.currentRowIndex = 0;
-    
+	
     self.blurImageView.alpha = 0.0;
 	self.blurImageView.transform = CGAffineTransformMakeScale(kBlurImageViewScale, kBlurImageViewScale);
     
@@ -167,6 +210,7 @@
         self.tableView.transform = CGAffineTransformScale(self.tableView.transform, 1/kBlurImageViewScale, 1/kBlurImageViewScale);
     } completion:^(BOOL fin) {
         [self clearData];
+		[self setHeaderViewWithOffset];
         [self.tableView reloadData];
         [self loadMoreDataCompletion:completion];
         self.tableView.transform = CGAffineTransformScale(self.tableView.transform, kBlurImageViewScale, kBlurImageViewScale);
@@ -182,16 +226,18 @@
 	} completion:^(BOOL fin) {
 		self.fetchedResultsController = self.prevFetchedResultsController;
         self.fetchedResultsController.delegate = self;
-        self.currentRowIndex = self.prevRowIndex;
         self.prevFetchedResultsController = nil;
+        self.currentRowIndex = self.prevRowIndex;
+		
         self.prevRowIndex = 0;
-        
+		[self setHeaderViewWithOffset];
+		
         [self.tableView reloadData];
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.currentRowIndex inSection:0]
                               atScrollPosition:UITableViewScrollPositionMiddle
                                       animated:NO];
         [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
-
+		
         self.blurImageView.alpha = 1.0;
         self.blurImageView.transform = CGAffineTransformMakeScale(1, 1);
 		self.tableView.transform = CGAffineTransformScale(self.tableView.transform, 1/kBlurImageViewScale, 1/kBlurImageViewScale);
@@ -219,39 +265,12 @@
 - (void)configureUsability
 {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.currentRowIndex inSection:0];
-    NSIndexPath *prev = [NSIndexPath indexPathForRow:self.currentRowIndex-1 inSection:0];
-    NSIndexPath *next = [NSIndexPath indexPathForRow:self.currentRowIndex+1 inSection:0];
+    NSIndexPath *prev = [NSIndexPath indexPathForRow:self.currentRowIndex - 1 inSection:0];
+    NSIndexPath *next = [NSIndexPath indexPathForRow:self.currentRowIndex + 1 inSection:0];
     
     [[self.tableView cellForRowAtIndexPath:indexPath] setUserInteractionEnabled:YES];
     [[self.tableView cellForRowAtIndexPath:prev] setUserInteractionEnabled:NO];
     [[self.tableView cellForRowAtIndexPath:next] setUserInteractionEnabled:NO];
-}
-
-- (void)scrollToRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([self.tableView numberOfRowsInSection:0] == indexPath.row+1) {
-        [self performSelector:@selector(loadMoreDataCompletion:) withObject:nil afterDelay:1.5];
-    }
-    
-    [self.tableView scrollToRowAtIndexPath:indexPath 
-                          atScrollPosition:UITableViewScrollPositionMiddle 
-                                  animated:YES];
-    
-    self.currentRowIndex = indexPath.row;
-    
-    
-    [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
-}
-
-- (void)scrollToRow:(int)row
-{
-    if (row == self.currentRowIndex) {
-        return;
-    }
-    if (row >= 0 && row < [self numberOfRows]) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-        [self scrollToRowAtIndexPath:indexPath];
-    }
 }
 
 - (void)swipeRight:(UISwipeGestureRecognizer *)ges
@@ -261,7 +280,7 @@
     }
 	NSArray *indexArray = [self.tableView indexPathsForVisibleRows];
 	NSIndexPath *nextIndex = [indexArray lastObject];
-      
+	
     [self scrollToRowAtIndexPath:nextIndex];
     [self.delegate cardTableViewController:self didScrollToRow:nextIndex.row withNumberOfRows:[self numberOfRows]];
 }
@@ -373,7 +392,7 @@
         }];
         
         [client getFriendsTimelineSinceID:nil
-                            maxID:[NSString stringWithFormat:@"%lld", maxID]
+									maxID:[NSString stringWithFormat:@"%lld", maxID]
                            startingAtPage:0 
                                     count:kStatusCountPerRequest
                                   feature:0];
@@ -404,7 +423,7 @@
         
         [client getUserTimeline:self.user.userID
                         SinceID:nil
-                  maxID:[NSString stringWithFormat:@"%lld", maxID]
+						  maxID:[NSString stringWithFormat:@"%lld", maxID]
                  startingAtPage:0
                           count:kStatusCountPerRequest
                         feature:0];
@@ -426,6 +445,8 @@
     }
     [self.managedObjectContext processPendingChanges];
     self.currentRowIndex = 0;
+	[self setHeaderViewWithOffset];
+	
 }
 
 - (void)refresh
@@ -468,46 +489,91 @@
 }
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    [self.tableView beginUpdates];
+    //[self.tableView beginUpdates];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath {
     
-    UITableView *tableView = self.tableView;
-    
-    switch(type) {
-            
-        case NSFetchedResultsChangeInsert:
-            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-                             withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-                             withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeUpdate:
-            [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
-                    atIndexPath:indexPath];
-            break;
-            
-        case NSFetchedResultsChangeMove:
-            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-                             withRowAnimation:UITableViewRowAnimationFade];
-            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-                             withRowAnimation:UITableViewRowAnimationFade];
-            break;
-    }
+	//    UITableView *tableView = self.tableView;
+	//    
+	//    switch(type) {
+	//            
+	//        case NSFetchedResultsChangeInsert:
+	//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+	//                             withRowAnimation:UITableViewRowAnimationFade];
+	//            break;
+	//            
+	//        case NSFetchedResultsChangeDelete:
+	//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+	//                             withRowAnimation:UITableViewRowAnimationFade];
+	//            break;
+	//            
+	//        case NSFetchedResultsChangeUpdate:
+	//            [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
+	//                    atIndexPath:indexPath];
+	//            break;
+	//            
+	//        case NSFetchedResultsChangeMove:
+	//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+	//                             withRowAnimation:UITableViewRowAnimationFade];
+	//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+	//                             withRowAnimation:UITableViewRowAnimationFade];
+	//            break;
+	//    }
 }
-
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [self.tableView endUpdates];
-    //[self.tableView reloadData];
+	//    [self.tableView endUpdates];
+	[self.tableView reloadData];
 }
 
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+	dragStartOffset = scrollView.contentOffset.y;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+	
+	if(_checkingDirection) {
+		_checkingDirection = NO;
+		CGFloat checkResult = scrollView.contentOffset.y - preDiff;
+		preDiff = 0;
+		
+		if((checkResult * _direction) < 0) {
+			return;
+		}
+		
+		if (checkResult > 0 && self.currentRowIndex < [self numberOfRows] - 1) {
+			NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.currentRowIndex + 1 inSection:0];
+			[self scrollToRowAtIndexPath:indexPath];
+		} 
+		else if(checkResult > 0 && self.currentRowIndex == [self numberOfRows] - 1) {
+			[self performSelector:@selector(loadMoreDataCompletion:) withObject:nil afterDelay:0.5];
+		}
+		else if(checkResult < 0 && self.currentRowIndex != 0){
+			NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.currentRowIndex - 1 inSection:0];
+			[self scrollToRowAtIndexPath:indexPath];
+		}
+	}
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+	_checkingDirection = YES;
+	if(scrollView.contentOffset.y > dragStartOffset) {
+		_direction = 1;
+	}
+	else if(scrollView.contentOffset.y < dragStartOffset) {
+		_direction = -1;
+	}
+}
+
+-(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
+{
+	if (_checkingDirection) {
+		preDiff = scrollView.contentOffset.y;
+	}
+}
 
 @end
