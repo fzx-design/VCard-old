@@ -365,7 +365,16 @@
 - (void)showDockView
 {
     [self.view insertSubview:self.dockViewController.view belowSubview:self.bottomStateView];
+	
+	CGRect frame = self.dockViewController.view.frame;
+	frame.origin.y += 100;
+	self.dockViewController.view.frame = frame;
+	
     [UIView animateWithDuration:1.0 animations:^{
+		CGRect frame = self.dockViewController.view.frame;
+		frame.origin.y -= 100;
+		self.dockViewController.view.frame = frame;
+		
         self.dockViewController.view.alpha = 1.0;
     }];
 }
