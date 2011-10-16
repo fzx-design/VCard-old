@@ -83,7 +83,7 @@
 							<object class="IBUIImageView" id="348527266">
 								<reference key="NSNextResponder" ref="413708758"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{-3, -2}, {475, 192}}</string>
+								<string key="NSFrame">{{-4, -2}, {475, 192}}</string>
 								<reference key="NSSuperview" ref="413708758"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="901953774"/>
@@ -787,7 +787,7 @@
 								<reference key="IBUIFont" ref="103665835"/>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, 37}, {466, 626}}</string>
+						<string key="NSFrame">{{0, 37}, {467, 626}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="348527266"/>
@@ -796,10 +796,9 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</array>
-				<string key="NSFrameSize">{466, 626}</string>
+				<string key="NSFrameSize">{467, 626}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView"/>
 				<reference key="IBUIBackgroundColor" ref="1036776383"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
@@ -1171,6 +1170,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">CCUserInfoCardViewController</string>
 					<string key="superclassName">UserCardBaseViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">newFriendsImageView</string>
+						<string key="NS.object.0">UIImageView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">newFriendsImageView</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">newFriendsImageView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/CCUserInfoCardViewController.h</string>
