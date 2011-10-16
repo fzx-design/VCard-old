@@ -112,7 +112,7 @@
 						<int key="IBUITag">1</int>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<string key="IBUIText"/>
+						<string key="IBUIText">18621699369</string>
 						<string key="IBUIPlaceholder">电子邮箱 / 手机号</string>
 						<object class="NSColor" key="IBUITextColor" id="519476891">
 							<int key="NSColorSpace">3</int>
@@ -151,7 +151,7 @@
 						<int key="IBUITag">2</int>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<string key="IBUIText"/>
+						<string key="IBUIText">699369</string>
 						<string key="IBUIPlaceholder">密码</string>
 						<reference key="IBUITextColor" ref="519476891"/>
 						<bool key="IBUIClearsOnBeginEditing">YES</bool>

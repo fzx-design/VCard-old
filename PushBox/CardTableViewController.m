@@ -64,6 +64,7 @@
 	self.tableView.pagingEnabled = YES;
 	
 	CGRect oldFrame = self.tableView.frame;
+	
     self.tableView.transform = CGAffineTransformMakeRotation(-M_PI_2);
 	self.tableView.frame = oldFrame;
 	self.tableView.delegate = self;
@@ -232,6 +233,7 @@
         self.prevRowIndex = 0;
 		[self setHeaderViewWithOffset];
         [self.tableView reloadData];
+		
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.currentRowIndex inSection:0]
                               atScrollPosition:UITableViewScrollPositionMiddle
                                       animated:NO];

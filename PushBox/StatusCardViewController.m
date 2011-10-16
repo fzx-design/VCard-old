@@ -439,6 +439,7 @@
 
 - (void)shouldDismissUserCardNotification:(id)sender 
 {
+	[UserCardNaviViewController sharedUserCardDismiss];
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardDismissed object:self];
 }
 
