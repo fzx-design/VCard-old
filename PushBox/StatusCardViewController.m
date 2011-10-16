@@ -410,12 +410,18 @@
 	vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     vc.delegate = self;
 	
-	UINavigationController* navcon = [[UINavigationController alloc] initWithRootViewController:vc];
-	navcon.navigationBarHidden = YES;
+//	UINavigationController* navcon = [[UINavigationController alloc] initWithRootViewController:vc];
+//	navcon.navigationBarHidden = YES;
 	
-	UserCardNaviViewController *navi = [UserCardNaviViewController sharedUserCardNaviViewController];
-	[navi.contentViewController.view addSubview:navcon.view];
-	navi.naviController = navcon;
+//	UserCardNaviViewController *navi = [UserCardNaviViewController sharedUserCardNaviViewController];
+//	[navi.naviController pushViewController:vc animated:NO];
+	
+//	[navi.contentViewController.view addSubview:navcon.view];
+//	navi.naviController = navcon;
+	
+	UserCardNaviViewController* navi = [[UserCardNaviViewController alloc] initWithRootViewController:vc];
+	[UserCardNaviViewController setSharedUserCardNaviViewController:navi];
+	
     navi.modalPresentationStyle = UIModalPresentationCurrentContext;
 	navi.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 
@@ -424,7 +430,7 @@
     [self presentModalViewController:navi animated:YES];
 	[navi release];
 	[vc release];
-	[navcon release];
+//	[navcon release];
 }
 
 - (void)userCardViewControllerDidDismiss:(UserCardViewController *)vc

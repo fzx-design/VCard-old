@@ -23,9 +23,9 @@
 @synthesize commandCenterNotiImageView = _commandCenterNotiImageView;
 @synthesize optionsPopoverController = _optionsPopoverController;
 @synthesize controlContainerView = _controlContainerView;
-@synthesize userCardViewController = _userCardViewController;
 @synthesize commentsTableViewController = _commentsTableViewController;
-
+@synthesize userCardNaviViewController = _userCardNaviViewController;
+@synthesize ccUserInfoCardViewController = _ccUserInfoCardViewController;
 
 #pragma mark - View lifecycle
 
@@ -43,8 +43,9 @@
     [_refreshNotiImageView release];
     [_commandCenterNotiImageView release];
     [_optionsPopoverController release];
-    [_userCardViewController release];
     [_commentsTableViewController release];
+	[_userCardNaviViewController release];
+	[_ccUserInfoCardViewController release];
     [super dealloc];
 }
 
@@ -93,9 +94,16 @@
     self.refreshNotiImageView.hidden = YES;
     self.commandCenterNotiImageView.hidden = YES;
 
-    self.userCardViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    self.userCardViewController.currentUser = self.currentUser;
+	self.ccUserInfoCardViewController = [[CCUserInfoCardViewController alloc] init];
+	self.ccUserInfoCardViewController.currentUser = self.currentUser;
+	self.userCardNaviViewController = [[UserCardNaviViewController alloc] initWithRootViewController:self.ccUserInfoCardViewController];
+	self.userCardNaviViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
+	CGRect frame = CGRectMake(-16, 121, self.userCardNaviViewController.view.frame.size.width, self.userCardNaviViewController.view.frame.size.height);
+	self.userCardNaviViewController.view.frame = frame;
+	[self.view addSubview:self.userCardNaviViewController.view];
+	
+	
     self.commentsTableViewController.dataSource = CommentsTableViewDataSourceCommentsToMe;
     self.commentsTableViewController.currentUser = self.currentUser;
 }
@@ -103,7 +111,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.userCardViewController viewWillAppear:YES];
+	[self.ccUserInfoCardViewController viewWillAppear:YES];
     [self.commentsTableViewController viewWillAppear:YES];
 }
 
@@ -122,7 +130,7 @@
 
 - (void)newFollowersNotification:(id)sender
 {
-    self.userCardViewController.newFriendsImageView.hidden = NO;
+	self.ccUserInfoCardViewController.newFriendsImageView.hidden = NO;
     if (!self.commandCenterButton.selected) {
         self.commandCenterNotiImageView.hidden = NO;
     }

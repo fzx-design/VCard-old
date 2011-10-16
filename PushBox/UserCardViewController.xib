@@ -61,7 +61,7 @@
 					<object class="IBUIImageView" id="1013010679">
 						<reference key="NSNextResponder" ref="317278890"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{-4, 35}, {475, 192}}</string>
+						<string key="NSFrame">{{-3, 35}, {475, 192}}</string>
 						<reference key="NSSuperview" ref="317278890"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="322003171"/>
@@ -912,7 +912,6 @@
 				<string key="NSFrameSize">{466, 626}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView"/>
 				<reference key="IBUIBackgroundColor" ref="410786381"/>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>

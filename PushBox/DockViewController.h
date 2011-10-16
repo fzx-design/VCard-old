@@ -10,6 +10,8 @@
 #import "OptionsTableViewController.h"
 #import "CCUserCardViewController.h"
 #import "CommentsTableViewController.h"
+#import "UserCardNaviViewController.h"
+#import "CCUserInfoCardViewController.h"
 
 @interface DockViewController : CoreDataViewController<UIPopoverControllerDelegate> {
     UIButton *_refreshButton;
@@ -25,8 +27,11 @@
     UIImageView *_commandCenterNotiImageView;
 
     UIPopoverController *_optionsPopoverController;
-    CCUserCardViewController *_userCardViewController;
+//    CCUserCardViewController *_userCardViewController;
     CommentsTableViewController *_commentsTableViewController;
+	
+	UserCardNaviViewController *_userCardNaviViewController;
+	CCUserInfoCardViewController *_ccUserInfoCardViewController;
 }
 
 @property(nonatomic, retain) IBOutlet UIButton* refreshButton;
@@ -41,8 +46,11 @@
 @property(nonatomic, retain) IBOutlet UIImageView* refreshNotiImageView;
 @property(nonatomic, retain) IBOutlet UIImageView* commandCenterNotiImageView;
 @property(nonatomic, retain) UIPopoverController* optionsPopoverController;
-@property(nonatomic, retain) IBOutlet CCUserCardViewController* userCardViewController;
-@property(nonatomic, retain) IBOutlet CommentsTableViewController* commentsTableViewController;
+//@property(nonatomic, retain) IBOutlet CCUserCardViewController* userCardViewController;
+@property(nonatomic, retain) CommentsTableViewController* commentsTableViewController;
+
+@property(nonatomic, retain) UserCardNaviViewController* userCardNaviViewController;
+@property(nonatomic, retain) IBOutlet CCUserInfoCardViewController* ccUserInfoCardViewController;
 
 - (void)showControlsAnimated:(BOOL)animated;
 - (void)hideControlsAnimated:(BOOL)animated;

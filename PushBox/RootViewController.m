@@ -548,6 +548,7 @@
     self.dockViewController.slider.enabled = NO;
     self.dockViewController.refreshButton.enabled = NO;
     self.dockViewController.messagesCenterButton.enabled = NO;
+	[self.dockViewController.userCardNaviViewController.naviController popToRootViewControllerAnimated:NO];
 }
 
 - (void)hideCommandCenter

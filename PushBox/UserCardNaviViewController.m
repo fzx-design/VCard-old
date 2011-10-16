@@ -15,17 +15,9 @@ static UserCardNaviViewController *sharedUserCardNaviViewController = nil;
 @synthesize contentViewController;
 @synthesize naviController;
 
-+ (UserCardNaviViewController *)sharedUserCardNaviViewController
++ (void)setSharedUserCardNaviViewController:(UserCardNaviViewController*)vc
 {
-    @synchronized(self)
-	{
-        if (sharedUserCardNaviViewController == nil)
-		{
-            sharedUserCardNaviViewController = [[UserCardNaviViewController alloc] init];
-        }
-    }
-	
-    return sharedUserCardNaviViewController;
+    sharedUserCardNaviViewController = [vc retain];
 }
 
 + (void)sharedUserCardDismiss
@@ -46,12 +38,21 @@ static UserCardNaviViewController *sharedUserCardNaviViewController = nil;
     return self;
 }
 
+- (id)initWithRootViewController:(UIViewController*)vc
+{
+	self = [super init];
+	if (self) {
+		self.naviController = [[UINavigationController alloc] initWithRootViewController:vc];
+		self.naviController.navigationBarHidden = YES;
+		[self.contentViewController.view addSubview:self.naviController.view];
+	}
+	
+	return self;
+}
+
 - (void)didReceiveMemoryWarning
 {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 - (UserCardContentViewController*)contentViewController
@@ -76,17 +77,19 @@ static UserCardNaviViewController *sharedUserCardNaviViewController = nil;
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-	[contentViewController release];
-	[naviController release];
 	contentViewController = nil;
 	naviController = nil;
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+}
+
+- (void)dealloc
+{
+	[contentViewController release];
+	[naviController release];
+	[super dealloc];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
