@@ -303,13 +303,21 @@
 	[actionSheet release];
 }
 
+- (void)newComment
+{
+	CommentViewController *vc = [[CommentViewController alloc] init];
+    vc.targetStatus = self.status;
+    [[UIApplication sharedApplication] presentModalViewController:vc atHeight:kModalViewHeight];
+    [vc release];
+}
+
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
 	UIAlertView *alert = nil;
 	MFMailComposeViewController *picker = nil;
 	switch (buttonIndex) {
 		case 0:
-            [self commentButtonClicked:nil];
+            [self newComment];
 			break;
 		case 1:
             [self repostButtonClicked:nil];
@@ -409,15 +417,7 @@
     vc.modalPresentationStyle = UIModalPresentationCurrentContext;
 	vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     vc.delegate = self;
-	
-//	UINavigationController* navcon = [[UINavigationController alloc] initWithRootViewController:vc];
-//	navcon.navigationBarHidden = YES;
-	
-//	UserCardNaviViewController *navi = [UserCardNaviViewController sharedUserCardNaviViewController];
-//	[navi.naviController pushViewController:vc animated:NO];
-	
-//	[navi.contentViewController.view addSubview:navcon.view];
-//	navi.naviController = navcon;
+
 	
 	UserCardNaviViewController* navi = [[UserCardNaviViewController alloc] initWithRootViewController:vc];
 	[UserCardNaviViewController setSharedUserCardNaviViewController:navi];
@@ -430,7 +430,6 @@
     [self presentModalViewController:navi animated:YES];
 	[navi release];
 	[vc release];
-//	[navcon release];
 }
 
 - (void)userCardViewControllerDidDismiss:(UserCardViewController *)vc
@@ -440,8 +439,6 @@
 
 - (void)shouldDismissUserCardNotification:(id)sender 
 {
-//	[self dismissModalViewControllerAnimated:YES];
-	[UserCardNaviViewController sharedUserCardDismiss];
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardDismissed object:self];
 }
 
