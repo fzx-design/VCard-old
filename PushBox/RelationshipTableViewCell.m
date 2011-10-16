@@ -16,10 +16,11 @@
 
 - (void)dealloc
 {
-    [super dealloc];
-    [_profileImageView release];
+	[_profileImageView release];
     [_screenNameLabel release];
     [_descriptionLabel release];
+    [super dealloc];
+
 }
 
 @end
