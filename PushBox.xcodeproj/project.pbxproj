@@ -974,12 +974,12 @@
 				CBBA021013E53F2900641923 /* CommentsTableViewCell.xib */,
 				CBBA01C913E3463300641923 /* PostViewController.xib */,
 				CBBA01F413E454FC00641923 /* RelationshipTableViewController.xib */,
-				CB9DCADD13E2C15C00DA3D3D /* UserCardViewController.xib */,
 				CB9DCACD13E1E54700DA3D3D /* DetailImageViewController.xib */,
 				CB26224F13DF06780062EDE7 /* StatusCardViewController.xib */,
 				20375C821449CA0A002081C7 /* SmartCardViewController.xib */,
 				9B5F2E3714498FC5008AC0B8 /* UserCardNaviViewController.xib */,
 				9BB5B8B51449A8B100352FF7 /* UserCardContentViewController.xib */,
+				CB9DCADD13E2C15C00DA3D3D /* UserCardViewController.xib */,
 				9BC6E650144A9B2400B28506 /* CCUserInfoCardViewController.xib */,
 			);
 			name = Nibs;
@@ -1407,7 +1407,9 @@
 				GCC_PREFIX_HEADER = "PushBox/PushBox-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "PushBox/PushBox-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "VCard HD";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1419,7 +1421,9 @@
 				GCC_PREFIX_HEADER = "PushBox/PushBox-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "PushBox/PushBox-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "VCard HD";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

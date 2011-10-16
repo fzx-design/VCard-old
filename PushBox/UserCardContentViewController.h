@@ -10,6 +10,4 @@
 
 @interface UserCardContentViewController : UIViewController
 
-@property (nonatomic, retain) UIViewController* parent;
-
 @end
