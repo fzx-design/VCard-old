@@ -367,12 +367,12 @@
     [self.view insertSubview:self.dockViewController.view belowSubview:self.bottomStateView];
 	
 	CGRect frame = self.dockViewController.view.frame;
-	frame.origin.y += 100;
+	frame.origin.y += 80;
 	self.dockViewController.view.frame = frame;
 	
     [UIView animateWithDuration:1.0 animations:^{
 		CGRect frame = self.dockViewController.view.frame;
-		frame.origin.y -= 100;
+		frame.origin.y -= 80;
 		self.dockViewController.view.frame = frame;
 		
         self.dockViewController.view.alpha = 1.0;
@@ -399,6 +399,9 @@
 {
     [self.dockViewController.optionsPopoverController dismissPopoverAnimated:YES];
     [UIView animateWithDuration:1.0 animations:^{
+		CGRect frame = self.dockViewController.view.frame;
+		frame.origin.y += 80;
+		self.dockViewController.view.frame = frame;
         self.dockViewController.view.alpha = 0.0;
     } completion:^(BOOL finished) {
         if (finished) {
