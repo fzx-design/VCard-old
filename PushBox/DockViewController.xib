@@ -167,6 +167,7 @@
 										<string key="NSFrame">{{59, 53}, {445, 529}}</string>
 										<reference key="NSSuperview" ref="154975372"/>
 										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView"/>
 										<reference key="IBUIBackgroundColor" ref="98537752"/>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClipsSubviews">YES</bool>
@@ -409,11 +410,11 @@
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">dock_button_fav.png</string>
 								</object>
-								<reference key="IBUINormalImage" ref="858075339"/>
-								<object class="NSCustomResource" key="IBUISelectedBackgroundImage">
+								<object class="NSCustomResource" key="IBUISelectedImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">dock_button_fav_HL.png</string>
 								</object>
+								<reference key="IBUINormalImage" ref="858075339"/>
 								<reference key="IBUIFontDescription" ref="872605717"/>
 								<reference key="IBUIFont" ref="131362465"/>
 							</object>
@@ -1002,7 +1003,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<real value="3"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<real value="1"/>
+					<real value="2"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<real value="2"/>
@@ -1191,6 +1192,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>commandCenterButton</string>
 							<string>commandCenterNotiImageView</string>
+							<string>commentsTableViewController</string>
 							<string>controlContainerView</string>
 							<string>messagesCenterButton</string>
 							<string>newTweetButton</string>
@@ -1205,6 +1207,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIButton</string>
 							<string>UIImageView</string>
+							<string>CommentsTableViewController</string>
 							<string>UIView</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
@@ -1222,6 +1225,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>commandCenterButton</string>
 							<string>commandCenterNotiImageView</string>
+							<string>commentsTableViewController</string>
 							<string>controlContainerView</string>
 							<string>messagesCenterButton</string>
 							<string>newTweetButton</string>
@@ -1241,6 +1245,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">commandCenterNotiImageView</string>
 								<string key="candidateClassName">UIImageView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">commentsTableViewController</string>
+								<string key="candidateClassName">CommentsTableViewController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">controlContainerView</string>

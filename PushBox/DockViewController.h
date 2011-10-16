@@ -45,7 +45,7 @@
 @property(nonatomic, retain) IBOutlet UIImageView* refreshNotiImageView;
 @property(nonatomic, retain) IBOutlet UIImageView* commandCenterNotiImageView;
 @property(nonatomic, retain) UIPopoverController* optionsPopoverController;
-@property(nonatomic, retain) CommentsTableViewController* commentsTableViewController;
+@property(nonatomic, retain) IBOutlet CommentsTableViewController* commentsTableViewController;
 
 @property(nonatomic, retain) UserCardNaviViewController* userCardNaviViewController;
 @property(nonatomic, retain) CCUserInfoCardViewController* ccUserInfoCardViewController;
