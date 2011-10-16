@@ -544,7 +544,7 @@
 					<object class="IBUIButton" id="661643145">
 						<reference key="NSNextResponder" ref="317278890"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{175, 57}, {290, 36}}</string>
+						<string key="NSFrame">{{175, 58}, {290, 34}}</string>
 						<reference key="NSSuperview" ref="317278890"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="106142262"/>
@@ -572,7 +572,7 @@
 					<object class="IBUIButton" id="127580360">
 						<reference key="NSNextResponder" ref="317278890"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{175, 96}, {290, 43}}</string>
+						<string key="NSFrame">{{175, 97}, {290, 39}}</string>
 						<reference key="NSSuperview" ref="317278890"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="755677849"/>
@@ -597,7 +597,7 @@
 					<object class="IBUIButton" id="817976475">
 						<reference key="NSNextResponder" ref="317278890"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{175, 141}, {290, 43}}</string>
+						<string key="NSFrame">{{175, 140}, {290, 36}}</string>
 						<reference key="NSSuperview" ref="317278890"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="244543500"/>
@@ -889,7 +889,6 @@
 						<string key="NSReuseIdentifierKey">_NS:241</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<bool key="IBUIEnabled">NO</bool>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<reference key="IBUIHighlightedTitleColor" ref="857333094"/>
@@ -1112,7 +1111,6 @@
 							<reference ref="755677849"/>
 							<reference ref="244543500"/>
 							<reference ref="661643145"/>
-							<reference ref="817976475"/>
 							<reference ref="364192309"/>
 							<reference ref="322003171"/>
 							<reference ref="193919512"/>
@@ -1131,6 +1129,7 @@
 							<reference ref="271138623"/>
 							<reference ref="257517753"/>
 							<reference ref="545144648"/>
+							<reference ref="817976475"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">View</string>
