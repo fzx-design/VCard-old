@@ -639,8 +639,30 @@
         [self.view addSubview:button];
     }
     
+	//self.cardTableViewController.tableview.tableHeaderView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 1024)] autorelease];
+	
+	CGRect frame = self.cardTableViewController.view.frame;
+	frame.origin.x += 782;
+	self.cardTableViewController.view.frame = frame;
+	frame = self.cardTableViewController.rootShadowLeft.frame;
+	frame.origin.x -= 782;
+	self.cardTableViewController.rootShadowLeft.frame = frame;
+
+	self.cardTableViewController.view.alpha = 0.0;
+	self.cardTableViewController.rootShadowLeft.alpha = 0.0;
+	
     [UIView animateWithDuration:1.0 animations:^{
+		
+		CGRect frame = self.cardTableViewController.view.frame;
+		frame.origin.x -= 782;
+		self.cardTableViewController.view.frame = frame;
+		frame = self.cardTableViewController.rootShadowLeft.frame;
+		frame.origin.x += 782;
+		self.cardTableViewController.rootShadowLeft.frame = frame;
+		
         self.cardTableViewController.view.alpha = 1.0;
+		self.cardTableViewController.rootShadowLeft.alpha = 1.0;
+		
         button.alpha = 1.0;
     }];
 }

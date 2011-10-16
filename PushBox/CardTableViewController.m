@@ -28,6 +28,7 @@
 
 @implementation CardTableViewController
 
+@synthesize rootShadowLeft = _rootShadowLeft;
 @synthesize tempCell = _tempCell;
 @synthesize delegate = _delegate;
 @synthesize currentRowIndex = _currentRowIndex;

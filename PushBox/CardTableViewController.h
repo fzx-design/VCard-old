@@ -28,6 +28,7 @@ typedef enum {
 
 @interface CardTableViewController : CoreDataTableViewController {
     UIImageView *_blurImageView;
+	UIImageView *_rootShadowLeft;
     
     CardTableViewDataSource _dataSource;
     User *_user;
@@ -53,6 +54,7 @@ typedef enum {
 
 
 @property(nonatomic, retain) IBOutlet UIImageView *blurImageView;
+@property(nonatomic, retain) IBOutlet UIImageView *rootShadowLeft;
 @property(nonatomic, assign) id<CardTableViewControllerDelegate> delegate;
 @property(nonatomic, assign) int currentRowIndex;
 @property(nonatomic, assign) BOOL swipeEnabled;
