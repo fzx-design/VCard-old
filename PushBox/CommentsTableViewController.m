@@ -133,8 +133,7 @@
     UITextView *textView = commentCell.textView;
     
     textView.text = comment.text;
-    textView.font = [textView.font fontWithSize:14];
-	
+    
 	CGRect frame = textView.frame;
 	frame.size = textView.contentSize;
 	textView.frame = frame;

@@ -131,7 +131,7 @@
 					<object class="IBUITextView" id="861138872">
 						<reference key="NSNextResponder" ref="789785206"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{79, 99}, {432, 356}}</string>
+						<string key="NSFrame">{{79, 104}, {432, 345}}</string>
 						<reference key="NSSuperview" ref="789785206"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -141,16 +141,20 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
 						<string key="IBUIText">content</string>
+						<object class="NSColor" key="IBUITextColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4yMDAwMDAwMDMgMC4yMDAwMDAwMDMgMC4yMDAwMDAwMDMAA</bytes>
+						</object>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIAutocapitalizationType">2</int>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
-							<int key="type">1</int>
+							<int key="type">2</int>
 							<double key="pointSize">17</double>
 						</object>
 						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica</string>
+							<string key="NSName">Helvetica-Bold</string>
 							<double key="NSSize">17</double>
 							<int key="NSfFlags">16</int>
 						</object>
@@ -203,7 +207,7 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">new_tools_bg.png</string>
+							<string key="NSResourceName">post_tools_bg.png</string>
 						</object>
 					</object>
 					<object class="IBUIButton" id="562598154">
@@ -326,7 +330,7 @@
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
 			<object class="IBUIView" id="291272755">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -335,7 +339,6 @@
 						<int key="NSvFlags">256</int>
 						<string key="NSFrameSize">{238, 233}</string>
 						<reference key="NSSuperview" ref="291272755"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="551080648"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -352,8 +355,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{125, 168}, {88, 35}}</string>
 						<reference key="NSSuperview" ref="291272755"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -376,7 +377,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{30, 20}, {183, 142}}</string>
 						<reference key="NSSuperview" ref="291272755"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="63047507"/>
 						<reference key="IBUIBackgroundColor" ref="836735456"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -384,14 +384,12 @@
 					</object>
 				</object>
 				<string key="NSFrameSize">{238, 233}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="105323029"/>
 				<reference key="IBUIBackgroundColor" ref="836735456"/>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
 			<object class="IBUIView" id="724371754">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -400,7 +398,6 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrameSize">{233, 238}</string>
 						<reference key="NSSuperview" ref="724371754"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="639814456"/>
 						<string key="NSReuseIdentifierKey">_NS:569</string>
 						<reference key="IBUIBackgroundColor" ref="836735456"/>
@@ -417,8 +414,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{45, 18}, {168, 31}}</string>
 						<reference key="NSSuperview" ref="724371754"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:320</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -453,7 +448,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{26, 23}, {15, 21}}</string>
 						<reference key="NSSuperview" ref="724371754"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="307238370"/>
 						<string key="NSReuseIdentifierKey">_NS:345</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -484,7 +478,6 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{19, 53}, {195, 161}}</string>
 						<reference key="NSSuperview" ref="724371754"/>
-						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:408</string>
 						<reference key="IBUIBackgroundColor" ref="327652619"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -500,8 +493,6 @@
 					</object>
 				</object>
 				<string key="NSFrameSize">{233, 238}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="868012977"/>
 				<string key="NSReuseIdentifierKey">_NS:212</string>
 				<reference key="IBUIBackgroundColor" ref="836735456"/>
@@ -1060,12 +1051,12 @@
 				<string>button_add.png</string>
 				<string>button_cancel.png</string>
 				<string>grey_card_lines_bg.png</string>
-				<string>new_tools_bg.png</string>
 				<string>post_button_#.png</string>
 				<string>post_button_@.png</string>
 				<string>post_button_camara.png</string>
 				<string>post_right_bg.png</string>
 				<string>post_right_button_remove.png</string>
+				<string>post_tools_bg.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1073,12 +1064,12 @@
 				<string>{19, 20}</string>
 				<string>{15, 19}</string>
 				<string>{596, 644}</string>
-				<string>{467, 36}</string>
 				<string>{14, 14}</string>
 				<string>{16, 18}</string>
 				<string>{20, 16}</string>
 				<string>{238, 233}</string>
 				<string>{87, 33}</string>
+				<string>{467, 36}</string>
 			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">933</string>
