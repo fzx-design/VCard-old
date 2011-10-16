@@ -47,6 +47,7 @@
 						<string key="NSFrame">{{11, 34}, {440, 551}}</string>
 						<reference key="NSSuperview" ref="143900249"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="692033167">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
@@ -138,7 +139,7 @@
 						</object>
 					</object>
 				</object>
-				<string key="NSFrameSize">{457, 585}</string>
+				<string key="NSFrameSize">{457, 567}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="IBUIBackgroundColor" ref="692033167"/>
