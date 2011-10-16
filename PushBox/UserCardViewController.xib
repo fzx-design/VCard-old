@@ -124,6 +124,7 @@
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">4</int>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<object class="NSCustomResource" key="IBUIImage" id="386872909">
 							<string key="NSClassName">NSImage</string>
@@ -141,6 +142,7 @@
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">4</int>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<reference key="IBUIImage" ref="386872909"/>
 					</object>
@@ -155,6 +157,7 @@
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">4</int>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<reference key="IBUIImage" ref="386872909"/>
 					</object>
@@ -345,7 +348,7 @@
 					<object class="IBUILabel" id="887718994">
 						<reference key="NSNextResponder" ref="317278890"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{301, 198}, {143, 20}}</string>
+						<string key="NSFrame">{{238, 198}, {206, 20}}</string>
 						<reference key="NSSuperview" ref="317278890"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="193919512"/>
@@ -548,7 +551,7 @@
 					<object class="IBUIButton" id="661643145">
 						<reference key="NSNextResponder" ref="317278890"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{175, 58}, {290, 34}}</string>
+						<string key="NSFrame">{{175, 58}, {290, 33}}</string>
 						<reference key="NSSuperview" ref="317278890"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="106142262"/>
@@ -576,7 +579,7 @@
 					<object class="IBUIButton" id="127580360">
 						<reference key="NSNextResponder" ref="317278890"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{175, 97}, {290, 39}}</string>
+						<string key="NSFrame">{{175, 98}, {290, 38}}</string>
 						<reference key="NSSuperview" ref="317278890"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="755677849"/>
@@ -737,7 +740,7 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">v_big.png</string>
+							<string key="NSResourceName">v_large.png</string>
 						</object>
 					</object>
 					<object class="IBUILabel" id="958061252">
@@ -895,6 +898,7 @@
 						<string key="NSReuseIdentifierKey">_NS:241</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<bool key="IBUIEnabled">NO</bool>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<reference key="IBUIHighlightedTitleColor" ref="857333094"/>
@@ -905,7 +909,7 @@
 						<reference key="IBUINormalTitleShadowColor" ref="1027003732"/>
 						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">button_send_msg.png</string>
+							<string key="NSResourceName">button_sendmsg_grey.png</string>
 						</object>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
 							<int key="type">2</int>
@@ -1688,7 +1692,7 @@
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>button_back.png</string>
-				<string>button_send_msg.png</string>
+				<string>button_sendmsg_grey.png</string>
 				<string>card_profile_cover_large.png</string>
 				<string>greycard_bg_upper.png</string>
 				<string>post_button_@.png</string>
@@ -1697,7 +1701,7 @@
 				<string>usercard_button_follow.png</string>
 				<string>usercard_button_unfollow.png</string>
 				<string>usercard_pointer.png</string>
-				<string>v_big.png</string>
+				<string>v_large.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>

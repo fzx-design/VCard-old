@@ -89,7 +89,7 @@
 							<object class="IBUILabel" id="837687591">
 								<reference key="NSNextResponder" ref="970843626"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{69, 31}, {359, 22}}</string>
+								<string key="NSFrame">{{69, 30}, {359, 22}}</string>
 								<reference key="NSSuperview" ref="970843626"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1028469540"/>
@@ -117,11 +117,11 @@
 									<string key="name">Helvetica</string>
 									<string key="family">Helvetica</string>
 									<int key="traits">0</int>
-									<double key="pointSize">14</double>
+									<double key="pointSize">12</double>
 								</object>
 								<object class="NSFont" key="IBUIFont">
 									<string key="NSName">Helvetica</string>
-									<double key="NSSize">14</double>
+									<double key="NSSize">12</double>
 									<int key="NSfFlags">16</int>
 								</object>
 							</object>
@@ -149,7 +149,7 @@
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">head_cover_card.png</string>
+									<string key="NSResourceName">head_cover_card_light.png</string>
 								</object>
 							</object>
 							<object class="IBUIImageView" id="1028469540">
@@ -169,8 +169,25 @@
 									<string key="NSResourceName">cell_separator_line.png</string>
 								</object>
 							</object>
+							<object class="IBUIImageView" id="605240250">
+								<reference key="NSNextResponder" ref="970843626"/>
+								<int key="NSvFlags">256</int>
+								<string key="NSFrame">{{425, 24}, {9, 16}}</string>
+								<reference key="NSSuperview" ref="970843626"/>
+								<reference key="NSWindow"/>
+								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIClipsSubviews">YES</bool>
+								<int key="IBUIContentMode">4</int>
+								<bool key="IBUIMultipleTouchEnabled">YES</bool>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">usercard_pointer.png</string>
+								</object>
+							</object>
 						</object>
-						<string key="NSFrameSize">{428, 65}</string>
+						<string key="NSFrameSize">{448, 65}</string>
 						<reference key="NSSuperview" ref="610186380"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="408796679"/>
@@ -192,7 +209,6 @@
 				<reference key="IBUIBackgroundColor" ref="1030048896"/>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 				<int key="IBUISelectionStyle">2</int>
-				<int key="IBUIAccessoryType">1</int>
 				<reference key="IBUIContentView" ref="970843626"/>
 				<string key="IBUIReuseIdentifier">RelationshipTableViewCell</string>
 				<real value="66" key="IBUIRowHeight"/>
@@ -258,6 +274,7 @@
 							<reference ref="774447132"/>
 							<reference ref="1028469540"/>
 							<reference ref="408796679"/>
+							<reference ref="605240250"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">cell</string>
@@ -287,6 +304,11 @@
 						<reference key="object" ref="408796679"/>
 						<reference key="parent" ref="610186380"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">21</int>
+						<reference key="object" ref="605240250"/>
+						<reference key="parent" ref="610186380"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -302,6 +324,7 @@
 					<string>12.IBPluginDependency</string>
 					<string>14.IBPluginDependency</string>
 					<string>20.IBPluginDependency</string>
+					<string>21.IBPluginDependency</string>
 					<string>7.CustomClassName</string>
 					<string>7.IBPluginDependency</string>
 				</object>
@@ -310,6 +333,7 @@
 					<string>RelationshipTableViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -332,7 +356,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">20</int>
+			<int key="maxID">21</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -489,12 +513,14 @@
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>cell_separator_line.png</string>
-				<string>head_cover_card.png</string>
+				<string>head_cover_card_light.png</string>
+				<string>usercard_pointer.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{446, 2}</string>
 				<string>{52, 53}</string>
+				<string>{9, 14}</string>
 			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">933</string>
