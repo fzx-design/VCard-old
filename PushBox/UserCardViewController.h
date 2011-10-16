@@ -7,6 +7,7 @@
 //
 
 #import "UserCardBaseViewController.h"
+#import "UserCardNaviViewController.h"
 
 @class UserCardViewController;
 @protocol UserCardViewControllerDelegate

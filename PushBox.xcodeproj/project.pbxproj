@@ -10,15 +10,6 @@
 		201D2336142B3BA40016F6DE /* greycard_bg_upper.png in Resources */ = {isa = PBXBuildFile; fileRef = 201D2335142B3BA40016F6DE /* greycard_bg_upper.png */; };
 		201D2339142B40060016F6DE /* modify_head.png in Resources */ = {isa = PBXBuildFile; fileRef = 201D2338142B40060016F6DE /* modify_head.png */; };
 		201D233B142B40B80016F6DE /* user_detail_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 201D233A142B40B80016F6DE /* user_detail_bg.png */; };
-		20375C771449B333002081C7 /* new_tools_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 20375C761449B333002081C7 /* new_tools_bg.png */; };
-		20375C7A1449B539002081C7 /* switch_small_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 20375C781449B539002081C7 /* switch_small_off.png */; };
-		20375C7B1449B539002081C7 /* switch_small_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 20375C791449B539002081C7 /* switch_small_on.png */; };
-		20375C7D1449B960002081C7 /* atpop_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 20375C7C1449B960002081C7 /* atpop_bg.png */; };
-		20375C7F1449BFAB002081C7 /* v_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 20375C7E1449BFAB002081C7 /* v_big.png */; };
-		20375C811449C147002081C7 /* button_send_msg.png in Resources */ = {isa = PBXBuildFile; fileRef = 20375C801449C147002081C7 /* button_send_msg.png */; };
-		20375C831449CA0B002081C7 /* SmartCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20375C821449CA0A002081C7 /* SmartCardViewController.xib */; };
-		20375C851449CAA2002081C7 /* smartcard_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 20375C841449CAA2002081C7 /* smartcard_bg.png */; };
-		20375C871449CC19002081C7 /* smartcard_actions.png in Resources */ = {isa = PBXBuildFile; fileRef = 20375C861449CC19002081C7 /* smartcard_actions.png */; };
 		203B640B1428B26400CD8426 /* bg_twilight.png in Resources */ = {isa = PBXBuildFile; fileRef = 203B64061428B26300CD8426 /* bg_twilight.png */; };
 		203B640C1428B26400CD8426 /* bg_mist.png in Resources */ = {isa = PBXBuildFile; fileRef = 203B64071428B26300CD8426 /* bg_mist.png */; };
 		203B640D1428B26400CD8426 /* bg_champagne.png in Resources */ = {isa = PBXBuildFile; fileRef = 203B64081428B26300CD8426 /* bg_champagne.png */; };
@@ -42,6 +33,12 @@
 		20DC1AED1428BE8E00213358 /* title_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DC1AEC1428BE8E00213358 /* title_small.png */; };
 		20EB93521417A370003E541D /* icon_72.png in Resources */ = {isa = PBXBuildFile; fileRef = 20EB93511417A370003E541D /* icon_72.png */; };
 		9B5F2E2014497374008AC0B8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F2E1F14497373008AC0B8 /* Default-Landscape~ipad.png */; };
+		9B5F2E3814498FDA008AC0B8 /* UserCardNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F2E3614498FB8008AC0B8 /* UserCardNaviViewController.m */; };
+		9B5F2E3914498FDA008AC0B8 /* UserCardNaviViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F2E3714498FC5008AC0B8 /* UserCardNaviViewController.xib */; };
+		9BB5B8B61449A8B100352FF7 /* UserCardContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB5B8B41449A8B100352FF7 /* UserCardContentViewController.m */; };
+		9BB5B8B71449A8B100352FF7 /* UserCardContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BB5B8B51449A8B100352FF7 /* UserCardContentViewController.xib */; };
+		9BC6E651144A9B2400B28506 /* CCUserInfoCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC6E64F144A9B2400B28506 /* CCUserInfoCardViewController.m */; };
+		9BC6E652144A9B2400B28506 /* CCUserInfoCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BC6E650144A9B2400B28506 /* CCUserInfoCardViewController.xib */; };
 		CB018DD613DD3CC9004217E0 /* DockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB018DD413DD3CC8004217E0 /* DockViewController.m */; };
 		CB018DD713DD3CC9004217E0 /* DockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB018DD513DD3CC8004217E0 /* DockViewController.xib */; };
 		CB018DDB13DDCCCD004217E0 /* dock_slider_thumb_HL.png in Resources */ = {isa = PBXBuildFile; fileRef = CB018DD913DDCCCD004217E0 /* dock_slider_thumb_HL.png */; };
@@ -264,6 +261,15 @@
 		20DC1AEC1428BE8E00213358 /* title_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_small.png; sourceTree = "<group>"; };
 		20EB93511417A370003E541D /* icon_72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_72.png; sourceTree = "<group>"; };
 		9B5F2E1F14497373008AC0B8 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		9B5F2E3514498FB4008AC0B8 /* UserCardNaviViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCardNaviViewController.h; sourceTree = "<group>"; };
+		9B5F2E3614498FB8008AC0B8 /* UserCardNaviViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCardNaviViewController.m; sourceTree = "<group>"; };
+		9B5F2E3714498FC5008AC0B8 /* UserCardNaviViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCardNaviViewController.xib; sourceTree = "<group>"; };
+		9BB5B8B31449A8B100352FF7 /* UserCardContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCardContentViewController.h; sourceTree = "<group>"; };
+		9BB5B8B41449A8B100352FF7 /* UserCardContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCardContentViewController.m; sourceTree = "<group>"; };
+		9BB5B8B51449A8B100352FF7 /* UserCardContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCardContentViewController.xib; sourceTree = "<group>"; };
+		9BC6E64E144A9B2300B28506 /* CCUserInfoCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCUserInfoCardViewController.h; sourceTree = "<group>"; };
+		9BC6E64F144A9B2400B28506 /* CCUserInfoCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCUserInfoCardViewController.m; sourceTree = "<group>"; };
+		9BC6E650144A9B2400B28506 /* CCUserInfoCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCUserInfoCardViewController.xib; sourceTree = "<group>"; };
 		CB018DD313DD3CC8004217E0 /* DockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DockViewController.h; sourceTree = "<group>"; };
 		CB018DD413DD3CC8004217E0 /* DockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DockViewController.m; sourceTree = "<group>"; };
 		CB018DD513DD3CC8004217E0 /* DockViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DockViewController.xib; sourceTree = "<group>"; };
@@ -597,6 +603,12 @@
 			children = (
 				CBD36F0E13E697F5008BB428 /* CommentViewController.h */,
 				CBD36F0F13E697F5008BB428 /* CommentViewController.m */,
+				9BB5B8B31449A8B100352FF7 /* UserCardContentViewController.h */,
+				9BB5B8B41449A8B100352FF7 /* UserCardContentViewController.m */,
+				9B5F2E3514498FB4008AC0B8 /* UserCardNaviViewController.h */,
+				9B5F2E3614498FB8008AC0B8 /* UserCardNaviViewController.m */,
+				9BC6E64E144A9B2300B28506 /* CCUserInfoCardViewController.h */,
+				9BC6E64F144A9B2400B28506 /* CCUserInfoCardViewController.m */,
 				CB9DCADB13E2C15900DA3D3D /* UserCardViewController.h */,
 				CB9DCADC13E2C15B00DA3D3D /* UserCardViewController.m */,
 				CB7C4A0613EBDE2B00BD329A /* UserCardBaseViewController.h */,
@@ -969,6 +981,9 @@
 				CB9DCACD13E1E54700DA3D3D /* DetailImageViewController.xib */,
 				CB26224F13DF06780062EDE7 /* StatusCardViewController.xib */,
 				20375C821449CA0A002081C7 /* SmartCardViewController.xib */,
+				9B5F2E3714498FC5008AC0B8 /* UserCardNaviViewController.xib */,
+				9BB5B8B51449A8B100352FF7 /* UserCardContentViewController.xib */,
+				9BC6E650144A9B2400B28506 /* CCUserInfoCardViewController.xib */,
 			);
 			name = Nibs;
 			sourceTree = "<group>";
@@ -1322,6 +1337,9 @@
 				FEFDACAF1443F7A5009CF7CD /* MessagesDialogTableViewCell.m in Sources */,
 				FE1E629914441E2600A48CF9 /* Message.m in Sources */,
 				FE1E629C14441E3F00A48CF9 /* User.m in Sources */,
+				9B5F2E3814498FDA008AC0B8 /* UserCardNaviViewController.m in Sources */,
+				9BB5B8B61449A8B100352FF7 /* UserCardContentViewController.m in Sources */,
+				9BC6E651144A9B2400B28506 /* CCUserInfoCardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

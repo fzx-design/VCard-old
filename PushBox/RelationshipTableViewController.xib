@@ -12,11 +12,10 @@
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<string>IBUILabel</string>
 			<string>IBUIButton</string>
 			<string>IBUITableView</string>
 			<string>IBUIView</string>
-			<string>IBUIImageView</string>
+			<string>IBUILabel</string>
 			<string>IBProxyObject</string>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
@@ -42,34 +41,16 @@
 				<int key="NSvFlags">292</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="IBUIImageView" id="41071111">
+					<object class="IBUITableView" id="180514799">
 						<reference key="NSNextResponder" ref="143900249"/>
 						<int key="NSvFlags">256</int>
-						<string key="NSFrameSize">{596, 644}</string>
+						<string key="NSFrame">{{15, 34}, {440, 551}}</string>
 						<reference key="NSSuperview" ref="143900249"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="212903670"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="692033167">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
 						</object>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">4</int>
-						<bool key="IBUIMultipleTouchEnabled">YES</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<object class="NSCustomResource" key="IBUIImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">greycard_bg.png</string>
-						</object>
-					</object>
-					<object class="IBUITableView" id="180514799">
-						<reference key="NSNextResponder" ref="143900249"/>
-						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{76, 54}, {440, 531}}</string>
-						<reference key="NSSuperview" ref="143900249"/>
-						<reference key="NSWindow"/>
-						<reference key="IBUIBackgroundColor" ref="692033167"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -85,7 +66,7 @@
 					<object class="IBUIButton" id="212903670">
 						<reference key="NSNextResponder" ref="143900249"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{69, 13}, {36, 37}}</string>
+						<string key="NSFrame">{{9, -4}, {36, 37}}</string>
 						<reference key="NSSuperview" ref="143900249"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="295511810"/>
@@ -124,7 +105,7 @@
 					<object class="IBUILabel" id="295511810">
 						<reference key="NSNextResponder" ref="143900249"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{193, 17}, {210, 25}}</string>
+						<string key="NSFrame">{{133, 0}, {210, 25}}</string>
 						<reference key="NSSuperview" ref="143900249"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="180514799"/>
@@ -157,10 +138,10 @@
 						</object>
 					</object>
 				</object>
-				<string key="NSFrameSize">{596, 644}</string>
+				<string key="NSFrameSize">{457, 585}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="41071111"/>
+				<reference key="NSNextKeyView"/>
 				<reference key="IBUIBackgroundColor" ref="692033167"/>
 				<bool key="IBUIOpaque">NO</bool>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -239,9 +220,8 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="212903670"/>
-							<reference ref="180514799"/>
-							<reference ref="41071111"/>
 							<reference ref="295511810"/>
+							<reference ref="180514799"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -254,11 +234,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">6</int>
 						<reference key="object" ref="180514799"/>
-						<reference key="parent" ref="143900249"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">7</int>
-						<reference key="object" ref="41071111"/>
 						<reference key="parent" ref="143900249"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -280,7 +255,6 @@
 					<string>4.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
-					<string>7.IBPluginDependency</string>
 					<string>8.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
@@ -288,7 +262,6 @@
 					<string>RelationshipTableViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -410,17 +383,8 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<bool key="EncodedWithXMLCoder">YES</bool>
-			<object class="NSArray" key="dict.sortedKeys">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>button_back.png</string>
-				<string>greycard_bg.png</string>
-			</object>
-			<object class="NSMutableArray" key="dict.values">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{12, 21}</string>
-				<string>{596, 644}</string>
-			</object>
+			<string key="NS.key.0">button_back.png</string>
+			<string key="NS.object.0">{12, 21}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>

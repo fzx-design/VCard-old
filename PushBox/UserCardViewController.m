@@ -116,8 +116,12 @@
 }
 
 - (IBAction)backButtonClicked:(id)sender {
-    [self.parentViewController dismissModalViewControllerAnimated:YES];
-    [self.delegate userCardViewControllerDidDismiss:self];
+	if (self.navigationController.viewControllers.count > 1) {
+		[self.navigationController popViewControllerAnimated:YES];
+	} else if(self.navigationController.viewControllers.count == 1){
+		[UserCardNaviViewController sharedUserCardDismiss];
+		[self.delegate userCardViewControllerDidDismiss:self];
+	}
 }
 
 @end

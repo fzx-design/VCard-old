@@ -409,11 +409,28 @@
     vc.modalPresentationStyle = UIModalPresentationCurrentContext;
 	vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     vc.delegate = self;
-    
+	
+//	UINavigationController* navcon = [[UINavigationController alloc] initWithRootViewController:vc];
+//	navcon.navigationBarHidden = YES;
+	
+//	UserCardNaviViewController *navi = [UserCardNaviViewController sharedUserCardNaviViewController];
+//	[navi.naviController pushViewController:vc animated:NO];
+	
+//	[navi.contentViewController.view addSubview:navcon.view];
+//	navi.naviController = navcon;
+	
+	UserCardNaviViewController* navi = [[UserCardNaviViewController alloc] initWithRootViewController:vc];
+	[UserCardNaviViewController setSharedUserCardNaviViewController:navi];
+	
+    navi.modalPresentationStyle = UIModalPresentationCurrentContext;
+	navi.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardPresented object:self];
     
-    [self presentModalViewController:vc animated:YES];
-    [vc release];
+    [self presentModalViewController:navi animated:YES];
+	[navi release];
+	[vc release];
+//	[navcon release];
 }
 
 - (void)userCardViewControllerDidDismiss:(UserCardViewController *)vc
@@ -423,7 +440,8 @@
 
 - (void)shouldDismissUserCardNotification:(id)sender 
 {
-    [self dismissModalViewControllerAnimated:YES];
+//	[self dismissModalViewControllerAnimated:YES];
+	[UserCardNaviViewController sharedUserCardDismiss];
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardDismissed object:self];
 }
 

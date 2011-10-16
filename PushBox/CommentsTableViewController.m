@@ -168,7 +168,7 @@
 }
 
 - (IBAction)backButtonClicked:(id)sender {
-    [self.parentViewController dismissModalViewControllerAnimated:YES];
+    [self dismissModalViewControllerAnimated:YES];
     [self.delegate commentsTableViewControllerDidDismiss:self];
 }
 

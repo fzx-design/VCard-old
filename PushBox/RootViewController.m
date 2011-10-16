@@ -269,7 +269,7 @@
 	self.bottomStateView.userInteractionEnabled = YES;
     self.dockViewController.view.userInteractionEnabled = YES;
 	self.cardTableViewController.tableView.scrollEnabled = YES;
-    self.cardTableViewController.swipeEnabled = YES;
+	self.cardTableViewController.swipeEnabled = YES;
 }
 
 - (void)cardTableViewController:(CardTableViewController *)vc didScrollToRow:(int)row withNumberOfRows:(int)numberOfRows
@@ -278,7 +278,7 @@
     [slider setMaximumValue:numberOfRows-1];
     [slider setMinimumValue:0];
     if (row == slider.value) {
-        [slider setValue:row+1 animated:NO];
+        [slider setValue:row + 1 animated:NO];
         [slider setValue:row animated:NO];
     }
     else {
@@ -589,6 +589,7 @@
     self.dockViewController.slider.enabled = NO;
     self.dockViewController.refreshButton.enabled = NO;
     self.dockViewController.messagesCenterButton.enabled = NO;
+	[self.dockViewController.userCardNaviViewController.naviController popToRootViewControllerAnimated:NO];
 }
 
 - (void)hideCommandCenter

@@ -43,7 +43,8 @@
 }
 
 - (IBAction)backButtonClicked:(id)sender {
-    [self.parentViewController dismissModalViewControllerAnimated:YES];
+//	[self.parentViewController dismissModalViewControllerAnimated:YES];
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad
@@ -160,7 +161,8 @@
     vc.currentUser = self.currentUser;
     vc.modalPresentationStyle = UIModalPresentationCurrentContext;
     vc.modalTransitionStyle = self.modalTransitionStyle;
-    [self presentModalViewController:vc animated:YES];
+//    [self presentModalViewController:vc animated:YES];
+	[self.navigationController pushViewController:vc animated:YES];
     [vc release];
 }
 
