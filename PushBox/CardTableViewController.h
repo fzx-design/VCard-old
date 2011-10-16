@@ -17,6 +17,7 @@ typedef enum {
     CardTableViewDataSourceFriendsTimeline,
     CardTableViewDataSourceUserTimeline,
     CardTableViewDataSourceFavorites,
+    CardTableViewDataSourceSearchStatues,
 } CardTableViewDataSource;
 
 @class CardTableViewController;
@@ -61,6 +62,7 @@ typedef enum {
 @property(nonatomic, retain) NSFetchedResultsController* prevFetchedResultsController;
 @property(nonatomic, assign) int prevRowIndex;
 @property(nonatomic, assign) BOOL insertionAnimationEnabled;
+@property(nonatomic, assign) NSString *searchString;
 
 - (void)pushCardWithCompletion:(void (^)())completion;
 - (void)popCardWithCompletion:(void (^)())completion;

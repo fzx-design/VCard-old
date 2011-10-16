@@ -38,6 +38,7 @@
 @synthesize prevFetchedResultsController = _prevFetchedResultsController;
 @synthesize prevRowIndex = _prevRowIndex;
 @synthesize insertionAnimationEnabled = _insertionAnimationEnabled;
+@synthesize searchString;
 
 - (void)dealloc
 {
@@ -59,7 +60,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     self.tableView.scrollEnabled = YES;
 	self.tableView.pagingEnabled = YES;
 	
@@ -337,6 +338,7 @@
     
     _loading = YES;
     
+    //
     if (self.dataSource == CardTableViewDataSourceFavorites) {
         [[UIApplication sharedApplication] showLoadingView];
         [self loadAllFavoritesWithCompletion:^(void) {
@@ -364,6 +366,7 @@
         maxID = [statusID longLongValue] - 1;
     }
     
+    //
     if (self.dataSource == CardTableViewDataSourceFriendsTimeline) {
         [[UIApplication sharedApplication] showLoadingView];
         [client setCompletionBlock:^(WeiboClient *client) {
@@ -398,6 +401,7 @@
                                   feature:0];
     }
     
+    //
     if (self.dataSource == CardTableViewDataSourceUserTimeline) {
         [[UIApplication sharedApplication] showLoadingView];
         [client setCompletionBlock:^(WeiboClient *client) {
@@ -427,6 +431,37 @@
                  startingAtPage:0
                           count:kStatusCountPerRequest
                         feature:0];
+    }
+    
+    //
+    if (self.dataSource == CardTableViewDataSourceSearchStatues) {
+        [[UIApplication sharedApplication] showLoadingView];
+        [client setCompletionBlock:^(WeiboClient *client) {
+            if (!client.hasError) {
+                NSArray *dictArray = client.responseJSONObject;
+                for (NSDictionary *dict in dictArray) {
+                    [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+                }
+                [self.managedObjectContext processPendingChanges];
+                
+                [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
+                [self.delegate cardTableViewController:self 
+                                        didScrollToRow:self.currentRowIndex
+                                      withNumberOfRows:[self numberOfRows]];
+                
+                NSLog(@"----------------");
+                
+                if (completion) {
+                    completion();
+                }
+                
+                [[UIApplication sharedApplication] hideLoadingView];
+                _loading = NO;
+            }
+        }];
+
+        [client getSearchStatuses:self.searchString filter_ori:0 filter_pic:0 fuid:0 province:0 city:0 
+                        starttime:0 endtime:0 count:10 page:1 needcount:NO base_app:0];
     }
 }
 

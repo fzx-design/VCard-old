@@ -251,13 +251,13 @@ report_completion:
 - (void)buildURL
 {
     NSString* url = [NSString stringWithFormat:@"%@://%@/%@", 
-                          self.secureConnection ? @"https" : @"http", 
-                          APIDomain, self.path];
+                     self.secureConnection ? @"https" : @"http", 
+                     APIDomain, self.path];
     
     if (self.httpMethod == HTTPMethodGet && [self.params count]) {
         url = [NSString stringWithFormat:@"%@?%@", url, [self queryString]];
     }
-
+    
     NSURL *finalURL = [NSURL URLWithString:url];
     
     NSLog(@"requestURL: %@", finalURL);
@@ -288,7 +288,7 @@ report_completion:
             [self.request setPostBody:postData];
         }
     }
-
+    
     if (self.authRequired) {
         _request.consumerKey = AppKey;
         _request.consumerSecret = AppSecret;
@@ -296,7 +296,7 @@ report_completion:
         _request.oauthTokenSecret = OAuthTokenSecret;
         [self.request generateOAuthHeader];
     }
-
+    
     //NSLog(@"request headers:\n%@", [self.request requestHeaders]);
     
     if (self.isSynchronized) {
@@ -410,11 +410,11 @@ report_completion:
     }];
     
     [self getCommentsAndRepostsCount:statusIDArray];
-
+    
 }
 
 - (void)getFriendsTimelineSinceID:(NSString *)sinceID 
-                    maxID:(NSString *)maxID 
+                            maxID:(NSString *)maxID 
                    startingAtPage:(int)page 
                             count:(int)count
                           feature:(int)feature;
@@ -454,7 +454,7 @@ report_completion:
 
 - (void)getUserTimeline:(NSString *)userID 
 				SinceID:(NSString *)sinceID 
-		  maxID:(NSString *)maxID 
+                  maxID:(NSString *)maxID 
 		 startingAtPage:(int)page 
 				  count:(int)count
                 feature:(int)feature
@@ -515,7 +515,7 @@ report_completion:
 {
     self.path = @"direct_messages/sent.json";
     if (sinceID) {
-    [self.params setObject:sinceID forKey:@"since_id"];
+        [self.params setObject:sinceID forKey:@"since_id"];
     }
     if (maxID) {
         [self.params setObject:sinceID forKey:@"max_id"];
@@ -714,6 +714,34 @@ report_completion:
 {
     self.path = @"friendships/show.json";
     [self.params setObject:userID forKey:@"target_id"];
+    [self sendRequest];
+}
+
+- (void)getSearchStatuses:(NSString *)q
+               filter_ori:(int)filter_ori 
+               filter_pic:(int)filter_pic
+                     fuid:(int64_t)fuid 
+                 province:(int)province
+                     city:(int)city 
+                starttime:(int64_t)starttime
+                  endtime:(int64_t)endtime 
+                    count:(int)count
+                     page:(int)page 
+                needcount:(Boolean)needcount
+                 base_app:(int)base_app
+{
+    self.path = @"search/statuses.json";
+    [self.params setObject:[NSString stringWithFormat:@"%d", filter_ori] forKey:@"filter_ori"];
+    [self.params setObject:[NSString stringWithFormat:@"%d", filter_pic] forKey:@"filter_pic"];
+    [self.params setObject:[NSString stringWithFormat:@"%d", fuid] forKey:@"fuid"];
+    [self.params setObject:[NSString stringWithFormat:@"%d", province] forKey:@"province"];
+    [self.params setObject:[NSString stringWithFormat:@"%d", city] forKey:@"city"];
+    [self.params setObject:[NSString stringWithFormat:@"%d", starttime] forKey:@"starttime"];
+    [self.params setObject:[NSString stringWithFormat:@"%d", endtime] forKey:@"endtime"];
+    [self.params setObject:[NSString stringWithFormat:@"%d", count] forKey:@"count"];
+    [self.params setObject:[NSString stringWithFormat:@"%d", page] forKey:@"page"];
+    [self.params setObject:[NSString stringWithFormat:@"%b", needcount] forKey:@"needcount"];
+    [self.params setObject:[NSString stringWithFormat:@"%d", base_app] forKey:@"base_app"];
     [self sendRequest];
 }
 

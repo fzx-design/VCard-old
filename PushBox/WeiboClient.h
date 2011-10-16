@@ -104,6 +104,18 @@ typedef void (^WCCompletionBlock)(WeiboClient *client);
 
 - (void)getUnreadCountSinceStatusID:(NSString *)statusID;
 - (void)resetUnreadCount:(int)type;
+- (void)getSearchStatuses:(NSString *)q
+               filter_ori:(int)filter_ori 
+               filter_pic:(int)filter_pic
+                     fuid:(int64_t)fuid 
+                 province:(int)province
+                     city:(int)city 
+                starttime:(int64_t)starttime
+                  endtime:(int64_t)endtime 
+                    count:(int)count
+                     page:(int)page 
+                needcount:(Boolean)needcount
+                 base_app:(int)base_app;
 
 - (void)getMessagesByUserSinceID:(NSString *)sinceID 
                            maxID:(NSString *)maxID 

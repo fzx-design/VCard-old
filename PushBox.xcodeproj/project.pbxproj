@@ -197,6 +197,7 @@
 		CBDA5B7613DC25FA00FAE221 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B7513DC25FA00FAE221 /* CoreDataTableViewController.m */; };
 		FE1E629914441E2600A48CF9 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1E629814441E2600A48CF9 /* Message.m */; };
 		FE1E629C14441E3F00A48CF9 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1E629B14441E3F00A48CF9 /* User.m */; };
+		FE5DC2CF144AC7690009AF54 /* search_text_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FE5DC2CE144AC7690009AF54 /* search_text_bg.png */; };
 		FE8F6D42144327B4001A62FD /* MessagesContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE8F6D40144327B3001A62FD /* MessagesContactsTableViewController.m */; };
 		FE8F6D43144327B4001A62FD /* MessagesContactsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE8F6D41144327B4001A62FD /* MessagesContactsTableViewController.xib */; };
 		FE9B26B1144481F70028C9B9 /* msg_sina.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9B26B0144481F70028C9B9 /* msg_sina.png */; };
@@ -478,6 +479,7 @@
 		FE1E629814441E2600A48CF9 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		FE1E629A14441E3F00A48CF9 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		FE1E629B14441E3F00A48CF9 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		FE5DC2CE144AC7690009AF54 /* search_text_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = search_text_bg.png; path = ../../../../../Downloads/search_text_bg.png; sourceTree = "<group>"; };
 		FE8F6D3F144327B3001A62FD /* MessagesContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesContactsTableViewController.h; sourceTree = "<group>"; };
 		FE8F6D40144327B3001A62FD /* MessagesContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesContactsTableViewController.m; sourceTree = "<group>"; };
 		FE8F6D41144327B4001A62FD /* MessagesContactsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesContactsTableViewController.xib; sourceTree = "<group>"; };
@@ -560,6 +562,7 @@
 				CB4AAC6313DC6FD00053E3A6 /* root_bottom_bar_bg.png */,
 				CB4AAC6713DC70310053E3A6 /* root_shadow_left.png */,
 				CB4AAC6813DC70310053E3A6 /* root_shadow_right.png */,
+				FE5DC2CE144AC7690009AF54 /* search_text_bg.png */,
 			);
 			name = root;
 			sourceTree = "<group>";
@@ -1249,6 +1252,7 @@
 				20375C831449CA0B002081C7 /* SmartCardViewController.xib in Resources */,
 				20375C851449CAA2002081C7 /* smartcard_bg.png in Resources */,
 				20375C871449CC19002081C7 /* smartcard_actions.png in Resources */,
+				FE5DC2CF144AC7690009AF54 /* search_text_bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
