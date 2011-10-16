@@ -253,7 +253,7 @@
     [slider setMaximumValue:numberOfRows-1];
     [slider setMinimumValue:0];
     if (row == slider.value) {
-        [slider setValue:row+1 animated:NO];
+        [slider setValue:row + 1 animated:NO];
         [slider setValue:row animated:NO];
     }
     else {

@@ -12,5 +12,9 @@
 @interface UserCardNaviViewController : UIViewController
 
 @property (nonatomic, retain) UserCardContentViewController* contentViewController;
+@property (nonatomic, retain) UINavigationController* naviController;
+
++ (UserCardNaviViewController *)sharedUserCardNaviViewController;
++ (void)sharedUserCardDismiss;
 
 @end

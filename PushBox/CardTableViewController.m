@@ -162,7 +162,7 @@
 - (void)scrollToRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self.tableView numberOfRowsInSection:0] == indexPath.row + 1) {
-        [self performSelector:@selector(loadMoreDataCompletion:) withObject:nil afterDelay:1.5];
+        [self performSelector:@selector(loadMoreDataCompletion:) withObject:nil afterDelay:0.5];
     }
 	
 	NSInteger indexDiff = indexPath.row - self.currentRowIndex;
@@ -231,7 +231,6 @@
 		
         self.prevRowIndex = 0;
 		[self setHeaderViewWithOffset];
-		
         [self.tableView reloadData];
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.currentRowIndex inSection:0]
                               atScrollPosition:UITableViewScrollPositionMiddle

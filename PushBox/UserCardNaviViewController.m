@@ -10,7 +10,32 @@
 
 @implementation UserCardNaviViewController
 
+static UserCardNaviViewController *sharedUserCardNaviViewController = nil;
+
 @synthesize contentViewController;
+@synthesize naviController;
+
++ (UserCardNaviViewController *)sharedUserCardNaviViewController
+{
+    @synchronized(self)
+	{
+        if (sharedUserCardNaviViewController == nil)
+		{
+            sharedUserCardNaviViewController = [[UserCardNaviViewController alloc] init];
+        }
+    }
+	
+    return sharedUserCardNaviViewController;
+}
+
++ (void)sharedUserCardDismiss
+{
+	if (sharedUserCardNaviViewController) {
+		[sharedUserCardNaviViewController dismissModalViewControllerAnimated:YES];
+		[sharedUserCardNaviViewController release];
+		sharedUserCardNaviViewController = nil;
+	}
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,7 +58,7 @@
 {
 	if (!contentViewController) {
 		contentViewController = [[UserCardContentViewController alloc] init];
-		contentViewController.parent = self;
+		contentViewController.parent = sharedUserCardNaviViewController;
 	}
 	return  contentViewController;
 }
@@ -44,14 +69,17 @@
 {
     [super viewDidLoad];
 	[self.view addSubview:self.contentViewController.view];
-	CGRect frame = CGRectMake(self.view.frame.origin.x + 60, self.view.frame.origin.y - 5, contentViewController.view.frame.size.width, contentViewController.view.frame.size.height);
-
+	CGRect frame = CGRectMake(self.view.frame.origin.x + 49, self.view.frame.origin.y - 5, contentViewController.view.frame.size.width, contentViewController.view.frame.size.height);
 	self.contentViewController.view.frame = frame;
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+	[contentViewController release];
+	[naviController release];
+	contentViewController = nil;
+	naviController = nil;
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
