@@ -498,7 +498,10 @@
                          }
                      }];
     
-    [self.dockViewController.commandCenterButton setEnabled:NO];
+    self.dockViewController.commandCenterButton.enabled = NO;
+    self.dockViewController.playButton.enabled = NO;
+    self.dockViewController.slider.enabled = NO;
+    self.dockViewController.refreshButton.enabled = NO;
 }
 
 - (void)hideMessagesCenter
@@ -526,7 +529,10 @@
                              [self.messagesViewController viewDidDisappear:YES];
                          }
                      }];
-    [self.dockViewController.commandCenterButton setEnabled:YES];
+    self.dockViewController.commandCenterButton.enabled = YES;
+    self.dockViewController.playButton.enabled = YES;
+    self.dockViewController.slider.enabled = YES;
+    self.dockViewController.refreshButton.enabled = YES;
 }
 
 - (void)commandCenterButtonClicked:(UIButton *)button
