@@ -79,26 +79,6 @@
 							<object class="IBUIView" id="1052650960">
 								<reference key="NSNextResponder" ref="1061782677"/>
 								<int key="NSvFlags">292</int>
-								<object class="NSMutableArray" key="NSSubviews">
-									<bool key="EncodedWithXMLCoder">YES</bool>
-									<object class="IBUIImageView" id="252185180">
-										<reference key="NSNextResponder" ref="1052650960"/>
-										<int key="NSvFlags">256</int>
-										<string key="NSFrame">{{-13, -29}, {596, 694}}</string>
-										<reference key="NSSuperview" ref="1052650960"/>
-										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView"/>
-										<bool key="IBUIOpaque">NO</bool>
-										<bool key="IBUIClipsSubviews">YES</bool>
-										<int key="IBUIContentMode">4</int>
-										<bool key="IBUIMultipleTouchEnabled">YES</bool>
-										<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-										<object class="NSCustomResource" key="IBUIImage" id="76580059">
-											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">greycard_bg.png</string>
-										</object>
-									</object>
-								</object>
 								<string key="NSFrameSize">{570, 640}</string>
 								<reference key="NSSuperview" ref="1061782677"/>
 								<reference key="NSWindow"/>
@@ -141,7 +121,10 @@
 										<int key="IBUIContentMode">4</int>
 										<bool key="IBUIMultipleTouchEnabled">YES</bool>
 										<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-										<reference key="IBUIImage" ref="76580059"/>
+										<object class="NSCustomResource" key="IBUIImage">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">greycard_bg.png</string>
+										</object>
 									</object>
 									<object class="IBUIButton" id="957577853">
 										<reference key="NSNextResponder" ref="154975372"/>
@@ -427,11 +410,11 @@
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">dock_button_fav.png</string>
 								</object>
-								<reference key="IBUINormalImage" ref="858075339"/>
-								<object class="NSCustomResource" key="IBUISelectedBackgroundImage">
+								<object class="NSCustomResource" key="IBUISelectedImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">dock_button_fav_HL.png</string>
 								</object>
+								<reference key="IBUINormalImage" ref="858075339"/>
 								<reference key="IBUIFontDescription" ref="872605717"/>
 								<reference key="IBUIFont" ref="131362465"/>
 							</object>
@@ -952,15 +935,9 @@
 						<reference key="object" ref="1052650960"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="252185180"/>
 						</object>
 						<reference key="parent" ref="1061782677"/>
 						<string key="objectName">usercard view</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">58</int>
-						<reference key="object" ref="252185180"/>
-						<reference key="parent" ref="1052650960"/>
 					</object>
 				</object>
 			</object>
@@ -999,7 +976,6 @@
 					<string>47.IBPluginDependency</string>
 					<string>48.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
-					<string>58.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
 					<string>73.CustomClassName</string>
@@ -1027,11 +1003,10 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<real value="3"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<real value="1"/>
+					<real value="2"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<real value="2"/>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1070,14 +1045,6 @@
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<object class="IBPartialClassDescription">
-					<string key="className">CCUserInfoCardViewController</string>
-					<string key="superclassName">UserCardBaseViewController</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/CCUserInfoCardViewController.h</string>
-					</object>
-				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">CommentsTableViewController</string>
 					<string key="superclassName">EGOTableViewController</string>
@@ -1223,9 +1190,9 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>ccUserInfoCardViewController</string>
 							<string>commandCenterButton</string>
 							<string>commandCenterNotiImageView</string>
+							<string>commentsTableViewController</string>
 							<string>controlContainerView</string>
 							<string>messagesCenterButton</string>
 							<string>newTweetButton</string>
@@ -1238,9 +1205,9 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>CCUserInfoCardViewController</string>
 							<string>UIButton</string>
 							<string>UIImageView</string>
+							<string>CommentsTableViewController</string>
 							<string>UIView</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
@@ -1256,9 +1223,9 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>ccUserInfoCardViewController</string>
 							<string>commandCenterButton</string>
 							<string>commandCenterNotiImageView</string>
+							<string>commentsTableViewController</string>
 							<string>controlContainerView</string>
 							<string>messagesCenterButton</string>
 							<string>newTweetButton</string>
@@ -1272,16 +1239,16 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
-								<string key="name">ccUserInfoCardViewController</string>
-								<string key="candidateClassName">CCUserInfoCardViewController</string>
-							</object>
-							<object class="IBToOneOutletInfo">
 								<string key="name">commandCenterButton</string>
 								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">commandCenterNotiImageView</string>
 								<string key="candidateClassName">UIImageView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">commentsTableViewController</string>
+								<string key="candidateClassName">CommentsTableViewController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">controlContainerView</string>
@@ -1332,134 +1299,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/EGOTableViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">UserCardBaseViewController</string>
-					<string key="superclassName">CoreDataViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>showFollowersButtonClicked:</string>
-							<string>showFriendsButtonClicked:</string>
-							<string>showStatusesButtonClicked:</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>showFollowersButtonClicked:</string>
-							<string>showFriendsButtonClicked:</string>
-							<string>showStatusesButtonClicked:</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBActionInfo">
-								<string key="name">showFollowersButtonClicked:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">showFriendsButtonClicked:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">showStatusesButtonClicked:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="outlets">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>descriptionTextView</string>
-							<string>emailLabel</string>
-							<string>followersCountLabel</string>
-							<string>friendsCountLabel</string>
-							<string>homePageLabel</string>
-							<string>locationLabel</string>
-							<string>profileImageView</string>
-							<string>screenNameLabel</string>
-							<string>statusesCountLabel</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UITextView</string>
-							<string>UILabel</string>
-							<string>UILabel</string>
-							<string>UILabel</string>
-							<string>UILabel</string>
-							<string>UILabel</string>
-							<string>UIImageView</string>
-							<string>UILabel</string>
-							<string>UILabel</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>descriptionTextView</string>
-							<string>emailLabel</string>
-							<string>followersCountLabel</string>
-							<string>friendsCountLabel</string>
-							<string>homePageLabel</string>
-							<string>locationLabel</string>
-							<string>profileImageView</string>
-							<string>screenNameLabel</string>
-							<string>statusesCountLabel</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">descriptionTextView</string>
-								<string key="candidateClassName">UITextView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">emailLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">followersCountLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">friendsCountLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">homePageLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">locationLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">profileImageView</string>
-								<string key="candidateClassName">UIImageView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">screenNameLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">statusesCountLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/UserCardBaseViewController.h</string>
 					</object>
 				</object>
 			</object>

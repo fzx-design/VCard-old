@@ -28,7 +28,6 @@
     UIImageView *_commandCenterNotiImageView;
 
     UIPopoverController *_optionsPopoverController;
-//    CCUserCardViewController *_userCardViewController;
     CommentsTableViewController *_commentsTableViewController;
 	
 	UserCardNaviViewController *_userCardNaviViewController;
@@ -48,11 +47,10 @@
 @property(nonatomic, retain) IBOutlet UIImageView* refreshNotiImageView;
 @property(nonatomic, retain) IBOutlet UIImageView* commandCenterNotiImageView;
 @property(nonatomic, retain) UIPopoverController* optionsPopoverController;
-//@property(nonatomic, retain) IBOutlet CCUserCardViewController* userCardViewController;
-@property(nonatomic, retain) CommentsTableViewController* commentsTableViewController;
+@property(nonatomic, retain) IBOutlet CommentsTableViewController* commentsTableViewController;
 
 @property(nonatomic, retain) UserCardNaviViewController* userCardNaviViewController;
-@property(nonatomic, retain) IBOutlet CCUserInfoCardViewController* ccUserInfoCardViewController;
+@property(nonatomic, retain) CCUserInfoCardViewController* ccUserInfoCardViewController;
 
 - (void)showControlsAnimated:(BOOL)animated;
 - (void)hideControlsAnimated:(BOOL)animated;

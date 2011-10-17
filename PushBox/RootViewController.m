@@ -256,6 +256,7 @@
 	self.bottomStateView.userInteractionEnabled = NO;
 	self.cardTableViewController.tableView.scrollEnabled = NO;
     self.cardTableViewController.swipeEnabled = NO;
+	[self.cardTableViewController enableDismissRegion];
 	[UIView animateWithDuration:0.5 animations:^{
 		_holeImageView.alpha = 1.0;
 	}];
@@ -270,6 +271,7 @@
     self.dockViewController.view.userInteractionEnabled = YES;
 	self.cardTableViewController.tableView.scrollEnabled = YES;
 	self.cardTableViewController.swipeEnabled = YES;
+	[self.cardTableViewController disableDismissRegion];
 }
 
 - (void)cardTableViewController:(CardTableViewController *)vc didScrollToRow:(int)row withNumberOfRows:(int)numberOfRows
@@ -390,7 +392,16 @@
 - (void)showDockView
 {
     [self.view insertSubview:self.dockViewController.view belowSubview:self.bottomStateView];
+	
+	CGRect frame = self.dockViewController.view.frame;
+	frame.origin.y += 80;
+	self.dockViewController.view.frame = frame;
+	
     [UIView animateWithDuration:1.0 animations:^{
+		CGRect frame = self.dockViewController.view.frame;
+		frame.origin.y -= 80;
+		self.dockViewController.view.frame = frame;
+		
         self.dockViewController.view.alpha = 1.0;
     }];
 }
@@ -415,6 +426,9 @@
 {
     [self.dockViewController.optionsPopoverController dismissPopoverAnimated:YES];
     [UIView animateWithDuration:1.0 animations:^{
+		CGRect frame = self.dockViewController.view.frame;
+		frame.origin.y += 80;
+		self.dockViewController.view.frame = frame;
         self.dockViewController.view.alpha = 0.0;
     } completion:^(BOOL finished) {
         if (finished) {
@@ -674,8 +688,30 @@
         [self.view addSubview:button];
     }
     
+	//self.cardTableViewController.tableview.tableHeaderView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 1024)] autorelease];
+	
+	CGRect frame = self.cardTableViewController.view.frame;
+	frame.origin.x += 782;
+	self.cardTableViewController.view.frame = frame;
+	frame = self.cardTableViewController.rootShadowLeft.frame;
+	frame.origin.x -= 782;
+	self.cardTableViewController.rootShadowLeft.frame = frame;
+
+	self.cardTableViewController.view.alpha = 0.0;
+	self.cardTableViewController.rootShadowLeft.alpha = 0.0;
+	
     [UIView animateWithDuration:1.0 animations:^{
+		
+		CGRect frame = self.cardTableViewController.view.frame;
+		frame.origin.x -= 782;
+		self.cardTableViewController.view.frame = frame;
+		frame = self.cardTableViewController.rootShadowLeft.frame;
+		frame.origin.x += 782;
+		self.cardTableViewController.rootShadowLeft.frame = frame;
+		
         self.cardTableViewController.view.alpha = 1.0;
+		self.cardTableViewController.rootShadowLeft.alpha = 1.0;
+		
         button.alpha = 1.0;
     }];
 }

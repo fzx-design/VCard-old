@@ -21,6 +21,12 @@
 		203B64191428B69800CD8426 /* bg_icon_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 203B64131428B69700CD8426 /* bg_icon_default.png */; };
 		203B641A1428B69800CD8426 /* bg_icon_mist.png in Resources */ = {isa = PBXBuildFile; fileRef = 203B64141428B69800CD8426 /* bg_icon_mist.png */; };
 		203B641B1428B69800CD8426 /* bg_icon_twilight.png in Resources */ = {isa = PBXBuildFile; fileRef = 203B64151428B69800CD8426 /* bg_icon_twilight.png */; };
+		206902DA144AD44D00BA9EC3 /* head_cover_card_light.png in Resources */ = {isa = PBXBuildFile; fileRef = 206902D9144AD44D00BA9EC3 /* head_cover_card_light.png */; };
+		206902E6144B280900BA9EC3 /* post_tools_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 206902E5144B280900BA9EC3 /* post_tools_bg.png */; };
+		206902E9144B29AA00BA9EC3 /* switch_grey_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 206902E7144B29AA00BA9EC3 /* switch_grey_off.png */; };
+		206902EA144B29AA00BA9EC3 /* switch_grey_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 206902E8144B29AA00BA9EC3 /* switch_grey_on.png */; };
+		206902EC144B2C0D00BA9EC3 /* v_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 206902EB144B2C0D00BA9EC3 /* v_large.png */; };
+		206902EE144B2C8100BA9EC3 /* button_sendmsg_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 206902ED144B2C8100BA9EC3 /* button_sendmsg_grey.png */; };
 		20C8D9101429FE9C00C94B86 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C8D90F1429FE9C00C94B86 /* libz.dylib */; };
 		20D54764142ADC35006A79A1 /* autologin_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D54762142ADC35006A79A1 /* autologin_on.png */; };
 		20D54765142ADC35006A79A1 /* autologin_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D54763142ADC35006A79A1 /* autologin_off.png */; };
@@ -228,12 +234,7 @@
 		201D2335142B3BA40016F6DE /* greycard_bg_upper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greycard_bg_upper.png; sourceTree = "<group>"; };
 		201D2338142B40060016F6DE /* modify_head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modify_head.png; sourceTree = "<group>"; };
 		201D233A142B40B80016F6DE /* user_detail_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_detail_bg.png; sourceTree = "<group>"; };
-		20375C761449B333002081C7 /* new_tools_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = new_tools_bg.png; sourceTree = "<group>"; };
-		20375C781449B539002081C7 /* switch_small_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch_small_off.png; sourceTree = "<group>"; };
-		20375C791449B539002081C7 /* switch_small_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch_small_on.png; sourceTree = "<group>"; };
 		20375C7C1449B960002081C7 /* atpop_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = atpop_bg.png; sourceTree = "<group>"; };
-		20375C7E1449BFAB002081C7 /* v_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v_big.png; sourceTree = "<group>"; };
-		20375C801449C147002081C7 /* button_send_msg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_send_msg.png; sourceTree = "<group>"; };
 		20375C821449CA0A002081C7 /* SmartCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmartCardViewController.xib; sourceTree = "<group>"; };
 		20375C841449CAA2002081C7 /* smartcard_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smartcard_bg.png; sourceTree = "<group>"; };
 		20375C861449CC19002081C7 /* smartcard_actions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smartcard_actions.png; sourceTree = "<group>"; };
@@ -248,6 +249,12 @@
 		203B64131428B69700CD8426 /* bg_icon_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_icon_default.png; sourceTree = "<group>"; };
 		203B64141428B69800CD8426 /* bg_icon_mist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_icon_mist.png; sourceTree = "<group>"; };
 		203B64151428B69800CD8426 /* bg_icon_twilight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_icon_twilight.png; sourceTree = "<group>"; };
+		206902D9144AD44D00BA9EC3 /* head_cover_card_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = head_cover_card_light.png; sourceTree = "<group>"; };
+		206902E5144B280900BA9EC3 /* post_tools_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = post_tools_bg.png; sourceTree = "<group>"; };
+		206902E7144B29AA00BA9EC3 /* switch_grey_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch_grey_off.png; sourceTree = "<group>"; };
+		206902E8144B29AA00BA9EC3 /* switch_grey_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch_grey_on.png; sourceTree = "<group>"; };
+		206902EB144B2C0D00BA9EC3 /* v_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v_large.png; sourceTree = "<group>"; };
+		206902ED144B2C8100BA9EC3 /* button_sendmsg_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_sendmsg_grey.png; sourceTree = "<group>"; };
 		20C8D90F1429FE9C00C94B86 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		20D54762142ADC35006A79A1 /* autologin_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autologin_on.png; sourceTree = "<group>"; };
 		20D54763142ADC35006A79A1 /* autologin_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autologin_off.png; sourceTree = "<group>"; };
@@ -662,8 +669,9 @@
 				CB1164DD13F11D1E00884118 /* options */,
 				20DC1AEC1428BE8E00213358 /* title_small.png */,
 				CB9E33D213E9CBE900AAE64C /* card_hole_bg.png */,
-				20375C781449B539002081C7 /* switch_small_off.png */,
-				20375C791449B539002081C7 /* switch_small_on.png */,
+				206902D9144AD44D00BA9EC3 /* head_cover_card_light.png */,
+				206902E7144B29AA00BA9EC3 /* switch_grey_off.png */,
+				206902E8144B29AA00BA9EC3 /* switch_grey_on.png */,
 				CBBA01FB13E473BB00641923 /* cell_separator_line.png */,
 				CBBA020913E5313600641923 /* comment_new_noti.png */,
 				CBBA01EB13E4519B00641923 /* refresh_help.png */,
@@ -749,16 +757,16 @@
 		CBBA01EE13E451BD00641923 /* usercard */ = {
 			isa = PBXGroup;
 			children = (
-				20375C7E1449BFAB002081C7 /* v_big.png */,
 				201D2335142B3BA40016F6DE /* greycard_bg_upper.png */,
 				201D2338142B40060016F6DE /* modify_head.png */,
+				206902EB144B2C0D00BA9EC3 /* v_large.png */,
+				206902ED144B2C8100BA9EC3 /* button_sendmsg_grey.png */,
 				20D54769142AE597006A79A1 /* greycard_bg.png */,
 				CBBA020713E5312300641923 /* usercard_follower_noti_new.png */,
 				CBBA020013E52AF300641923 /* usercard_button_HL.png */,
 				CBBA01C113E2C87000641923 /* usercard_button_follow.png */,
 				201D233A142B40B80016F6DE /* user_detail_bg.png */,
 				CBBA01BE13E2C80000641923 /* usercard_bg.png */,
-				20375C801449C147002081C7 /* button_send_msg.png */,
 				CBBA01C213E2C87000641923 /* usercard_button_unfollow.png */,
 				CBBA01C513E2C8C700641923 /* usercard_pointer.png */,
 			);
@@ -781,8 +789,8 @@
 			isa = PBXGroup;
 			children = (
 				CBBA01CD13E34A9F00641923 /* post_button_@.png */,
-				20375C761449B333002081C7 /* new_tools_bg.png */,
 				CBBA01CE13E34AA000641923 /* post_button_#.png */,
+				206902E5144B280900BA9EC3 /* post_tools_bg.png */,
 				CBBA01CF13E34AA000641923 /* post_bg.png */,
 				20375C7C1449B960002081C7 /* atpop_bg.png */,
 				CBBA01D013E34AA100641923 /* post_right_bg.png */,
@@ -974,12 +982,12 @@
 				CBBA021013E53F2900641923 /* CommentsTableViewCell.xib */,
 				CBBA01C913E3463300641923 /* PostViewController.xib */,
 				CBBA01F413E454FC00641923 /* RelationshipTableViewController.xib */,
-				CB9DCADD13E2C15C00DA3D3D /* UserCardViewController.xib */,
 				CB9DCACD13E1E54700DA3D3D /* DetailImageViewController.xib */,
 				CB26224F13DF06780062EDE7 /* StatusCardViewController.xib */,
 				20375C821449CA0A002081C7 /* SmartCardViewController.xib */,
 				9B5F2E3714498FC5008AC0B8 /* UserCardNaviViewController.xib */,
 				9BB5B8B51449A8B100352FF7 /* UserCardContentViewController.xib */,
+				CB9DCADD13E2C15C00DA3D3D /* UserCardViewController.xib */,
 				9BC6E650144A9B2400B28506 /* CCUserInfoCardViewController.xib */,
 			);
 			name = Nibs;
@@ -1258,6 +1266,12 @@
 				9B5F2E3914498FDA008AC0B8 /* UserCardNaviViewController.xib in Resources */,
 				9BB5B8B71449A8B100352FF7 /* UserCardContentViewController.xib in Resources */,
 				9BC6E652144A9B2400B28506 /* CCUserInfoCardViewController.xib in Resources */,
+				206902DA144AD44D00BA9EC3 /* head_cover_card_light.png in Resources */,
+				206902E6144B280900BA9EC3 /* post_tools_bg.png in Resources */,
+				206902E9144B29AA00BA9EC3 /* switch_grey_off.png in Resources */,
+				206902EA144B29AA00BA9EC3 /* switch_grey_on.png in Resources */,
+				206902EC144B2C0D00BA9EC3 /* v_large.png in Resources */,
+				206902EE144B2C8100BA9EC3 /* button_sendmsg_grey.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1407,7 +1421,9 @@
 				GCC_PREFIX_HEADER = "PushBox/PushBox-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "PushBox/PushBox-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "VCard HD";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1419,7 +1435,9 @@
 				GCC_PREFIX_HEADER = "PushBox/PushBox-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "PushBox/PushBox-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "VCard HD";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

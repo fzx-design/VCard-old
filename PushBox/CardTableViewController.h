@@ -8,6 +8,7 @@
 
 #import "CoreDataTableViewController.h"
 #import "CardTableViewCell.h"
+#import "UserCardNaviViewController.h"
 
 #define kNotificationNameNewCommentsToMe @"kNotificationNameNewCommentsToMe"
 #define kNotificationNameNewStatuses @"kNotificationNameNewStatuses"
@@ -29,6 +30,7 @@ typedef enum {
 
 @interface CardTableViewController : CoreDataTableViewController {
     UIImageView *_blurImageView;
+	UIImageView *_rootShadowLeft;
     
     CardTableViewDataSource _dataSource;
     User *_user;
@@ -52,8 +54,10 @@ typedef enum {
 	CGFloat preDiff;
 }
 
-
+@property(nonatomic, retain) IBOutlet UIButton *regionLeftDetectButton;
+@property(nonatomic, retain) IBOutlet UIButton *regionRightDetectButton;
 @property(nonatomic, retain) IBOutlet UIImageView *blurImageView;
+@property(nonatomic, retain) IBOutlet UIImageView *rootShadowLeft;
 @property(nonatomic, assign) id<CardTableViewControllerDelegate> delegate;
 @property(nonatomic, assign) int currentRowIndex;
 @property(nonatomic, assign) BOOL swipeEnabled;
@@ -78,5 +82,9 @@ typedef enum {
 
 - (void)showNextCard;
 - (void)scrollToRow:(int)row;
+
+-(IBAction)dismissRegionTouched:(id)sender;
+-(void)enableDismissRegion;
+-(void)disableDismissRegion;
 
 @end

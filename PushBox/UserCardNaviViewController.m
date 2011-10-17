@@ -20,6 +20,15 @@ static UserCardNaviViewController *sharedUserCardNaviViewController = nil;
     sharedUserCardNaviViewController = [vc retain];
 }
 
++ (BOOL)sharedUserCardNaviViewControllerExisted
+{
+	BOOL result = NO;
+	if (sharedUserCardNaviViewController) {
+		result = YES;
+	}
+	return result;
+}
+
 + (void)sharedUserCardDismiss
 {
 	if (sharedUserCardNaviViewController) {
@@ -29,21 +38,13 @@ static UserCardNaviViewController *sharedUserCardNaviViewController = nil;
 	}
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (id)initWithRootViewController:(UIViewController*)vc
 {
 	self = [super init];
 	if (self) {
 		self.naviController = [[UINavigationController alloc] initWithRootViewController:vc];
 		self.naviController.navigationBarHidden = YES;
+		[self.naviController.view setFrame:[self.contentViewController.view bounds]];
 		[self.contentViewController.view addSubview:self.naviController.view];
 	}
 	
@@ -58,8 +59,10 @@ static UserCardNaviViewController *sharedUserCardNaviViewController = nil;
 - (UserCardContentViewController*)contentViewController
 {
 	if (!contentViewController) {
-		contentViewController = [[UserCardContentViewController alloc] init];
-		contentViewController.parent = sharedUserCardNaviViewController;
+		self.contentViewController = [[UserCardContentViewController alloc] init];
+		CGRect frame = CGRectMake(self.view.frame.origin.x	+ 49, self.view.frame.origin.y + 15, contentViewController.view.frame.size.width, contentViewController.view.frame.size.height);
+		self.contentViewController.view.frame = frame;
+		[self.view addSubview:self.contentViewController.view];
 	}
 	return  contentViewController;
 }
@@ -69,9 +72,6 @@ static UserCardNaviViewController *sharedUserCardNaviViewController = nil;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	[self.view addSubview:self.contentViewController.view];
-	CGRect frame = CGRectMake(self.view.frame.origin.x + 49, self.view.frame.origin.y - 5, contentViewController.view.frame.size.width, contentViewController.view.frame.size.height);
-	self.contentViewController.view.frame = frame;
 }
 
 - (void)viewDidUnload

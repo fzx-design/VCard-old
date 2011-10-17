@@ -28,6 +28,9 @@
 
 @implementation CardTableViewController
 
+@synthesize regionLeftDetectButton;
+@synthesize regionRightDetectButton;
+@synthesize rootShadowLeft = _rootShadowLeft;
 @synthesize tempCell = _tempCell;
 @synthesize delegate = _delegate;
 @synthesize currentRowIndex = _currentRowIndex;
@@ -65,6 +68,7 @@
 	self.tableView.pagingEnabled = YES;
 	
 	CGRect oldFrame = self.tableView.frame;
+	
     self.tableView.transform = CGAffineTransformMakeRotation(-M_PI_2);
 	self.tableView.frame = oldFrame;
 	self.tableView.delegate = self;
@@ -233,6 +237,7 @@
         self.prevRowIndex = 0;
 		[self setHeaderViewWithOffset];
         [self.tableView reloadData];
+		
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.currentRowIndex inSection:0]
                               atScrollPosition:UITableViewScrollPositionMiddle
                                       animated:NO];
@@ -608,6 +613,26 @@
 	if (_checkingDirection) {
 		preDiff = scrollView.contentOffset.y;
 	}
+}
+
+-(void)enableDismissRegion
+{
+	self.regionLeftDetectButton.alpha = 1.0;
+	self.regionRightDetectButton.alpha = 1.0;
+}
+
+-(void)disableDismissRegion
+{
+	self.regionLeftDetectButton.alpha = 0.0;
+	self.regionRightDetectButton.alpha = 0.0;
+}
+
+-(IBAction)dismissRegionTouched:(id)sender
+{
+	if ([UserCardNaviViewController sharedUserCardNaviViewControllerExisted]) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameShouldDismissUserCard object:self];
+	}
+	[self disableDismissRegion];
 }
 
 @end
