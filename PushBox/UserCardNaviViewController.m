@@ -20,6 +20,15 @@ static UserCardNaviViewController *sharedUserCardNaviViewController = nil;
     sharedUserCardNaviViewController = [vc retain];
 }
 
++ (BOOL)sharedUserCardNaviViewControllerExisted
+{
+	BOOL result = NO;
+	if (sharedUserCardNaviViewController) {
+		result = YES;
+	}
+	return result;
+}
+
 + (void)sharedUserCardDismiss
 {
 	if (sharedUserCardNaviViewController) {

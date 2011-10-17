@@ -15,6 +15,7 @@
 @property (nonatomic, retain) UINavigationController* naviController;
 
 + (void)setSharedUserCardNaviViewController:(UserCardNaviViewController*)vc;
++ (BOOL)sharedUserCardNaviViewControllerExisted;
 + (void)sharedUserCardDismiss;
 - (id)initWithRootViewController:(UIViewController*)vc;
 
