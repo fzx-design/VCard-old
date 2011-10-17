@@ -145,13 +145,15 @@
     
     self.bottomStateView.alpha = 0.0;
     
-    if ([WeiboClient authorized]) {
-        self.pushBoxHDImageView.alpha = 0.0;
-        [self start];
-    }
-    else {
-        [self showLoginView];
-    }
+//    if ([WeiboClient authorized]) {
+//        self.pushBoxHDImageView.alpha = 0.0;
+//        [self start];
+//    }
+//    else {
+//        [self showLoginView];
+//    }
+	
+	[self showLoginView];
 }
 
 - (void)userSignoutNotification:(id)sender

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define kModalViewHeight 39
+#define kModalViewHeight 25
 
 @interface UIApplication(UIApplicationAddition)
 
