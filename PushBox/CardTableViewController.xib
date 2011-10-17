@@ -44,13 +44,12 @@
 					<object class="IBUIImageView" id="491138225">
 						<reference key="NSNextResponder" ref="544957833"/>
 						<int key="NSvFlags">256</int>
-						<string key="NSFrame">{{0, 148}, {1024, 318}}</string>
+						<string key="NSFrame">{{0, -38}, {1024, 687}}</string>
 						<reference key="NSSuperview" ref="544957833"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="229692080"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
-						<float key="IBUIAlpha">0.40000000596046448</float>
 						<int key="IBUIContentMode">4</int>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -493,7 +492,7 @@
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{1024, 318}</string>
+				<string>{1024, 748}</string>
 				<string>{78, 653}</string>
 				<string>{78, 653}</string>
 				<string>{32, 32}</string>

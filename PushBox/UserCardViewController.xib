@@ -290,7 +290,11 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="1027003732"/>
-						<object class="NSCustomResource" key="IBUINormalImage">
+						<object class="NSCustomResource" key="IBUIHighlightedImage" id="396916768">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">usercard_button_unfollow.png</string>
+						</object>
+						<object class="NSCustomResource" key="IBUINormalImage" id="531994240">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">usercard_button_follow.png</string>
 						</object>
@@ -314,10 +318,8 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="1027003732"/>
-						<object class="NSCustomResource" key="IBUINormalImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">usercard_button_unfollow.png</string>
-						</object>
+						<reference key="IBUIHighlightedImage" ref="531994240"/>
+						<reference key="IBUINormalImage" ref="396916768"/>
 						<reference key="IBUIFontDescription" ref="268622513"/>
 						<reference key="IBUIFont" ref="438676074"/>
 					</object>
@@ -1365,6 +1367,7 @@
 					<string>31.IBPluginDependency</string>
 					<string>31.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>32.IBPluginDependency</string>
+					<string>32.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>33.IBPluginDependency</string>
 					<string>33.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>38.IBPluginDependency</string>
@@ -1410,8 +1413,9 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<real value="0.0"/>
+					<real value="1"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<real value="1"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<real value="0.0"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
