@@ -44,6 +44,7 @@
     [super viewDidLoad];
     self.titleLabel.text = NSLocalizedString(@"发表评论", nil);
     self.textView.text = @"";
+    [self.textView becomeFirstResponder];
     if (self.targetComment) {
         self.textView.text = [NSString stringWithFormat:@"回复@%@:", self.targetComment.author.screenName];
     }

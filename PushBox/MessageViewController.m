@@ -38,7 +38,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    self.textView.text = @"";
+    [self.textView becomeFirstResponder];
 }
 
 - (void)viewDidUnload
@@ -84,6 +86,14 @@
 - (IBAction)sendButtonClicked:(UIButton *)sender
 {
     
+}
+
+# pragma - UITextViewDelegate
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    int count = [textView.text length];
+    self.countLabel.text = [[NSString alloc] initWithFormat:@"%d", count];
 }
 
 @end

@@ -73,6 +73,7 @@
 {
     [super viewDidLoad];
     self.textView.text = nil;
+    [self.textView becomeFirstResponder];
     
     if (_type == PostViewTypeRepost) {
         [self.camaraButton removeFromSuperview];

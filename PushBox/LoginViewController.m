@@ -51,6 +51,8 @@
 	BOOL autoSave = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeyAutoSave];
 	self.autoSaveButton.selected = autoSave;
 //	self.autoSaveSwitch.on = autoSave;
+    
+    [self.usernameTextField becomeFirstResponder];
 }
 
 - (void)viewDidUnload
