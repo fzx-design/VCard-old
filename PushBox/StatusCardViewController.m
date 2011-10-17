@@ -418,7 +418,6 @@
 	vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     vc.delegate = self;
 
-	
 	UserCardNaviViewController* navi = [[UserCardNaviViewController alloc] initWithRootViewController:vc];
 	[UserCardNaviViewController setSharedUserCardNaviViewController:navi];
 	

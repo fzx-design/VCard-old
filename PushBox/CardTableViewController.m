@@ -28,6 +28,8 @@
 
 @implementation CardTableViewController
 
+@synthesize regionLeftDetectButton;
+@synthesize regionRightDetectButton;
 @synthesize rootShadowLeft = _rootShadowLeft;
 @synthesize tempCell = _tempCell;
 @synthesize delegate = _delegate;
@@ -576,6 +578,26 @@
 	if (_checkingDirection) {
 		preDiff = scrollView.contentOffset.y;
 	}
+}
+
+-(void)enableDismissRegion
+{
+	self.regionLeftDetectButton.alpha = 1.0;
+	self.regionRightDetectButton.alpha = 1.0;
+}
+
+-(void)disableDismissRegion
+{
+	self.regionLeftDetectButton.alpha = 0.0;
+	self.regionRightDetectButton.alpha = 0.0;
+}
+
+-(IBAction)dismissRegionTouched:(id)sender
+{
+	if ([UserCardNaviViewController sharedUserCardNaviViewControllerExisted]) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameShouldDismissUserCard object:self];
+	}
+	[self disableDismissRegion];
 }
 
 @end

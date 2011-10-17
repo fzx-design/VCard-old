@@ -231,6 +231,7 @@
 	self.bottomStateView.userInteractionEnabled = NO;
 	self.cardTableViewController.tableView.scrollEnabled = NO;
     self.cardTableViewController.swipeEnabled = NO;
+	[self.cardTableViewController enableDismissRegion];
 	[UIView animateWithDuration:0.5 animations:^{
 		_holeImageView.alpha = 1.0;
 	}];
@@ -245,6 +246,7 @@
     self.dockViewController.view.userInteractionEnabled = YES;
 	self.cardTableViewController.tableView.scrollEnabled = YES;
 	self.cardTableViewController.swipeEnabled = YES;
+	[self.cardTableViewController disableDismissRegion];
 }
 
 - (void)cardTableViewController:(CardTableViewController *)vc didScrollToRow:(int)row withNumberOfRows:(int)numberOfRows

@@ -24,10 +24,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"关于", nil)
-																			 style:UIBarButtonItemStylePlain
-																			target:self
-																			action:@selector(showAbout)];
+//	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"关于", nil)
+//																			 style:UIBarButtonItemStylePlain
+//																			target:self
+//																			action:@selector(showAbout)];
 	
     self.title = NSLocalizedString(@"VCard HD", nil);
     self.contentSizeForViewInPopover = kContentSizeForViewInPopover;
@@ -51,7 +51,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -63,6 +63,8 @@
             return 1;
         case 2:
             return 3;
+		case 3:
+			return 1;
     }
     return 0;
 }
@@ -80,6 +82,8 @@
         case 2:
             header = NSLocalizedString(@"设置", nil);
             break;
+		case 3:
+			header = NSLocalizedString(@"",nil);
     }
     return header;
 }
@@ -156,6 +160,15 @@
                     break;
             }
             break;
+		case 3:
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.textLabel.text = NSLocalizedString(@"关于", nil);
+//			int enumValue = [[userDefault objectForKey:kUserDefaultKeyBackground] intValue];
+//			NSString *desc = [BackgroundManViewController backgroundDescriptionFromEnum:enumValue];
+//            cell.detailTextLabel.text = desc;
+//			NSString *path = [BackgroundManViewController backgroundIconFilePathFromEnum:enumValue];
+//            cell.imageView.image = [UIImage imageNamed:path];
+            break;
         default:
             break;
     }
@@ -211,7 +224,9 @@
                 [ivc release];
             }
             break;
-    }
+		case 3:
+			[self showAbout];
+		}
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
