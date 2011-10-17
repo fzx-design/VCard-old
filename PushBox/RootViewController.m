@@ -108,6 +108,7 @@
             }];;
         }
     }];
+    
     [client getUser:[WeiboClient currentUserID]];
 }
 
@@ -179,21 +180,32 @@
     [UIView animateWithDuration:0.28 animations:^(void) {
         self.bottomStateView.alpha = 1.0;
         CGRect frame = self.bottomStateView.frame;
-        frame.origin.y = 768 - 352 - 46 - 18 - 4;
+        frame.origin.y = 768 - 352 - 46 - 18;
         [self.bottomStateView setFrame:frame];
     }];
+    
+    self.bottomStateTextField.text = @"";
+    self.bottomStateLabel.text = @"";
+    self.bottomStateTextField.hidden = NO;
+    self.bottomStateLabel.hidden = YES;
 }
 
 - (void)hideBottomStateViewForSearch
 {
     self.dockViewController.searchButton.selected = NO;
-    
+    [self.bottomStateTextField resignFirstResponder];
+
     [UIView animateWithDuration:0.28 animations:^(void) {
         self.bottomStateView.alpha = 0.0;
         CGRect frame = self.bottomStateView.frame;
         frame.origin.y = 618;
         [self.bottomStateView setFrame:frame];
     }];
+    
+    self.bottomStateTextField.text = @"";
+    self.bottomStateLabel.text = @"";
+    self.bottomStateTextField.hidden = YES;
+    self.bottomStateLabel.hidden = NO;
 }
 
 - (void)hideBottomStateView
@@ -213,6 +225,9 @@
 
 - (void)showFriendsTimeline:(id)sender
 {
+    if (self.dockViewController.searchButton.selected)
+        [self hideBottomStateViewForSearch];
+    
     self.cardTableViewController.dataSource = CardTableViewDataSourceFriendsTimeline;
     [self hideBottomStateView];
     [self.cardTableViewController popCardWithCompletion:^{
@@ -230,6 +245,19 @@
         self.dockViewController.showFavoritesButton.selected = NO;
         [self showBottomStateView];
     }];
+}
+
+- (void)showSearchTimeline:(NSString *)searchString
+{
+    self.cardTableViewController.dataSource = CardTableViewDataSourceSearchStatues;
+    [self.cardTableViewController pushCardWithCompletion:^{
+        NSString* string = [[NSString alloc] initWithFormat:@"包含%@的微博", searchString];
+        
+        self.bottomStateLabel.text = NSLocalizedString(string, nil); 
+        self.bottomStateTextField.text = @"";
+        self.bottomStateTextField.hidden = YES;
+        [self showBottomStateView];
+    }];    
 }
 
 - (void)showFavorites
@@ -516,6 +544,8 @@
     self.dockViewController.playButton.enabled = NO;
     self.dockViewController.slider.enabled = NO;
     self.dockViewController.refreshButton.enabled = NO;
+    self.dockViewController.showFavoritesButton.enabled = NO;
+    self.dockViewController.searchButton.enabled = NO;
 }
 
 - (void)hideMessagesCenter
@@ -547,6 +577,8 @@
     self.dockViewController.playButton.enabled = YES;
     self.dockViewController.slider.enabled = YES;
     self.dockViewController.refreshButton.enabled = YES;
+    self.dockViewController.showFavoritesButton.enabled = YES;
+    self.dockViewController.searchButton.enabled = YES;
 }
 
 - (void)commandCenterButtonClicked:(UIButton *)button
@@ -839,23 +871,20 @@
     return _messagesViewController;
 }
 
-# pragma - TextFieldViewDelegate
+# pragma - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
-    
+
+    self.cardTableViewController.searchString = textField.text;
+    [self showSearchTimeline:textField.text];
     [self hideBottomStateViewForSearch];
     
-    self.cardTableViewController.dataSource = CardTableViewDataSourceSearchStatues;
-    self.cardTableViewController.searchString = textField.text;
-    [self.cardTableViewController pushCardWithCompletion:^{
-        self.bottomStateLabel.text = NSLocalizedString(@"包含XXX的微博", nil);
-        self.bottomStateTextField.hidden = YES;
-        
-        [self showBottomStateView];
-    }];    
-    
     return NO;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [self hideBottomStateViewForSearch];
 }
 
 @end

@@ -184,6 +184,9 @@ typedef enum {
         {
             self.hasError = YES;
             self.errorDesc = [NSHTTPURLResponse localizedStringForStatusCode:request.responseStatusCode];
+            
+            NSLog(@"%d",request.responseStatusCode);
+            
             goto report_completion;
         }
     }
@@ -717,6 +720,15 @@ report_completion:
     [self sendRequest];
 }
 
+- (void)getTrendsStatuses:(NSString *)trend_name
+{
+    self.path = @"trends/statuses.json";
+    if (trend_name) {
+        [self.params setObject:trend_name forKey:@"trend_name"];
+    }
+    [self sendRequest];
+}
+
 - (void)getSearchStatuses:(NSString *)q
                filter_ori:(int)filter_ori 
                filter_pic:(int)filter_pic
@@ -730,18 +742,30 @@ report_completion:
                 needcount:(Boolean)needcount
                  base_app:(int)base_app
 {
-    self.path = @"search/statuses.json";
-    [self.params setObject:[NSString stringWithFormat:@"%d", filter_ori] forKey:@"filter_ori"];
-    [self.params setObject:[NSString stringWithFormat:@"%d", filter_pic] forKey:@"filter_pic"];
-    [self.params setObject:[NSString stringWithFormat:@"%d", fuid] forKey:@"fuid"];
-    [self.params setObject:[NSString stringWithFormat:@"%d", province] forKey:@"province"];
-    [self.params setObject:[NSString stringWithFormat:@"%d", city] forKey:@"city"];
-    [self.params setObject:[NSString stringWithFormat:@"%d", starttime] forKey:@"starttime"];
-    [self.params setObject:[NSString stringWithFormat:@"%d", endtime] forKey:@"endtime"];
-    [self.params setObject:[NSString stringWithFormat:@"%d", count] forKey:@"count"];
-    [self.params setObject:[NSString stringWithFormat:@"%d", page] forKey:@"page"];
-    [self.params setObject:[NSString stringWithFormat:@"%b", needcount] forKey:@"needcount"];
-    [self.params setObject:[NSString stringWithFormat:@"%d", base_app] forKey:@"base_app"];
+    self.path = @"2/search/statuses.json";
+    if(filter_ori)
+        [self.params setObject:[NSString stringWithFormat:@"%d", filter_ori] forKey:@"filter_ori"];
+    if(filter_pic)
+        [self.params setObject:[NSString stringWithFormat:@"%d", filter_pic] forKey:@"filter_pic"];
+    if(fuid)
+        [self.params setObject:[NSString stringWithFormat:@"%d", fuid] forKey:@"fuid"];
+    if(province)
+        [self.params setObject:[NSString stringWithFormat:@"%d", province] forKey:@"province"];
+    if(city)
+        [self.params setObject:[NSString stringWithFormat:@"%d", city] forKey:@"city"];
+    if(starttime)
+        [self.params setObject:[NSString stringWithFormat:@"%d", starttime] forKey:@"starttime"];
+    if(endtime)
+        [self.params setObject:[NSString stringWithFormat:@"%d", endtime] forKey:@"endtime"];
+    if(count)
+        [self.params setObject:[NSString stringWithFormat:@"%d", count] forKey:@"count"];
+    if(page)
+        [self.params setObject:[NSString stringWithFormat:@"%d", page] forKey:@"page"];
+    if(needcount)
+        [self.params setObject:[NSString stringWithFormat:@"%b", needcount] forKey:@"needcount"];
+    if(base_app)
+        [self.params setObject:[NSString stringWithFormat:@"%d", base_app] forKey:@"base_app"];
+    
     [self sendRequest];
 }
 

@@ -223,6 +223,28 @@
     }];
 }
 
+- (void)pushCardWithoutCompletion
+{
+    if (!self.prevFetchedResultsController) {
+        self.prevFetchedResultsController = self.fetchedResultsController;
+        self.prevRowIndex = self.currentRowIndex;
+    }
+	
+    self.fetchedResultsController.delegate = nil;
+    self.fetchedResultsController = nil;
+    self.currentRowIndex = 0;
+	
+    self.blurImageView.alpha = 0.0;
+	self.blurImageView.transform = CGAffineTransformMakeScale(kBlurImageViewScale, kBlurImageViewScale);
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.blurImageView.alpha = 1.0;
+        self.blurImageView.transform = CGAffineTransformMakeScale(1, 1);
+        self.tableView.alpha = 0.0;
+        self.tableView.transform = CGAffineTransformScale(self.tableView.transform, 1/kBlurImageViewScale, 1/kBlurImageViewScale);
+    }];
+}
+
 - (void)popCardWithCompletion:(void (^)())completion
 {
     self.dataSource = CardTableViewDataSourceFriendsTimeline;
@@ -452,9 +474,7 @@
                 [self.delegate cardTableViewController:self 
                                         didScrollToRow:self.currentRowIndex
                                       withNumberOfRows:[self numberOfRows]];
-                
-                NSLog(@"----------------");
-                
+                                
                 if (completion) {
                     completion();
                 }
@@ -464,8 +484,7 @@
             }
         }];
 
-        [client getSearchStatuses:self.searchString filter_ori:0 filter_pic:0 fuid:0 province:0 city:0 
-                        starttime:0 endtime:0 count:10 page:1 needcount:NO base_app:0];
+        [client getTrendsStatuses:self.searchString];
     }
 }
 

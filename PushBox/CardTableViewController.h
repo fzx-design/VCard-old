@@ -71,6 +71,8 @@ typedef enum {
 - (void)pushCardWithCompletion:(void (^)())completion;
 - (void)popCardWithCompletion:(void (^)())completion;
 
+- (void)pushCardWithoutCompletion;
+
 - (int)numberOfRows;
 
 - (void)getUnread;
