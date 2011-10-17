@@ -10,12 +10,14 @@
 #import "WeiboClient.h"
 
 #define kUserDefaultKeyAutoSave @"kUserDefaultKeyAutoSave"
+#define kUserDefaultName @"kUserDefaultName"
 
 @implementation LoginViewController
 
 @synthesize usernameTextField = _usernameTextField;
 @synthesize passwordTextField = _passwordTextField;
 @synthesize autoSaveSwitch = _autoSaveSwitch;
+@synthesize autoSaveButton = _autoSaveButton;
 @synthesize providerLabel = _providerLabel;
 @synthesize delegate = _delegate;
 
@@ -35,6 +37,7 @@
     [_usernameTextField release];
     [_passwordTextField release];
     [_autoSaveSwitch release];
+	[_autoSaveButton release];
     [_providerLabel release];
     _delegate = nil;
     [super dealloc];
@@ -46,7 +49,8 @@
     
     self.providerLabel.text = NSLocalizedString(@"新浪微博", nil);
 	BOOL autoSave = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeyAutoSave];
-    self.autoSaveSwitch.on = autoSave;
+	self.autoSaveButton.selected = autoSave;
+//	self.autoSaveSwitch.on = autoSave;
 }
 
 - (void)viewDidUnload
@@ -54,8 +58,9 @@
     [super viewDidUnload];
     self.usernameTextField = nil;
     self.passwordTextField = nil;
-    self.autoSaveSwitch = nil;
-    self.providerLabel = nil;
+//	self.autoSaveSwitch = nil;
+    self.autoSaveButton = nil;
+	self.providerLabel = nil;
 }
 
 - (IBAction)login:(id)sender {
@@ -81,7 +86,8 @@
         }
     }];
     
-    [client authWithUsername:username password:password autosave:self.autoSaveSwitch.on];
+//    [client authWithUsername:username password:password autosave:self.autoSaveSwitch.on];
+	[client authWithUsername:username password:password autosave:self.autoSaveButton.selected];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -102,7 +108,9 @@
 }
 
 - (IBAction)autoSaveSwitchChanged:(id)sender {
-    BOOL on = self.autoSaveSwitch.on;
+//    BOOL on = self.autoSaveSwitch.on;
+	BOOL on = !self.autoSaveButton.selected;
+	self.autoSaveButton.selected = on;
 	[[NSUserDefaults standardUserDefaults] setBool:on forKey:kUserDefaultKeyAutoSave];
 }
 
