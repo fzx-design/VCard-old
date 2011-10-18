@@ -47,6 +47,7 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrameSize">{1024, 748}</string>
 						<reference key="NSSuperview" ref="420341332"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="72760619"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -65,6 +66,7 @@
 								<int key="NSvFlags">256</int>
 								<string key="NSFrame">{{0, -4}, {1024, 54}}</string>
 								<reference key="NSSuperview" ref="72760619"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="689393616"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -81,6 +83,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{944, 0}, {78, 46}}</string>
 								<reference key="NSSuperview" ref="72760619"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -119,7 +122,8 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{298, 1}, {428, 44}}</string>
 								<reference key="NSSuperview" ref="72760619"/>
-								<reference key="NSNextKeyView" ref="330712054"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<object class="NSColor" key="IBUIBackgroundColor" id="533626259">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MCAwAA</bytes>
@@ -155,22 +159,12 @@
 									<int key="NSfFlags">16</int>
 								</object>
 							</object>
-							<object class="IBUIImageView" id="330712054">
-								<reference key="NSNextResponder" ref="72760619"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{298, 1}, {428, 44}}</string>
-								<reference key="NSSuperview" ref="72760619"/>
-								<reference key="NSNextKeyView" ref="1018925235"/>
-								<string key="NSReuseIdentifierKey">_NS:569</string>
-								<int key="IBUIContentMode">4</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-							</object>
 							<object class="IBUITextField" id="1018925235">
 								<reference key="NSNextResponder" ref="72760619"/>
-								<int key="NSvFlags">292</int>
+								<int key="NSvFlags">-2147483356</int>
 								<string key="NSFrame">{{348, 1}, {378, 44}}</string>
 								<reference key="NSSuperview" ref="72760619"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="902454433"/>
 								<string key="NSReuseIdentifierKey">_NS:320</string>
 								<reference key="IBUIBackgroundColor" ref="533626259"/>
@@ -204,6 +198,7 @@
 						</object>
 						<string key="NSFrame">{{0, 625}, {1024, 46}}</string>
 						<reference key="NSSuperview" ref="420341332"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="35991125"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -217,6 +212,7 @@
 				</object>
 				<string key="NSFrame">{{0, 20}, {1024, 748}}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="928190392"/>
 				<reference key="IBUIBackgroundColor" ref="90466321"/>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
@@ -337,7 +333,6 @@
 							<reference ref="35991125"/>
 							<reference ref="1018925235"/>
 							<reference ref="902454433"/>
-							<reference ref="330712054"/>
 						</object>
 						<reference key="parent" ref="420341332"/>
 						<string key="objectName">botton state view</string>
@@ -362,11 +357,6 @@
 						<reference key="object" ref="1018925235"/>
 						<reference key="parent" ref="72760619"/>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">55</int>
-						<reference key="object" ref="330712054"/>
-						<reference key="parent" ref="72760619"/>
-					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -384,7 +374,6 @@
 					<string>32.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
 					<string>50.IBPluginDependency</string>
-					<string>55.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
@@ -396,7 +385,6 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<real value="0.0"/>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -418,7 +406,91 @@
 			<nil key="sourceID"/>
 			<int key="maxID">55</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<object class="IBPartialClassDescription">
+					<string key="className">CoreDataViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/CoreDataViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">RootViewController</string>
+					<string key="superclassName">CoreDataViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">showFriendsTimeline:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">showFriendsTimeline:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">showFriendsTimeline:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>backgroundImageView</string>
+							<string>bottomStateLabel</string>
+							<string>bottomStateTextField</string>
+							<string>bottomStateView</string>
+							<string>pushBoxHDImageView</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIImageView</string>
+							<string>UILabel</string>
+							<string>UITextField</string>
+							<string>UIView</string>
+							<string>UIImageView</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>backgroundImageView</string>
+							<string>bottomStateLabel</string>
+							<string>bottomStateTextField</string>
+							<string>bottomStateView</string>
+							<string>pushBoxHDImageView</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">backgroundImageView</string>
+								<string key="candidateClassName">UIImageView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">bottomStateLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">bottomStateTextField</string>
+								<string key="candidateClassName">UITextField</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">bottomStateView</string>
+								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">pushBoxHDImageView</string>
+								<string key="candidateClassName">UIImageView</string>
+							</object>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/RootViewController.h</string>
+					</object>
+				</object>
+			</object>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
