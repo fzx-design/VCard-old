@@ -9,6 +9,7 @@
 #import "CoreDataTableViewController.h"
 #import "CardTableViewCell.h"
 #import "UserCardNaviViewController.h"
+#import "ErrorNotification.h"
 
 #define kNotificationNameNewCommentsToMe @"kNotificationNameNewCommentsToMe"
 #define kNotificationNameNewStatuses @"kNotificationNameNewStatuses"

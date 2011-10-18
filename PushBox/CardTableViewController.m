@@ -332,7 +332,12 @@
                     completion();
                 }
             }
-        }
+        } else {
+			if (completion) {
+				completion();
+			}
+			[ErrorNotification showLoadingError];
+		}
     };
     
     [client setCompletionBlock:block];
@@ -402,13 +407,7 @@
 				if (completion) {
                     completion();
                 }
-				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"离线模式", nil)
-																message:NSLocalizedString(@"要获取最新消息，请检查网络设置并刷新", nil)
-															   delegate:self
-													  cancelButtonTitle:NSLocalizedString(@"好", nil)
-													  otherButtonTitles:nil];
-				[alert show];
-				[alert release];
+				[ErrorNotification showLoadingError];
 			}
 			[[UIApplication sharedApplication] hideLoadingView];
 			_loading = NO;
@@ -440,9 +439,15 @@
                 if (completion) {
                     completion();
                 }
-                [[UIApplication sharedApplication] hideLoadingView];
-                _loading = NO;
-            }
+				
+            } else {
+				if (completion) {
+                    completion();
+                }
+				[ErrorNotification showLoadingError];
+			}
+			[[UIApplication sharedApplication] hideLoadingView];
+			_loading = NO;
         }];
         
         [client getUserTimeline:self.user.userID
@@ -472,10 +477,15 @@
                 if (completion) {
                     completion();
                 }
-                
-                [[UIApplication sharedApplication] hideLoadingView];
-                _loading = NO;
-            }
+				
+            } else {
+				if (completion) {
+                    completion();
+                }
+				[ErrorNotification showLoadingError];
+			}
+			[[UIApplication sharedApplication] hideLoadingView];
+			_loading = NO;
         }];
 
         [client getTrendsStatuses:self.searchString];

@@ -38,6 +38,7 @@
 		20D54772142B3547006A79A1 /* dock_button_msg_HL.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D5476E142B3547006A79A1 /* dock_button_msg_HL.png */; };
 		20DC1AED1428BE8E00213358 /* title_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DC1AEC1428BE8E00213358 /* title_small.png */; };
 		20EB93521417A370003E541D /* icon_72.png in Resources */ = {isa = PBXBuildFile; fileRef = 20EB93511417A370003E541D /* icon_72.png */; };
+		9B39EAA4144DCDBA00F234D6 /* ErrorNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B39EAA3144DCDB900F234D6 /* ErrorNotification.m */; };
 		9B5F2E2014497374008AC0B8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F2E1F14497373008AC0B8 /* Default-Landscape~ipad.png */; };
 		9B5F2E3814498FDA008AC0B8 /* UserCardNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F2E3614498FB8008AC0B8 /* UserCardNaviViewController.m */; };
 		9B5F2E3914498FDA008AC0B8 /* UserCardNaviViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F2E3714498FC5008AC0B8 /* UserCardNaviViewController.xib */; };
@@ -266,6 +267,8 @@
 		20D5476E142B3547006A79A1 /* dock_button_msg_HL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dock_button_msg_HL.png; sourceTree = "<group>"; };
 		20DC1AEC1428BE8E00213358 /* title_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_small.png; sourceTree = "<group>"; };
 		20EB93511417A370003E541D /* icon_72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_72.png; sourceTree = "<group>"; };
+		9B39EAA2144DCDB900F234D6 /* ErrorNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorNotification.h; sourceTree = "<group>"; };
+		9B39EAA3144DCDB900F234D6 /* ErrorNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorNotification.m; sourceTree = "<group>"; };
 		9B5F2E1F14497373008AC0B8 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		9B5F2E3514498FB4008AC0B8 /* UserCardNaviViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCardNaviViewController.h; sourceTree = "<group>"; };
 		9B5F2E3614498FB8008AC0B8 /* UserCardNaviViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCardNaviViewController.m; sourceTree = "<group>"; };
@@ -892,6 +895,8 @@
 				CB018E0D13DE0064004217E0 /* CardTableViewController.m */,
 				CBDA5B0313DBEC1300FAE221 /* PushBoxAppDelegate.h */,
 				CBDA5B0413DBEC1300FAE221 /* PushBoxAppDelegate.m */,
+				9B39EAA2144DCDB900F234D6 /* ErrorNotification.h */,
+				9B39EAA3144DCDB900F234D6 /* ErrorNotification.m */,
 				CBDA5AFB13DBEC1300FAE221 /* Supporting Files */,
 			);
 			path = PushBox;
@@ -1344,6 +1349,7 @@
 				9B5F2E3814498FDA008AC0B8 /* UserCardNaviViewController.m in Sources */,
 				9BB5B8B61449A8B100352FF7 /* UserCardContentViewController.m in Sources */,
 				9BC6E651144A9B2400B28506 /* CCUserInfoCardViewController.m in Sources */,
+				9B39EAA4144DCDBA00F234D6 /* ErrorNotification.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

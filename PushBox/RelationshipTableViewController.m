@@ -113,7 +113,9 @@
             
             [self doneLoadingTableViewData];
             _loading = NO;
-        }
+        } else {
+			[ErrorNotification showLoadingError];
+		}
     }];
     
     if (_type == RelationshipViewTypeFriends) {

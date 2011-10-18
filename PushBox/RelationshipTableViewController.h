@@ -7,6 +7,7 @@
 //
 
 #import "EGOTableViewController.h"
+#import "ErrorNotification.h"
 
 typedef enum {
     RelationshipViewTypeFriends,
