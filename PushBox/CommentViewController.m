@@ -69,7 +69,9 @@
                                                   otherButtonTitles:nil];
             [alert show];
             [alert release];
-        }
+        } else {
+			[ErrorNotification showPostError];
+		}
     }];
     
     [client comment:self.targetStatus.statusID cid:self.targetComment.commentID text:comment commentOrigin:NO];

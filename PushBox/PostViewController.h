@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ErrorNotification.h"
 
 typedef enum {
     PostViewTypePost,

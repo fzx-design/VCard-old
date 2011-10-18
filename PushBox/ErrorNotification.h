@@ -11,5 +11,6 @@
 @interface ErrorNotification : NSObject
 
 + (void)showLoadingError;
++ (void)showPostError;
 
 @end

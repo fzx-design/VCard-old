@@ -351,8 +351,7 @@
     }
     
     _loading = YES;
-    
-    //
+ 
     if (self.dataSource == CardTableViewDataSourceFavorites) {
         [[UIApplication sharedApplication] showLoadingView];
         [self loadAllFavoritesWithCompletion:^(void) {
@@ -513,7 +512,7 @@
 
 - (void)refresh
 {
-    [self clearData];
+//    [self clearData];
     [self loadMoreDataCompletion:NULL];
 }
 

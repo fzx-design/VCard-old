@@ -139,6 +139,8 @@
 	WeiboClient *client = [WeiboClient client];
     [client setCompletionBlock:^(WeiboClient *client) {
         if (!client.hasError) {
+			
+			[self dismissView];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
                                                             message:NSLocalizedString(@"发表成功", nil)
                                                            delegate:nil
@@ -146,7 +148,9 @@
                                                   otherButtonTitles:nil];
             [alert show];
             [alert release];
-        }
+        } else {
+			[ErrorNotification showPostError];
+		}
     }];
     
     if (_type == PostViewTypeRepost) {
@@ -164,7 +168,6 @@
         }
     }
     
-	[self dismissView];
 }
 
 - (IBAction)referButtonClicked:(id)sender {

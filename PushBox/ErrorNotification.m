@@ -21,4 +21,15 @@
 	[alert release];
 }
 
++ (void)showPostError
+{
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"发布失败", nil)
+													message:NSLocalizedString(@"请检查网络设置并刷新", nil)
+												   delegate:self
+										  cancelButtonTitle:NSLocalizedString(@"取消", nil)
+										  otherButtonTitles:nil];
+	[alert show];
+	[alert release];
+}
+
 @end
