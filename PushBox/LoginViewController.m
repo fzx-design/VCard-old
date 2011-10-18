@@ -16,7 +16,6 @@
 
 @synthesize usernameTextField = _usernameTextField;
 @synthesize passwordTextField = _passwordTextField;
-@synthesize autoSaveSwitch = _autoSaveSwitch;
 @synthesize autoSaveButton = _autoSaveButton;
 @synthesize providerLabel = _providerLabel;
 @synthesize delegate = _delegate;
@@ -36,7 +35,6 @@
     NSLog(@"LoginViewController dealloc");
     [_usernameTextField release];
     [_passwordTextField release];
-    [_autoSaveSwitch release];
 	[_autoSaveButton release];
     [_providerLabel release];
     _delegate = nil;
@@ -50,8 +48,7 @@
     self.providerLabel.text = NSLocalizedString(@"新浪微博", nil);
 	BOOL autoSave = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeyAutoSave];
 	self.autoSaveButton.selected = autoSave;
-//	self.autoSaveSwitch.on = autoSave;
-    
+	self.usernameTextField.text = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultName];
     [self.usernameTextField becomeFirstResponder];
 }
 
@@ -60,7 +57,6 @@
     [super viewDidUnload];
     self.usernameTextField = nil;
     self.passwordTextField = nil;
-//	self.autoSaveSwitch = nil;
     self.autoSaveButton = nil;
 	self.providerLabel = nil;
 }
@@ -68,7 +64,8 @@
 - (IBAction)login:(id)sender {
     NSString *username = self.usernameTextField.text;
     NSString *password = self.passwordTextField.text;
-
+	[[NSUserDefaults standardUserDefaults] setObject:username forKey:kUserDefaultName];
+	
     WeiboClient *client = [WeiboClient client];
     
     [client setCompletionBlock:^(WeiboClient *client) {
@@ -87,8 +84,6 @@
             [self.delegate loginViewControllerDidLogin:self];
         }
     }];
-    
-//    [client authWithUsername:username password:password autosave:self.autoSaveSwitch.on];
 	[client authWithUsername:username password:password autosave:self.autoSaveButton.selected];
 }
 
@@ -110,7 +105,6 @@
 }
 
 - (IBAction)autoSaveSwitchChanged:(id)sender {
-//    BOOL on = self.autoSaveSwitch.on;
 	BOOL on = !self.autoSaveButton.selected;
 	self.autoSaveButton.selected = on;
 	[[NSUserDefaults standardUserDefaults] setBool:on forKey:kUserDefaultKeyAutoSave];

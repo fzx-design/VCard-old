@@ -85,23 +85,6 @@
     footer.backgroundColor = [UIColor clearColor];
     [self.tableView setTableFooterView:footer];
     [footer release];
-	
-	//TODO
-	//Need to add pan gesture to the controller
-	
-	//	UISwipeGestureRecognizer *swipeRigthGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self 
-	//																							action:@selector(swipeRight:)];
-	//	swipeRigthGesture.direction = UISwipeGestureRecognizerDirectionUp;
-	//	swipeRigthGesture.numberOfTouchesRequired = 1;
-	//	[self.tableView addGestureRecognizer:swipeRigthGesture];
-	//	[swipeRigthGesture release];
-	//	
-	//	UISwipeGestureRecognizer *swipeLeftGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self
-	//																						   action:@selector(swipeLeft:)];
-	//	swipeLeftGesture.direction = UISwipeGestureRecognizerDirectionDown;
-	//	swipeLeftGesture.numberOfTouchesRequired = 1;
-	//	[self.tableView addGestureRecognizer:swipeLeftGesture];
-	//	[swipeLeftGesture release];
     
     self.currentRowIndex = 0;
     self.swipeEnabled = YES;
@@ -411,13 +394,24 @@
                 [self.delegate cardTableViewController:self 
                                         didScrollToRow:self.currentRowIndex
                                       withNumberOfRows:[self numberOfRows]];
-                
                 if (completion) {
                     completion();
                 }
-                [[UIApplication sharedApplication] hideLoadingView];
-                _loading = NO;
-            }
+                
+            } else {
+				if (completion) {
+                    completion();
+                }
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"离线模式", nil)
+																message:NSLocalizedString(@"要获取最新消息，请检查网络设置并刷新", nil)
+															   delegate:self
+													  cancelButtonTitle:NSLocalizedString(@"好", nil)
+													  otherButtonTitles:nil];
+				[alert show];
+				[alert release];
+			}
+			[[UIApplication sharedApplication] hideLoadingView];
+			_loading = NO;
         }];
         
         [client getFriendsTimelineSinceID:nil

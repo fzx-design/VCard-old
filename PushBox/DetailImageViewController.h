@@ -31,7 +31,7 @@
 @property (nonatomic, assign) IBOutlet id <DetailImageViewControllerDelegate> delegate;
 @property (nonatomic, retain) UIImage *image;
 
-
+- (id)initWithImage:(UIImage *)image;
 - (IBAction)saveImage:(UIButton *)sender;
 - (IBAction)dismiss:(UIButton *)sender;
 

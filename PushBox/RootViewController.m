@@ -97,16 +97,17 @@
         if (!client.hasError) {
             NSDictionary *userDict = client.responseJSONObject;
             self.currentUser = [User insertUser:userDict inManagedObjectContext:self.managedObjectContext];
-            [self updateBackgroundImageAnimated:YES];
-            self.cardTableViewController.dataSource = CardTableViewDataSourceFriendsTimeline;
-            [self.cardTableViewController loadMoreDataCompletion:^(void) {
-                [self.cardTableViewController loadAllFavoritesWithCompletion:NULL];
-                [self showCardTableView];
-                [self showDockView];
-                [self showMessagesView];
-                [self.cardTableViewController getUnread];
-            }];;
         }
+		
+		[self updateBackgroundImageAnimated:YES];
+		self.cardTableViewController.dataSource = CardTableViewDataSourceFriendsTimeline;
+		[self.cardTableViewController loadMoreDataCompletion:^(void) {
+			[self.cardTableViewController loadAllFavoritesWithCompletion:NULL];
+			[self showCardTableView];
+			[self showDockView];
+			[self showMessagesView];
+			[self.cardTableViewController getUnread];
+		}];
     }];
     
     [client getUser:[WeiboClient currentUserID]];
@@ -145,15 +146,14 @@
     
     self.bottomStateView.alpha = 0.0;
     
-//    if ([WeiboClient authorized]) {
-//        self.pushBoxHDImageView.alpha = 0.0;
-//        [self start];
-//    }
-//    else {
-//        [self showLoginView];
-//    }
-	
-	[self showLoginView];
+    if ([WeiboClient authorized]) {
+        self.pushBoxHDImageView.alpha = 0.0;
+		self.currentUser = [User userWithID:[WeiboClient currentUserID] inManagedObjectContext:self.managedObjectContext];
+        [self start];
+    }
+    else {
+        [self showLoginView];
+    }
 }
 
 - (void)userSignoutNotification:(id)sender
