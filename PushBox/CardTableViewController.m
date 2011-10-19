@@ -468,7 +468,7 @@
                 [self.delegate cardTableViewController:self 
                                         didScrollToRow:self.currentRowIndex
                                       withNumberOfRows:[self numberOfRows]];
-                                
+                
                 if (completion) {
                     completion();
                 }
@@ -477,7 +477,7 @@
                 _loading = NO;
             }
         }];
-
+        
         [client getTrendsStatuses:self.searchString];
     }
 }
@@ -508,12 +508,17 @@
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
-{
-    //NSLog(@"card table view configure cell");
-    
-    CardTableViewCell *tableViewCell = (CardTableViewCell *)cell;
-    tableViewCell.statusCardViewController.currentUser = self.currentUser;
-    tableViewCell.statusCardViewController.status = [self.fetchedResultsController objectAtIndexPath:indexPath];
+{    
+    if (YES)
+    {   CardTableViewCell *tableViewCell = (CardTableViewCell *)cell;
+        tableViewCell.smartCardViewController.currentUser = self.currentUser;
+        tableViewCell.smartCardViewController.status = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    }
+    else 
+    {   CardTableViewCell *tableViewCell = (CardTableViewCell *)cell;
+        tableViewCell.statusCardViewController.currentUser = self.currentUser;
+        tableViewCell.statusCardViewController.status = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    }
 }
 
 - (void)configureRequest:(NSFetchRequest *)request
