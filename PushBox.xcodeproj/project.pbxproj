@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		200CE8CA144EF12A009AD00C /* sc_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 200CE8C9144EF12A009AD00C /* sc_bg.png */; };
 		201D2336142B3BA40016F6DE /* greycard_bg_upper.png in Resources */ = {isa = PBXBuildFile; fileRef = 201D2335142B3BA40016F6DE /* greycard_bg_upper.png */; };
 		201D2339142B40060016F6DE /* modify_head.png in Resources */ = {isa = PBXBuildFile; fileRef = 201D2338142B40060016F6DE /* modify_head.png */; };
 		201D233B142B40B80016F6DE /* user_detail_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 201D233A142B40B80016F6DE /* user_detail_bg.png */; };
@@ -241,11 +242,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		200CE8C9144EF12A009AD00C /* sc_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc_bg.png; sourceTree = "<group>"; };
 		201D2335142B3BA40016F6DE /* greycard_bg_upper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greycard_bg_upper.png; sourceTree = "<group>"; };
 		201D2338142B40060016F6DE /* modify_head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modify_head.png; sourceTree = "<group>"; };
 		201D233A142B40B80016F6DE /* user_detail_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_detail_bg.png; sourceTree = "<group>"; };
 		20375C7C1449B960002081C7 /* atpop_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = atpop_bg.png; sourceTree = "<group>"; };
-		20375C841449CAA2002081C7 /* smartcard_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smartcard_bg.png; sourceTree = "<group>"; };
 		20375C861449CC19002081C7 /* smartcard_actions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smartcard_actions.png; sourceTree = "<group>"; };
 		203B64061428B26300CD8426 /* bg_twilight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_twilight.png; sourceTree = "<group>"; };
 		203B64071428B26300CD8426 /* bg_mist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_mist.png; sourceTree = "<group>"; };
@@ -839,10 +840,10 @@
 				CB9DCAB813DFF27F00DA3D3D /* card_profile_cover_large.png */,
 				CB9DCAB913DFF27F00DA3D3D /* card_profile_cover.png */,
 				CB9DCAB213DFF08C00DA3D3D /* card_cover_bottom.png */,
+				200CE8C9144EF12A009AD00C /* sc_bg.png */,
 				CB9DCAB313DFF08C00DA3D3D /* card_cover_top.png */,
 				CB9DCAA313DFEF5D00DA3D3D /* status_bg.png */,
 				CB9DCAA413DFEF5D00DA3D3D /* status_button_action.png */,
-				20375C841449CAA2002081C7 /* smartcard_bg.png */,
 				CB9DCAA513DFEF5D00DA3D3D /* status_button_comment.png */,
 				CB9DCAA613DFEF5D00DA3D3D /* status_button_fav.png */,
 				CB9DCABC13DFF30E00DA3D3D /* status_button_unfav.png */,
@@ -1311,6 +1312,7 @@
 				FEBCE6B3144EBB5300195C9F /* sc_repost_bg.png in Resources */,
 				FEBCE6B4144EBB5300195C9F /* sc_track_button_default.png in Resources */,
 				FE92BEE2144EC0BF00CA0306 /* SmartCardViewController.xib in Resources */,
+				200CE8CA144EF12A009AD00C /* sc_bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

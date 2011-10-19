@@ -47,6 +47,7 @@
 						<int key="NSvFlags">256</int>
 						<string key="NSFrameSize">{570, 640}</string>
 						<reference key="NSSuperview" ref="931374233"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="473836443"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="392801989">
 							<int key="NSColorSpace">3</int>
@@ -59,7 +60,7 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">smartcard_bg.png</string>
+							<string key="NSResourceName">sc_bg.png</string>
 						</object>
 					</object>
 					<object class="IBUIImageView" id="1017421927">
@@ -67,6 +68,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{65, 20}, {64, 60}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="878036489"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -76,6 +78,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{57, 13}, {80, 76}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1017421927"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -114,6 +117,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{144, 21}, {182, 24}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="726699579"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -150,6 +154,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{144, 44}, {200, 21}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="450764150"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -181,6 +186,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{472, 20}, {30, 24}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="774651433"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -204,6 +210,7 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{68, 97}, {435, 123}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1053363127"/>
 						<reference key="IBUIBackgroundColor" ref="392801989"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -231,6 +238,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{49, 267}, {467, 321}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="978562341"/>
 						<reference key="IBUIBackgroundColor" ref="392801989"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -251,6 +259,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{0, -29}, {467, 348}}</string>
 								<reference key="NSSuperview" ref="978562341"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="96538064"/>
 								<reference key="IBUIBackgroundColor" ref="392801989"/>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -262,6 +271,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{0, -29}, {467, 349}}</string>
 								<reference key="NSSuperview" ref="978562341"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="767260924"/>
 								<reference key="IBUIBackgroundColor" ref="392801989"/>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -271,6 +281,7 @@
 						</object>
 						<string key="NSFrame">{{49, 269}, {467, 319}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="252177055"/>
 						<string key="NSReuseIdentifierKey">_NS:212</string>
 						<reference key="IBUIBackgroundColor" ref="392801989"/>
@@ -282,6 +293,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{60, 275}, {451, 129}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="620434925"/>
 						<string key="NSReuseIdentifierKey">_NS:569</string>
 						<int key="IBUIContentMode">4</int>
@@ -297,6 +309,7 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{76, 290}, {418, 97}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="995979114"/>
 						<reference key="IBUIBackgroundColor" ref="392801989"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -317,6 +330,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{399, 242}, {42, 21}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="401241327"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -353,6 +367,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{469, 242}, {42, 21}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="470756897"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -380,6 +395,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{373, 246}, {18, 13}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="63823706"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<int key="IBUIContentMode">4</int>
@@ -403,6 +419,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{444, 247}, {17, 14}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="670531204"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<int key="IBUIContentMode">4</int>
@@ -426,6 +443,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{70, 290}, {431, 42}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="308029235"/>
 						<string key="NSReuseIdentifierKey">_NS:241</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -455,6 +473,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{115, 294}, {326, 33}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:345</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -473,6 +492,7 @@
 				</object>
 				<string key="NSFrameSize">{570, 640}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="167232458"/>
 				<reference key="IBUIBackgroundColor" ref="392801989"/>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -863,7 +883,203 @@
 			<nil key="sourceID"/>
 			<int key="maxID">58</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<object class="IBPartialClassDescription">
+					<string key="className">CoreDataViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/CoreDataViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SmartCardViewController</string>
+					<string key="superclassName">CoreDataViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>actionsButtonClicked:</string>
+							<string>addFavButtonClicked:</string>
+							<string>commentButtonClicked:</string>
+							<string>profileImageButtonClicked:</string>
+							<string>repostButtonClicked:</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIButton</string>
+							<string>UIButton</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>actionsButtonClicked:</string>
+							<string>addFavButtonClicked:</string>
+							<string>commentButtonClicked:</string>
+							<string>profileImageButtonClicked:</string>
+							<string>repostButtonClicked:</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">actionsButtonClicked:</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">addFavButtonClicked:</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">commentButtonClicked:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">profileImageButtonClicked:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">repostButtonClicked:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>actionsButton</string>
+							<string>addFavourateButton</string>
+							<string>commentCountLabel</string>
+							<string>dateLabel</string>
+							<string>profileImageView</string>
+							<string>repostCountLabel</string>
+							<string>repostTextView</string>
+							<string>repostTweetImageView</string>
+							<string>repostView</string>
+							<string>screenNameLabel</string>
+							<string>trackButton</string>
+							<string>trackLabel</string>
+							<string>tweetImageView</string>
+							<string>tweetScrollView</string>
+							<string>tweetTextView</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIButton</string>
+							<string>UIButton</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UIImageView</string>
+							<string>UILabel</string>
+							<string>UITextView</string>
+							<string>UIImageView</string>
+							<string>UIImageView</string>
+							<string>UILabel</string>
+							<string>UIButton</string>
+							<string>UILabel</string>
+							<string>UIImageView</string>
+							<string>UIScrollView</string>
+							<string>UITextView</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>actionsButton</string>
+							<string>addFavourateButton</string>
+							<string>commentCountLabel</string>
+							<string>dateLabel</string>
+							<string>profileImageView</string>
+							<string>repostCountLabel</string>
+							<string>repostTextView</string>
+							<string>repostTweetImageView</string>
+							<string>repostView</string>
+							<string>screenNameLabel</string>
+							<string>trackButton</string>
+							<string>trackLabel</string>
+							<string>tweetImageView</string>
+							<string>tweetScrollView</string>
+							<string>tweetTextView</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">actionsButton</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">addFavourateButton</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">commentCountLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">dateLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">profileImageView</string>
+								<string key="candidateClassName">UIImageView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">repostCountLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">repostTextView</string>
+								<string key="candidateClassName">UITextView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">repostTweetImageView</string>
+								<string key="candidateClassName">UIImageView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">repostView</string>
+								<string key="candidateClassName">UIImageView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">screenNameLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">trackButton</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">trackLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">tweetImageView</string>
+								<string key="candidateClassName">UIImageView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">tweetScrollView</string>
+								<string key="candidateClassName">UIScrollView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">tweetTextView</string>
+								<string key="candidateClassName">UITextView</string>
+							</object>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SmartCardViewController.h</string>
+					</object>
+				</object>
+			</object>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
@@ -877,23 +1093,23 @@
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>card_profile_cover.png</string>
+				<string>sc_bg.png</string>
 				<string>sc_button_comment.png</string>
 				<string>sc_button_repost.png</string>
 				<string>sc_image_cover.png</string>
 				<string>sc_repost_bg.png</string>
 				<string>sc_track_button_default.png</string>
-				<string>smartcard_bg.png</string>
 				<string>status_button_action.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{68, 69}</string>
+				<string>{596, 650}</string>
 				<string>{17, 14}</string>
 				<string>{18, 13}</string>
 				<string>{467, 321}</string>
 				<string>{451, 129}</string>
 				<string>{431, 42}</string>
-				<string>{596, 650}</string>
 				<string>{30, 24}</string>
 			</object>
 		</object>
