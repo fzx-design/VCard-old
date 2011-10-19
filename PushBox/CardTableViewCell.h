@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "StatusCardViewController.h"
+#import "SmartCardViewController.h"
 
 @interface CardTableViewCell : UITableViewCell {
     StatusCardViewController *_statusCardViewController;
+    SmartCardViewController *_smartCardViewController;
 }
 
 @property(nonatomic, retain) StatusCardViewController* statusCardViewController;
+@property(nonatomic, retain) SmartCardViewController* smartCardViewController;
 
 @end

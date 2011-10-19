@@ -11,6 +11,7 @@
 @implementation CardTableViewCell
 
 @synthesize statusCardViewController = _statusCardViewController;
+@synthesize smartCardViewController = _smartCardViewController;
 
 - (void)dealloc
 {
@@ -23,12 +24,23 @@
 {
     NSLog(@"CardTableViewCell awakeFromNib");
     self.transform = CGAffineTransformRotate(self.transform, M_PI_2);
-    if (!_statusCardViewController) {
+    
+    if(NO)
+    {if (!_statusCardViewController) {
         _statusCardViewController = [[StatusCardViewController alloc] init];
     }
+        
+        [self.contentView addSubview:_statusCardViewController.view];
+    }
     
-    [self.contentView addSubview:_statusCardViewController.view];
-    
+    else
+    {
+        if (!_smartCardViewController) {
+            _smartCardViewController = [[SmartCardViewController alloc] init];
+        }
+        
+        [self.contentView addSubview:_smartCardViewController.view];
+    }
 }
 
 
