@@ -21,7 +21,7 @@
 @class Status;
 
 @interface SmartCardViewController : CoreDataViewController<DetailImageViewControllerDelegate, 
-UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControllerDelegate, CommentsTableViewControllerDelegate> {
+UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControllerDelegate, CommentsTableViewControllerDelegate, UIWebViewDelegate> {
     UIImageView *_profileImageView;
     UILabel *_screenNameLabel;
     UILabel *_dateLabel;
@@ -40,7 +40,10 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
     UILabel *_trackLabel;
     UIView *_trackView;
     UIImageView *_imageCoverImageView;
+    UIImageView *_musicBackgroundImageView;
+    UIImageView *_musicCoverImageView;
     UIButton *_playButton;
+    UILabel *_recentActNotifyLabel;
     
     Boolean isTrack;
     
@@ -65,7 +68,10 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
 @property(nonatomic, retain) IBOutlet UILabel* trackLabel;
 @property(nonatomic, retain) IBOutlet UIView* trackView;
 @property(nonatomic, retain) IBOutlet UIImageView* imageCoverImageView;
+@property(nonatomic, retain) IBOutlet UIImageView* musicBackgroundImageView;
+@property(nonatomic, retain) IBOutlet UIImageView* musicCoverImageView;
 @property(nonatomic, retain) IBOutlet UIButton* playButton;
+@property(nonatomic, retain) IBOutlet UILabel* recentActNotifyLabel;
 
 @property(nonatomic, retain) Status* status;
 @property(nonatomic, retain) NSString *postMusicVideoLink;
@@ -76,6 +82,6 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
 - (IBAction)commentButtonClicked:(id)sender;
 - (IBAction)repostButtonClicked:(id)sender;
 - (IBAction)addFavButtonClicked:(UIButton *)sender;
-
+- (IBAction)askOwnerButtonClicked:(UIButton *)sender;
 
 @end
