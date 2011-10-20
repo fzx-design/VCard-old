@@ -14,8 +14,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CBDA5AED13DBEC1300FAE221"
-               BuildableName = "PushBox.app"
-               BlueprintName = "PushBox"
+               BuildableName = "VCard HD.app"
+               BlueprintName = "VCard HD"
                ReferencedContainer = "container:PushBox.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -39,8 +39,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CBDA5AED13DBEC1300FAE221"
-            BuildableName = "PushBox.app"
-            BlueprintName = "PushBox"
+            BuildableName = "VCard HD.app"
+            BlueprintName = "VCard HD"
             ReferencedContainer = "container:PushBox.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -56,8 +56,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CBDA5AED13DBEC1300FAE221"
-            BuildableName = "PushBox.app"
-            BlueprintName = "PushBox"
+            BuildableName = "VCard HD.app"
+            BlueprintName = "VCard HD"
             ReferencedContainer = "container:PushBox.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

@@ -650,7 +650,6 @@
 				CB26224E13DF06780062EDE7 /* StatusCardViewController.m */,
 				FE92BEDE144EC0BF00CA0306 /* SmartCardViewController.h */,
 				FE92BEDF144EC0BF00CA0306 /* SmartCardViewController.m */,
-				FE92BEE0144EC0BF00CA0306 /* SmartCardViewController.xib */,
 				FE8F6D45144327B8001A62FD /* msg */,
 			);
 			name = "Card controllers";
@@ -1001,6 +1000,12 @@
 		CBDA5B5C13DBED1600FAE221 /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
+				FEFB311F144311D600440DD5 /* MessagesViewController.xib */,
+				FE8F6D41144327B4001A62FD /* MessagesContactsTableViewController.xib */,
+				FEA4265514432103002E80B3 /* MessagesContactsTableViewCell.xib */,
+				FEFDACA81443F775009CF7CD /* MessagesDialogTableViewController.xib */,
+				FEFDACAE1443F7A5009CF7CD /* MessagesDialogTableViewCell.xib */,
+				FEFB31241443130700440DD5 /* MessageViewController.xib */,
 				CBD36F1013E697F5008BB428 /* CommentViewController.xib */,
 				CBBA01F913E470F100641923 /* RelationshipTableViewCell.xib */,
 				CB018DFE13DDE468004217E0 /* AboutViewController.xib */,
@@ -1018,6 +1023,7 @@
 				CB26224F13DF06780062EDE7 /* StatusCardViewController.xib */,
 				9B5F2E3714498FC5008AC0B8 /* UserCardNaviViewController.xib */,
 				9BB5B8B51449A8B100352FF7 /* UserCardContentViewController.xib */,
+				FE92BEE0144EC0BF00CA0306 /* SmartCardViewController.xib */,
 				CB9DCADD13E2C15C00DA3D3D /* UserCardViewController.xib */,
 				9BC6E650144A9B2400B28506 /* CCUserInfoCardViewController.xib */,
 			);
@@ -1059,22 +1065,16 @@
 			children = (
 				FEFB311D144311D600440DD5 /* MessagesViewController.h */,
 				FEFB311E144311D600440DD5 /* MessagesViewController.m */,
-				FEFB311F144311D600440DD5 /* MessagesViewController.xib */,
 				FE8F6D3F144327B3001A62FD /* MessagesContactsTableViewController.h */,
 				FE8F6D40144327B3001A62FD /* MessagesContactsTableViewController.m */,
-				FE8F6D41144327B4001A62FD /* MessagesContactsTableViewController.xib */,
 				FEA42652144320E7002E80B3 /* MessagesContactsTableViewCell.h */,
 				FEA42653144320E7002E80B3 /* MessagesContactsTableViewCell.m */,
-				FEA4265514432103002E80B3 /* MessagesContactsTableViewCell.xib */,
 				FEFDACA61443F775009CF7CD /* MessagesDialogTableViewController.h */,
 				FEFDACA71443F775009CF7CD /* MessagesDialogTableViewController.m */,
-				FEFDACA81443F775009CF7CD /* MessagesDialogTableViewController.xib */,
 				FEFDACAC1443F7A5009CF7CD /* MessagesDialogTableViewCell.h */,
 				FEFDACAD1443F7A5009CF7CD /* MessagesDialogTableViewCell.m */,
-				FEFDACAE1443F7A5009CF7CD /* MessagesDialogTableViewCell.xib */,
 				FEFB31221443130700440DD5 /* MessageViewController.h */,
 				FEFB31231443130700440DD5 /* MessageViewController.m */,
-				FEFB31241443130700440DD5 /* MessageViewController.xib */,
 			);
 			name = msg;
 			sourceTree = "<group>";

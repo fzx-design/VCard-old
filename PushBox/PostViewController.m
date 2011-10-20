@@ -93,6 +93,26 @@
 		range.length = 0;
 		self.textView.selectedRange = range;
     }
+    
+    self.textView.delegate = self;
+}
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    NSString *text = self.textView.text;
+//    int leng = [text length];
+    int bytes = [text lengthOfBytesUsingEncoding:NSUTF16StringEncoding];
+    const char *ptr = [text cStringUsingEncoding:NSUTF16StringEncoding];
+    int words = 0;
+    for (int i = 0; i < bytes; i++) {
+        if (*ptr) {
+            words++;
+        }
+        ptr++;
+    }
+    words += 1;
+    words /= 2;
+    self.wordsCountLabel.text = [NSString stringWithFormat:@"%d", 140 - words];
 }
 
 - (IBAction)cancelButtonClicked:(UIButton *)sender {

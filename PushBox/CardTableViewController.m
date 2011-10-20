@@ -494,6 +494,7 @@
         case CardTableViewDataSourceFavorites:
             [self.currentUser removeFavorites:self.currentUser.favorites];
             break;
+            
     }
     [self.managedObjectContext processPendingChanges];
     self.currentRowIndex = 0;
