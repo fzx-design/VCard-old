@@ -413,6 +413,7 @@
     CGContextDrawImage(context, myImageRect, subImageRef);
     UIImage* cutImage = [UIImage imageWithCGImage:subImageRef];
     UIGraphicsEndImageContext();
+	
 	if (_tmpImage == nil) {
 		_tmpImage = [cutImage retain];
 	} else {
