@@ -316,6 +316,7 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="738363382"/>
 						<reference key="IBUIBackgroundColor" ref="392801989"/>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<bool key="IBUIBounces">NO</bool>
 						<bool key="IBUIScrollEnabled">NO</bool>
@@ -335,7 +336,7 @@
 							<int key="type">1</int>
 							<double key="pointSize">12</double>
 						</object>
-						<object class="NSFont" key="IBUIFont" id="556737309">
+						<object class="NSFont" key="IBUIFont" id="339859118">
 							<string key="NSName">Helvetica</string>
 							<double key="NSSize">12</double>
 							<int key="NSfFlags">16</int>
@@ -401,7 +402,7 @@
 								<float key="IBUIMinimumFontSize">10</float>
 								<int key="IBUITextAlignment">2</int>
 								<reference key="IBUIFontDescription" ref="244538416"/>
-								<reference key="IBUIFont" ref="556737309"/>
+								<reference key="IBUIFont" ref="339859118"/>
 							</object>
 							<object class="IBUILabel" id="48488285">
 								<reference key="NSNextResponder" ref="60335549"/>
@@ -427,7 +428,7 @@
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">10</float>
 								<reference key="IBUIFontDescription" ref="244538416"/>
-								<reference key="IBUIFont" ref="556737309"/>
+								<reference key="IBUIFont" ref="339859118"/>
 							</object>
 						</object>
 						<string key="NSFrame">{{66, 281}, {433, 44}}</string>
@@ -467,7 +468,7 @@
 							<int key="traits">0</int>
 							<double key="pointSize">12</double>
 						</object>
-						<reference key="IBUIFont" ref="556737309"/>
+						<reference key="IBUIFont" ref="339859118"/>
 					</object>
 					<object class="IBUILabel" id="670531204">
 						<reference key="NSNextResponder" ref="931374233"/>
@@ -490,7 +491,7 @@
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
 						<reference key="IBUIFontDescription" ref="372925803"/>
-						<reference key="IBUIFont" ref="556737309"/>
+						<reference key="IBUIFont" ref="339859118"/>
 					</object>
 					<object class="IBUIButton" id="1053363127">
 						<reference key="NSNextResponder" ref="931374233"/>
