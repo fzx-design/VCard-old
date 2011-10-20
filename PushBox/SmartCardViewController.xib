@@ -148,7 +148,7 @@
 						<string key="NSFrame">{{122, 25}, {182, 24}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="774651433"/>
+						<reference key="NSNextKeyView" ref="726699579"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -185,7 +185,7 @@
 						<string key="NSFrame">{{122, 46}, {200, 21}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="726699579"/>
+						<reference key="NSNextKeyView" ref="822315524"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -218,7 +218,7 @@
 						<string key="NSFrame">{{477, 21}, {30, 24}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="822315524"/>
+						<reference key="NSNextKeyView" ref="774651433"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -231,7 +231,7 @@
 						<reference key="IBUINormalTitleShadowColor" ref="805400912"/>
 						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">smartcard_actions.png</string>
+							<string key="NSResourceName">sc_action.png</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="712415454"/>
 						<reference key="IBUIFont" ref="480757143"/>
@@ -1327,6 +1327,7 @@
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>head_cover_card.png</string>
+				<string>sc_action.png</string>
 				<string>sc_bg.png</string>
 				<string>sc_button_comment.png</string>
 				<string>sc_button_play.png</string>
@@ -1336,11 +1337,11 @@
 				<string>sc_music_bg.png</string>
 				<string>sc_repost_bg.png</string>
 				<string>sc_track_button_default.png</string>
-				<string>smartcard_actions.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{52, 53}</string>
+				<string>{19, 20}</string>
 				<string>{596, 650}</string>
 				<string>{17, 14}</string>
 				<string>{68, 68}</string>
@@ -1350,7 +1351,6 @@
 				<string>{443, 139}</string>
 				<string>{451, 129}</string>
 				<string>{431, 42}</string>
-				<string>{19, 20}</string>
 			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">933</string>
