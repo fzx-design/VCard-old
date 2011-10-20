@@ -93,6 +93,7 @@
     _nextPage = 1;
     _loading = NO;
 	_checkingDirection = NO;
+	_refreshFlag = YES;
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:5
 											  target:self 
@@ -140,8 +141,6 @@
     }
     [client getUnreadCountSinceStatusID:sinceID];
 }
-
-
 
 -(void)setHeaderViewWithOffset{
 	self.tableView.tableHeaderView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 232 + 464 * self.currentRowIndex)] autorelease];
@@ -375,8 +374,9 @@
     
     long long maxID = 0;
     Status *lastStatus = [self.fetchedResultsController.fetchedObjects lastObject];
-    NSLog(@"%@", lastStatus.text);
-    if (lastStatus) {
+
+	NSLog(@"%@", lastStatus.text);
+    if (lastStatus && _lastStatus && !_refreshFlag) {
         NSString *statusID = lastStatus.statusID;
         maxID = [statusID longLongValue] - 1;
     }
@@ -388,9 +388,37 @@
             if (!client.hasError) {
 
                 NSArray *dictArray = client.responseJSONObject;
+				
+				if (_refreshFlag) {
+					_refreshFlag = NO;
+					
+					NSDictionary *dict = [dictArray lastObject];
+					Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+					
+					NSLog(@"_____%@ _______%@", newStatus.text, _lastStatus.text);
+					
+					if (_lastStatus == nil) {
+						_lastStatus = [newStatus retain];
+						[self clearData];
+						_refreshFlag = YES;
+					} else if ([newStatus.statusID isEqualToString:_lastStatus.statusID]) {
+						if (completion) {
+							completion();
+						}
+						[[UIApplication sharedApplication] hideLoadingView];
+						_loading = NO;
+						return;
+					} else {
+						_lastStatus = [newStatus retain];
+						[self clearData];
+						_refreshFlag = YES;
+					}
+				}
+				
                 for (NSDictionary *dict in dictArray) {
                     Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-										
+					NSLog(@"_____%@ _______%@", newStatus.text, _lastStatus.text);
+					
                     [self.currentUser addFriendsStatusesObject:newStatus];
                     if (self.insertionAnimationEnabled) {
                         [self.managedObjectContext processPendingChanges];
@@ -398,6 +426,11 @@
                 }
                 [self.managedObjectContext processPendingChanges];
                 
+				if (_refreshFlag) {
+					_refreshFlag = NO;
+					[self scrollToRow:0];
+				}
+				
                 [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
                 [self.delegate cardTableViewController:self 
                                         didScrollToRow:self.currentRowIndex
@@ -429,6 +462,31 @@
         [client setCompletionBlock:^(WeiboClient *client) {
             if (!client.hasError) {
                 NSArray *dictArray = client.responseJSONObject;
+				
+				if (_refreshFlag) {
+					_refreshFlag = NO;
+					
+					NSDictionary *dict = [dictArray lastObject];
+					Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+					
+					if (_lastStatus == nil) {
+						_lastStatus = [newStatus retain];
+						[self clearData];
+						_refreshFlag = YES;
+					} else if ([newStatus.statusID isEqualToString:_lastStatus.statusID]) {
+						if (completion) {
+							completion();
+						}
+						[[UIApplication sharedApplication] hideLoadingView];
+						_loading = NO;
+						return;
+					} else {
+						_lastStatus = [newStatus retain];
+						[self clearData];
+						_refreshFlag = YES;
+					}
+				}
+				
                 for (NSDictionary *dict in dictArray) {
                     [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
                 }
@@ -468,6 +526,31 @@
             if (!client.hasError) {
                 
 				NSArray *dictArray = client.responseJSONObject;
+				
+				if (_refreshFlag) {
+					_refreshFlag = NO;
+					
+					NSDictionary *dict = [dictArray lastObject];
+					Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+					
+					if (_lastStatus == nil) {
+						_lastStatus = [newStatus retain];
+						[self clearData];
+						_refreshFlag = YES;
+					} else if ([newStatus.statusID isEqualToString:_lastStatus.statusID]) {
+						if (completion) {
+							completion();
+						}
+						[[UIApplication sharedApplication] hideLoadingView];
+						_loading = NO;
+						return;
+					} else {
+						_lastStatus = [newStatus retain];
+						[self clearData];
+						_refreshFlag = YES;
+					}
+				}
+				
                 for (NSDictionary *dict in dictArray) {
                     [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
                 }
@@ -512,13 +595,14 @@
 			break;
     }
     [self.managedObjectContext processPendingChanges];
-    self.currentRowIndex = 0;
-	[self setHeaderViewWithOffset];
+//    self.currentRowIndex = 0;
+//	[self setHeaderViewWithOffset];
 }
 
 - (void)refresh
 {
-    [self clearData];
+	_refreshFlag = YES;
+//    [self clearData];
     [self loadMoreDataCompletion:NULL];
 }
 

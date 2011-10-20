@@ -14,6 +14,8 @@
 #define kBackViewAlpha 0.5
 
 static UIImageView *_loadingImageView;
+//static UIImageView *_loadingCircleImageView;
+//static UIImageView *_loadingRoundImageView;
 static UIActivityIndicatorView *_loadingActivityIndicator;
 
 static UIViewController *_modalViewController;
@@ -45,6 +47,16 @@ static UIView *_backView;
         _loadingImageView.center = CGPointMake(512.0, 345.0);
     }
     
+//    if (!_loadingCircleImageView) {
+//        _loadingCircleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loading_circle.png"]];
+//        _loadingCircleImageView.center = CGPointMake(512.0, 345.0);
+//    }
+//	
+//	if (!_loadingRoundImageView) {
+//        _loadingRoundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"refreshing_bg.png"]];
+//        _loadingRoundImageView.center = CGPointMake(512.0, 345.0);
+//    }
+	
     if (!_loadingActivityIndicator) {
         _loadingActivityIndicator = [[UIActivityIndicatorView alloc] 
                                      initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -53,8 +65,18 @@ static UIView *_backView;
     }
     
     [[self rootView] addSubview:_loadingImageView];
+	
+//	[_loadingRoundImageView addSubview:_loadingRoundImageView];
+//	[_loadingRoundImageView addSubview:_loadingCircleImageView];
+	
 	[[self rootView] addSubview:_loadingActivityIndicator];
 	[_loadingActivityIndicator startAnimating];
+	
+	
+}
+
+- (void)updateLoadingView
+{
 	
 }
 

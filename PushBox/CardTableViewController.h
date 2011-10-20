@@ -49,7 +49,9 @@ typedef enum {
     
     BOOL _insertionAnimationEnabled;
 	
+	BOOL _refreshFlag;
 	BOOL _checkingDirection;
+	Status *_lastStatus;
 	NSInteger _direction;
 	CGFloat dragStartOffset;
 	CGFloat preDiff;

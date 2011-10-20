@@ -58,6 +58,13 @@
 		9BE01AEA14504B8B00450EE2 /* CardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE01AE914504B8B00450EE2 /* CardTableViewCell.m */; };
 		9BE01AEB14504F7800450EE2 /* SmartCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92BEDF144EC0BF00CA0306 /* SmartCardViewController.m */; };
 		9BE01AF614506B8F00450EE2 /* SmartCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BE01AF514506B8F00450EE2 /* SmartCardViewController.xib */; };
+		9BE01AFA14506FF800450EE2 /* sc_comments_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE01AF714506FF700450EE2 /* sc_comments_icon.png */; };
+		9BE01AFB14506FF800450EE2 /* sc_default_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE01AF814506FF700450EE2 /* sc_default_bg.png */; };
+		9BE01AFC14506FF800450EE2 /* sc_repost_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE01AF914506FF800450EE2 /* sc_repost_icon.png */; };
+		9BE01B02145098E100450EE2 /* loading_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE01AFE145098E100450EE2 /* loading_circle.png */; };
+		9BE01B03145098E100450EE2 /* posting_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE01AFF145098E100450EE2 /* posting_bg.png */; };
+		9BE01B04145098E100450EE2 /* posting_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE01B00145098E100450EE2 /* posting_circle.png */; };
+		9BE01B05145098E100450EE2 /* refreshing_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE01B01145098E100450EE2 /* refreshing_bg.png */; };
 		CB018DD613DD3CC9004217E0 /* DockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB018DD413DD3CC8004217E0 /* DockViewController.m */; };
 		CB018DD713DD3CC9004217E0 /* DockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB018DD513DD3CC8004217E0 /* DockViewController.xib */; };
 		CB018DDB13DDCCCD004217E0 /* dock_slider_thumb_HL.png in Resources */ = {isa = PBXBuildFile; fileRef = CB018DD913DDCCCD004217E0 /* dock_slider_thumb_HL.png */; };
@@ -287,6 +294,13 @@
 		9BE01AE814504B8B00450EE2 /* CardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTableViewCell.h; sourceTree = "<group>"; };
 		9BE01AE914504B8B00450EE2 /* CardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardTableViewCell.m; sourceTree = "<group>"; };
 		9BE01AF514506B8F00450EE2 /* SmartCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmartCardViewController.xib; sourceTree = "<group>"; };
+		9BE01AF714506FF700450EE2 /* sc_comments_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc_comments_icon.png; sourceTree = "<group>"; };
+		9BE01AF814506FF700450EE2 /* sc_default_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc_default_bg.png; sourceTree = "<group>"; };
+		9BE01AF914506FF800450EE2 /* sc_repost_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc_repost_icon.png; sourceTree = "<group>"; };
+		9BE01AFE145098E100450EE2 /* loading_circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading_circle.png; sourceTree = "<group>"; };
+		9BE01AFF145098E100450EE2 /* posting_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = posting_bg.png; sourceTree = "<group>"; };
+		9BE01B00145098E100450EE2 /* posting_circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = posting_circle.png; sourceTree = "<group>"; };
+		9BE01B01145098E100450EE2 /* refreshing_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refreshing_bg.png; sourceTree = "<group>"; };
 		CB018DD313DD3CC8004217E0 /* DockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DockViewController.h; sourceTree = "<group>"; };
 		CB018DD413DD3CC8004217E0 /* DockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DockViewController.m; sourceTree = "<group>"; };
 		CB018DD513DD3CC8004217E0 /* DockViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DockViewController.xib; sourceTree = "<group>"; };
@@ -570,6 +584,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9BE01AFD145098CB00450EE2 /* loading */ = {
+			isa = PBXGroup;
+			children = (
+				9BE01AFE145098E100450EE2 /* loading_circle.png */,
+				9BE01AFF145098E100450EE2 /* posting_bg.png */,
+				9BE01B00145098E100450EE2 /* posting_circle.png */,
+				9BE01B01145098E100450EE2 /* refreshing_bg.png */,
+			);
+			name = loading;
+			sourceTree = "<group>";
+		};
 		CB018DDF13DDD015004217E0 /* Options view controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -684,6 +709,7 @@
 		CB4AAC5213DC6AF20053E3A6 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				9BE01AFD145098CB00450EE2 /* loading */,
 				FEFB30F51443117D00440DD5 /* msg */,
 				CBBA01F113E4530700641923 /* statuscard */,
 				CBBA01ED13E451AA00641923 /* buttons */,
@@ -844,6 +870,9 @@
 				CB9DCAB813DFF27F00DA3D3D /* card_profile_cover_large.png */,
 				CB9DCAB913DFF27F00DA3D3D /* card_profile_cover.png */,
 				CB9DCAB213DFF08C00DA3D3D /* card_cover_bottom.png */,
+				9BE01AF714506FF700450EE2 /* sc_comments_icon.png */,
+				9BE01AF814506FF700450EE2 /* sc_default_bg.png */,
+				9BE01AF914506FF800450EE2 /* sc_repost_icon.png */,
 				200CE8C9144EF12A009AD00C /* sc_bg.png */,
 				CB9DCAB313DFF08C00DA3D3D /* card_cover_top.png */,
 				CB9DCAA313DFEF5D00DA3D3D /* status_bg.png */,
@@ -1314,6 +1343,13 @@
 				FE72B4CD144FFD3000C3EE5B /* smartcard.html in Resources */,
 				FE72B4CE144FFD3000C3EE5B /* webview_bg.jpg in Resources */,
 				9BE01AF614506B8F00450EE2 /* SmartCardViewController.xib in Resources */,
+				9BE01AFA14506FF800450EE2 /* sc_comments_icon.png in Resources */,
+				9BE01AFB14506FF800450EE2 /* sc_default_bg.png in Resources */,
+				9BE01AFC14506FF800450EE2 /* sc_repost_icon.png in Resources */,
+				9BE01B02145098E100450EE2 /* loading_circle.png in Resources */,
+				9BE01B03145098E100450EE2 /* posting_bg.png in Resources */,
+				9BE01B04145098E100450EE2 /* posting_circle.png in Resources */,
+				9BE01B05145098E100450EE2 /* refreshing_bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

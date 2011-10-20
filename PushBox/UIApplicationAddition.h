@@ -12,6 +12,8 @@
 
 @interface UIApplication(UIApplicationAddition)
 
+//@property (nonatomic, retain) NSTimer *timer;
+
 //- (NSPersistentStoreCoordinator *)persistentStoreCoordinator;
 
 - (UIView *)rootView;
