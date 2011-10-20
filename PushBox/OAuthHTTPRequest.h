@@ -8,7 +8,7 @@
 
 #import "ASIFormDataRequest.h"
 
-@interface OAuthHTTPRequest : ASIFormDataRequest {
+@interface OAuthHTTPRequest : ASIHTTPRequest {
     BOOL _authNeeded;
     
     NSString *_consumerKey;
