@@ -40,6 +40,8 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
     UILabel *_trackLabel;
     UIView *_trackView;
     UIImageView *_imageCoverImageView;
+    UIImageView *_musicBackgroundImageView;
+    UIImageView *_musicCoverImageView;
     UIButton *_playButton;
     
     Boolean isTrack;
@@ -65,6 +67,8 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
 @property(nonatomic, retain) IBOutlet UILabel* trackLabel;
 @property(nonatomic, retain) IBOutlet UIView* trackView;
 @property(nonatomic, retain) IBOutlet UIImageView* imageCoverImageView;
+@property(nonatomic, retain) IBOutlet UIImageView* musicBackgroundImageView;
+@property(nonatomic, retain) IBOutlet UIImageView* musicCoverImageView;
 @property(nonatomic, retain) IBOutlet UIButton* playButton;
 
 @property(nonatomic, retain) Status* status;

@@ -16,6 +16,12 @@
 #import "WeiboClient.h"
 
 #define kLoadDelay 1.5
+#define kPlayButtonFrameTopRight CGRectMake(399, 306, 68, 68)
+#define kPlayButtonFrameCenter CGRectMake(199, 126, 68, 68)
+#define kRepostViewFrameTop CGRectMake(57, 275, 451, 129)
+#define kRepostWebViewFrameTop CGRectMake(65, 287, 433, 106)
+#define kRepostViewFrameBottom CGRectMake(57, 275+118, 451, 129)
+#define kRepostWebViewFrameBottom CGRectMake(65, 287+118, 433, 106)
 
 @implementation SmartCardViewController
 
@@ -37,6 +43,8 @@
 @synthesize trackLabel = _trackLabel;
 @synthesize trackView = _trackView;
 @synthesize imageCoverImageView = _imageCoverImageView;
+@synthesize musicBackgroundImageView = _musicBackgroundImageView;
+@synthesize musicCoverImageView = _musicCoverImageView;
 @synthesize playButton = _playButton;
 
 @synthesize status = _status;
@@ -136,22 +144,27 @@
     self.repostMusicVideoLink = nil;
     
 	self.tweetImageView.image = nil;
-	self.tweetImageView.hidden = YES;
+	self.tweetImageView.alpha = 0.0;
 	
-	self.repostTweetImageView.hidden = YES;
+	self.repostTweetImageView.alpha = 0.0;
 	self.repostTweetImageView.image = nil;
     
-    self.imageCoverImageView.hidden = YES;
+    self.imageCoverImageView.alpha = 0.0;
     
-    self.repostView.hidden = YES;
+    self.repostView.alpha = 0.0;
     
-    self.postWebView.hidden = YES;
-    self.repostWebView.hidden = YES;
+    self.postWebView.alpha = 0.0;
+    self.repostWebView.alpha = 0.0;
+    
+    self.repostView.frame = kRepostViewFrameTop;
+    self.repostWebView.frame = kRepostWebViewFrameTop;
     
     self.trackView.hidden = YES;
     self.trackLabel.text = @"";
     
     self.playButton.hidden = YES;
+    self.musicBackgroundImageView.alpha = 0.0;
+    self.playButton.frame = kPlayButtonFrameCenter;
     
 	self.profileImageView.image = nil;
 	self.screenNameLabel.text = self.status.author.screenName;
@@ -180,7 +193,13 @@
     [self.tweetImageView loadImageFromURL:self.status.originalPicURL 
                                completion:^(void) 
      {
-         //////
+         self.tweetImageView.alpha = 0.0;
+         self.imageCoverImageView.alpha = 0.0;
+         [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+             self.tweetImageView.alpha = 1.0;
+             self.imageCoverImageView.alpha = 1.0;
+         } completion:^(BOOL fin) {
+         }];
      } 
                            cacheInContext:self.managedObjectContext];
 }
@@ -193,7 +212,13 @@
     [self.repostTweetImageView loadImageFromURL:repostStatus.originalPicURL 
                                      completion:^(void) 
      {
-         //////
+         self.repostTweetImageView.alpha = 0.0;
+         self.imageCoverImageView.alpha = 0.0;
+         [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+             self.repostTweetImageView.alpha = 1.0;
+             self.imageCoverImageView.alpha = 1.0;
+         } completion:^(BOOL fin) {
+         }];
      }
                                  cacheInContext:self.managedObjectContext];
 }
@@ -272,29 +297,143 @@
         }
     }
     
-    self.postWebView.hidden = NO;
     //    NSString* htmlText = [[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><style type=\"text/css\">@import url(\"smartcard.css\");</style></head><body><div id=\"post\">%@</div></body></html>", phasedStatus];
     NSString* htmlText = [[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><link href=\"smartcard.css\" rel=\"stylesheet\" type=\"text/css\" /></head><body><div id=\"post\">%@</div></body></html>", phasedStatus];
     //    NSLog(htmlText);
     NSString *path = [[NSBundle mainBundle] pathForResource:@"smartcard" ofType:@"html"]; 
     [self.postWebView loadHTMLString:htmlText baseURL:[NSURL fileURLWithPath: path]];
+    
+    self.postWebView.alpha = 0.0;
+    [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
+        self.postWebView.alpha = 1.0;
+    } completion:^(BOOL fin) {
+    }];
+    
 }
 
 - (void)loadRepostWebView
 {
+    self.repostView.hidden = NO;
+
+    NSString* originStatus = self.status.repostStatus.text;
+    NSString* phasedStatus = self.status.repostStatus.text;
+    //    NSString* originStatus = @"fdsjkl@jffa@";
+    //    NSString* phasedStatus = @"fdsjkl@jffa@";
     
+    NSLog(@"%@", originStatus);
+    
+    // phase
+    for (int i = 0; i < originStatus.length; i++) {
+        int startIndex = i;
+        int endIndex = i;
+        
+        switch ([originStatus characterAtIndex:i]) {
+            case '@':
+            {
+                int j = i + 1;
+                for (j = i + 1; j < originStatus.length; j++) {
+                    if ([originStatus characterAtIndex:j] == ' '|| [originStatus characterAtIndex:j] == ':') {
+                        break;
+                    }
+                };
+                endIndex = j;
+                if(startIndex < endIndex)
+                {
+                    NSRange range = NSMakeRange(startIndex, endIndex-startIndex);
+                    NSString* subStr = [originStatus substringWithRange:range];
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='#'>%@</a></span>", subStr]];
+                }
+                break;
+            }
+            case '#':
+            {
+                for (int j = i + 1; j < originStatus.length; j++) {
+                    if ([originStatus characterAtIndex:j] == '#') {
+                        endIndex = j;
+                        break;
+                    }
+                }
+                if(startIndex < endIndex)
+                {
+                    NSRange range = NSMakeRange(startIndex, endIndex+1-startIndex);
+                    NSString* subStr = [originStatus substringWithRange:range];
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='#'>%@</a></span>", subStr]];
+                }
+                break;
+            }
+            case 'h':
+            {
+                if ([originStatus length] - 1 < i + 6 ) {
+                    break;
+                }
+                NSRange range = NSMakeRange(i, 7);
+                NSString* subStr = [originStatus substringWithRange:range];
+                if ([subStr compare:@"http://"] == NSOrderedSame) {
+                    int j = i + 1;
+                    for (j = i + 1; j < originStatus.length; j++) {
+                        if ([originStatus characterAtIndex:j] == ' ') {
+                            break;
+                        }
+                    }
+                    endIndex = j;
+                    range = NSMakeRange(startIndex, endIndex-startIndex);
+                    subStr = [originStatus substringWithRange:range];
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0)' onMouseDown='linkClicked()'>%@</a></span>", subStr]];
+                }
+                break;
+            }
+            default:
+                break;
+        }
+    }
+    
+    //    NSString* htmlText = [[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><style type=\"text/css\">@import url(\"smartcard.css\");</style></head><body><div id=\"post\">%@</div></body></html>", phasedStatus];
+    NSString* htmlText = [[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><link href=\"smartcard.css\" rel=\"stylesheet\" type=\"text/css\" /><script type='text/javascript' src='smartcard.js'></script></head><body><div id=\"repost\"><span class='highlight'><a href='#'>@%@</a></span>: %@</div></body></html>", self.status.repostStatus.author.screenName, phasedStatus];
+    //    NSLog(htmlText);
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"smartcard" ofType:@"html"]; 
+    [self.repostWebView loadHTMLString:htmlText baseURL:[NSURL fileURLWithPath: path]];
+    
+    self.repostWebView.alpha = 0.0;
+    self.repostView.alpha = 0.0;
+    self.imageCoverImageView.alpha = 0.0;
+    [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
+        self.repostWebView.alpha = 1.0;
+        self.repostView.alpha = 1.0;
+        self.imageCoverImageView.alpha = 1.0;
+    } completion:^(BOOL fin) {
+    }];
+
 }
 
 - (void)loadPostMusicVideo:(NSString*)postMusicVideoLink
-{
-    NSLog(postMusicVideoLink);
-    
+{    
     self.playButton.hidden = NO;
     isTrack = NO;
+    self.musicBackgroundImageView.hidden = NO;
+    self.playButton.frame = kPlayButtonFrameCenter;
 }
 
 - (void)loadRepostMusicVideo:(NSString*)repostMusicVideoLink
 {
+    self.playButton.hidden = NO;
+    self.musicBackgroundImageView.hidden = NO;
+    self.playButton.frame = kPlayButtonFrameTopRight;
+    self.repostView.frame = kRepostViewFrameBottom;
+    self.repostWebView.frame = kRepostWebViewFrameBottom;
+    self.repostWebView.alpha = 0.0;
+    self.repostView.alpha = 0.0;
+    self.imageCoverImageView.alpha = 0.0;
+    self.musicBackgroundImageView.alpha = 0.0;
+    self.repostTweetImageView.alpha = 1.0;
+    [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
+        self.repostWebView.alpha = 1.0;
+        self.repostView.alpha = 1.0;
+        self.imageCoverImageView.alpha = 1.0;
+        self.musicBackgroundImageView.alpha = 1.0;
+        self.repostTweetImageView.alpha = 0.0;
+    } completion:^(BOOL fin) {
+    }];
+
 }
 
 - (void)getPostMusicVideoLink:(NSString*)statusText
@@ -334,7 +473,7 @@
                             NSString* longUrl = [dict objectForKey:@"url_long"];
                             
                             
-                            if ([longUrl rangeOfString:@"http://v.youku.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound)
+                            if ([longUrl rangeOfString:@"http://v.youku.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.tudou.com"].location != NSNotFound || [longUrl rangeOfString:@"http://v.ku6.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.56.com"].location != NSNotFound || [longUrl rangeOfString:@"http://music.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"xiami.com"].location != NSNotFound || [longUrl rangeOfString:@"songtaste.com"].location != NSNotFound)
                             {
                                 [self loadPostMusicVideo:longUrl];
                             }
@@ -352,6 +491,54 @@
 
 - (void)getRepostMusicVideoLink:(NSString*)statusText
 {
+    NSString* shortUrl = nil;
+    
+    for (int i = 0; i < statusText.length; i++) {
+        int startIndex = i;
+        int endIndex = i;
+        
+        if ([statusText characterAtIndex:i] == 'h') {
+            
+            if ([statusText length] - 1 < i + 6 ) {
+                break;
+            }
+            
+            NSRange range = NSMakeRange(i, 7);
+            shortUrl = [statusText substringWithRange:range];
+            if ([shortUrl compare:@"http://"] == NSOrderedSame) {
+                int j = i + 1;
+                for (j = i + 1; j < statusText.length; j++) {
+                    if ([statusText characterAtIndex:j] == ' ') {
+                        break;
+                    }
+                }
+                endIndex = j;
+                range = NSMakeRange(startIndex, endIndex-startIndex);
+                shortUrl = [statusText substringWithRange:range];            
+                
+                
+                WeiboClient *client = [WeiboClient client];
+                [client setCompletionBlock:^(WeiboClient *client) {
+                    if (!client.hasError) {
+                        NSArray *dictsArray = client.responseJSONObject;
+                        NSDictionary *dict = [dictsArray objectAtIndex:0];
+                        if ([dict objectForKey:@"url_long"]) {
+                            NSString* longUrl = [dict objectForKey:@"url_long"];
+                            
+                            
+                            if ([longUrl rangeOfString:@"http://v.youku.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.tudou.com"].location != NSNotFound || [longUrl rangeOfString:@"http://v.ku6.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.56.com"].location != NSNotFound || [longUrl rangeOfString:@"http://music.sina.com"].location != NSNotFound|| [longUrl rangeOfString:@"xiami.com"].location != NSNotFound || [longUrl rangeOfString:@"songtaste.com"].location != NSNotFound)
+                            {
+                                [self loadRepostMusicVideo:longUrl];
+                            }
+                        }
+                    }
+                }];
+                
+                if (shortUrl)
+                    [client getShortUrlExpand:shortUrl];
+            }
+        }
+    }
 }
 
 - (void)update
@@ -378,13 +565,13 @@
         self.imageCoverImageView.hidden = NO;
         isTrack = NO;
         // repost text
-        self.repostView.hidden = NO;
+        [self loadRepostWebView];
         // repost image
         if (imageLoadingEnabled && repostStatus.originalPicURL.length) {
             [self performSelector:@selector(loadRepostStautsImage) withObject:nil afterDelay:kLoadDelay];
         }
         // repost music or video
-        if (NO)
+        if (YES)
         {
             [self getRepostMusicVideoLink:repostStatus.text];
         }
@@ -643,4 +830,23 @@
     }
     
 }
+
+#pragma mark – 
+#pragma mark UIWebViewDelegate 
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType { 
+    if ( [request.mainDocumentURL.relativePath isEqualToString:@"/click/false"] ) {    
+        NSLog( @"not clicked" ); 
+        return false; 
+    } 
+    if ( [request.mainDocumentURL.relativePath isEqualToString:@"/click/true"] ) {        //the image is clicked, variable click is true 
+        NSLog( @"image clicked" ); 
+        UIAlertView* alert=[[UIAlertView alloc]initWithTitle:@"JavaScript called" 
+                                                     message:@"You’ve called iPhone provided control from javascript!!" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil]; 
+        [alert show]; 
+        [alert release]; 
+        return false; 
+    } 
+    return true; 
+} 
+
 @end
