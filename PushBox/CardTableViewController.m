@@ -352,7 +352,8 @@
     }
     
     _loading = YES;
- 
+
+	//
     if (self.dataSource == CardTableViewDataSourceFavorites) {
         [[UIApplication sharedApplication] showLoadingView];
         [self loadAllFavoritesWithCompletion:^(void) {
@@ -385,15 +386,9 @@
         [[UIApplication sharedApplication] showLoadingView];
         [client setCompletionBlock:^(WeiboClient *client) {
             if (!client.hasError) {
-				
-//				[self clearData];
 
                 NSArray *dictArray = client.responseJSONObject;
 				NSDictionary *dict = [dictArray lastObject];
-//				if ([((Status*)[self.fetchedResultsController.fetchedObjects objectAtIndex:1]).statusID isEqualToString:((Status*)(dict o)).statusID]) {
-//					
-//				}
-								
                 for (NSDictionary *dict in dictArray) {
                     Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
 										
@@ -514,17 +509,11 @@
         case CardTableViewDataSourceFavorites:
             [self.currentUser removeFavorites:self.currentUser.favorites];
             break;
-			default:
-			break;
     }
     [self.managedObjectContext processPendingChanges];
     self.currentRowIndex = 0;
 	[self setHeaderViewWithOffset];
-	
-}
 
-- (void)refresh
-{
     [self clearData];
     [self loadMoreDataCompletion:NULL];
 }
