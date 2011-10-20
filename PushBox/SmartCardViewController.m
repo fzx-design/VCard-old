@@ -151,15 +151,15 @@
     
 	self.tweetImageView.image = nil;
 	self.tweetImageView.alpha = 1.0;
-//    [self.tweetImageView setImage:[UIImage imageNamed:@"sc_image_default 2.png"]];
+    //    [self.tweetImageView setImage:[UIImage imageNamed:@"sc_image_default 2.png"]];
 	
 	self.repostTweetImageView.alpha = 1.0;
 	self.repostTweetImageView.image = nil;
-//    [self.repostTweetImageView setImage:[UIImage imageNamed:@"sc_image_default 2.png"]];
+    //    [self.repostTweetImageView setImage:[UIImage imageNamed:@"sc_image_default 2.png"]];
     
     self.tweetImageView.hidden = YES;
     self.repostTweetImageView.hidden = YES;
-
+    
     self.imageCoverImageView.alpha = 0.0;
     
     self.repostView.alpha = 0.0;
@@ -171,7 +171,7 @@
     self.repostWebView.frame = kRepostWebViewFrameTop;
     
     self.recentActNotifyLabel.hidden = YES;
-
+    
     self.trackView.hidden = YES;
     self.trackLabel.text = @"";
     self.trackView.alpha = 0.0;
@@ -209,10 +209,10 @@
                                completion:^(void) 
      {
          self.tweetImageView.alpha = 0.0;
-//         self.imageCoverImageView.alpha = 0.0;
-        [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+         //         self.imageCoverImageView.alpha = 0.0;
+         [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
              self.tweetImageView.alpha = 1.0;
-//             self.imageCoverImageView.alpha = 1.0;
+             //             self.imageCoverImageView.alpha = 1.0;
          } completion:^(BOOL fin) {
          }];
      } 
@@ -243,7 +243,8 @@
     //    NSString* originStatus = @"fdsjkl@jffa@";
     //    NSString* phasedStatus = @"fdsjkl@jffa@";
     
-    NSLog(@"%@", originStatus);
+//    NSString* s = @"中国人";
+//    NSLog(@"-------------------%c, %c, %c--------------------", [s characterAtIndex:0],[s characterAtIndex:1],[s characterAtIndex:2]);
     
     // phase
     for (int i = 0; i < originStatus.length; i++) {
@@ -255,7 +256,9 @@
             {
                 int j = i + 1;
                 for (j = i + 1; j < originStatus.length; j++) {
-                    if ([originStatus characterAtIndex:j] == ' '|| [originStatus characterAtIndex:j] == ':') {
+                    if ([originStatus characterAtIndex:j] == ' '|| [originStatus characterAtIndex:j] == ':'|| [originStatus characterAtIndex:j] == ','|| [originStatus characterAtIndex:j] == '.'|| [originStatus characterAtIndex:j] == '/'|| [originStatus characterAtIndex:j] == '\\'|| [originStatus characterAtIndex:j] == ';'|| [originStatus characterAtIndex:j] == '!'|| [originStatus characterAtIndex:j] == '?'|| [originStatus characterAtIndex:j] == '~'|| [originStatus characterAtIndex:j] == ')'|| [originStatus characterAtIndex:j] == ']'|| [originStatus characterAtIndex:j] == '}'|| [originStatus characterAtIndex:j] == '\"'
+                        
+                        ) {
                         break;
                     }
                 };
@@ -345,7 +348,9 @@
             {
                 int j = i + 1;
                 for (j = i + 1; j < originStatus.length; j++) {
-                    if ([originStatus characterAtIndex:j] == ' '|| [originStatus characterAtIndex:j] == ':') {
+                    if ([originStatus characterAtIndex:j] == ' '|| [originStatus characterAtIndex:j] == ':'|| [originStatus characterAtIndex:j] == ','|| [originStatus characterAtIndex:j] == '.'|| [originStatus characterAtIndex:j] == '/'|| [originStatus characterAtIndex:j] == '\\'|| [originStatus characterAtIndex:j] == ';'|| [originStatus characterAtIndex:j] == '!'|| [originStatus characterAtIndex:j] == '?'|| [originStatus characterAtIndex:j] == '~'|| [originStatus characterAtIndex:j] == ')'|| [originStatus characterAtIndex:j] == ']'|| [originStatus characterAtIndex:j] == '}'|| [originStatus characterAtIndex:j] == '\"'
+                        
+                        ) {
                         break;
                     }
                 };
@@ -408,11 +413,11 @@
     
     self.repostWebView.alpha = 0.0;
     self.repostView.alpha = 0.0;
-//    self.imageCoverImageView.alpha = 0.0;
+    //    self.imageCoverImageView.alpha = 0.0;
     [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
         self.repostWebView.alpha = 1.0;
         self.repostView.alpha = 1.0;
-//        self.imageCoverImageView.alpha = 1.0;
+        //        self.imageCoverImageView.alpha = 1.0;
     } completion:^(BOOL fin) {
     }];
     
@@ -431,11 +436,11 @@
     self.playButton.frame = kPlayButtonFrameTopRight;
     self.repostView.frame = kRepostViewFrameBottom;
     self.repostWebView.frame = kRepostWebViewFrameBottom;
-//    self.imageCoverImageView.alpha = 0.0;
+    //    self.imageCoverImageView.alpha = 0.0;
     self.musicBackgroundImageView.alpha = 0.0;
     self.repostTweetImageView.alpha = 1.0;
     [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
-//        self.imageCoverImageView.alpha = 1.0;
+        //        self.imageCoverImageView.alpha = 1.0;
         self.musicBackgroundImageView.alpha = 1.0;
         self.repostTweetImageView.alpha = 0.0;
     } completion:^(BOOL fin) {
@@ -558,7 +563,7 @@
     isTrack = YES;
     
     self.imageCoverImageView.alpha = 0.0;
-   [UIView animateWithDuration:0.5 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         self.imageCoverImageView.alpha = 1.0;
     } completion:^(BOOL fin) {
     }];
@@ -578,7 +583,7 @@
     
     if (self.status.repostStatus) {
         Status *repostStatus = self.status.repostStatus;
-//        self.imageCoverImageView.hidden = NO;
+        //        self.imageCoverImageView.hidden = NO;
         isTrack = NO;
         // repost text
         [self loadRepostWebView];
@@ -604,7 +609,7 @@
         self.trackLabel.hidden = NO;
         self.recentActNotifyLabel.hidden = NO;
         self.trackView.hidden = NO;
-//        self.imageCoverImageView.hidden = YES;
+        //        self.imageCoverImageView.hidden = YES;
         [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
             self.trackLabel.alpha = 1.0;
             self.trackView.alpha = 1.0;

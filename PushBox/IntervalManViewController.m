@@ -54,22 +54,22 @@
     // Configure the cell...
     switch (indexPath.row) {
         case 0:
-			cellInterval = 1;
-            break;
-        case 1:
 			cellInterval = 3;
             break;
-        case 2:
+        case 1:
 			cellInterval = 5;
             break;
-        case 3:
+        case 2:
 			cellInterval = 10;
             break;
+        case 3:
+			cellInterval = 15;
+            break;
         case 4:
-			cellInterval = 30;
+			cellInterval = 20;
             break;
         case 5:
-			cellInterval = 60;
+			cellInterval = 30;
             break;
     }
 	cell.accessoryType = UITableViewCellAccessoryNone;
@@ -88,22 +88,22 @@
     // Configure the cell...
     switch (indexPath.row) {
         case 0:
-			cellInterval = 1;
-            break;
-        case 1:
 			cellInterval = 3;
             break;
-        case 2:
+        case 1:
 			cellInterval = 5;
             break;
-        case 3:
+        case 2:
 			cellInterval = 10;
             break;
+        case 3:
+			cellInterval = 15;
+            break;
         case 4:
-			cellInterval = 30;
+			cellInterval = 20;
             break;
         case 5:
-			cellInterval = 60;
+			cellInterval = 30;
             break;
     }
 	[[NSUserDefaults standardUserDefaults] setInteger:cellInterval forKey:kUserDefaultKeySiidePlayTimeInterval];
