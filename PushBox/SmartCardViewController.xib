@@ -61,7 +61,7 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">smartcard_bg.png</string>
+							<string key="NSResourceName">sc_bg.png</string>
 						</object>
 					</object>
 					<object class="IBUIImageView" id="1017421927">
@@ -1324,7 +1324,6 @@
 				<string>sc_music_bg.png</string>
 				<string>sc_repost_bg.png</string>
 				<string>sc_track_button_default.png</string>
-				<string>smartcard_bg.png</string>
 				<string>status_button_action.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
@@ -1338,7 +1337,6 @@
 				<string>{443, 139}</string>
 				<string>{451, 129}</string>
 				<string>{431, 42}</string>
-				<string>{596, 650}</string>
 				<string>{30, 24}</string>
 			</object>
 		</object>

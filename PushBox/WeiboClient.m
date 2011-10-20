@@ -652,13 +652,34 @@ report_completion:
 
 - (void)post:(NSString *)text withImage:(UIImage *)image
 {
+    //[self.request setPostFormat:ASIMultipartFormDataPostFormat];
     NSData *imageData = UIImageJPEGRepresentation(image, 0.2);
     self.httpMethod = HTTPMethodForm;
-    self.request.postFormat = ASIMultipartFormDataPostFormat;
     self.path = [NSString stringWithFormat:@"statuses/upload.json"];
-    [self.request setPostValue:[text URLEncodedString] forKey:@"status"]; 
-    NSLog(@"%d\n",    [self.request.postBody length]);
-    [self.request setData:imageData withFileName:@"image.jpg" andContentType:@"image/jpeg" forKey:@"pic"];
+    
+    
+//	NSString *path = [NSString stringWithFormat:@"statuses/upload.%@", API_FORMAT];
+//    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+//						 status, @"status",s
+//						 _engine.consumerKey, @"source",
+//                         nil];
+//    
+//    NSString *param = [self nameValString:dic];
+//    NSString *footer = [NSString stringWithFormat:@"\r\n--%@--\r\n", TWITTERFON_FORM_BOUNDARY];
+//    
+//    param = [param stringByAppendingString:[NSString stringWithFormat:@"--%@\r\n", TWITTERFON_FORM_BOUNDARY]];
+//    param = [param stringByAppendingString:@"Content-Disposition: form-data; name=\"pic\";filename=\"image.jpg\"\r\nContent-Type: image/jpeg\r\n\r\n"];
+//    NSLog(@"jpeg size: %d", [jpeg length]);
+//    
+//    NSMutableData *data = [NSMutableData data];
+//    [data appendData:[param dataUsingEncoding:NSUTF8StringEncoding]];
+//    [data appendData:jpeg];
+//    [data appendData:[footer dataUsingEncoding:NSUTF8StringEncoding]];
+//	
+//	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
+//	[params setObject:_engine.consumerKey forKey:@"source"];
+//	[params setObject:status forKey:@"status"];
+    
     [self sendRequest];
 }
 

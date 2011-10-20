@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		200CE8CA144EF12A009AD00C /* sc_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 200CE8C9144EF12A009AD00C /* sc_bg.png */; };
 		201D2336142B3BA40016F6DE /* greycard_bg_upper.png in Resources */ = {isa = PBXBuildFile; fileRef = 201D2335142B3BA40016F6DE /* greycard_bg_upper.png */; };
 		201D2339142B40060016F6DE /* modify_head.png in Resources */ = {isa = PBXBuildFile; fileRef = 201D2338142B40060016F6DE /* modify_head.png */; };
 		201D233B142B40B80016F6DE /* user_detail_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 201D233A142B40B80016F6DE /* user_detail_bg.png */; };
@@ -245,11 +246,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		200CE8C9144EF12A009AD00C /* sc_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc_bg.png; sourceTree = "<group>"; };
 		201D2335142B3BA40016F6DE /* greycard_bg_upper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greycard_bg_upper.png; sourceTree = "<group>"; };
 		201D2338142B40060016F6DE /* modify_head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modify_head.png; sourceTree = "<group>"; };
 		201D233A142B40B80016F6DE /* user_detail_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_detail_bg.png; sourceTree = "<group>"; };
 		20375C7C1449B960002081C7 /* atpop_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = atpop_bg.png; sourceTree = "<group>"; };
-		20375C841449CAA2002081C7 /* smartcard_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smartcard_bg.png; sourceTree = "<group>"; };
 		20375C861449CC19002081C7 /* smartcard_actions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smartcard_actions.png; sourceTree = "<group>"; };
 		203B64061428B26300CD8426 /* bg_twilight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_twilight.png; sourceTree = "<group>"; };
 		203B64071428B26300CD8426 /* bg_mist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_mist.png; sourceTree = "<group>"; };
@@ -850,10 +851,10 @@
 				CB9DCAB813DFF27F00DA3D3D /* card_profile_cover_large.png */,
 				CB9DCAB913DFF27F00DA3D3D /* card_profile_cover.png */,
 				CB9DCAB213DFF08C00DA3D3D /* card_cover_bottom.png */,
+				200CE8C9144EF12A009AD00C /* sc_bg.png */,
 				CB9DCAB313DFF08C00DA3D3D /* card_cover_top.png */,
 				CB9DCAA313DFEF5D00DA3D3D /* status_bg.png */,
 				CB9DCAA413DFEF5D00DA3D3D /* status_button_action.png */,
-				20375C841449CAA2002081C7 /* smartcard_bg.png */,
 				CB9DCAA513DFEF5D00DA3D3D /* status_button_comment.png */,
 				CB9DCAA613DFEF5D00DA3D3D /* status_button_fav.png */,
 				CB9DCABC13DFF30E00DA3D3D /* status_button_unfav.png */,
@@ -1011,6 +1012,12 @@
 		CBDA5B5C13DBED1600FAE221 /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
+				FEFB311F144311D600440DD5 /* MessagesViewController.xib */,
+				FE8F6D41144327B4001A62FD /* MessagesContactsTableViewController.xib */,
+				FEA4265514432103002E80B3 /* MessagesContactsTableViewCell.xib */,
+				FEFDACA81443F775009CF7CD /* MessagesDialogTableViewController.xib */,
+				FEFDACAE1443F7A5009CF7CD /* MessagesDialogTableViewCell.xib */,
+				FEFB31241443130700440DD5 /* MessageViewController.xib */,
 				CBD36F1013E697F5008BB428 /* CommentViewController.xib */,
 				CBBA01F913E470F100641923 /* RelationshipTableViewCell.xib */,
 				CB018DFE13DDE468004217E0 /* AboutViewController.xib */,
@@ -1028,6 +1035,7 @@
 				CB26224F13DF06780062EDE7 /* StatusCardViewController.xib */,
 				9B5F2E3714498FC5008AC0B8 /* UserCardNaviViewController.xib */,
 				9BB5B8B51449A8B100352FF7 /* UserCardContentViewController.xib */,
+				FE92BEE0144EC0BF00CA0306 /* SmartCardViewController.xib */,
 				CB9DCADD13E2C15C00DA3D3D /* UserCardViewController.xib */,
 				9BC6E650144A9B2400B28506 /* CCUserInfoCardViewController.xib */,
 				FE92BEE0144EC0BF00CA0306 /* SmartCardViewController.xib */,
@@ -1070,22 +1078,16 @@
 			children = (
 				FEFB311D144311D600440DD5 /* MessagesViewController.h */,
 				FEFB311E144311D600440DD5 /* MessagesViewController.m */,
-				FEFB311F144311D600440DD5 /* MessagesViewController.xib */,
 				FE8F6D3F144327B3001A62FD /* MessagesContactsTableViewController.h */,
 				FE8F6D40144327B3001A62FD /* MessagesContactsTableViewController.m */,
-				FE8F6D41144327B4001A62FD /* MessagesContactsTableViewController.xib */,
 				FEA42652144320E7002E80B3 /* MessagesContactsTableViewCell.h */,
 				FEA42653144320E7002E80B3 /* MessagesContactsTableViewCell.m */,
-				FEA4265514432103002E80B3 /* MessagesContactsTableViewCell.xib */,
 				FEFDACA61443F775009CF7CD /* MessagesDialogTableViewController.h */,
 				FEFDACA71443F775009CF7CD /* MessagesDialogTableViewController.m */,
-				FEFDACA81443F775009CF7CD /* MessagesDialogTableViewController.xib */,
 				FEFDACAC1443F7A5009CF7CD /* MessagesDialogTableViewCell.h */,
 				FEFDACAD1443F7A5009CF7CD /* MessagesDialogTableViewCell.m */,
-				FEFDACAE1443F7A5009CF7CD /* MessagesDialogTableViewCell.xib */,
 				FEFB31221443130700440DD5 /* MessageViewController.h */,
 				FEFB31231443130700440DD5 /* MessageViewController.m */,
-				FEFB31241443130700440DD5 /* MessageViewController.xib */,
 			);
 			name = msg;
 			sourceTree = "<group>";
