@@ -8,13 +8,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "PushBox/CardTableViewController.m"
-         timestampString = "340840653.510472"
+         filePath = "PushBox/UIApplicationAddition.m"
+         timestampString = "340847229.375885"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "656"
-         endingLineNumber = "656"
-         landmarkName = "-controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:"
+         startingLineNumber = "53"
+         endingLineNumber = "53"
+         landmarkName = "-updateLoadingView"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

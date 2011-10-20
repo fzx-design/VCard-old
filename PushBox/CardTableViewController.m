@@ -182,6 +182,8 @@
         self.prevRowIndex = self.currentRowIndex;
     }
 	
+	[[UIApplication sharedApplication] showLoadingView];
+	
     self.fetchedResultsController.delegate = nil;
     self.fetchedResultsController = nil;
     self.currentRowIndex = 0;
@@ -378,6 +380,8 @@
     if (lastStatus && _lastStatus && !_refreshFlag) {
         NSString *statusID = lastStatus.statusID;
         maxID = [statusID longLongValue] - 1;
+		
+		[[UIApplication sharedApplication] showLoadingView];
     }
     
     //

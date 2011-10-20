@@ -105,6 +105,8 @@
 		
 		[self updateBackgroundImageAnimated:YES];
 		
+		[[UIApplication sharedApplication] showLoadingView];
+		
 		self.cardTableViewController.dataSource = CardTableViewDataSourceFriendsTimeline;
 		[self.cardTableViewController loadMoreDataCompletion:^(void) {
 			[self.cardTableViewController loadAllFavoritesWithCompletion:NULL];
@@ -112,6 +114,7 @@
 			[self showDockView];
 			[self showMessagesView];
 			[self.cardTableViewController getUnread];
+//			[[UIApplication sharedApplication] hideLoadingView];
 		}];
     }];
     

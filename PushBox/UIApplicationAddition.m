@@ -52,6 +52,10 @@ static CGFloat offset;
 {
 	offset -= 0.05;
 	_loadingCircleImageView.transform = CGAffineTransformMakeRotation(offset);
+	refreshTime += 0.01;
+	if (refreshTime > 3) {
+		[self hideLoadingView];
+	}
 }
 
 - (void)updateRefreshView
@@ -87,8 +91,11 @@ static CGFloat offset;
 	[[self rootView] addSubview:_loadingCircleImageView];
 	
 	offset = 0;
+	refreshTime = 0;
 	
 	_loadingTimer = [NSTimer scheduledTimerWithTimeInterval:(0.01) target:self selector:@selector(updateLoadingView) userInfo:nil repeats:YES];
+	[[NSRunLoop currentRunLoop] addTimer:_loadingTimer forMode:NSRunLoopCommonModes];
+	
 }
 
 
@@ -113,6 +120,7 @@ static CGFloat offset;
 	refreshTime = 0;
 	
 	_refreshTimer = [NSTimer scheduledTimerWithTimeInterval:(0.01) target:self selector:@selector(updateRefreshView) userInfo:nil repeats:YES];
+	[[NSRunLoop currentRunLoop] addTimer:_refreshTimer forMode:NSRunLoopCommonModes];
 }
 
 
