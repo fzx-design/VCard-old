@@ -141,7 +141,7 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">v_big.png</string>
+									<string key="NSResourceName">v_large.png</string>
 								</object>
 							</object>
 							<object class="IBUIButton" id="1072200159">
@@ -1290,7 +1290,7 @@
 			<string key="user_detail_bg.png">{424, 288}</string>
 			<string key="usercard_button_HL.png">{262, 36}</string>
 			<string key="usercard_pointer.png">{9, 14}</string>
-			<string key="v_big.png">{19, 18}</string>
+			<string key="v_large.png">{19, 18}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		200CE8CA144EF12A009AD00C /* sc_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 200CE8C9144EF12A009AD00C /* sc_bg.png */; };
 		201D2336142B3BA40016F6DE /* greycard_bg_upper.png in Resources */ = {isa = PBXBuildFile; fileRef = 201D2335142B3BA40016F6DE /* greycard_bg_upper.png */; };
 		201D2339142B40060016F6DE /* modify_head.png in Resources */ = {isa = PBXBuildFile; fileRef = 201D2338142B40060016F6DE /* modify_head.png */; };
 		201D233B142B40B80016F6DE /* user_detail_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 201D233A142B40B80016F6DE /* user_detail_bg.png */; };
@@ -203,9 +204,19 @@
 		FE1E629C14441E3F00A48CF9 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1E629B14441E3F00A48CF9 /* User.m */; };
 		FE8F6D42144327B4001A62FD /* MessagesContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE8F6D40144327B3001A62FD /* MessagesContactsTableViewController.m */; };
 		FE8F6D43144327B4001A62FD /* MessagesContactsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE8F6D41144327B4001A62FD /* MessagesContactsTableViewController.xib */; };
+		FE92BEE1144EC0BF00CA0306 /* SmartCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92BEDF144EC0BF00CA0306 /* SmartCardViewController.m */; };
+		FE92BEE2144EC0BF00CA0306 /* SmartCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE92BEE0144EC0BF00CA0306 /* SmartCardViewController.xib */; };
 		FE9B26B1144481F70028C9B9 /* msg_sina.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9B26B0144481F70028C9B9 /* msg_sina.png */; };
 		FEA42654144320E7002E80B3 /* MessagesContactsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA42653144320E7002E80B3 /* MessagesContactsTableViewCell.m */; };
 		FEA4265614432103002E80B3 /* MessagesContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEA4265514432103002E80B3 /* MessagesContactsTableViewCell.xib */; };
+		FEBCE6AD144EBB5300195C9F /* sc_button_comment.png in Resources */ = {isa = PBXBuildFile; fileRef = FEBCE6A5144EBB5300195C9F /* sc_button_comment.png */; };
+		FEBCE6AE144EBB5300195C9F /* sc_button_play_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = FEBCE6A6144EBB5300195C9F /* sc_button_play_highlight.png */; };
+		FEBCE6AF144EBB5300195C9F /* sc_button_play.png in Resources */ = {isa = PBXBuildFile; fileRef = FEBCE6A7144EBB5300195C9F /* sc_button_play.png */; };
+		FEBCE6B0144EBB5300195C9F /* sc_button_repost.png in Resources */ = {isa = PBXBuildFile; fileRef = FEBCE6A8144EBB5300195C9F /* sc_button_repost.png */; };
+		FEBCE6B1144EBB5300195C9F /* sc_image_cover.png in Resources */ = {isa = PBXBuildFile; fileRef = FEBCE6A9144EBB5300195C9F /* sc_image_cover.png */; };
+		FEBCE6B2144EBB5300195C9F /* sc_music_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FEBCE6AA144EBB5300195C9F /* sc_music_bg.png */; };
+		FEBCE6B3144EBB5300195C9F /* sc_repost_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FEBCE6AB144EBB5300195C9F /* sc_repost_bg.png */; };
+		FEBCE6B4144EBB5300195C9F /* sc_track_button_default.png in Resources */ = {isa = PBXBuildFile; fileRef = FEBCE6AC144EBB5300195C9F /* sc_track_button_default.png */; };
 		FEFB310B1443117D00440DD5 /* button_new_msg_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFB30F81443117D00440DD5 /* button_new_msg_grey.png */; };
 		FEFB310C1443117D00440DD5 /* button_new_msg_silver.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFB30F91443117D00440DD5 /* button_new_msg_silver.png */; };
 		FEFB310E1443117D00440DD5 /* grey_card_lines_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFB30FB1443117D00440DD5 /* grey_card_lines_bg.png */; };
@@ -232,12 +243,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		200CE8C9144EF12A009AD00C /* sc_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc_bg.png; sourceTree = "<group>"; };
 		201D2335142B3BA40016F6DE /* greycard_bg_upper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greycard_bg_upper.png; sourceTree = "<group>"; };
 		201D2338142B40060016F6DE /* modify_head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modify_head.png; sourceTree = "<group>"; };
 		201D233A142B40B80016F6DE /* user_detail_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_detail_bg.png; sourceTree = "<group>"; };
 		20375C7C1449B960002081C7 /* atpop_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = atpop_bg.png; sourceTree = "<group>"; };
-		20375C821449CA0A002081C7 /* SmartCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmartCardViewController.xib; sourceTree = "<group>"; };
-		20375C841449CAA2002081C7 /* smartcard_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smartcard_bg.png; sourceTree = "<group>"; };
 		20375C861449CC19002081C7 /* smartcard_actions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smartcard_actions.png; sourceTree = "<group>"; };
 		203B64061428B26300CD8426 /* bg_twilight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_twilight.png; sourceTree = "<group>"; };
 		203B64071428B26300CD8426 /* bg_mist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_mist.png; sourceTree = "<group>"; };
@@ -497,10 +507,21 @@
 		FE8F6D3F144327B3001A62FD /* MessagesContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesContactsTableViewController.h; sourceTree = "<group>"; };
 		FE8F6D40144327B3001A62FD /* MessagesContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesContactsTableViewController.m; sourceTree = "<group>"; };
 		FE8F6D41144327B4001A62FD /* MessagesContactsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesContactsTableViewController.xib; sourceTree = "<group>"; };
+		FE92BEDE144EC0BF00CA0306 /* SmartCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartCardViewController.h; sourceTree = "<group>"; };
+		FE92BEDF144EC0BF00CA0306 /* SmartCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartCardViewController.m; sourceTree = "<group>"; };
+		FE92BEE0144EC0BF00CA0306 /* SmartCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmartCardViewController.xib; sourceTree = "<group>"; };
 		FE9B26B0144481F70028C9B9 /* msg_sina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = msg_sina.png; sourceTree = "<group>"; };
 		FEA42652144320E7002E80B3 /* MessagesContactsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesContactsTableViewCell.h; sourceTree = "<group>"; };
 		FEA42653144320E7002E80B3 /* MessagesContactsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesContactsTableViewCell.m; sourceTree = "<group>"; };
 		FEA4265514432103002E80B3 /* MessagesContactsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesContactsTableViewCell.xib; sourceTree = "<group>"; };
+		FEBCE6A5144EBB5300195C9F /* sc_button_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc_button_comment.png; sourceTree = "<group>"; };
+		FEBCE6A6144EBB5300195C9F /* sc_button_play_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc_button_play_highlight.png; sourceTree = "<group>"; };
+		FEBCE6A7144EBB5300195C9F /* sc_button_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc_button_play.png; sourceTree = "<group>"; };
+		FEBCE6A8144EBB5300195C9F /* sc_button_repost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc_button_repost.png; sourceTree = "<group>"; };
+		FEBCE6A9144EBB5300195C9F /* sc_image_cover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc_image_cover.png; sourceTree = "<group>"; };
+		FEBCE6AA144EBB5300195C9F /* sc_music_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc_music_bg.png; sourceTree = "<group>"; };
+		FEBCE6AB144EBB5300195C9F /* sc_repost_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc_repost_bg.png; sourceTree = "<group>"; };
+		FEBCE6AC144EBB5300195C9F /* sc_track_button_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc_track_button_default.png; sourceTree = "<group>"; };
 		FEFB30F81443117D00440DD5 /* button_new_msg_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_new_msg_grey.png; sourceTree = "<group>"; };
 		FEFB30F91443117D00440DD5 /* button_new_msg_silver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_new_msg_silver.png; sourceTree = "<group>"; };
 		FEFB30FB1443117D00440DD5 /* grey_card_lines_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grey_card_lines_bg.png; sourceTree = "<group>"; };
@@ -630,6 +651,8 @@
 				CBBA01C813E3463200641923 /* PostViewController.m */,
 				CB26224D13DF06780062EDE7 /* StatusCardViewController.h */,
 				CB26224E13DF06780062EDE7 /* StatusCardViewController.m */,
+				FE92BEDE144EC0BF00CA0306 /* SmartCardViewController.h */,
+				FE92BEDF144EC0BF00CA0306 /* SmartCardViewController.m */,
 				FE8F6D45144327B8001A62FD /* msg */,
 			);
 			name = "Card controllers";
@@ -806,15 +829,23 @@
 		CBBA01F113E4530700641923 /* statuscard */ = {
 			isa = PBXGroup;
 			children = (
+				FEBCE6A5144EBB5300195C9F /* sc_button_comment.png */,
+				FEBCE6A6144EBB5300195C9F /* sc_button_play_highlight.png */,
+				FEBCE6A7144EBB5300195C9F /* sc_button_play.png */,
+				FEBCE6A8144EBB5300195C9F /* sc_button_repost.png */,
+				FEBCE6A9144EBB5300195C9F /* sc_image_cover.png */,
+				FEBCE6AA144EBB5300195C9F /* sc_music_bg.png */,
+				FEBCE6AB144EBB5300195C9F /* sc_repost_bg.png */,
+				FEBCE6AC144EBB5300195C9F /* sc_track_button_default.png */,
 				CB9E33D413E9E26100AAE64C /* status_msg_addfav.png */,
 				20375C861449CC19002081C7 /* smartcard_actions.png */,
 				CB9DCAB813DFF27F00DA3D3D /* card_profile_cover_large.png */,
 				CB9DCAB913DFF27F00DA3D3D /* card_profile_cover.png */,
 				CB9DCAB213DFF08C00DA3D3D /* card_cover_bottom.png */,
+				200CE8C9144EF12A009AD00C /* sc_bg.png */,
 				CB9DCAB313DFF08C00DA3D3D /* card_cover_top.png */,
 				CB9DCAA313DFEF5D00DA3D3D /* status_bg.png */,
 				CB9DCAA413DFEF5D00DA3D3D /* status_button_action.png */,
-				20375C841449CAA2002081C7 /* smartcard_bg.png */,
 				CB9DCAA513DFEF5D00DA3D3D /* status_button_comment.png */,
 				CB9DCAA613DFEF5D00DA3D3D /* status_button_fav.png */,
 				CB9DCABC13DFF30E00DA3D3D /* status_button_unfav.png */,
@@ -974,6 +1005,12 @@
 		CBDA5B5C13DBED1600FAE221 /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
+				FEFB311F144311D600440DD5 /* MessagesViewController.xib */,
+				FE8F6D41144327B4001A62FD /* MessagesContactsTableViewController.xib */,
+				FEA4265514432103002E80B3 /* MessagesContactsTableViewCell.xib */,
+				FEFDACA81443F775009CF7CD /* MessagesDialogTableViewController.xib */,
+				FEFDACAE1443F7A5009CF7CD /* MessagesDialogTableViewCell.xib */,
+				FEFB31241443130700440DD5 /* MessageViewController.xib */,
 				CBD36F1013E697F5008BB428 /* CommentViewController.xib */,
 				CBBA01F913E470F100641923 /* RelationshipTableViewCell.xib */,
 				9BC57898144FE5D400550BB8 /* RootViewController.xib */,
@@ -989,9 +1026,9 @@
 				CBBA01F413E454FC00641923 /* RelationshipTableViewController.xib */,
 				CB9DCACD13E1E54700DA3D3D /* DetailImageViewController.xib */,
 				CB26224F13DF06780062EDE7 /* StatusCardViewController.xib */,
-				20375C821449CA0A002081C7 /* SmartCardViewController.xib */,
 				9B5F2E3714498FC5008AC0B8 /* UserCardNaviViewController.xib */,
 				9BB5B8B51449A8B100352FF7 /* UserCardContentViewController.xib */,
+				FE92BEE0144EC0BF00CA0306 /* SmartCardViewController.xib */,
 				CB9DCADD13E2C15C00DA3D3D /* UserCardViewController.xib */,
 				9BC6E650144A9B2400B28506 /* CCUserInfoCardViewController.xib */,
 			);
@@ -1033,22 +1070,16 @@
 			children = (
 				FEFB311D144311D600440DD5 /* MessagesViewController.h */,
 				FEFB311E144311D600440DD5 /* MessagesViewController.m */,
-				FEFB311F144311D600440DD5 /* MessagesViewController.xib */,
 				FE8F6D3F144327B3001A62FD /* MessagesContactsTableViewController.h */,
 				FE8F6D40144327B3001A62FD /* MessagesContactsTableViewController.m */,
-				FE8F6D41144327B4001A62FD /* MessagesContactsTableViewController.xib */,
 				FEA42652144320E7002E80B3 /* MessagesContactsTableViewCell.h */,
 				FEA42653144320E7002E80B3 /* MessagesContactsTableViewCell.m */,
-				FEA4265514432103002E80B3 /* MessagesContactsTableViewCell.xib */,
 				FEFDACA61443F775009CF7CD /* MessagesDialogTableViewController.h */,
 				FEFDACA71443F775009CF7CD /* MessagesDialogTableViewController.m */,
-				FEFDACA81443F775009CF7CD /* MessagesDialogTableViewController.xib */,
 				FEFDACAC1443F7A5009CF7CD /* MessagesDialogTableViewCell.h */,
 				FEFDACAD1443F7A5009CF7CD /* MessagesDialogTableViewCell.m */,
-				FEFDACAE1443F7A5009CF7CD /* MessagesDialogTableViewCell.xib */,
 				FEFB31221443130700440DD5 /* MessageViewController.h */,
 				FEFB31231443130700440DD5 /* MessageViewController.m */,
-				FEFB31241443130700440DD5 /* MessageViewController.xib */,
 			);
 			name = msg;
 			sourceTree = "<group>";
