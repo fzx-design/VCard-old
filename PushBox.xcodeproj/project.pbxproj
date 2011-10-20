@@ -29,6 +29,7 @@
 		206902EC144B2C0D00BA9EC3 /* v_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 206902EB144B2C0D00BA9EC3 /* v_large.png */; };
 		206902EE144B2C8100BA9EC3 /* button_sendmsg_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 206902ED144B2C8100BA9EC3 /* button_sendmsg_grey.png */; };
 		20C8D9101429FE9C00C94B86 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C8D90F1429FE9C00C94B86 /* libz.dylib */; };
+		20D0B8DA1450778D005685C5 /* SmartCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20D0B8D91450778D005685C5 /* SmartCardViewController.xib */; };
 		20D54764142ADC35006A79A1 /* autologin_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D54762142ADC35006A79A1 /* autologin_on.png */; };
 		20D54765142ADC35006A79A1 /* autologin_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D54763142ADC35006A79A1 /* autologin_off.png */; };
 		20D54768142ADDA6006A79A1 /* login_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D54767142ADDA6006A79A1 /* login_shadow.png */; };
@@ -208,7 +209,6 @@
 		FE8F6D42144327B4001A62FD /* MessagesContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE8F6D40144327B3001A62FD /* MessagesContactsTableViewController.m */; };
 		FE8F6D43144327B4001A62FD /* MessagesContactsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE8F6D41144327B4001A62FD /* MessagesContactsTableViewController.xib */; };
 		FE92BEE1144EC0BF00CA0306 /* SmartCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92BEDF144EC0BF00CA0306 /* SmartCardViewController.m */; };
-		FE92BEE2144EC0BF00CA0306 /* SmartCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE92BEE0144EC0BF00CA0306 /* SmartCardViewController.xib */; };
 		FE9B26B1144481F70028C9B9 /* msg_sina.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9B26B0144481F70028C9B9 /* msg_sina.png */; };
 		FEA42654144320E7002E80B3 /* MessagesContactsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA42653144320E7002E80B3 /* MessagesContactsTableViewCell.m */; };
 		FEA4265614432103002E80B3 /* MessagesContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEA4265514432103002E80B3 /* MessagesContactsTableViewCell.xib */; };
@@ -270,6 +270,7 @@
 		206902EB144B2C0D00BA9EC3 /* v_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v_large.png; sourceTree = "<group>"; };
 		206902ED144B2C8100BA9EC3 /* button_sendmsg_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_sendmsg_grey.png; sourceTree = "<group>"; };
 		20C8D90F1429FE9C00C94B86 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		20D0B8D91450778D005685C5 /* SmartCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmartCardViewController.xib; sourceTree = "<group>"; };
 		20D54762142ADC35006A79A1 /* autologin_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autologin_on.png; sourceTree = "<group>"; };
 		20D54763142ADC35006A79A1 /* autologin_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autologin_off.png; sourceTree = "<group>"; };
 		20D54767142ADDA6006A79A1 /* login_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_shadow.png; sourceTree = "<group>"; };
@@ -514,7 +515,6 @@
 		FE8F6D41144327B4001A62FD /* MessagesContactsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesContactsTableViewController.xib; sourceTree = "<group>"; };
 		FE92BEDE144EC0BF00CA0306 /* SmartCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartCardViewController.h; sourceTree = "<group>"; };
 		FE92BEDF144EC0BF00CA0306 /* SmartCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartCardViewController.m; sourceTree = "<group>"; };
-		FE92BEE0144EC0BF00CA0306 /* SmartCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmartCardViewController.xib; sourceTree = "<group>"; };
 		FE9B26B0144481F70028C9B9 /* msg_sina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = msg_sina.png; sourceTree = "<group>"; };
 		FEA42652144320E7002E80B3 /* MessagesContactsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesContactsTableViewCell.h; sourceTree = "<group>"; };
 		FEA42653144320E7002E80B3 /* MessagesContactsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesContactsTableViewCell.m; sourceTree = "<group>"; };
@@ -1013,6 +1013,7 @@
 			isa = PBXGroup;
 			children = (
 				FEFB311F144311D600440DD5 /* MessagesViewController.xib */,
+				20D0B8D91450778D005685C5 /* SmartCardViewController.xib */,
 				FE8F6D41144327B4001A62FD /* MessagesContactsTableViewController.xib */,
 				FEA4265514432103002E80B3 /* MessagesContactsTableViewCell.xib */,
 				FEFDACA81443F775009CF7CD /* MessagesDialogTableViewController.xib */,
@@ -1035,10 +1036,8 @@
 				CB26224F13DF06780062EDE7 /* StatusCardViewController.xib */,
 				9B5F2E3714498FC5008AC0B8 /* UserCardNaviViewController.xib */,
 				9BB5B8B51449A8B100352FF7 /* UserCardContentViewController.xib */,
-				FE92BEE0144EC0BF00CA0306 /* SmartCardViewController.xib */,
 				CB9DCADD13E2C15C00DA3D3D /* UserCardViewController.xib */,
 				9BC6E650144A9B2400B28506 /* CCUserInfoCardViewController.xib */,
-				FE92BEE0144EC0BF00CA0306 /* SmartCardViewController.xib */,
 			);
 			name = Nibs;
 			sourceTree = "<group>";
@@ -1324,12 +1323,12 @@
 				FEBCE6B2144EBB5300195C9F /* sc_music_bg.png in Resources */,
 				FEBCE6B3144EBB5300195C9F /* sc_repost_bg.png in Resources */,
 				FEBCE6B4144EBB5300195C9F /* sc_track_button_default.png in Resources */,
-				FE92BEE2144EC0BF00CA0306 /* SmartCardViewController.xib in Resources */,
 				200CE8CA144EF12A009AD00C /* sc_bg.png in Resources */,
 				FE72B4CB144FFD3000C3EE5B /* repost_bg.jpg in Resources */,
 				FE72B4CC144FFD3000C3EE5B /* smartcard.css in Resources */,
 				FE72B4CD144FFD3000C3EE5B /* smartcard.html in Resources */,
 				FE72B4CE144FFD3000C3EE5B /* webview_bg.jpg in Resources */,
+				20D0B8DA1450778D005685C5 /* SmartCardViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
