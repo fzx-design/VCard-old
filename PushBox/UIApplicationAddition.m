@@ -13,13 +13,21 @@
 #define kAnimationDuration 0.5
 #define kBackViewAlpha 0.5
 
+static NSTimer *_refreshTimer;
+static NSTimer *_loadingTimer;
 static UIImageView *_loadingImageView;
-//static UIImageView *_loadingCircleImageView;
-//static UIImageView *_loadingRoundImageView;
-static UIActivityIndicatorView *_loadingActivityIndicator;
+static UIImageView *_loadingCircleImageView;
+static UIImageView *_loadingRoundImageView;
+
+static UIImageView *_refreshCircleImageView;
+static UIImageView *_refreshRoundImageView;
+//static UIActivityIndicatorView *_loadingActivityIndicator;
 
 static UIViewController *_modalViewController;
 static UIView *_backView;
+
+static CGFloat refreshTime;
+static CGFloat offset;
 
 @implementation UIApplication (UIApplication_RootView)
 //
@@ -40,6 +48,23 @@ static UIView *_backView;
     return appDelegate.rootViewController;
 }
 
+- (void)updateLoadingView
+{
+	offset -= 0.05;
+	_loadingCircleImageView.transform = CGAffineTransformMakeRotation(offset);
+}
+
+- (void)updateRefreshView
+{
+	offset -= 0.05;
+	_refreshCircleImageView.transform = CGAffineTransformMakeRotation(offset);
+	
+	refreshTime += 0.01;
+	if (refreshTime > 3) {
+		[self hideRefreshView];
+	}
+}
+
 - (void)showLoadingView
 {
     if (!_loadingImageView) {
@@ -47,44 +72,63 @@ static UIView *_backView;
         _loadingImageView.center = CGPointMake(512.0, 345.0);
     }
     
-//    if (!_loadingCircleImageView) {
-//        _loadingCircleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loading_circle.png"]];
-//        _loadingCircleImageView.center = CGPointMake(512.0, 345.0);
-//    }
-//	
-//	if (!_loadingRoundImageView) {
-//        _loadingRoundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"refreshing_bg.png"]];
-//        _loadingRoundImageView.center = CGPointMake(512.0, 345.0);
-//    }
+    if (!_loadingCircleImageView) {
+        _loadingCircleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loading_circle.png"]];
+        _loadingCircleImageView.center = CGPointMake(512.0, 338.0);
+    }
 	
-    if (!_loadingActivityIndicator) {
-        _loadingActivityIndicator = [[UIActivityIndicatorView alloc] 
-                                     initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        _loadingActivityIndicator.hidesWhenStopped = YES;
-        _loadingActivityIndicator.center = CGPointMake(512.0, 332.0);
+	if (!_loadingRoundImageView) {
+        _loadingRoundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"refreshing_bg.png"]];
+        _loadingRoundImageView.center = CGPointMake(512.0, 338.0);
     }
     
     [[self rootView] addSubview:_loadingImageView];
+	[[self rootView] addSubview:_loadingRoundImageView];
+	[[self rootView] addSubview:_loadingCircleImageView];
 	
-//	[_loadingRoundImageView addSubview:_loadingRoundImageView];
-//	[_loadingRoundImageView addSubview:_loadingCircleImageView];
+	offset = 0;
 	
-	[[self rootView] addSubview:_loadingActivityIndicator];
-	[_loadingActivityIndicator startAnimating];
-	
-	
+	_loadingTimer = [NSTimer scheduledTimerWithTimeInterval:(0.01) target:self selector:@selector(updateLoadingView) userInfo:nil repeats:YES];
 }
 
-- (void)updateLoadingView
+
+- (void)showRefreshView
 {
+	if (!_refreshCircleImageView) {
+        _refreshCircleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loading_circle.png"]];
+        _refreshCircleImageView.center = CGPointMake(45.0, 711);
+		_refreshCircleImageView.userInteractionEnabled = NO;
+    }
 	
+	if (!_refreshRoundImageView) {
+        _refreshRoundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"refreshing_bg.png"]];
+        _refreshRoundImageView.center = CGPointMake(45, 712);
+		_refreshRoundImageView.userInteractionEnabled = NO;
+    }
+    
+	[[self rootView] addSubview:_refreshRoundImageView];
+	[[self rootView] addSubview:_refreshCircleImageView];
+	
+	offset = 0;
+	refreshTime = 0;
+	
+	_refreshTimer = [NSTimer scheduledTimerWithTimeInterval:(0.01) target:self selector:@selector(updateRefreshView) userInfo:nil repeats:YES];
 }
+
 
 - (void)hideLoadingView
 {
-    [_loadingActivityIndicator stopAnimating];
+	[_loadingTimer invalidate];
     [_loadingImageView removeFromSuperview];
-    [_loadingActivityIndicator removeFromSuperview];
+	[_loadingCircleImageView removeFromSuperview];
+	[_loadingRoundImageView removeFromSuperview];
+}
+
+- (void)hideRefreshView
+{
+	[_refreshTimer invalidate];
+	[_refreshCircleImageView removeFromSuperview];
+	[_refreshRoundImageView removeFromSuperview];
 }
 
 - (void)presentModalViewController:(UIViewController *)vc atHeight:(CGFloat)height

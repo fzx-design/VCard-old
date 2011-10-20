@@ -12,8 +12,6 @@
 
 @interface UIApplication(UIApplicationAddition)
 
-//@property (nonatomic, retain) NSTimer *timer;
-
 //- (NSPersistentStoreCoordinator *)persistentStoreCoordinator;
 
 - (UIView *)rootView;
@@ -21,6 +19,9 @@
 
 - (void)showLoadingView;
 - (void)hideLoadingView;
+
+- (void)showRefreshView;
+- (void)hideRefreshView;
 
 - (void)presentModalViewController:(UIViewController *)vc atHeight:(CGFloat)height;
 - (void)dismissModalViewController;

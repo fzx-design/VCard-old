@@ -36,6 +36,7 @@
 - (void)hideLoginView;
 - (void)showDockView;
 - (void)hideDockView;
+- (void)moveCardIntoView;
 - (void)showMessagesView;
 - (void)hideMessagesView;
 - (void)showMessagesCenter;
@@ -147,6 +148,11 @@
                selector:@selector(userSignoutNotification:) 
                    name:kNotificationNameUserSignedOut 
                  object:nil];
+	[center addObserver:self
+			   selector:@selector(moveCardIntoView) 
+				   name:kNotificationNameReMoveCardsIntoView 
+				 object:nil];
+	
     
     self.bottomStateView.alpha = 0.0;
 	self.bottomStateInvisibleView.alpha = 1.0;

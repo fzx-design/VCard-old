@@ -14,6 +14,7 @@
 #define kNotificationNameNewCommentsToMe @"kNotificationNameNewCommentsToMe"
 #define kNotificationNameNewStatuses @"kNotificationNameNewStatuses"
 #define kNotificationNameNewFollowers @"kNotificationNameNewFollowers"
+#define kNotificationNameReMoveCardsIntoView @"kNotificationReMoveCardsIntoView"
 
 typedef enum {
     CardTableViewDataSourceFriendsTimeline,

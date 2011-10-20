@@ -354,7 +354,6 @@
 
 	//
     if (self.dataSource == CardTableViewDataSourceFavorites) {
-        [[UIApplication sharedApplication] showLoadingView];
         [self loadAllFavoritesWithCompletion:^(void) {
             [self.managedObjectContext processPendingChanges];
             [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
@@ -364,7 +363,7 @@
             if (completion) {
                 completion();
             }
-            [[UIApplication sharedApplication] hideLoadingView];
+//            [[UIApplication sharedApplication] hideRefreshView];
             _loading = NO;
         }];
         return;
@@ -383,53 +382,40 @@
     
     //
     if (self.dataSource == CardTableViewDataSourceFriendsTimeline) {
-        [[UIApplication sharedApplication] showLoadingView];
         [client setCompletionBlock:^(WeiboClient *client) {
             if (!client.hasError) {
 
                 NSArray *dictArray = client.responseJSONObject;
+				for (NSDictionary *dict in dictArray) {
+                    Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+                    [self.currentUser addFriendsStatusesObject:newStatus];
+//                    if (self.insertionAnimationEnabled) {
+//                        [self.managedObjectContext processPendingChanges];
+//                    }
+                }
+				[self.managedObjectContext processPendingChanges];
 				
 				if (_refreshFlag) {
 					_refreshFlag = NO;
+
+					Status *newStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
 					
-					NSDictionary *dict = [dictArray lastObject];
-					Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-					
-					NSLog(@"_____%@ _______%@", newStatus.text, _lastStatus.text);
-					
-					if (_lastStatus == nil) {
-						_lastStatus = [newStatus retain];
-						[self clearData];
-						_refreshFlag = YES;
+					if (_lastStatus == nil || ![newStatus.statusID isEqualToString:_lastStatus.statusID]) {
+						
+						_lastStatus = newStatus;
+
+						[self scrollToRow:0];
+						
 					} else if ([newStatus.statusID isEqualToString:_lastStatus.statusID]) {
 						if (completion) {
 							completion();
 						}
-						[[UIApplication sharedApplication] hideLoadingView];
+//						[[UIApplication sharedApplication] hideRefreshView];
 						_loading = NO;
 						return;
-					} else {
-						_lastStatus = [newStatus retain];
-						[self clearData];
-						_refreshFlag = YES;
-					}
+					} 
 				}
-				
-                for (NSDictionary *dict in dictArray) {
-                    Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-					NSLog(@"_____%@ _______%@", newStatus.text, _lastStatus.text);
-					
-                    [self.currentUser addFriendsStatusesObject:newStatus];
-                    if (self.insertionAnimationEnabled) {
-                        [self.managedObjectContext processPendingChanges];
-                    }
-                }
-                [self.managedObjectContext processPendingChanges];
-                
-				if (_refreshFlag) {
-					_refreshFlag = NO;
-					[self scrollToRow:0];
-				}
+
 				
                 [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
                 [self.delegate cardTableViewController:self 
@@ -445,7 +431,7 @@
                 }
 				[ErrorNotification showLoadingError];
 			}
-			[[UIApplication sharedApplication] hideLoadingView];
+//			[[UIApplication sharedApplication] hideRefreshView];
 			_loading = NO;
         }];
         
@@ -459,38 +445,39 @@
     //
     if (self.dataSource == CardTableViewDataSourceUserTimeline) {
         [[UIApplication sharedApplication] showLoadingView];
-        [client setCompletionBlock:^(WeiboClient *client) {
+		[client setCompletionBlock:^(WeiboClient *client) {
             if (!client.hasError) {
+				
                 NSArray *dictArray = client.responseJSONObject;
+				for (NSDictionary *dict in dictArray) {
+                    Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+                    [self.currentUser addFriendsStatusesObject:newStatus];
+					//                    if (self.insertionAnimationEnabled) {
+					//                        [self.managedObjectContext processPendingChanges];
+					//                    }
+                }
+				[self.managedObjectContext processPendingChanges];
 				
 				if (_refreshFlag) {
 					_refreshFlag = NO;
 					
-					NSDictionary *dict = [dictArray lastObject];
-					Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+					Status *newStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
 					
-					if (_lastStatus == nil) {
-						_lastStatus = [newStatus retain];
-						[self clearData];
-						_refreshFlag = YES;
+					if (_lastStatus == nil || ![newStatus.statusID isEqualToString:_lastStatus.statusID]) {
+						
+						_lastStatus = newStatus;
+						
+						[self scrollToRow:0];
+						
 					} else if ([newStatus.statusID isEqualToString:_lastStatus.statusID]) {
 						if (completion) {
 							completion();
 						}
-						[[UIApplication sharedApplication] hideLoadingView];
+						[[UIApplication sharedApplication] hideRefreshView];
 						_loading = NO;
 						return;
-					} else {
-						_lastStatus = [newStatus retain];
-						[self clearData];
-						_refreshFlag = YES;
-					}
+					} 
 				}
-				
-                for (NSDictionary *dict in dictArray) {
-                    [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-                }
-                [self.managedObjectContext processPendingChanges];
                 
                 [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
                 [self.delegate cardTableViewController:self 
@@ -507,7 +494,7 @@
                 }
 				[ErrorNotification showLoadingError];
 			}
-			[[UIApplication sharedApplication] hideLoadingView];
+			[[UIApplication sharedApplication] hideRefreshView];
 			_loading = NO;
         }];
         
@@ -522,39 +509,39 @@
     //
     if (self.dataSource == CardTableViewDataSourceSearchStatues) {
         [[UIApplication sharedApplication] showLoadingView];
-        [client setCompletionBlock:^(WeiboClient *client) {
+		[client setCompletionBlock:^(WeiboClient *client) {
             if (!client.hasError) {
-                
-				NSArray *dictArray = client.responseJSONObject;
+				
+                NSArray *dictArray = client.responseJSONObject;
+				for (NSDictionary *dict in dictArray) {
+                    Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+                    [self.currentUser addFriendsStatusesObject:newStatus];
+					//                    if (self.insertionAnimationEnabled) {
+					//                        [self.managedObjectContext processPendingChanges];
+					//                    }
+                }
+				[self.managedObjectContext processPendingChanges];
 				
 				if (_refreshFlag) {
 					_refreshFlag = NO;
 					
-					NSDictionary *dict = [dictArray lastObject];
-					Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+					Status *newStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
 					
-					if (_lastStatus == nil) {
-						_lastStatus = [newStatus retain];
-						[self clearData];
-						_refreshFlag = YES;
+					if (_lastStatus == nil || ![newStatus.statusID isEqualToString:_lastStatus.statusID]) {
+						
+						_lastStatus = newStatus;
+						
+						[self scrollToRow:0];
+						
 					} else if ([newStatus.statusID isEqualToString:_lastStatus.statusID]) {
 						if (completion) {
 							completion();
 						}
-						[[UIApplication sharedApplication] hideLoadingView];
+						[[UIApplication sharedApplication] hideRefreshView];
 						_loading = NO;
 						return;
-					} else {
-						_lastStatus = [newStatus retain];
-						[self clearData];
-						_refreshFlag = YES;
-					}
+					} 
 				}
-				
-                for (NSDictionary *dict in dictArray) {
-                    [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-                }
-                [self.managedObjectContext processPendingChanges];
                 
                 [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
                 [self.delegate cardTableViewController:self 
@@ -571,7 +558,7 @@
                 }
 				[ErrorNotification showLoadingError];
 			}
-			[[UIApplication sharedApplication] hideLoadingView];
+			[[UIApplication sharedApplication] hideRefreshView];
 			_loading = NO;
         }];
         
@@ -602,8 +589,8 @@
 - (void)refresh
 {
 	_refreshFlag = YES;
-//    [self clearData];
     [self loadMoreDataCompletion:NULL];
+	[[UIApplication sharedApplication] showRefreshView];
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
