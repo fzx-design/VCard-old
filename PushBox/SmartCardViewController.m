@@ -29,13 +29,19 @@
 @synthesize tweetScrollView = _tweetScrollView;
 @synthesize tweetImageView = _tweetImageView;
 @synthesize tweetTextView = _tweetTextView;
+@synthesize postWebView = _postWebView;
+@synthesize repostWebView = _repostWebView;
 @synthesize repostTextView = _repostTextView;
 @synthesize repostView = _repostView;
 @synthesize repostTweetImageView = _repostTweetImageView;
 @synthesize trackLabel = _trackLabel;
-@synthesize trackButton = _trackButton;
+@synthesize trackView = _trackView;
+@synthesize imageCoverImageView = _imageCoverImageView;
+@synthesize playButton = _playButton;
 
 @synthesize status = _status;
+@synthesize postMusicVideoLink;
+@synthesize repostMusicVideoLink;
 
 - (void)dealloc
 {    
@@ -91,9 +97,6 @@
 	[self.repostTweetImageView addGestureRecognizer:tapGesture];
 	[tapGesture release];
     
-    self.tweetTextView.font = [self.tweetTextView.font fontWithSize:18];
-	self.repostTextView.font = [self.repostTextView.font fontWithSize:14];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(shouldDismissUserCardNotification:)
                                                  name:kNotificationNameShouldDismissUserCard
@@ -129,17 +132,26 @@
 
 - (void)prepare
 {		
+    self.postMusicVideoLink = nil;
+    self.repostMusicVideoLink = nil;
+    
 	self.tweetImageView.image = nil;
 	self.tweetImageView.hidden = YES;
 	
 	self.repostTweetImageView.hidden = YES;
 	self.repostTweetImageView.image = nil;
     
+    self.imageCoverImageView.hidden = YES;
+    
     self.repostView.hidden = YES;
     
-    self.trackButton.hidden = YES;
+    self.postWebView.hidden = YES;
+    self.repostWebView.hidden = YES;
+    
+    self.trackView.hidden = YES;
     self.trackLabel.text = @"";
-    self.trackLabel.hidden = YES;
+    
+    self.playButton.hidden = YES;
     
 	self.profileImageView.image = nil;
 	self.screenNameLabel.text = self.status.author.screenName;
@@ -157,12 +169,14 @@
                              cacheInContext:self.managedObjectContext];
     
     //
-    [[self.tweetImageView layer] setCornerRadius:15.0];
-    [[self.repostTweetImageView layer] setCornerRadius:15.0];
+    [[self.tweetImageView layer] setCornerRadius:20.0];
+    [[self.repostTweetImageView layer] setCornerRadius:20.0];
 }
 
 - (void)loadStatusImage
 {
+    self.tweetImageView.hidden = NO;
+    self.imageCoverImageView.hidden = NO;
     [self.tweetImageView loadImageFromURL:self.status.originalPicURL 
                                completion:^(void) 
      {
@@ -173,6 +187,8 @@
 
 - (void)loadRepostStautsImage
 {
+    self.repostTweetImageView.hidden = NO;
+    self.imageCoverImageView.hidden = NO;
     Status *repostStatus = self.status.repostStatus;
     [self.repostTweetImageView loadImageFromURL:repostStatus.originalPicURL 
                                      completion:^(void) 
@@ -182,53 +198,209 @@
                                  cacheInContext:self.managedObjectContext];
 }
 
+- (void)loadPostWebView
+{
+    NSString* originStatus = self.status.text;
+    NSString* phasedStatus = self.status.text;
+    //    NSString* originStatus = @"fdsjkl@jffa@";
+    //    NSString* phasedStatus = @"fdsjkl@jffa@";
+    
+    NSLog(@"%@", originStatus);
+    
+    // phase
+    for (int i = 0; i < originStatus.length; i++) {
+        int startIndex = i;
+        int endIndex = i;
+        
+        switch ([originStatus characterAtIndex:i]) {
+            case '@':
+            {
+                int j = i + 1;
+                for (j = i + 1; j < originStatus.length; j++) {
+                    if ([originStatus characterAtIndex:j] == ' '|| [originStatus characterAtIndex:j] == ':') {
+                        break;
+                    }
+                };
+                endIndex = j;
+                if(startIndex < endIndex)
+                {
+                    NSRange range = NSMakeRange(startIndex, endIndex-startIndex);
+                    NSString* subStr = [originStatus substringWithRange:range];
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='#'>%@</a></span>", subStr]];
+                }
+                break;
+            }
+            case '#':
+            {
+                for (int j = i + 1; j < originStatus.length; j++) {
+                    if ([originStatus characterAtIndex:j] == '#') {
+                        endIndex = j;
+                        break;
+                    }
+                }
+                if(startIndex < endIndex)
+                {
+                    NSRange range = NSMakeRange(startIndex, endIndex+1-startIndex);
+                    NSString* subStr = [originStatus substringWithRange:range];
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='#'>%@</a></span>", subStr]];
+                }
+                break;
+            }
+            case 'h':
+            {
+                if ([originStatus length] - 1 < i + 6 ) {
+                    break;
+                }
+                NSRange range = NSMakeRange(i, 7);
+                NSString* subStr = [originStatus substringWithRange:range];
+                if ([subStr compare:@"http://"] == NSOrderedSame) {
+                    int j = i + 1;
+                    for (j = i + 1; j < originStatus.length; j++) {
+                        if ([originStatus characterAtIndex:j] == ' ') {
+                            break;
+                        }
+                    }
+                    endIndex = j;
+                    range = NSMakeRange(startIndex, endIndex-startIndex);
+                    subStr = [originStatus substringWithRange:range];
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='#'>%@</a></span>", subStr]];
+                }
+                break;
+            }
+            default:
+                break;
+        }
+    }
+    
+    self.postWebView.hidden = NO;
+    //    NSString* htmlText = [[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><style type=\"text/css\">@import url(\"smartcard.css\");</style></head><body><div id=\"post\">%@</div></body></html>", phasedStatus];
+    NSString* htmlText = [[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><link href=\"smartcard.css\" rel=\"stylesheet\" type=\"text/css\" /></head><body><div id=\"post\">%@</div></body></html>", phasedStatus];
+    //    NSLog(htmlText);
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"smartcard" ofType:@"html"]; 
+    [self.postWebView loadHTMLString:htmlText baseURL:[NSURL fileURLWithPath: path]];
+}
+
+- (void)loadRepostWebView
+{
+    
+}
+
+- (void)loadPostMusicVideo:(NSString*)postMusicVideoLink
+{
+    NSLog(postMusicVideoLink);
+    
+    self.playButton.hidden = NO;
+    isTrack = NO;
+}
+
+- (void)loadRepostMusicVideo:(NSString*)repostMusicVideoLink
+{
+}
+
+- (void)getPostMusicVideoLink:(NSString*)statusText
+{
+    NSString* shortUrl = nil;
+    
+    for (int i = 0; i < statusText.length; i++) {
+        int startIndex = i;
+        int endIndex = i;
+        
+        if ([statusText characterAtIndex:i] == 'h') {
+            
+            if ([statusText length] - 1 < i + 6 ) {
+                break;
+            }
+            
+            NSRange range = NSMakeRange(i, 7);
+            shortUrl = [statusText substringWithRange:range];
+            if ([shortUrl compare:@"http://"] == NSOrderedSame) {
+                int j = i + 1;
+                for (j = i + 1; j < statusText.length; j++) {
+                    if ([statusText characterAtIndex:j] == ' ') {
+                        break;
+                    }
+                }
+                endIndex = j;
+                range = NSMakeRange(startIndex, endIndex-startIndex);
+                shortUrl = [statusText substringWithRange:range];            
+                
+                
+                WeiboClient *client = [WeiboClient client];
+                [client setCompletionBlock:^(WeiboClient *client) {
+                    if (!client.hasError) {
+                        NSArray *dictsArray = client.responseJSONObject;
+                        NSDictionary *dict = [dictsArray objectAtIndex:0];
+                        if ([dict objectForKey:@"url_long"]) {
+                            NSString* longUrl = [dict objectForKey:@"url_long"];
+                            
+                            
+                            if ([longUrl rangeOfString:@"http://v.youku.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound)
+                            {
+                                [self loadPostMusicVideo:longUrl];
+                            }
+                        }
+                    }
+                }];
+                
+                if (shortUrl)
+                    [client getShortUrlExpand:shortUrl];
+            }
+        }
+    }
+    
+}
+
+- (void)getRepostMusicVideoLink:(NSString*)statusText
+{
+}
+
 - (void)update
 {	
 	BOOL imageLoadingEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeyImageDownloadingEnabled];
     
     Status *status = self.status;
+    isTrack = YES;
     // post text
-    self.tweetTextView.text = self.status.text;
+    [self loadPostWebView];
     // post image
     if (imageLoadingEnabled && self.status.originalPicURL) {
-		self.tweetImageView.hidden = NO;
         [self performSelector:@selector(loadStatusImage) withObject:nil afterDelay:kLoadDelay];
+        isTrack = NO;
     }
     // post music or video
-    else if (NO)
+    if (YES)
     {
-        
+        [self getPostMusicVideoLink:status.text];
     }
-    // post no pmv
-    else
-    {
-        if (self.status.repostStatus) {
-            Status *repostStatus = self.status.repostStatus;
-            
-            // repost text
-            self.repostTextView.text = [NSString stringWithFormat:@"@%@: %@", repostStatus.author.screenName, repostStatus.text];
-            self.repostView.hidden = NO;
-            // repost image
-            if (imageLoadingEnabled && repostStatus.originalPicURL.length) {
-                self.repostTweetImageView.hidden = NO;
-                [self performSelector:@selector(loadRepostStautsImage) withObject:nil afterDelay:kLoadDelay];
-            }
-            // repost music or video
-            else if (NO)
-            {
-                
-            }
+    
+    if (self.status.repostStatus) {
+        Status *repostStatus = self.status.repostStatus;
+        self.imageCoverImageView.hidden = NO;
+        isTrack = NO;
+        // repost text
+        self.repostView.hidden = NO;
+        // repost image
+        if (imageLoadingEnabled && repostStatus.originalPicURL.length) {
+            [self performSelector:@selector(loadRepostStautsImage) withObject:nil afterDelay:kLoadDelay];
         }
-        
-        // no repost
-        else
+        // repost music or video
+        if (NO)
         {
-            NSString* trackString = [[NSString alloc] initWithFormat:@"更多进展，请询问%@@", status.author.screenName];
-            self.trackLabel.text = trackString;
-            self.trackLabel.hidden = NO;
-            self.trackButton.hidden = NO;
+            [self getRepostMusicVideoLink:repostStatus.text];
         }
     }
+    
+    // Track
+    //    if (isTrack)
+    if (NO)
+    {
+        NSString* trackString = [[NSString alloc] initWithFormat:@"询问 @%@", status.author.screenName];
+        self.trackLabel.text = trackString;
+        self.trackLabel.hidden = NO;
+        self.trackView.hidden = NO;
+        self.imageCoverImageView.hidden = YES;
+    }
+    
 }
 
 - (void)setStatus:(Status *)status

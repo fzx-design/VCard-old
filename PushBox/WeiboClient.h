@@ -117,7 +117,7 @@ typedef void (^WCCompletionBlock)(WeiboClient *client);
                 needcount:(Boolean)needcount
                  base_app:(int)base_app;
 - (void)getTrendsStatuses:(NSString *)trend_name;
-
+- (void)getShortUrlExpand:(NSString *)url_short ;
 - (void)getMessagesByUserSinceID:(NSString *)sinceID 
                            maxID:(NSString *)maxID 
                            count:(int)count

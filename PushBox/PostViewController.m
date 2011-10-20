@@ -112,7 +112,10 @@
     }
     words += 1;
     words /= 2;
-    self.wordsCountLabel.text = [NSString stringWithFormat:@"%d", 140 - words];
+    words = 140 - words;
+    self.wordsCountLabel.text = [NSString stringWithFormat:@"%d", words];
+    self.doneButton.enabled = words >= 0;
+    
 }
 
 - (IBAction)cancelButtonClicked:(UIButton *)sender {

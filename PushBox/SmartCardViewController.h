@@ -32,11 +32,17 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
 	UIScrollView *_tweetScrollView;
     UIImageView *_tweetImageView;
 	UITextView *_tweetTextView;
+    UIWebView *_postWebView;
+    UIWebView *_repostWebView;
 	UITextView *_repostTextView;
 	UIImageView *_repostView;
 	UIImageView *_repostTweetImageView;
     UILabel *_trackLabel;
-    UIButton *_trackButton;
+    UIView *_trackView;
+    UIImageView *_imageCoverImageView;
+    UIButton *_playButton;
+    
+    Boolean isTrack;
     
     Status *_status;
 }
@@ -51,13 +57,19 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
 @property(nonatomic, retain) IBOutlet UIScrollView* tweetScrollView;
 @property(nonatomic, retain) IBOutlet UIImageView* tweetImageView;
 @property(nonatomic, retain) IBOutlet UITextView* tweetTextView;
+@property(nonatomic, retain) IBOutlet UIWebView* postWebView;
+@property(nonatomic, retain) IBOutlet UIWebView* repostWebView;
 @property(nonatomic, retain) IBOutlet UITextView* repostTextView;
 @property(nonatomic, retain) IBOutlet UIImageView* repostView;
 @property(nonatomic, retain) IBOutlet UIImageView* repostTweetImageView;
 @property(nonatomic, retain) IBOutlet UILabel* trackLabel;
-@property(nonatomic, retain) IBOutlet UIButton* trackButton;
+@property(nonatomic, retain) IBOutlet UIView* trackView;
+@property(nonatomic, retain) IBOutlet UIImageView* imageCoverImageView;
+@property(nonatomic, retain) IBOutlet UIButton* playButton;
 
 @property(nonatomic, retain) Status* status;
+@property(nonatomic, retain) NSString *postMusicVideoLink;
+@property(nonatomic, retain) NSString *repostMusicVideoLink;
 
 - (IBAction)actionsButtonClicked:(UIButton *)sender;
 - (IBAction)profileImageButtonClicked:(id)sender;
