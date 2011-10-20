@@ -109,7 +109,6 @@
 		CB7C4A0513EBD19600BD329A /* CCUserCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7C4A0413EBD19600BD329A /* CCUserCardViewController.m */; };
 		CB7C4A0813EBDE2C00BD329A /* UserCardBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7C4A0713EBDE2B00BD329A /* UserCardBaseViewController.m */; };
 		CB9DCAA913DFEF5D00DA3D3D /* status_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCAA313DFEF5D00DA3D3D /* status_bg.png */; };
-		CB9DCAAA13DFEF5D00DA3D3D /* status_button_action.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCAA413DFEF5D00DA3D3D /* status_button_action.png */; };
 		CB9DCAAB13DFEF5D00DA3D3D /* status_button_comment.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCAA513DFEF5D00DA3D3D /* status_button_comment.png */; };
 		CB9DCAAC13DFEF5D00DA3D3D /* status_button_fav.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCAA613DFEF5D00DA3D3D /* status_button_fav.png */; };
 		CB9DCAAD13DFEF5D00DA3D3D /* status_button_repost.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DCAA713DFEF5D00DA3D3D /* status_button_repost.png */; };
@@ -366,7 +365,6 @@
 		CB7C4A0613EBDE2B00BD329A /* UserCardBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCardBaseViewController.h; sourceTree = "<group>"; };
 		CB7C4A0713EBDE2B00BD329A /* UserCardBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCardBaseViewController.m; sourceTree = "<group>"; };
 		CB9DCAA313DFEF5D00DA3D3D /* status_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_bg.png; sourceTree = "<group>"; };
-		CB9DCAA413DFEF5D00DA3D3D /* status_button_action.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_button_action.png; sourceTree = "<group>"; };
 		CB9DCAA513DFEF5D00DA3D3D /* status_button_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_button_comment.png; sourceTree = "<group>"; };
 		CB9DCAA613DFEF5D00DA3D3D /* status_button_fav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_button_fav.png; sourceTree = "<group>"; };
 		CB9DCAA713DFEF5D00DA3D3D /* status_button_repost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_button_repost.png; sourceTree = "<group>"; };
@@ -854,7 +852,6 @@
 				200CE8C9144EF12A009AD00C /* sc_bg.png */,
 				CB9DCAB313DFF08C00DA3D3D /* card_cover_top.png */,
 				CB9DCAA313DFEF5D00DA3D3D /* status_bg.png */,
-				CB9DCAA413DFEF5D00DA3D3D /* status_button_action.png */,
 				CB9DCAA513DFEF5D00DA3D3D /* status_button_comment.png */,
 				CB9DCAA613DFEF5D00DA3D3D /* status_button_fav.png */,
 				CB9DCABC13DFF30E00DA3D3D /* status_button_unfav.png */,
@@ -1215,7 +1212,6 @@
 				CB26225113DF06780062EDE7 /* StatusCardViewController.xib in Resources */,
 				CB26225313DF07820062EDE7 /* CardTableViewCell.xib in Resources */,
 				CB9DCAA913DFEF5D00DA3D3D /* status_bg.png in Resources */,
-				CB9DCAAA13DFEF5D00DA3D3D /* status_button_action.png in Resources */,
 				CB9DCAAB13DFEF5D00DA3D3D /* status_button_comment.png in Resources */,
 				CB9DCAAC13DFEF5D00DA3D3D /* status_button_fav.png in Resources */,
 				CB9DCAAD13DFEF5D00DA3D3D /* status_button_repost.png in Resources */,
