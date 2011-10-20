@@ -46,6 +46,7 @@
 @synthesize musicBackgroundImageView = _musicBackgroundImageView;
 @synthesize musicCoverImageView = _musicCoverImageView;
 @synthesize playButton = _playButton;
+@synthesize recentActNotifyLabel = _recentActNotifyLabel;
 
 @synthesize status = _status;
 @synthesize postMusicVideoLink;
@@ -169,6 +170,8 @@
     self.repostView.frame = kRepostViewFrameTop;
     self.repostWebView.frame = kRepostWebViewFrameTop;
     
+    self.recentActNotifyLabel.hidden = YES;
+
     self.trackView.hidden = YES;
     self.trackLabel.text = @"";
     self.trackView.alpha = 0.0;
@@ -206,10 +209,10 @@
                                completion:^(void) 
      {
          self.tweetImageView.alpha = 0.0;
-         self.imageCoverImageView.alpha = 0.0;
+//         self.imageCoverImageView.alpha = 0.0;
         [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
              self.tweetImageView.alpha = 1.0;
-             self.imageCoverImageView.alpha = 1.0;
+//             self.imageCoverImageView.alpha = 1.0;
          } completion:^(BOOL fin) {
          }];
      } 
@@ -405,11 +408,11 @@
     
     self.repostWebView.alpha = 0.0;
     self.repostView.alpha = 0.0;
-    self.imageCoverImageView.alpha = 0.0;
+//    self.imageCoverImageView.alpha = 0.0;
     [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
         self.repostWebView.alpha = 1.0;
         self.repostView.alpha = 1.0;
-        self.imageCoverImageView.alpha = 1.0;
+//        self.imageCoverImageView.alpha = 1.0;
     } completion:^(BOOL fin) {
     }];
     
@@ -428,11 +431,11 @@
     self.playButton.frame = kPlayButtonFrameTopRight;
     self.repostView.frame = kRepostViewFrameBottom;
     self.repostWebView.frame = kRepostWebViewFrameBottom;
-    self.imageCoverImageView.alpha = 0.0;
+//    self.imageCoverImageView.alpha = 0.0;
     self.musicBackgroundImageView.alpha = 0.0;
     self.repostTweetImageView.alpha = 1.0;
     [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
-        self.imageCoverImageView.alpha = 1.0;
+//        self.imageCoverImageView.alpha = 1.0;
         self.musicBackgroundImageView.alpha = 1.0;
         self.repostTweetImageView.alpha = 0.0;
     } completion:^(BOOL fin) {
@@ -553,6 +556,13 @@
     
     Status *status = self.status;
     isTrack = YES;
+    
+    self.imageCoverImageView.alpha = 0.0;
+   [UIView animateWithDuration:0.5 animations:^{
+        self.imageCoverImageView.alpha = 1.0;
+    } completion:^(BOOL fin) {
+    }];
+    
     // post text
     [self loadPostWebView];
     // post image
@@ -568,7 +578,7 @@
     
     if (self.status.repostStatus) {
         Status *repostStatus = self.status.repostStatus;
-        self.imageCoverImageView.hidden = NO;
+//        self.imageCoverImageView.hidden = NO;
         isTrack = NO;
         // repost text
         [self loadRepostWebView];
@@ -589,10 +599,13 @@
     {
         NSString* trackString = [[NSString alloc] initWithFormat:@"询问 %@", status.author.screenName];
         self.trackLabel.text = trackString;
+        trackString = [[NSString alloc] initWithFormat:@"%@ 关于此微博的最新进展", status.author.screenName];
+        self.recentActNotifyLabel.text = trackString;
         self.trackLabel.hidden = NO;
+        self.recentActNotifyLabel.hidden = NO;
         self.trackView.hidden = NO;
-        self.imageCoverImageView.hidden = YES;
-        [UIView animateWithDuration:0.5 delay:1.0 options:0 animations:^{
+//        self.imageCoverImageView.hidden = YES;
+        [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
             self.trackLabel.alpha = 1.0;
             self.trackView.alpha = 1.0;
         } completion:^(BOOL fin) {
@@ -645,6 +658,11 @@
     vc.targetStatus = self.status;
     [[UIApplication sharedApplication] presentModalViewController:vc atHeight:kModalViewHeight];
     [vc release];
+}
+
+- (IBAction)askOwnerButtonClicked:(UIButton *)sender
+{
+    [self performSelector:@selector(newComment)];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
