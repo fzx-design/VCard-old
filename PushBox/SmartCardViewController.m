@@ -17,11 +17,11 @@
 
 #define kLoadDelay 1.5
 #define kPlayButtonFrameTopRight CGRectMake(399, 306, 68, 68)
-#define kPlayButtonFrameCenter CGRectMake(199, 126, 68, 68)
+#define kPlayButtonFrameCenter CGRectMake(251, 373, 68, 68)
 #define kRepostViewFrameTop CGRectMake(57, 275, 451, 129)
 #define kRepostWebViewFrameTop CGRectMake(65, 287, 433, 106)
-#define kRepostViewFrameBottom CGRectMake(57, 275+118, 451, 129)
-#define kRepostWebViewFrameBottom CGRectMake(65, 287+118, 433, 106)
+#define kRepostViewFrameBottom CGRectMake(57, 275+125, 451, 129)
+#define kRepostWebViewFrameBottom CGRectMake(65, 287+125, 433, 106)
 
 @implementation SmartCardViewController
 
@@ -93,6 +93,11 @@
 {
     [super viewDidLoad];
     
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"smartcard" ofType:@"js"];  
+    NSString *jsString = [[NSString alloc] initWithContentsOfFile:filePath];  
+    [self.postWebView stringByEvaluatingJavaScriptFromString:jsString];  
+    [self.repostWebView stringByEvaluatingJavaScriptFromString:jsString];  
+    
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClicked:)];
 	tapGesture.numberOfTapsRequired = 1;
 	tapGesture.numberOfTouchesRequired = 1;
@@ -161,6 +166,8 @@
     
     self.trackView.hidden = YES;
     self.trackLabel.text = @"";
+    self.trackView.alpha = 0.0;
+    self.trackLabel.alpha = 0.0;
     
     self.playButton.hidden = YES;
     self.musicBackgroundImageView.alpha = 0.0;
@@ -213,10 +220,8 @@
                                      completion:^(void) 
      {
          self.repostTweetImageView.alpha = 0.0;
-         self.imageCoverImageView.alpha = 0.0;
          [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
              self.repostTweetImageView.alpha = 1.0;
-             self.imageCoverImageView.alpha = 1.0;
          } completion:^(BOOL fin) {
          }];
      }
@@ -288,7 +293,7 @@
                     endIndex = j;
                     range = NSMakeRange(startIndex, endIndex-startIndex);
                     subStr = [originStatus substringWithRange:range];
-                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='#'>%@</a></span>", subStr]];
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='linkClicked()' onClick='linkClicked()'>%@</a></span>", subStr]];
                 }
                 break;
             }
@@ -314,7 +319,7 @@
 - (void)loadRepostWebView
 {
     self.repostView.hidden = NO;
-
+    
     NSString* originStatus = self.status.repostStatus.text;
     NSString* phasedStatus = self.status.repostStatus.text;
     //    NSString* originStatus = @"fdsjkl@jffa@";
@@ -378,7 +383,7 @@
                     endIndex = j;
                     range = NSMakeRange(startIndex, endIndex-startIndex);
                     subStr = [originStatus substringWithRange:range];
-                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0)' onMouseDown='linkClicked()'>%@</a></span>", subStr]];
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='linkClicked()' onClick='linkClicked()'>%@</a></span>", subStr]];
                 }
                 break;
             }
@@ -402,38 +407,32 @@
         self.imageCoverImageView.alpha = 1.0;
     } completion:^(BOOL fin) {
     }];
-
+    
 }
 
 - (void)loadPostMusicVideo:(NSString*)postMusicVideoLink
 {    
     self.playButton.hidden = NO;
     isTrack = NO;
-    self.musicBackgroundImageView.hidden = NO;
     self.playButton.frame = kPlayButtonFrameCenter;
 }
 
 - (void)loadRepostMusicVideo:(NSString*)repostMusicVideoLink
 {
     self.playButton.hidden = NO;
-    self.musicBackgroundImageView.hidden = NO;
     self.playButton.frame = kPlayButtonFrameTopRight;
     self.repostView.frame = kRepostViewFrameBottom;
     self.repostWebView.frame = kRepostWebViewFrameBottom;
-    self.repostWebView.alpha = 0.0;
-    self.repostView.alpha = 0.0;
     self.imageCoverImageView.alpha = 0.0;
     self.musicBackgroundImageView.alpha = 0.0;
     self.repostTweetImageView.alpha = 1.0;
     [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
-        self.repostWebView.alpha = 1.0;
-        self.repostView.alpha = 1.0;
         self.imageCoverImageView.alpha = 1.0;
         self.musicBackgroundImageView.alpha = 1.0;
         self.repostTweetImageView.alpha = 0.0;
     } completion:^(BOOL fin) {
     }];
-
+    
 }
 
 - (void)getPostMusicVideoLink:(NSString*)statusText
@@ -475,6 +474,7 @@
                             
                             if ([longUrl rangeOfString:@"http://v.youku.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.tudou.com"].location != NSNotFound || [longUrl rangeOfString:@"http://v.ku6.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.56.com"].location != NSNotFound || [longUrl rangeOfString:@"http://music.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"xiami.com"].location != NSNotFound || [longUrl rangeOfString:@"songtaste.com"].location != NSNotFound)
                             {
+                                isTrack = NO;
                                 [self loadPostMusicVideo:longUrl];
                             }
                         }
@@ -528,6 +528,7 @@
                             
                             if ([longUrl rangeOfString:@"http://v.youku.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.tudou.com"].location != NSNotFound || [longUrl rangeOfString:@"http://v.ku6.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.56.com"].location != NSNotFound || [longUrl rangeOfString:@"http://music.sina.com"].location != NSNotFound|| [longUrl rangeOfString:@"xiami.com"].location != NSNotFound || [longUrl rangeOfString:@"songtaste.com"].location != NSNotFound)
                             {
+                                isTrack = NO;
                                 [self loadRepostMusicVideo:longUrl];
                             }
                         }
@@ -578,14 +579,19 @@
     }
     
     // Track
-    //    if (isTrack)
-    if (NO)
+    if (isTrack)
+        //    if (NO)
     {
-        NSString* trackString = [[NSString alloc] initWithFormat:@"询问 @%@", status.author.screenName];
+        NSString* trackString = [[NSString alloc] initWithFormat:@"询问 %@", status.author.screenName];
         self.trackLabel.text = trackString;
         self.trackLabel.hidden = NO;
         self.trackView.hidden = NO;
         self.imageCoverImageView.hidden = YES;
+        [UIView animateWithDuration:0.5 delay:1.0 options:0 animations:^{
+            self.trackLabel.alpha = 1.0;
+            self.trackView.alpha = 1.0;
+        } completion:^(BOOL fin) {
+        }];
     }
     
 }

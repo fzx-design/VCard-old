@@ -21,7 +21,7 @@
 @class Status;
 
 @interface SmartCardViewController : CoreDataViewController<DetailImageViewControllerDelegate, 
-UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControllerDelegate, CommentsTableViewControllerDelegate> {
+UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControllerDelegate, CommentsTableViewControllerDelegate, UIWebViewDelegate> {
     UIImageView *_profileImageView;
     UILabel *_screenNameLabel;
     UILabel *_dateLabel;
