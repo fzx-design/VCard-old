@@ -27,9 +27,10 @@
     self.transform = CGAffineTransformRotate(self.transform, M_PI_2);
     
     if(NO)
-    {if (!_statusCardViewController) {
-        _statusCardViewController = [[StatusCardViewController alloc] init];
-    }
+    {
+		if (!_statusCardViewController) {
+			_statusCardViewController = [[StatusCardViewController alloc] init];
+		}
         
         [self.contentView addSubview:_statusCardViewController.view];
     }

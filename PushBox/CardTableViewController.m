@@ -525,12 +525,14 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {    
     if (YES)
-    {   CardTableViewCell *tableViewCell = (CardTableViewCell *)cell;
+    {   
+		CardTableViewCell *tableViewCell = (CardTableViewCell *)cell;
         tableViewCell.smartCardViewController.currentUser = self.currentUser;
         tableViewCell.smartCardViewController.status = [self.fetchedResultsController objectAtIndexPath:indexPath];
     }
     else 
-    {   CardTableViewCell *tableViewCell = (CardTableViewCell *)cell;
+    {   
+		CardTableViewCell *tableViewCell = (CardTableViewCell *)cell;
         tableViewCell.statusCardViewController.currentUser = self.currentUser;
         tableViewCell.statusCardViewController.status = [self.fetchedResultsController objectAtIndexPath:indexPath];
     }

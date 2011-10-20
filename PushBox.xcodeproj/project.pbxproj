@@ -53,11 +53,11 @@
 		9BB11CB514503ED3005B43AC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBDA5AF613DBEC1300FAE221 /* CoreGraphics.framework */; };
 		9BB5B8B61449A8B100352FF7 /* UserCardContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB5B8B41449A8B100352FF7 /* UserCardContentViewController.m */; };
 		9BB5B8B71449A8B100352FF7 /* UserCardContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BB5B8B51449A8B100352FF7 /* UserCardContentViewController.xib */; };
-		9BC57899144FE5D400550BB8 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BC57898144FE5D400550BB8 /* RootViewController.xib */; };
 		9BC6E651144A9B2400B28506 /* CCUserInfoCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC6E64F144A9B2400B28506 /* CCUserInfoCardViewController.m */; };
 		9BC6E652144A9B2400B28506 /* CCUserInfoCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BC6E650144A9B2400B28506 /* CCUserInfoCardViewController.xib */; };
 		9BE01AEA14504B8B00450EE2 /* CardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE01AE914504B8B00450EE2 /* CardTableViewCell.m */; };
 		9BE01AEB14504F7800450EE2 /* SmartCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92BEDF144EC0BF00CA0306 /* SmartCardViewController.m */; };
+		9BE01AF614506B8F00450EE2 /* SmartCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BE01AF514506B8F00450EE2 /* SmartCardViewController.xib */; };
 		CB018DD613DD3CC9004217E0 /* DockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB018DD413DD3CC8004217E0 /* DockViewController.m */; };
 		CB018DD713DD3CC9004217E0 /* DockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB018DD513DD3CC8004217E0 /* DockViewController.xib */; };
 		CB018DDB13DDCCCD004217E0 /* dock_slider_thumb_HL.png in Resources */ = {isa = PBXBuildFile; fileRef = CB018DD913DDCCCD004217E0 /* dock_slider_thumb_HL.png */; };
@@ -286,6 +286,7 @@
 		9BC6E650144A9B2400B28506 /* CCUserInfoCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCUserInfoCardViewController.xib; sourceTree = "<group>"; };
 		9BE01AE814504B8B00450EE2 /* CardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTableViewCell.h; sourceTree = "<group>"; };
 		9BE01AE914504B8B00450EE2 /* CardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardTableViewCell.m; sourceTree = "<group>"; };
+		9BE01AF514506B8F00450EE2 /* SmartCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmartCardViewController.xib; sourceTree = "<group>"; };
 		CB018DD313DD3CC8004217E0 /* DockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DockViewController.h; sourceTree = "<group>"; };
 		CB018DD413DD3CC8004217E0 /* DockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DockViewController.m; sourceTree = "<group>"; };
 		CB018DD513DD3CC8004217E0 /* DockViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DockViewController.xib; sourceTree = "<group>"; };
@@ -507,7 +508,6 @@
 		FE8F6D41144327B4001A62FD /* MessagesContactsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesContactsTableViewController.xib; sourceTree = "<group>"; };
 		FE92BEDE144EC0BF00CA0306 /* SmartCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartCardViewController.h; sourceTree = "<group>"; };
 		FE92BEDF144EC0BF00CA0306 /* SmartCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartCardViewController.m; sourceTree = "<group>"; };
-		FE92BEE0144EC0BF00CA0306 /* SmartCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmartCardViewController.xib; sourceTree = "<group>"; };
 		FE9B26B0144481F70028C9B9 /* msg_sina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = msg_sina.png; sourceTree = "<group>"; };
 		FEA42652144320E7002E80B3 /* MessagesContactsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesContactsTableViewCell.h; sourceTree = "<group>"; };
 		FEA42653144320E7002E80B3 /* MessagesContactsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesContactsTableViewCell.m; sourceTree = "<group>"; };
@@ -1030,10 +1030,9 @@
 				CB26224F13DF06780062EDE7 /* StatusCardViewController.xib */,
 				9B5F2E3714498FC5008AC0B8 /* UserCardNaviViewController.xib */,
 				9BB5B8B51449A8B100352FF7 /* UserCardContentViewController.xib */,
-				FE92BEE0144EC0BF00CA0306 /* SmartCardViewController.xib */,
 				CB9DCADD13E2C15C00DA3D3D /* UserCardViewController.xib */,
 				9BC6E650144A9B2400B28506 /* CCUserInfoCardViewController.xib */,
-				FE92BEE0144EC0BF00CA0306 /* SmartCardViewController.xib */,
+				9BE01AF514506B8F00450EE2 /* SmartCardViewController.xib */,
 			);
 			name = Nibs;
 			sourceTree = "<group>";
@@ -1310,7 +1309,11 @@
 				206902EA144B29AA00BA9EC3 /* switch_grey_on.png in Resources */,
 				206902EC144B2C0D00BA9EC3 /* v_large.png in Resources */,
 				206902EE144B2C8100BA9EC3 /* button_sendmsg_grey.png in Resources */,
-				9BC57899144FE5D400550BB8 /* RootViewController.xib in Resources */,
+				FE72B4CB144FFD3000C3EE5B /* repost_bg.jpg in Resources */,
+				FE72B4CC144FFD3000C3EE5B /* smartcard.css in Resources */,
+				FE72B4CD144FFD3000C3EE5B /* smartcard.html in Resources */,
+				FE72B4CE144FFD3000C3EE5B /* webview_bg.jpg in Resources */,
+				9BE01AF614506B8F00450EE2 /* SmartCardViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
