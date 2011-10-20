@@ -17,6 +17,7 @@
 {
     NSLog(@"CardTableViewCell dealloc");
     [_statusCardViewController release];
+    [_smartCardViewController release];
     [super dealloc];
 }
 
@@ -32,7 +33,6 @@
         
         [self.contentView addSubview:_statusCardViewController.view];
     }
-    
     else
     {
         if (!_smartCardViewController) {

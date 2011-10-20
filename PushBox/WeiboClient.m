@@ -455,6 +455,26 @@ report_completion:
     [self sendRequest];
 }
 
+- (void)getShortUrlExpand:(NSString *)url_short 
+{
+    self.path = @"short_url/expand.json";
+    [self.params setObject:url_short forKey:@"url_short"];
+    
+//    [self setPreCompletionBlock:^(WeiboClient *client1) {
+//        if (!client1.hasError) {
+//            NSArray *statusesDict = client1.responseJSONObject;
+//            if ([statusesDict count]) {
+//                WeiboClient *client2 = [WeiboClient client];
+//                [client2 setCompletionBlock:client1.completionBlock];
+//                [client1 setCompletionBlock:NULL];
+//                [client2 getCommentsAndRepostsCountForStatusesDict:statusesDict];
+//            }
+//        }
+//    }];
+//    
+    [self sendRequest];
+}
+
 - (void)getUserTimeline:(NSString *)userID 
 				SinceID:(NSString *)sinceID 
                   maxID:(NSString *)maxID 
