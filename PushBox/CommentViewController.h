@@ -15,13 +15,17 @@
 @interface CommentViewController : UIViewController<UIActionSheetDelegate, UIAlertViewDelegate> {
     UITextView *_textView;
     UILabel *_titleLabel;
-    
+    UIImageView *_postDoneImageView;
+	UIActivityIndicatorView *_activityIndicatorView;
+	
     Status *_targetStatus;
     Comment *_targetComment;
 }
 
 @property(nonatomic, retain) IBOutlet UITextView* textView;
 @property(nonatomic, retain) IBOutlet UILabel* titleLabel;
+@property(nonatomic, retain) IBOutlet UIImageView* postDoneImage;
+@property(nonatomic, retain) IBOutlet UIActivityIndicatorView* activityIndicatorView;
 @property(nonatomic, retain) Status* targetStatus;
 @property(nonatomic, retain) Comment* targetComment;
 

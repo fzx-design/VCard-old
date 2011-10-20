@@ -163,7 +163,6 @@
 	
 	[self.delegate cardTableViewController:self didScrollToRow:self.currentRowIndex withNumberOfRows:[self numberOfRows]];
 	[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
-	NSLog(@"indexDiff**************%d   currentIndex**********%d", indexDiff, self.currentRowIndex);
 }
 
 - (void)scrollToRow:(int)row
@@ -200,9 +199,11 @@
         [self clearData];
 		[self setHeaderViewWithOffset];
         [self.tableView reloadData];
-        [self loadMoreDataCompletion:completion];
         self.tableView.transform = CGAffineTransformScale(self.tableView.transform, kBlurImageViewScale, kBlurImageViewScale);
-        self.tableView.alpha = 1.0;
+        self.tableView.alpha = 0.0;
+		self.rootShadowLeft.alpha = 1.0;
+        [self loadMoreDataCompletion:completion];
+
     }];
 }
 
@@ -231,7 +232,7 @@
 - (void)popCardWithCompletion:(void (^)())completion
 {
     self.dataSource = CardTableViewDataSourceFriendsTimeline;
-	[UIView animateWithDuration:1 delay:0 options:0 animations:^{
+	[UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
 		self.tableView.alpha = 0.0;
 	} completion:^(BOOL fin) {
 		self.fetchedResultsController = self.prevFetchedResultsController;
@@ -251,7 +252,7 @@
         self.blurImageView.alpha = 1.0;
         self.blurImageView.transform = CGAffineTransformMakeScale(1, 1);
 		self.tableView.transform = CGAffineTransformScale(self.tableView.transform, 1/kBlurImageViewScale, 1/kBlurImageViewScale);
-		[UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
+		[UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
             self.blurImageView.alpha = 0.0;
             self.blurImageView.transform = CGAffineTransformMakeScale(kBlurImageViewScale, kBlurImageViewScale);
 			self.tableView.transform = CGAffineTransformScale(self.tableView.transform, kBlurImageViewScale, kBlurImageViewScale);
@@ -384,9 +385,18 @@
         [[UIApplication sharedApplication] showLoadingView];
         [client setCompletionBlock:^(WeiboClient *client) {
             if (!client.hasError) {
+				
+//				[self clearData];
+
                 NSArray *dictArray = client.responseJSONObject;
+				NSDictionary *dict = [dictArray lastObject];
+//				if ([((Status*)[self.fetchedResultsController.fetchedObjects objectAtIndex:1]).statusID isEqualToString:((Status*)(dict o)).statusID]) {
+//					
+//				}
+								
                 for (NSDictionary *dict in dictArray) {
                     Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+										
                     [self.currentUser addFriendsStatusesObject:newStatus];
                     if (self.insertionAnimationEnabled) {
                         [self.managedObjectContext processPendingChanges];
@@ -462,7 +472,8 @@
         [[UIApplication sharedApplication] showLoadingView];
         [client setCompletionBlock:^(WeiboClient *client) {
             if (!client.hasError) {
-                NSArray *dictArray = client.responseJSONObject;
+                
+				NSArray *dictArray = client.responseJSONObject;
                 for (NSDictionary *dict in dictArray) {
                     [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
                 }
@@ -503,6 +514,8 @@
         case CardTableViewDataSourceFavorites:
             [self.currentUser removeFavorites:self.currentUser.favorites];
             break;
+			default:
+			break;
     }
     [self.managedObjectContext processPendingChanges];
     self.currentRowIndex = 0;
@@ -512,7 +525,7 @@
 
 - (void)refresh
 {
-//    [self clearData];
+    [self clearData];
     [self loadMoreDataCompletion:NULL];
 }
 
@@ -541,6 +554,8 @@
             break;
         case CardTableViewDataSourceFavorites:
             request.predicate = [NSPredicate predicateWithFormat:@"favoritedBy == %@", self.currentUser];
+			default:
+			break;
     }
 }
 
@@ -550,44 +565,44 @@
 }
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    //[self.tableView beginUpdates];
+	[self.tableView beginUpdates];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath {
     
-	//    UITableView *tableView = self.tableView;
-	//    
-	//    switch(type) {
-	//            
-	//        case NSFetchedResultsChangeInsert:
-	//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-	//                             withRowAnimation:UITableViewRowAnimationFade];
-	//            break;
-	//            
-	//        case NSFetchedResultsChangeDelete:
-	//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-	//                             withRowAnimation:UITableViewRowAnimationFade];
-	//            break;
-	//            
-	//        case NSFetchedResultsChangeUpdate:
-	//            [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
-	//                    atIndexPath:indexPath];
-	//            break;
-	//            
-	//        case NSFetchedResultsChangeMove:
-	//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-	//                             withRowAnimation:UITableViewRowAnimationFade];
-	//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-	//                             withRowAnimation:UITableViewRowAnimationFade];
-	//            break;
-	//    }
+    UITableView *tableView = self.tableView;
+    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
+                    atIndexPath:indexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-	//    [self.tableView endUpdates];
-	[self.tableView reloadData];
+    [self.tableView endUpdates];
+//	[self.tableView reloadData];
 }
 
 

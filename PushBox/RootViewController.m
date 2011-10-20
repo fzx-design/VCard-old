@@ -52,7 +52,10 @@
 
 @synthesize backgroundImageView = _backgroundImageView;
 @synthesize pushBoxHDImageView = _pushBoxHDImageView;
+@synthesize bottomStateFrameView = _bottomStateFrameView;
 @synthesize bottomStateView = _bottomStateView;
+@synthesize bottomStateInvisibleView = _bottomStateInvisibleView;
+@synthesize bottomBackButton = _bottomBackButton;
 @synthesize bottomStateLabel = _bottomStateLabel;
 @synthesize bottomStateTextField = _bottomStateTextField;
 @synthesize loginViewController = _loginViewController;
@@ -91,7 +94,7 @@
 }
 
 - (void)start
-{
+{	
     WeiboClient *client = [WeiboClient client];
     [client setCompletionBlock:^(WeiboClient *client) {
         if (!client.hasError) {
@@ -100,6 +103,7 @@
         }
 		
 		[self updateBackgroundImageAnimated:YES];
+		
 		self.cardTableViewController.dataSource = CardTableViewDataSourceFriendsTimeline;
 		[self.cardTableViewController loadMoreDataCompletion:^(void) {
 			[self.cardTableViewController loadAllFavoritesWithCompletion:NULL];
@@ -145,7 +149,8 @@
                  object:nil];
     
     self.bottomStateView.alpha = 0.0;
-    
+	self.bottomStateInvisibleView.alpha = 1.0;
+	
     if ([WeiboClient authorized]) {
         self.pushBoxHDImageView.alpha = 0.0;
 		self.currentUser = [User userWithID:[WeiboClient currentUserID] inManagedObjectContext:self.managedObjectContext];
@@ -168,11 +173,45 @@
     [self performSelector:@selector(showLoginView) withObject:nil afterDelay:1.0];
 }
 
+
+- (void)moveCardIntoView
+{
+	CGRect frame = self.cardTableViewController.tableView.frame;
+	frame.origin.x += 782;
+	self.cardTableViewController.tableView.frame = frame;
+	
+	self.cardTableViewController.tableView.alpha = 1.0;
+	self.cardTableViewController.rootShadowLeft.alpha = 1.0;
+	
+    [UIView animateWithDuration:1.0 animations:^{
+		
+		CGRect frame = self.cardTableViewController.tableView.frame;
+		frame.origin.x -= 782;
+		self.cardTableViewController.tableView.frame = frame;
+    }];
+}
+
 - (void)showBottomStateView
 {
-    [UIView animateWithDuration:1.0 animations:^(void) {
-        self.bottomStateView.alpha = 1.0;
-    }];
+	if (self.bottomStateInvisibleView.image == nil) {
+		self.bottomStateInvisibleView.image = _tmpImage;
+	}
+	
+	CATransition *animation = [CATransition animation];
+    animation.delegate = self.bottomStateFrameView;
+    animation.duration = 0.5f;
+    animation.timingFunction = UIViewAnimationCurveEaseInOut;
+	animation.fillMode = kCAFillModeForwards;
+	animation.removedOnCompletion = NO;
+	animation.type = @"cube";
+	animation.subtype = kCATransitionFromBottom;
+	
+	self.bottomStateView.alpha = 1.0;
+	[self.bottomStateFrameView.layer addAnimation:animation forKey:@"animation"];
+	[self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
+	
+	[self.bottomStateFrameView bringSubviewToFront:self.bottomStateView];
+	self.bottomBackButton.enabled = YES;
 }
 
 - (void)showBottomStateViewForSearch
@@ -212,9 +251,21 @@
 
 - (void)hideBottomStateView
 {
-    [UIView animateWithDuration:1.0 animations:^(void) {
-        self.bottomStateView.alpha = 0.0;
-    }];
+	CATransition *animation = [CATransition animation];
+    animation.delegate = self.bottomStateFrameView;
+    animation.duration = 0.5f;
+    animation.timingFunction = UIViewAnimationCurveEaseInOut;
+	animation.fillMode = kCAFillModeForwards;
+	animation.removedOnCompletion = NO;
+	animation.type = @"cube";
+	animation.subtype = kCATransitionFromBottom;
+	
+	[self.bottomStateFrameView.layer addAnimation:animation forKey:@"animation"];
+	[self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
+
+	self.bottomStateView.alpha = 0.0;
+	self.bottomBackButton.enabled = NO;
+
 }
 
 - (void)shouldShowUserTimelineNotification:(id)sender
@@ -242,33 +293,40 @@
 {
     self.cardTableViewController.dataSource = CardTableViewDataSourceUserTimeline;
     self.cardTableViewController.user = user;
+	
+	self.bottomStateLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@的微博", nil), user.screenName];
+	self.dockViewController.showFavoritesButton.selected = NO;
+	[self showBottomStateView];
+	
     [self.cardTableViewController pushCardWithCompletion:^{
-        self.bottomStateLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@的微博", nil), user.screenName];
-        self.dockViewController.showFavoritesButton.selected = NO;
-        [self showBottomStateView];
+		[self moveCardIntoView];
     }];
 }
 
 - (void)showSearchTimeline:(NSString *)searchString
 {
     self.cardTableViewController.dataSource = CardTableViewDataSourceSearchStatues;
+	
+	NSString* string = [[NSString alloc] initWithFormat:@"包含%@的微博", searchString];
+	self.bottomStateLabel.text = NSLocalizedString(string, nil); 
+	self.bottomStateTextField.text = @"";
+	self.bottomStateTextField.hidden = YES;
+	[self showBottomStateView];
+	
     [self.cardTableViewController pushCardWithCompletion:^{
-        NSString* string = [[NSString alloc] initWithFormat:@"包含%@的微博", searchString];
-        
-        self.bottomStateLabel.text = NSLocalizedString(string, nil); 
-        self.bottomStateTextField.text = @"";
-        self.bottomStateTextField.hidden = YES;
-        [self showBottomStateView];
+        [self moveCardIntoView];
     }];    
 }
 
 - (void)showFavorites
 {
     self.cardTableViewController.dataSource = CardTableViewDataSourceFavorites;
+	self.bottomStateLabel.text = NSLocalizedString(@"收藏", nil);
+	[self showBottomStateView];
+	
     [self.cardTableViewController pushCardWithCompletion:^{
-        self.bottomStateLabel.text = NSLocalizedString(@"收藏", nil);
-        [self showBottomStateView];
         self.dockViewController.showFavoritesButton.userInteractionEnabled = YES;
+		[self moveCardIntoView];
     }];
 }
 
@@ -343,15 +401,35 @@
 	NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"png"];
 	UIImage *img = [UIImage imageWithContentsOfFile:path];
 	
+	CGRect myImageRect = CGRectMake(0.0, 642.0, img.size.width, 688);
+    UIImage *originalImage = img;	
+    CGImageRef imageRef = originalImage.CGImage;
+    CGImageRef subImageRef = CGImageCreateWithImageInRect(imageRef, myImageRect);
+	
+    CGSize size = CGSizeMake(1024, 46);
+	
+    UIGraphicsBeginImageContext(size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextDrawImage(context, myImageRect, subImageRef);
+    UIImage* cutImage = [UIImage imageWithCGImage:subImageRef];
+    UIGraphicsEndImageContext();
+	if (_tmpImage == nil) {
+		_tmpImage = [cutImage retain];
+	} else {
+		self.bottomStateInvisibleView.image = cutImage;
+	}
+	
 	if (animated) {
         CATransition *transition = [CATransition animation];
         transition.duration = 1.0;
         transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
         transition.type = kCATransitionFade;
         [self.backgroundImageView.layer addAnimation:transition forKey:nil];
+		[self.bottomStateInvisibleView.layer addAnimation:transition forKey:nil];
     }
     
 	self.backgroundImageView.image = img;
+
 }
 
 - (void)backgroundChangedNotification:(id)sender
@@ -421,7 +499,7 @@
 
 - (void)showDockView
 {
-    [self.view insertSubview:self.dockViewController.view belowSubview:self.bottomStateView];
+    [self.view insertSubview:self.dockViewController.view belowSubview:self.bottomBackButton];
 	
 	CGRect frame = self.dockViewController.view.frame;
 	frame.origin.y += 80;
@@ -498,7 +576,7 @@
 
 - (void)showMessagesView
 {
-    [self.view insertSubview:self.messagesViewController.view belowSubview:self.bottomStateView];
+    [self.view insertSubview:self.messagesViewController.view belowSubview:self.bottomBackButton];
     [UIView animateWithDuration:1.0 animations:^{
         self.messagesViewController.view.alpha = 1.0;
     }];
@@ -706,7 +784,7 @@
 
 - (void)showCardTableView
 {    
-    [self.view insertSubview:self.cardTableViewController.view belowSubview:self.bottomStateView];
+    [self.view insertSubview:self.cardTableViewController.view belowSubview:self.bottomBackButton];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL firstTime = [defaults boolForKey:kUserDefaultKeyFirstTime];

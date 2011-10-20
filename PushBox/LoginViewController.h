@@ -26,7 +26,6 @@
 
 @property(nonatomic, retain) IBOutlet UITextField* usernameTextField;
 @property(nonatomic, retain) IBOutlet UITextField* passwordTextField;
-@property(nonatomic, retain) IBOutlet UISwitch* autoSaveSwitch;
 @property(nonatomic, retain) IBOutlet UILabel* providerLabel;
 @property(nonatomic, retain) IBOutlet UIButton* autoSaveButton;
 @property(nonatomic, assign) id<LoginViewControllerDelegate> delegate;

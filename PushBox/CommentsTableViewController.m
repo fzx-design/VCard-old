@@ -97,7 +97,10 @@
             
             _loading = NO;
             [self doneLoadingTableViewData];
-        }
+        } else {
+			_loading = NO;
+			[ErrorNotification showPostError];
+		}
     }];
     
     if (self.dataSource == CommentsTableViewDataSourceCommentsOfStatus) {

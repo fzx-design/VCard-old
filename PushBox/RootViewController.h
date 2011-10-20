@@ -17,8 +17,12 @@
     UIImageView *_backgroundImageView;
     UIImageView *_pushBoxHDImageView;
     
+	UIView *_bottomStateFrameView;
     UIView *_bottomStateView;
-    UILabel *_bottomStateLabel;
+	UIImageView *_bottomStateInvisibleView;
+	UIButton *_bottomBackButton;
+    
+	UILabel *_bottomStateLabel;
     UITextField *_bottomStateTextField;
     
     UIImageView *_holeImageView;
@@ -29,11 +33,16 @@
     CardTableViewController *_cardTableViewController;
     
     NSTimer *_playTimer;
+	
+	UIImage *_tmpImage;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView* backgroundImageView;
 @property(nonatomic, retain) IBOutlet UIImageView* pushBoxHDImageView;
+@property(nonatomic, retain) IBOutlet UIView* bottomStateFrameView;
 @property(nonatomic, retain) IBOutlet UIView* bottomStateView;
+@property(nonatomic, retain) IBOutlet UIImageView* bottomStateInvisibleView;
+@property(nonatomic, retain) IBOutlet UIButton* bottomBackButton;;
 @property(nonatomic, retain) IBOutlet UILabel* bottomStateLabel;
 @property(nonatomic, retain) IBOutlet UITextField* bottomStateTextField;
 
