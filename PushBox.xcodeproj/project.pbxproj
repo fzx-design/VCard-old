@@ -1325,6 +1325,7 @@
 				FEBCE6B3144EBB5300195C9F /* sc_repost_bg.png in Resources */,
 				FEBCE6B4144EBB5300195C9F /* sc_track_button_default.png in Resources */,
 				FE92BEE2144EC0BF00CA0306 /* SmartCardViewController.xib in Resources */,
+				200CE8CA144EF12A009AD00C /* sc_bg.png in Resources */,
 				FE72B4CB144FFD3000C3EE5B /* repost_bg.jpg in Resources */,
 				FE72B4CC144FFD3000C3EE5B /* smartcard.css in Resources */,
 				FE72B4CD144FFD3000C3EE5B /* smartcard.html in Resources */,
