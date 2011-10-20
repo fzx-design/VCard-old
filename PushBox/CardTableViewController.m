@@ -388,7 +388,6 @@
             if (!client.hasError) {
 
                 NSArray *dictArray = client.responseJSONObject;
-				NSDictionary *dict = [dictArray lastObject];
                 for (NSDictionary *dict in dictArray) {
                     Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
 										
@@ -509,11 +508,16 @@
         case CardTableViewDataSourceFavorites:
             [self.currentUser removeFavorites:self.currentUser.favorites];
             break;
+		default:
+			break;
     }
     [self.managedObjectContext processPendingChanges];
     self.currentRowIndex = 0;
 	[self setHeaderViewWithOffset];
+}
 
+- (void)refresh
+{
     [self clearData];
     [self loadMoreDataCompletion:NULL];
 }
