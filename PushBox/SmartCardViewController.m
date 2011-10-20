@@ -149,11 +149,16 @@
     self.repostMusicVideoLink = nil;
     
 	self.tweetImageView.image = nil;
-	self.tweetImageView.alpha = 0.0;
+	self.tweetImageView.alpha = 1.0;
+//    [self.tweetImageView setImage:[UIImage imageNamed:@"sc_image_default 2.png"]];
 	
-	self.repostTweetImageView.alpha = 0.0;
+	self.repostTweetImageView.alpha = 1.0;
 	self.repostTweetImageView.image = nil;
+//    [self.repostTweetImageView setImage:[UIImage imageNamed:@"sc_image_default 2.png"]];
     
+    self.tweetImageView.hidden = YES;
+    self.repostTweetImageView.hidden = YES;
+
     self.imageCoverImageView.alpha = 0.0;
     
     self.repostView.alpha = 0.0;
@@ -202,7 +207,7 @@
      {
          self.tweetImageView.alpha = 0.0;
          self.imageCoverImageView.alpha = 0.0;
-         [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+        [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
              self.tweetImageView.alpha = 1.0;
              self.imageCoverImageView.alpha = 1.0;
          } completion:^(BOOL fin) {
