@@ -170,7 +170,7 @@
 }
 
 - (IBAction)backButtonClicked:(id)sender {
-    [self dismissModalViewControllerAnimated:YES];
+    [UserCardNaviViewController sharedUserCardDismiss];
     [self.delegate commentsTableViewControllerDidDismiss:self];
 }
 

@@ -114,7 +114,7 @@
 			[self showDockView];
 			[self showMessagesView];
 			[self.cardTableViewController getUnread];
-//			[[UIApplication sharedApplication] hideLoadingView];
+			[[UIApplication sharedApplication] hideLoadingView];
 		}];
     }];
     
@@ -336,6 +336,7 @@
     [self.cardTableViewController pushCardWithCompletion:^{
         self.dockViewController.showFavoritesButton.userInteractionEnabled = YES;
 		[self moveCardIntoView];
+		
     }];
 }
 
@@ -449,7 +450,9 @@
 
 - (void)refresh
 {
-    [self.cardTableViewController refresh];
+	if ([[UIApplication sharedApplication] waitingForRefreshing]) {
+		[self.cardTableViewController refresh];
+	}
 }
 
 - (void)post

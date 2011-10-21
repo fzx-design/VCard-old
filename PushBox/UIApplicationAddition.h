@@ -17,6 +17,8 @@
 - (UIView *)rootView;
 - (UIViewController *)rootViewController;
 
+- (BOOL)waitingForRefreshing;
+
 - (void)showLoadingView;
 - (void)hideLoadingView;
 

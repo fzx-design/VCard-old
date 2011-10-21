@@ -60,26 +60,21 @@
 
 - (IBAction)doneButtonClicked:(UIButton *)sender {
     NSString *comment = self.textView.text;
-	[self.activityIndicatorView startAnimating];
-	self.activityIndicatorView.hidden = NO;
-	
+
 	WeiboClient *client = [WeiboClient client];
+	
+	[[UIApplication sharedApplication] showLoadingView];
+	
     [client setCompletionBlock:^(WeiboClient *client) {
-		[self.activityIndicatorView stopAnimating];
-		self.activityIndicatorView.hidden = YES;
+		
+		[[UIApplication sharedApplication] hideLoadingView];
+		
         if (!client.hasError) {
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-//                                                            message:NSLocalizedString(@"发表成功", nil)
-//                                                           delegate:self
-//                                                  cancelButtonTitle:NSLocalizedString(@"确定", nil)
-//                                                  otherButtonTitles:nil];
-//            [alert show];
-//            [alert release];
-			
 			self.postDoneImage.alpha = 1.0;
 			[UIView animateWithDuration:1.0 delay:1.0 options:0 animations:^{
 				self.postDoneImage.alpha = 0.0;
 			} completion:NULL];
+			
         } else {
 			[ErrorNotification showPostError];
 		}

@@ -204,12 +204,14 @@
         self.tableView.alpha = 0.0;
 		self.rootShadowLeft.alpha = 1.0;
         [self loadMoreDataCompletion:completion];
-
+		
     }];
 }
 
 - (void)pushCardWithoutCompletion
 {
+	[[UIApplication sharedApplication] showLoadingView];
+	
     if (!self.prevFetchedResultsController) {
         self.prevFetchedResultsController = self.fetchedResultsController;
         self.prevRowIndex = self.currentRowIndex;
@@ -232,6 +234,8 @@
 
 - (void)popCardWithCompletion:(void (^)())completion
 {
+	[[UIApplication sharedApplication] showLoadingView];
+	
     self.dataSource = CardTableViewDataSourceFriendsTimeline;
 	[UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
 		self.tableView.alpha = 0.0;
@@ -265,6 +269,7 @@
             if (completion) {
                 completion();
             }
+			[[UIApplication sharedApplication] hideLoadingView];
         }];
 	}];
 }
@@ -365,9 +370,10 @@
             if (completion) {
                 completion();
             }
-//            [[UIApplication sharedApplication] hideRefreshView];
+			[[UIApplication sharedApplication] hideLoadingView];
             _loading = NO;
         }];
+				
         return;
     }
     
@@ -380,7 +386,6 @@
     if (lastStatus && _lastStatus && !_refreshFlag) {
         NSString *statusID = lastStatus.statusID;
         maxID = [statusID longLongValue] - 1;
-		
 		[[UIApplication sharedApplication] showLoadingView];
     }
     
@@ -393,9 +398,6 @@
 				for (NSDictionary *dict in dictArray) {
                     Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
                     [self.currentUser addFriendsStatusesObject:newStatus];
-//                    if (self.insertionAnimationEnabled) {
-//                        [self.managedObjectContext processPendingChanges];
-//                    }
                 }
 				[self.managedObjectContext processPendingChanges];
 				
@@ -404,23 +406,18 @@
 
 					Status *newStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
 					
-					if (_lastStatus == nil || ![newStatus.statusID isEqualToString:_lastStatus.statusID]) {
-						
+					if (_lastStatus == nil || ![newStatus.statusID isEqualToString:_lastStatus.statusID]){
 						_lastStatus = newStatus;
-
 						[self scrollToRow:0];
-						
 					} else if ([newStatus.statusID isEqualToString:_lastStatus.statusID]) {
 						if (completion) {
 							completion();
 						}
-//						[[UIApplication sharedApplication] hideRefreshView];
+						[[UIApplication sharedApplication] hideLoadingView];
 						_loading = NO;
 						return;
-					} 
+					}
 				}
-
-				
                 [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
                 [self.delegate cardTableViewController:self 
                                         didScrollToRow:self.currentRowIndex
@@ -433,9 +430,10 @@
 				if (completion) {
                     completion();
                 }
+				[[UIApplication sharedApplication] hideRefreshView];
 				[ErrorNotification showLoadingError];
 			}
-//			[[UIApplication sharedApplication] hideRefreshView];
+			[[UIApplication sharedApplication] hideLoadingView];
 			_loading = NO;
         }];
         
@@ -456,9 +454,6 @@
 				for (NSDictionary *dict in dictArray) {
                     Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
                     [self.currentUser addFriendsStatusesObject:newStatus];
-					//                    if (self.insertionAnimationEnabled) {
-					//                        [self.managedObjectContext processPendingChanges];
-					//                    }
                 }
 				[self.managedObjectContext processPendingChanges];
 				
@@ -477,7 +472,7 @@
 						if (completion) {
 							completion();
 						}
-						[[UIApplication sharedApplication] hideRefreshView];
+						[[UIApplication sharedApplication] hideLoadingView];
 						_loading = NO;
 						return;
 					} 
@@ -496,9 +491,10 @@
 				if (completion) {
                     completion();
                 }
+				[[UIApplication sharedApplication] hideRefreshView];
 				[ErrorNotification showLoadingError];
 			}
-			[[UIApplication sharedApplication] hideRefreshView];
+			[[UIApplication sharedApplication] hideLoadingView];
 			_loading = NO;
         }];
         
@@ -520,9 +516,6 @@
 				for (NSDictionary *dict in dictArray) {
                     Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
                     [self.currentUser addFriendsStatusesObject:newStatus];
-					//                    if (self.insertionAnimationEnabled) {
-					//                        [self.managedObjectContext processPendingChanges];
-					//                    }
                 }
 				[self.managedObjectContext processPendingChanges];
 				
@@ -531,17 +524,15 @@
 					
 					Status *newStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
 					
-					if (_lastStatus == nil || ![newStatus.statusID isEqualToString:_lastStatus.statusID]) {
-						
+					if (_lastStatus == nil || ![newStatus.statusID isEqualToString:_lastStatus.statusID]){
 						_lastStatus = newStatus;
-						
 						[self scrollToRow:0];
 						
 					} else if ([newStatus.statusID isEqualToString:_lastStatus.statusID]) {
 						if (completion) {
 							completion();
 						}
-						[[UIApplication sharedApplication] hideRefreshView];
+						[[UIApplication sharedApplication] hideLoadingView];
 						_loading = NO;
 						return;
 					} 
@@ -560,9 +551,10 @@
 				if (completion) {
                     completion();
                 }
+				[[UIApplication sharedApplication] hideRefreshView];
 				[ErrorNotification showLoadingError];
 			}
-			[[UIApplication sharedApplication] hideRefreshView];
+			[[UIApplication sharedApplication] hideLoadingView];
 			_loading = NO;
         }];
         
@@ -586,8 +578,6 @@
 			break;
     }
     [self.managedObjectContext processPendingChanges];
-//    self.currentRowIndex = 0;
-//	[self setHeaderViewWithOffset];
 }
 
 - (void)refresh
@@ -743,7 +733,7 @@
 {
 	if ([UserCardNaviViewController sharedUserCardNaviViewControllerExisted]) {
 		[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameShouldDismissUserCard object:self];
-	}
+	} 
 	[self disableDismissRegion];
 }
 

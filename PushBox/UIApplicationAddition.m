@@ -13,21 +13,23 @@
 #define kAnimationDuration 0.5
 #define kBackViewAlpha 0.5
 
-static NSTimer *_refreshTimer;
-static NSTimer *_loadingTimer;
+#define kAnimationRefresh @"kAnimationRefresh"
+#define kAnimationLoad @"kAnimationLoad"
+
+static NSTimer *_timer;
+
 static UIImageView *_loadingImageView;
 static UIImageView *_loadingCircleImageView;
 static UIImageView *_loadingRoundImageView;
 
 static UIImageView *_refreshCircleImageView;
 static UIImageView *_refreshRoundImageView;
-//static UIActivityIndicatorView *_loadingActivityIndicator;
 
 static UIViewController *_modalViewController;
 static UIView *_backView;
 
 static CGFloat refreshTime;
-static CGFloat offset;
+static NSInteger referenceCount;
 
 @implementation UIApplication (UIApplication_RootView)
 //
@@ -36,6 +38,15 @@ static CGFloat offset;
 //    PushBoxAppDelegate *appDelegate = (PushBoxAppDelegate *)[[UIApplication sharedApplication] delegate];
 //    return appDelegate.persistentStoreCoordinator;
 //}
+
+- (BOOL)waitingForRefreshing
+{
+	BOOL result = NO;
+	if (refreshTime == 0) {
+		result = YES;
+	}
+	return result;
+}
 
 - (UIView *)rootView
 {
@@ -48,23 +59,10 @@ static CGFloat offset;
     return appDelegate.rootViewController;
 }
 
-- (void)updateLoadingView
+- (void)calculateRefreshTime
 {
-	offset -= 0.05;
-	_loadingCircleImageView.transform = CGAffineTransformMakeRotation(offset);
-	refreshTime += 0.01;
-	if (refreshTime > 3) {
-		[self hideLoadingView];
-	}
-}
-
-- (void)updateRefreshView
-{
-	offset -= 0.05;
-	_refreshCircleImageView.transform = CGAffineTransformMakeRotation(offset);
-	
-	refreshTime += 0.01;
-	if (refreshTime > 3) {
+	refreshTime += 1;
+	if (refreshTime >= 5) {
 		[self hideRefreshView];
 	}
 }
@@ -74,69 +72,88 @@ static CGFloat offset;
     if (!_loadingImageView) {
         _loadingImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"root_loading_bg"]];
         _loadingImageView.center = CGPointMake(512.0, 345.0);
+		[[self rootView] addSubview:_loadingImageView];
     }
-    
-    if (!_loadingCircleImageView) {
-        _loadingCircleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loading_circle.png"]];
-        _loadingCircleImageView.center = CGPointMake(512.0, 338.0);
-    }
-	
 	if (!_loadingRoundImageView) {
         _loadingRoundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"refreshing_bg.png"]];
         _loadingRoundImageView.center = CGPointMake(512.0, 338.0);
+		[[self rootView] addSubview:_loadingRoundImageView];
     }
-    
-    [[self rootView] addSubview:_loadingImageView];
-	[[self rootView] addSubview:_loadingRoundImageView];
-	[[self rootView] addSubview:_loadingCircleImageView];
 	
-	offset = 0;
-	refreshTime = 0;
+    if (!_loadingCircleImageView) {
+        _loadingCircleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loading_circle.png"]];
+        _loadingCircleImageView.center = CGPointMake(512.0, 338.0);
+		[[self rootView] addSubview:_loadingCircleImageView];
+    }
 	
-	_loadingTimer = [NSTimer scheduledTimerWithTimeInterval:(0.01) target:self selector:@selector(updateLoadingView) userInfo:nil repeats:YES];
-	[[NSRunLoop currentRunLoop] addTimer:_loadingTimer forMode:NSRunLoopCommonModes];
-	
+	_loadingImageView.alpha = 1.0;
+	_loadingRoundImageView.alpha = 1.0;
+	_loadingCircleImageView.alpha = 1.0;
+
+	CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+	rotationAnimation.duration = 1.0;
+	rotationAnimation.fromValue = [NSNumber numberWithFloat:0.0];
+	rotationAnimation.toValue = [NSNumber numberWithFloat:-2.0 * M_PI];
+	rotationAnimation.repeatCount = 10;
+	[_loadingCircleImageView.layer addAnimation:rotationAnimation forKey:kAnimationLoad];
 }
 
 
 - (void)showRefreshView
 {
-	if (!_refreshCircleImageView) {
-        _refreshCircleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loading_circle.png"]];
-        _refreshCircleImageView.center = CGPointMake(45.0, 711);
-		_refreshCircleImageView.userInteractionEnabled = NO;
-    }
-	
 	if (!_refreshRoundImageView) {
         _refreshRoundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"refreshing_bg.png"]];
         _refreshRoundImageView.center = CGPointMake(45, 712);
 		_refreshRoundImageView.userInteractionEnabled = NO;
+		[[self rootView] addSubview:_refreshRoundImageView];
+    }
+	
+	if (!_refreshCircleImageView) {
+        _refreshCircleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loading_circle.png"]];
+        _refreshCircleImageView.center = CGPointMake(45.0, 711);
+		_refreshCircleImageView.userInteractionEnabled = NO;
+		[[self rootView] addSubview:_refreshCircleImageView];
     }
     
-	[[self rootView] addSubview:_refreshRoundImageView];
-	[[self rootView] addSubview:_refreshCircleImageView];
 	
-	offset = 0;
-	refreshTime = 0;
-	
-	_refreshTimer = [NSTimer scheduledTimerWithTimeInterval:(0.01) target:self selector:@selector(updateRefreshView) userInfo:nil repeats:YES];
-	[[NSRunLoop currentRunLoop] addTimer:_refreshTimer forMode:NSRunLoopCommonModes];
+	if (refreshTime == 0) {
+		_refreshCircleImageView.alpha = 1.0;
+		_refreshRoundImageView.alpha = 1.0;
+		_timer = [NSTimer scheduledTimerWithTimeInterval:(1.0) target:self selector:@selector(calculateRefreshTime) userInfo:nil repeats:YES];
+		
+		CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+		rotationAnimation.duration = 1.0;
+		rotationAnimation.fromValue = [NSNumber numberWithFloat:0.0];
+		rotationAnimation.toValue = [NSNumber numberWithFloat:-2.0 * M_PI];
+		rotationAnimation.repeatCount = 10;
+		[_refreshCircleImageView.layer addAnimation:rotationAnimation forKey:kAnimationRefresh];
+	}
 }
 
 
 - (void)hideLoadingView
 {
-	[_loadingTimer invalidate];
-    [_loadingImageView removeFromSuperview];
-	[_loadingCircleImageView removeFromSuperview];
-	[_loadingRoundImageView removeFromSuperview];
+    [UIView animateWithDuration:1.0 animations:^{
+		_loadingCircleImageView.alpha = 0.0;
+		_loadingRoundImageView.alpha = 0.0;
+		_loadingImageView.alpha = 0.0;
+    } completion:^(BOOL finished) {
+		[_loadingCircleImageView.layer removeAnimationForKey:kAnimationLoad];
+	}];
 }
 
 - (void)hideRefreshView
 {
-	[_refreshTimer invalidate];
-	[_refreshCircleImageView removeFromSuperview];
-	[_refreshRoundImageView removeFromSuperview];
+	refreshTime = 0;
+	if (_timer != nil) {
+		[_timer invalidate];
+	}
+	[UIView animateWithDuration:1.0 animations:^{
+		_refreshCircleImageView.alpha = 0.0;
+		_refreshRoundImageView.alpha = 0.0;
+    } completion:^(BOOL finished) {
+		[_refreshCircleImageView.layer removeAnimationForKey:kAnimationRefresh];
+	}];
 }
 
 - (void)presentModalViewController:(UIViewController *)vc atHeight:(CGFloat)height

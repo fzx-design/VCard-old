@@ -813,13 +813,22 @@
     vc.currentUser = self.currentUser;
     vc.delegate = self;
     vc.status = self.status;
-    vc.modalPresentationStyle = UIModalPresentationCurrentContext;
-    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    
+
+	UserCardNaviViewController* navi = [[UserCardNaviViewController alloc] initWithRootViewController:vc];
+	[UserCardNaviViewController setSharedUserCardNaviViewController:navi];
+	
+    navi.modalPresentationStyle = UIModalPresentationCurrentContext;
+	navi.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardPresented object:self];
     
-    [self presentModalViewController:vc animated:YES];
-    [vc release];
+    [self presentModalViewController:navi animated:YES];
+	[navi release];
+	[vc release];
+	
+//    [self presentModalViewController:vc animated:YES];
+//    [vc release];
 }
 
 - (void)commentsTableViewControllerDidDismiss:(CommentsTableViewController *)vc

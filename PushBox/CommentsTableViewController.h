@@ -9,6 +9,7 @@
 #import "EGOTableViewController.h"
 #import "CommentsTableViewCell.h"
 #import "CommentViewController.h"
+#import "UserCardNaviViewController.h"
 
 typedef enum {
     CommentsTableViewDataSourceCommentsToMe,

@@ -61,7 +61,7 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">sc_default_bg.png</string>
+							<string key="NSResourceName">sc_bg.png</string>
 						</object>
 					</object>
 					<object class="IBUIImageView" id="1017421927">
@@ -562,7 +562,7 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">sc_repost_icon.png</string>
+							<string key="NSResourceName">sc_music_bg.png</string>
 						</object>
 					</object>
 					<object class="IBUIImageView" id="767260924">
@@ -578,7 +578,7 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">sc_comments_icon.png</string>
+							<string key="NSResourceName">sc_repost_bg.png</string>
 						</object>
 					</object>
 					<object class="IBUIWebView" id="822315524">
@@ -639,7 +639,6 @@
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="167232458"/>
 				<reference key="IBUIBackgroundColor" ref="392801989"/>
-				<bool key="IBUIOpaque">NO</bool>
 				<bool key="IBUIClipsSubviews">YES</bool>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
@@ -1415,28 +1414,28 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>head_cover_card.png</string>
 				<string>sc_action.png</string>
+				<string>sc_bg.png</string>
 				<string>sc_button_comment.png</string>
 				<string>sc_button_play.png</string>
 				<string>sc_button_play_highlight.png</string>
 				<string>sc_button_repost.png</string>
-				<string>sc_comments_icon.png</string>
-				<string>sc_default_bg.png</string>
 				<string>sc_image_cover.png</string>
-				<string>sc_repost_icon.png</string>
+				<string>sc_music_bg.png</string>
+				<string>sc_repost_bg.png</string>
 				<string>sc_track_button_default.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{52, 53}</string>
 				<string>{19, 20}</string>
-				<string>{17, 14}</string>
-				<string>{68, 68}</string>
-				<string>{68, 68}</string>
-				<string>{18, 13}</string>
-				<string>{17, 14}</string>
 				<string>{596, 650}</string>
-				<string>{467, 321}</string>
+				<string>{17, 14}</string>
+				<string>{68, 68}</string>
+				<string>{68, 68}</string>
 				<string>{18, 13}</string>
+				<string>{467, 321}</string>
+				<string>{443, 139}</string>
+				<string>{451, 129}</string>
 				<string>{431, 42}</string>
 			</object>
 		</object>

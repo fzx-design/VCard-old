@@ -23,6 +23,7 @@
 @synthesize topicButton = _topicButton;
 @synthesize camaraButton = _camaraButton;
 @synthesize textView = _textView;
+@synthesize postDoneImage = _postDoneImage;
 @synthesize rightView = _rightView;
 @synthesize rightImageView = _rightImageView;
 @synthesize pc = _pc;
@@ -160,17 +161,26 @@
 	
     
 	WeiboClient *client = [WeiboClient client];
+	
+	[[UIApplication sharedApplication] showLoadingView];
     [client setCompletionBlock:^(WeiboClient *client) {
+		[[UIApplication sharedApplication] hideLoadingView];
         if (!client.hasError) {
 			
-			[self dismissView];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                            message:NSLocalizedString(@"发表成功", nil)
-                                                           delegate:nil
-                                                  cancelButtonTitle:NSLocalizedString(@"确定", nil)
-                                                  otherButtonTitles:nil];
-            [alert show];
-            [alert release];
+			self.postDoneImage.alpha = 1.0;
+			[UIView animateWithDuration:1.0 delay:1.0 options:0 animations:^{
+				self.postDoneImage.alpha = 0.0;
+			} completion:^(BOOL finished) {
+				[self dismissView];
+			}];
+			
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+//                                                            message:NSLocalizedString(@"发表成功", nil)
+//                                                           delegate:nil
+//                                                  cancelButtonTitle:NSLocalizedString(@"确定", nil)
+//                                                  otherButtonTitles:nil];
+//            [alert show];
+//            [alert release];
         } else {
 			[ErrorNotification showPostError];
 		}
