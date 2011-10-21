@@ -25,11 +25,12 @@ static UIImageView *_loadingRoundImageView;
 static UIImageView *_refreshCircleImageView;
 static UIImageView *_refreshRoundImageView;
 
+static UIImageView *_operationDoneImageView;
+
 static UIViewController *_modalViewController;
 static UIView *_backView;
 
 static CGFloat refreshTime;
-static NSInteger referenceCount;
 
 @implementation UIApplication (UIApplication_RootView)
 //
@@ -130,6 +131,16 @@ static NSInteger referenceCount;
 	}
 }
 
+- (void)showOperationDoneView
+{
+	_operationDoneImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail_save_done.png"]];_operationDoneImageView.frame = CGRectMake(460, 320, 101, 101);
+	[[self rootView] addSubview:_operationDoneImageView];
+	[UIView animateWithDuration:2.0 delay:1.0 options:0 animations:^{
+		_operationDoneImageView.alpha = 0.0;
+	} completion:^(BOOL finished) {
+		[_operationDoneImageView removeFromSuperview];
+	}];
+}
 
 - (void)hideLoadingView
 {

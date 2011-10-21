@@ -9,6 +9,7 @@
 #import "CommentViewController.h"
 #import "WeiboClient.h"
 #import "UIApplicationAddition.h"
+#import "PushBoxAppDelegate.h"
 #import "Status.h"
 #import "User.h"
 #import "Comment.h"
@@ -17,8 +18,8 @@
 
 @synthesize textView = _textView;
 @synthesize titleLabel = _titleLabel;
-@synthesize postDoneImage = _postDoneImage;
-@synthesize activityIndicatorView = _activityIndicatorView;
+@synthesize postingRoundImageView = _postingRoundImageView;
+@synthesize postingCircleImageView = _postingCircleImageView;
 @synthesize targetStatus = _targetStatus;
 @synthesize targetComment = _targetComment;
 
@@ -29,6 +30,8 @@
     [_titleLabel release];
     [_targetStatus release];
     [_targetComment release];
+	[_postingRoundImageView release];
+	[_postingCircleImageView release];
     [super dealloc];
 }
 
@@ -39,6 +42,8 @@
     // e.g. self.myOutlet = nil;
     self.textView = nil;
     self.titleLabel = nil;
+	self.postingRoundImageView = nil;
+	self.postingCircleImageView = nil;
 }
 
 - (void)viewDidLoad
@@ -58,23 +63,40 @@
     [[UIApplication sharedApplication] dismissModalViewController];
 }
 
+- (void)showPostingView
+{
+	_postingCircleImageView.alpha = 1.0;
+	_postingRoundImageView.alpha = 1.0;
+	
+	CABasicAnimation *rotationAnimation =[CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+	rotationAnimation.duration = 1.0;
+	rotationAnimation.fromValue = [NSNumber numberWithFloat:0.0];
+	rotationAnimation.toValue = [NSNumber numberWithFloat:-2.0 * M_PI];
+	rotationAnimation.repeatCount = 65535;
+	[_postingCircleImageView.layer addAnimation:rotationAnimation forKey:@"kAnimationLoad"];
+}
+
+- (void)hidePostingView
+{
+	[UIView animateWithDuration:1.0 animations:^{
+		_postingRoundImageView.alpha = 0.0;
+		_postingCircleImageView.alpha = 0.0;
+    } completion:^(BOOL finished) {
+		[_postingCircleImageView.layer removeAnimationForKey:@"kAnimationLoad"];
+	}];
+}
+
 - (IBAction)doneButtonClicked:(UIButton *)sender {
     NSString *comment = self.textView.text;
 
 	WeiboClient *client = [WeiboClient client];
 	
-	[[UIApplication sharedApplication] showLoadingView];
-	
+	[self showPostingView];
     [client setCompletionBlock:^(WeiboClient *client) {
-		
-		[[UIApplication sharedApplication] hideLoadingView];
-		
+		[self hidePostingView];
         if (!client.hasError) {
-			self.postDoneImage.alpha = 1.0;
-			[UIView animateWithDuration:1.0 delay:1.0 options:0 animations:^{
-				self.postDoneImage.alpha = 0.0;
-			} completion:NULL];
-			
+			[self dismissView];
+			[[UIApplication sharedApplication] showOperationDoneView];
         } else {
 			[ErrorNotification showPostError];
 		}

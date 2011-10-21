@@ -351,6 +351,28 @@
     [client getFavoritesByPage:_nextPage++];
 }
 
+- (void)adjustCardViewAfterLoading
+{
+	[UIView animateWithDuration:0.5 delay:0.0 options:0 animations:^{
+		self.tableView.alpha = 0.0;
+	} completion:^(BOOL finished) {
+		
+		[self.managedObjectContext processPendingChanges];
+		[self scrollToRow:0];
+		
+		CGRect frame = self.tableView.frame;
+		frame.origin.x += 782;
+		self.tableView.frame = frame;
+		
+		[UIView animateWithDuration:1.0 delay:0.5 options:0 animations:^{
+			self.tableView.alpha = 1.0;
+			CGRect frame = self.tableView.frame;
+			frame.origin.x -= 782;
+			self.tableView.frame = frame;
+		} completion:nil];
+	}];
+}
+
 - (void)loadMoreDataCompletion:(void (^)())completion
 {
     if (_loading) {
@@ -408,7 +430,18 @@
 					
 					if (_lastStatus == nil || ![newStatus.statusID isEqualToString:_lastStatus.statusID]){
 						_lastStatus = newStatus;
-						[self scrollToRow:0];
+						
+						[self clearData];
+						[self.managedObjectContext processPendingChanges];
+						
+						for (NSDictionary *dict in dictArray) {
+							Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+							[self.currentUser addFriendsStatusesObject:newStatus];
+						}
+						
+						[self adjustCardViewAfterLoading];
+						
+						
 					} else if ([newStatus.statusID isEqualToString:_lastStatus.statusID]) {
 						if (completion) {
 							completion();

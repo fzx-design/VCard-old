@@ -24,9 +24,9 @@
 + (void)showPostError
 {
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"发布失败", nil)
-													message:NSLocalizedString(@"请检查网络设置并刷新", nil)
+													message:NSLocalizedString(@"请检查网络设置并重试", nil)
 												   delegate:self
-										  cancelButtonTitle:NSLocalizedString(@"取消", nil)
+										  cancelButtonTitle:NSLocalizedString(@"好", nil)
 										  otherButtonTitles:nil];
 	[alert show];
 	[alert release];

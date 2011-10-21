@@ -17,6 +17,7 @@
 
 #define kNotificationNameModalCardPresented @"kNotificationNameModalCardPresented"
 #define kNotificationNameModalCardDismissed @"kNotificationNameModalCardDismissed"
+#define kNotificationNameCardDeleted @"kNotificationNameCardDeleted"
 
 @class Status;
 

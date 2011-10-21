@@ -25,6 +25,8 @@
 - (void)showRefreshView;
 - (void)hideRefreshView;
 
+- (void)showOperationDoneView;
+
 - (void)presentModalViewController:(UIViewController *)vc atHeight:(CGFloat)height;
 - (void)dismissModalViewController;
 

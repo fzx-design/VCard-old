@@ -155,6 +155,10 @@
 			   selector:@selector(moveCardIntoView) 
 				   name:kNotificationNameReMoveCardsIntoView 
 				 object:nil];
+	[center addObserver:self
+			   selector:@selector(configureUsablityAfterDeleted) 
+				   name:kNotificationNameCardDeleted 
+				 object:nil];
 	
     
     self.bottomStateView.alpha = 0.0;
@@ -182,6 +186,10 @@
     [self performSelector:@selector(showLoginView) withObject:nil afterDelay:1.0];
 }
 
+- (void)configureUsablityAfterDeleted
+{
+	[self.cardTableViewController configureUsability];
+}
 
 - (void)moveCardIntoView
 {

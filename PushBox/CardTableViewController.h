@@ -88,9 +88,9 @@ typedef enum {
 
 - (void)showNextCard;
 - (void)scrollToRow:(int)row;
-
--(IBAction)dismissRegionTouched:(id)sender;
--(void)enableDismissRegion;
--(void)disableDismissRegion;
+- (void)configureUsability;
+- (IBAction)dismissRegionTouched:(id)sender;
+- (void)enableDismissRegion;
+- (void)disableDismissRegion;
 
 @end

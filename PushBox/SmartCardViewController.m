@@ -650,7 +650,7 @@
 	[actionSheet addButtonWithTitle:NSLocalizedString(@"邮件分享", nil)];
 	if ([self.status.author.userID isEqualToString:self.currentUser.userID]) {
 		[actionSheet addButtonWithTitle:NSLocalizedString(@"删除微博", nil)];
-		actionSheet.destructiveButtonIndex = 3;
+		actionSheet.destructiveButtonIndex = 5;
 	}
     
 	[actionSheet showFromRect:sender.bounds inView:sender animated:YES];
@@ -770,6 +770,7 @@
             if (!client.hasError) {
                 [self.managedObjectContext deleteObject:self.status];
                 [self.managedObjectContext processPendingChanges];
+				[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameCardDeleted object:self];
             }
         }];
         [client destroyStatus:self.status.statusID];

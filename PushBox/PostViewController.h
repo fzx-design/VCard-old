@@ -25,7 +25,9 @@ typedef enum {
     UIButton *_topicButton;
     UIButton *_camaraButton;
     UITextView *_textView;
-    UIImageView *_postDoneImage;
+	
+	UIImageView *_postingCircleImageView;
+	UIImageView *_postingRoundImageView;
 	
     UIView *_rightView;
     UIImageView *_rightImageView;
@@ -46,7 +48,10 @@ typedef enum {
 @property(nonatomic, retain) IBOutlet UIButton* camaraButton;
 @property(nonatomic, retain) IBOutlet UITextView* textView;
 @property(nonatomic, retain) IBOutlet UIView* rightView;
-@property(nonatomic, retain) IBOutlet UIImageView* postDoneImage;
+
+@property(nonatomic, retain) IBOutlet UIImageView* postingCircleImageView;
+@property(nonatomic, retain) IBOutlet UIImageView* postingRoundImageView;
+
 @property(nonatomic, retain) IBOutlet UIImageView* rightImageView;
 @property(nonatomic, retain) UIPopoverController* pc;
 @property(nonatomic, retain) Status *targetStatus;
