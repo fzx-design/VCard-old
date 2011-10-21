@@ -680,6 +680,8 @@
 			children = (
 				CB018E0013DDE4E8004217E0 /* about_button_bg.png */,
 				CB018E0213DDE523004217E0 /* about_pb_title.png */,
+				2019AF041451610500F26033 /* options_icon_about.png */,
+				2019AF051451610500F26033 /* options_icon_legal.png */,
 				CB018DF813DDD70F004217E0 /* options_icon_image.png */,
 				CB018DF913DDD70F004217E0 /* options_icon_sound.png */,
 				CB018DFA13DDD710004217E0 /* options_icon_time.png */,
