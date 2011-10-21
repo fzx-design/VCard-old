@@ -1414,26 +1414,28 @@
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>head_cover_card.png</string>
+				<string>sc_action.png</string>
+				<string>sc_button_comment.png</string>
 				<string>sc_button_play.png</string>
 				<string>sc_button_play_highlight.png</string>
+				<string>sc_button_repost.png</string>
 				<string>sc_comments_icon.png</string>
 				<string>sc_default_bg.png</string>
 				<string>sc_image_cover.png</string>
-				<string>sc_music_bg.png</string>
-				<string>sc_repost_bg.png</string>
 				<string>sc_repost_icon.png</string>
 				<string>sc_track_button_default.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{52, 53}</string>
+				<string>{19, 20}</string>
+				<string>{17, 14}</string>
 				<string>{68, 68}</string>
 				<string>{68, 68}</string>
+				<string>{18, 13}</string>
 				<string>{17, 14}</string>
 				<string>{596, 650}</string>
 				<string>{467, 321}</string>
-				<string>{443, 139}</string>
-				<string>{451, 129}</string>
 				<string>{18, 13}</string>
 				<string>{431, 42}</string>
 			</object>
