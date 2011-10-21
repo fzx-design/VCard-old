@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		200CE8CA144EF12A009AD00C /* sc_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 200CE8C9144EF12A009AD00C /* sc_bg.png */; };
+		2019AF061451610500F26033 /* options_icon_about.png in Resources */ = {isa = PBXBuildFile; fileRef = 2019AF041451610500F26033 /* options_icon_about.png */; };
+		2019AF071451610500F26033 /* options_icon_legal.png in Resources */ = {isa = PBXBuildFile; fileRef = 2019AF051451610500F26033 /* options_icon_legal.png */; };
 		201D2336142B3BA40016F6DE /* greycard_bg_upper.png in Resources */ = {isa = PBXBuildFile; fileRef = 201D2335142B3BA40016F6DE /* greycard_bg_upper.png */; };
 		201D2339142B40060016F6DE /* modify_head.png in Resources */ = {isa = PBXBuildFile; fileRef = 201D2338142B40060016F6DE /* modify_head.png */; };
 		201D233B142B40B80016F6DE /* user_detail_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 201D233A142B40B80016F6DE /* user_detail_bg.png */; };
@@ -249,6 +251,8 @@
 
 /* Begin PBXFileReference section */
 		200CE8C9144EF12A009AD00C /* sc_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc_bg.png; sourceTree = "<group>"; };
+		2019AF041451610500F26033 /* options_icon_about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = options_icon_about.png; sourceTree = "<group>"; };
+		2019AF051451610500F26033 /* options_icon_legal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = options_icon_legal.png; sourceTree = "<group>"; };
 		201D2335142B3BA40016F6DE /* greycard_bg_upper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greycard_bg_upper.png; sourceTree = "<group>"; };
 		201D2338142B40060016F6DE /* modify_head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modify_head.png; sourceTree = "<group>"; };
 		201D233A142B40B80016F6DE /* user_detail_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_detail_bg.png; sourceTree = "<group>"; };
@@ -627,6 +631,8 @@
 			children = (
 				CB018E0013DDE4E8004217E0 /* about_button_bg.png */,
 				CB018E0213DDE523004217E0 /* about_pb_title.png */,
+				2019AF041451610500F26033 /* options_icon_about.png */,
+				2019AF051451610500F26033 /* options_icon_legal.png */,
 				CB018DF813DDD70F004217E0 /* options_icon_image.png */,
 				CB018DF913DDD70F004217E0 /* options_icon_sound.png */,
 				CB018DFA13DDD710004217E0 /* options_icon_time.png */,
@@ -1334,6 +1340,8 @@
 				20D0B8DA1450778D005685C5 /* SmartCardViewController.xib in Resources */,
 				20D0B8DC1450851D005685C5 /* sc_action.png in Resources */,
 				FE72B4F51450AE9A00C3EE5B /* sc_image_default 2.png in Resources */,
+				2019AF061451610500F26033 /* options_icon_about.png in Resources */,
+				2019AF071451610500F26033 /* options_icon_legal.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

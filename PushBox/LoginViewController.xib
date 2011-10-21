@@ -189,7 +189,6 @@
 						<string key="NSFrame">{{63, 120}, {85, 30}}</string>
 						<reference key="NSSuperview" ref="624629413"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:241</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -227,6 +226,7 @@
 						<reference key="NSNextKeyView" ref="501788014"/>
 						<string key="NSReuseIdentifierKey">_NS:1062</string>
 						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<bool key="IBUIHidesWhenStopped">NO</bool>
 						<int key="IBUIStyle">2</int>
@@ -493,7 +493,6 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>autoSaveButton</string>
-							<string>autoSaveSwitch</string>
 							<string>passwordTextField</string>
 							<string>providerLabel</string>
 							<string>usernameTextField</string>
@@ -501,7 +500,6 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIButton</string>
-							<string>UISwitch</string>
 							<string>UITextField</string>
 							<string>UILabel</string>
 							<string>UITextField</string>
@@ -512,7 +510,6 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>autoSaveButton</string>
-							<string>autoSaveSwitch</string>
 							<string>passwordTextField</string>
 							<string>providerLabel</string>
 							<string>usernameTextField</string>
@@ -522,10 +519,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">autoSaveButton</string>
 								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">autoSaveSwitch</string>
-								<string key="candidateClassName">UISwitch</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">passwordTextField</string>
