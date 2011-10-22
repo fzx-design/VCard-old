@@ -352,17 +352,12 @@
     [client getFavoritesByPage:_nextPage++];
 }
 
-- (void)adjustCardViewPosition
+- (void)moveCardsIn
 {
-	[self.managedObjectContext processPendingChanges];
-	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-	[self scrollToRowAtIndexPath:indexPath];
-	[self scrollToRowAtIndexPath:indexPath];
-	
 	CGRect frame = self.tableView.frame;
 	frame.origin.x += 782;
 	self.tableView.frame = frame;
-
+	
 	[UIView animateWithDuration:1.0 delay:0.5 options:0 animations:^{
 		self.tableView.alpha = 1.0;
 		CGRect frame = self.tableView.frame;
@@ -370,6 +365,16 @@
 		self.tableView.frame = frame;
 	} completion:^(BOOL finished) {
 	}];
+}
+
+- (void)adjustCardViewPosition
+{
+	[self.managedObjectContext processPendingChanges];
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+	[self scrollToRowAtIndexPath:indexPath];
+	
+	[self performSelector:@selector(moveCardsIn) withObject:nil afterDelay:0.5];
+	
 }
 
 - (void)adjustCardViewAfterLoading

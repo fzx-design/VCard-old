@@ -75,6 +75,7 @@
     [_loginViewController release];
     [_dockViewController release];
     [_cardTableViewController release];
+	[_tmpImage release];
     [super dealloc];
 }
 
@@ -162,7 +163,7 @@
 	
     
     self.bottomStateView.alpha = 0.0;
-	self.bottomStateInvisibleView.alpha = 1.0;
+	self.bottomStateInvisibleView.alpha = 0.0;
 	
     if ([WeiboClient authorized]) {
         self.pushBoxHDImageView.alpha = 0.0;
@@ -179,7 +180,7 @@
     [WeiboClient signout];
     [self hideDockView];
     [self hideCardTableView];
-    [self hideBottomStateView];
+	self.bottomStateInvisibleView.alpha = 0.0;
 	[self setDefaultBackgroundImage:YES];
     self.currentUser = nil;
     [User deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
@@ -212,6 +213,7 @@
 {
 	if (self.bottomStateInvisibleView.image == nil) {
 		self.bottomStateInvisibleView.image = _tmpImage;
+		self.bottomStateInvisibleView.alpha = 1.0;
 	}
 	
 	CATransition *animation = [CATransition animation];
@@ -419,7 +421,7 @@
 	NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"png"];
 	UIImage *img = [UIImage imageWithContentsOfFile:path];
 	
-	CGRect myImageRect = CGRectMake(0.0, 642.0, img.size.width, 688);
+	CGRect myImageRect = CGRectMake(0.0, 642.0, img.size.width, 46);
     UIImage *originalImage = img;	
     CGImageRef imageRef = originalImage.CGImage;
     CGImageRef subImageRef = CGImageCreateWithImageInRect(imageRef, myImageRect);
