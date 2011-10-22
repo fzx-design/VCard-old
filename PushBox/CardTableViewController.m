@@ -137,6 +137,7 @@
 				}
             }
 			if ([[dict objectForKey:@"mentions"] intValue]) {
+				[center postNotificationName:kNotificationNameNewMentions object:self];
 				if (preNewMentionCount != [[dict objectForKey:@"mentions"] intValue]) {
 					preNewMentionCount = [[dict objectForKey:@"mentions"] intValue];
 					notificationFlag = YES;
@@ -398,7 +399,7 @@
 
 - (void)adjustCardViewAfterLoading
 {
-	[UIView animateWithDuration:0.5 delay:0.0 options:0 animations:^{
+	[UIView animateWithDuration:1.0 delay:0.0 options:0 animations:^{
 		self.tableView.alpha = 0.0;
 	} completion:^(BOOL finished) {
 		[self adjustCardViewPosition];

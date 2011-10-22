@@ -93,6 +93,10 @@
                selector:@selector(newFollowersNotification:) 
                    name:kNotificationNameNewFollowers object:nil];
 	
+	[center addObserver:self
+               selector:@selector(newMentionsNotification:) 
+                   name:kNotificationNameNewMentions object:nil];
+	
 	[center addObserver:self 
 			   selector:@selector(disableRefreshButton) 
 				   name:kNotificationNameDisableRefresh 
@@ -141,6 +145,14 @@
 }
 
 - (void)newFollowersNotification:(id)sender
+{
+	self.ccUserInfoCardViewController.newFriendsImageView.hidden = NO;
+    if (!self.commandCenterButton.selected) {
+        self.commandCenterNotiImageView.hidden = NO;
+    }
+}
+
+- (void)newMentionsNotification:(id)sender
 {
 	self.ccUserInfoCardViewController.newFriendsImageView.hidden = NO;
     if (!self.commandCenterButton.selected) {
