@@ -22,6 +22,11 @@
     UILabel *_friendsCountLabel;
 	UILabel *_followersCountLabel;
 	UILabel *_statusesCountLabel;
+	
+	UILabel *_genderLabel;
+	UILabel *_birthdayLabel;
+	UILabel *_careerInfoLabel;
+	
 	UITextView *_descriptionTextView;
     
     User *_user;
@@ -36,6 +41,11 @@
 @property(nonatomic, retain) IBOutlet UILabel* followersCountLabel;
 @property(nonatomic, retain) IBOutlet UILabel* statusesCountLabel;
 @property(nonatomic, retain) IBOutlet UITextView* descriptionTextView;
+
+@property (nonatomic, retain) IBOutlet UILabel *genderLabel;
+@property (nonatomic, retain) IBOutlet UILabel *birthdayLabel;
+@property (nonatomic, retain) IBOutlet UILabel *careerInfoLabel;
+
 @property(nonatomic, retain) User* user;
 
 - (void)configureView;

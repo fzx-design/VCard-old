@@ -123,10 +123,10 @@
                 [center postNotificationName:kNotificationNameNewCommentsToMe object:self];
             }
             if ([[dict objectForKey:@"followers"] intValue]) {
-                [center postNotificationName:kNotificationNameNewFollowers object:self];
+                [center postNotificationName:kNotificationNameNewFollowers object:self userInfo:dict];
             }
             if ([[dict objectForKey:@"new_status"] intValue]) {
-                [center postNotificationName:kNotificationNameNewStatuses object:self];
+                [center postNotificationName:kNotificationNameNewStatuses object:self userInfo:dict];
             }
         }
     }];

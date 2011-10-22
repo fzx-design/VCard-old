@@ -84,7 +84,7 @@
     [center addObserver:self
                selector:@selector(newCommentsToMeNotification:)
                    name:kNotificationNameNewCommentsToMe object:nil];
-    
+	
     [center addObserver:self
                selector:@selector(newStatusesNotification:)
                    name:kNotificationNameNewStatuses object:nil];

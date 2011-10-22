@@ -531,7 +531,6 @@
 						<string key="NSFrame">{{168, 425}, {268, 111}}</string>
 						<reference key="NSSuperview" ref="317278890"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<reference key="IBUIBackgroundColor" ref="410786381"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -1028,6 +1027,30 @@
 					<int key="connectionID">68</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">birthdayLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="257517753"/>
+					</object>
+					<int key="connectionID">128</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">careerInfoLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="271138623"/>
+					</object>
+					<int key="connectionID">129</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">genderLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="545144648"/>
+					</object>
+					<int key="connectionID">130</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">unfollowButtonClicked:</string>
 						<reference key="source" ref="558958614"/>
@@ -1447,7 +1470,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">126</int>
+			<int key="maxID">130</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1506,10 +1529,13 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>birthdayLabel</string>
+							<string>careerInfoLabel</string>
 							<string>descriptionTextView</string>
 							<string>emailLabel</string>
 							<string>followersCountLabel</string>
 							<string>friendsCountLabel</string>
+							<string>genderLabel</string>
 							<string>homePageLabel</string>
 							<string>locationLabel</string>
 							<string>profileImageView</string>
@@ -1518,7 +1544,10 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UILabel</string>
+							<string>UILabel</string>
 							<string>UITextView</string>
+							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
@@ -1533,10 +1562,13 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>birthdayLabel</string>
+							<string>careerInfoLabel</string>
 							<string>descriptionTextView</string>
 							<string>emailLabel</string>
 							<string>followersCountLabel</string>
 							<string>friendsCountLabel</string>
+							<string>genderLabel</string>
 							<string>homePageLabel</string>
 							<string>locationLabel</string>
 							<string>profileImageView</string>
@@ -1545,6 +1577,14 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">birthdayLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">careerInfoLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">descriptionTextView</string>
 								<string key="candidateClassName">UITextView</string>
@@ -1559,6 +1599,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">friendsCountLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">genderLabel</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">

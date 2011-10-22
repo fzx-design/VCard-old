@@ -24,6 +24,10 @@
 @synthesize descriptionTextView = _descriptionTextView;
 @synthesize user = _user;
 
+@synthesize genderLabel = _genderLabel;
+@synthesize birthdayLabel = _birthdayLabel;
+@synthesize careerInfoLabel = _careerInfoLabel;
+
 - (void)dealloc
 {
     [_profileImageView release];
@@ -36,6 +40,9 @@
     [_statusesCountLabel release];
     [_descriptionTextView release];
     [_user release];
+	[_genderLabel release];
+    [_birthdayLabel release];
+    [_careerInfoLabel release];
     [super dealloc];
 }
 
@@ -51,6 +58,9 @@
     self.followersCountLabel = nil;
     self.statusesCountLabel = nil;
     self.descriptionTextView = nil;
+	self.genderLabel = nil;
+    self.birthdayLabel = nil;
+    self.careerInfoLabel = nil;
 }
 
 - (void)configureView
@@ -68,6 +78,9 @@
     self.friendsCountLabel.text = self.user.friendsCount;
     self.followersCountLabel.text = self.user.followersCount;
     self.statusesCountLabel.text = self.user.statusesCount;
+	
+	self.genderLabel.text = self.user.gender;
+//	self.birthdayLabel.text = self.user.
 }
 
 - (IBAction)showFriendsButtonClicked:(id)sender {
