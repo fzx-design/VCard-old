@@ -7,14 +7,13 @@
 //
 
 #import "DetailImageViewController.h"
+#import "UIApplicationAddition.h"
 
 
 @implementation DetailImageViewController
 
 @synthesize imageView = _imageView;
-@synthesize saveDoneImageView = _saveDoneImageView;
 @synthesize scrollView = _scrollView;
-@synthesize activityIndicatorView = _activityIndicatorView;
 @synthesize delegate = _delegate;
 @synthesize image = _image;
 
@@ -40,7 +39,6 @@
 	frame.origin.x = 1024/2 - size.width/2;
 	self.imageView.frame = frame;
 
-	self.saveDoneImageView.alpha = 0.0;
 
 	self.scrollView.contentSize = CGSizeMake(self.imageView.frame.size.width, self.imageView.frame.size.height);
 	float y = self.imageView.frame.size.height/2 - 768/2;
@@ -66,18 +64,14 @@
 - (void)viewDidUnload {
     [super viewDidUnload];
 	self.imageView = nil;
-    self.saveDoneImageView = nil;
     self.scrollView = nil;
-    self.activityIndicatorView = nil;
     self.delegate = nil;
 }
 
 
 - (void)dealloc {
 	[_imageView release];
-    [_saveDoneImageView release];
     [_scrollView release];
-    [_activityIndicatorView release];
     _delegate = nil;
 	[_image release];
     [super dealloc];
@@ -85,15 +79,15 @@
 
 - (IBAction)saveImage:(UIButton *)sender
 {
-	self.activityIndicatorView.hidden = NO;
-	[self.activityIndicatorView startAnimating];
+
+	[[UIApplication sharedApplication] showLoadingView];
 	UIImageWriteToSavedPhotosAlbum(self.image, self, @selector(image:finishedSavingWithError:contextInfo:), NULL);
 }
 
 -(void)image:(UIImage *)image finishedSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
-	[self.activityIndicatorView stopAnimating];
-	self.activityIndicatorView.hidden = YES;
+
+	[[UIApplication sharedApplication] hideLoadingView];
 	if (error) {
 		UIAlertView *alert = [[UIAlertView alloc]
 							  initWithTitle:NSLocalizedString(@"保存失败", nil)
@@ -106,10 +100,7 @@
 		[alert release];
 	}
 	else {
-		self.saveDoneImageView.alpha = 1.0;
-		[UIView animateWithDuration:1.0 delay:1.0 options:0 animations:^{
-			self.saveDoneImageView.alpha = 0.0;
-		} completion:NULL];
+		[[UIApplication sharedApplication] showOperationDoneView];
 	}
 
 }

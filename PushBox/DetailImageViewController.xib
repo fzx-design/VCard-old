@@ -12,7 +12,6 @@
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<string>IBUIActivityIndicatorView</string>
 			<string>IBUIButton</string>
 			<string>IBUIImageView</string>
 			<string>IBUIView</string>
@@ -70,36 +69,8 @@
 								<string key="NSFrame">{{327, 228}, {369, 271}}</string>
 								<reference key="NSSuperview" ref="283024692"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="658204373"/>
+								<reference key="NSNextKeyView"/>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-							</object>
-							<object class="IBUIActivityIndicatorView" id="658204373">
-								<reference key="NSNextResponder" ref="283024692"/>
-								<int key="NSvFlags">-2147483356</int>
-								<string key="NSFrame">{{494, 337}, {37, 37}}</string>
-								<reference key="NSSuperview" ref="283024692"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="117629307"/>
-								<bool key="IBUIOpaque">NO</bool>
-								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<bool key="IBUIHidesWhenStopped">NO</bool>
-								<int key="IBUIStyle">0</int>
-							</object>
-							<object class="IBUIImageView" id="324921508">
-								<reference key="NSNextResponder" ref="283024692"/>
-								<int key="NSvFlags">256</int>
-								<string key="NSFrame">{{462, 313}, {99, 101}}</string>
-								<reference key="NSSuperview" ref="283024692"/>
-								<reference key="NSWindow"/>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">4</int>
-								<bool key="IBUIMultipleTouchEnabled">YES</bool>
-								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<object class="NSCustomResource" key="IBUIImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">detail_save_done.png</string>
-								</object>
 							</object>
 						</object>
 						<string key="NSFrameSize">{1024, 748}</string>
@@ -186,7 +157,7 @@
 								<string key="NSFrame">{{84, 21}, {34, 34}}</string>
 								<reference key="NSSuperview" ref="117629307"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="324921508"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
@@ -241,14 +212,6 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">activityIndicatorView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="658204373"/>
-					</object>
-					<int key="connectionID">14</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">imageView</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="365453919"/>
@@ -270,14 +233,6 @@
 						<reference key="destination" ref="707811626"/>
 					</object>
 					<int key="connectionID">18</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">saveDoneImageView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="324921508"/>
-					</object>
-					<int key="connectionID">16</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -337,8 +292,6 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="365453919"/>
-							<reference ref="658204373"/>
-							<reference ref="324921508"/>
 						</object>
 						<reference key="parent" ref="707811626"/>
 					</object>
@@ -346,11 +299,6 @@
 						<int key="objectID">7</int>
 						<reference key="object" ref="794615121"/>
 						<reference key="parent" ref="707811626"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">9</int>
-						<reference key="object" ref="658204373"/>
-						<reference key="parent" ref="283024692"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">13</int>
@@ -384,11 +332,6 @@
 						<reference key="object" ref="883398506"/>
 						<reference key="parent" ref="117629307"/>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">8</int>
-						<reference key="object" ref="324921508"/>
-						<reference key="parent" ref="283024692"/>
-					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -407,16 +350,12 @@
 					<string>5.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
-					<string>8.IBPluginDependency</string>
-					<string>9.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>DetailImageViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -484,7 +423,6 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>activityIndicatorView</string>
 							<string>delegate</string>
 							<string>imageView</string>
 							<string>saveDoneImageView</string>
@@ -492,7 +430,6 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UIActivityIndicatorView</string>
 							<string>id</string>
 							<string>UIImageView</string>
 							<string>UIImageView</string>
@@ -503,7 +440,6 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>activityIndicatorView</string>
 							<string>delegate</string>
 							<string>imageView</string>
 							<string>saveDoneImageView</string>
@@ -511,10 +447,6 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">activityIndicatorView</string>
-								<string key="candidateClassName">UIActivityIndicatorView</string>
-							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">delegate</string>
 								<string key="candidateClassName">id</string>
@@ -560,7 +492,6 @@
 				<string>detail_button_return.png</string>
 				<string>detail_button_save.png</string>
 				<string>detail_console_bg.png</string>
-				<string>detail_save_done.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
@@ -568,7 +499,6 @@
 				<string>{13, 17}</string>
 				<string>{16, 17}</string>
 				<string>{118, 69}</string>
-				<string>{101, 101}</string>
 			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">933</string>
