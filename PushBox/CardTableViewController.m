@@ -617,7 +617,6 @@
 {
 	_refreshFlag = YES;
     [self loadMoreDataCompletion:NULL];
-	[[UIApplication sharedApplication] showRefreshView];
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath

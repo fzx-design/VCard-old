@@ -17,7 +17,6 @@
 #define kAnimationLoad @"kAnimationLoad"
 
 static NSTimer *_timer;
-
 static UIImageView *_loadingImageView;
 static UIImageView *_loadingCircleImageView;
 static UIImageView *_loadingRoundImageView;
@@ -31,6 +30,7 @@ static UIViewController *_modalViewController;
 static UIView *_backView;
 
 static CGFloat refreshTime;
+static BOOL refreshFlag = NO;
 
 @implementation UIApplication (UIApplication_RootView)
 //
@@ -42,11 +42,7 @@ static CGFloat refreshTime;
 
 - (BOOL)waitingForRefreshing
 {
-	BOOL result = NO;
-	if (refreshTime == 0) {
-		result = YES;
-	}
-	return result;
+	return !refreshFlag;
 }
 
 - (UIView *)rootView
@@ -62,6 +58,10 @@ static CGFloat refreshTime;
 
 - (void)calculateRefreshTime
 {
+	if (!refreshFlag) {
+		return;
+	}
+	
 	refreshTime += 1;
 	if (refreshTime >= 5) {
 		[self hideRefreshView];
@@ -95,13 +95,15 @@ static CGFloat refreshTime;
 	rotationAnimation.duration = 1.0;
 	rotationAnimation.fromValue = [NSNumber numberWithFloat:0.0];
 	rotationAnimation.toValue = [NSNumber numberWithFloat:-2.0 * M_PI];
-	rotationAnimation.repeatCount = 10;
+	rotationAnimation.repeatCount = 65535;
 	[_loadingCircleImageView.layer addAnimation:rotationAnimation forKey:kAnimationLoad];
 }
 
 
 - (void)showRefreshView
 {
+	refreshFlag = YES;
+	
 	if (!_refreshRoundImageView) {
         _refreshRoundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"refreshing_bg.png"]];
         _refreshRoundImageView.center = CGPointMake(45, 712);
@@ -115,18 +117,20 @@ static CGFloat refreshTime;
 		_refreshCircleImageView.userInteractionEnabled = NO;
 		[[self rootView] addSubview:_refreshCircleImageView];
     }
+
+	if (!_timer) {
+		_timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(calculateRefreshTime) userInfo:nil repeats:YES];
+	}
     
+	_refreshCircleImageView.alpha = 1.0;
+	_refreshRoundImageView.alpha = 1.0;
 	
-	if (refreshTime == 0) {
-		_refreshCircleImageView.alpha = 1.0;
-		_refreshRoundImageView.alpha = 1.0;
-		_timer = [NSTimer scheduledTimerWithTimeInterval:(1.0) target:self selector:@selector(calculateRefreshTime) userInfo:nil repeats:YES];
-		
-		CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-		rotationAnimation.duration = 1.0;
-		rotationAnimation.fromValue = [NSNumber numberWithFloat:0.0];
-		rotationAnimation.toValue = [NSNumber numberWithFloat:-2.0 * M_PI];
-		rotationAnimation.repeatCount = 10;
+	CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+	rotationAnimation.duration = 1.0;
+	rotationAnimation.fromValue = [NSNumber numberWithFloat:0.0];
+	rotationAnimation.toValue = [NSNumber numberWithFloat:-2.0 * M_PI];
+	rotationAnimation.repeatCount = 65535;
+	if ([_refreshRoundImageView.layer animationForKey:kAnimationRefresh] == nil) {
 		[_refreshCircleImageView.layer addAnimation:rotationAnimation forKey:kAnimationRefresh];
 	}
 }
@@ -155,16 +159,13 @@ static CGFloat refreshTime;
 
 - (void)hideRefreshView
 {
+	refreshFlag = NO;
 	refreshTime = 0;
-	if (_timer != nil) {
-		[_timer invalidate];
-	}
+
 	[UIView animateWithDuration:1.0 animations:^{
 		_refreshCircleImageView.alpha = 0.0;
 		_refreshRoundImageView.alpha = 0.0;
-    } completion:^(BOOL finished) {
-		[_refreshCircleImageView.layer removeAnimationForKey:kAnimationRefresh];
-	}];
+    } completion:nil];
 }
 
 - (void)presentModalViewController:(UIViewController *)vc atHeight:(CGFloat)height
