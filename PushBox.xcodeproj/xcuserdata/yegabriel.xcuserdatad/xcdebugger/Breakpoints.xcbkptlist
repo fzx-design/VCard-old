@@ -2,4 +2,88 @@
 <Bucket
    type = "1"
    version = "1.0">
+   <FileBreakpoints>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "PushBox/CardTableViewController.m"
+         timestampString = "340960833.909506"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "467"
+         endingLineNumber = "467"
+         landmarkName = "-loadMoreDataCompletion:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "PushBox/CardTableViewController.m"
+         timestampString = "340960833.909506"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "377"
+         endingLineNumber = "377"
+         landmarkName = "-adjustCardViewAfterLoading"
+         landmarkType = "5">
+         <Locations>
+            <Location
+               shouldBeEnabled = "Yes"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[CardTableViewController adjustCardViewAfterLoading]"
+               urlString = "file://localhost/Users/yegabriel/Documents/Projects/iOS_Projects/VCardDev/PushBox/CardTableViewController.m"
+               timestampString = "340960834.53313"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "377"
+               endingLineNumber = "377">
+            </Location>
+            <Location
+               shouldBeEnabled = "Yes"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "__53-[CardTableViewController adjustCardViewAfterLoading]_block_invoke_0"
+               urlString = "file://localhost/Users/yegabriel/Documents/Projects/iOS_Projects/VCardDev/PushBox/CardTableViewController.m"
+               timestampString = "340960834.53353"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "377"
+               endingLineNumber = "377">
+            </Location>
+         </Locations>
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "PushBox/CardTableViewController.m"
+         timestampString = "340960833.909506"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "367"
+         endingLineNumber = "367"
+         landmarkName = "-adjustCardViewPosition"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "PushBox/CardTableViewController.m"
+         timestampString = "340960833.909506"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "372"
+         endingLineNumber = "372"
+         landmarkName = "-adjustCardViewPosition"
+         landmarkType = "5">
+      </FileBreakpoint>
+   </FileBreakpoints>
 </Bucket>

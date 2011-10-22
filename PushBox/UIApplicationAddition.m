@@ -125,14 +125,17 @@ static BOOL refreshFlag = NO;
 	_refreshCircleImageView.alpha = 1.0;
 	_refreshRoundImageView.alpha = 1.0;
 	
-	CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-	rotationAnimation.duration = 1.0;
-	rotationAnimation.fromValue = [NSNumber numberWithFloat:0.0];
-	rotationAnimation.toValue = [NSNumber numberWithFloat:-2.0 * M_PI];
-	rotationAnimation.repeatCount = 65535;
 	if ([_refreshRoundImageView.layer animationForKey:kAnimationRefresh] == nil) {
+		CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+		rotationAnimation.duration = 1.0;
+		rotationAnimation.fromValue = [NSNumber numberWithFloat:0.0];
+		rotationAnimation.toValue = [NSNumber numberWithFloat:-2.0 * M_PI];
+		rotationAnimation.repeatCount = 65535;
 		[_refreshCircleImageView.layer addAnimation:rotationAnimation forKey:kAnimationRefresh];
 	}
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameDisableRefresh
+														object:nil];
 }
 
 - (void)showOperationDoneView
@@ -166,6 +169,9 @@ static BOOL refreshFlag = NO;
 		_refreshCircleImageView.alpha = 0.0;
 		_refreshRoundImageView.alpha = 0.0;
     } completion:nil];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameEnableRefresh
+														object:nil];
 }
 
 - (void)presentModalViewController:(UIViewController *)vc atHeight:(CGFloat)height

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 #define kModalViewHeight 25
+#define kNotificationNameDisableRefresh @"kNotificationNameDisableRefresh"
+#define kNotificationNameEnableRefresh @"kNotificationNameEnableRefresh"
 
 @interface UIApplication(UIApplicationAddition)
 

@@ -458,12 +458,9 @@
 
 - (void)refresh
 {
-
 	if ([[UIApplication sharedApplication] waitingForRefreshing]) {
 		[[UIApplication sharedApplication] showRefreshView];
 		[self.cardTableViewController refresh];
-	} else {
-		NSLog(@"a");
 	}
 }
 

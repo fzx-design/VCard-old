@@ -8,6 +8,7 @@
 
 #import "DockViewController.h"
 #import "CardTableViewController.h" //to get notification defines
+#import "UIApplicationAddition.h"	//to get notification defines
 
 @implementation DockViewController
 
@@ -91,6 +92,16 @@
     [center addObserver:self
                selector:@selector(newFollowersNotification:) 
                    name:kNotificationNameNewFollowers object:nil];
+	
+	[center addObserver:self 
+			   selector:@selector(disableRefreshButton) 
+				   name:kNotificationNameDisableRefresh 
+				 object:nil];
+	
+	[center addObserver:self 
+			   selector:@selector(enableRefreshButton) 
+				   name:kNotificationNameEnableRefresh 
+				 object:nil];
     
     self.refreshNotiImageView.hidden = YES;
     self.commandCenterNotiImageView.hidden = YES;
@@ -174,6 +185,16 @@
                                                  animated:YES];
     [otvc release];
     [nc release];
+}
+
+- (void)enableRefreshButton
+{
+	self.refreshButton.enabled = YES;
+}
+
+- (void)disableRefreshButton
+{
+	self.refreshButton.enabled = NO;
 }
 
 - (IBAction)refreshButtonClicked:(id)sender {

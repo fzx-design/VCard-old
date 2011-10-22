@@ -93,7 +93,8 @@
     _nextPage = 1;
     _loading = NO;
 	_checkingDirection = NO;
-	_refreshFlag = YES;
+	_refreshFlag = NO;
+	_firstLoadFlag = YES;
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:5
 											  target:self 
@@ -351,25 +352,32 @@
     [client getFavoritesByPage:_nextPage++];
 }
 
+- (void)adjustCardViewPosition
+{
+	[self.managedObjectContext processPendingChanges];
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+	[self scrollToRowAtIndexPath:indexPath];
+	[self scrollToRowAtIndexPath:indexPath];
+	
+	CGRect frame = self.tableView.frame;
+	frame.origin.x += 782;
+	self.tableView.frame = frame;
+
+	[UIView animateWithDuration:1.0 delay:0.5 options:0 animations:^{
+		self.tableView.alpha = 1.0;
+		CGRect frame = self.tableView.frame;
+		frame.origin.x -= 782;
+		self.tableView.frame = frame;
+	} completion:^(BOOL finished) {
+	}];
+}
+
 - (void)adjustCardViewAfterLoading
 {
 	[UIView animateWithDuration:0.5 delay:0.0 options:0 animations:^{
 		self.tableView.alpha = 0.0;
 	} completion:^(BOOL finished) {
-		
-		[self.managedObjectContext processPendingChanges];
-		[self scrollToRow:0];
-		
-		CGRect frame = self.tableView.frame;
-		frame.origin.x += 782;
-		self.tableView.frame = frame;
-		
-		[UIView animateWithDuration:1.0 delay:0.5 options:0 animations:^{
-			self.tableView.alpha = 1.0;
-			CGRect frame = self.tableView.frame;
-			frame.origin.x -= 782;
-			self.tableView.frame = frame;
-		} completion:nil];
+		[self adjustCardViewPosition];
 	}];
 }
 
@@ -417,12 +425,30 @@
             if (!client.hasError) {
 
                 NSArray *dictArray = client.responseJSONObject;
+				
+				if (_firstLoadFlag) {
+					_firstLoadFlag = NO;
+					[self clearData];
+					[self.managedObjectContext processPendingChanges];
+					for (NSDictionary *dict in dictArray) {
+						Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+						[self.currentUser addFriendsStatusesObject:newStatus];
+					}
+					[self.managedObjectContext processPendingChanges];
+					if (completion) {
+						completion();
+					}
+					[[UIApplication sharedApplication] hideLoadingView];
+					_loading = NO;
+					return;
+				}
+				
 				for (NSDictionary *dict in dictArray) {
                     Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
                     [self.currentUser addFriendsStatusesObject:newStatus];
                 }
 				[self.managedObjectContext processPendingChanges];
-				
+
 				if (_refreshFlag) {
 					_refreshFlag = NO;
 
@@ -432,15 +458,15 @@
 						_lastStatus = newStatus;
 						
 						[self clearData];
-						[self.managedObjectContext processPendingChanges];
 						
 						for (NSDictionary *dict in dictArray) {
 							Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
 							[self.currentUser addFriendsStatusesObject:newStatus];
+							[self.managedObjectContext processPendingChanges];
 						}
+						[self.managedObjectContext processPendingChanges];
 						
 						[self adjustCardViewAfterLoading];
-						
 						
 					} else if ([newStatus.statusID isEqualToString:_lastStatus.statusID]) {
 						if (completion) {
@@ -455,16 +481,11 @@
                 [self.delegate cardTableViewController:self 
                                         didScrollToRow:self.currentRowIndex
                                       withNumberOfRows:[self numberOfRows]];
-                if (completion) {
-                    completion();
-                }
-                
             } else {
-				if (completion) {
-                    completion();
-                }
-				[[UIApplication sharedApplication] hideRefreshView];
 				[ErrorNotification showLoadingError];
+			}
+			if (completion) {
+				completion();
 			}
 			[[UIApplication sharedApplication] hideLoadingView];
 			_loading = NO;
@@ -485,8 +506,9 @@
 				
                 NSArray *dictArray = client.responseJSONObject;
 				for (NSDictionary *dict in dictArray) {
-                    Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-                    [self.currentUser addFriendsStatusesObject:newStatus];
+//                    Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+//                    [self.currentUser addFriendsStatusesObject:newStatus];
+					[Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
                 }
 				[self.managedObjectContext processPendingChanges];
 				
@@ -497,9 +519,13 @@
 					
 					if (_lastStatus == nil || ![newStatus.statusID isEqualToString:_lastStatus.statusID]) {
 						
-						_lastStatus = newStatus;
+						[self clearData];
+						[self.managedObjectContext processPendingChanges];
 						
-						[self scrollToRow:0];
+						for (NSDictionary *dict in dictArray) {
+							[Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+						}
+						[self adjustCardViewAfterLoading];
 						
 					} else if ([newStatus.statusID isEqualToString:_lastStatus.statusID]) {
 						if (completion) {

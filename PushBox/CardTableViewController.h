@@ -51,6 +51,7 @@ typedef enum {
     BOOL _insertionAnimationEnabled;
 	
 	BOOL _refreshFlag;
+	BOOL _firstLoadFlag;
 	BOOL _checkingDirection;
 	Status *_lastStatus;
 	NSInteger _direction;
