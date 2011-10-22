@@ -51,7 +51,6 @@ typedef enum {
     BOOL _insertionAnimationEnabled;
 	
 	BOOL _refreshFlag;
-	BOOL _firstLoadFlag;
 	BOOL _checkingDirection;
 	Status *_lastStatus;
 	NSInteger _direction;
@@ -86,6 +85,7 @@ typedef enum {
 - (void)loadMoreDataCompletion:(void (^)())completion;
 - (void)clearData;
 - (void)refresh;
+- (void)firstLoad:(void (^)())completion;
 
 - (void)showNextCard;
 - (void)scrollToRow:(int)row;

@@ -109,7 +109,7 @@
 		[[UIApplication sharedApplication] showLoadingView];
 		
 		self.cardTableViewController.dataSource = CardTableViewDataSourceFriendsTimeline;
-		[self.cardTableViewController loadMoreDataCompletion:^(void) {
+		[self.cardTableViewController firstLoad:^(void) {
 			[self.cardTableViewController loadAllFavoritesWithCompletion:NULL];
 			[self showCardTableView];
 			[self showDockView];

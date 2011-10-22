@@ -94,7 +94,6 @@
     _loading = NO;
 	_checkingDirection = NO;
 	_refreshFlag = NO;
-	_firstLoadFlag = YES;
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:5
 											  target:self 
@@ -386,12 +385,63 @@
 	}];
 }
 
+- (void)firstLoad:(void (^)())completion
+{
+	WeiboClient *client = [WeiboClient client];
+    
+    long long maxID = 0;
+    Status *lastStatus = [self.fetchedResultsController.fetchedObjects lastObject];
+	
+	NSLog(@"%@", lastStatus.text);
+    if (lastStatus && _lastStatus && !_refreshFlag) {
+        NSString *statusID = lastStatus.statusID;
+        maxID = [statusID longLongValue] - 1;
+		[[UIApplication sharedApplication] showLoadingView];
+    }
+	
+	[client setCompletionBlock:^(WeiboClient *client) {
+		if (!client.hasError) {
+			
+			NSArray *dictArray = client.responseJSONObject;
+
+			[self clearData];
+			[self.managedObjectContext processPendingChanges];
+			for (NSDictionary *dict in dictArray) {
+				Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+				[self.currentUser addFriendsStatusesObject:newStatus];
+			}
+			[self.managedObjectContext processPendingChanges];
+			_lastStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
+			if (completion) {
+				completion();
+			}
+			[[UIApplication sharedApplication] hideLoadingView];
+
+			return;
+
+		} else {
+			[ErrorNotification showLoadingError];
+		}
+		if (completion) {
+			completion();
+		}
+		[[UIApplication sharedApplication] hideLoadingView];
+	}];
+	
+	[client getFriendsTimelineSinceID:nil
+								maxID:[NSString stringWithFormat:@"%lld", maxID]
+					   startingAtPage:0 
+								count:kStatusCountPerRequest
+							  feature:0];
+
+}
+
 - (void)loadMoreDataCompletion:(void (^)())completion
 {
     if (_loading) {
         return;
     }
-    
+	
     _loading = YES;
 
 	//
@@ -421,6 +471,7 @@
     if (lastStatus && _lastStatus && !_refreshFlag) {
         NSString *statusID = lastStatus.statusID;
         maxID = [statusID longLongValue] - 1;
+		_refreshFlag = NO;
 		[[UIApplication sharedApplication] showLoadingView];
     }
     
@@ -431,27 +482,11 @@
 
                 NSArray *dictArray = client.responseJSONObject;
 				
-				if (_firstLoadFlag) {
-					_firstLoadFlag = NO;
-					[self clearData];
-					[self.managedObjectContext processPendingChanges];
-					for (NSDictionary *dict in dictArray) {
-						Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-						[self.currentUser addFriendsStatusesObject:newStatus];
-					}
-					[self.managedObjectContext processPendingChanges];
-					if (completion) {
-						completion();
-					}
-					[[UIApplication sharedApplication] hideLoadingView];
-					_loading = NO;
-					return;
-				}
-				
 				for (NSDictionary *dict in dictArray) {
                     Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
                     [self.currentUser addFriendsStatusesObject:newStatus];
                 }
+				
 				[self.managedObjectContext processPendingChanges];
 
 				if (_refreshFlag) {
