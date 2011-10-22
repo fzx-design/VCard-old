@@ -246,6 +246,7 @@
 		FE72B4F51450AE9A00C3EE5B /* sc_image_default 2.png in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4F41450AE9A00C3EE5B /* sc_image_default 2.png */; };
 		FE8F6D42144327B4001A62FD /* MessagesContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE8F6D40144327B3001A62FD /* MessagesContactsTableViewController.m */; };
 		FE8F6D43144327B4001A62FD /* MessagesContactsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE8F6D41144327B4001A62FD /* MessagesContactsTableViewController.xib */; };
+		FE94DEFA1453379800D8A12E /* smartcard.js in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4E5145084D500C3EE5B /* smartcard.js */; };
 		FEA42654144320E7002E80B3 /* MessagesContactsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA42653144320E7002E80B3 /* MessagesContactsTableViewCell.m */; };
 		FEA4265614432103002E80B3 /* MessagesContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEA4265514432103002E80B3 /* MessagesContactsTableViewCell.xib */; };
 		FEFB3120144311D600440DD5 /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEFB311E144311D600440DD5 /* MessagesViewController.m */; };
@@ -1215,6 +1216,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE94DEFA1453379800D8A12E /* smartcard.js in Resources */,
 				CBDA5AFF13DBEC1300FAE221 /* InfoPlist.strings in Resources */,
 				CBDA5B0813DBEC1300FAE221 /* MainWindow.xib in Resources */,
 				CB4AAC6013DC6C4D0053E3A6 /* root_pushbox.png in Resources */,

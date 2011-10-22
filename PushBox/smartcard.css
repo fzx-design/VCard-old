@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /* VCard Smart Card CSS Document */
-body{ font-family:"Helvetica Neue", "黑体";}
+body{ font-family:"Helvetica Neue", "黑体"; background-color: transparent;}
 
 #post{background-image:url(webview_bg.jpg); background-position:center; background-repeat:no-repeat; width:431px; height:136px; font-size:13px; padding:5px 15px 5px 15px; line-height:25px; color:#595757; text-shadow:#FFF 0px 1px 0px; margin:-8px 0 0 -8px;}
 .highlight{ color:#2a88d4; font-weight:bold;}

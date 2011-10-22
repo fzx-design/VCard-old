@@ -589,7 +589,8 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="475836784"/>
 						<string key="NSReuseIdentifierKey">_NS:693</string>
-						<reference key="IBUIBackgroundColor" ref="371620557"/>
+						<reference key="IBUIBackgroundColor" ref="392801989"/>
+						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
 					<object class="IBUIWebView" id="738363382">
@@ -601,6 +602,7 @@
 						<reference key="NSNextKeyView" ref="60335549"/>
 						<string key="NSReuseIdentifierKey">_NS:693</string>
 						<reference key="IBUIBackgroundColor" ref="392801989"/>
+						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIDataDetectorTypes">2</int>
 					</object>
@@ -610,7 +612,6 @@
 						<string key="NSFrame">{{251, 373}, {68, 68}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:241</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -850,6 +851,22 @@
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">79</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="822315524"/>
+						<reference key="destination" ref="841351856"/>
+					</object>
+					<int key="connectionID">82</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="738363382"/>
+						<reference key="destination" ref="841351856"/>
+					</object>
+					<int key="connectionID">81</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1145,7 +1162,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">80</int>
+			<int key="maxID">82</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

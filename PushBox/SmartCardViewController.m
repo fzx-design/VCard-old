@@ -54,6 +54,8 @@
 
 - (void)dealloc
 {    
+    [_postWebView release];
+    [_repostWebView release];
     [_profileImageView release];
     [_screenNameLabel release];
     [_dateLabel release];
@@ -167,6 +169,9 @@
     self.postWebView.alpha = 0.0;
     self.repostWebView.alpha = 0.0;
     
+    [[self.postWebView scrollView] setScrollEnabled:NO];
+    [[self.repostWebView scrollView] setScrollEnabled:NO];
+    
     self.repostView.frame = kRepostViewFrameTop;
     self.repostWebView.frame = kRepostWebViewFrameTop;
     
@@ -208,11 +213,9 @@
     [self.tweetImageView loadImageFromURL:self.status.originalPicURL 
                                completion:^(void) 
      {
-         self.tweetImageView.alpha = 0.0;
-         //         self.imageCoverImageView.alpha = 0.0;
-         [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+         [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
              self.tweetImageView.alpha = 1.0;
-             //             self.imageCoverImageView.alpha = 1.0;
+             self.imageCoverImageView.alpha = 1.0;
          } completion:^(BOOL fin) {
          }];
      } 
@@ -227,9 +230,10 @@
     [self.repostTweetImageView loadImageFromURL:repostStatus.originalPicURL 
                                      completion:^(void) 
      {
-         self.repostTweetImageView.alpha = 0.0;
-         [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+         //         self.repostTweetImageView.alpha = 0.0;
+         [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
              self.repostTweetImageView.alpha = 1.0;
+             self.imageCoverImageView.alpha = 1.0;
          } completion:^(BOOL fin) {
          }];
      }
@@ -240,11 +244,6 @@
 {
     NSString* originStatus = self.status.text;
     NSString* phasedStatus = self.status.text;
-    //    NSString* originStatus = @"fdsjkl@jffa@";
-    //    NSString* phasedStatus = @"fdsjkl@jffa@";
-    
-//    NSString* s = @"中国人";
-//    NSLog(@"-------------------%c, %c, %c--------------------", [s characterAtIndex:0],[s characterAtIndex:1],[s characterAtIndex:2]);
     
     // phase
     for (int i = 0; i < originStatus.length; i++) {
@@ -263,11 +262,10 @@
                     }
                 };
                 endIndex = j;
-                if(startIndex < endIndex)
                 {
                     NSRange range = NSMakeRange(startIndex, endIndex-startIndex);
                     NSString* subStr = [originStatus substringWithRange:range];
-                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='#'>%@</a></span>", subStr]];
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='atClicked(\"%@\")'>%@</a></span>", [subStr substringFromIndex:1], subStr]];
                 }
                 break;
             }
@@ -283,8 +281,9 @@
                 {
                     NSRange range = NSMakeRange(startIndex, endIndex+1-startIndex);
                     NSString* subStr = [originStatus substringWithRange:range];
-                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='#'>%@</a></span>", subStr]];
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='spClicked(\"%@\")'>%@</a></span>", [subStr substringFromIndex:1], subStr]];
                 }
+                
                 break;
             }
             case 'h':
@@ -304,7 +303,7 @@
                     endIndex = j;
                     range = NSMakeRange(startIndex, endIndex-startIndex);
                     subStr = [originStatus substringWithRange:range];
-                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='linkClicked()' onClick='linkClicked()'>%@</a></span>", subStr]];
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='lkClicked(\"%@\")'>%@</a></span>", subStr, subStr]];
                 }
                 break;
             }
@@ -314,17 +313,16 @@
     }
     
     //    NSString* htmlText = [[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><style type=\"text/css\">@import url(\"smartcard.css\");</style></head><body><div id=\"post\">%@</div></body></html>", phasedStatus];
-    NSString* htmlText = [[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><link href=\"smartcard.css\" rel=\"stylesheet\" type=\"text/css\" /></head><body><div id=\"post\">%@</div></body></html>", phasedStatus];
+    NSString* htmlText = [[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><link href=\"smartcard.css\" rel=\"stylesheet\" type=\"text/css\" /><script type='text/javascript' src='smartcard.js'></script></head><body><div id=\"post\">%@</div></body></html>", phasedStatus];
     //    NSLog(htmlText);
     NSString *path = [[NSBundle mainBundle] pathForResource:@"smartcard" ofType:@"html"]; 
-    [self.postWebView loadHTMLString:htmlText baseURL:[NSURL fileURLWithPath: path]];
+    [self.postWebView loadHTMLString:htmlText baseURL:[NSURL fileURLWithPath: path]];    
     
-    self.postWebView.alpha = 0.0;
-    [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
+    [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
         self.postWebView.alpha = 1.0;
+        self.imageCoverImageView.alpha = 1.0;
     } completion:^(BOOL fin) {
     }];
-    
 }
 
 - (void)loadRepostWebView
@@ -359,7 +357,7 @@
                 {
                     NSRange range = NSMakeRange(startIndex, endIndex-startIndex);
                     NSString* subStr = [originStatus substringWithRange:range];
-                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='#'>%@</a></span>", subStr]];
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='atClicked(\"%@\")'>%@</a></span>", [subStr substringFromIndex:1], subStr]];
                 }
                 break;
             }
@@ -375,7 +373,7 @@
                 {
                     NSRange range = NSMakeRange(startIndex, endIndex+1-startIndex);
                     NSString* subStr = [originStatus substringWithRange:range];
-                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='#'>%@</a></span>", subStr]];
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='spClicked(\"%@\")'>%@</a></span>", [subStr substringFromIndex:1], subStr]];
                 }
                 break;
             }
@@ -396,7 +394,7 @@
                     endIndex = j;
                     range = NSMakeRange(startIndex, endIndex-startIndex);
                     subStr = [originStatus substringWithRange:range];
-                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='linkClicked()' onClick='linkClicked()'>%@</a></span>", subStr]];
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='lkClicked(\"%@\")'>%@</a></span>", subStr, subStr]];
                 }
                 break;
             }
@@ -406,28 +404,43 @@
     }
     
     //    NSString* htmlText = [[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><style type=\"text/css\">@import url(\"smartcard.css\");</style></head><body><div id=\"post\">%@</div></body></html>", phasedStatus];
-    NSString* htmlText = [[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><link href=\"smartcard.css\" rel=\"stylesheet\" type=\"text/css\" /><script type='text/javascript' src='smartcard.js'></script></head><body><div id=\"repost\"><span class='highlight'><a href='#'>@%@</a></span>: %@</div></body></html>", self.status.repostStatus.author.screenName, phasedStatus];
-    //    NSLog(htmlText);
+    NSString* htmlText = [[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><link href=\"smartcard.css\" rel=\"stylesheet\" type=\"text/css\" /><script type='text/javascript' src='smartcard.js'></script></head><body><div id=\"repost\"><span class='highlight'><a href='javascript:void(0);' onclick='atClicked(\"%@\")'>@%@</a></span>: %@</div></body></html>", self.status.repostStatus.author.screenName, self.status.repostStatus.author.screenName, phasedStatus];
+    
     NSString *path = [[NSBundle mainBundle] pathForResource:@"smartcard" ofType:@"html"]; 
     [self.repostWebView loadHTMLString:htmlText baseURL:[NSURL fileURLWithPath: path]];
     
-    self.repostWebView.alpha = 0.0;
-    self.repostView.alpha = 0.0;
-    //    self.imageCoverImageView.alpha = 0.0;
     [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
-        self.repostWebView.alpha = 1.0;
         self.repostView.alpha = 1.0;
-        //        self.imageCoverImageView.alpha = 1.0;
+        self.repostWebView.alpha = 1.0;
+        self.imageCoverImageView.alpha = 1.0;
     } completion:^(BOOL fin) {
     }];
     
 }
 
+- (void)loadMusicCoverImage
+{
+    self.musicCoverImageView.hidden = NO;
+    [self.musicCoverImageView loadImageFromURL:self.status.repostStatus.thumbnailPicURL 
+                                    completion:^(void) 
+     {
+         //         self.musicCoverImageView.alpha = 0.0;
+         [UIView animateWithDuration:0.5 delay:0.1 options:0 animations:^{
+             self.musicCoverImageView.alpha = 1.0;
+         } completion:^(BOOL fin) {
+         }];
+     } 
+                                cacheInContext:self.managedObjectContext];
+}
+
 - (void)loadPostMusicVideo:(NSString*)postMusicVideoLink
 {    
     self.playButton.hidden = NO;
-    isTrack = NO;
     self.playButton.frame = kPlayButtonFrameCenter;
+    [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
+        self.playButton.alpha = 1.0;
+    } completion:^(BOOL fin) {
+    }];
 }
 
 - (void)loadRepostMusicVideo:(NSString*)repostMusicVideoLink
@@ -436,16 +449,17 @@
     self.playButton.frame = kPlayButtonFrameTopRight;
     self.repostView.frame = kRepostViewFrameBottom;
     self.repostWebView.frame = kRepostWebViewFrameBottom;
-    //    self.imageCoverImageView.alpha = 0.0;
-    self.musicBackgroundImageView.alpha = 0.0;
-    self.repostTweetImageView.alpha = 1.0;
+    //    self.musicBackgroundImageView.alpha = 0.0;
+    //    self.repostTweetImageView.alpha = 1.0;
+    self.repostTweetImageView.hidden = YES;
     [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
-        //        self.imageCoverImageView.alpha = 1.0;
         self.musicBackgroundImageView.alpha = 1.0;
         self.repostTweetImageView.alpha = 0.0;
+        self.imageCoverImageView.alpha = 1.0;
     } completion:^(BOOL fin) {
     }];
     
+    [self loadMusicCoverImage];
 }
 
 - (void)getPostMusicVideoLink:(NSString*)statusText
@@ -562,11 +576,11 @@
     Status *status = self.status;
     isTrack = YES;
     
-    self.imageCoverImageView.alpha = 0.0;
-    [UIView animateWithDuration:0.5 animations:^{
-        self.imageCoverImageView.alpha = 1.0;
-    } completion:^(BOOL fin) {
-    }];
+    //    self.imageCoverImageView.alpha = 0.0;
+//    [UIView animateWithDuration:0.5 animations:^{
+//        self.imageCoverImageView.alpha = 1.0;
+//    } completion:^(BOOL fin) {
+//    }];
     
     // post text
     [self loadPostWebView];
@@ -815,7 +829,7 @@
     vc.delegate = self;
     vc.status = self.status;
     
-
+    
 	UserCardNaviViewController* navi = [[UserCardNaviViewController alloc] initWithRootViewController:vc];
 	[UserCardNaviViewController setSharedUserCardNaviViewController:navi];
 	
@@ -828,8 +842,17 @@
 	[navi release];
 	[vc release];
 	
-//    [self presentModalViewController:vc animated:YES];
-//    [vc release];
+    //    [self presentModalViewController:vc animated:YES];
+    //    [vc release];
+}
+
+- (void)postWithContent:(NSString* )content
+{
+	PostViewController *vc = [[PostViewController alloc] initWithType:PostViewTypePost];
+    [[UIApplication sharedApplication] presentModalViewController:vc atHeight:kModalViewHeight];
+	vc.textView.text = content;
+    
+	[vc release];
 }
 
 - (void)commentsTableViewControllerDidDismiss:(CommentsTableViewController *)vc
@@ -877,20 +900,32 @@
 
 #pragma mark – 
 #pragma mark UIWebViewDelegate 
+
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType { 
-    if ( [request.mainDocumentURL.relativePath isEqualToString:@"/click/false"] ) {    
-        NSLog( @"not clicked" ); 
-        return false; 
-    } 
-    if ( [request.mainDocumentURL.relativePath isEqualToString:@"/click/true"] ) {        //the image is clicked, variable click is true 
-        NSLog( @"image clicked" ); 
-        UIAlertView* alert=[[UIAlertView alloc]initWithTitle:@"JavaScript called" 
-                                                     message:@"You’ve called iPhone provided control from javascript!!" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil]; 
-        [alert show]; 
-        [alert release]; 
-        return false; 
-    } 
+    
+    NSString* s = request.mainDocumentURL.relativePath;
+    NSLog(@"%@", s);
+    
+    NSString* type = [s substringToIndex:4];
+    NSString* para = [s substringFromIndex:4];
+    
+    if ([type compare:@"/at/"] == NSOrderedSame) {
+        //        NSLog(@"at %@", para);
+        NSString* content = [[NSString alloc] initWithFormat:@"@%@ ", para];
+        [self postWithContent:content];
+    }
+    else if ([type compare:@"/sp/"] == NSOrderedSame) {
+        //        NSLog(@"sp %@", para);
+        NSString* content = [[NSString alloc] initWithFormat:@"#%@# ", para];
+        [self postWithContent:content];
+    }
+    else if ([type compare:@"/lk/"] == NSOrderedSame) {
+        //        NSLog(@"lk %@", para);
+        NSURL* url = [[NSURL alloc] initWithString:para];
+        [[UIApplication sharedApplication] openURL:url];
+    }
+    
     return true; 
-} 
+}
 
 @end
