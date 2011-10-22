@@ -24,7 +24,7 @@
 	UILabel *_statusesCountLabel;
 	
 	UILabel *_genderLabel;
-	UILabel *_birthdayLabel;
+	UILabel *blogURLLabel;
 	UILabel *_careerInfoLabel;
 	
 	UITextView *_descriptionTextView;
@@ -43,7 +43,7 @@
 @property(nonatomic, retain) IBOutlet UITextView* descriptionTextView;
 
 @property (nonatomic, retain) IBOutlet UILabel *genderLabel;
-@property (nonatomic, retain) IBOutlet UILabel *birthdayLabel;
+@property (nonatomic, retain) IBOutlet UILabel *blogURLLabel;
 @property (nonatomic, retain) IBOutlet UILabel *careerInfoLabel;
 
 @property(nonatomic, retain) User* user;

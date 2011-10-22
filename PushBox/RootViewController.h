@@ -26,6 +26,17 @@
     UITextField *_bottomStateTextField;
     
     UIImageView *_holeImageView;
+	
+	UIView *_notificationView;
+	UILabel *_notiNewCommentLabel;
+	UILabel *_notiNewFollowerLabel;
+	UILabel *_notiNewAtLabel;
+	
+	UIButton *_notiCloseButton;
+	UIButton *_notiDisplayNewFollowersButton;
+	UIButton *_notiDisplayNewMentionsButton;
+	UIButton *_notiDisplayNewCommentsButton;
+	
     
     LoginViewController *_loginViewController;
     DockViewController *_dockViewController;
@@ -46,11 +57,23 @@
 @property(nonatomic, retain) IBOutlet UILabel* bottomStateLabel;
 @property(nonatomic, retain) IBOutlet UITextField* bottomStateTextField;
 
+@property(nonatomic, retain) IBOutlet UIView *notificationView;
+@property(nonatomic, retain) IBOutlet UILabel *notiNewCommentLabel;
+@property(nonatomic, retain) IBOutlet UILabel *notiNewFollowerLabel;
+@property(nonatomic, retain) IBOutlet UILabel *notiNewAtLabel;
+
+@property(nonatomic, retain) IBOutlet UIButton *notiCloseButton;
+@property(nonatomic, retain) IBOutlet UIButton *notiDisplayNewFollowersButton;
+@property(nonatomic, retain) IBOutlet UIButton *notiDisplayNewMentionsButton;
+@property(nonatomic, retain) IBOutlet UIButton *notiDisplayNewCommentsButton;
+
 @property(nonatomic, retain) LoginViewController* loginViewController;
 @property(nonatomic, retain) DockViewController *dockViewController;
 @property(nonatomic, retain) MessagesViewController *messagesViewController;
 @property(nonatomic, retain) CardTableViewController* cardTableViewController;
 
 - (IBAction)showFriendsTimeline:(id)sender;
+- (IBAction)refreshAndShowCommentCenter:(id)sender;
+- (IBAction)closeNotificationPop:(id)sender;
 
 @end

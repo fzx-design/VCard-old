@@ -117,17 +117,37 @@
     WeiboClient *client = [WeiboClient client];
     [client setCompletionBlock:^(WeiboClient *client) {
         if (!client.hasError) {
+			
+			BOOL notificationFlag = NO;
+			
             NSDictionary *dict = client.responseJSONObject;
             NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
             if ([[dict objectForKey:@"comments"] intValue]) {
                 [center postNotificationName:kNotificationNameNewCommentsToMe object:self];
+				if (preNewCommentCount != [[dict objectForKey:@"comments"] intValue]) {
+					preNewCommentCount = [[dict objectForKey:@"comments"] intValue];
+					notificationFlag = YES;
+				}
             }
             if ([[dict objectForKey:@"followers"] intValue]) {
-                [center postNotificationName:kNotificationNameNewFollowers object:self userInfo:dict];
+                [center postNotificationName:kNotificationNameNewFollowers object:self];
+				if (preNewFollowerCount != [[dict objectForKey:@"followers"] intValue]) {
+					preNewFollowerCount = [[dict objectForKey:@"followers"] intValue];
+					notificationFlag = YES;
+				}
             }
+			if ([[dict objectForKey:@"mentions"] intValue]) {
+				if (preNewMentionCount != [[dict objectForKey:@"mentions"] intValue]) {
+					preNewMentionCount = [[dict objectForKey:@"mentions"] intValue];
+					notificationFlag = YES;
+				}
+			}
             if ([[dict objectForKey:@"new_status"] intValue]) {
-                [center postNotificationName:kNotificationNameNewStatuses object:self userInfo:dict];
+                [center postNotificationName:kNotificationNameNewStatuses object:self];
             }
+			if (notificationFlag) {
+				[center postNotificationName:kNotificationNameNewNotification object:self userInfo:dict];
+			}
         }
     }];
     

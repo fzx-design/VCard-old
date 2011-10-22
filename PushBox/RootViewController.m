@@ -45,6 +45,7 @@
 - (void)hideCommandCenter;
 - (void)showCardTableView;
 - (void)hideCardTableView;
+- (void)showNotificationView:(id)sender;
 - (void)setDefaultBackgroundImage:(BOOL)animated;
 - (void)updateBackgroundImageAnimated:(BOOL)animated;
 @end
@@ -64,6 +65,17 @@
 @synthesize messagesViewController = _messagesViewController;
 @synthesize cardTableViewController = _cardTableViewController;
 
+@synthesize notificationView = _notificationView;
+@synthesize notiNewCommentLabel = _notiNewCommentLabel;
+@synthesize notiNewFollowerLabel = _notiNewFollowerLabel;
+@synthesize notiNewAtLabel = _notiNewAtLabel;
+
+@synthesize notiCloseButton = _notiCloseButton;
+@synthesize notiDisplayNewFollowersButton = _notiDisplayNewFollowersButton;
+@synthesize notiDisplayNewMentionsButton = _notiDisplayNewMentionsButton;
+@synthesize notiDisplayNewCommentsButton = _notiDisplayNewCommentsButton;
+
+
 #pragma mark - View lifecycle
 
 - (void)dealloc
@@ -76,6 +88,14 @@
     [_dockViewController release];
     [_cardTableViewController release];
 	[_tmpImage release];
+	[_notificationView release];
+	[_notiNewCommentLabel release];
+    [_notiNewFollowerLabel release];
+    [_notiNewAtLabel release];
+    [_notiCloseButton release];
+    [_notiDisplayNewFollowersButton release];
+    [_notiDisplayNewMentionsButton release];
+    [_notiDisplayNewCommentsButton release];
     [super dealloc];
 }
 
@@ -86,6 +106,14 @@
     self.pushBoxHDImageView = nil;
     self.bottomStateView = nil;
     self.bottomStateLabel = nil;
+	self.notificationView = nil;
+	self.notiNewCommentLabel = nil;
+    self.notiNewFollowerLabel = nil;
+    self.notiNewAtLabel = nil;
+	self.notiCloseButton = nil;
+    self.notiDisplayNewFollowersButton = nil;
+    self.notiDisplayNewMentionsButton = nil;
+    self.notiDisplayNewCommentsButton = nil;
 }
 
 + (void)initialize {
@@ -110,11 +138,10 @@
 		
 		self.cardTableViewController.dataSource = CardTableViewDataSourceFriendsTimeline;
 		[self.cardTableViewController firstLoad:^(void) {
-			[self.cardTableViewController loadAllFavoritesWithCompletion:NULL];
+			[self.cardTableViewController loadAllFavoritesWithCompletion:nil];
 			[self showCardTableView];
 			[self showDockView];
 			[self showMessagesView];
-			[self.cardTableViewController getUnread];
 			[[UIApplication sharedApplication] hideLoadingView];
 		}];
     }];
@@ -160,10 +187,15 @@
 			   selector:@selector(configureUsablityAfterDeleted) 
 				   name:kNotificationNameCardDeleted 
 				 object:nil];
+	[center addObserver:self
+			   selector:@selector(showNotificationView:) 
+				   name:kNotificationNameNewNotification 
+				 object:nil];
 	
     
     self.bottomStateView.alpha = 0.0;
 	self.bottomStateInvisibleView.alpha = 0.0;
+	self.notificationView.alpha = 0.0;
 	
     if ([WeiboClient authorized]) {
         self.pushBoxHDImageView.alpha = 0.0;
@@ -348,6 +380,51 @@
 		[self moveCardIntoView];
 		
     }];
+}
+
+- (void)showNotificationView:(id)sender
+{
+	NSDictionary *dict = [sender userInfo];
+	
+	self.notiNewCommentLabel.text = [NSString stringWithFormat:@"%d", [[dict objectForKey:@"comments"] intValue]];
+	self.notiNewFollowerLabel.text = [NSString stringWithFormat:@"%d", [[dict objectForKey:@"followers"] intValue]];
+	self.notiNewAtLabel.text = [NSString stringWithFormat:@"%d", [[dict objectForKey:@"mentions"] intValue]];
+	
+	CCUserInfoCardViewController *userCardVC = self.dockViewController.ccUserInfoCardViewController;
+	userCardVC.friendsCountLabel.text =  userCardVC.user.friendsCount;
+    userCardVC.followersCountLabel.text = userCardVC.user.followersCount;
+	
+	if (self.notificationView.alpha == 0.0) {
+		
+		self.notificationView.alpha = 1.0;
+		
+		CAKeyframeAnimation * animation; 
+		animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"]; 
+		animation.duration = 0.5; 
+		animation.delegate = self;
+		animation.removedOnCompletion = YES;
+		animation.fillMode = kCAFillModeForwards;
+		
+		NSMutableArray *values = [NSMutableArray array];
+		[values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.1, 0.1, 1.0)]];
+		[values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1.0)]]; 
+		[values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9, 0.9, 0.9)]]; 
+		[values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]]; 
+		
+		animation.values = values;
+		[self.notificationView.layer addAnimation:animation forKey:nil];
+	}
+}
+
+- (IBAction)refreshAndShowCommentCenter:(id)sender
+{
+	self.notificationView.alpha = 0.0;
+	[self showCommandCenter];
+}
+
+- (IBAction)closeNotificationPop:(id)sender
+{
+	self.notificationView.alpha = 0.0;
 }
 
 - (void)modalCardViewPresentedNotification:(id)sender

@@ -15,6 +15,7 @@
 #define kNotificationNameNewStatuses @"kNotificationNameNewStatuses"
 #define kNotificationNameNewFollowers @"kNotificationNameNewFollowers"
 #define kNotificationNameReMoveCardsIntoView @"kNotificationReMoveCardsIntoView"
+#define kNotificationNameNewNotification @"kNotificationNameNewNotification"
 
 typedef enum {
     CardTableViewDataSourceFriendsTimeline,
@@ -37,10 +38,10 @@ typedef enum {
     CardTableViewDataSource _dataSource;
     User *_user;
     
+    id _delegate;
+    int _nextPage;
     int _currentRowIndex;
     BOOL _swipeEnabled;
-    int _nextPage;
-    id _delegate;
     
     NSFetchedResultsController *_prevFetchedResultsController;
     int _prevRowIndex;
@@ -56,6 +57,10 @@ typedef enum {
 	NSInteger _direction;
 	CGFloat dragStartOffset;
 	CGFloat preDiff;
+	
+	NSInteger preNewFollowerCount;
+	NSInteger preNewCommentCount;
+	NSInteger preNewMentionCount;
 }
 
 @property(nonatomic, retain) IBOutlet UIButton *regionLeftDetectButton;

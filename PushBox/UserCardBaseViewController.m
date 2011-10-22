@@ -25,7 +25,7 @@
 @synthesize user = _user;
 
 @synthesize genderLabel = _genderLabel;
-@synthesize birthdayLabel = _birthdayLabel;
+@synthesize blogURLLabel = _birthdayLabel;
 @synthesize careerInfoLabel = _careerInfoLabel;
 
 - (void)dealloc
@@ -59,7 +59,7 @@
     self.statusesCountLabel = nil;
     self.descriptionTextView = nil;
 	self.genderLabel = nil;
-    self.birthdayLabel = nil;
+    self.blogURLLabel = nil;
     self.careerInfoLabel = nil;
 }
 
@@ -79,8 +79,13 @@
     self.followersCountLabel.text = self.user.followersCount;
     self.statusesCountLabel.text = self.user.statusesCount;
 	
-	self.genderLabel.text = self.user.gender;
-//	self.birthdayLabel.text = self.user.
+	self.blogURLLabel.text = self.user.blogURL;
+	
+	if ([self.genderLabel.text isEqualToString:@"m"]) {
+		self.genderLabel.text = @"男";
+	} else {
+		self.genderLabel.text = @"女";
+	}
 }
 
 - (IBAction)showFriendsButtonClicked:(id)sender {
@@ -89,7 +94,6 @@
     vc.user = self.user;
     vc.modalPresentationStyle = UIModalPresentationCurrentContext;
     vc.modalTransitionStyle = self.modalTransitionStyle;
-//    [self presentModalViewController:vc animated:YES];
 	[self.navigationController pushViewController:vc animated:YES];
 	[vc release];
 }
@@ -100,7 +104,6 @@
     vc.user = self.user;
     vc.modalPresentationStyle = UIModalPresentationCurrentContext;
     vc.modalTransitionStyle = self.modalTransitionStyle;
-//    [self presentModalViewController:vc animated:YES];
 	[self.navigationController pushViewController:vc animated:YES];
     [vc release];
 }
