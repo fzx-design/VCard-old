@@ -16,18 +16,14 @@
 
 @interface DetailImageViewController : UIViewController <UIScrollViewDelegate> {
 	UIImageView *_imageView;
-	UIImageView *_saveDoneImageView;
 	UIScrollView *_scrollView;
-	UIActivityIndicatorView *_activityIndicatorView;
 	
 	id _delegate;
 	UIImage *_image;
 }
 
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
-@property (nonatomic, retain) IBOutlet UIImageView *saveDoneImageView;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activityIndicatorView;
 @property (nonatomic, assign) IBOutlet id <DetailImageViewControllerDelegate> delegate;
 @property (nonatomic, retain) UIImage *image;
 

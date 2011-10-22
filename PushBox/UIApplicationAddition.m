@@ -73,23 +73,24 @@ static BOOL refreshFlag = NO;
     if (!_loadingImageView) {
         _loadingImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"root_loading_bg"]];
         _loadingImageView.center = CGPointMake(512.0, 345.0);
-		[[self rootView] addSubview:_loadingImageView];
     }
 	if (!_loadingRoundImageView) {
         _loadingRoundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"refreshing_bg.png"]];
         _loadingRoundImageView.center = CGPointMake(512.0, 338.0);
-		[[self rootView] addSubview:_loadingRoundImageView];
     }
 	
     if (!_loadingCircleImageView) {
         _loadingCircleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loading_circle.png"]];
         _loadingCircleImageView.center = CGPointMake(512.0, 338.0);
-		[[self rootView] addSubview:_loadingCircleImageView];
     }
 	
 	_loadingImageView.alpha = 1.0;
 	_loadingRoundImageView.alpha = 1.0;
 	_loadingCircleImageView.alpha = 1.0;
+	
+	[[self rootView] addSubview:_loadingImageView];
+	[[self rootView] addSubview:_loadingRoundImageView];
+	[[self rootView] addSubview:_loadingCircleImageView];
 
 	CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
 	rotationAnimation.duration = 1.0;
@@ -140,7 +141,7 @@ static BOOL refreshFlag = NO;
 
 - (void)showOperationDoneView
 {
-	_operationDoneImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail_save_done.png"]];_operationDoneImageView.frame = CGRectMake(460, 320, 101, 101);
+	_operationDoneImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail_save_done.png"]];_operationDoneImageView.frame = CGRectMake(461, 295, 101, 101);
 	[[self rootView] addSubview:_operationDoneImageView];
 	[UIView animateWithDuration:2.0 delay:1.0 options:0 animations:^{
 		_operationDoneImageView.alpha = 0.0;
@@ -157,6 +158,9 @@ static BOOL refreshFlag = NO;
 		_loadingImageView.alpha = 0.0;
     } completion:^(BOOL finished) {
 		[_loadingCircleImageView.layer removeAnimationForKey:kAnimationLoad];
+		[_loadingCircleImageView removeFromSuperview];
+		[_loadingImageView removeFromSuperview];
+		[_loadingRoundImageView removeFromSuperview];
 	}];
 }
 
