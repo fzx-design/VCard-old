@@ -213,6 +213,7 @@
     [self hideDockView];
     [self hideCardTableView];
 	self.bottomStateInvisibleView.alpha = 0.0;
+	self.notificationView.alpha = 0.0;
 	[self setDefaultBackgroundImage:YES];
     self.currentUser = nil;
     [User deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
