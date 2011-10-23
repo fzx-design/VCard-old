@@ -219,7 +219,7 @@
 					</object>
 					<object class="IBUIActivityIndicatorView" id="238443414">
 						<reference key="NSNextResponder" ref="624629413"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{439, 84}, {20, 20}}</string>
 						<reference key="NSSuperview" ref="624629413"/>
 						<reference key="NSWindow"/>
@@ -493,6 +493,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>autoSaveButton</string>
+							<string>loadingIndicator</string>
 							<string>passwordTextField</string>
 							<string>providerLabel</string>
 							<string>usernameTextField</string>
@@ -500,6 +501,7 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIButton</string>
+							<string>UIActivityIndicatorView</string>
 							<string>UITextField</string>
 							<string>UILabel</string>
 							<string>UITextField</string>
@@ -510,6 +512,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>autoSaveButton</string>
+							<string>loadingIndicator</string>
 							<string>passwordTextField</string>
 							<string>providerLabel</string>
 							<string>usernameTextField</string>
@@ -519,6 +522,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">autoSaveButton</string>
 								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">loadingIndicator</string>
+								<string key="candidateClassName">UIActivityIndicatorView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">passwordTextField</string>

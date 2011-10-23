@@ -9,9 +9,9 @@
 #import "UserCardBaseViewController.h"
 
 @interface CCUserInfoCardViewController : UserCardBaseViewController{
-	UIImageView *_newFriendsImageView;
+	UILabel *_theNewFollowersCountLabel;
 }
 
-@property(nonatomic, retain) IBOutlet UIImageView* newFriendsImageView;
+@property(nonatomic, retain) IBOutlet UILabel *theNewFollowersCountLabel;
 
 @end

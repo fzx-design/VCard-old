@@ -146,7 +146,7 @@
 
 - (void)newFollowersNotification:(id)sender
 {
-	self.ccUserInfoCardViewController.newFriendsImageView.hidden = NO;
+	self.ccUserInfoCardViewController.theNewFollowersCountLabel.hidden = NO;
     if (!self.commandCenterButton.selected) {
         self.commandCenterNotiImageView.hidden = NO;
     }
@@ -154,7 +154,6 @@
 
 - (void)newMentionsNotification:(id)sender
 {
-	self.ccUserInfoCardViewController.newFriendsImageView.hidden = NO;
     if (!self.commandCenterButton.selected) {
         self.commandCenterNotiImageView.hidden = NO;
     }

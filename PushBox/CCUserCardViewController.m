@@ -11,23 +11,25 @@
 
 @implementation CCUserCardViewController
 
-@synthesize newFriendsImageView = _newFriendsImageView;
+@synthesize theNewFollowersCountLabel = _theNewFollowersCountLabel;
+
 
 - (void)dealloc
 {
-    [_newFriendsImageView release];
+	[_theNewFollowersCountLabel release];
+
     [super dealloc];
 }
 
 - (void)viewDidUnload
 {
+	self.theNewFollowersCountLabel = nil;
     [super viewDidUnload];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.newFriendsImageView.hidden = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -40,7 +42,9 @@
 - (void)showFollowersButtonClicked:(id)sender
 {
     [super showFollowersButtonClicked:sender];
-    self.newFriendsImageView.hidden = YES;
+	
+	self.theNewFollowersCountLabel.hidden = YES;
+	
     WeiboClient *client = [WeiboClient client];
     [client resetUnreadCount:ResetUnreadCountTypeFollowers];
 }

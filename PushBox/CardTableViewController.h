@@ -58,10 +58,6 @@ typedef enum {
 	NSInteger _direction;
 	CGFloat dragStartOffset;
 	CGFloat preDiff;
-	
-	NSInteger preNewFollowerCount;
-	NSInteger preNewCommentCount;
-	NSInteger preNewMentionCount;
 }
 
 @property(nonatomic, retain) IBOutlet UIButton *regionLeftDetectButton;

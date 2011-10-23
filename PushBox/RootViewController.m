@@ -6,10 +6,11 @@
 //  Copyright 2011年 同济大学. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "RootViewController.h"
 #import "WeiboClient.h"
 #import "UIApplicationAddition.h"
-#import <QuartzCore/QuartzCore.h>
+#import "AnimationProvider.h"
 #import "Status.h"
 #import "User.h"
 
@@ -125,6 +126,11 @@
 
 - (void)start
 {	
+	preNewCommentCount = 0;
+	preNewFollowerCount = 0;
+	preNewMentionCount = 0;
+	self.notificationView.hidden = YES;
+	
     WeiboClient *client = [WeiboClient client];
     [client setCompletionBlock:^(WeiboClient *client) {
         if (!client.hasError) {
@@ -195,7 +201,7 @@
     
     self.bottomStateView.alpha = 0.0;
 	self.bottomStateInvisibleView.alpha = 0.0;
-	self.notificationView.alpha = 0.0;
+	_commandCenterFlag = NO;
 	
     if ([WeiboClient authorized]) {
         self.pushBoxHDImageView.alpha = 0.0;
@@ -209,11 +215,15 @@
 
 - (void)userSignoutNotification:(id)sender
 {
+	preNewCommentCount = 0;
+	preNewFollowerCount = 0;
+	preNewMentionCount = 0;
+	
     [WeiboClient signout];
     [self hideDockView];
     [self hideCardTableView];
 	self.bottomStateInvisibleView.alpha = 0.0;
-	self.notificationView.alpha = 0.0;
+	self.notificationView.hidden = YES;
 	[self setDefaultBackgroundImage:YES];
     self.currentUser = nil;
     [User deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
@@ -248,18 +258,8 @@
 		self.bottomStateInvisibleView.image = _tmpImage;
 		self.bottomStateInvisibleView.alpha = 1.0;
 	}
-	
-	CATransition *animation = [CATransition animation];
-    animation.delegate = self.bottomStateFrameView;
-    animation.duration = 0.5f;
-    animation.timingFunction = UIViewAnimationCurveEaseInOut;
-	animation.fillMode = kCAFillModeForwards;
-	animation.removedOnCompletion = NO;
-	animation.type = @"cube";
-	animation.subtype = kCATransitionFromBottom;
-	
 	self.bottomStateView.alpha = 1.0;
-	[self.bottomStateFrameView.layer addAnimation:animation forKey:@"animation"];
+	[self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimation] forKey:@"animation"];
 	[self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
 	
 	[self.bottomStateFrameView bringSubviewToFront:self.bottomStateView];
@@ -303,16 +303,7 @@
 
 - (void)hideBottomStateView
 {
-	CATransition *animation = [CATransition animation];
-    animation.delegate = self.bottomStateFrameView;
-    animation.duration = 0.5f;
-    animation.timingFunction = UIViewAnimationCurveEaseInOut;
-	animation.fillMode = kCAFillModeForwards;
-	animation.removedOnCompletion = NO;
-	animation.type = @"cube";
-	animation.subtype = kCATransitionFromBottom;
-	
-	[self.bottomStateFrameView.layer addAnimation:animation forKey:@"animation"];
+	[self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimation] forKey:@"animation"];
 	[self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
 
 	self.bottomStateView.alpha = 0.0;
@@ -383,49 +374,54 @@
     }];
 }
 
+- (BOOL)needUpdateNotiViewWithUserInfo:(NSDictionary*)dict
+{
+	BOOL result = NO;
+	if (preNewCommentCount < [[dict objectForKey:@"comments"] intValue]) {
+		preNewCommentCount = [[dict objectForKey:@"comments"] intValue];
+		self.notiNewCommentLabel.text = [NSString stringWithFormat:@"%d", preNewCommentCount];
+		result = YES;
+	}
+	if (preNewFollowerCount < [[dict objectForKey:@"followers"] intValue]) {
+		preNewFollowerCount = [[dict objectForKey:@"followers"] intValue];
+		self.notiNewFollowerLabel.text = [NSString stringWithFormat:@"%d", preNewFollowerCount];
+		result = YES;
+	}
+	if (preNewMentionCount < [[dict objectForKey:@"mentions"] intValue]) {
+		preNewMentionCount = [[dict objectForKey:@"mentions"] intValue];
+		self.notiNewAtLabel.text = [NSString stringWithFormat:@"%d", preNewMentionCount];
+		result = YES;
+	}
+	
+	return result;
+}
+
 - (void)showNotificationView:(id)sender
 {
 	NSDictionary *dict = [sender userInfo];
 	
-	self.notiNewCommentLabel.text = [NSString stringWithFormat:@"%d", [[dict objectForKey:@"comments"] intValue]];
-	self.notiNewFollowerLabel.text = [NSString stringWithFormat:@"%d", [[dict objectForKey:@"followers"] intValue]];
-	self.notiNewAtLabel.text = [NSString stringWithFormat:@"%d", [[dict objectForKey:@"mentions"] intValue]];
-	
-	CCUserInfoCardViewController *userCardVC = self.dockViewController.ccUserInfoCardViewController;
-	userCardVC.friendsCountLabel.text =  userCardVC.user.friendsCount;
-    userCardVC.followersCountLabel.text = userCardVC.user.followersCount;
-	
-	if (self.notificationView.alpha == 0.0) {
+	if ([self needUpdateNotiViewWithUserInfo:dict]) {
+		CCUserInfoCardViewController *userCardVC = self.dockViewController.ccUserInfoCardViewController;
+		userCardVC.friendsCountLabel.text =  userCardVC.user.friendsCount;
+		userCardVC.followersCountLabel.text = userCardVC.user.followersCount;
 		
-		self.notificationView.alpha = 1.0;
+		userCardVC.theNewFollowersCountLabel.text = self.notiNewFollowerLabel.text;
 		
-		CAKeyframeAnimation * animation; 
-		animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"]; 
-		animation.duration = 0.5; 
-		animation.delegate = self;
-		animation.removedOnCompletion = YES;
-		animation.fillMode = kCAFillModeForwards;
-		
-		NSMutableArray *values = [NSMutableArray array];
-		[values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.1, 0.1, 1.0)]];
-		[values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1.0)]]; 
-		[values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9, 0.9, 0.9)]]; 
-		[values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]]; 
-		
-		animation.values = values;
-		[self.notificationView.layer addAnimation:animation forKey:nil];
+		if (self.notificationView.hidden && !_commandCenterFlag) {
+			self.notificationView.hidden = NO;
+			[self.notificationView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
+		}
 	}
 }
 
 - (IBAction)refreshAndShowCommentCenter:(id)sender
 {
-	self.notificationView.alpha = 0.0;
 	[self showCommandCenter];
 }
 
 - (IBAction)closeNotificationPop:(id)sender
 {
-	self.notificationView.alpha = 0.0;
+	self.notificationView.hidden = YES;
 }
 
 - (void)modalCardViewPresentedNotification:(id)sender
@@ -792,6 +788,13 @@
 
 - (void)showCommandCenter
 {
+	_commandCenterFlag = YES;
+	self.notificationView.hidden = YES;
+	
+	[self.dockViewController.commentsTableViewController refresh];
+	preNewCommentCount = 0;
+	self.notiNewCommentLabel.text = [NSString stringWithFormat:@"%d", preNewCommentCount];
+	
     [self.dockViewController viewWillAppear:YES];
     if (self.cardTableViewController.dataSource != CardTableViewDataSourceFriendsTimeline) {
         [self hideBottomStateView];
@@ -827,7 +830,8 @@
 }
 
 - (void)hideCommandCenter
-{
+{	
+	_commandCenterFlag = NO;
     if (self.cardTableViewController.dataSource != CardTableViewDataSourceFriendsTimeline) {
         [self showBottomStateView];
     }
@@ -865,6 +869,8 @@
 {
     [self.view addSubview:self.loginViewController.view];
     
+	[self.loginViewController.view.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
+	
     [UIView animateWithDuration:1.0 animations:^{
         self.pushBoxHDImageView.alpha = 1.0;
         self.loginViewController.view.alpha = 1.0;
