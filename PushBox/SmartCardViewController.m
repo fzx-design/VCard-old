@@ -147,6 +147,8 @@
 - (Boolean)isAtEndChar:(unichar)c
 {
     NSArray* atEndCharArray = [[NSArray alloc] initWithObjects:
+                               [[NSNumber alloc] initWithInt:44],   // ' '
+                               [[NSNumber alloc] initWithInt:46],   // ' '
                                [[NSNumber alloc] initWithInt:32],   // ' '
                                [[NSNumber alloc] initWithInt:64],   // '@'
                                [[NSNumber alloc] initWithInt:58],   // ':'
@@ -175,6 +177,70 @@
                                [[NSNumber alloc] initWithInt:92],   // '\'
                                [[NSNumber alloc] initWithInt:47],   // '/'
                                [[NSNumber alloc] initWithInt:63],   // '?'
+                               [[NSNumber alloc] initWithInt:65306],   // '"'
+                               [[NSNumber alloc] initWithInt:65307],   // '"'
+                               [[NSNumber alloc] initWithInt:8216],   // '"'
+                               [[NSNumber alloc] initWithInt:8217],   // '"'
+                               [[NSNumber alloc] initWithInt:8220],   // '"'
+                               [[NSNumber alloc] initWithInt:8221],   // '"'
+                               [[NSNumber alloc] initWithInt:65288],   // '"'
+                               [[NSNumber alloc] initWithInt:65289],   // '"'
+                               [[NSNumber alloc] initWithInt:65339],   // '"'
+                               [[NSNumber alloc] initWithInt:65341],   // '"'
+                               [[NSNumber alloc] initWithInt:65371],   // '"'
+                               [[NSNumber alloc] initWithInt:65373],   // '"'
+                               [[NSNumber alloc] initWithInt:65374],   // '"'
+                               [[NSNumber alloc] initWithInt:65281],   // '"'
+                               [[NSNumber alloc] initWithInt:65283],   // '"'
+                               [[NSNumber alloc] initWithInt:65509],   // '"'
+                               [[NSNumber alloc] initWithInt:65285],   // '"'
+                               [[NSNumber alloc] initWithInt:8212],   // '"'
+                               [[NSNumber alloc] initWithInt:65290],   // '"'
+                               [[NSNumber alloc] initWithInt:65291],   // '"'
+                               [[NSNumber alloc] initWithInt:65309],   // '"'
+                               [[NSNumber alloc] initWithInt:65372],   // '"'
+                               [[NSNumber alloc] initWithInt:12298],   // '"'
+                               [[NSNumber alloc] initWithInt:65295],   // '"'
+                               [[NSNumber alloc] initWithInt:65311],   // '"'
+                               [[NSNumber alloc] initWithInt:8230],   // '"'
+                               nil];
+    for (int i = 0; i < [atEndCharArray count]; i++)
+    {
+        if (c == [[atEndCharArray objectAtIndex:i] intValue])
+            return YES;
+    }
+    
+    return NO;
+}
+
+- (Boolean)isLinkEndChar:(unichar)c
+{
+    if (c > 127) {
+        return YES;
+    }
+    
+    NSArray* atEndCharArray = [[NSArray alloc] initWithObjects:
+                               [[NSNumber alloc] initWithInt:44],   // ' '
+                               [[NSNumber alloc] initWithInt:32],   // ' '
+                               [[NSNumber alloc] initWithInt:64],   // '@'
+                               [[NSNumber alloc] initWithInt:59],   // ';'
+                               [[NSNumber alloc] initWithInt:39],   // '''
+                               [[NSNumber alloc] initWithInt:34],   // '"'
+                               [[NSNumber alloc] initWithInt:40],   // '('
+                               [[NSNumber alloc] initWithInt:41],   // ')'
+                               [[NSNumber alloc] initWithInt:91],   // '['
+                               [[NSNumber alloc] initWithInt:93],   // ']'
+                               [[NSNumber alloc] initWithInt:123],   // '{'
+                               [[NSNumber alloc] initWithInt:125],   // '}'
+                               [[NSNumber alloc] initWithInt:126],   // '~'
+                               [[NSNumber alloc] initWithInt:33],   // '!'
+                               [[NSNumber alloc] initWithInt:36],   // '$'
+                               [[NSNumber alloc] initWithInt:94],   // '^'
+                               [[NSNumber alloc] initWithInt:42],   // '*'
+                               [[NSNumber alloc] initWithInt:43],   // '+'
+                               [[NSNumber alloc] initWithInt:124],   // '|'
+                               [[NSNumber alloc] initWithInt:60],   // '<'
+                               [[NSNumber alloc] initWithInt:62],   // '>'
                                [[NSNumber alloc] initWithInt:65306],   // '"'
                                [[NSNumber alloc] initWithInt:65307],   // '"'
                                [[NSNumber alloc] initWithInt:8216],   // '"'
@@ -362,7 +428,7 @@
                 if ([subStr compare:@"http://"] == NSOrderedSame) {
                     int j = i + 1;
                     for (j = i + 1; j < originStatus.length; j++) {
-                        if ([originStatus characterAtIndex:j] == ' ' || [originStatus characterAtIndex:j] > 127) {
+                        if ([self isLinkEndChar:[originStatus characterAtIndex:j]]) {
                             break;
                         }
                     }
@@ -452,7 +518,7 @@
                 if ([subStr compare:@"http://"] == NSOrderedSame) {
                     int j = i + 1;
                     for (j = i + 1; j < originStatus.length; j++) {
-                        if ([originStatus characterAtIndex:j] == ' ' || [originStatus characterAtIndex:j] > 127) {
+                        if ([self isLinkEndChar:[originStatus characterAtIndex:j]]) {
                             break;
                         }
                     }
@@ -506,9 +572,19 @@
     }
 }
 
+- (void)openLinkInInnerBroswer:(NSString*)link
+{
+    if (link) {
+        InnerBroswerViewController* browser = [[InnerBroswerViewController alloc] init];
+        [[UIApplication sharedApplication] presentModalViewController:browser atHeight:0];
+        [browser loadLink:link];
+        [browser release];
+    }
+}
+
 - (IBAction)playButtonClicked:(id)sender
 {
-    [self openLinkInSafari:self.musicLink];
+    [self openLinkInInnerBroswer:self.musicLink];
 }
 
 - (void)loadPostMusicVideo:(NSString*)postMusicVideoLink
@@ -529,7 +605,7 @@
     self.repostView.frame = kRepostViewFrameBottom;
     self.repostWebView.frame = kRepostWebViewFrameBottom;
     self.musicLink = repostMusicVideoLink;
-   //    self.musicBackgroundImageView.alpha = 0.0;
+    //    self.musicBackgroundImageView.alpha = 0.0;
     //    self.repostTweetImageView.alpha = 1.0;
     self.repostTweetImageView.hidden = YES;
     [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
@@ -1050,8 +1126,7 @@
     }
     else if ([type compare:@"/lk/"] == NSOrderedSame) {
         //        NSLog(@"lk %@", para);
-        NSURL* url = [[NSURL alloc] initWithString:para];
-        [[UIApplication sharedApplication] openURL:url];
+        [self openLinkInInnerBroswer:para];
     }
     
     return true; 

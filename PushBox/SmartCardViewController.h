@@ -13,6 +13,7 @@
 #import "CommentsTableViewController.h"
 #import "CommentViewController.h"
 #import "PostViewController.h"
+#import "InnerBroswerViewController.h"
 #import <MessageUI/MessageUI.h>
 
 #define kNotificationNameModalCardPresented @"kNotificationNameModalCardPresented"
