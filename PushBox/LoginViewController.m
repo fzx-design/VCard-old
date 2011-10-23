@@ -19,6 +19,7 @@
 @synthesize autoSaveButton = _autoSaveButton;
 @synthesize providerLabel = _providerLabel;
 @synthesize delegate = _delegate;
+@synthesize loadingIndicator = _loadingIndicator;
 
 #pragma mark - View lifecycle
 
@@ -37,6 +38,7 @@
     [_passwordTextField release];
 	[_autoSaveButton release];
     [_providerLabel release];
+	[_loadingIndicator release];
     _delegate = nil;
     [super dealloc];
 }
@@ -50,6 +52,7 @@
 	self.autoSaveButton.selected = autoSave;
 	self.usernameTextField.text = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultName];
     [self.usernameTextField becomeFirstResponder];
+	self.loadingIndicator = nil;
 }
 
 - (void)viewDidUnload
@@ -68,7 +71,12 @@
 	
     WeiboClient *client = [WeiboClient client];
     
+	self.loadingIndicator.hidden = NO;
+	[self.loadingIndicator startAnimating];
+	
     [client setCompletionBlock:^(WeiboClient *client) {
+		self.loadingIndicator.hidden = YES;
+		[self.loadingIndicator stopAnimating];
         if (client.hasError || ![WeiboClient authorized]) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"验证失败", nil)
                                                             message:NSLocalizedString(@"请检查用户名或网络设置", nil)

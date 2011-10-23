@@ -129,6 +129,8 @@
 	preNewCommentCount = 0;
 	preNewFollowerCount = 0;
 	preNewMentionCount = 0;
+	self.notificationView.hidden = YES;
+	
     WeiboClient *client = [WeiboClient client];
     [client setCompletionBlock:^(WeiboClient *client) {
         if (!client.hasError) {
@@ -199,7 +201,6 @@
     
     self.bottomStateView.alpha = 0.0;
 	self.bottomStateInvisibleView.alpha = 0.0;
-	self.notificationView.hidden = YES;
 	_commandCenterFlag = NO;
 	
     if ([WeiboClient authorized]) {
@@ -222,7 +223,7 @@
     [self hideDockView];
     [self hideCardTableView];
 	self.bottomStateInvisibleView.alpha = 0.0;
-	self.notificationView.alpha = 0.0;
+	self.notificationView.hidden = YES;
 	[self setDefaultBackgroundImage:YES];
     self.currentUser = nil;
     [User deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
@@ -856,7 +857,6 @@
                      completion:^(BOOL finished) {
                          if (finished) {
                              [self.dockViewController viewDidDisappear:YES];
-							 self.notificationView.hidden = NO;
                          }
                      }];
     self.dockViewController.playButton.enabled = YES;
