@@ -395,6 +395,8 @@
 	userCardVC.friendsCountLabel.text =  userCardVC.user.friendsCount;
     userCardVC.followersCountLabel.text = userCardVC.user.followersCount;
 	
+	userCardVC.theNewFollowersCountLabel.text = self.notiNewFollowerLabel.text;
+	
 	if (self.notificationView.alpha == 0.0) {
 		
 		self.notificationView.alpha = 1.0;
@@ -419,7 +421,6 @@
 
 - (IBAction)refreshAndShowCommentCenter:(id)sender
 {
-	self.notificationView.alpha = 0.0;
 	[self showCommandCenter];
 }
 
@@ -792,6 +793,8 @@
 
 - (void)showCommandCenter
 {
+	self.notificationView.alpha = 0.0;
+	
     [self.dockViewController viewWillAppear:YES];
     if (self.cardTableViewController.dataSource != CardTableViewDataSourceFriendsTimeline) {
         [self hideBottomStateView];
