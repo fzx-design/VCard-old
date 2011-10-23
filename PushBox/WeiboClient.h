@@ -101,7 +101,7 @@ typedef void (^WCCompletionBlock)(WeiboClient *client);
 - (void)getFavoritesByPage:(int)page;
 
 - (void)getRelationshipWithUser:(NSString *)userID;
-
+- (void)getUserByScreenName:(NSString *)screenName;
 - (void)getUnreadCountSinceStatusID:(NSString *)statusID;
 - (void)resetUnreadCount:(int)type;
 - (void)getSearchStatuses:(NSString *)q

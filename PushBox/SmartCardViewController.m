@@ -145,6 +145,72 @@
 	}];
 }
 
+- (Boolean)isAtEndChar:(unichar)c
+{
+    NSArray* atEndCharArray = [[NSArray alloc] initWithObjects:
+                               [[NSNumber alloc] initWithInt:32],   // ' '
+                               [[NSNumber alloc] initWithInt:64],   // '@'
+                               [[NSNumber alloc] initWithInt:58],   // ':'
+                               [[NSNumber alloc] initWithInt:59],   // ';'
+                               [[NSNumber alloc] initWithInt:35],   // '#'
+                               [[NSNumber alloc] initWithInt:39],   // '''
+                               [[NSNumber alloc] initWithInt:34],   // '"'
+                               [[NSNumber alloc] initWithInt:40],   // '('
+                               [[NSNumber alloc] initWithInt:41],   // ')'
+                               [[NSNumber alloc] initWithInt:91],   // '['
+                               [[NSNumber alloc] initWithInt:93],   // ']'
+                               [[NSNumber alloc] initWithInt:123],   // '{'
+                               [[NSNumber alloc] initWithInt:125],   // '}'
+                               [[NSNumber alloc] initWithInt:126],   // '~'
+                               [[NSNumber alloc] initWithInt:33],   // '!'
+                               [[NSNumber alloc] initWithInt:36],   // '$'
+                               [[NSNumber alloc] initWithInt:37],   // '%'
+                               [[NSNumber alloc] initWithInt:94],   // '^'
+                               [[NSNumber alloc] initWithInt:38],   // '&'
+                               [[NSNumber alloc] initWithInt:42],   // '*'
+                               [[NSNumber alloc] initWithInt:43],   // '+'
+                               [[NSNumber alloc] initWithInt:61],   // '='
+                               [[NSNumber alloc] initWithInt:124],   // '|'
+                               [[NSNumber alloc] initWithInt:60],   // '<'
+                               [[NSNumber alloc] initWithInt:62],   // '>'
+                               [[NSNumber alloc] initWithInt:92],   // '\'
+                               [[NSNumber alloc] initWithInt:47],   // '/'
+                               [[NSNumber alloc] initWithInt:63],   // '?'
+                               [[NSNumber alloc] initWithInt:65306],   // '"'
+                               [[NSNumber alloc] initWithInt:65307],   // '"'
+                               [[NSNumber alloc] initWithInt:8216],   // '"'
+                               [[NSNumber alloc] initWithInt:8217],   // '"'
+                               [[NSNumber alloc] initWithInt:8220],   // '"'
+                               [[NSNumber alloc] initWithInt:8221],   // '"'
+                               [[NSNumber alloc] initWithInt:65288],   // '"'
+                               [[NSNumber alloc] initWithInt:65289],   // '"'
+                               [[NSNumber alloc] initWithInt:65339],   // '"'
+                               [[NSNumber alloc] initWithInt:65341],   // '"'
+                               [[NSNumber alloc] initWithInt:65371],   // '"'
+                               [[NSNumber alloc] initWithInt:65373],   // '"'
+                               [[NSNumber alloc] initWithInt:65374],   // '"'
+                               [[NSNumber alloc] initWithInt:65281],   // '"'
+                               [[NSNumber alloc] initWithInt:65283],   // '"'
+                               [[NSNumber alloc] initWithInt:65509],   // '"'
+                               [[NSNumber alloc] initWithInt:65285],   // '"'
+                               [[NSNumber alloc] initWithInt:8212],   // '"'
+                               [[NSNumber alloc] initWithInt:65290],   // '"'
+                               [[NSNumber alloc] initWithInt:65291],   // '"'
+                               [[NSNumber alloc] initWithInt:65309],   // '"'
+                               [[NSNumber alloc] initWithInt:65372],   // '"'
+                               [[NSNumber alloc] initWithInt:12298],   // '"'
+                               [[NSNumber alloc] initWithInt:65295],   // '"'
+                               [[NSNumber alloc] initWithInt:65311],   // '"'
+                               [[NSNumber alloc] initWithInt:8230],   // '"'
+                               nil];
+    for (int i = 0; i < [atEndCharArray count]; i++)
+    {
+        if (c == [[atEndCharArray objectAtIndex:i] intValue])
+            return YES;
+    }
+    
+    return NO;
+}
 
 - (void)prepare
 {		
@@ -174,6 +240,8 @@
     
     self.repostView.frame = kRepostViewFrameTop;
     self.repostWebView.frame = kRepostWebViewFrameTop;
+    
+    self.musicCoverImageView.hidden = YES;
     
     self.recentActNotifyLabel.hidden = YES;
     
@@ -255,9 +323,8 @@
             {
                 int j = i + 1;
                 for (j = i + 1; j < originStatus.length; j++) {
-                    if ([originStatus characterAtIndex:j] == ' '|| [originStatus characterAtIndex:j] == ':'|| [originStatus characterAtIndex:j] == ','|| [originStatus characterAtIndex:j] == '.'|| [originStatus characterAtIndex:j] == '/'|| [originStatus characterAtIndex:j] == '\\'|| [originStatus characterAtIndex:j] == ';'|| [originStatus characterAtIndex:j] == '!'|| [originStatus characterAtIndex:j] == '?'|| [originStatus characterAtIndex:j] == '~'|| [originStatus characterAtIndex:j] == ')'|| [originStatus characterAtIndex:j] == ']'|| [originStatus characterAtIndex:j] == '}'|| [originStatus characterAtIndex:j] == '\"'
-                        
-                        ) {
+                    if ([self isAtEndChar:[originStatus characterAtIndex:j]]) {
+                        NSLog(@"%d", [originStatus characterAtIndex:j]);
                         break;
                     }
                 };
@@ -269,10 +336,11 @@
                 }
                 break;
             }
+            case 65283:
             case '#':
             {
                 for (int j = i + 1; j < originStatus.length; j++) {
-                    if ([originStatus characterAtIndex:j] == '#') {
+                    if ([originStatus characterAtIndex:j] == '#'||[originStatus characterAtIndex:j] == 65283) {
                         endIndex = j;
                         break;
                     }
@@ -296,7 +364,7 @@
                 if ([subStr compare:@"http://"] == NSOrderedSame) {
                     int j = i + 1;
                     for (j = i + 1; j < originStatus.length; j++) {
-                        if ([originStatus characterAtIndex:j] == ' ') {
+                        if ([originStatus characterAtIndex:j] == ' ' || [originStatus characterAtIndex:j] > 127) {
                             break;
                         }
                     }
@@ -346,9 +414,7 @@
             {
                 int j = i + 1;
                 for (j = i + 1; j < originStatus.length; j++) {
-                    if ([originStatus characterAtIndex:j] == ' '|| [originStatus characterAtIndex:j] == ':'|| [originStatus characterAtIndex:j] == ','|| [originStatus characterAtIndex:j] == '.'|| [originStatus characterAtIndex:j] == '/'|| [originStatus characterAtIndex:j] == '\\'|| [originStatus characterAtIndex:j] == ';'|| [originStatus characterAtIndex:j] == '!'|| [originStatus characterAtIndex:j] == '?'|| [originStatus characterAtIndex:j] == '~'|| [originStatus characterAtIndex:j] == ')'|| [originStatus characterAtIndex:j] == ']'|| [originStatus characterAtIndex:j] == '}'|| [originStatus characterAtIndex:j] == '\"'
-                        
-                        ) {
+                    if ([self isAtEndChar:[originStatus characterAtIndex:j]]) {
                         break;
                     }
                 };
@@ -361,10 +427,11 @@
                 }
                 break;
             }
+            case 65283:
             case '#':
             {
                 for (int j = i + 1; j < originStatus.length; j++) {
-                    if ([originStatus characterAtIndex:j] == '#') {
+                    if ([originStatus characterAtIndex:j] == '#'||[originStatus characterAtIndex:j] == 65283) {
                         endIndex = j;
                         break;
                     }
@@ -387,7 +454,7 @@
                 if ([subStr compare:@"http://"] == NSOrderedSame) {
                     int j = i + 1;
                     for (j = i + 1; j < originStatus.length; j++) {
-                        if ([originStatus characterAtIndex:j] == ' ') {
+                        if ([originStatus characterAtIndex:j] == ' ' || [originStatus characterAtIndex:j] > 127) {
                             break;
                         }
                     }
@@ -577,10 +644,10 @@
     isTrack = YES;
     
     //    self.imageCoverImageView.alpha = 0.0;
-//    [UIView animateWithDuration:0.5 animations:^{
-//        self.imageCoverImageView.alpha = 1.0;
-//    } completion:^(BOOL fin) {
-//    }];
+    //    [UIView animateWithDuration:0.5 animations:^{
+    //        self.imageCoverImageView.alpha = 1.0;
+    //    } completion:^(BOOL fin) {
+    //    }];
     
     // post text
     [self loadPostWebView];
@@ -811,6 +878,54 @@
 	[vc release];
 }
 
+- (void)atUserClicked:(NSString*)screenName {
+    WeiboClient *client = [WeiboClient client];
+    
+    [client setCompletionBlock:^(WeiboClient *client) {
+        if (!client.hasError) {
+            NSDictionary *userDict = client.responseJSONObject;
+            User* atUser = [User insertUser:userDict inManagedObjectContext:self.managedObjectContext];
+            
+            UserCardViewController *vc = [[UserCardViewController alloc] initWithUsr:atUser];
+            [vc setRelationshipState];
+            vc.currentUser = self.currentUser;
+            vc.modalPresentationStyle = UIModalPresentationCurrentContext;
+            vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+            vc.delegate = self;
+            
+            UserCardNaviViewController* navi = [[UserCardNaviViewController alloc] initWithRootViewController:vc];
+            [UserCardNaviViewController setSharedUserCardNaviViewController:navi];
+            
+            navi.modalPresentationStyle = UIModalPresentationCurrentContext;
+            navi.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardPresented object:self];
+            
+            [self presentModalViewController:navi animated:YES];
+            [navi release];
+            [vc release];
+            
+        }
+        else
+        {
+            // alert
+            NSString *msg = [[NSString alloc] initWithFormat:@"VCard 无法找到名为 \"%@\" 的新浪微博用户", screenName];
+            
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:NSLocalizedString(@"未找到此用户", nil)
+                                  message:NSLocalizedString(msg, nil)
+                                  delegate:nil
+                                  cancelButtonTitle:NSLocalizedString(@"关闭", nil)
+                                  otherButtonTitles:nil];
+            
+            [alert show];
+            [alert release];
+        }
+    }];
+    
+    [client getUserByScreenName:screenName];    
+}
+
 - (void)userCardViewControllerDidDismiss:(UserCardViewController *)vc
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardDismissed object:self];    
@@ -818,7 +933,7 @@
 
 - (void)shouldDismissUserCardNotification:(id)sender 
 {
-	[UserCardNaviViewController sharedUserCardDismiss];
+    [UserCardNaviViewController sharedUserCardDismiss];
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardDismissed object:self];
 }
 
@@ -830,29 +945,29 @@
     vc.status = self.status;
     
     
-	UserCardNaviViewController* navi = [[UserCardNaviViewController alloc] initWithRootViewController:vc];
-	[UserCardNaviViewController setSharedUserCardNaviViewController:navi];
-	
+    UserCardNaviViewController* navi = [[UserCardNaviViewController alloc] initWithRootViewController:vc];
+    [UserCardNaviViewController setSharedUserCardNaviViewController:navi];
+    
     navi.modalPresentationStyle = UIModalPresentationCurrentContext;
-	navi.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    navi.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardPresented object:self];
     
     [self presentModalViewController:navi animated:YES];
-	[navi release];
-	[vc release];
-	
+    [navi release];
+    [vc release];
+    
     //    [self presentModalViewController:vc animated:YES];
     //    [vc release];
 }
 
 - (void)postWithContent:(NSString* )content
 {
-	PostViewController *vc = [[PostViewController alloc] initWithType:PostViewTypePost];
+    PostViewController *vc = [[PostViewController alloc] initWithType:PostViewTypePost];
     [[UIApplication sharedApplication] presentModalViewController:vc atHeight:kModalViewHeight];
-	vc.textView.text = content;
+    vc.textView.text = content;
     
-	[vc release];
+    [vc release];
 }
 
 - (void)commentsTableViewControllerDidDismiss:(CommentsTableViewController *)vc
@@ -912,7 +1027,8 @@
     if ([type compare:@"/at/"] == NSOrderedSame) {
         //        NSLog(@"at %@", para);
         NSString* content = [[NSString alloc] initWithFormat:@"@%@ ", para];
-        [self postWithContent:content];
+        //        [self postWithContent:content];
+        [self atUserClicked:para];
     }
     else if ([type compare:@"/sp/"] == NSOrderedSame) {
         //        NSLog(@"sp %@", para);
