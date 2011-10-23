@@ -247,6 +247,12 @@
 		FE72B4CE144FFD3000C3EE5B /* webview_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4CA144FFD3000C3EE5B /* webview_bg.jpg */; };
 		FE72B4E6145084D500C3EE5B /* smartcard.js in Sources */ = {isa = PBXBuildFile; fileRef = FE72B4E5145084D500C3EE5B /* smartcard.js */; };
 		FE72B4F51450AE9A00C3EE5B /* sc_image_default 2.png in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4F41450AE9A00C3EE5B /* sc_image_default 2.png */; };
+		FE8E1753145433A5004F6A7C /* InnerBroswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE8E1751145433A5004F6A7C /* InnerBroswerViewController.m */; };
+		FE8E1754145433A5004F6A7C /* InnerBroswerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE8E1752145433A5004F6A7C /* InnerBroswerViewController.xib */; };
+		FE8E175D14544255004F6A7C /* webview_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = FE8E175A14544255004F6A7C /* webview_bottom.png */; };
+		FE8E175E14544255004F6A7C /* webview_goSafari.png in Resources */ = {isa = PBXBuildFile; fileRef = FE8E175B14544255004F6A7C /* webview_goSafari.png */; };
+		FE8E175F14544255004F6A7C /* webview_topbar.png in Resources */ = {isa = PBXBuildFile; fileRef = FE8E175C14544255004F6A7C /* webview_topbar.png */; };
+		FE8E1761145459D6004F6A7C /* webview_bg_large.png in Resources */ = {isa = PBXBuildFile; fileRef = FE8E1760145459D6004F6A7C /* webview_bg_large.png */; };
 		FE8F6D42144327B4001A62FD /* MessagesContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE8F6D40144327B3001A62FD /* MessagesContactsTableViewController.m */; };
 		FE8F6D43144327B4001A62FD /* MessagesContactsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE8F6D41144327B4001A62FD /* MessagesContactsTableViewController.xib */; };
 		FE94DEFA1453379800D8A12E /* smartcard.js in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4E5145084D500C3EE5B /* smartcard.js */; };
@@ -570,6 +576,13 @@
 		FE72B4CA144FFD3000C3EE5B /* webview_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = webview_bg.jpg; sourceTree = "<group>"; };
 		FE72B4E5145084D500C3EE5B /* smartcard.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = smartcard.js; sourceTree = "<group>"; };
 		FE72B4F41450AE9A00C3EE5B /* sc_image_default 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sc_image_default 2.png"; sourceTree = "<group>"; };
+		FE8E1750145433A5004F6A7C /* InnerBroswerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InnerBroswerViewController.h; sourceTree = "<group>"; };
+		FE8E1751145433A5004F6A7C /* InnerBroswerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InnerBroswerViewController.m; sourceTree = "<group>"; };
+		FE8E1752145433A5004F6A7C /* InnerBroswerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InnerBroswerViewController.xib; sourceTree = "<group>"; };
+		FE8E175A14544255004F6A7C /* webview_bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = webview_bottom.png; sourceTree = "<group>"; };
+		FE8E175B14544255004F6A7C /* webview_goSafari.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = webview_goSafari.png; sourceTree = "<group>"; };
+		FE8E175C14544255004F6A7C /* webview_topbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = webview_topbar.png; sourceTree = "<group>"; };
+		FE8E1760145459D6004F6A7C /* webview_bg_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = webview_bg_large.png; sourceTree = "<group>"; };
 		FE8F6D3F144327B3001A62FD /* MessagesContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesContactsTableViewController.h; sourceTree = "<group>"; };
 		FE8F6D40144327B3001A62FD /* MessagesContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesContactsTableViewController.m; sourceTree = "<group>"; };
 		FE8F6D41144327B4001A62FD /* MessagesContactsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesContactsTableViewController.xib; sourceTree = "<group>"; };
@@ -791,6 +804,10 @@
 				CBBA01EB13E4519B00641923 /* refresh_help.png */,
 				CB018DDD13DDCD27004217E0 /* transparent.png */,
 				CB4AAC9813DC7CAD0053E3A6 /* flag_sina.png */,
+				FE8E175A14544255004F6A7C /* webview_bottom.png */,
+				FE8E175B14544255004F6A7C /* webview_goSafari.png */,
+				FE8E175C14544255004F6A7C /* webview_topbar.png */,
+				FE8E1760145459D6004F6A7C /* webview_bg_large.png */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -1009,6 +1026,9 @@
 				CB4AAC9013DC7BE60053E3A6 /* LoginViewController.m */,
 				CB018DD313DD3CC8004217E0 /* DockViewController.h */,
 				CB018DD413DD3CC8004217E0 /* DockViewController.m */,
+				FE8E1750145433A5004F6A7C /* InnerBroswerViewController.h */,
+				FE8E1751145433A5004F6A7C /* InnerBroswerViewController.m */,
+				FE8E1752145433A5004F6A7C /* InnerBroswerViewController.xib */,
 				CBDA5B7113DC25C500FAE221 /* CoreDataViewController.h */,
 				CBDA5B7213DC25C500FAE221 /* CoreDataViewController.m */,
 				CBDA5B7413DC25FA00FAE221 /* CoreDataTableViewController.h */,
