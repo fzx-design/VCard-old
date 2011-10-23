@@ -339,6 +339,30 @@
 					<int key="connectionID">13</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">authorNameLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="962706520"/>
+					</object>
+					<int key="connectionID">23</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">authorPreviewLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="444785559"/>
+					</object>
+					<int key="connectionID">24</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">authorImageView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="381118869"/>
+					</object>
+					<int key="connectionID">27</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">backButtonClicked:</string>
 						<reference key="source" ref="387993057"/>
@@ -389,11 +413,11 @@
 							<reference ref="882878909"/>
 							<reference ref="600398195"/>
 							<reference ref="381118869"/>
-							<reference ref="127408447"/>
 							<reference ref="962706520"/>
 							<reference ref="444785559"/>
 							<reference ref="922805547"/>
 							<reference ref="274063477"/>
+							<reference ref="127408447"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -415,11 +439,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">19</int>
 						<reference key="object" ref="962706520"/>
-						<reference key="parent" ref="537707468"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">18</int>
-						<reference key="object" ref="127408447"/>
 						<reference key="parent" ref="537707468"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -449,6 +468,11 @@
 						<reference key="object" ref="387993057"/>
 						<reference key="parent" ref="537707468"/>
 						<string key="objectName">back button</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">18</int>
+						<reference key="object" ref="127408447"/>
+						<reference key="parent" ref="537707468"/>
 					</object>
 				</object>
 			</object>
@@ -503,7 +527,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">22</int>
+			<int key="maxID">27</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -547,11 +571,17 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>authorImageView</string>
+							<string>authorNameLabel</string>
+							<string>authorPreviewLabel</string>
 							<string>newCommentsImageView</string>
 							<string>titleLabel</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIImageView</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
 							<string>UIImageView</string>
 							<string>UILabel</string>
 						</object>
@@ -560,11 +590,26 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>authorImageView</string>
+							<string>authorNameLabel</string>
+							<string>authorPreviewLabel</string>
 							<string>newCommentsImageView</string>
 							<string>titleLabel</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">authorImageView</string>
+								<string key="candidateClassName">UIImageView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">authorNameLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">authorPreviewLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">newCommentsImageView</string>
 								<string key="candidateClassName">UIImageView</string>

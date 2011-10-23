@@ -13,6 +13,7 @@
 #import "Status.h"
 #import "NSDateAddition.h"
 #import "UIApplicationAddition.h"
+#import "UIImageViewAddition.h"
 
 @implementation CommentsTableViewController
 @synthesize status = _status;
@@ -21,12 +22,19 @@
 @synthesize delegate = _delegate;
 @synthesize newCommentsImageView = _newCommentsImageView;
 
+@synthesize authorImageView = _authorImageView;
+@synthesize authorNameLabel = _authorNameLabel;
+@synthesize authorPreviewLabel = _authorPreviewLabel;
+
 - (void)dealloc
 {
     NSLog(@"CommentsTableViewController dealloc");
     [_titleLabel release];
     [_status release];
     [_newCommentsImageView release];
+	[_authorImageView release];
+    [_authorNameLabel release];
+    [_authorPreviewLabel release];
     [super dealloc];
 }
 
@@ -34,6 +42,9 @@
 {
     [super viewDidUnload];
     [_titleLabel release];
+	self.authorImageView = nil;
+    self.authorNameLabel = nil;
+    self.authorPreviewLabel = nil;
 }
 
 - (void)viewDidLoad
@@ -45,7 +56,12 @@
     [self performSelector:@selector(loadMoreData) withObject:nil afterDelay:0.5];
     [self performSelector:@selector(hideLoadMoreDataButton) withObject:nil afterDelay:0.1];
     
+	[self.authorImageView loadImageFromURL:self.status.author.profileImageURL 
+                                 completion:NULL
+                             cacheInContext:self.managedObjectContext];
     self.newCommentsImageView.hidden = YES;
+	self.authorNameLabel.text = self.status.author.screenName;
+	self.authorPreviewLabel.text = self.status.text;
 }
 
 - (void)clearData
