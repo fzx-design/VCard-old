@@ -36,5 +36,6 @@
 - (IBAction)unfollowButtonClicked:(id)sender;
 - (IBAction)backButtonClicked:(id)sender;
 
+- (void)setRelationshipState;
 
 @end

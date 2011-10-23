@@ -460,18 +460,18 @@ report_completion:
     self.path = @"short_url/expand.json";
     [self.params setObject:url_short forKey:@"url_short"];
     
-//    [self setPreCompletionBlock:^(WeiboClient *client1) {
-//        if (!client1.hasError) {
-//            NSArray *statusesDict = client1.responseJSONObject;
-//            if ([statusesDict count]) {
-//                WeiboClient *client2 = [WeiboClient client];
-//                [client2 setCompletionBlock:client1.completionBlock];
-//                [client1 setCompletionBlock:NULL];
-//                [client2 getCommentsAndRepostsCountForStatusesDict:statusesDict];
-//            }
-//        }
-//    }];
-//    
+    //    [self setPreCompletionBlock:^(WeiboClient *client1) {
+    //        if (!client1.hasError) {
+    //            NSArray *statusesDict = client1.responseJSONObject;
+    //            if ([statusesDict count]) {
+    //                WeiboClient *client2 = [WeiboClient client];
+    //                [client2 setCompletionBlock:client1.completionBlock];
+    //                [client1 setCompletionBlock:NULL];
+    //                [client2 getCommentsAndRepostsCountForStatusesDict:statusesDict];
+    //            }
+    //        }
+    //    }];
+    //    
     [self sendRequest];
 }
 
@@ -589,6 +589,14 @@ report_completion:
     [self sendRequest];
 }
 
+- (void)getUserByScreenName:(NSString *)screenName
+{
+    self.path = @"users/show.json";
+    if(screenName)
+        [self.params setObject:screenName forKey:@"screen_name"];
+    [self sendRequest];
+}
+
 - (void)getFriendsOfUser:(NSString *)userID cursor:(int)cursor count:(int)count
 {
     self.path = @"statuses/friends.json";
@@ -658,27 +666,27 @@ report_completion:
     self.path = [NSString stringWithFormat:@"statuses/upload.json"];
     
     
-//	NSString *path = [NSString stringWithFormat:@"statuses/upload.%@", API_FORMAT];
-//    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
-//						 status, @"status",s
-//						 _engine.consumerKey, @"source",
-//                         nil];
-//    
-//    NSString *param = [self nameValString:dic];
-//    NSString *footer = [NSString stringWithFormat:@"\r\n--%@--\r\n", TWITTERFON_FORM_BOUNDARY];
-//    
-//    param = [param stringByAppendingString:[NSString stringWithFormat:@"--%@\r\n", TWITTERFON_FORM_BOUNDARY]];
-//    param = [param stringByAppendingString:@"Content-Disposition: form-data; name=\"pic\";filename=\"image.jpg\"\r\nContent-Type: image/jpeg\r\n\r\n"];
-//    NSLog(@"jpeg size: %d", [jpeg length]);
-//    
-//    NSMutableData *data = [NSMutableData data];
-//    [data appendData:[param dataUsingEncoding:NSUTF8StringEncoding]];
-//    [data appendData:jpeg];
-//    [data appendData:[footer dataUsingEncoding:NSUTF8StringEncoding]];
-//	
-//	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
-//	[params setObject:_engine.consumerKey forKey:@"source"];
-//	[params setObject:status forKey:@"status"];
+    //	NSString *path = [NSString stringWithFormat:@"statuses/upload.%@", API_FORMAT];
+    //    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+    //						 status, @"status",s
+    //						 _engine.consumerKey, @"source",
+    //                         nil];
+    //    
+    //    NSString *param = [self nameValString:dic];
+    //    NSString *footer = [NSString stringWithFormat:@"\r\n--%@--\r\n", TWITTERFON_FORM_BOUNDARY];
+    //    
+    //    param = [param stringByAppendingString:[NSString stringWithFormat:@"--%@\r\n", TWITTERFON_FORM_BOUNDARY]];
+    //    param = [param stringByAppendingString:@"Content-Disposition: form-data; name=\"pic\";filename=\"image.jpg\"\r\nContent-Type: image/jpeg\r\n\r\n"];
+    //    NSLog(@"jpeg size: %d", [jpeg length]);
+    //    
+    //    NSMutableData *data = [NSMutableData data];
+    //    [data appendData:[param dataUsingEncoding:NSUTF8StringEncoding]];
+    //    [data appendData:jpeg];
+    //    [data appendData:[footer dataUsingEncoding:NSUTF8StringEncoding]];
+    //	
+    //	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
+    //	[params setObject:_engine.consumerKey forKey:@"source"];
+    //	[params setObject:status forKey:@"status"];
     
     [self sendRequest];
 }
