@@ -108,6 +108,8 @@
 		9B5F2E3814498FDA008AC0B8 /* UserCardNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F2E3614498FB8008AC0B8 /* UserCardNaviViewController.m */; };
 		9B5F2E3914498FDA008AC0B8 /* UserCardNaviViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F2E3714498FC5008AC0B8 /* UserCardNaviViewController.xib */; };
 		9B5F867614540190004B01D6 /* AnimationProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F867514540190004B01D6 /* AnimationProvider.m */; };
+		9B5F867F1454124B004B01D6 /* CCCommentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F867D14541249004B01D6 /* CCCommentsTableViewController.m */; };
+		9B5F86801454124B004B01D6 /* CCCommentsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F867E1454124A004B01D6 /* CCCommentsTableViewController.xib */; };
 		9BB11CAC14503E8A005B43AC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C8D90F1429FE9C00C94B86 /* libz.dylib */; };
 		9BB11CAD14503E94005B43AC /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9DCAD913E1ED6800DA3D3D /* MessageUI.framework */; };
 		9BB11CAE14503E9C005B43AC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB018E0413DDEAA5004217E0 /* QuartzCore.framework */; };
@@ -366,6 +368,9 @@
 		9B5F2E3714498FC5008AC0B8 /* UserCardNaviViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCardNaviViewController.xib; sourceTree = "<group>"; };
 		9B5F867414540190004B01D6 /* AnimationProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationProvider.h; sourceTree = "<group>"; };
 		9B5F867514540190004B01D6 /* AnimationProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationProvider.m; sourceTree = "<group>"; };
+		9B5F867C14541248004B01D6 /* CCCommentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCCommentsTableViewController.h; sourceTree = "<group>"; };
+		9B5F867D14541249004B01D6 /* CCCommentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCCommentsTableViewController.m; sourceTree = "<group>"; };
+		9B5F867E1454124A004B01D6 /* CCCommentsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCCommentsTableViewController.xib; sourceTree = "<group>"; };
 		9BB5B8B31449A8B100352FF7 /* UserCardContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCardContentViewController.h; sourceTree = "<group>"; };
 		9BB5B8B41449A8B100352FF7 /* UserCardContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCardContentViewController.m; sourceTree = "<group>"; };
 		9BB5B8B51449A8B100352FF7 /* UserCardContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCardContentViewController.xib; sourceTree = "<group>"; };
@@ -720,6 +725,8 @@
 				CB7C4A0413EBD19600BD329A /* CCUserCardViewController.m */,
 				CBBA020213E52F7B00641923 /* CommentsTableViewController.h */,
 				CBBA020313E52F7D00641923 /* CommentsTableViewController.m */,
+				9B5F867C14541248004B01D6 /* CCCommentsTableViewController.h */,
+				9B5F867D14541249004B01D6 /* CCCommentsTableViewController.m */,
 				CBBA01C713E3463100641923 /* PostViewController.h */,
 				CBBA01C813E3463200641923 /* PostViewController.m */,
 				CB26224D13DF06780062EDE7 /* StatusCardViewController.h */,
@@ -1107,6 +1114,7 @@
 				CBDA5B0613DBEC1300FAE221 /* MainWindow.xib */,
 				CB4AAC9113DC7BE60053E3A6 /* LoginViewController.xib */,
 				CBBA020413E52F8100641923 /* CommentsTableViewController.xib */,
+				9B5F867E1454124A004B01D6 /* CCCommentsTableViewController.xib */,
 				CBBA021013E53F2900641923 /* CommentsTableViewCell.xib */,
 				CBBA01C913E3463300641923 /* PostViewController.xib */,
 				CBBA01F413E454FC00641923 /* RelationshipTableViewController.xib */,
@@ -1396,6 +1404,7 @@
 				9B112A111451459A001CE64E /* SmartCardViewController.xib in Resources */,
 				20F893C21452BE7100AE44AA /* news_bg.png in Resources */,
 				20F893C31452BE7100AE44AA /* news_button_close.png in Resources */,
+				9B5F86801454124B004B01D6 /* CCCommentsTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1472,6 +1481,7 @@
 				9B1129E514511116001CE64E /* CardTableViewCell.m in Sources */,
 				9B1129E61451112A001CE64E /* SmartCardViewController.m in Sources */,
 				9B5F867614540190004B01D6 /* AnimationProvider.m in Sources */,
+				9B5F867F1454124B004B01D6 /* CCCommentsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -25,9 +25,12 @@
 @synthesize commandCenterNotiImageView = _commandCenterNotiImageView;
 @synthesize optionsPopoverController = _optionsPopoverController;
 @synthesize controlContainerView = _controlContainerView;
-@synthesize commentsTableViewController = _commentsTableViewController;
+//@synthesize commentsTableViewController = _commentsTableViewController;
+
 @synthesize userCardNaviViewController = _userCardNaviViewController;
 @synthesize ccUserInfoCardViewController = _ccUserInfoCardViewController;
+@synthesize commentNaviViewController = _commentNaviViewController;
+@synthesize ccCommentTableViewController = _ccCommentTableViewController;
 
 #pragma mark - View lifecycle
 
@@ -45,9 +48,13 @@
     [_refreshNotiImageView release];
     [_commandCenterNotiImageView release];
     [_optionsPopoverController release];
-    [_commentsTableViewController release];
+//    [_commentsTableViewController release];
 	[_userCardNaviViewController release];
 	[_ccUserInfoCardViewController release];
+	
+	[_commentNaviViewController release];
+	[_ccCommentTableViewController release];
+	
     [super dealloc];
 }
 
@@ -65,6 +72,9 @@
     self.refreshNotiImageView = nil;
     self.commandCenterNotiImageView = nil;
     self.controlContainerView = nil;
+	
+	self.commentNaviViewController = nil;
+	self.ccCommentTableViewController = nil;
 }
 
 - (void)viewDidLoad
@@ -119,21 +129,32 @@
 	self.userCardNaviViewController.view.frame = frame;
 	[self.view addSubview:self.userCardNaviViewController.view];
 	
+	self.ccCommentTableViewController = [[CCCommentsTableViewController alloc] init];
+	self.ccCommentTableViewController.dataSource = CommentsTableViewDataSourceCommentsToMe;
+	self.ccCommentTableViewController.currentUser = self.currentUser;
+	self.commentNaviViewController = [[UserCardNaviViewController alloc] initWithRootViewController:self.ccCommentTableViewController];
+	self.commentNaviViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 	
-    self.commentsTableViewController.dataSource = CommentsTableViewDataSourceCommentsToMe;
-    self.commentsTableViewController.currentUser = self.currentUser;
+	frame = CGRectMake(470, 121, self.commentNaviViewController.view.frame.size.width, self.commentNaviViewController.view.frame.size.height);
+	self.commentNaviViewController.view.frame = frame;
+	[self.view addSubview:self.commentNaviViewController.view];
+	
+//    self.commentsTableViewController.dataSource = CommentsTableViewDataSourceCommentsToMe;
+//    self.commentsTableViewController.currentUser = self.currentUser;
+//	
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
 	[self.ccUserInfoCardViewController viewWillAppear:YES];
-    [self.commentsTableViewController viewWillAppear:YES];
+	[self.ccCommentTableViewController viewWillAppear:YES];
+//    [self.commentsTableViewController viewWillAppear:YES];
 }
 
 - (void)newCommentsToMeNotification:(id)sender
 {
-    self.commentsTableViewController.newCommentsImageView.hidden = NO;
+//    self.commentsTableViewController.newCommentsImageView.hidden = NO;
     if (!self.commandCenterButton.selected) {
         self.commandCenterNotiImageView.hidden = NO;
     }

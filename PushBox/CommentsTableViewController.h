@@ -16,6 +16,11 @@ typedef enum {
     CommentsTableViewDataSourceCommentsOfStatus,
 } CommentsTableViewDataSource;
 
+typedef enum {
+	CommentsTableViewCommandCenterModel,
+	CommentsTableViewNormalModel,
+} CommentsTableViewModel;
+
 @class CommentsTableViewController;
 @protocol CommentsTableViewControllerDelegate
 - (void)commentsTableViewControllerDidDismiss:(CommentsTableViewController *)vc;
@@ -34,8 +39,7 @@ typedef enum {
 	UILabel *_authorNameLabel;
 	UILabel *_authorPreviewLabel;
 	
-	
-    UIImageView *_newCommentsImageView;
+	CommentsTableViewModel _commentsTableViewModel;
 }
 
 @property(nonatomic, retain) IBOutlet UILabel *titleLabel;
@@ -47,6 +51,8 @@ typedef enum {
 @property(nonatomic, retain) IBOutlet UIImageView *authorImageView;
 @property(nonatomic, retain) IBOutlet UILabel *authorNameLabel;
 @property(nonatomic, retain) IBOutlet UILabel *authorPreviewLabel;
+
+@property(nonatomic) CommentsTableViewModel commentsTableViewModel;
 
 - (IBAction)commentButtonClicked:(id)sender;
 - (IBAction)backButtonClicked:(id)sender;

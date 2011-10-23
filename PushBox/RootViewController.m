@@ -791,7 +791,7 @@
 	_commandCenterFlag = YES;
 	self.notificationView.hidden = YES;
 	
-	[self.dockViewController.commentsTableViewController refresh];
+	[self.dockViewController.ccCommentTableViewController refresh];
 	preNewCommentCount = 0;
 	self.notiNewCommentLabel.text = [NSString stringWithFormat:@"%d", preNewCommentCount];
 	

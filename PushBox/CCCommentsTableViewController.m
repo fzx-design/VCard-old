@@ -1,12 +1,12 @@
 //
-//  CommentsTableViewController.m
+//  CCCommentsTableViewController.m
 //  PushBox
 //
-//  Created by Xie Hasky on 11-7-31.
-//  Copyright 2011年 同济大学. All rights reserved.
+//  Created by Gabriel Yeah on 11-10-23.
+//  Copyright (c) 2011年 同济大学. All rights reserved.
 //
 
-#import "CommentsTableViewController.h"
+#import "CCCommentsTableViewController.h"
 #import "WeiboClient.h"
 #import "Comment.h"
 #import "User.h"
@@ -15,28 +15,16 @@
 #import "UIApplicationAddition.h"
 #import "UIImageViewAddition.h"
 
-@implementation CommentsTableViewController
-@synthesize status = _status;
+@implementation CCCommentsTableViewController
 @synthesize titleLabel = _titleLabel;
 @synthesize dataSource = _dataSource;
 @synthesize delegate = _delegate;
-@synthesize newCommentsImageView = _newCommentsImageView;
-
-@synthesize authorImageView = _authorImageView;
-@synthesize authorNameLabel = _authorNameLabel;
-@synthesize authorPreviewLabel = _authorPreviewLabel;
-
-@synthesize commentsTableViewModel = _commentsTableViewModel;
+@synthesize status = _status;
 
 - (void)dealloc
 {
     NSLog(@"CommentsTableViewController dealloc");
     [_titleLabel release];
-    [_status release];
-    [_newCommentsImageView release];
-	[_authorImageView release];
-    [_authorNameLabel release];
-    [_authorPreviewLabel release];
     [super dealloc];
 }
 
@@ -44,9 +32,6 @@
 {
     [super viewDidUnload];
     [_titleLabel release];
-	self.authorImageView = nil;
-    self.authorNameLabel = nil;
-    self.authorPreviewLabel = nil;
 }
 
 - (void)viewDidLoad
@@ -57,14 +42,6 @@
     _nextPage = 1;
     [self performSelector:@selector(loadMoreData) withObject:nil afterDelay:0.5];
     [self performSelector:@selector(hideLoadMoreDataButton) withObject:nil afterDelay:0.1];
-    
-	[self.authorImageView loadImageFromURL:self.status.author.profileImageURL 
-                                 completion:NULL
-                             cacheInContext:self.managedObjectContext];
-    self.newCommentsImageView.hidden = YES;
-	self.authorNameLabel.text = self.status.author.screenName;
-	self.authorPreviewLabel.text = self.status.text;
-	[self refresh];
 }
 
 - (void)clearData
@@ -83,7 +60,6 @@
 {
 	[self clearData];
     [self loadMoreData];
-    self.newCommentsImageView.hidden = YES;
     WeiboClient *client = [WeiboClient client];
     [client resetUnreadCount:ResetUnreadCountTypeComments];
 }
@@ -99,23 +75,27 @@
     WeiboClient *client = [WeiboClient client];
 	[[UIApplication sharedApplication] showLoadingView];
     [client setCompletionBlock:^(WeiboClient *client) {
+		
+		[[UIApplication sharedApplication] hideLoadingView];
         if (!client.hasError) {
-			[[UIApplication sharedApplication] hideLoadingView];
+
             NSArray *dictArray = client.responseJSONObject;
-            
-            int count = [dictArray count];
+            for (NSDictionary *dict in dictArray) {
+                [Comment insertComment:dict inManagedObjectContext:self.managedObjectContext];
+            }
+			
+			int count = [dictArray count];
             if (count < 20) {
                 [self hideLoadMoreDataButton];
             }
             else {
                 [self showLoadMoreDataButton];
             }
-            
-            for (NSDictionary *dict in dictArray) {
-                [Comment insertComment:dict inManagedObjectContext:self.managedObjectContext];
-            }
+			
+			[self.managedObjectContext processPendingChanges];
+			
             _nextPage++;
-
+			
         } else {
 			[ErrorNotification showPostError];
 		}
@@ -134,15 +114,22 @@
 - (void)configureRequest:(NSFetchRequest *)request
 {
     request.entity = [NSEntityDescription entityForName:@"Comment" inManagedObjectContext:self.managedObjectContext];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updateDate" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:NO];
     request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     
-    if (self.dataSource == CommentsTableViewDataSourceCommentsOfStatus) {
-        request.predicate = [NSPredicate predicateWithFormat:@"targetStatus == %@", self.status];
-    }
-    else {
-        request.predicate = [NSPredicate predicateWithFormat:@"targetUser == %@", self.currentUser];
-    }
+	request.predicate = [NSPredicate predicateWithFormat:@"targetUser == %@ && author != %@", self.currentUser, self.currentUser];
+}
+
+- (void)commentsTableViewCellCommentButtonClicked:(CommentsTableViewCell *)cell
+{
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    Comment *comment = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    CommentViewController *vc = [[CommentViewController alloc] init];
+    vc.targetComment = comment;
+    vc.targetStatus = self.status;
+    [[UIApplication sharedApplication] presentModalViewController:vc atHeight:kModalViewHeight];
+    [vc release];
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
@@ -154,7 +141,6 @@
     commentCell.delegate = self;
     
     UITextView *textView = commentCell.textView;
-    
     textView.text = comment.text;
     
 	CGRect frame = textView.frame;
@@ -170,34 +156,6 @@
                                                  commentCell.separatorLine.frame.size.height);
 }
 
-- (void)commentsTableViewCellCommentButtonClicked:(CommentsTableViewCell *)cell
-{
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    Comment *comment = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    CommentViewController *vc = [[CommentViewController alloc] init];
-    vc.targetComment = comment;
-    vc.targetStatus = self.status;
-    [[UIApplication sharedApplication] presentModalViewController:vc atHeight:kModalViewHeight];
-    [vc release];
-}
-
-- (IBAction)commentButtonClicked:(id)sender {
-    CommentViewController *vc = [[CommentViewController alloc] init];
-    vc.targetStatus = self.status;
-    [[UIApplication sharedApplication] presentModalViewController:vc atHeight:kModalViewHeight];
-    [vc release];
-}
-
-- (IBAction)backButtonClicked:(id)sender {
-	if (self.commentsTableViewModel == CommentsTableViewNormalModel) {
-		[UserCardNaviViewController sharedUserCardDismiss];
-		[self.delegate commentsTableViewControllerDidDismiss:self];
-	} else if (self.commentsTableViewModel == CommentsTableViewCommandCenterModel){
-		[self.navigationController popViewControllerAnimated:YES];
-	}
-}
-
 - (NSString *)customCellClassName
 {
     return @"CommentsTableViewCell";
@@ -209,7 +167,7 @@
 	
 	UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(11, 26, 383, 39)];
 	[self.view addSubview:textView];
-//	textView.font = [textView.font fontWithSize:14];
+	//	textView.font = [textView.font fontWithSize:14];
 	textView.text = comment.text;
     
 	CGFloat height = textView.frame.origin.y + textView.contentSize.height;
@@ -219,5 +177,19 @@
 	return height;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	Comment *comment = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    CommentsTableViewController *vc = [[CommentsTableViewController alloc] init];
+    vc.dataSource = CommentsTableViewDataSourceCommentsOfStatus;
+    vc.currentUser = comment.targetUser;
+    vc.status = comment.targetStatus;
+	vc.commentsTableViewModel = CommentsTableViewCommandCenterModel;
+	
+	[self.navigationController pushViewController:vc animated:YES];
+    [vc release];
+}
+
 
 @end
+
