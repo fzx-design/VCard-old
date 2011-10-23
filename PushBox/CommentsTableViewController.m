@@ -58,11 +58,11 @@
     else {
         [self.currentUser removeCommentsToMe:self.currentUser.commentsToMe];
     }
+	[self.managedObjectContext processPendingChanges];
 }
 
 - (void)refresh
 {
-    [self clearData];
     [self loadMoreData];
     self.newCommentsImageView.hidden = YES;
     WeiboClient *client = [WeiboClient client];
@@ -80,6 +80,9 @@
     WeiboClient *client = [WeiboClient client];
     [client setCompletionBlock:^(WeiboClient *client) {
         if (!client.hasError) {
+			
+			[self clearData];
+			
             NSArray *dictArray = client.responseJSONObject;
             
             int count = [dictArray count];
@@ -94,13 +97,12 @@
                 [Comment insertComment:dict inManagedObjectContext:self.managedObjectContext];
             }
             _nextPage++;
-            
-            _loading = NO;
-            [self doneLoadingTableViewData];
+
         } else {
-			_loading = NO;
 			[ErrorNotification showPostError];
 		}
+		[self doneLoadingTableViewData];
+		_loading = NO;
     }];
     
     if (self.dataSource == CommentsTableViewDataSourceCommentsOfStatus) {

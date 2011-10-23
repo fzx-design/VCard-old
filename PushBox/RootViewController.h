@@ -37,13 +37,17 @@
 	UIButton *_notiDisplayNewMentionsButton;
 	UIButton *_notiDisplayNewCommentsButton;
 	
-    
     LoginViewController *_loginViewController;
     DockViewController *_dockViewController;
     MessagesViewController *_messagesViewController;
     CardTableViewController *_cardTableViewController;
     
     NSTimer *_playTimer;
+	
+	BOOL _commandCenterFlag;
+	NSInteger preNewFollowerCount;
+	NSInteger preNewCommentCount;
+	NSInteger preNewMentionCount;
 	
 	UIImage *_tmpImage;
 }
