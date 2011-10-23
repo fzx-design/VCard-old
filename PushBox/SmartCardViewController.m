@@ -49,8 +49,7 @@
 @synthesize recentActNotifyLabel = _recentActNotifyLabel;
 
 @synthesize status = _status;
-@synthesize postMusicVideoLink;
-@synthesize repostMusicVideoLink;
+@synthesize musicLink = _musicLink;
 
 - (void)dealloc
 {    
@@ -214,8 +213,7 @@
 
 - (void)prepare
 {		
-    self.postMusicVideoLink = nil;
-    self.repostMusicVideoLink = nil;
+    self.musicLink = nil;
     
 	self.tweetImageView.image = nil;
 	self.tweetImageView.alpha = 1.0;
@@ -500,10 +498,24 @@
                                 cacheInContext:self.managedObjectContext];
 }
 
+- (void)openLinkInSafari:(NSString*)link
+{
+    if (link) {
+        NSURL* url = [[NSURL alloc] initWithString:link];
+        [[UIApplication sharedApplication] openURL:url];
+    }
+}
+
+- (IBAction)playButtonClicked:(id)sender
+{
+    [self openLinkInSafari:self.musicLink];
+}
+
 - (void)loadPostMusicVideo:(NSString*)postMusicVideoLink
 {    
     self.playButton.hidden = NO;
     self.playButton.frame = kPlayButtonFrameCenter;
+    self.musicLink = postMusicVideoLink;
     [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
         self.playButton.alpha = 1.0;
     } completion:^(BOOL fin) {
@@ -516,7 +528,8 @@
     self.playButton.frame = kPlayButtonFrameTopRight;
     self.repostView.frame = kRepostViewFrameBottom;
     self.repostWebView.frame = kRepostWebViewFrameBottom;
-    //    self.musicBackgroundImageView.alpha = 0.0;
+    self.musicLink = repostMusicVideoLink;
+   //    self.musicBackgroundImageView.alpha = 0.0;
     //    self.repostTweetImageView.alpha = 1.0;
     self.repostTweetImageView.hidden = YES;
     [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
@@ -1026,7 +1039,7 @@
     
     if ([type compare:@"/at/"] == NSOrderedSame) {
         //        NSLog(@"at %@", para);
-        NSString* content = [[NSString alloc] initWithFormat:@"@%@ ", para];
+        //        NSString* content = [[NSString alloc] initWithFormat:@"@%@ ", para];
         //        [self postWithContent:content];
         [self atUserClicked:para];
     }

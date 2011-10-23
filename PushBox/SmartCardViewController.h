@@ -48,6 +48,8 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
     
     Boolean isTrack;
     
+    NSString *_musicLink;
+    
     Status *_status;
 }
 
@@ -74,9 +76,9 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
 @property(nonatomic, retain) IBOutlet UIButton* playButton;
 @property(nonatomic, retain) IBOutlet UILabel* recentActNotifyLabel;
 
+@property(nonatomic, retain) NSString* musicLink;
+
 @property(nonatomic, retain) Status* status;
-@property(nonatomic, retain) NSString *postMusicVideoLink;
-@property(nonatomic, retain) NSString *repostMusicVideoLink;
 
 - (IBAction)actionsButtonClicked:(UIButton *)sender;
 - (IBAction)profileImageButtonClicked:(id)sender;

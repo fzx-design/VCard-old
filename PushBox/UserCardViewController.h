@@ -8,6 +8,8 @@
 
 #import "UserCardBaseViewController.h"
 #import "UserCardNaviViewController.h"
+#import "PostViewController.h"
+#import "UIApplicationAddition.h"
 
 @class UserCardViewController;
 @protocol UserCardViewControllerDelegate
@@ -35,6 +37,7 @@
 - (IBAction)followButtonClicked:(id)sender;
 - (IBAction)unfollowButtonClicked:(id)sender;
 - (IBAction)backButtonClicked:(id)sender;
+- (IBAction)atButtonClicked:(id)sender;
 
 - (void)setRelationshipState;
 

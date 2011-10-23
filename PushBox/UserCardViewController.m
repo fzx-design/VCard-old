@@ -78,6 +78,15 @@
     [client getRelationshipWithUser:self.user.userID];
 }
 
+- (IBAction)atButtonClicked:(id)sender
+{
+    PostViewController *vc = [[PostViewController alloc] initWithType:PostViewTypePost];
+    [[UIApplication sharedApplication] presentModalViewController:vc atHeight:kModalViewHeight];
+    vc.textView.text = [[NSString alloc] initWithFormat:@"@%@ ", self.user.screenName];
+    
+    [vc release];
+}
+
 - (void)configureView
 {
     [super configureView];
