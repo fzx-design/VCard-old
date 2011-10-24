@@ -18,10 +18,10 @@
 #define kLoadDelay 1.5
 #define kPlayButtonFrameTopRight CGRectMake(399, 306, 68, 68)
 #define kPlayButtonFrameCenter CGRectMake(251, 373, 68, 68)
-#define kRepostViewFrameTop CGRectMake(57, 275, 451, 129)
-#define kRepostWebViewFrameTop CGRectMake(65, 287, 433, 106)
-#define kRepostViewFrameBottom CGRectMake(57, 275+125, 451, 129)
-#define kRepostWebViewFrameBottom CGRectMake(65, 287+125, 433, 106)
+#define kRepostViewFrameTop CGRectMake(57, 275, 451, 134)
+#define kRepostWebViewFrameTop CGRectMake(57, 275, 451, 134)
+#define kRepostViewFrameBottom CGRectMake(57, 275+125, 451, 134)
+#define kRepostWebViewFrameBottom CGRectMake(57, 275+125, 451, 134)
 
 @implementation SmartCardViewController
 
@@ -602,8 +602,8 @@
 {
     self.playButton.hidden = NO;
     self.playButton.frame = kPlayButtonFrameTopRight;
-    self.repostView.frame = kRepostViewFrameBottom;
-    self.repostWebView.frame = kRepostWebViewFrameBottom;
+//    self.repostView.frame = kRepostViewFrameBottom;
+//    self.repostWebView.frame = kRepostWebViewFrameBottom;
     self.musicLink = repostMusicVideoLink;
     //    self.musicBackgroundImageView.alpha = 0.0;
     //    self.repostTweetImageView.alpha = 1.0;
