@@ -10,6 +10,7 @@
 #import "OptionsTableViewController.h"
 #import "CCUserCardViewController.h"
 #import "CommentsTableViewController.h"
+#import "CCCommentsTableViewController.h"
 #import "UserCardNaviViewController.h"
 #import "CCUserInfoCardViewController.h"
 
@@ -28,10 +29,14 @@
     UIImageView *_commandCenterNotiImageView;
 
     UIPopoverController *_optionsPopoverController;
-    CommentsTableViewController *_commentsTableViewController;
+//    CommentsTableViewController *_commentsTableViewController;
 	
 	UserCardNaviViewController *_userCardNaviViewController;
 	CCUserInfoCardViewController *_ccUserInfoCardViewController;
+	
+	UserCardNaviViewController *_commentNaviViewController;
+	CCCommentsTableViewController *_ccCommentTableViewController;
+	
 }
 
 @property(nonatomic, retain) IBOutlet UIButton* refreshButton;
@@ -47,8 +52,10 @@
 @property(nonatomic, retain) IBOutlet UIImageView* refreshNotiImageView;
 @property(nonatomic, retain) IBOutlet UIImageView* commandCenterNotiImageView;
 @property(nonatomic, retain) UIPopoverController* optionsPopoverController;
-@property(nonatomic, retain) IBOutlet CommentsTableViewController* commentsTableViewController;
+//@property(nonatomic, retain) IBOutlet CommentsTableViewController* commentsTableViewController;
 
+@property(nonatomic, retain) UserCardNaviViewController* commentNaviViewController;
+@property(nonatomic, retain) CCCommentsTableViewController* ccCommentTableViewController;
 @property(nonatomic, retain) UserCardNaviViewController* userCardNaviViewController;
 @property(nonatomic, retain) CCUserInfoCardViewController* ccUserInfoCardViewController;
 

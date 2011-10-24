@@ -84,11 +84,11 @@
 		[[self layer] addSublayer:layer];
 		_arrowImage=layer;
 		
-		UIActivityIndicatorView *view = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-		view.frame = CGRectMake(25.0f, frame.size.height - 38.0f, 20.0f, 20.0f);
-		[self addSubview:view];
-		_activityView = view;
-		[view release];
+//		UIActivityIndicatorView *view = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+//		view.frame = CGRectMake(25.0f, frame.size.height - 38.0f, 20.0f, 20.0f);
+//		[self addSubview:view];
+//		_activityView = view;
+//		[view release];
 		
 		
 		[self setState:EGOOPullRefreshNormal];
@@ -148,7 +148,7 @@
 			}
 			
 			_statusLabel.text = NSLocalizedString(@"下拉以刷新...", @"下拉以刷新状态");
-			[_activityView stopAnimating];
+//			[_activityView stopAnimating];
 			[CATransaction begin];
 			[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions]; 
 			_arrowImage.hidden = NO;
@@ -161,7 +161,7 @@
 		case EGOOPullRefreshLoading:
 			
 			_statusLabel.text = NSLocalizedString(@"请稍等...", @"载入状态");
-			[_activityView startAnimating];
+//			[_activityView startAnimating];
 			[CATransaction begin];
 			[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions]; 
 			_arrowImage.hidden = YES;
@@ -249,7 +249,7 @@
 - (void)dealloc {
 	
 	_delegate=nil;
-	_activityView = nil;
+//	_activityView = nil;
 	_statusLabel = nil;
 	_arrowImage = nil;
 	_lastUpdatedLabel = nil;

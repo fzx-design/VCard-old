@@ -163,7 +163,6 @@
     vc.currentUser = self.currentUser;
     vc.modalPresentationStyle = UIModalPresentationCurrentContext;
     vc.modalTransitionStyle = self.modalTransitionStyle;
-//    [self presentModalViewController:vc animated:YES];
 	[self.navigationController pushViewController:vc animated:YES];
     [vc release];
 }

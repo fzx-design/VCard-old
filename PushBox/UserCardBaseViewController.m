@@ -81,7 +81,7 @@
 	
 	self.blogURLLabel.text = self.user.blogURL;
 	
-	if ([self.genderLabel.text isEqualToString:@"m"]) {
+	if ([self.user.gender isEqualToString:@"m"]) {
 		self.genderLabel.text = @"男";
 	} else {
 		self.genderLabel.text = @"女";
