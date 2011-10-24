@@ -1424,6 +1424,11 @@
 				9B112A111451459A001CE64E /* SmartCardViewController.xib in Resources */,
 				20F893C21452BE7100AE44AA /* news_bg.png in Resources */,
 				20F893C31452BE7100AE44AA /* news_button_close.png in Resources */,
+				FE8E1754145433A5004F6A7C /* InnerBroswerViewController.xib in Resources */,
+				FE8E175D14544255004F6A7C /* webview_bottom.png in Resources */,
+				FE8E175E14544255004F6A7C /* webview_goSafari.png in Resources */,
+				FE8E175F14544255004F6A7C /* webview_topbar.png in Resources */,
+				FE8E1761145459D6004F6A7C /* webview_bg_large.png in Resources */,
 				9B5F86801454124B004B01D6 /* CCCommentsTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1501,6 +1506,7 @@
 				9B1129E514511116001CE64E /* CardTableViewCell.m in Sources */,
 				9B1129E61451112A001CE64E /* SmartCardViewController.m in Sources */,
 				9B5F867614540190004B01D6 /* AnimationProvider.m in Sources */,
+				FE8E1753145433A5004F6A7C /* InnerBroswerViewController.m in Sources */,
 				9B5F867F1454124B004B01D6 /* CCCommentsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
