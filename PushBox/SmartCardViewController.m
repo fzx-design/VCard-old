@@ -299,8 +299,8 @@
     self.postWebView.alpha = 0.0;
     self.repostWebView.alpha = 0.0;
     
-    [[self.postWebView scrollView] setScrollEnabled:NO];
-    [[self.repostWebView scrollView] setScrollEnabled:NO];
+//    [[self.postWebView scrollView] setScrollEnabled:NO];
+//    [[self.repostWebView scrollView] setScrollEnabled:NO];
     
     self.repostView.frame = kRepostViewFrameTop;
     self.repostWebView.frame = kRepostWebViewFrameTop;

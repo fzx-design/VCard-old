@@ -104,6 +104,10 @@
 		9B112A0E14514449001CE64E /* posting_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B112A0A14514449001CE64E /* posting_circle.png */; };
 		9B112A0F14514449001CE64E /* refreshing_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B112A0B14514449001CE64E /* refreshing_bg.png */; };
 		9B112A111451459A001CE64E /* SmartCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B112A101451459A001CE64E /* SmartCardViewController.xib */; };
+		9B11DC0614553AAD001F75EF /* CCCommentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B11DC0514553AAC001F75EF /* CCCommentsTableViewCell.xib */; };
+		9B11DC0B14554EC7001F75EF /* cc_comments_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B11DC0814554EC7001F75EF /* cc_comments_selected.png */; };
+		9B11DC0C14554EC7001F75EF /* cc_reposts_button_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B11DC0914554EC7001F75EF /* cc_reposts_button_highlight.png */; };
+		9B11DC0D14554EC7001F75EF /* cc_reposts_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B11DC0A14554EC7001F75EF /* cc_reposts_button.png */; };
 		9B5F2E2014497374008AC0B8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F2E1F14497373008AC0B8 /* Default-Landscape~ipad.png */; };
 		9B5F2E3814498FDA008AC0B8 /* UserCardNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F2E3614498FB8008AC0B8 /* UserCardNaviViewController.m */; };
 		9B5F2E3914498FDA008AC0B8 /* UserCardNaviViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F2E3714498FC5008AC0B8 /* UserCardNaviViewController.xib */; };
@@ -366,6 +370,10 @@
 		9B112A0A14514449001CE64E /* posting_circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = posting_circle.png; sourceTree = "<group>"; };
 		9B112A0B14514449001CE64E /* refreshing_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refreshing_bg.png; sourceTree = "<group>"; };
 		9B112A101451459A001CE64E /* SmartCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmartCardViewController.xib; sourceTree = "<group>"; };
+		9B11DC0514553AAC001F75EF /* CCCommentsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCCommentsTableViewCell.xib; sourceTree = "<group>"; };
+		9B11DC0814554EC7001F75EF /* cc_comments_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cc_comments_selected.png; sourceTree = "<group>"; };
+		9B11DC0914554EC7001F75EF /* cc_reposts_button_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cc_reposts_button_highlight.png; sourceTree = "<group>"; };
+		9B11DC0A14554EC7001F75EF /* cc_reposts_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cc_reposts_button.png; sourceTree = "<group>"; };
 		9B39EAA2144DCDB900F234D6 /* ErrorNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorNotification.h; sourceTree = "<group>"; };
 		9B39EAA3144DCDB900F234D6 /* ErrorNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorNotification.m; sourceTree = "<group>"; };
 		9B5F2E1F14497373008AC0B8 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
@@ -650,6 +658,16 @@
 			path = Msg;
 			sourceTree = "<group>";
 		};
+		9B11DC0714554E81001F75EF /* commandcenter */ = {
+			isa = PBXGroup;
+			children = (
+				9B11DC0814554EC7001F75EF /* cc_comments_selected.png */,
+				9B11DC0914554EC7001F75EF /* cc_reposts_button_highlight.png */,
+				9B11DC0A14554EC7001F75EF /* cc_reposts_button.png */,
+			);
+			name = commandcenter;
+			sourceTree = "<group>";
+		};
 		9BE01AFD145098CB00450EE2 /* loading */ = {
 			isa = PBXGroup;
 			children = (
@@ -780,6 +798,7 @@
 		CB4AAC5213DC6AF20053E3A6 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				9B11DC0714554E81001F75EF /* commandcenter */,
 				9B1129C414510E17001CE64E /* msg */,
 				9BE01AFD145098CB00450EE2 /* loading */,
 				CBBA01F113E4530700641923 /* statuscard */,
@@ -1125,7 +1144,7 @@
 				FEFDACAE1443F7A5009CF7CD /* MessagesDialogTableViewCell.xib */,
 				FEFB31241443130700440DD5 /* MessageViewController.xib */,
 				CBD36F1013E697F5008BB428 /* CommentViewController.xib */,
-				CBBA01F913E470F100641923 /* RelationshipTableViewCell.xib */,
+				CBBA01C913E3463300641923 /* PostViewController.xib */,
 				CB018DFE13DDE468004217E0 /* AboutViewController.xib */,
 				CB018DD513DD3CC8004217E0 /* DockViewController.xib */,
 				9B1129EE14514374001CE64E /* RootViewController.xib */,
@@ -1134,9 +1153,10 @@
 				CBDA5B0613DBEC1300FAE221 /* MainWindow.xib */,
 				CB4AAC9113DC7BE60053E3A6 /* LoginViewController.xib */,
 				CBBA020413E52F8100641923 /* CommentsTableViewController.xib */,
-				9B5F867E1454124A004B01D6 /* CCCommentsTableViewController.xib */,
 				CBBA021013E53F2900641923 /* CommentsTableViewCell.xib */,
-				CBBA01C913E3463300641923 /* PostViewController.xib */,
+				9B11DC0514553AAC001F75EF /* CCCommentsTableViewCell.xib */,
+				9B5F867E1454124A004B01D6 /* CCCommentsTableViewController.xib */,
+				CBBA01F913E470F100641923 /* RelationshipTableViewCell.xib */,
 				CBBA01F413E454FC00641923 /* RelationshipTableViewController.xib */,
 				CB9DCACD13E1E54700DA3D3D /* DetailImageViewController.xib */,
 				CB26224F13DF06780062EDE7 /* StatusCardViewController.xib */,
@@ -1430,6 +1450,10 @@
 				FE8E175F14544255004F6A7C /* webview_topbar.png in Resources */,
 				FE8E1761145459D6004F6A7C /* webview_bg_large.png in Resources */,
 				9B5F86801454124B004B01D6 /* CCCommentsTableViewController.xib in Resources */,
+				9B11DC0614553AAD001F75EF /* CCCommentsTableViewCell.xib in Resources */,
+				9B11DC0B14554EC7001F75EF /* cc_comments_selected.png in Resources */,
+				9B11DC0C14554EC7001F75EF /* cc_reposts_button_highlight.png in Resources */,
+				9B11DC0D14554EC7001F75EF /* cc_reposts_button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

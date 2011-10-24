@@ -50,7 +50,7 @@
 							<object class="IBUILabel" id="742522035">
 								<reference key="NSNextResponder" ref="710760870"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{20, 13}, {222, 21}}</string>
+								<string key="NSFrame">{{20, 0}, {222, 21}}</string>
 								<reference key="NSSuperview" ref="710760870"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1069354354"/>
@@ -91,10 +91,10 @@
 							<object class="IBUILabel" id="1069354354">
 								<reference key="NSNextResponder" ref="710760870"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{250, 13}, {148, 21}}</string>
+								<string key="NSFrame">{{250, 0}, {148, 21}}</string>
 								<reference key="NSSuperview" ref="710760870"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="76159881"/>
+								<reference key="NSNextKeyView" ref="310639166"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
@@ -128,10 +128,10 @@
 							<object class="IBUITextView" id="310639166">
 								<reference key="NSNextResponder" ref="710760870"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{12, 28}, {387, 33}}</string>
+								<string key="NSFrame">{{19, 21}, {387, 41}}</string>
 								<reference key="NSSuperview" ref="710760870"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="742522035"/>
+								<reference key="NSNextKeyView" ref="76159881"/>
 								<object class="NSColor" key="IBUIBackgroundColor" id="785062007">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MCAwAA</bytes>
@@ -166,7 +166,7 @@
 							<object class="IBUIButton" id="76159881">
 								<reference key="NSNextResponder" ref="710760870"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{405, 11}, {35, 29}}</string>
+								<string key="NSFrame">{{405, -1}, {35, 29}}</string>
 								<reference key="NSSuperview" ref="710760870"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="234804698"/>
@@ -203,9 +203,10 @@
 							<object class="IBUIImageView" id="234804698">
 								<reference key="NSNextResponder" ref="710760870"/>
 								<int key="NSvFlags">256</int>
-								<string key="NSFrame">{{0, 66}, {447, 2}}</string>
+								<string key="NSFrame">{{0, 63}, {447, 2}}</string>
 								<reference key="NSSuperview" ref="710760870"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">4</int>
@@ -218,10 +219,10 @@
 								</object>
 							</object>
 						</object>
-						<string key="NSFrameSize">{448, 75}</string>
+						<string key="NSFrameSize">{448, 65}</string>
 						<reference key="NSSuperview" ref="160182125"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="310639166"/>
+						<reference key="NSNextKeyView" ref="742522035"/>
 						<reference key="IBUIBackgroundColor" ref="785062007"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -230,7 +231,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</object>
-				<string key="NSFrameSize">{448, 76}</string>
+				<string key="NSFrameSize">{448, 66}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="710760870"/>
@@ -239,7 +240,7 @@
 				<int key="IBUISelectionStyle">0</int>
 				<reference key="IBUIContentView" ref="710760870"/>
 				<string key="IBUIReuseIdentifier">CommentsTableViewCell</string>
-				<real value="76" key="IBUIRowHeight"/>
+				<real value="65" key="IBUIRowHeight"/>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -315,10 +316,10 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="76159881"/>
-							<reference ref="310639166"/>
 							<reference ref="742522035"/>
 							<reference ref="1069354354"/>
 							<reference ref="234804698"/>
+							<reference ref="310639166"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>

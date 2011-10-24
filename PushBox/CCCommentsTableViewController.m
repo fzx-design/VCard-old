@@ -158,24 +158,24 @@
 
 - (NSString *)customCellClassName
 {
-    return @"CommentsTableViewCell";
+    return @"CCCommentsTableViewCell";
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	Comment *comment = [self.fetchedResultsController objectAtIndexPath:indexPath];
-	
-	UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(11, 26, 383, 39)];
-	[self.view addSubview:textView];
-	//	textView.font = [textView.font fontWithSize:14];
-	textView.text = comment.text;
-    
-	CGFloat height = textView.frame.origin.y + textView.contentSize.height;
-	[textView removeFromSuperview];
-	[textView release];
-	
-	return height;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//	Comment *comment = [self.fetchedResultsController objectAtIndexPath:indexPath];
+//	
+//	UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(11, 26, 383, 39)];
+//	[self.view addSubview:textView];
+//	//	textView.font = [textView.font fontWithSize:14];
+//	textView.text = comment.text;
+//    
+//	CGFloat height = textView.frame.origin.y + textView.contentSize.height;
+//	[textView removeFromSuperview];
+//	[textView release];
+//	
+//	return height;
+//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
