@@ -27,6 +27,7 @@
 
 @synthesize profileImageView = _profileImageView;
 @synthesize screenNameLabel = _screenNameLabel;
+@synthesize gifIcon = _gifIcon;
 @synthesize dateLabel = _dateLabel;
 @synthesize actionsButton = _actionsButton;
 @synthesize repostCountLabel = _repostCountLabel;
@@ -118,6 +119,22 @@
                                                object:nil];
 }
 
+- (BOOL)checkGif:(NSString*)url
+{
+    if (url == nil) {
+        return NO;
+    }
+    
+    NSString* extName = [url substringFromIndex:([url length] - 3)];
+    
+    if ([extName compare:@"gif"] == NSOrderedSame) {
+        return YES;
+    }
+    else {
+        return NO;
+    }
+}
+
 - (void)imageViewClicked:(UIGestureRecognizer *)ges
 {
 	UIView *mainView = [[UIApplication sharedApplication] rootView];
@@ -125,6 +142,17 @@
 	UIImageView *imageView = (UIImageView *)ges.view;
 	
 	DetailImageViewController *dvc = [[DetailImageViewController alloc] initWithImage:imageView.image];
+    
+    //
+    if ([self checkGif:self.status.originalPicURL])
+    {
+        dvc.gifUrl = self.status.originalPicURL;
+    }
+    if ([self checkGif:self.status.repostStatus.originalPicURL])
+    {
+        dvc.gifUrl = self.status.repostStatus.originalPicURL;
+    }
+    
 	dvc.delegate = self;
 	dvc.view.alpha = 0.0;
 	[mainView addSubview:dvc.view];
@@ -133,10 +161,6 @@
 		dvc.view.alpha = 1.0;
 	}];
     
-    // Audio test
-//    UIAudioAddition *audioAddition = [[UIAudioAddition alloc] init];
-//    [audioAddition playNotificationSound];
-//    [audioAddition release];
 }
 
 - (void)detailImageViewControllerShouldDismiss:(UIViewController *)vc
@@ -299,13 +323,15 @@
     
     self.imageCoverImageView.alpha = 0.0;
     
+    self.gifIcon.hidden = YES;
+    
     self.repostView.alpha = 0.0;
     
     self.postWebView.alpha = 0.0;
     self.repostWebView.alpha = 0.0;
     
-//    [[self.postWebView scrollView] setScrollEnabled:NO];
-//    [[self.repostWebView scrollView] setScrollEnabled:NO];
+    //    [[self.postWebView scrollView] setScrollEnabled:NO];
+    //    [[self.repostWebView scrollView] setScrollEnabled:NO];
     
     self.repostView.frame = kRepostViewFrameTop;
     self.repostWebView.frame = kRepostWebViewFrameTop;
@@ -357,6 +383,11 @@
          }];
      } 
                            cacheInContext:self.managedObjectContext];
+    
+    if ([self checkGif:self.status.originalPicURL])
+    {
+        [self.gifIcon setHidden:NO];
+    }
 }
 
 - (void)loadRepostStautsImage
@@ -375,6 +406,10 @@
          }];
      }
                                  cacheInContext:self.managedObjectContext];
+    if ([self checkGif:self.status.repostStatus.originalPicURL])
+    {
+        [self.gifIcon setHidden:NO];
+    }
 }
 
 - (void)loadPostWebView
@@ -607,8 +642,8 @@
 {
     self.playButton.hidden = NO;
     self.playButton.frame = kPlayButtonFrameTopRight;
-//    self.repostView.frame = kRepostViewFrameBottom;
-//    self.repostWebView.frame = kRepostWebViewFrameBottom;
+    //    self.repostView.frame = kRepostViewFrameBottom;
+    //    self.repostWebView.frame = kRepostWebViewFrameBottom;
     self.musicLink = repostMusicVideoLink;
     //    self.musicBackgroundImageView.alpha = 0.0;
     //    self.repostTweetImageView.alpha = 1.0;

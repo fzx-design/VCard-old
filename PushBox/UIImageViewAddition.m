@@ -30,14 +30,14 @@
     }
 	
     NSURL *url = [NSURL URLWithString:urlString];
-		
+    
     dispatch_queue_t downloadQueue = dispatch_queue_create("downloadQueue", NULL);
-		
+    
     dispatch_async(downloadQueue, ^{ 
         NSData *imageData = [NSData dataWithContentsOfURL:url];
         UIImage *img = [UIImage imageWithData:imageData];
         dispatch_async(dispatch_get_main_queue(), ^{
-//            [Image insertImage:imageData withURL:urlString inManagedObjectContext:context];
+            //            [Image insertImage:imageData withURL:urlString inManagedObjectContext:context];
             NSLog(@"cache image url:%@", urlString);
             self.image = img;
             if (completion) {

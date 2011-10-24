@@ -256,6 +256,7 @@
 		FE94DEFA1453379800D8A12E /* smartcard.js in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4E5145084D500C3EE5B /* smartcard.js */; };
 		FEA42654144320E7002E80B3 /* MessagesContactsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA42653144320E7002E80B3 /* MessagesContactsTableViewCell.m */; };
 		FEA4265614432103002E80B3 /* MessagesContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEA4265514432103002E80B3 /* MessagesContactsTableViewCell.xib */; };
+		FEB5EA521455CF0500453B09 /* gif_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FEB5EA511455CF0500453B09 /* gif_icon.png */; };
 		FEC6D1DA14555F8B00576EF3 /* vc_new_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEC6D1D814555F8B00576EF3 /* vc_new_sound.wav */; };
 		FEC6D1DB14555F8B00576EF3 /* vc_noti_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEC6D1D914555F8B00576EF3 /* vc_noti_sound.wav */; };
 		FEC6D1DD14555F9800576EF3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEC6D1DC14555F9800576EF3 /* AudioToolbox.framework */; };
@@ -590,6 +591,7 @@
 		FEA42652144320E7002E80B3 /* MessagesContactsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesContactsTableViewCell.h; sourceTree = "<group>"; };
 		FEA42653144320E7002E80B3 /* MessagesContactsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesContactsTableViewCell.m; sourceTree = "<group>"; };
 		FEA4265514432103002E80B3 /* MessagesContactsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesContactsTableViewCell.xib; sourceTree = "<group>"; };
+		FEB5EA511455CF0500453B09 /* gif_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gif_icon.png; sourceTree = "<group>"; };
 		FEC6D1D814555F8B00576EF3 /* vc_new_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = vc_new_sound.wav; sourceTree = "<group>"; };
 		FEC6D1D914555F8B00576EF3 /* vc_noti_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = vc_noti_sound.wav; sourceTree = "<group>"; };
 		FEC6D1DC14555F9800576EF3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -940,6 +942,7 @@
 		CBBA01F113E4530700641923 /* statuscard */ = {
 			isa = PBXGroup;
 			children = (
+				FEB5EA511455CF0500453B09 /* gif_icon.png */,
 				9B1128E214510978001CE64E /* card_profile_cover_large.png */,
 				9B1128E314510978001CE64E /* card_profile_cover.png */,
 				9B1128E414510978001CE64E /* greycard_bg_upper.png */,
@@ -1446,6 +1449,7 @@
 				FE8E1761145459D6004F6A7C /* webview_bg_large.png in Resources */,
 				FEC6D1DA14555F8B00576EF3 /* vc_new_sound.wav in Resources */,
 				FEC6D1DB14555F8B00576EF3 /* vc_noti_sound.wav in Resources */,
+				FEB5EA521455CF0500453B09 /* gif_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -25,6 +25,8 @@
 - (void)dealloc
 {
     [super release];
+    [_webView stopLoading];
+    [_webView setDelegate:nil];
     [_webView release];
     [_loadingIndicator release];
 }
@@ -70,6 +72,8 @@
 {
     //
     [[UIApplication sharedApplication] dismissModalViewController];
+    
+    [self release];
 }
 
 - (IBAction)goSafariButtonClicked:(id)sender

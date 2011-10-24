@@ -415,7 +415,7 @@
 		if (!client.hasError) {
 			
 			NSArray *dictArray = client.responseJSONObject;
-
+            
 			[self clearData];
 			[self.managedObjectContext processPendingChanges];
 			for (NSDictionary *dict in dictArray) {
@@ -428,9 +428,9 @@
 				completion();
 			}
 			[[UIApplication sharedApplication] hideLoadingView];
-
+            
 			return;
-
+            
 		} else {
 			[ErrorNotification showLoadingError];
 		}
@@ -445,7 +445,7 @@
 					   startingAtPage:0 
 								count:kStatusCountPerRequest
 							  feature:0];
-
+    
 }
 
 - (void)loadMoreDataCompletion:(void (^)())completion
@@ -455,7 +455,7 @@
     }
 	
     _loading = YES;
-
+    
 	//
     if (self.dataSource == CardTableViewDataSourceFavorites) {
         [self loadAllFavoritesWithCompletion:^(void) {
@@ -470,7 +470,7 @@
 			[[UIApplication sharedApplication] hideLoadingView];
             _loading = NO;
         }];
-				
+        
         return;
     }
     
@@ -478,7 +478,7 @@
     
     long long maxID = 0;
     Status *lastStatus = [self.fetchedResultsController.fetchedObjects lastObject];
-
+    
 	NSLog(@"%@", lastStatus.text);
     if (lastStatus && _lastStatus && !_refreshFlag) {
         NSString *statusID = lastStatus.statusID;
@@ -491,7 +491,7 @@
     if (self.dataSource == CardTableViewDataSourceFriendsTimeline) {
         [client setCompletionBlock:^(WeiboClient *client) {
             if (!client.hasError) {
-
+                
                 NSArray *dictArray = client.responseJSONObject;
 				
 				for (NSDictionary *dict in dictArray) {
@@ -500,10 +500,10 @@
                 }
 				
 				[self.managedObjectContext processPendingChanges];
-
+                
 				if (_refreshFlag) {
 					_refreshFlag = NO;
-
+                    
 					Status *newStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
 					
 					if (_lastStatus == nil || ![newStatus.statusID isEqualToString:_lastStatus.statusID]){
@@ -558,8 +558,8 @@
 				
                 NSArray *dictArray = client.responseJSONObject;
 				for (NSDictionary *dict in dictArray) {
-//                    Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-//                    [self.currentUser addFriendsStatusesObject:newStatus];
+                    //                    Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+                    //                    [self.currentUser addFriendsStatusesObject:newStatus];
 					[Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
                 }
 				[self.managedObjectContext processPendingChanges];
@@ -729,7 +729,7 @@
             break;
         case CardTableViewDataSourceFavorites:
             request.predicate = [NSPredicate predicateWithFormat:@"favoritedBy == %@", self.currentUser];
-			default:
+        default:
 			break;
     }
 }
@@ -777,7 +777,7 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
-//	[self.tableView reloadData];
+    //	[self.tableView reloadData];
 }
 
 
