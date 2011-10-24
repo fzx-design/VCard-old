@@ -132,6 +132,11 @@
 	[UIView animateWithDuration:0.5 animations:^{
 		dvc.view.alpha = 1.0;
 	}];
+    
+    // Audio test
+//    UIAudioAddition *audioAddition = [[UIAudioAddition alloc] init];
+//    [audioAddition playNotificationSound];
+//    [audioAddition release];
 }
 
 - (void)detailImageViewControllerShouldDismiss:(UIViewController *)vc

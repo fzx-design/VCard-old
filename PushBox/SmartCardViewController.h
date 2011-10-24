@@ -14,6 +14,7 @@
 #import "CommentViewController.h"
 #import "PostViewController.h"
 #import "InnerBroswerViewController.h"
+#import "UIAudioAddition.h"
 #import <MessageUI/MessageUI.h>
 
 #define kNotificationNameModalCardPresented @"kNotificationNameModalCardPresented"

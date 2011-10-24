@@ -256,6 +256,10 @@
 		FE94DEFA1453379800D8A12E /* smartcard.js in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4E5145084D500C3EE5B /* smartcard.js */; };
 		FEA42654144320E7002E80B3 /* MessagesContactsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA42653144320E7002E80B3 /* MessagesContactsTableViewCell.m */; };
 		FEA4265614432103002E80B3 /* MessagesContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEA4265514432103002E80B3 /* MessagesContactsTableViewCell.xib */; };
+		FEC6D1DA14555F8B00576EF3 /* vc_new_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEC6D1D814555F8B00576EF3 /* vc_new_sound.wav */; };
+		FEC6D1DB14555F8B00576EF3 /* vc_noti_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEC6D1D914555F8B00576EF3 /* vc_noti_sound.wav */; };
+		FEC6D1DD14555F9800576EF3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEC6D1DC14555F9800576EF3 /* AudioToolbox.framework */; };
+		FEC6D1E314555FF900576EF3 /* UIAudioAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = FEC6D1E214555FF900576EF3 /* UIAudioAddition.m */; };
 		FEFB3120144311D600440DD5 /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEFB311E144311D600440DD5 /* MessagesViewController.m */; };
 		FEFB3121144311D600440DD5 /* MessagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEFB311F144311D600440DD5 /* MessagesViewController.xib */; };
 		FEFB31251443130700440DD5 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEFB31231443130700440DD5 /* MessageViewController.m */; };
@@ -586,6 +590,11 @@
 		FEA42652144320E7002E80B3 /* MessagesContactsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesContactsTableViewCell.h; sourceTree = "<group>"; };
 		FEA42653144320E7002E80B3 /* MessagesContactsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesContactsTableViewCell.m; sourceTree = "<group>"; };
 		FEA4265514432103002E80B3 /* MessagesContactsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesContactsTableViewCell.xib; sourceTree = "<group>"; };
+		FEC6D1D814555F8B00576EF3 /* vc_new_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = vc_new_sound.wav; sourceTree = "<group>"; };
+		FEC6D1D914555F8B00576EF3 /* vc_noti_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = vc_noti_sound.wav; sourceTree = "<group>"; };
+		FEC6D1DC14555F9800576EF3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		FEC6D1E114555FF900576EF3 /* UIAudioAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAudioAddition.h; sourceTree = "<group>"; };
+		FEC6D1E214555FF900576EF3 /* UIAudioAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAudioAddition.m; sourceTree = "<group>"; };
 		FEFB311D144311D600440DD5 /* MessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesViewController.h; sourceTree = "<group>"; };
 		FEFB311E144311D600440DD5 /* MessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesViewController.m; sourceTree = "<group>"; };
 		FEFB311F144311D600440DD5 /* MessagesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesViewController.xib; sourceTree = "<group>"; };
@@ -605,6 +614,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEC6D1DD14555F9800576EF3 /* AudioToolbox.framework in Frameworks */,
 				9BB11CB414503ED3005B43AC /* CoreData.framework in Frameworks */,
 				9BB11CB514503ED3005B43AC /* CoreGraphics.framework in Frameworks */,
 				9BB11CAE14503E9C005B43AC /* QuartzCore.framework in Frameworks */,
@@ -760,6 +770,7 @@
 		CB4AAC4313DC6A360053E3A6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FEC6D1D614555F7B00576EF3 /* sounds */,
 				CB4AAC5213DC6AF20053E3A6 /* images */,
 				FE72B4C7144FFD3000C3EE5B /* repost_bg.jpg */,
 				FE72B4CA144FFD3000C3EE5B /* webview_bg.jpg */,
@@ -859,6 +870,8 @@
 			children = (
 				CB9DCAC413E171A100DA3D3D /* UIImageViewAddition.h */,
 				CB9DCAC513E171A100DA3D3D /* UIImageViewAddition.m */,
+				FEC6D1E114555FF900576EF3 /* UIAudioAddition.h */,
+				FEC6D1E214555FF900576EF3 /* UIAudioAddition.m */,
 				CB018E0913DDEFEA004217E0 /* UIApplicationAddition.h */,
 				CB018E0A13DDEFEB004217E0 /* UIApplicationAddition.m */,
 				CB9DCAC713E1C36200DA3D3D /* NSDateAddition.h */,
@@ -961,6 +974,7 @@
 		CBDA5AE313DBEC1300FAE221 = {
 			isa = PBXGroup;
 			children = (
+				FEC6D1DC14555F9800576EF3 /* AudioToolbox.framework */,
 				20EB93511417A370003E541D /* icon_72.png */,
 				9B5F2E1F14497373008AC0B8 /* Default-Landscape~ipad.png */,
 				CBDA5AFA13DBEC1300FAE221 /* PushBox */,
@@ -1188,6 +1202,15 @@
 				FEFB31231443130700440DD5 /* MessageViewController.m */,
 			);
 			name = msg;
+			sourceTree = "<group>";
+		};
+		FEC6D1D614555F7B00576EF3 /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				FEC6D1D814555F8B00576EF3 /* vc_new_sound.wav */,
+				FEC6D1D914555F8B00576EF3 /* vc_noti_sound.wav */,
+			);
+			name = sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1421,6 +1444,8 @@
 				FE8E175E14544255004F6A7C /* webview_goSafari.png in Resources */,
 				FE8E175F14544255004F6A7C /* webview_topbar.png in Resources */,
 				FE8E1761145459D6004F6A7C /* webview_bg_large.png in Resources */,
+				FEC6D1DA14555F8B00576EF3 /* vc_new_sound.wav in Resources */,
+				FEC6D1DB14555F8B00576EF3 /* vc_noti_sound.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1498,6 +1523,7 @@
 				9B1129E61451112A001CE64E /* SmartCardViewController.m in Sources */,
 				9B5F867614540190004B01D6 /* AnimationProvider.m in Sources */,
 				FE8E1753145433A5004F6A7C /* InnerBroswerViewController.m in Sources */,
+				FEC6D1E314555FF900576EF3 /* UIAudioAddition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
