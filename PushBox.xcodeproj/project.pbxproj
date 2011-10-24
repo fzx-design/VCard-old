@@ -1475,6 +1475,11 @@
 				FE8E175E14544255004F6A7C /* webview_goSafari.png in Resources */,
 				FE8E175F14544255004F6A7C /* webview_topbar.png in Resources */,
 				FE8E1761145459D6004F6A7C /* webview_bg_large.png in Resources */,
+				9B5F86801454124B004B01D6 /* CCCommentsTableViewController.xib in Resources */,
+				9B11DC0614553AAD001F75EF /* CCCommentsTableViewCell.xib in Resources */,
+				9B11DC0B14554EC7001F75EF /* cc_comments_selected.png in Resources */,
+				9B11DC0C14554EC7001F75EF /* cc_reposts_button_highlight.png in Resources */,
+				9B11DC0D14554EC7001F75EF /* cc_reposts_button.png in Resources */,
 				FEC6D1DA14555F8B00576EF3 /* vc_new_sound.wav in Resources */,
 				FEC6D1DB14555F8B00576EF3 /* vc_noti_sound.wav in Resources */,
 				FEB5EA521455CF0500453B09 /* gif_icon.png in Resources */,
@@ -1555,6 +1560,7 @@
 				9B1129E61451112A001CE64E /* SmartCardViewController.m in Sources */,
 				9B5F867614540190004B01D6 /* AnimationProvider.m in Sources */,
 				FE8E1753145433A5004F6A7C /* InnerBroswerViewController.m in Sources */,
+				9B5F867F1454124B004B01D6 /* CCCommentsTableViewController.m in Sources */,
 				FEC6D1E314555FF900576EF3 /* UIAudioAddition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
