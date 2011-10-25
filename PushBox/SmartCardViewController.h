@@ -14,6 +14,7 @@
 #import "CommentViewController.h"
 #import "PostViewController.h"
 #import "InnerBroswerViewController.h"
+#import "UIAudioAddition.h"
 #import <MessageUI/MessageUI.h>
 
 #define kNotificationNameModalCardPresented @"kNotificationNameModalCardPresented"
@@ -44,6 +45,7 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
     UIImageView *_imageCoverImageView;
     UIImageView *_musicBackgroundImageView;
     UIImageView *_musicCoverImageView;
+    UIImageView *_gifIcon;
     UIButton *_playButton;
     UILabel *_recentActNotifyLabel;
     
@@ -55,6 +57,7 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView* profileImageView;
+@property(nonatomic, retain) IBOutlet UIImageView* gifIcon;
 @property(nonatomic, retain) IBOutlet UILabel* screenNameLabel;
 @property(nonatomic, retain) IBOutlet UILabel* dateLabel;
 @property(nonatomic, retain) IBOutlet UIButton* actionsButton;

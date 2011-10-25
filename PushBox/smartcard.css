@@ -11,3 +11,5 @@ body{ font-family:"Helvetica Neue", "黑体"; background-color: transparent;}
 .highlight{ color:#2a88d4; font-weight:bold;}
 .highlight a:link{ text-decoration:none; color:#2a88d4;}
 .highlight a:visited{ text-decoration:none; color:#2a88d4;}
+
+#gifImg{width:1024px; text-align:center; margin-top:150px; background-color:transparent;}
