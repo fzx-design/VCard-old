@@ -214,6 +214,7 @@
                                [[NSNumber alloc] initWithInt:65288],   // '"'
                                [[NSNumber alloc] initWithInt:65289],   // '"'
                                [[NSNumber alloc] initWithInt:65339],   // '"'
+                               [[NSNumber alloc] initWithInt:12290],   // '"'
                                [[NSNumber alloc] initWithInt:65341],   // '"'
                                [[NSNumber alloc] initWithInt:65371],   // '"'
                                [[NSNumber alloc] initWithInt:65373],   // '"'
