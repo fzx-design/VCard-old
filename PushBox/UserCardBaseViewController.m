@@ -81,7 +81,7 @@
     self.statusesCountLabel.text = self.user.statusesCount;
 	
 	self.blogURLLabel.text = self.user.blogURL;
-	    
+	       
 	if ([self.user.gender isEqualToString:@"m"]) {
 		self.genderLabel.text = @"男";
 	} else {
