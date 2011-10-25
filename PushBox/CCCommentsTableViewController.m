@@ -65,7 +65,7 @@
 
 - (void)refresh
 {
-	[self clearData];
+//	[self clearData];
     [self loadMoreData];
     WeiboClient *client = [WeiboClient client];
     [client resetUnreadCount:ResetUnreadCountTypeComments];
@@ -80,10 +80,10 @@
     _loading = YES;
     
     WeiboClient *client = [WeiboClient client];
-	[[UIApplication sharedApplication] showLoadingView];
+//	[[UIApplication sharedApplication] showLoadingView];
     [client setCompletionBlock:^(WeiboClient *client) {
 		
-		[[UIApplication sharedApplication] hideLoadingView];
+//		[[UIApplication sharedApplication] hideLoadingView];
         if (!client.hasError) {
 
             NSArray *dictArray = client.responseJSONObject;

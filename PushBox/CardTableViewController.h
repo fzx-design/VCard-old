@@ -59,6 +59,7 @@ typedef enum {
 	BOOL _refreshFlag;
 	BOOL _checkingDirection;
 	Status *_lastStatus;
+	NSString *_lastMentionStatusID;
 	NSInteger _direction;
 	CGFloat dragStartOffset;
 	CGFloat preDiff;

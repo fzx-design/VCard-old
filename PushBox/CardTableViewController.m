@@ -93,6 +93,7 @@
 		self.mentionsManagedObjectContext = [(PushBoxAppDelegate*)[[UIApplication sharedApplication] delegate] mentionsManagedObjectContext];
 	}
     
+	[self.tableView setScrollsToTop:NO];
     self.currentRowIndex = 0;
     self.swipeEnabled = YES;
     self.blurImageView.alpha = 0.0;
@@ -209,6 +210,7 @@
 	
 	if (self.dataSource == CardTableViewDataSourceMentions) {
 		self.fetchedResultsController = self.fetchedMentionsResultsController;
+		_refreshFlag = YES;
 	}
 	
     self.blurImageView.alpha = 0.0;
@@ -220,7 +222,9 @@
         self.tableView.alpha = 0.0;
         self.tableView.transform = CGAffineTransformScale(self.tableView.transform, 1/kBlurImageViewScale, 1/kBlurImageViewScale);
     } completion:^(BOOL fin) {
-        [self clearData];
+		if (self.dataSource != CardTableViewDataSourceMentions) {
+			[self clearData];
+		}
 		[self setHeaderViewWithOffset];
         [self.tableView reloadData];
         self.tableView.transform = CGAffineTransformScale(self.tableView.transform, kBlurImageViewScale, kBlurImageViewScale);
@@ -688,8 +692,8 @@
                 NSArray *dictArray = client.responseJSONObject;
 				
 				for (NSDictionary *dict in dictArray) {
-                    Status* status = [Status insertStatus:dict inManagedObjectContext:self.mentionsManagedObjectContext];
-					NSLog(@"_____________ %@", status.text);
+                    Status * status = [Status insertStatus:dict inManagedObjectContext:self.mentionsManagedObjectContext];
+					NSLog(@"%@", status.text);
                 }
 				
 				[self.mentionsManagedObjectContext processPendingChanges];
@@ -699,10 +703,16 @@
 					
 					Status *newStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
 					
-					if (_lastStatus == nil || ![newStatus.statusID isEqualToString:_lastStatus.statusID]){
-						_lastStatus = newStatus;
+					if (newStatus == nil) {
+						NSLog(@"WTF!");
+					}
+					
+					NSLog(@"the new status's id is _______________ %@ and ____________ %@", newStatus.statusID, _lastMentionStatusID);
+					
+					if (_lastMentionStatusID == nil || ![newStatus.statusID isEqualToString:_lastMentionStatusID]){
+						[_lastMentionStatusID release];
+						_lastMentionStatusID = [[NSString stringWithString:newStatus.statusID] copy];
 						
-						//Remain to be realized
 						[self clearData];
 						
 						for (NSDictionary *dict in dictArray) {
@@ -712,12 +722,14 @@
 						
 						[self adjustCardViewAfterLoading];
 						
-					} else if ([newStatus.statusID isEqualToString:_lastStatus.statusID]) {
-						if (completion) {
-							completion();
-						}
+					} else if ([newStatus.statusID isEqualToString:_lastMentionStatusID]) {
+						[self adjustCardViewAfterLoading];
 						[[UIApplication sharedApplication] hideLoadingView];
 						_loading = NO;
+						[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
+						[self.delegate cardTableViewController:self 
+												didScrollToRow:self.currentRowIndex
+											  withNumberOfRows:[self numberOfRows]];
 						return;
 					}
 				}
@@ -727,9 +739,6 @@
                                       withNumberOfRows:[self numberOfRows]];
             } else {
 				[ErrorNotification showLoadingError];
-			}
-			if (completion) {
-				completion();
 			}
 			[[UIApplication sharedApplication] hideLoadingView];
 			_loading = NO;
@@ -755,6 +764,8 @@
         case CardTableViewDataSourceFavorites:
             [self.currentUser removeFavorites:self.currentUser.favorites];
             break;
+		case CardTableViewDataSourceMentions:
+			[Status deleteAllObjectsInManagedObjectContext:self.mentionsManagedObjectContext];
 		default:
 			break;
     }
@@ -801,7 +812,6 @@
         case CardTableViewDataSourceFavorites:
 			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.managedObjectContext];
             request.predicate = [NSPredicate predicateWithFormat:@"favoritedBy == %@", self.currentUser];
-			break;
 		case CardTableViewDataSourceMentions:
 			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.mentionsManagedObjectContext];
 			break;

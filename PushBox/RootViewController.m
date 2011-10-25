@@ -205,7 +205,6 @@
 	
     
     self.bottomStateView.alpha = 0.0;
-	self.bottomStateInvisibleView.alpha = 0.0;
 	_commandCenterFlag = NO;
 	
     if ([WeiboClient authorized]) {
@@ -263,7 +262,6 @@
 {
 	if (self.bottomStateInvisibleView.image == nil) {
 		self.bottomStateInvisibleView.image = _tmpImage;
-		self.bottomStateInvisibleView.alpha = 1.0;
 	}
 	self.bottomStateView.alpha = 1.0;
 	[self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimation] forKey:@"animation"];
@@ -388,7 +386,7 @@
 	[self showBottomStateView];
 	
 	[self.cardTableViewController pushCardWithCompletion:^{
-		[self moveCardIntoView];
+//		[self moveCardIntoView];
 		WeiboClient *client = [WeiboClient client];
 		[client resetUnreadCount:ResetUnreadCountTypeReferMe];
 	}];
@@ -399,8 +397,9 @@
 	if (self.dockViewController.commandCenterButton.selected) {
         [self hideCommandCenter];
     }
-	
-	[self performSelector:@selector(showMentions) withObject:[sender object] afterDelay:1.0];
+	if (self.cardTableViewController.dataSource != CardTableViewDataSourceMentions) {
+		[self performSelector:@selector(showMentions) withObject:[sender object] afterDelay:1.0];
+	}
 }
 
 

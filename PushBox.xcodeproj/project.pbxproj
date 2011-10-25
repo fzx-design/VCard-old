@@ -1560,6 +1560,7 @@
 				9B5F867614540190004B01D6 /* AnimationProvider.m in Sources */,
 				FE8E1753145433A5004F6A7C /* InnerBroswerViewController.m in Sources */,
 				9B5F867F1454124B004B01D6 /* CCCommentsTableViewController.m in Sources */,
+				FEC6D1E314555FF900576EF3 /* UIAudioAddition.m in Sources */,
 				9B4CE7BE1455B085008AA445 /* Status.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
