@@ -45,6 +45,16 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    MPMusicPlayerController* ipodMusicPlayer = [MPMusicPlayerController iPodMusicPlayer];
+    NSLog(@"%@", [[ipodMusicPlayer nowPlayingItem] description]);
+    if ([ipodMusicPlayer playbackState] == MPMusicPlaybackStatePlaying)
+    {
+        isIpodPlaying = YES;
+    }
+    else
+    {
+        isIpodPlaying = NO;
+    }
 }
 
 - (void)viewDidUnload
@@ -73,10 +83,11 @@
     //
     [[UIApplication sharedApplication] dismissModalViewController];
     [self.webView loadRequest:[[NSURLRequest alloc] initWithURL:[[NSURL alloc] initWithString:@"about:blank"]]];
-    MPMusicPlayerController* ipodMusicPlayer = [MPMusicPlayerController iPodMusicPlayer];
-    NSLog(@"%@", [[ipodMusicPlayer nowPlayingItem] description]);
-    [ipodMusicPlayer play];
-
+    if (isIpodPlaying) {
+        MPMusicPlayerController* ipodMusicPlayer = [MPMusicPlayerController iPodMusicPlayer];
+        NSLog(@"%@", [[ipodMusicPlayer nowPlayingItem] description]);
+        [ipodMusicPlayer play];
+    }
     [self release];
 }
 

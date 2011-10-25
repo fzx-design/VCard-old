@@ -15,6 +15,8 @@
     UIWebView *_webView;
     
     UIActivityIndicatorView *_loadingIndicator;
+    
+    BOOL isIpodPlaying;
 }
 
 - (void)loadLink:(NSString*)link;
