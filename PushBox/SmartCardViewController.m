@@ -160,7 +160,6 @@
 	[UIView animateWithDuration:0.5 animations:^{
 		dvc.view.alpha = 1.0;
 	}];
-    
 }
 
 - (void)detailImageViewControllerShouldDismiss:(UIViewController *)vc

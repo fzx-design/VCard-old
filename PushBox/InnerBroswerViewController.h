@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "UIApplicationAddition.h"
+#import <MediaPlayer/MPMusicPlayerController.h>
 
 @interface InnerBroswerViewController : UIViewController<UIWebViewDelegate>
 {
     UIWebView *_webView;
     
     UIActivityIndicatorView *_loadingIndicator;
+    
+    BOOL isIpodPlaying;
 }
 
 - (void)loadLink:(NSString*)link;
