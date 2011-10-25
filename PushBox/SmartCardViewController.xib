@@ -639,6 +639,7 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="259776592"/>
 						<string key="NSReuseIdentifierKey">_NS:569</string>
+						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">2</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
