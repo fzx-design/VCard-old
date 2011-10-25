@@ -14,4 +14,6 @@
 
 @property(nonatomic, retain) IBOutlet UILabel *theNewFollowersCountLabel;
 
+- (void)updateUserInfo;
+
 @end

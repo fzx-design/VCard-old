@@ -155,6 +155,7 @@
 - (void)newCommentsToMeNotification:(id)sender
 {
 //    self.commentsTableViewController.newCommentsImageView.hidden = NO;
+	self.ccCommentTableViewController.theNewCommentCountLabel.hidden = NO;
     if (!self.commandCenterButton.selected) {
         self.commandCenterNotiImageView.hidden = NO;
     }
@@ -175,6 +176,7 @@
 
 - (void)newMentionsNotification:(id)sender
 {
+	self.ccCommentTableViewController.theNewMentionsCountLabel.hidden = NO;
     if (!self.commandCenterButton.selected) {
         self.commandCenterNotiImageView.hidden = NO;
     }

@@ -199,7 +199,14 @@
 
 - (IBAction)mentionButtonClicked:(id)sender
 {
+	self.theNewMentionsCountLabel.hidden = YES;
 	[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameShouldShowMentions object:self];
+}
+
+- (IBAction)commentButtonClicked:(id)sender
+{
+	self.theNewCommentCountLabel.hidden = YES;
+	[self refresh];
 }
 
 @end

@@ -432,10 +432,14 @@
 	
 	if ([self needUpdateNotiViewWithUserInfo:dict]) {
 		CCUserInfoCardViewController *userCardVC = self.dockViewController.ccUserInfoCardViewController;
-		userCardVC.friendsCountLabel.text =  userCardVC.user.friendsCount;
-		userCardVC.followersCountLabel.text = userCardVC.user.followersCount;
+		userCardVC.friendsCountLabel.text =  self.currentUser.friendsCount;
+		userCardVC.followersCountLabel.text = self.currentUser.followersCount;
 		
 		userCardVC.theNewFollowersCountLabel.text = self.notiNewFollowerLabel.text;
+		
+		CCCommentsTableViewController *commentVC = self.dockViewController.ccCommentTableViewController;
+		commentVC.theNewCommentCountLabel.text = self.notiNewCommentLabel.text;
+		commentVC.theNewMentionsCountLabel.text = self.notiNewAtLabel.text;
 		
 		if (self.notificationView.hidden && !_commandCenterFlag) {
 			self.notificationView.hidden = NO;
@@ -446,6 +450,7 @@
 
 - (IBAction)refreshAndShowCommentCenter:(id)sender
 {
+	
 	[self showCommandCenter];
 }
 
@@ -823,7 +828,6 @@
 	
 	[self.dockViewController.ccCommentTableViewController refresh];
 	preNewCommentCount = 0;
-	self.notiNewCommentLabel.text = [NSString stringWithFormat:@"%d", preNewCommentCount];
 	
     [self.dockViewController viewWillAppear:YES];
     if (self.cardTableViewController.dataSource != CardTableViewDataSourceFriendsTimeline) {
