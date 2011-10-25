@@ -201,7 +201,6 @@
 								<string key="NSFrame">{{84, 21}, {34, 34}}</string>
 								<reference key="NSSuperview" ref="117629307"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
@@ -234,14 +233,15 @@
 					<object class="IBUIActivityIndicatorView" id="503832088">
 						<reference key="NSNextResponder" ref="707811626"/>
 						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{503, 363}, {20, 20}}</string>
+						<string key="NSFrame">{{495, 354}, {37, 37}}</string>
 						<reference key="NSSuperview" ref="707811626"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="551896010"/>
 						<string key="NSReuseIdentifierKey">_NS:1062</string>
 						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<int key="IBUIStyle">2</int>
+						<int key="IBUIStyle">0</int>
 					</object>
 				</object>
 				<string key="NSFrame">{{0, 20}, {1024, 748}}</string>
