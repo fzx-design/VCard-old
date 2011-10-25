@@ -7,6 +7,7 @@
 //
 
 #import "CCCommentsTableViewController.h"
+#import "UserCardBaseViewController.h"		//To get define
 #import "WeiboClient.h"
 #import "Comment.h"
 #import "User.h"
@@ -20,11 +21,15 @@
 @synthesize dataSource = _dataSource;
 @synthesize delegate = _delegate;
 @synthesize status = _status;
+@synthesize theNewCommentCountLabel = _theNewCommentCountLabel;
+@synthesize theNewMentionsCountLabel = _theNewMentionsCountLabel;
 
 - (void)dealloc
 {
     NSLog(@"CommentsTableViewController dealloc");
     [_titleLabel release];
+	[_theNewCommentCountLabel release];
+    [_theNewMentionsCountLabel release];
     [super dealloc];
 }
 
@@ -32,6 +37,8 @@
 {
     [super viewDidUnload];
     [_titleLabel release];
+    self.theNewCommentCountLabel = nil;
+    self.theNewMentionsCountLabel = nil;
 }
 
 - (void)viewDidLoad
@@ -190,6 +197,10 @@
     [vc release];
 }
 
+- (IBAction)mentionButtonClicked:(id)sender
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameShouldShowMentions object:self];
+}
 
 @end
 

@@ -130,6 +130,7 @@
 	preNewFollowerCount = 0;
 	preNewMentionCount = 0;
 	self.notificationView.hidden = YES;
+	self.bottomStateFrameView.hidden = NO;
 	
     WeiboClient *client = [WeiboClient client];
     [client setCompletionBlock:^(WeiboClient *client) {
@@ -197,6 +198,10 @@
 			   selector:@selector(showNotificationView:) 
 				   name:kNotificationNameNewNotification 
 				 object:nil];
+	[center addObserver:self 
+			   selector:@selector(showMentionsNotification:) 
+				   name:kNotificationNameShouldShowMentions 
+				 object:nil];
 	
     
     self.bottomStateView.alpha = 0.0;
@@ -222,11 +227,13 @@
     [WeiboClient signout];
     [self hideDockView];
     [self hideCardTableView];
-	self.bottomStateInvisibleView.alpha = 0.0;
+	self.bottomStateFrameView.hidden = YES;
+	[self hideBottomStateView];
 	self.notificationView.hidden = YES;
 	[self setDefaultBackgroundImage:YES];
     self.currentUser = nil;
     [User deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
+	[Status deleteAllObjectsInManagedObjectContext:self.cardTableViewController.mentionsManagedObjectContext];
     [self performSelector:@selector(showLoginView) withObject:nil afterDelay:1.0];
 }
 
@@ -358,7 +365,7 @@
 	
     [self.cardTableViewController pushCardWithCompletion:^{
         [self moveCardIntoView];
-    }];    
+    }];
 }
 
 - (void)showFavorites
@@ -373,6 +380,29 @@
 		
     }];
 }
+
+- (void)showMentions
+{	
+	self.cardTableViewController.dataSource = CardTableViewDataSourceMentions;
+	self.bottomStateLabel.text = NSLocalizedString(@"@我的微博", nil);
+	[self showBottomStateView];
+	
+	[self.cardTableViewController pushCardWithCompletion:^{
+		[self moveCardIntoView];
+		WeiboClient *client = [WeiboClient client];
+		[client resetUnreadCount:ResetUnreadCountTypeReferMe];
+	}];
+}
+
+- (void)showMentionsNotification:(id)sender
+{
+	if (self.dockViewController.commandCenterButton.selected) {
+        [self hideCommandCenter];
+    }
+	
+	[self performSelector:@selector(showMentions) withObject:[sender object] afterDelay:1.0];
+}
+
 
 - (BOOL)needUpdateNotiViewWithUserInfo:(NSDictionary*)dict
 {
