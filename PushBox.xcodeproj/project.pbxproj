@@ -1006,7 +1006,6 @@
 		CBDA5AE313DBEC1300FAE221 = {
 			isa = PBXGroup;
 			children = (
-				FE777CC714568C3A00849B5B /* MediaPlayer.framework */,
 				20EB93511417A370003E541D /* icon_72.png */,
 				9B5F2E1F14497373008AC0B8 /* Default-Landscape~ipad.png */,
 				CBDA5AFA13DBEC1300FAE221 /* PushBox */,
@@ -1027,6 +1026,7 @@
 			isa = PBXGroup;
 			children = (
 				20C8D90F1429FE9C00C94B86 /* libz.dylib */,
+				FE777CC714568C3A00849B5B /* MediaPlayer.framework */,
 				FEC6D1DC14555F9800576EF3 /* AudioToolbox.framework */,
 				CB9DCAD913E1ED6800DA3D3D /* MessageUI.framework */,
 				CB018E0413DDEAA5004217E0 /* QuartzCore.framework */,
