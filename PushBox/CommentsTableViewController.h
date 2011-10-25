@@ -28,7 +28,7 @@ typedef enum {
 
 @class Status;
 
-@interface CommentsTableViewController : EGOTableViewController<CommentsTableViewCellDelegats> {
+@interface CommentsTableViewController : EGOTableViewController<CommentsTableViewCellDelegats, CommentseViewDelegates> {
     UILabel *_titleLabel;
     Status *_status;
     int _nextPage;

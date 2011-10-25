@@ -13,6 +13,7 @@
 #import "NSDateAddition.h"
 #import "OptionsTableViewController.h"
 #import "UIApplicationAddition.h"
+#import "PushBoxAppDelegate.h"
 #import "WeiboClient.h"
 
 #define kLoadDelay 1.5
@@ -982,8 +983,14 @@
         WeiboClient *client = [WeiboClient client];
         [client setCompletionBlock:^(WeiboClient *client) {
             if (!client.hasError) {
-                [self.managedObjectContext deleteObject:self.status];
-                [self.managedObjectContext processPendingChanges];
+				
+				//remain to be solved;
+				
+				NSManagedObjectContext *managedContext = [self.status managedObjectContext];
+				[managedContext deleteObject:self.status];
+				[managedContext processPendingChanges];
+//                [self.managedObjectContext deleteObject:self.status];
+//				[self.managedObjectContext processPendingChanges];
 				[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameCardDeleted object:self];
             }
         }];
@@ -1131,7 +1138,9 @@
         WeiboClient *client = [WeiboClient client];
         [client setCompletionBlock:^(WeiboClient *client) {
             if (!client.hasError) {
+				//remain to be solved;
                 [self.currentUser addFavoritesObject:self.status];
+				
                 sender.selected = YES;
                 
                 UIImage *img = [UIImage imageNamed:@"status_msg_addfav"];

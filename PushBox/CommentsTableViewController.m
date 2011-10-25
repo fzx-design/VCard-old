@@ -184,6 +184,7 @@
 
 - (IBAction)commentButtonClicked:(id)sender {
     CommentViewController *vc = [[CommentViewController alloc] init];
+	vc.delegate = self;
     vc.targetStatus = self.status;
     [[UIApplication sharedApplication] presentModalViewController:vc atHeight:kModalViewHeight];
     [vc release];
@@ -201,6 +202,11 @@
 - (NSString *)customCellClassName
 {
     return @"CommentsTableViewCell";
+}
+
+- (void)commentFinished
+{
+	[self refresh];
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

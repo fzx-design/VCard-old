@@ -133,6 +133,7 @@
     Comment *comment = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     CommentViewController *vc = [[CommentViewController alloc] init];
+	vc.delegate = self;
     vc.targetComment = comment;
     vc.targetStatus = self.status;
     [[UIApplication sharedApplication] presentModalViewController:vc atHeight:kModalViewHeight];
@@ -206,6 +207,11 @@
 - (IBAction)commentButtonClicked:(id)sender
 {
 	self.theNewCommentCountLabel.hidden = YES;
+	[self refresh];
+}
+
+- (void)commentFinished
+{
 	[self refresh];
 }
 

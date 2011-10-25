@@ -22,7 +22,8 @@
 @synthesize postingCircleImageView = _postingCircleImageView;
 @synthesize targetStatus = _targetStatus;
 @synthesize targetComment = _targetComment;
-
+@synthesize repostButton = _repostButton;
+@synthesize delegate = _delegate;
 
 - (void)dealloc
 {
@@ -30,6 +31,7 @@
     [_titleLabel release];
     [_targetStatus release];
     [_targetComment release];
+	[_repostButton release];
 	[_postingRoundImageView release];
 	[_postingCircleImageView release];
     [super dealloc];
@@ -42,6 +44,7 @@
     // e.g. self.myOutlet = nil;
     self.textView = nil;
     self.titleLabel = nil;
+	self.repostButton = nil;
 	self.postingRoundImageView = nil;
 	self.postingCircleImageView = nil;
 }
@@ -96,13 +99,25 @@
 		[self hidePostingView];
         if (!client.hasError) {
 			[self dismissView];
+			if (self.delegate != nil) {
+				[self.delegate commentFinished];
+			}
 			[[UIApplication sharedApplication] showOperationDoneView];
         } else {
 			[ErrorNotification showPostError];
 		}
     }];
     
-    [client comment:self.targetStatus.statusID cid:self.targetComment.commentID text:comment commentOrigin:NO];
+	if (_repostFlag) {
+		NSString *first = [@"//@" stringByAppendingString:self.targetStatus.author.screenName];
+		NSString *second = [first stringByAppendingString:@": "];
+		NSString *third = [second stringByAppendingString:self.targetStatus.text];
+		NSString *content = [comment stringByAppendingString:third];
+		[client repost:self.targetStatus.statusID text:content commentStatus:YES commentOrigin:NO];
+	} else {
+		[client comment:self.targetStatus.statusID cid:self.targetComment.commentID text:comment commentOrigin:NO];
+	}
+	
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -124,5 +139,11 @@
 	if (buttonIndex == actionSheet.destructiveButtonIndex) {
 		[self dismissView];
 	}
+}
+
+- (IBAction)repostButtonClicked:(id)sender
+{
+	_repostFlag = !self.repostButton.selected;
+	self.repostButton.selected = _repostFlag;
 }
 @end

@@ -406,12 +406,15 @@
 	
 }
 
-- (void)adjustCardViewAfterLoading
+- (void)adjustCardViewAfterLoadingWithCompletion:(void (^)())completion
 {
-	[UIView animateWithDuration:1.0 delay:0.0 options:0 animations:^{
+	[UIView animateWithDuration:0.3 delay:0.0 options:0 animations:^{
 		self.tableView.alpha = 0.0;
 	} completion:^(BOOL finished) {
 		[self adjustCardViewPosition];
+		if (completion) {
+			completion();
+		}
  	}];
 }
 
@@ -526,16 +529,14 @@
 					if (_lastStatus == nil || ![newStatus.statusID isEqualToString:_lastStatus.statusID]){
 						_lastStatus = newStatus;
 						
-						[self clearData];
-						
-						for (NSDictionary *dict in dictArray) {
-							Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-							[self.currentUser addFriendsStatusesObject:newStatus];
+						[self adjustCardViewAfterLoadingWithCompletion:^(){
+							[self clearData];
+							for (NSDictionary *dict in dictArray) {
+								Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+								[self.currentUser addFriendsStatusesObject:newStatus];
+							}
 							[self.managedObjectContext processPendingChanges];
-						}
-						[self.managedObjectContext processPendingChanges];
-						
-						[self adjustCardViewAfterLoading];
+						}];
 						
 					} else if ([newStatus.statusID isEqualToString:_lastStatus.statusID]) {
 						if (completion) {
@@ -586,13 +587,14 @@
 					
 					if (_lastStatus == nil || ![newStatus.statusID isEqualToString:_lastStatus.statusID]) {
 						
-						[self clearData];
-						[self.managedObjectContext processPendingChanges];
-						
-						for (NSDictionary *dict in dictArray) {
-							[Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-						}
-						[self adjustCardViewAfterLoading];
+						[self adjustCardViewAfterLoadingWithCompletion:^(){
+							[self clearData];
+							[self.managedObjectContext processPendingChanges];
+							
+							for (NSDictionary *dict in dictArray) {
+								[Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+							}
+						}];
 						
 					} else if ([newStatus.statusID isEqualToString:_lastStatus.statusID]) {
 						if (completion) {
@@ -706,27 +708,20 @@
 					
 					Status *newStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
 					
-					if (newStatus == nil) {
-						NSLog(@"WTF!");
-					}
-					
-					NSLog(@"the new status's id is _______________ %@ and ____________ %@", newStatus.statusID, _lastMentionStatusID);
-					
 					if (_lastMentionStatusID == nil || ![newStatus.statusID isEqualToString:_lastMentionStatusID]){
 						[_lastMentionStatusID release];
 						_lastMentionStatusID = [[NSString stringWithString:newStatus.statusID] copy];
 						
-						[self clearData];
-						
-						for (NSDictionary *dict in dictArray) {
-							[Status insertStatus:dict inManagedObjectContext:self.mentionsManagedObjectContext];
-						}
-						[self.mentionsManagedObjectContext processPendingChanges];
-						
-						[self adjustCardViewAfterLoading];
+						[self adjustCardViewAfterLoadingWithCompletion:^(){
+							[self clearData];
+							for (NSDictionary *dict in dictArray) {
+								[Status insertStatus:dict inManagedObjectContext:self.mentionsManagedObjectContext];
+							}
+							[self.mentionsManagedObjectContext processPendingChanges];
+						}];
 						
 					} else if ([newStatus.statusID isEqualToString:_lastMentionStatusID]) {
-						[self adjustCardViewAfterLoading];
+						[self adjustCardViewAfterLoadingWithCompletion:nil];
 						[[UIApplication sharedApplication] hideLoadingView];
 						_loading = NO;
 						[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
@@ -829,44 +824,44 @@
 }
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-//	[self.tableView beginUpdates];
+	[self.tableView beginUpdates];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath {
     
-//    UITableView *tableView = self.tableView;
-//    
-//    switch(type) {
-//            
-//        case NSFetchedResultsChangeInsert:
-//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-//                             withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//            
-//        case NSFetchedResultsChangeDelete:
-//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-//                             withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//            
-//        case NSFetchedResultsChangeUpdate:
-//            [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
-//                    atIndexPath:indexPath];
-//            break;
-//            
-//        case NSFetchedResultsChangeMove:
-//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-//                             withRowAnimation:UITableViewRowAnimationFade];
-//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-//                             withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//    }
+    UITableView *tableView = self.tableView;
+    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                             withRowAnimation:UITableViewRowAnimationRight];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
+                    atIndexPath:indexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-//    [self.tableView endUpdates];
-	[self.tableView reloadData];
+    [self.tableView endUpdates];
+//	[self.tableView reloadData];
 }
 
 
