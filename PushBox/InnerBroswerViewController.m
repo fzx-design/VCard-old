@@ -72,7 +72,11 @@
 {
     //
     [[UIApplication sharedApplication] dismissModalViewController];
-    
+    [self.webView loadRequest:[[NSURLRequest alloc] initWithURL:[[NSURL alloc] initWithString:@"about:blank"]]];
+    MPMusicPlayerController* ipodMusicPlayer = [MPMusicPlayerController iPodMusicPlayer];
+    NSLog(@"%@", [[ipodMusicPlayer nowPlayingItem] description]);
+    [ipodMusicPlayer play];
+
     [self release];
 }
 

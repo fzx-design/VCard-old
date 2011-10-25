@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UIApplicationAddition.h"
+#import <MediaPlayer/MPMusicPlayerController.h>
 
 @interface InnerBroswerViewController : UIViewController<UIWebViewDelegate>
 {
