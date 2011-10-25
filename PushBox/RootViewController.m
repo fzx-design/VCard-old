@@ -411,6 +411,10 @@
 			self.notificationView.hidden = NO;
 			[self.notificationView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
 		}
+        
+        UIAudioAddition* audioAddition = [[UIAudioAddition alloc] init];
+        [audioAddition playNotificationSound];
+        [audioAddition release];
 	}
 }
 

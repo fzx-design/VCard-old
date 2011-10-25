@@ -375,6 +375,9 @@
 		frame.origin.x -= 782;
 		self.tableView.frame = frame;
 	} completion:^(BOOL finished) {
+        UIAudioAddition* audioAddition = [[UIAudioAddition alloc] init];
+        [audioAddition playRefreshDoneSound];
+        [audioAddition release];
 	}];
 }
 
@@ -394,7 +397,7 @@
 		self.tableView.alpha = 0.0;
 	} completion:^(BOOL finished) {
 		[self adjustCardViewPosition];
-	}];
+ 	}];
 }
 
 - (void)firstLoad:(void (^)())completion
