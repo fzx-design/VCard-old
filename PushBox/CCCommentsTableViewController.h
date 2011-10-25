@@ -12,6 +12,8 @@
 #import "UserCardNaviViewController.h"
 #import "CommentsTableViewController.h"
 
+#define kNotificationNameShouldShowMentions @"kNotificationNameShouldShowMentions"
+
 @class CommentsTableViewController;
 @class Status;
 
@@ -22,12 +24,18 @@
     CommentsTableViewDataSource _dataSource;
     id _delegate;
 	
-	Comment *_lastComment;
+	UILabel *_theNewCommentCountLabel;
+	UILabel *_theNewMentionsCountLabel;
 }
 
 @property(nonatomic, retain) Status *status;
 @property(nonatomic, retain) IBOutlet UILabel *titleLabel;
 @property(nonatomic, assign) CommentsTableViewDataSource dataSource;
 @property(nonatomic, assign) id<CommentsTableViewControllerDelegate> delegate;
+
+@property(nonatomic, retain) IBOutlet UILabel *theNewCommentCountLabel;
+@property(nonatomic, retain) IBOutlet UILabel *theNewMentionsCountLabel;
+
+- (IBAction)mentionButtonClicked:(id)sender;
 
 @end

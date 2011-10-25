@@ -7,6 +7,7 @@
 //
 
 #import "CardTableViewController.h"
+#import "PushBoxAppDelegate.h"
 #import "WeiboClient.h"
 #import "Status.h"
 #import "User.h"
@@ -39,6 +40,8 @@
 @synthesize dataSource = _dataSource;
 @synthesize user = _user;
 @synthesize prevFetchedResultsController = _prevFetchedResultsController;
+@synthesize fetchedMentionsResultsController = _fetchedMentionsResultsController;
+@synthesize mentionsManagedObjectContext = _mentionsManagedObjectContext;
 @synthesize prevRowIndex = _prevRowIndex;
 @synthesize insertionAnimationEnabled = _insertionAnimationEnabled;
 @synthesize searchString;
@@ -85,7 +88,12 @@
     footer.backgroundColor = [UIColor clearColor];
     [self.tableView setTableFooterView:footer];
     [footer release];
+	
+	if (!self.mentionsManagedObjectContext) {
+		self.mentionsManagedObjectContext = [(PushBoxAppDelegate*)[[UIApplication sharedApplication] delegate] mentionsManagedObjectContext];
+	}
     
+	[self.tableView setScrollsToTop:NO];
     self.currentRowIndex = 0;
     self.swipeEnabled = YES;
     self.blurImageView.alpha = 0.0;
@@ -200,6 +208,11 @@
     self.fetchedResultsController = nil;
     self.currentRowIndex = 0;
 	
+	if (self.dataSource == CardTableViewDataSourceMentions) {
+		self.fetchedResultsController = self.fetchedMentionsResultsController;
+		_refreshFlag = YES;
+	}
+	
     self.blurImageView.alpha = 0.0;
 	self.blurImageView.transform = CGAffineTransformMakeScale(kBlurImageViewScale, kBlurImageViewScale);
     
@@ -209,7 +222,9 @@
         self.tableView.alpha = 0.0;
         self.tableView.transform = CGAffineTransformScale(self.tableView.transform, 1/kBlurImageViewScale, 1/kBlurImageViewScale);
     } completion:^(BOOL fin) {
-        [self clearData];
+		if (self.dataSource != CardTableViewDataSourceMentions) {
+			[self clearData];
+		}
 		[self setHeaderViewWithOffset];
         [self.tableView reloadData];
         self.tableView.transform = CGAffineTransformScale(self.tableView.transform, kBlurImageViewScale, kBlurImageViewScale);
@@ -456,7 +471,6 @@
     if (_loading) {
         return;
     }
-	
     _loading = YES;
     
 	//
@@ -561,8 +575,6 @@
 				
                 NSArray *dictArray = client.responseJSONObject;
 				for (NSDictionary *dict in dictArray) {
-                    //                    Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-                    //                    [self.currentUser addFriendsStatusesObject:newStatus];
 					[Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
                 }
 				[self.managedObjectContext processPendingChanges];
@@ -674,6 +686,73 @@
         
         [client getTrendsStatuses:self.searchString];
     }
+	
+	//
+	if (self.dataSource == CardTableViewDataSourceMentions) {
+		[client setCompletionBlock:^(WeiboClient *client) {
+            if (!client.hasError) {
+				
+                NSArray *dictArray = client.responseJSONObject;
+				
+				for (NSDictionary *dict in dictArray) {
+                    Status * status = [Status insertStatus:dict inManagedObjectContext:self.mentionsManagedObjectContext];
+					NSLog(@"%@", status.text);
+                }
+				
+				[self.mentionsManagedObjectContext processPendingChanges];
+				
+				if (_refreshFlag) {
+					_refreshFlag = NO;
+					
+					Status *newStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
+					
+					if (newStatus == nil) {
+						NSLog(@"WTF!");
+					}
+					
+					NSLog(@"the new status's id is _______________ %@ and ____________ %@", newStatus.statusID, _lastMentionStatusID);
+					
+					if (_lastMentionStatusID == nil || ![newStatus.statusID isEqualToString:_lastMentionStatusID]){
+						[_lastMentionStatusID release];
+						_lastMentionStatusID = [[NSString stringWithString:newStatus.statusID] copy];
+						
+						[self clearData];
+						
+						for (NSDictionary *dict in dictArray) {
+							[Status insertStatus:dict inManagedObjectContext:self.mentionsManagedObjectContext];
+						}
+						[self.mentionsManagedObjectContext processPendingChanges];
+						
+						[self adjustCardViewAfterLoading];
+						
+					} else if ([newStatus.statusID isEqualToString:_lastMentionStatusID]) {
+						[self adjustCardViewAfterLoading];
+						[[UIApplication sharedApplication] hideLoadingView];
+						_loading = NO;
+						[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
+						[self.delegate cardTableViewController:self 
+												didScrollToRow:self.currentRowIndex
+											  withNumberOfRows:[self numberOfRows]];
+						return;
+					}
+				}
+                [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
+                [self.delegate cardTableViewController:self 
+                                        didScrollToRow:self.currentRowIndex
+                                      withNumberOfRows:[self numberOfRows]];
+            } else {
+				[ErrorNotification showLoadingError];
+			}
+			[[UIApplication sharedApplication] hideLoadingView];
+			_loading = NO;
+        }];
+		
+		[client getMentionsSinceID:nil 
+							 maxID:[NSString stringWithFormat:@""] 
+							  page:0 
+							 count:20];
+
+	}
 }
 
 - (void)clearData
@@ -688,6 +767,8 @@
         case CardTableViewDataSourceFavorites:
             [self.currentUser removeFavorites:self.currentUser.favorites];
             break;
+		case CardTableViewDataSourceMentions:
+			[Status deleteAllObjectsInManagedObjectContext:self.mentionsManagedObjectContext];
 		default:
 			break;
     }
@@ -721,18 +802,23 @@
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"statusID"
                                                                      ascending:NO];
     request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.managedObjectContext];
     
     switch (self.dataSource) {
         case CardTableViewDataSourceFriendsTimeline:
+			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.managedObjectContext];
             request.predicate = [NSPredicate predicateWithFormat:@"isFriendsStatusOf == %@", self.currentUser];
             break;
         case CardTableViewDataSourceUserTimeline:
+			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.managedObjectContext];
             request.predicate = [NSPredicate predicateWithFormat:@"author == %@", self.user];
             break;
         case CardTableViewDataSourceFavorites:
+			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.managedObjectContext];
             request.predicate = [NSPredicate predicateWithFormat:@"favoritedBy == %@", self.currentUser];
-        default:
+		case CardTableViewDataSourceMentions:
+			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.mentionsManagedObjectContext];
+			break;
+		default:
 			break;
     }
 }
@@ -848,6 +934,29 @@
 		[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameShouldDismissUserCard object:self];
 	} 
 	[self disableDismissRegion];
+}
+
+- (NSFetchedResultsController *)fetchedMentionsResultsController
+{
+    if (_fetchedMentionsResultsController != nil)
+    {
+        return _fetchedMentionsResultsController;
+    }
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    [self configureRequest:fetchRequest];
+    
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.mentionsManagedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    aFetchedResultsController.delegate = self;
+    self.fetchedMentionsResultsController = aFetchedResultsController;
+    
+    [aFetchedResultsController release];
+    [fetchRequest release];
+    
+	[self.fetchedMentionsResultsController performFetch:NULL];
+    
+    return _fetchedMentionsResultsController;
 }
 
 @end

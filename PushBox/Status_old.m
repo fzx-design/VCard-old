@@ -60,7 +60,7 @@
     if (!result) {
         result = [NSEntityDescription insertNewObjectForEntityForName:@"Status" inManagedObjectContext:context];
     }
-	
+
     result.updateDate = [NSDate date];
     
     result.statusID = statusID;
@@ -76,7 +76,7 @@
     
     result.commentsCount = [dict objectForKey:@"comment_count"];
     result.repostsCount = [dict objectForKey:@"repost_count"];
-	
+
     result.thumbnailPicURL = [dict objectForKey:@"thumbnail_pic"];
     result.bmiddlePicURL = [dict objectForKey:@"bmiddle_pic"];
     result.originalPicURL = [dict objectForKey:@"original_pic"];

@@ -7,6 +7,7 @@
 //
 
 #import "CCUserInfoCardViewController.h"
+#import "User.h"
 #import "WeiboClient.h"
 
 @implementation CCUserInfoCardViewController
@@ -46,6 +47,12 @@
 	
     WeiboClient *client = [WeiboClient client];
     [client resetUnreadCount:ResetUnreadCountTypeFollowers];
+}
+
+- (void)updateUserInfo
+{
+	self.followersCountLabel.text = self.currentUser.followersCount;
+	self.friendsCountLabel.text = self.currentUser.friendsCount;
 }
 
 

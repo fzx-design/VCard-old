@@ -7,6 +7,7 @@
 //
 
 #import "CCCommentsTableViewController.h"
+#import "UserCardBaseViewController.h"		//To get define
 #import "WeiboClient.h"
 #import "Comment.h"
 #import "User.h"
@@ -20,11 +21,15 @@
 @synthesize dataSource = _dataSource;
 @synthesize delegate = _delegate;
 @synthesize status = _status;
+@synthesize theNewCommentCountLabel = _theNewCommentCountLabel;
+@synthesize theNewMentionsCountLabel = _theNewMentionsCountLabel;
 
 - (void)dealloc
 {
     NSLog(@"CommentsTableViewController dealloc");
     [_titleLabel release];
+	[_theNewCommentCountLabel release];
+    [_theNewMentionsCountLabel release];
     [super dealloc];
 }
 
@@ -32,6 +37,8 @@
 {
     [super viewDidUnload];
     [_titleLabel release];
+    self.theNewCommentCountLabel = nil;
+    self.theNewMentionsCountLabel = nil;
 }
 
 - (void)viewDidLoad
@@ -58,7 +65,7 @@
 
 - (void)refresh
 {
-	[self clearData];
+//	[self clearData];
     [self loadMoreData];
     WeiboClient *client = [WeiboClient client];
     [client resetUnreadCount:ResetUnreadCountTypeComments];
@@ -73,10 +80,10 @@
     _loading = YES;
     
     WeiboClient *client = [WeiboClient client];
-	[[UIApplication sharedApplication] showLoadingView];
+//	[[UIApplication sharedApplication] showLoadingView];
     [client setCompletionBlock:^(WeiboClient *client) {
 		
-		[[UIApplication sharedApplication] hideLoadingView];
+//		[[UIApplication sharedApplication] hideLoadingView];
         if (!client.hasError) {
 
             NSArray *dictArray = client.responseJSONObject;
@@ -190,6 +197,17 @@
     [vc release];
 }
 
+- (IBAction)mentionButtonClicked:(id)sender
+{
+	self.theNewMentionsCountLabel.hidden = YES;
+	[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameShouldShowMentions object:self];
+}
+
+- (IBAction)commentButtonClicked:(id)sender
+{
+	self.theNewCommentCountLabel.hidden = YES;
+	[self refresh];
+}
 
 @end
 

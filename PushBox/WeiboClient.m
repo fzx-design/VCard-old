@@ -573,6 +573,28 @@ report_completion:
     [self sendRequest];
 }
 
+
+- (void)getMentionsSinceID:(NSString *)sinceID 
+					 maxID:(NSString *)maxID 
+					  page:(int)page 
+					 count:(int)count
+{
+	self.path = @"statuses/mentions.json";
+    if (sinceID) {
+        [self.params setObject:sinceID forKey:@"since_id"];
+    }
+    if (maxID) {
+        [self.params setObject:maxID forKey:@"max_id"];
+    }
+    if (page) {
+        [self.params setObject:[NSString stringWithFormat:@"%d", page] forKey:@"page"];
+    }
+    if (count) {
+        [self.params setObject:[NSString stringWithFormat:@"%d", count] forKey:@"count"];
+    }
+    [self sendRequest];
+}
+
 - (void)getCommentsAndRepostsCount:(NSArray *)statusIDs
 {
     self.path = @"statuses/counts.json";

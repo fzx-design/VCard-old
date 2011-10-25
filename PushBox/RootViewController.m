@@ -130,6 +130,7 @@
 	preNewFollowerCount = 0;
 	preNewMentionCount = 0;
 	self.notificationView.hidden = YES;
+	self.bottomStateFrameView.hidden = NO;
 	
     WeiboClient *client = [WeiboClient client];
     [client setCompletionBlock:^(WeiboClient *client) {
@@ -197,10 +198,13 @@
 			   selector:@selector(showNotificationView:) 
 				   name:kNotificationNameNewNotification 
 				 object:nil];
+	[center addObserver:self 
+			   selector:@selector(showMentionsNotification:) 
+				   name:kNotificationNameShouldShowMentions 
+				 object:nil];
 	
     
     self.bottomStateView.alpha = 0.0;
-	self.bottomStateInvisibleView.alpha = 0.0;
 	_commandCenterFlag = NO;
 	
     if ([WeiboClient authorized]) {
@@ -222,11 +226,13 @@
     [WeiboClient signout];
     [self hideDockView];
     [self hideCardTableView];
-	self.bottomStateInvisibleView.alpha = 0.0;
+	self.bottomStateFrameView.hidden = YES;
+	[self hideBottomStateView];
 	self.notificationView.hidden = YES;
 	[self setDefaultBackgroundImage:YES];
     self.currentUser = nil;
     [User deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
+	[Status deleteAllObjectsInManagedObjectContext:self.cardTableViewController.mentionsManagedObjectContext];
     [self performSelector:@selector(showLoginView) withObject:nil afterDelay:1.0];
 }
 
@@ -256,7 +262,6 @@
 {
 	if (self.bottomStateInvisibleView.image == nil) {
 		self.bottomStateInvisibleView.image = _tmpImage;
-		self.bottomStateInvisibleView.alpha = 1.0;
 	}
 	self.bottomStateView.alpha = 1.0;
 	[self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimation] forKey:@"animation"];
@@ -358,7 +363,7 @@
 	
     [self.cardTableViewController pushCardWithCompletion:^{
         [self moveCardIntoView];
-    }];    
+    }];
 }
 
 - (void)showFavorites
@@ -373,6 +378,30 @@
 		
     }];
 }
+
+- (void)showMentions
+{	
+	self.cardTableViewController.dataSource = CardTableViewDataSourceMentions;
+	self.bottomStateLabel.text = NSLocalizedString(@"@我的微博", nil);
+	[self showBottomStateView];
+	
+	[self.cardTableViewController pushCardWithCompletion:^{
+//		[self moveCardIntoView];
+		WeiboClient *client = [WeiboClient client];
+		[client resetUnreadCount:ResetUnreadCountTypeReferMe];
+	}];
+}
+
+- (void)showMentionsNotification:(id)sender
+{
+	if (self.dockViewController.commandCenterButton.selected) {
+        [self hideCommandCenter];
+    }
+	if (self.cardTableViewController.dataSource != CardTableViewDataSourceMentions) {
+		[self performSelector:@selector(showMentions) withObject:[sender object] afterDelay:1.0];
+	}
+}
+
 
 - (BOOL)needUpdateNotiViewWithUserInfo:(NSDictionary*)dict
 {
@@ -402,10 +431,14 @@
 	
 	if ([self needUpdateNotiViewWithUserInfo:dict]) {
 		CCUserInfoCardViewController *userCardVC = self.dockViewController.ccUserInfoCardViewController;
-		userCardVC.friendsCountLabel.text =  userCardVC.user.friendsCount;
-		userCardVC.followersCountLabel.text = userCardVC.user.followersCount;
+		userCardVC.friendsCountLabel.text =  self.currentUser.friendsCount;
+		userCardVC.followersCountLabel.text = self.currentUser.followersCount;
 		
 		userCardVC.theNewFollowersCountLabel.text = self.notiNewFollowerLabel.text;
+		
+		CCCommentsTableViewController *commentVC = self.dockViewController.ccCommentTableViewController;
+		commentVC.theNewCommentCountLabel.text = self.notiNewCommentLabel.text;
+		commentVC.theNewMentionsCountLabel.text = self.notiNewAtLabel.text;
 		
 		if (self.notificationView.hidden && !_commandCenterFlag) {
 			self.notificationView.hidden = NO;
@@ -420,6 +453,7 @@
 
 - (IBAction)refreshAndShowCommentCenter:(id)sender
 {
+	
 	[self showCommandCenter];
 }
 
@@ -797,7 +831,6 @@
 	
 	[self.dockViewController.ccCommentTableViewController refresh];
 	preNewCommentCount = 0;
-	self.notiNewCommentLabel.text = [NSString stringWithFormat:@"%d", preNewCommentCount];
 	
     [self.dockViewController viewWillAppear:YES];
     if (self.cardTableViewController.dataSource != CardTableViewDataSourceFriendsTimeline) {
