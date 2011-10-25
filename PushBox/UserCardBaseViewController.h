@@ -15,6 +15,7 @@
 
 @interface UserCardBaseViewController : CoreDataViewController {
     UIImageView *_profileImageView;
+    UIImageView *_verifiedImageView;
     UILabel *_screenNameLabel;
 	UILabel *_locationLabel;
 	UILabel *_homePageLabel;
@@ -33,6 +34,7 @@
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView* profileImageView;
+@property(nonatomic, retain) IBOutlet UIImageView* verifiedImageView;
 @property(nonatomic, retain) IBOutlet UILabel* screenNameLabel;
 @property(nonatomic, retain) IBOutlet UILabel* locationLabel;
 @property(nonatomic, retain) IBOutlet UILabel* homePageLabel;

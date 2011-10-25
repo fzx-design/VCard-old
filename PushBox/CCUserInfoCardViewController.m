@@ -13,7 +13,6 @@
 
 @synthesize theNewFollowersCountLabel = _theNewFollowersCountLabel;
 
-
 - (void)dealloc
 {
 	[_theNewFollowersCountLabel release];

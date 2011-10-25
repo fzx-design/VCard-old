@@ -14,6 +14,7 @@
 @implementation UserCardBaseViewController
 
 @synthesize profileImageView = _profileImageView;
+@synthesize verifiedImageView = _verifiedImageView;
 @synthesize screenNameLabel = _screenNameLabel;
 @synthesize locationLabel = _locationLabel;
 @synthesize homePageLabel = _homePageLabel;
@@ -86,6 +87,11 @@
 	} else {
 		self.genderLabel.text = @"女";
 	}
+        
+    [self.verifiedImageView setHidden:YES];
+    if ([_user.verified compare:[[NSNumber alloc] initWithInt:1]] == NSOrderedSame) {
+        [self.verifiedImageView setHidden:NO];
+    }
 }
 
 - (IBAction)showFriendsButtonClicked:(id)sender {
