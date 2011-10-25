@@ -311,11 +311,9 @@
     
 	self.tweetImageView.image = nil;
 	self.tweetImageView.alpha = 1.0;
-    //    [self.tweetImageView setImage:[UIImage imageNamed:@"sc_image_default 2.png"]];
 	
 	self.repostTweetImageView.alpha = 1.0;
 	self.repostTweetImageView.image = nil;
-    //    [self.repostTweetImageView setImage:[UIImage imageNamed:@"sc_image_default 2.png"]];
     
     self.tweetImageView.hidden = YES;
     self.repostTweetImageView.hidden = YES;
@@ -329,8 +327,14 @@
     self.postWebView.alpha = 0.0;
     self.repostWebView.alpha = 0.0;
     
-    //    [[self.postWebView scrollView] setScrollEnabled:NO];
-    //    [[self.repostWebView scrollView] setScrollEnabled:NO];
+    for (id subview in self.postWebView.subviews){
+        if ([[subview class] isSubclassOfClass: [UIScrollView class]])
+            ((UIScrollView *)subview).scrollEnabled = NO;
+    }
+    for (id subview in self.repostWebView.subviews){
+        if ([[subview class] isSubclassOfClass: [UIScrollView class]])
+            ((UIScrollView *)subview).scrollEnabled = NO;
+    }
     
     self.repostView.frame = kRepostViewFrameTop;
     self.repostWebView.frame = kRepostWebViewFrameTop;
@@ -375,7 +379,7 @@
     [self.tweetImageView loadImageFromURL:self.status.originalPicURL 
                                completion:^(void) 
      {
-         [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
+         [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
              self.tweetImageView.alpha = 1.0;
              self.imageCoverImageView.alpha = 1.0;
          } completion:^(BOOL fin) {
@@ -398,7 +402,7 @@
                                      completion:^(void) 
      {
          //         self.repostTweetImageView.alpha = 0.0;
-         [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
+         [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
              self.repostTweetImageView.alpha = 1.0;
              self.imageCoverImageView.alpha = 1.0;
          } completion:^(BOOL fin) {
@@ -574,12 +578,12 @@
     }
     
     //    NSString* htmlText = [[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><style type=\"text/css\">@import url(\"smartcard.css\");</style></head><body><div id=\"post\">%@</div></body></html>", phasedStatus];
-    NSString* htmlText = [[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><link href=\"smartcard.css\" rel=\"stylesheet\" type=\"text/css\" /><script type='text/javascript' src='smartcard.js'></script></head><body><div id=\"repost\"><span class='highlight'><a href='javascript:void(0);' onclick='atClicked(\"%@\")'>@%@</a></span>: %@</div></body></html>", self.status.repostStatus.author.screenName, self.status.repostStatus.author.screenName, phasedStatus];
+    NSString* htmlText = [[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><link href=\"smartcard.css\" rel=\"stylesheet\" type=\"text/css\" /><script type='text/javascript' src='smartcard.js'></script></head><body style=\"background-color:transparent\"><div id=\"repost\"><span class='highlight'><a href='javascript:void(0);' onclick='atClicked(\"%@\")'>@%@</a></span>: %@</div></body></html>", self.status.repostStatus.author.screenName, self.status.repostStatus.author.screenName, phasedStatus];
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"smartcard" ofType:@"html"]; 
     [self.repostWebView loadHTMLString:htmlText baseURL:[NSURL fileURLWithPath: path]];
     
-    [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
+    [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
         self.repostView.alpha = 1.0;
         self.repostWebView.alpha = 1.0;
         self.imageCoverImageView.alpha = 1.0;
@@ -631,7 +635,7 @@
     self.playButton.hidden = NO;
     self.playButton.frame = kPlayButtonFrameCenter;
     self.musicLink = postMusicVideoLink;
-    [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
+    [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
         self.playButton.alpha = 1.0;
     } completion:^(BOOL fin) {
     }];
@@ -641,13 +645,13 @@
 {
     self.playButton.hidden = NO;
     self.playButton.frame = kPlayButtonFrameTopRight;
-    //    self.repostView.frame = kRepostViewFrameBottom;
-    //    self.repostWebView.frame = kRepostWebViewFrameBottom;
+        self.repostView.frame = kRepostViewFrameBottom;
+        self.repostWebView.frame = kRepostWebViewFrameBottom;
     self.musicLink = repostMusicVideoLink;
     //    self.musicBackgroundImageView.alpha = 0.0;
     //    self.repostTweetImageView.alpha = 1.0;
     self.repostTweetImageView.hidden = YES;
-    [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
+    [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
         self.musicBackgroundImageView.alpha = 1.0;
         self.repostTweetImageView.alpha = 0.0;
         self.imageCoverImageView.alpha = 1.0;
@@ -819,7 +823,7 @@
         self.recentActNotifyLabel.hidden = NO;
         self.trackView.hidden = NO;
         //        self.imageCoverImageView.hidden = YES;
-        [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
+        [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
             self.trackLabel.alpha = 1.0;
             self.trackView.alpha = 1.0;
         } completion:^(BOOL fin) {
@@ -838,7 +842,7 @@
     _status = [status retain];
     
     [self prepare];
-    [self performSelector:@selector(update) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(update) withObject:nil afterDelay:0.3];
 }
 
 - (IBAction)actionsButtonClicked:(UIButton *)sender {

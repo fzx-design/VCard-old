@@ -24,7 +24,6 @@
 
 - (void)dealloc
 {
-    [super release];
     [_webView stopLoading];
     [_webView setDelegate:nil];
     [_webView release];
@@ -46,7 +45,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     MPMusicPlayerController* ipodMusicPlayer = [MPMusicPlayerController iPodMusicPlayer];
-    NSLog(@"%@", [[ipodMusicPlayer nowPlayingItem] description]);
     if ([ipodMusicPlayer playbackState] == MPMusicPlaybackStatePlaying)
     {
         isIpodPlaying = YES;

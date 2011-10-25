@@ -7,7 +7,7 @@ body{ font-family:"Helvetica Neue", "黑体"; background-color: transparent;}
 .highlight a:link{ text-decoration:none; color:#2a88d4;}
 .highlight a:visited{ text-decoration:none; color:#2a88d4;}
 
-#repost{width:431px; height:109px; background-image:url(sc_repost_bg.png); background-repeat:no-repeat; font-size:12px; color:#717171; text-shadow:#FFF 0px 1px 0px; line-height:20px; padding:10px 10px 10px 10px; margin:-5px 0 -10px -5px;}
+#repost{width:416px; height:109px; background-image:url(sc_repost_bg.png); background-repeat:no-repeat; background-color:transparent; font-size:12px; color:#717171; text-shadow:#FFF 0px 1px 0px; line-height:20px; padding:15px 15px 10px 20px; margin:-10px 0px 0px -8px;}
 .highlight{ color:#2a88d4; font-weight:bold;}
 .highlight a:link{ text-decoration:none; color:#2a88d4;}
 .highlight a:visited{ text-decoration:none; color:#2a88d4;}
