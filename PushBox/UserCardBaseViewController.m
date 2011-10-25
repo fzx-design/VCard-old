@@ -66,7 +66,7 @@
 
 - (void)configureView
 {
-    [self.profileImageView loadImageFromURL:self.user.profileImageURL 
+    [self.profileImageView loadImageFromURL:[self.user.profileImageURL stringByReplacingOccurrencesOfString:@"/50/" withString:@"/180/"] 
                                  completion:NULL
                              cacheInContext:self.managedObjectContext];
     

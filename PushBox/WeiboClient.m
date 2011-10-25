@@ -686,6 +686,8 @@ report_completion:
     NSData *imageData = UIImageJPEGRepresentation(image, 0.2);
     self.httpMethod = HTTPMethodForm;
     self.path = [NSString stringWithFormat:@"statuses/upload.json"];
+    [self.params setObject:text forKey:@"status"];
+    [self.params setObject:imageData forKey:@"pic"];
     
     
     //	NSString *path = [NSString stringWithFormat:@"statuses/upload.%@", API_FORMAT];
