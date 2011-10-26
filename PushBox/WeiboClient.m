@@ -27,6 +27,10 @@ typedef enum {
     HTTPMethodGet,
 } HTTPMethod;
 
+static NSString* API_DOMAIN = @"json";
+
+NSString *TWITTERFON_FORM_BOUNDARY = @"0194784892923";
+
 @interface WeiboClient()
 
 @property (nonatomic, assign, getter=isAuthRequired) BOOL authRequired;
@@ -270,7 +274,7 @@ report_completion:
 
 - (void)sendRequest
 {
-    if ([_request url]) {
+    if ([_request url] && self.httpMethod!=HTTPMethodForm) {
         return;
     }
     
@@ -289,6 +293,11 @@ report_completion:
             NSString *postBody = [self queryString];
             NSMutableData *postData = [[NSMutableData alloc] initWithData:[postBody dataUsingEncoding:NSUTF8StringEncoding]];
             [self.request setPostBody:postData];
+        }
+        else {
+            NSString* contentType = [[NSString alloc] initWithFormat:@"multipart/form-data; boundary=%@", TWITTERFON_FORM_BOUNDARY];
+            [self.request addRequestHeader:@"Content-Type" value:contentType];
+            self.request.requestMethod = @"POST";
         }
     }
     
@@ -680,37 +689,103 @@ report_completion:
 	[self sendRequest];
 }
 
+- (NSString*) nameValString: (NSDictionary*) dict {
+    NSArray* keys = [dict allKeys];
+    NSString* result = [NSString string];
+    int i;
+    for (i = 0; i < [keys count]; i++) {
+        result = [result stringByAppendingString:
+                  [@"--" stringByAppendingString:
+                   [TWITTERFON_FORM_BOUNDARY stringByAppendingString:
+                    [@"\r\nContent-Disposition: form-data; name=\"" stringByAppendingString:
+                     [[keys objectAtIndex: i] stringByAppendingString:
+                      [@"\"\r\n\r\n" stringByAppendingString:
+                       [[dict valueForKey: [keys objectAtIndex: i]] stringByAppendingString: @"\r\n"]]]]]]];
+    }
+    
+    return result;
+}
+
+- (NSString *)_encodeString:(NSString *)string
+{
+    NSString *result = (NSString *)CFURLCreateStringByAddingPercentEscapes(NULL, 
+                                                                           (CFStringRef)string, 
+                                                                           NULL, 
+                                                                           (CFStringRef)@";/?:@&=$+{}<>,",
+                                                                           kCFStringEncodingUTF8);
+    return [result autorelease];
+}
+
+- (NSString *)_queryStringWithBase:(NSString *)base parameters:(NSDictionary *)params prefixed:(BOOL)prefixed
+{
+    // Append base if specified.
+    NSMutableString *str = [NSMutableString stringWithCapacity:0];
+    if (base) {
+        [str appendString:base];
+    }
+    
+    // Append each name-value pair.
+    if (params) {
+        int i;
+        NSArray *names = [params allKeys];
+        for (i = 0; i < [names count]; i++) {
+            if (i == 0 && prefixed) {
+                [str appendString:@"?"];
+            } else if (i > 0) {
+                [str appendString:@"&"];
+            }
+            NSString *name = [names objectAtIndex:i];
+            [str appendString:[NSString stringWithFormat:@"%@=%@", 
+                               name, [self _encodeString:[params objectForKey:name]]]];
+        }
+    }
+    
+    return str;
+}
+
+- (NSString *)getURL:(NSString *)path 
+     queryParameters:(NSMutableDictionary*)params {
+    NSString* fullPath = [NSString stringWithFormat:@"%@://%@/%@", 
+                          (_secureConnection) ? @"https" : @"http",
+                          APIDomain, path];
+    if (params) {
+        fullPath = [self _queryStringWithBase:fullPath parameters:params prefixed:YES];
+    }
+    return fullPath;
+}
+
 - (void)post:(NSString *)text withImage:(UIImage *)image
 {
-    //[self.request setPostFormat:ASIMultipartFormDataPostFormat];
-    NSData *imageData = UIImageJPEGRepresentation(image, 0.2);
+    self.path = @"statuses/upload.json";
     self.httpMethod = HTTPMethodForm;
-    self.path = [NSString stringWithFormat:@"statuses/upload.json"];
-    [self.params setObject:text forKey:@"status"];
-    [self.params setObject:imageData forKey:@"pic"];
     
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.2);
     
-    //	NSString *path = [NSString stringWithFormat:@"statuses/upload.%@", API_FORMAT];
-    //    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
-    //						 status, @"status",s
-    //						 _engine.consumerKey, @"source",
-    //                         nil];
-    //    
-    //    NSString *param = [self nameValString:dic];
-    //    NSString *footer = [NSString stringWithFormat:@"\r\n--%@--\r\n", TWITTERFON_FORM_BOUNDARY];
-    //    
-    //    param = [param stringByAppendingString:[NSString stringWithFormat:@"--%@\r\n", TWITTERFON_FORM_BOUNDARY]];
-    //    param = [param stringByAppendingString:@"Content-Disposition: form-data; name=\"pic\";filename=\"image.jpg\"\r\nContent-Type: image/jpeg\r\n\r\n"];
-    //    NSLog(@"jpeg size: %d", [jpeg length]);
-    //    
-    //    NSMutableData *data = [NSMutableData data];
-    //    [data appendData:[param dataUsingEncoding:NSUTF8StringEncoding]];
-    //    [data appendData:jpeg];
-    //    [data appendData:[footer dataUsingEncoding:NSUTF8StringEncoding]];
-    //	
-    //	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
-    //	[params setObject:_engine.consumerKey forKey:@"source"];
-    //	[params setObject:status forKey:@"status"];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         text, @"status",
+                         AppKey, @"source",
+                         nil];
+    NSString *param = [self nameValString:dic];
+    
+    NSString *footer = [NSString stringWithFormat:@"\r\n--%@--\r\n", TWITTERFON_FORM_BOUNDARY];
+    
+    param = [param stringByAppendingString:[NSString stringWithFormat:@"--%@\r\n", TWITTERFON_FORM_BOUNDARY]];
+    param = [param stringByAppendingString:@"Content-Disposition: form-data; name=\"pic\";filename=\"image.jpg\"\r\nContent-Type: image/jpeg\r\n\r\n"];
+    
+    NSMutableData *data = [NSMutableData data];
+    [data appendData:[param dataUsingEncoding:NSUTF8StringEncoding]];
+    [data appendData:imageData];
+    [data appendData:[footer dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
+    [params setObject:AppKey forKey:@"source"];
+    [params setObject:text forKey:@"status"];
+    
+    //    [self post:[self getURL:self.path queryParameters:params] data:data];
+    NSURL* url = [[NSURL alloc] initWithString:[self getURL:self.path queryParameters:params]];
+    NSLog(@"%@", [url description]);
+    [self.request setURL:url];
+    [self.request setPostBody:data];
     
     [self sendRequest];
 }
