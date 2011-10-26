@@ -96,8 +96,10 @@
     _loading = NO;
 	_checkingDirection = NO;
 	_refreshFlag = NO;
+	
+	NSInteger interval = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeyRefreshingInterval];
     
-    _timer = [NSTimer scheduledTimerWithTimeInterval:5
+    _timer = [NSTimer scheduledTimerWithTimeInterval:interval
 											  target:self 
 											selector:@selector(timerFired:) 
 											userInfo:nil 

@@ -62,7 +62,7 @@
         case 1:
             return 1;
         case 2:
-            return 3;
+            return 4;
 		case 3:
 			return 1;
     }
@@ -130,7 +130,25 @@
                     cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%d 秒", nil), interval]; 
                     cell.imageView.image = [UIImage imageNamed:@"options_icon_time.png"];
                     break;
-                case 1:
+					
+				case 1:
+					cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    cell.textLabel.text = NSLocalizedString(@"消息更新速度", nil);
+					int refreshInterval = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeyRefreshingInterval];
+					if (refreshInterval == 10) {
+						cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"立即", nil), interval];
+					} else if(refreshInterval == 30) {
+						cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"每30秒", nil), interval];
+					} else if(refreshInterval == 60) {
+						cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"每分钟", nil), interval];
+					} else {
+						cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%手动", nil), interval];
+					}
+                    
+                    cell.imageView.image = [UIImage imageNamed:@"options_icon_time.png"];
+                    break;
+					
+                case 2:
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 					
 					UISwitch *aSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 94, 27)];
@@ -144,7 +162,7 @@
                     cell.textLabel.text = NSLocalizedString(@"加载微博图片", nil);
                     cell.imageView.image = [UIImage imageNamed:@"options_icon_image.png"];
                     break;
-                case 2:
+                case 3:
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 					
 					UISwitch *aSwitch2 = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 94, 27)];
@@ -158,11 +176,13 @@
 					cell.textLabel.text = NSLocalizedString(@"音效", nil);
                     cell.imageView.image = [UIImage imageNamed:@"options_icon_sound.png"];
                     break;
+					
             }
             break;
 		case 3:
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.textLabel.text = NSLocalizedString(@"关于", nil);
+			cell.imageView.image = [UIImage imageNamed:@"options_icon_about.png"];
 //			int enumValue = [[userDefault objectForKey:kUserDefaultKeyBackground] intValue];
 //			NSString *desc = [BackgroundManViewController backgroundDescriptionFromEnum:enumValue];
 //            cell.detailTextLabel.text = desc;
@@ -222,7 +242,12 @@
                 ivc.contentSizeForViewInPopover = kContentSizeForViewInPopover;
                 [self.navigationController pushViewController:ivc animated:YES];
                 [ivc release];
-            }
+            } else if(indexPath.row == 1) {
+				RefreshingIntervalViewController *ivc = [[RefreshingIntervalViewController alloc] initWithStyle:UITableViewStyleGrouped];
+                ivc.contentSizeForViewInPopover = kContentSizeForViewInPopover;
+                [self.navigationController pushViewController:ivc animated:YES];
+                [ivc release];
+			}
             break;
 		case 3:
 			[self showAbout];

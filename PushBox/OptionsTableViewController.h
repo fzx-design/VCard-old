@@ -10,6 +10,7 @@
 
 #import "IntervalManViewController.h"
 #import "BackgroundManViewController.h"
+#import "RefreshingIntervalViewController.h"
 #import "AboutViewController.h"
 
 #define kUserDefaultKeyImageDownloadingEnabled @"kUserDefaultKeyImageDownloadingEnabled"

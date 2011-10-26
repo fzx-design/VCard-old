@@ -109,6 +109,7 @@
 		9B11DC0C14554EC7001F75EF /* cc_reposts_button_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B11DC0914554EC7001F75EF /* cc_reposts_button_highlight.png */; };
 		9B11DC0D14554EC7001F75EF /* cc_reposts_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B11DC0A14554EC7001F75EF /* cc_reposts_button.png */; };
 		9B4B49F814582FCF00C9B542 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4B49F714582FCF00C9B542 /* Status.m */; };
+		9B4B49FB14586C1000C9B542 /* RefreshingIntervalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4B49FA14586C1000C9B542 /* RefreshingIntervalViewController.m */; };
 		9B5F2E2014497374008AC0B8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F2E1F14497373008AC0B8 /* Default-Landscape~ipad.png */; };
 		9B5F2E3814498FDA008AC0B8 /* UserCardNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F2E3614498FB8008AC0B8 /* UserCardNaviViewController.m */; };
 		9B5F2E3914498FDA008AC0B8 /* UserCardNaviViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F2E3714498FC5008AC0B8 /* UserCardNaviViewController.xib */; };
@@ -387,6 +388,8 @@
 		9B39EAA3144DCDB900F234D6 /* ErrorNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorNotification.m; sourceTree = "<group>"; };
 		9B4B49F614582FCF00C9B542 /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
 		9B4B49F714582FCF00C9B542 /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
+		9B4B49F914586C1000C9B542 /* RefreshingIntervalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshingIntervalViewController.h; sourceTree = "<group>"; };
+		9B4B49FA14586C1000C9B542 /* RefreshingIntervalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshingIntervalViewController.m; sourceTree = "<group>"; };
 		9B5F2E1F14497373008AC0B8 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		9B5F2E3514498FB4008AC0B8 /* UserCardNaviViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCardNaviViewController.h; sourceTree = "<group>"; };
 		9B5F2E3614498FB8008AC0B8 /* UserCardNaviViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCardNaviViewController.m; sourceTree = "<group>"; };
@@ -708,6 +711,8 @@
 				CB018DE113DDD028004217E0 /* AboutViewController.m */,
 				CB018DE213DDD028004217E0 /* BackgroundManViewController.h */,
 				CB018DE313DDD028004217E0 /* BackgroundManViewController.m */,
+				9B4B49F914586C1000C9B542 /* RefreshingIntervalViewController.h */,
+				9B4B49FA14586C1000C9B542 /* RefreshingIntervalViewController.m */,
 				CB018DE413DDD028004217E0 /* IntervalManViewController.h */,
 				CB018DE513DDD028004217E0 /* IntervalManViewController.m */,
 				CB018DE613DDD028004217E0 /* OptionsTableViewController.h */,
@@ -1580,6 +1585,7 @@
 				FEC6D1E314555FF900576EF3 /* UIAudioAddition.m in Sources */,
 				9BC6FA1214572A2D001493D6 /* CommentReviewPopoverController.m in Sources */,
 				9B4B49F814582FCF00C9B542 /* Status.m in Sources */,
+				9B4B49FB14586C1000C9B542 /* RefreshingIntervalViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
