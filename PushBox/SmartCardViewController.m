@@ -218,6 +218,7 @@
                                [[NSNumber alloc] initWithInt:65339],   // '"'
                                [[NSNumber alloc] initWithInt:12290],   // '"'
                                [[NSNumber alloc] initWithInt:65341],   // '"'
+                               [[NSNumber alloc] initWithInt:65292],   // '，'
                                [[NSNumber alloc] initWithInt:65371],   // '"'
                                [[NSNumber alloc] initWithInt:65373],   // '"'
                                [[NSNumber alloc] initWithInt:65374],   // '"'
@@ -635,21 +636,23 @@
 
 - (void)loadPostMusicVideo:(NSString*)postMusicVideoLink
 {    
-    self.playButton.hidden = NO;
-    self.playButton.frame = kPlayButtonFrameCenter;
-    self.musicLink = postMusicVideoLink;
-    [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
-        self.playButton.alpha = 1.0;
-    } completion:^(BOOL fin) {
-    }];
+    if (!self.status.repostStatus) {
+        self.playButton.hidden = NO;
+        self.playButton.frame = kPlayButtonFrameCenter;
+        self.musicLink = postMusicVideoLink;
+        [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+            self.playButton.alpha = 1.0;
+        } completion:^(BOOL fin) {
+        }];
+    }
 }
 
 - (void)loadRepostMusicVideo:(NSString*)repostMusicVideoLink
 {
     self.playButton.hidden = NO;
     self.playButton.frame = kPlayButtonFrameTopRight;
-        self.repostView.frame = kRepostViewFrameBottom;
-        self.repostWebView.frame = kRepostWebViewFrameBottom;
+    self.repostView.frame = kRepostViewFrameBottom;
+    self.repostWebView.frame = kRepostWebViewFrameBottom;
     self.musicLink = repostMusicVideoLink;
     //    self.musicBackgroundImageView.alpha = 0.0;
     //    self.repostTweetImageView.alpha = 1.0;
@@ -990,8 +993,8 @@
 				NSManagedObjectContext *managedContext = [self.status managedObjectContext];
 				[managedContext deleteObject:self.status];
 				[managedContext processPendingChanges];
-//                [self.managedObjectContext deleteObject:self.status];
-//				[self.managedObjectContext processPendingChanges];
+                //                [self.managedObjectContext deleteObject:self.status];
+                //				[self.managedObjectContext processPendingChanges];
 				[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameCardDeleted object:self];
             }
         }];
