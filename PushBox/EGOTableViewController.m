@@ -48,10 +48,12 @@
     if (!_loadMoreDataButton) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 65);
-        NSString *text = NSLocalizedString(@"加载更多数据", nil);
+        NSString *text = NSLocalizedString(@"更多", nil);
         [button setTitle:text forState:UIControlStateNormal];
         [button setTitle:text forState:UIControlStateHighlighted];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+		[button.titleLabel setFont:[UIFont fontWithName:@"Helvetica" size:14]];
+		
         [button addTarget:self action:@selector(loadMoreData) forControlEvents:UIControlEventTouchUpInside];
         self.loadMoreDataButton = button;
     }
