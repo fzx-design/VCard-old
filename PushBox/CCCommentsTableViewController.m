@@ -159,7 +159,7 @@
 	height = height > 65 ? height : 65;
 	commentCell.frame = CGRectMake(0, 0, 448, height);
 	
-	commentCell.separatorLine.frame = CGRectMake(0, height-10, 
+	commentCell.separatorLine.frame = CGRectMake(0, height - 2, 
                                                  commentCell.separatorLine.frame.size.width, 
                                                  commentCell.separatorLine.frame.size.height);
 }
@@ -169,21 +169,21 @@
     return @"CCCommentsTableViewCell";
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//	Comment *comment = [self.fetchedResultsController objectAtIndexPath:indexPath];
-//	
-//	UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(11, 26, 383, 39)];
-//	[self.view addSubview:textView];
-//	//	textView.font = [textView.font fontWithSize:14];
-//	textView.text = comment.text;
-//    
-//	CGFloat height = textView.frame.origin.y + textView.contentSize.height;
-//	[textView removeFromSuperview];
-//	[textView release];
-//	
-//	return height;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	Comment *comment = [self.fetchedResultsController objectAtIndexPath:indexPath];
+	
+	UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(11, 26, 383, 39)];
+	[self.view addSubview:textView];
+	//	textView.font = [textView.font fontWithSize:14];
+	textView.text = comment.text;
+    
+	CGFloat height = textView.frame.origin.y + textView.contentSize.height + 16;
+	[textView removeFromSuperview];
+	[textView release];
+	
+	return height;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
