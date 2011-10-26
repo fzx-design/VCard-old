@@ -40,8 +40,6 @@
 @synthesize dataSource = _dataSource;
 @synthesize user = _user;
 @synthesize prevFetchedResultsController = _prevFetchedResultsController;
-@synthesize fetchedMentionsResultsController = _fetchedMentionsResultsController;
-@synthesize mentionsManagedObjectContext = _mentionsManagedObjectContext;
 @synthesize prevRowIndex = _prevRowIndex;
 @synthesize insertionAnimationEnabled = _insertionAnimationEnabled;
 @synthesize searchString;
@@ -88,10 +86,6 @@
     footer.backgroundColor = [UIColor clearColor];
     [self.tableView setTableFooterView:footer];
     [footer release];
-	
-	if (!self.mentionsManagedObjectContext) {
-		self.mentionsManagedObjectContext = [(PushBoxAppDelegate*)[[UIApplication sharedApplication] delegate] mentionsManagedObjectContext];
-	}
     
 	[self.tableView setScrollsToTop:NO];
     self.currentRowIndex = 0;
@@ -209,7 +203,6 @@
     self.currentRowIndex = 0;
 	
 	if (self.dataSource == CardTableViewDataSourceMentions) {
-		self.fetchedResultsController = self.fetchedMentionsResultsController;
 		_refreshFlag = YES;
 	}
 	
@@ -222,9 +215,7 @@
         self.tableView.alpha = 0.0;
         self.tableView.transform = CGAffineTransformScale(self.tableView.transform, 1/kBlurImageViewScale, 1/kBlurImageViewScale);
     } completion:^(BOOL fin) {
-		if (self.dataSource != CardTableViewDataSourceMentions) {
-			[self clearData];
-		}
+		[self clearData];
 		[self setHeaderViewWithOffset];
         [self.tableView reloadData];
         self.tableView.transform = CGAffineTransformScale(self.tableView.transform, kBlurImageViewScale, kBlurImageViewScale);
@@ -697,11 +688,11 @@
                 NSArray *dictArray = client.responseJSONObject;
 				
 				for (NSDictionary *dict in dictArray) {
-                    Status * status = [Status insertStatus:dict inManagedObjectContext:self.mentionsManagedObjectContext];
+                    Status * status = [Status insertMentionedStatus:dict inManagedObjectContext:self.managedObjectContext];
 					NSLog(@"%@", status.text);
                 }
 				
-				[self.mentionsManagedObjectContext processPendingChanges];
+				[self.managedObjectContext processPendingChanges];
 				
 				if (_refreshFlag) {
 					_refreshFlag = NO;
@@ -715,9 +706,9 @@
 						[self adjustCardViewAfterLoadingWithCompletion:^(){
 							[self clearData];
 							for (NSDictionary *dict in dictArray) {
-								[Status insertStatus:dict inManagedObjectContext:self.mentionsManagedObjectContext];
+								[Status insertMentionedStatus:dict inManagedObjectContext:self.managedObjectContext];
 							}
-							[self.mentionsManagedObjectContext processPendingChanges];
+							[self.managedObjectContext processPendingChanges];
 						}];
 						
 					} else if ([newStatus.statusID isEqualToString:_lastMentionStatusID]) {
@@ -763,7 +754,7 @@
             [self.currentUser removeFavorites:self.currentUser.favorites];
             break;
 		case CardTableViewDataSourceMentions:
-			[Status deleteAllObjectsInManagedObjectContext:self.mentionsManagedObjectContext];
+			break;
 		default:
 			break;
     }
@@ -811,7 +802,8 @@
 			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.managedObjectContext];
             request.predicate = [NSPredicate predicateWithFormat:@"favoritedBy == %@", self.currentUser];
 		case CardTableViewDataSourceMentions:
-			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.mentionsManagedObjectContext];
+			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.managedObjectContext];
+            request.predicate = [NSPredicate predicateWithFormat:@"isMentioned == %@", [NSNumber numberWithBool:YES]];
 			break;
 		default:
 			break;
@@ -929,29 +921,6 @@
 		[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameShouldDismissUserCard object:self];
 	} 
 	[self disableDismissRegion];
-}
-
-- (NSFetchedResultsController *)fetchedMentionsResultsController
-{
-    if (_fetchedMentionsResultsController != nil)
-    {
-        return _fetchedMentionsResultsController;
-    }
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    [self configureRequest:fetchRequest];
-    
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.mentionsManagedObjectContext sectionNameKeyPath:nil cacheName:nil];
-    aFetchedResultsController.delegate = self;
-    self.fetchedMentionsResultsController = aFetchedResultsController;
-    
-    [aFetchedResultsController release];
-    [fetchRequest release];
-    
-	[self.fetchedMentionsResultsController performFetch:NULL];
-    
-    return _fetchedMentionsResultsController;
 }
 
 @end

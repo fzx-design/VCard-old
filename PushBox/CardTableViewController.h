@@ -46,7 +46,6 @@ typedef enum {
     BOOL _swipeEnabled;
     
     NSFetchedResultsController *_prevFetchedResultsController;
-	NSFetchedResultsController *_fetchedMentionsResultsController;
 	NSManagedObjectContext *_mentionsManagedObjectContext;
 	
     int _prevRowIndex;
@@ -75,8 +74,6 @@ typedef enum {
 @property(nonatomic, assign) CardTableViewDataSource dataSource;
 @property(nonatomic, retain) User *user;
 @property(nonatomic, retain) NSFetchedResultsController* prevFetchedResultsController;
-@property(nonatomic, retain) NSFetchedResultsController* fetchedMentionsResultsController;
-@property(nonatomic, retain) NSManagedObjectContext *mentionsManagedObjectContext;
 @property(nonatomic, assign) int prevRowIndex;
 @property(nonatomic, assign) BOOL insertionAnimationEnabled;
 @property(nonatomic, assign) NSString *searchString;

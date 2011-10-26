@@ -19,8 +19,6 @@
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 @synthesize rootViewController = _rootViewController;
 
-@synthesize mentionsManagedObjectContext = _mentionsManagedObjectContext;
-
 + (void)initialize
 {
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
@@ -117,7 +115,6 @@
 {
     [_window release];
     [__managedObjectContext release];
-	[_mentionsManagedObjectContext release];
     [__managedObjectModel release];
     [__persistentStoreCoordinator release];
     [_rootViewController release];
@@ -173,22 +170,6 @@
     return __managedObjectContext;
 }
 
-- (NSManagedObjectContext *)mentionsManagedObjectContext
-{
-	if (_mentionsManagedObjectContext != nil)
-    {
-        return _mentionsManagedObjectContext;
-    }
-    
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (coordinator != nil)
-    {
-        _mentionsManagedObjectContext = [[NSManagedObjectContext alloc] init];
-        [_mentionsManagedObjectContext setPersistentStoreCoordinator:coordinator];
-    }
-    return _mentionsManagedObjectContext;
-}
-
 /**
  Returns the managed object model for the application.
  If the model doesn't already exist, it is created from the application's model.
@@ -215,7 +196,7 @@
         return __persistentStoreCoordinator;
     }
     
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"VCardHD.sqlite"];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"VCard.sqlite"];
     
     //
     NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];

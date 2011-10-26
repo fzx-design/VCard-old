@@ -232,7 +232,6 @@
 	[self setDefaultBackgroundImage:YES];
     self.currentUser = nil;
     [User deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
-	[Status deleteAllObjectsInManagedObjectContext:self.cardTableViewController.mentionsManagedObjectContext];
     [self performSelector:@selector(showLoginView) withObject:nil afterDelay:1.0];
 }
 
