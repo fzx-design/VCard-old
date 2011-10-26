@@ -62,7 +62,7 @@
         case 1:
             return 1;
         case 2:
-            return 4;
+            return 5;
 		case 3:
 			return 1;
     }
@@ -162,7 +162,21 @@
                     cell.textLabel.text = NSLocalizedString(@"加载微博图片", nil);
                     cell.imageView.image = [UIImage imageNamed:@"options_icon_image.png"];
                     break;
-                case 3:
+				case 3:
+					cell.selectionStyle = UITableViewCellSelectionStyleNone;
+					
+					UISwitch *aSwitch1 = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 94, 27)];
+					aSwitch1.on = [userDefault boolForKey:kUserDefaultKeyNotiPopoverEnabled];
+					[aSwitch1 addTarget:self
+								action:@selector(notiPopoverOn:)
+					  forControlEvents:UIControlEventTouchUpInside];
+                    cell.accessoryView = aSwitch1;
+					[aSwitch1 release];
+					
+                    cell.textLabel.text = NSLocalizedString(@"气泡提醒", nil);
+                    cell.imageView.image = [UIImage imageNamed:@"options_icon_image.png"];
+                    break;
+                case 4:
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 					
 					UISwitch *aSwitch2 = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 94, 27)];
@@ -207,6 +221,13 @@
 {
 	BOOL on = sender.on;
 	[[NSUserDefaults standardUserDefaults] setBool:on forKey:kUserDefaultKeySoundEnabled];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)notiPopoverOn:(UISwitch *)sender
+{
+	BOOL on = sender.on;
+	[[NSUserDefaults standardUserDefaults] setBool:on forKey:kUserDefaultKeyNotiPopoverEnabled];
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 

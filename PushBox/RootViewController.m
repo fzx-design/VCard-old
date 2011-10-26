@@ -438,7 +438,8 @@
 		commentVC.theNewCommentCountLabel.text = self.notiNewCommentLabel.text;
 		commentVC.theNewMentionsCountLabel.text = self.notiNewAtLabel.text;
 		
-		if (self.notificationView.hidden && !_commandCenterFlag) {
+		BOOL enabled = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeyNotiPopoverEnabled];
+		if (self.notificationView.hidden && !_commandCenterFlag && enabled) {
 			self.notificationView.hidden = NO;
 			[self.notificationView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
 		}

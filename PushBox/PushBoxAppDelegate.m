@@ -26,6 +26,7 @@
 	[dict setObject:[NSNumber numberWithInt:PBBackgroundImageDefault] forKey:kUserDefaultKeyBackground];
 	[dict setObject:[NSNumber numberWithInt:3] forKey:kUserDefaultKeySiidePlayTimeInterval];
 	[dict setObject:[NSNumber numberWithInt:10] forKey:kUserDefaultKeyRefreshingInterval];
+	[dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultKeyNotiPopoverEnabled];
     [dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultKeySoundEnabled];
 	[dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultKeyImageDownloadingEnabled];    
 	[dict setObject:[NSNumber numberWithInt:0] forKey:kUserDefaultKeyLoginCount];

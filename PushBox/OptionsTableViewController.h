@@ -15,7 +15,7 @@
 
 #define kUserDefaultKeyImageDownloadingEnabled @"kUserDefaultKeyImageDownloadingEnabled"
 #define kUserDefaultKeySoundEnabled @"kUserDefaultKeySoundEnabled"
-
+#define kUserDefaultKeyNotiPopoverEnabled @"kUserDefaultKeyNotiPopoverEnabled"
 #define kNotificationNameUserSignedOut @"kNotificationNameUserSignedOut"
 
 @interface OptionsTableViewController : UITableViewController {
