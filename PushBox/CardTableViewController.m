@@ -347,7 +347,6 @@
             if ([dictsArray count]) {
                 for (NSDictionary *dict in dictsArray) {
                     Status *status = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-					NSLog(@"The favored status is -___________-  %@", status.text);
                     [self.currentUser addFavoritesObject:status];
                 }
                 [self loadAllFavoritesWithCompletion:completion];
@@ -774,7 +773,9 @@
     {   
 		CardTableViewCell *tableViewCell = (CardTableViewCell *)cell;
         tableViewCell.smartCardViewController.currentUser = self.currentUser;
-        tableViewCell.smartCardViewController.status = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        Status * status = tableViewCell.smartCardViewController.status = [self.fetchedResultsController objectAtIndexPath:indexPath];
+		
+		NSLog(@"The favored status is -___________-  %@", status.text);
     }
     else 
     {   
@@ -802,6 +803,7 @@
         case CardTableViewDataSourceFavorites:
 			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.managedObjectContext];
             request.predicate = [NSPredicate predicateWithFormat:@"favoritedBy == %@", self.currentUser];
+			break;
 		case CardTableViewDataSourceMentions:
 			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.managedObjectContext];
             request.predicate = [NSPredicate predicateWithFormat:@"isMentioned == %@", [NSNumber numberWithBool:YES]];
