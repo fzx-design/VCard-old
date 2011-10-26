@@ -51,7 +51,7 @@
         NSString *text = NSLocalizedString(@"更多", nil);
         [button setTitle:text forState:UIControlStateNormal];
         [button setTitle:text forState:UIControlStateHighlighted];
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor colorWithRed:68/255 green:68/255 blue:68/255 alpha:1.0] forState:UIControlStateNormal];
 		[button.titleLabel setFont:[UIFont fontWithName:@"Helvetica" size:14]];
 		
         [button addTarget:self action:@selector(loadMoreData) forControlEvents:UIControlEventTouchUpInside];
