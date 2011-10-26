@@ -19,7 +19,7 @@ enum {
 
 typedef void (^WCCompletionBlock)(WeiboClient *client);
 
-@interface WeiboClient : NSObject <ASIHTTPRequestDelegate, NSURLConnectionDelegate> {
+@interface WeiboClient : NSObject <ASIHTTPRequestDelegate> {
     BOOL _hasError;
     NSString* _errorDesc;
     int _responseStatusCode;

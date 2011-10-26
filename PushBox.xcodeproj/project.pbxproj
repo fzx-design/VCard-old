@@ -248,8 +248,6 @@
 		CBDA5B7613DC25FA00FAE221 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B7513DC25FA00FAE221 /* CoreDataTableViewController.m */; };
 		FE1E629914441E2600A48CF9 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1E629814441E2600A48CF9 /* Message.m */; };
 		FE1E629C14441E3F00A48CF9 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1E629B14441E3F00A48CF9 /* User.m */; };
-		FE47FDE714583F01003A6A36 /* OAToken.m in Sources */ = {isa = PBXBuildFile; fileRef = FE47FDDB14583F01003A6A36 /* OAToken.m */; };
-		FE47FDEB1458517D003A6A36 /* OAConsumer.m in Sources */ = {isa = PBXBuildFile; fileRef = FE47FDEA1458517C003A6A36 /* OAConsumer.m */; };
 		FE72B4CB144FFD3000C3EE5B /* repost_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4C7144FFD3000C3EE5B /* repost_bg.jpg */; };
 		FE72B4CC144FFD3000C3EE5B /* smartcard.css in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4C8144FFD3000C3EE5B /* smartcard.css */; };
 		FE72B4CD144FFD3000C3EE5B /* smartcard.html in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4C9144FFD3000C3EE5B /* smartcard.html */; };
@@ -593,10 +591,6 @@
 		FE1E629814441E2600A48CF9 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		FE1E629A14441E3F00A48CF9 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		FE1E629B14441E3F00A48CF9 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		FE47FDDA14583F01003A6A36 /* OAToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAToken.h; sourceTree = "<group>"; };
-		FE47FDDB14583F01003A6A36 /* OAToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAToken.m; sourceTree = "<group>"; };
-		FE47FDE91458517C003A6A36 /* OAConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAConsumer.h; sourceTree = "<group>"; };
-		FE47FDEA1458517C003A6A36 /* OAConsumer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAConsumer.m; sourceTree = "<group>"; };
 		FE72B4C7144FFD3000C3EE5B /* repost_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = repost_bg.jpg; sourceTree = "<group>"; };
 		FE72B4C8144FFD3000C3EE5B /* smartcard.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = smartcard.css; sourceTree = "<group>"; };
 		FE72B4C9144FFD3000C3EE5B /* smartcard.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = smartcard.html; sourceTree = "<group>"; };
@@ -1233,10 +1227,6 @@
 				CBDA5B5113DBECEE00FAE221 /* NSString+URLEncoding.m */,
 				CBDA5B5213DBECEE00FAE221 /* OAuthHTTPRequest.h */,
 				CBDA5B5313DBECEE00FAE221 /* OAuthHTTPRequest.m */,
-				FE47FDE91458517C003A6A36 /* OAConsumer.h */,
-				FE47FDEA1458517C003A6A36 /* OAConsumer.m */,
-				FE47FDDA14583F01003A6A36 /* OAToken.h */,
-				FE47FDDB14583F01003A6A36 /* OAToken.m */,
 			);
 			name = OARequest;
 			sourceTree = "<group>";
@@ -1589,12 +1579,7 @@
 				9B5F867F1454124B004B01D6 /* CCCommentsTableViewController.m in Sources */,
 				FEC6D1E314555FF900576EF3 /* UIAudioAddition.m in Sources */,
 				9BC6FA1214572A2D001493D6 /* CommentReviewPopoverController.m in Sources */,
-<<<<<<< HEAD
 				9B4B49F814582FCF00C9B542 /* Status.m in Sources */,
-=======
-				FE47FDE714583F01003A6A36 /* OAToken.m in Sources */,
-				FE47FDEB1458517D003A6A36 /* OAConsumer.m in Sources */,
->>>>>>> 新增 微博发图片功能
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
