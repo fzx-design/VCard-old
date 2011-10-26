@@ -16,12 +16,14 @@
 - (void)commentFinished;
 @end
 
-@interface CommentViewController : UIViewController<UIActionSheetDelegate, UIAlertViewDelegate> {
+@interface CommentViewController : UIViewController<UITextViewDelegate,UIActionSheetDelegate, UIAlertViewDelegate> {
     UITextView *_textView;
     UILabel *_titleLabel;
+	UILabel *_wordsCountLabel;
 	UIImageView *_postingCircleImageView;
 	UIImageView *_postingRoundImageView;
 	UIButton *_repostButton;
+	UIButton *_doneButton;
 	
     Status *_targetStatus;
     Comment *_targetComment;
@@ -33,10 +35,12 @@
 
 @property(nonatomic, retain) IBOutlet UITextView* textView;
 @property(nonatomic, retain) IBOutlet UILabel* titleLabel;
-
+@property(nonatomic, retain) IBOutlet UILabel* wordsCountLabel;
 @property(nonatomic, retain) IBOutlet UIImageView* postingCircleImageView;
 @property(nonatomic, retain) IBOutlet UIImageView* postingRoundImageView;
 @property(nonatomic, retain) IBOutlet UIButton* repostButton;
+@property(nonatomic, retain) IBOutlet UIButton* doneButton;
+
 
 @property(nonatomic, retain) Status* targetStatus;
 @property(nonatomic, retain) Comment* targetComment;

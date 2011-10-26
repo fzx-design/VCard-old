@@ -23,6 +23,8 @@
 @synthesize targetStatus = _targetStatus;
 @synthesize targetComment = _targetComment;
 @synthesize repostButton = _repostButton;
+@synthesize doneButton = _doneButton;
+@synthesize wordsCountLabel = _wordsCountLabel;
 @synthesize delegate = _delegate;
 
 - (void)dealloc
@@ -32,6 +34,8 @@
     [_targetStatus release];
     [_targetComment release];
 	[_repostButton release];
+	[_doneButton release];
+	[_wordsCountLabel release];
 	[_postingRoundImageView release];
 	[_postingCircleImageView release];
     [super dealloc];
@@ -45,6 +49,8 @@
     self.textView = nil;
     self.titleLabel = nil;
 	self.repostButton = nil;
+	self.doneButton = nil;
+	self.wordsCountLabel = nil;
 	self.postingRoundImageView = nil;
 	self.postingCircleImageView = nil;
 }
@@ -87,6 +93,27 @@
     } completion:^(BOOL finished) {
 		[_postingCircleImageView.layer removeAnimationForKey:@"kAnimationLoad"];
 	}];
+}
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    NSString *text = self.textView.text;
+	//    int leng = [text length];
+    int bytes = [text lengthOfBytesUsingEncoding:NSUTF16StringEncoding];
+    const char *ptr = [text cStringUsingEncoding:NSUTF16StringEncoding];
+    int words = 0;
+    for (int i = 0; i < bytes; i++) {
+        if (*ptr) {
+            words++;
+        }
+        ptr++;
+    }
+    words += 1;
+    words /= 2;
+    words = 140 - words;
+    self.wordsCountLabel.text = [NSString stringWithFormat:@"%d", words];
+    self.doneButton.enabled = words >= 0;
+    
 }
 
 - (IBAction)doneButtonClicked:(UIButton *)sender {
