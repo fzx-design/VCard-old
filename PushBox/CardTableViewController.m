@@ -347,6 +347,7 @@
             if ([dictsArray count]) {
                 for (NSDictionary *dict in dictsArray) {
                     Status *status = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+					NSLog(@"The favored status is -___________-  %@", status.text);
                     [self.currentUser addFavoritesObject:status];
                 }
                 [self loadAllFavoritesWithCompletion:completion];

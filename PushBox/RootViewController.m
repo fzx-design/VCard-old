@@ -374,7 +374,6 @@
     [self.cardTableViewController pushCardWithCompletion:^{
         self.dockViewController.showFavoritesButton.userInteractionEnabled = YES;
 		[self moveCardIntoView];
-		
     }];
 }
 
