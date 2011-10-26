@@ -55,6 +55,7 @@
 
 - (void)dealloc
 {    
+	NSLog(@"tweet_______:%@", _tweetTextView.text);
     [_postWebView release];
     [_repostWebView release];
     [_profileImageView release];

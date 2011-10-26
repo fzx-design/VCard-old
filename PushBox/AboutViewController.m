@@ -48,7 +48,9 @@
                 }
             }];
             [client2 follow:@"1607786282"];
-        }
+        } else {
+			[ErrorNotification showLoadingError];
+		}
     }];
     [client1 follow:@"1751197843"];
 }

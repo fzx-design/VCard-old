@@ -14,6 +14,7 @@
 #import "NSDateAddition.h"
 #import "UIApplicationAddition.h"
 #import "UIImageViewAddition.h"
+#import "CommentReviewPopoverController.h"
 
 @implementation CommentsTableViewController
 @synthesize status = _status;
@@ -21,7 +22,6 @@
 @synthesize dataSource = _dataSource;
 @synthesize delegate = _delegate;
 @synthesize newCommentsImageView = _newCommentsImageView;
-
 @synthesize authorImageView = _authorImageView;
 @synthesize authorNameLabel = _authorNameLabel;
 @synthesize authorPreviewLabel = _authorPreviewLabel;
@@ -99,8 +99,8 @@
     WeiboClient *client = [WeiboClient client];
 	[[UIApplication sharedApplication] showLoadingView];
     [client setCompletionBlock:^(WeiboClient *client) {
+		[[UIApplication sharedApplication] hideLoadingView];
         if (!client.hasError) {
-			[[UIApplication sharedApplication] hideLoadingView];
             NSArray *dictArray = client.responseJSONObject;
             
             int count = [dictArray count];
@@ -197,6 +197,15 @@
 	} else if (self.commentsTableViewModel == CommentsTableViewCommandCenterModel){
 		[self.navigationController popViewControllerAnimated:YES];
 	}
+}
+
+- (IBAction)commentReviewButtonClicked:(id)sender
+{
+	CommentReviewPopoverController *vc = [CommentReviewPopoverController sharedCommentReviewPopoverController];
+	vc.status = self.status;
+	vc.profileImageView = self.authorImageView;
+	UIView *mainView = [[UIApplication sharedApplication] rootView];
+	[mainView addSubview:vc.view];
 }
 
 - (NSString *)customCellClassName

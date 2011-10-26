@@ -106,22 +106,23 @@
     WeiboClient *client = [WeiboClient client];
     [client setCompletionBlock:^(WeiboClient *client) {
         if (!client.hasError) {
-            self.unFollowButton.hidden = NO;
-            self.followButton.hidden = YES;
+            
         }
     }];
     [client follow:self.user.userID];
+	self.unFollowButton.hidden = NO;
+	self.followButton.hidden = YES;
 }
 
 - (IBAction)unfollowButtonClicked:(id)sender {
     WeiboClient *client = [WeiboClient client];
     [client setCompletionBlock:^(WeiboClient *client) {
         if (!client.hasError) {
-            self.unFollowButton.hidden = YES;
-            self.followButton.hidden = NO;
         }
     }];
     [client unfollow:self.user.userID];
+	self.unFollowButton.hidden = YES;
+	self.followButton.hidden = NO;
 }
 
 - (IBAction)backButtonClicked:(id)sender {
