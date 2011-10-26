@@ -773,10 +773,8 @@
     {   
 		CardTableViewCell *tableViewCell = (CardTableViewCell *)cell;
         tableViewCell.smartCardViewController.currentUser = self.currentUser;
-        Status * status = tableViewCell.smartCardViewController.status = [self.fetchedResultsController objectAtIndexPath:indexPath];
-		
-		NSLog(@"The favored status is -___________-  %@", status.text);
-    }
+        tableViewCell.smartCardViewController.status = [self.fetchedResultsController objectAtIndexPath:indexPath];
+	}
     else 
     {   
 		CardTableViewCell *tableViewCell = (CardTableViewCell *)cell;

@@ -24,8 +24,8 @@
 - (void)showLoadingView;
 - (void)hideLoadingView;
 
-- (void)showRefreshView;
-- (void)hideRefreshView;
+//- (void)showRefreshView;
+//- (void)hideRefreshView;
 
 - (void)showOperationDoneView;
 

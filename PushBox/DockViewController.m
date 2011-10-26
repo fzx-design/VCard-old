@@ -8,7 +8,6 @@
 
 #import "DockViewController.h"
 #import "CardTableViewController.h" //to get notification defines
-#import "UIApplicationAddition.h"	//to get notification defines
 
 @implementation DockViewController
 
@@ -25,7 +24,9 @@
 @synthesize commandCenterNotiImageView = _commandCenterNotiImageView;
 @synthesize optionsPopoverController = _optionsPopoverController;
 @synthesize controlContainerView = _controlContainerView;
-//@synthesize commentsTableViewController = _commentsTableViewController;
+
+@synthesize postingRoundImageView = _postingRoundImageView;
+@synthesize postingCircleImageView = _postingCircleImageView;
 
 @synthesize userCardNaviViewController = _userCardNaviViewController;
 @synthesize ccUserInfoCardViewController = _ccUserInfoCardViewController;
@@ -52,6 +53,9 @@
 	[_userCardNaviViewController release];
 	[_ccUserInfoCardViewController release];
 	
+	[_postingRoundImageView release];
+	[_postingCircleImageView release];
+	
 	[_commentNaviViewController release];
 	[_ccCommentTableViewController release];
 	
@@ -72,6 +76,9 @@
     self.refreshNotiImageView = nil;
     self.commandCenterNotiImageView = nil;
     self.controlContainerView = nil;
+	
+	self.postingRoundImageView = nil;
+	self.postingCircleImageView = nil;
 	
 	self.commentNaviViewController = nil;
 	self.ccCommentTableViewController = nil;
@@ -139,6 +146,8 @@
 	self.commentNaviViewController.view.frame = frame;
 	[self.view addSubview:self.commentNaviViewController.view];
 	
+	NSTimer* _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(calculateRefreshTime) userInfo:nil repeats:YES];
+	
 //    self.commentsTableViewController.dataSource = CommentsTableViewDataSourceCommentsToMe;
 //    self.commentsTableViewController.currentUser = self.currentUser;
 //	
@@ -150,6 +159,47 @@
 	[self.ccUserInfoCardViewController viewWillAppear:YES];
 	[self.ccCommentTableViewController viewWillAppear:YES];
 //    [self.commentsTableViewController viewWillAppear:YES];
+}
+
+- (void)calculateRefreshTime
+{
+	if (!refreshFlag) {
+		return;
+	}
+	
+	refreshTime += 1;
+	if (refreshTime >= 5) {
+		[self hideLoadingView];
+	}
+}
+
+- (void)showLoadingView
+{
+	refreshFlag = YES;
+	self.refreshButton.enabled = NO;
+	
+	_postingCircleImageView.alpha = 1.0;
+	_postingRoundImageView.alpha = 1.0;
+	
+	CABasicAnimation *rotationAnimation =[CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+	rotationAnimation.duration = 1.0;
+	rotationAnimation.fromValue = [NSNumber numberWithFloat:0.0];
+	rotationAnimation.toValue = [NSNumber numberWithFloat:-2.0 * M_PI];
+	rotationAnimation.repeatCount = 65535;
+	[_postingCircleImageView.layer addAnimation:rotationAnimation forKey:@"kAnimationLoad"];
+}
+
+- (void)hideLoadingView
+{
+	self.refreshButton.enabled = YES;
+	refreshFlag = NO;
+	refreshTime = 0;
+	[UIView animateWithDuration:1.0 animations:^{
+		_postingRoundImageView.alpha = 0.0;
+		_postingCircleImageView.alpha = 0.0;
+    } completion:^(BOOL finished) {
+		[_postingCircleImageView.layer removeAnimationForKey:@"kAnimationLoad"];
+	}];
 }
 
 - (void)newCommentsToMeNotification:(id)sender

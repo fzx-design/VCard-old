@@ -27,6 +27,9 @@
     UIView *_controlContainerView;
     UIImageView *_refreshNotiImageView;
     UIImageView *_commandCenterNotiImageView;
+	
+	UIImageView *_postingCircleImageView;
+	UIImageView *_postingRoundImageView;
 
     UIPopoverController *_optionsPopoverController;
 //    CommentsTableViewController *_commentsTableViewController;
@@ -36,6 +39,9 @@
 	
 	UserCardNaviViewController *_commentNaviViewController;
 	CCCommentsTableViewController *_ccCommentTableViewController;
+	
+	BOOL refreshFlag;
+	NSInteger refreshTime;
 	
 }
 
@@ -52,7 +58,9 @@
 @property(nonatomic, retain) IBOutlet UIImageView* refreshNotiImageView;
 @property(nonatomic, retain) IBOutlet UIImageView* commandCenterNotiImageView;
 @property(nonatomic, retain) UIPopoverController* optionsPopoverController;
-//@property(nonatomic, retain) IBOutlet CommentsTableViewController* commentsTableViewController;
+
+@property(nonatomic, retain) IBOutlet UIImageView* postingCircleImageView;
+@property(nonatomic, retain) IBOutlet UIImageView* postingRoundImageView;
 
 @property(nonatomic, retain) UserCardNaviViewController* commentNaviViewController;
 @property(nonatomic, retain) CCCommentsTableViewController* ccCommentTableViewController;
@@ -66,6 +74,9 @@
 
 - (IBAction)refreshButtonClicked:(id)sender;
 - (IBAction)commandCenterButtonClicked:(id)sender;
+
+- (void)showLoadingView;
+- (void)hideLoadingView;
 
 
 @end

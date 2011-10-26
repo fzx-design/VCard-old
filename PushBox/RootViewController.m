@@ -149,7 +149,7 @@
 			[self showCardTableView];
 			[self showDockView];
 			[self showMessagesView];
-			[[UIApplication sharedApplication] hideLoadingView];
+			[self.dockViewController hideLoadingView];
 		}];
     }];
     
@@ -570,8 +570,8 @@
 
 - (void)refresh
 {
-	if ([[UIApplication sharedApplication] waitingForRefreshing]) {
-		[[UIApplication sharedApplication] showRefreshView];
+	if (self.dockViewController.refreshButton.enabled) {
+		[self.dockViewController showLoadingView];
 		[self.cardTableViewController refresh];
 	}
 }
