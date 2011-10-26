@@ -105,9 +105,7 @@
 - (IBAction)followButtonClicked:(id)sender {
     WeiboClient *client = [WeiboClient client];
     [client setCompletionBlock:^(WeiboClient *client) {
-        if (!client.hasError) {
-            
-        }
+        
     }];
     [client follow:self.user.userID];
 	self.unFollowButton.hidden = NO;
@@ -117,8 +115,7 @@
 - (IBAction)unfollowButtonClicked:(id)sender {
     WeiboClient *client = [WeiboClient client];
     [client setCompletionBlock:^(WeiboClient *client) {
-        if (!client.hasError) {
-        }
+        
     }];
     [client unfollow:self.user.userID];
 	self.unFollowButton.hidden = YES;

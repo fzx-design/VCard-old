@@ -361,7 +361,6 @@
 			if (completion) {
 				completion();
 			}
-			[ErrorNotification showLoadingError];
 		}
     };
     
@@ -443,9 +442,7 @@
             
 			return;
             
-		} else {
-			[ErrorNotification showLoadingError];
-		}
+		} 
 		if (completion) {
 			completion();
 		}
@@ -610,7 +607,6 @@
 				if (completion) {
                     completion();
                 }
-				[[UIApplication sharedApplication] hideRefreshView];
 				[ErrorNotification showLoadingError];
 			}
 			[[UIApplication sharedApplication] hideLoadingView];
@@ -670,7 +666,6 @@
 				if (completion) {
                     completion();
                 }
-				[[UIApplication sharedApplication] hideRefreshView];
 				[ErrorNotification showLoadingError];
 			}
 			[[UIApplication sharedApplication] hideLoadingView];

@@ -104,7 +104,7 @@
             _nextPage++;
 			
         } else {
-			[ErrorNotification showPostError];
+			[ErrorNotification showLoadingError];
 		}
 		[self doneLoadingTableViewData];
 		_loading = NO;

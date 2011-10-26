@@ -12,5 +12,6 @@
 
 + (void)showLoadingError;
 + (void)showPostError;
++ (void)showOperationError;
 
 @end

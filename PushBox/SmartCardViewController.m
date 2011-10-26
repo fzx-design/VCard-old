@@ -996,7 +996,9 @@
                 //                [self.managedObjectContext deleteObject:self.status];
                 //				[self.managedObjectContext processPendingChanges];
 				[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameCardDeleted object:self];
-            }
+            } else {
+				[ErrorNotification showOperationError];
+			}
         }];
         [client destroyStatus:self.status.statusID];
     }
@@ -1134,7 +1136,9 @@
             if (!client.hasError) {
                 [self.currentUser removeFavoritesObject:self.status];
                 sender.selected = NO;
-            }
+            } else {
+				[ErrorNotification showOperationError];
+			}
         }];
         [client unFavorite:self.status.statusID];
     }
@@ -1153,7 +1157,9 @@
                 [self.view addSubview:imageView];
                 [imageView release];
                 [imageView performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:2.0];
-            }
+            } else {
+				[ErrorNotification showOperationError];
+			}
         }];
         [client favorite:self.status.statusID];
     }
