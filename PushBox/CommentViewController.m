@@ -64,6 +64,8 @@
     if (self.targetComment) {
         self.textView.text = [NSString stringWithFormat:@"回复@%@:", self.targetComment.author.screenName];
     }
+	
+	self.textView.delegate = self;
 }
 
 - (void)dismissView
