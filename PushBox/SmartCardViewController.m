@@ -1031,7 +1031,7 @@
         if (!client.hasError) {
             NSDictionary *userDict = client.responseJSONObject;
             User* atUser = [User insertUser:userDict inManagedObjectContext:self.managedObjectContext];
-            
+
             UserCardViewController *vc = [[UserCardViewController alloc] initWithUsr:atUser];
             [vc setRelationshipState];
             vc.currentUser = self.currentUser;

@@ -23,7 +23,7 @@ static UserCardNaviViewController *sharedUserCardNaviViewController = nil;
 + (BOOL)sharedUserCardNaviViewControllerExisted
 {
 	BOOL result = NO;
-	if (sharedUserCardNaviViewController) {
+	if (sharedUserCardNaviViewController != nil) {
 		result = YES;
 	}
 	return result;
@@ -31,8 +31,10 @@ static UserCardNaviViewController *sharedUserCardNaviViewController = nil;
 
 + (void)sharedUserCardDismiss
 {
-	if (sharedUserCardNaviViewController) {
+	if (sharedUserCardNaviViewController != nil) {
+		NSLog(@"Dismiss Start!!!!");
 		[sharedUserCardNaviViewController dismissModalViewControllerAnimated:YES];
+		NSLog(@"Dismiss End!!!!");
 		[sharedUserCardNaviViewController release];
 		sharedUserCardNaviViewController = nil;
 	}

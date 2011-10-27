@@ -927,22 +927,28 @@
 
 -(void)enableDismissRegion
 {
-	self.regionLeftDetectButton.alpha = 1.0;
-	self.regionRightDetectButton.alpha = 1.0;
+//	self.regionLeftDetectButton.alpha = 1.0;
+//	self.regionRightDetectButton.alpha = 1.0;
+	self.regionLeftDetectButton.enabled = YES;
+	self.regionRightDetectButton.enabled = YES;
 }
 
 -(void)disableDismissRegion
 {
-	self.regionLeftDetectButton.alpha = 0.0;
-	self.regionRightDetectButton.alpha = 0.0;
+//	self.regionLeftDetectButton.alpha = 0.0;
+//	self.regionRightDetectButton.alpha = 0.0;
+	self.regionLeftDetectButton.enabled = NO;
+	self.regionRightDetectButton.enabled = NO;
 }
 
 -(IBAction)dismissRegionTouched:(id)sender
 {
-	if ([UserCardNaviViewController sharedUserCardNaviViewControllerExisted]) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameShouldDismissUserCard object:self];
-	} 
 	[self disableDismissRegion];
+    [UserCardNaviViewController sharedUserCardDismiss];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardDismissed object:self];
+//	if ([UserCardNaviViewController sharedUserCardNaviViewControllerExisted]) {
+//		[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameShouldDismissUserCard object:self];
+//	} 
 }
 
 @end

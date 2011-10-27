@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-    self.title = NSLocalizedString(@"SlidePlay 时间间隔", nil);
+    self.title = NSLocalizedString(@"消息更新速度", nil);
 }
 
 

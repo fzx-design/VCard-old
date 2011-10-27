@@ -13,15 +13,35 @@
 
 @implementation AboutViewController
 
+@synthesize followButton = _followButton;
+
 - (void)dealloc
 {
     NSLog(@"AboutViewController dealloc");
+	[_followButton release];
     [super dealloc];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.title = NSLocalizedString(@"关于", nil);
+	WeiboClient *client = [WeiboClient client];
+    
+    [client setCompletionBlock:^(WeiboClient *client) {
+        NSDictionary *dict = client.responseJSONObject;
+        dict = [dict objectForKey:@"target"];
+        
+        BOOL followedByMe = [[dict objectForKey:@"followed_by"] boolValue];
+        
+        if (followedByMe) {
+            self.followButton.enabled = NO;
+        }
+        else {
+            self.followButton.enabled = YES;
+        }
+    }];
+    
+    [client getRelationshipWithUser:@"2478499604"];
 }
 
 - (IBAction)rate:(UIButton *)sender
@@ -32,27 +52,21 @@
 
 - (IBAction)followAuthor:(UIButton *)sender
 {
-    WeiboClient *client1 = [WeiboClient client];
-    [client1 setCompletionBlock:^(WeiboClient *client){
+    WeiboClient *client = [WeiboClient client];
+    [client setCompletionBlock:^(WeiboClient *client){
         if (!client.hasError) {
-            WeiboClient *client2 = [WeiboClient client];
-            [client setCompletionBlock:^(WeiboClient *client) {
-                if (!client.hasError) {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"关注完成", nil) 
-                                                                    message:nil
-                                                                   delegate:nil
-                                                          cancelButtonTitle:NSLocalizedString(@"确定", nil)
-                                                          otherButtonTitles:nil];
-                    [alert show];
-                    [alert release];
-                }
-            }];
-            [client2 follow:@"1607786282"];
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"关注完成", nil) 
+															message:nil
+														   delegate:nil
+												  cancelButtonTitle:NSLocalizedString(@"确定", nil)
+												  otherButtonTitles:nil];
+			[alert show];
+			[alert release];
         } else {
 			[ErrorNotification showLoadingError];
 		}
     }];
-    [client1 follow:@"1751197843"];
+    [client follow:@"2478499604"];
 }
 
 - (IBAction)tellFriends:(UIButton *)sender

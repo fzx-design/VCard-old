@@ -13,8 +13,10 @@
 #define kNotificationNameShouldDismissPopoverView @"kNotificationNameShouldDismissPopoverView"
 
 @interface AboutViewController : UIViewController <MFMailComposeViewControllerDelegate, UIAlertViewDelegate> {
-	
+	UIButton *_followButton;
 }
+
+@property (nonatomic, retain) IBOutlet UIButton* followButton;
 
 - (IBAction)rate:(UIButton *)sender;
 - (IBAction)followAuthor:(UIButton *)sender;
