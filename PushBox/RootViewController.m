@@ -442,16 +442,16 @@
 			self.notificationView.hidden = NO;
 			[self.notificationView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
 		}
-        
-        UIAudioAddition* audioAddition = [[UIAudioAddition alloc] init];
-        [audioAddition playNotificationSound];
-        [audioAddition release];
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeySoundEnabled]) {
+			UIAudioAddition* audioAddition = [[UIAudioAddition alloc] init];
+			[audioAddition playNotificationSound];
+			[audioAddition release];
+		}
 	}
 }
 
 - (IBAction)refreshAndShowCommentCenter:(id)sender
 {
-	
 	[self showCommandCenter];
 }
 

@@ -1100,7 +1100,8 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardPresented object:self];
     
-    [self presentModalViewController:navi animated:YES];
+//    [self presentModalViewController:navi animated:YES];
+	[self presentViewController:navi animated:YES completion:nil];
     [navi release];
     [vc release];
     

@@ -7,6 +7,7 @@
 //
 
 #import "DockViewController.h"
+#import "User.h"
 #import "CardTableViewController.h" //to get notification defines
 
 @implementation DockViewController
@@ -253,6 +254,8 @@
 
 - (IBAction)optionsButtonClicked:(id)sender {
     OptionsTableViewController *otvc = [[OptionsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+	otvc.name = self.currentUser.screenName;
+	
     UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:otvc];
     
     _optionsPopoverController = [[UIPopoverController alloc] initWithContentViewController:nc];
