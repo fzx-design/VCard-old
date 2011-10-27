@@ -98,8 +98,26 @@
 	_refreshFlag = NO;
 	
 	NSInteger interval = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeyRefreshingInterval];
+	
+	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+	[center addObserver:self selector:@selector(changeRefreshingIntervalTime) 
+				   name:kNotificationNameRefreshingIntervalChanged 
+				 object:nil];
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:interval
+											  target:self 
+											selector:@selector(timerFired:) 
+											userInfo:nil 
+											 repeats:YES];
+}
+
+- (void)changeRefreshingIntervalTime
+{
+	[_timer invalidate];
+	
+	NSInteger interval = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeyRefreshingInterval];
+	
+	_timer = [NSTimer scheduledTimerWithTimeInterval:interval
 											  target:self 
 											selector:@selector(timerFired:) 
 											userInfo:nil 

@@ -98,6 +98,8 @@
             break;
     }
 	[[NSUserDefaults standardUserDefaults] setInteger:cellInterval forKey:kUserDefaultKeyRefreshingInterval];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameRefreshingIntervalChanged object:nil];
+	
 	[self.tableView reloadData];
     [self.navigationController popViewControllerAnimated:YES]; 
 }

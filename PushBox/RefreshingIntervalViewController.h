@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+#define kNotificationNameRefreshingIntervalChanged @"kNotificationNameRefreshingIntervalChanged"
 #define kUserDefaultKeyRefreshingInterval @"kUserDefaultKeyRefreshingInterval"
 
 @interface RefreshingIntervalViewController : UITableViewController
