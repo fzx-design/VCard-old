@@ -734,6 +734,9 @@
 						[self.delegate cardTableViewController:self 
 												didScrollToRow:self.currentRowIndex
 											  withNumberOfRows:[self numberOfRows]];
+						if (completion) {
+							completion();
+						}
 						return;
 					}
 				}
@@ -741,6 +744,9 @@
                 [self.delegate cardTableViewController:self 
                                         didScrollToRow:self.currentRowIndex
                                       withNumberOfRows:[self numberOfRows]];
+				if (completion) {
+					completion();
+				}
             } else {
 				[ErrorNotification showLoadingError];
 			}

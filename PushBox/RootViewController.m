@@ -384,7 +384,6 @@
 	[self showBottomStateView];
 	
 	[self.cardTableViewController pushCardWithCompletion:^{
-//		[self moveCardIntoView];
 		WeiboClient *client = [WeiboClient client];
 		[client resetUnreadCount:ResetUnreadCountTypeReferMe];
 	}];
