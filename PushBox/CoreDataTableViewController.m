@@ -6,6 +6,7 @@
 //  Copyright 2011年 同济大学. All rights reserved.
 //
 
+#import "CardTableViewCell.h"
 #import "CoreDataTableViewController.h"
 
 @implementation CoreDataTableViewController
@@ -102,49 +103,55 @@
             [cell autorelease];
         }
     }
+    else {
+        if ([name compare:@"CardTableViewCell"] == NSOrderedSame) {
+            CardTableViewCell* cardTableViewCell = (CardTableViewCell*)cell;
+//            [cardTableViewCell clear];
+        }
+    }
     
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-//    [self.tableView beginUpdates];
+    //    [self.tableView beginUpdates];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath {
     
-//    UITableView *tableView = self.tableView;
-//    
-//    switch(type) {
-//        case NSFetchedResultsChangeInsert:
-//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-//                             withRowAnimation:UITableViewRowAnimationTop];
-//            break;
-//            
-//        case NSFetchedResultsChangeDelete:
-//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-//                             withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//            
-//        case NSFetchedResultsChangeUpdate:
-//            [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
-//                    atIndexPath:indexPath];
-//            break;
-//            
-//        case NSFetchedResultsChangeMove:
-//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-//                             withRowAnimation:UITableViewRowAnimationFade];
-//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-//                             withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//    }
+    //    UITableView *tableView = self.tableView;
+    //    
+    //    switch(type) {
+    //        case NSFetchedResultsChangeInsert:
+    //            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+    //                             withRowAnimation:UITableViewRowAnimationTop];
+    //            break;
+    //            
+    //        case NSFetchedResultsChangeDelete:
+    //            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+    //                             withRowAnimation:UITableViewRowAnimationFade];
+    //            break;
+    //            
+    //        case NSFetchedResultsChangeUpdate:
+    //            [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
+    //                    atIndexPath:indexPath];
+    //            break;
+    //            
+    //        case NSFetchedResultsChangeMove:
+    //            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+    //                             withRowAnimation:UITableViewRowAnimationFade];
+    //            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+    //                             withRowAnimation:UITableViewRowAnimationFade];
+    //            break;
+    //    }
 }
 
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-//    [self.tableView endUpdates];
+    //    [self.tableView endUpdates];
 	[self.tableView reloadData];
 }
 

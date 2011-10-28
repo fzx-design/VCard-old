@@ -44,5 +44,10 @@
     }
 }
 
+- (void)clear
+{
+    [_smartCardViewController release];
+    _smartCardViewController = [[SmartCardViewController alloc] init];
+}
 
 @end

@@ -314,9 +314,9 @@
     self.musicLink = nil;
     
 	self.tweetImageView.image = nil;
-	self.tweetImageView.alpha = 1.0;
+	self.tweetImageView.alpha = 0.0;
 	
-	self.repostTweetImageView.alpha = 1.0;
+	self.repostTweetImageView.alpha = 0.0;
 	self.repostTweetImageView.image = nil;
     
     self.tweetImageView.hidden = YES;
@@ -366,11 +366,6 @@
 	self.tweetTextView.text = @"";
     self.repostTextView.text = @"";
     
-    NSString *profileImageString = self.status.author.profileImageURL;
-    [self.profileImageView loadImageFromURL:profileImageString 
-                                 completion:NULL
-                             cacheInContext:self.managedObjectContext];
-    
     //
     [[self.tweetImageView layer] setCornerRadius:20.0];
     [[self.repostTweetImageView layer] setCornerRadius:20.0];
@@ -405,7 +400,6 @@
     [self.repostTweetImageView loadImageFromURL:repostStatus.originalPicURL 
                                      completion:^(void) 
      {
-         //         self.repostTweetImageView.alpha = 0.0;
          [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
              self.repostTweetImageView.alpha = 1.0;
              self.imageCoverImageView.alpha = 1.0;
@@ -781,11 +775,10 @@
     Status *status = self.status;
     isTrack = YES;
     
-    //    self.imageCoverImageView.alpha = 0.0;
-    //    [UIView animateWithDuration:0.5 animations:^{
-    //        self.imageCoverImageView.alpha = 1.0;
-    //    } completion:^(BOOL fin) {
-    //    }];
+    NSString *profileImageString = self.status.author.profileImageURL;
+    [self.profileImageView loadImageFromURL:profileImageString 
+                                 completion:NULL
+                             cacheInContext:self.managedObjectContext];
     
     // post text
     [self loadPostWebView];
@@ -1031,7 +1024,7 @@
         if (!client.hasError) {
             NSDictionary *userDict = client.responseJSONObject;
             User* atUser = [User insertUser:userDict inManagedObjectContext:self.managedObjectContext];
-
+            
             UserCardViewController *vc = [[UserCardViewController alloc] initWithUsr:atUser];
             [vc setRelationshipState];
             vc.currentUser = self.currentUser;

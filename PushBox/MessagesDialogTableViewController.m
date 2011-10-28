@@ -55,7 +55,7 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     MessagesDialogTableViewCell *dialogCell = (MessagesDialogTableViewCell *)cell;
-    Message *message = [self.fetchedResultsController objectAtIndexPath:indexPath];
+//    Message *message = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     if (NO) {
         dialogCell.fromTextView.text = DEFAULT_TEST_TEXT;

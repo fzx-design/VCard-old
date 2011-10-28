@@ -758,7 +758,7 @@
 							 maxID:[NSString stringWithFormat:@""] 
 							  page:0 
 							 count:20];
-
+        
 	}
 }
 
@@ -792,7 +792,8 @@
 {    
     if (YES)
     {   
-		CardTableViewCell *tableViewCell = (CardTableViewCell *)cell;
+        CardTableViewCell *tableViewCell = (CardTableViewCell *)cell;
+        //        tableViewCell.smartCardViewController = [[SmartCardViewController alloc] init];
         tableViewCell.smartCardViewController.currentUser = self.currentUser;
         tableViewCell.smartCardViewController.status = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	}
@@ -838,44 +839,44 @@
 }
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-	[self.tableView beginUpdates];
+    //	[self.tableView beginUpdates];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath {
     
-    UITableView *tableView = self.tableView;
-    
-    switch(type) {
-            
-        case NSFetchedResultsChangeInsert:
-            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-                             withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-                             withRowAnimation:UITableViewRowAnimationRight];
-            break;
-            
-        case NSFetchedResultsChangeUpdate:
-            [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
-                    atIndexPath:indexPath];
-            break;
-            
-        case NSFetchedResultsChangeMove:
-            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-                             withRowAnimation:UITableViewRowAnimationFade];
-            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-                             withRowAnimation:UITableViewRowAnimationFade];
-            break;
-    }
+    //    UITableView *tableView = self.tableView;
+    //    
+    //    switch(type) {
+    //            
+    //        case NSFetchedResultsChangeInsert:
+    //            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+    //                             withRowAnimation:UITableViewRowAnimationFade];
+    //            break;
+    //            
+    //        case NSFetchedResultsChangeDelete:
+    //            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+    //                             withRowAnimation:UITableViewRowAnimationRight];
+    //            break;
+    //            
+    //        case NSFetchedResultsChangeUpdate:
+    //            [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
+    //                    atIndexPath:indexPath];
+    //            break;
+    //            
+    //        case NSFetchedResultsChangeMove:
+    //            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+    //                             withRowAnimation:UITableViewRowAnimationFade];
+    //            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+    //                             withRowAnimation:UITableViewRowAnimationFade];
+    //            break;
+    //    }
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [self.tableView endUpdates];
-//	[self.tableView reloadData];
+    //    [self.tableView endUpdates];
+	[self.tableView reloadData];
 }
 
 
@@ -927,16 +928,16 @@
 
 -(void)enableDismissRegion
 {
-//	self.regionLeftDetectButton.alpha = 1.0;
-//	self.regionRightDetectButton.alpha = 1.0;
+    //	self.regionLeftDetectButton.alpha = 1.0;
+    //	self.regionRightDetectButton.alpha = 1.0;
 	self.regionLeftDetectButton.enabled = YES;
 	self.regionRightDetectButton.enabled = YES;
 }
 
 -(void)disableDismissRegion
 {
-//	self.regionLeftDetectButton.alpha = 0.0;
-//	self.regionRightDetectButton.alpha = 0.0;
+    //	self.regionLeftDetectButton.alpha = 0.0;
+    //	self.regionRightDetectButton.alpha = 0.0;
 	self.regionLeftDetectButton.enabled = NO;
 	self.regionRightDetectButton.enabled = NO;
 }
@@ -946,9 +947,9 @@
 	[self disableDismissRegion];
     [UserCardNaviViewController sharedUserCardDismiss];
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardDismissed object:self];
-//	if ([UserCardNaviViewController sharedUserCardNaviViewControllerExisted]) {
-//		[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameShouldDismissUserCard object:self];
-//	} 
+    //	if ([UserCardNaviViewController sharedUserCardNaviViewControllerExisted]) {
+    //		[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameShouldDismissUserCard object:self];
+    //	} 
 }
 
 @end

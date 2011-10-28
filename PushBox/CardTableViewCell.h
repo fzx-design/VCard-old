@@ -18,4 +18,6 @@
 @property(nonatomic, retain) StatusCardViewController* statusCardViewController;
 @property(nonatomic, retain) SmartCardViewController* smartCardViewController;
 
+- (void)clear;
+
 @end
