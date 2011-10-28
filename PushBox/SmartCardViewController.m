@@ -54,7 +54,6 @@
 
 - (void)dealloc
 {    
-	NSLog(@"tweet_______:%@", _tweetTextView.text);
     [_postWebView release];
     [_repostWebView release];
     [_profileImageView release];
@@ -112,6 +111,11 @@
                                                object:nil];
 }
 
+- (void)clear
+{
+    
+}
+
 - (BOOL)checkGif:(NSString*)url
 {
     if (url == nil) {
@@ -137,20 +141,17 @@
 	DetailImageViewController *dvc = [[DetailImageViewController alloc] initWithImage:imageView.image];
     
     //
-    if ([self checkGif:self.status.originalPicURL])
-    {
+    if ([self checkGif:self.status.originalPicURL]) {
         dvc.gifUrl = self.status.originalPicURL;
     }
-    if ([self checkGif:self.status.repostStatus.originalPicURL])
-    {
+    if ([self checkGif:self.status.repostStatus.originalPicURL]) {
         dvc.gifUrl = self.status.repostStatus.originalPicURL;
     }
     
 	dvc.delegate = self;
 	dvc.view.alpha = 0.0;
 	[mainView addSubview:dvc.view];
-	
-	[UIView animateWithDuration:0.5 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
 		dvc.view.alpha = 1.0;
 	}];
 }
@@ -302,6 +303,7 @@
 
 - (void)prepare
 {		
+    self.profileImageView.alpha = 0.0;
     self.musicLink = nil;
     
 	self.tweetImageView.image = nil;
@@ -384,7 +386,7 @@
     self.imageCoverImageView.hidden = NO;
     Status *repostStatus = self.status.repostStatus;
     [self.tweetImageView loadImageFromURL:repostStatus.originalPicURL 
-                                     completion:^(void) 
+                               completion:^(void) 
      {
          [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
              self.tweetImageView.alpha = 1.0;
@@ -392,7 +394,7 @@
          } completion:^(BOOL fin) {
          }];
      }
-                                 cacheInContext:self.managedObjectContext];
+                           cacheInContext:self.managedObjectContext];
     if ([self checkGif:self.status.repostStatus.originalPicURL])
     {
         [self.gifIcon setHidden:NO];
@@ -423,7 +425,8 @@
                 {
                     NSRange range = NSMakeRange(startIndex, endIndex-startIndex);
                     NSString* subStr = [originStatus substringWithRange:range];
-                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='atClicked(\"%@\")'>%@</a></span>", [subStr substringFromIndex:1], subStr]];
+                    if (endIndex > startIndex + 1)
+                        phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='atClicked(\"%@\")'>%@</a></span>", [subStr substringFromIndex:1], subStr]];
                 }
                 break;
             }
@@ -514,7 +517,8 @@
                 {
                     NSRange range = NSMakeRange(startIndex, endIndex-startIndex);
                     NSString* subStr = [originStatus substringWithRange:range];
-                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='atClicked(\"%@\")'>%@</a></span>", [subStr substringFromIndex:1], subStr]];
+                    if (endIndex > startIndex + 1)
+                        phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='atClicked(\"%@\")'>%@</a></span>", [subStr substringFromIndex:1], subStr]];
                 }
                 break;
             }
@@ -763,8 +767,12 @@
     
     NSString *profileImageString = self.status.author.profileImageURL;
     [self.profileImageView loadImageFromURL:profileImageString 
-                                 completion:NULL
-                             cacheInContext:self.managedObjectContext];
+                                 completion:   ^(void)     {
+                                     [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+                                         self.profileImageView.alpha = 1.0;
+                                     } completion:^(BOOL fin) {
+                                     }];
+                                 }                                                                           cacheInContext:self.managedObjectContext];
     
     // post text
     [self loadPostWebView];
@@ -824,7 +832,8 @@
     }
     
     [_status release];
-    _status = [status retain];
+    //    _status = [status retain];
+    _status = status;
     
     [self prepare];
     [self performSelector:@selector(update) withObject:nil afterDelay:0.3];
@@ -832,32 +841,32 @@
 
 - (IBAction)actionsButtonClicked:(UIButton *)sender {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
-															 delegate:self 
-													cancelButtonTitle:nil
-											   destructiveButtonTitle:nil 
-													otherButtonTitles:nil];
-	
-	[actionSheet addButtonWithTitle:NSLocalizedString(@"转发", nil)];
-	[actionSheet addButtonWithTitle:NSLocalizedString(@"发表评论", nil)];
-	[actionSheet addButtonWithTitle:NSLocalizedString(@"查看评论", nil)];
-	if (![self.currentUser.favorites containsObject:self.status]) {
+                                                             delegate:self 
+                                                    cancelButtonTitle:nil
+                                               destructiveButtonTitle:nil 
+                                                    otherButtonTitles:nil];
+    
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"转发", nil)];
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"发表评论", nil)];
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"查看评论", nil)];
+    if (![self.currentUser.favorites containsObject:self.status]) {
         [actionSheet addButtonWithTitle:NSLocalizedString(@"收藏", nil)];
     } else {
-		[actionSheet addButtonWithTitle:NSLocalizedString(@"取消收藏", nil)];
-	}
-	[actionSheet addButtonWithTitle:NSLocalizedString(@"邮件分享", nil)];
-	if ([self.status.author.userID isEqualToString:self.currentUser.userID]) {
-		[actionSheet addButtonWithTitle:NSLocalizedString(@"删除微博", nil)];
-		actionSheet.destructiveButtonIndex = 5;
-	}
+        [actionSheet addButtonWithTitle:NSLocalizedString(@"取消收藏", nil)];
+    }
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"邮件分享", nil)];
+    if ([self.status.author.userID isEqualToString:self.currentUser.userID]) {
+        [actionSheet addButtonWithTitle:NSLocalizedString(@"删除微博", nil)];
+        actionSheet.destructiveButtonIndex = 5;
+    }
     
-	[actionSheet showFromRect:sender.bounds inView:sender animated:YES];
-	[actionSheet release];
+    [actionSheet showFromRect:sender.bounds inView:sender animated:YES];
+    [actionSheet release];
 }
 
 - (void)newComment
 {
-	CommentViewController *vc = [[CommentViewController alloc] init];
+    CommentViewController *vc = [[CommentViewController alloc] init];
     vc.targetStatus = self.status;
     [[UIApplication sharedApplication] presentModalViewController:vc atHeight:kModalViewHeight];
     [vc release];
@@ -870,91 +879,91 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-	UIAlertView *alert = nil;
-	MFMailComposeViewController *picker = nil;
-	switch (buttonIndex) {
-		case 0:
+    UIAlertView *alert = nil;
+    MFMailComposeViewController *picker = nil;
+    switch (buttonIndex) {
+        case 0:
             [self repostButtonClicked:nil];
-			break;
-		case 1:
+            break;
+        case 1:
             [self newComment];
-			break;
-		case 2:
-			[self commentButtonClicked:nil];
-			break;
-		case 3:
-			[self addFavButtonClicked:self.addFavourateButton];
-			break;
-		case 4:
-			picker = [[MFMailComposeViewController alloc] init];
-			picker.mailComposeDelegate = self;
+            break;
+        case 2:
+            [self commentButtonClicked:nil];
+            break;
+        case 3:
+            [self addFavButtonClicked:self.addFavourateButton];
+            break;
+        case 4:
+            picker = [[MFMailComposeViewController alloc] init];
+            picker.mailComposeDelegate = self;
             picker.modalPresentationStyle = UIModalPresentationPageSheet;
-			
+            
             NSString *subject = [NSString stringWithFormat:@"分享一条来自新浪的微博，作者：%@", self.status.author.screenName];
             
-			[picker setSubject:subject];
-			NSString *emailBody = [NSString stringWithFormat:@"%@ %@", self.status.text, self.status.repostStatus.text];
-			[picker setMessageBody:emailBody isHTML:NO];
-			
-			UIImage *img = nil;
-			if (self.tweetImageView.image) {
-				img = self.tweetImageView.image;
-			}
-			
-			if (img) {
-				NSData *imageData = UIImageJPEGRepresentation(img, 0.8);
-				[picker addAttachmentData:imageData mimeType:@"image/jpeg" fileName:NSLocalizedString(@"微博图片", nil)];
-			}
-			
+            [picker setSubject:subject];
+            NSString *emailBody = [NSString stringWithFormat:@"%@ %@", self.status.text, self.status.repostStatus.text];
+            [picker setMessageBody:emailBody isHTML:NO];
+            
+            UIImage *img = nil;
+            if (self.tweetImageView.image) {
+                img = self.tweetImageView.image;
+            }
+            
+            if (img) {
+                NSData *imageData = UIImageJPEGRepresentation(img, 0.8);
+                [picker addAttachmentData:imageData mimeType:@"image/jpeg" fileName:NSLocalizedString(@"微博图片", nil)];
+            }
+            
             [[[UIApplication sharedApplication] rootViewController] presentModalViewController:picker animated:YES];
             [picker release];
             
-			break;
-		case 5:
-			alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"删除此条微博", nil)
-											   message:nil
-											  delegate:self
-									 cancelButtonTitle:NSLocalizedString(@"取消", nil)
-									 otherButtonTitles:NSLocalizedString(@"删除", nil), nil];
-			alert.tag = -2;
-			[alert show];
-			[alert release];
-			break;
-		default:
-			break;
-	}
+            break;
+        case 5:
+            alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"删除此条微博", nil)
+                                               message:nil
+                                              delegate:self
+                                     cancelButtonTitle:NSLocalizedString(@"取消", nil)
+                                     otherButtonTitles:NSLocalizedString(@"删除", nil), nil];
+            alert.tag = -2;
+            [alert show];
+            [alert release];
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller 
-		  didFinishWithResult:(MFMailComposeResult)result 
-						error:(NSError*)error
+          didFinishWithResult:(MFMailComposeResult)result 
+                        error:(NSError*)error
 {
-	NSString *message = nil;
-	switch (result)
-	{
-		case MFMailComposeResultSaved:
-			message = NSLocalizedString(@"保存成功", nil);
+    NSString *message = nil;
+    switch (result)
+    {
+        case MFMailComposeResultSaved:
+            message = NSLocalizedString(@"保存成功", nil);
             [[[UIApplication sharedApplication] rootViewController] dismissModalViewControllerAnimated:YES];
-			break;
-		case MFMailComposeResultSent:
-			message = NSLocalizedString(@"发送成功", nil);
+            break;
+        case MFMailComposeResultSent:
+            message = NSLocalizedString(@"发送成功", nil);
             [[[UIApplication sharedApplication] rootViewController] dismissModalViewControllerAnimated:YES];
-			break;
-		case MFMailComposeResultFailed:
-			message = NSLocalizedString(@"发送失败", nil);
-			break;
-		default:
+            break;
+        case MFMailComposeResultFailed:
+            message = NSLocalizedString(@"发送失败", nil);
+            break;
+        default:
             [[[UIApplication sharedApplication] rootViewController] dismissModalViewControllerAnimated:YES];
-			return;
-	}
-	
-	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:message 
-														message:nil
-													   delegate:nil
-											  cancelButtonTitle:NSLocalizedString(@"确定", nil)
-											  otherButtonTitles:nil];
-	[alertView show];
-	[alertView release];
+            return;
+    }
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:message 
+                                                        message:nil
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"确定", nil)
+                                              otherButtonTitles:nil];
+    [alertView show];
+    [alertView release];
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
@@ -963,18 +972,18 @@
         WeiboClient *client = [WeiboClient client];
         [client setCompletionBlock:^(WeiboClient *client) {
             if (!client.hasError) {
-				
-				//remain to be solved;
-				
-				NSManagedObjectContext *managedContext = [self.status managedObjectContext];
-				[managedContext deleteObject:self.status];
-				[managedContext processPendingChanges];
+                
+                //remain to be solved;
+                
+                NSManagedObjectContext *managedContext = [self.status managedObjectContext];
+                [managedContext deleteObject:self.status];
+                [managedContext processPendingChanges];
                 //                [self.managedObjectContext deleteObject:self.status];
                 //				[self.managedObjectContext processPendingChanges];
-				[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameCardDeleted object:self];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameCardDeleted object:self];
             } else {
-				[ErrorNotification showOperationError];
-			}
+                [ErrorNotification showOperationError];
+            }
         }];
         [client destroyStatus:self.status.statusID];
     }
@@ -984,20 +993,20 @@
     UserCardViewController *vc = [[UserCardViewController alloc] initWithUsr:self.status.author];
     vc.currentUser = self.currentUser;
     vc.modalPresentationStyle = UIModalPresentationCurrentContext;
-	vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     vc.delegate = self;
     
-	UserCardNaviViewController* navi = [[UserCardNaviViewController alloc] initWithRootViewController:vc];
-	[UserCardNaviViewController setSharedUserCardNaviViewController:navi];
-	
+    UserCardNaviViewController* navi = [[UserCardNaviViewController alloc] initWithRootViewController:vc];
+    [UserCardNaviViewController setSharedUserCardNaviViewController:navi];
+    
     navi.modalPresentationStyle = UIModalPresentationCurrentContext;
-	navi.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    navi.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardPresented object:self];
     
     [self presentModalViewController:navi animated:YES];
-	[navi release];
-	[vc release];
+    [navi release];
+    [vc release];
 }
 
 - (void)atUserClicked:(NSString*)screenName {
@@ -1065,7 +1074,7 @@
     vc.currentUser = self.currentUser;
     vc.delegate = self;
     vc.status = self.status;
-	vc.commentsTableViewModel = CommentsTableViewNormalModel;
+    vc.commentsTableViewModel = CommentsTableViewNormalModel;
     
     
     UserCardNaviViewController* navi = [[UserCardNaviViewController alloc] initWithRootViewController:vc];
@@ -1113,8 +1122,8 @@
                 [self.currentUser removeFavoritesObject:self.status];
                 sender.selected = NO;
             } else {
-				[ErrorNotification showOperationError];
-			}
+                [ErrorNotification showOperationError];
+            }
         }];
         [client unFavorite:self.status.statusID];
     }
@@ -1122,9 +1131,9 @@
         WeiboClient *client = [WeiboClient client];
         [client setCompletionBlock:^(WeiboClient *client) {
             if (!client.hasError) {
-				//remain to be solved;
+                //remain to be solved;
                 [self.currentUser addFavoritesObject:self.status];
-				
+                
                 sender.selected = YES;
                 
                 UIImage *img = [UIImage imageNamed:@"status_msg_addfav"];
@@ -1134,8 +1143,8 @@
                 [imageView release];
                 [imageView performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:2.0];
             } else {
-				[ErrorNotification showOperationError];
-			}
+                [ErrorNotification showOperationError];
+            }
         }];
         [client favorite:self.status.statusID];
     }

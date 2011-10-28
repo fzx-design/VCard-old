@@ -23,9 +23,9 @@
         NSData *imageData = imageObject.data;
         UIImage *img = [UIImage imageWithData:imageData];
         /////////
-//        if (self.image && img) {
-//            [self.image release];
-//        }
+        if (self.image && img) {
+            [self.image release];
+        }
         ////////
         self.image = img;
         if (completion) {

@@ -45,12 +45,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     MPMusicPlayerController* ipodMusicPlayer = [MPMusicPlayerController iPodMusicPlayer];
-    if ([ipodMusicPlayer playbackState] == MPMusicPlaybackStatePlaying)
-    {
+    if ([ipodMusicPlayer playbackState] == MPMusicPlaybackStatePlaying) {
         isIpodPlaying = YES;
     }
-    else
-    {
+    else {
         isIpodPlaying = NO;
     }
 }

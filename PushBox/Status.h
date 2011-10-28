@@ -51,4 +51,6 @@
 - (void)removeRepostedByObject:(Status *)value;
 - (void)addRepostedBy:(NSSet *)values;
 - (void)removeRepostedBy:(NSSet *)values;
+- (int)countOfStatuseInContext:(NSManagedObjectContext *)context;
+
 @end

@@ -81,14 +81,15 @@
 	self.imageView = nil;
     self.scrollView = nil;
     self.delegate = nil;
+    self.webView = nil;
 }
 
 
 - (void)dealloc {
 	[_imageView release];
     [_scrollView release];
-    _delegate = nil;
 	[_image release];
+    [_webView release];
     [super dealloc];
 }
 

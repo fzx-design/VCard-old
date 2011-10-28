@@ -99,8 +99,30 @@
     return result;
 }
 
+- (int)countOfStatuseInContext:(NSManagedObjectContext *)context
+
+{
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"Status" inManagedObjectContext:context]];
+    
+    [request setIncludesSubentities:NO]; //Omit subentities. Default is YES (i.e. include subentities)
+    
+    NSError *err;
+    NSUInteger count = [context countForFetchRequest:request error:&err];
+    if(count == NSNotFound) {
+        //Handle error
+    }
+    
+    [request release];
+    
+    return count;
+}
+
 + (Status *)insertStatus:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context
 {
+    int n = [[self countOfStatuseInContext:context] intValue];
+    NSLog(@"----------------------%d", n);
+    
     NSString *statusID = [[dict objectForKey:@"id"] stringValue];
     
     if (!statusID || [statusID isEqualToString:@""]) {
