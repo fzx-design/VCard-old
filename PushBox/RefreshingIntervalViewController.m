@@ -20,6 +20,7 @@
     [super viewDidLoad];
 	
     self.title = NSLocalizedString(@"消息更新速度", nil);
+//	self.tableView t
 }
 
 
@@ -104,5 +105,13 @@
     [self.navigationController popViewControllerAnimated:YES]; 
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section{
+
+	return @"VCard 会自动从服务器获取更新提示, 更快的速度可能需要更多的数据流量";;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 90;
+}
 
 @end

@@ -12,6 +12,7 @@
 #import "BackgroundManViewController.h"
 #import "RefreshingIntervalViewController.h"
 #import "AboutViewController.h"
+#import "LegacyViewController.h"
 
 #define kUserDefaultKeyImageDownloadingEnabled @"kUserDefaultKeyImageDownloadingEnabled"
 #define kUserDefaultKeySoundEnabled @"kUserDefaultKeySoundEnabled"
@@ -21,5 +22,7 @@
 @interface OptionsTableViewController : UITableViewController {
 
 }
+
+@property (nonatomic, copy) NSString* name;
 
 @end

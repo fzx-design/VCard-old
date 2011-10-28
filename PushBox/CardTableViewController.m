@@ -400,9 +400,11 @@
 		frame.origin.x -= 782;
 		self.tableView.frame = frame;
 	} completion:^(BOOL finished) {
-        UIAudioAddition* audioAddition = [[UIAudioAddition alloc] init];
-        [audioAddition playRefreshDoneSound];
-        [audioAddition release];
+		if ([[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeySoundEnabled]) {
+			UIAudioAddition* audioAddition = [[UIAudioAddition alloc] init];
+			[audioAddition playRefreshDoneSound];
+			[audioAddition release];
+		}
 	}];
 }
 

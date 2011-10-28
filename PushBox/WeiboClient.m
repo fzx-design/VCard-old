@@ -759,7 +759,7 @@ report_completion:
     self.path = @"statuses/upload.json";
     self.httpMethod = HTTPMethodForm;
     
-    NSData *imageData = UIImageJPEGRepresentation(image, 0.2);
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.8);
     
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
                          text, @"status",

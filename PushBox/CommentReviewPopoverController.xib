@@ -100,22 +100,6 @@
 							<string key="NSResourceName">weibopop_bg.png</string>
 						</object>
 					</object>
-					<object class="IBUIImageView" id="652871917">
-						<reference key="NSNextResponder" ref="398787352"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{29, 20}, {52, 53}}</string>
-						<reference key="NSSuperview" ref="398787352"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="426269661"/>
-						<string key="NSReuseIdentifierKey">_NS:569</string>
-						<int key="IBUIContentMode">4</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<object class="NSCustomResource" key="IBUIImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">head_cover_card_light.png</string>
-						</object>
-					</object>
 					<object class="IBUILabel" id="668072439">
 						<reference key="NSNextResponder" ref="398787352"/>
 						<int key="NSvFlags">292</int>
@@ -131,15 +115,11 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">Usename</string>
 						<object class="NSColor" key="IBUITextColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4yOTgwMzkyMjc3IDAuMjk4MDM5MjI3NyAwLjI5ODAzOTIyNzcAA</bytes>
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MC4zMzMzMzMzMzMzAA</bytes>
 						</object>
 						<nil key="IBUIHighlightedColor"/>
-						<object class="NSColor" key="IBUIShadowColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC45MDE5NjA3OTAyIDAuOTAxOTYwNzkwMiAwLjkwMTk2MDc5MDIAA</bytes>
-						</object>
-						<string key="IBUIShadowOffset">{0, 1}</string>
+						<string key="IBUIShadowOffset">{0, 0}</string>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
@@ -150,6 +130,33 @@
 							<string key="NSName">Helvetica-Bold</string>
 							<double key="NSSize">14</double>
 							<int key="NSfFlags">16</int>
+						</object>
+					</object>
+					<object class="IBUIImageView" id="426269661">
+						<reference key="NSNextResponder" ref="398787352"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{30, 20}, {48, 48}}</string>
+						<reference key="NSSuperview" ref="398787352"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="668072439"/>
+						<int key="IBUITag">-1</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+					</object>
+					<object class="IBUIImageView" id="652871917">
+						<reference key="NSNextResponder" ref="398787352"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{28, 18}, {52, 53}}</string>
+						<reference key="NSSuperview" ref="398787352"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="426269661"/>
+						<string key="NSReuseIdentifierKey">_NS:569</string>
+						<int key="IBUIContentMode">4</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">head_cover_card_light.png</string>
 						</object>
 					</object>
 					<object class="IBUILabel" id="369050842">
@@ -184,17 +191,6 @@
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
-					<object class="IBUIImageView" id="426269661">
-						<reference key="NSNextResponder" ref="398787352"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{31, 22}, {48, 48}}</string>
-						<reference key="NSSuperview" ref="398787352"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="668072439"/>
-						<int key="IBUITag">-1</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-					</object>
 					<object class="IBUIImageView" id="1041838450">
 						<reference key="NSNextResponder" ref="398787352"/>
 						<int key="NSvFlags">292</int>
@@ -208,7 +204,7 @@
 					<object class="IBUIButton" id="801634217">
 						<reference key="NSNextResponder" ref="398787352"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{264, 22}, {37, 37}}</string>
+						<string key="NSFrame">{{268, 12}, {37, 37}}</string>
 						<reference key="NSSuperview" ref="398787352"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="369050842"/>
@@ -375,11 +371,11 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="668072439"/>
 							<reference ref="999562504"/>
-							<reference ref="652871917"/>
 							<reference ref="426269661"/>
 							<reference ref="1041838450"/>
 							<reference ref="801634217"/>
 							<reference ref="207369126"/>
+							<reference ref="652871917"/>
 							<reference ref="369050842"/>
 						</array>
 						<reference key="parent" ref="0"/>

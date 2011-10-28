@@ -14,7 +14,9 @@
 #pragma mark -
 #pragma mark View lifecycle
 
-#define kContentSizeForViewInPopover CGSizeMake(320.0f, 500.0f)
+#define kContentSizeForViewInPopover CGSizeMake(320.0f, 600.0f)
+
+@synthesize name;
 
 - (void)dealloc
 {
@@ -46,12 +48,20 @@
 	[aboutVC release];
 }
 
+- (void)showLegacy
+{
+	LegacyViewController *legacyVC = [[LegacyViewController alloc] init];
+	[self.navigationController pushViewController:legacyVC animated:YES];
+    legacyVC.contentSizeForViewInPopover = kContentSizeForViewInPopover;
+	[legacyVC release];
+}
+
 #pragma mark -
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -62,9 +72,11 @@
         case 1:
             return 1;
         case 2:
-            return 5;
+            return 3;
 		case 3:
-			return 1;
+			return 2;
+		case 4:
+			return 2;
     }
     return 0;
 }
@@ -77,12 +89,14 @@
             header = NSLocalizedString(@"账户", nil);
             break;
         case 1:
-            header = NSLocalizedString(@"外观", nil);
+            header = NSLocalizedString(@"可读性", nil);
             break;
         case 2:
             header = NSLocalizedString(@"设置", nil);
             break;
 		case 3:
+			header = NSLocalizedString(@"",nil);
+		case 4:
 			header = NSLocalizedString(@"",nil);
     }
     return header;
@@ -105,7 +119,7 @@
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             switch (indexPath.row) {
                 case 0:
-                    cell.textLabel.text = NSLocalizedString(@"新浪微博", nil);
+                    cell.textLabel.text = NSLocalizedString(self.name, nil);
                     cell.detailTextLabel.text = NSLocalizedString(@"注销", nil);
                     cell.imageView.image = [UIImage imageNamed:@"flag_sina.png"];
                     break;
@@ -119,6 +133,7 @@
             cell.detailTextLabel.text = desc;
 			NSString *path = [BackgroundManViewController backgroundIconFilePathFromEnum:enumValue];
             cell.imageView.image = [UIImage imageNamed:path];
+			
             break;
         case 2:
             switch (indexPath.row) {
@@ -131,24 +146,8 @@
                     cell.imageView.image = [UIImage imageNamed:@"options_icon_time.png"];
                     break;
 					
-				case 1:
-					cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                    cell.textLabel.text = NSLocalizedString(@"消息更新速度", nil);
-					int refreshInterval = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeyRefreshingInterval];
-					if (refreshInterval == 10) {
-						cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"立即", nil), interval];
-					} else if(refreshInterval == 30) {
-						cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"每30秒", nil), interval];
-					} else if(refreshInterval == 60) {
-						cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"每分钟", nil), interval];
-					} else {
-						cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%手动", nil), interval];
-					}
-                    
-                    cell.imageView.image = [UIImage imageNamed:@"options_icon_time.png"];
-                    break;
 					
-                case 2:
+                case 1:
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 					
 					UISwitch *aSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 94, 27)];
@@ -162,21 +161,8 @@
                     cell.textLabel.text = NSLocalizedString(@"加载微博图片", nil);
                     cell.imageView.image = [UIImage imageNamed:@"options_icon_image.png"];
                     break;
-				case 3:
-					cell.selectionStyle = UITableViewCellSelectionStyleNone;
-					
-					UISwitch *aSwitch1 = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 94, 27)];
-					aSwitch1.on = [userDefault boolForKey:kUserDefaultKeyNotiPopoverEnabled];
-					[aSwitch1 addTarget:self
-								action:@selector(notiPopoverOn:)
-					  forControlEvents:UIControlEventTouchUpInside];
-                    cell.accessoryView = aSwitch1;
-					[aSwitch1 release];
-					
-                    cell.textLabel.text = NSLocalizedString(@"气泡提醒", nil);
-                    cell.imageView.image = [UIImage imageNamed:@"options_icon_image.png"];
-                    break;
-                case 4:
+
+                case 2:
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 					
 					UISwitch *aSwitch2 = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 94, 27)];
@@ -194,15 +180,54 @@
             }
             break;
 		case 3:
-			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.textLabel.text = NSLocalizedString(@"关于", nil);
-			cell.imageView.image = [UIImage imageNamed:@"options_icon_about.png"];
-//			int enumValue = [[userDefault objectForKey:kUserDefaultKeyBackground] intValue];
-//			NSString *desc = [BackgroundManViewController backgroundDescriptionFromEnum:enumValue];
-//            cell.detailTextLabel.text = desc;
-//			NSString *path = [BackgroundManViewController backgroundIconFilePathFromEnum:enumValue];
-//            cell.imageView.image = [UIImage imageNamed:path];
-            break;
+			switch (indexPath.row) {
+				case 0:
+					cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    cell.textLabel.text = NSLocalizedString(@"消息更新速度", nil);
+					int refreshInterval = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeyRefreshingInterval];
+					if (refreshInterval == 10) {
+						cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"立即", nil)];
+					} else if(refreshInterval == 30) {
+						cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"每30秒", nil)];
+					} else if(refreshInterval == 60) {
+						cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"每分钟", nil)];
+					} else {
+						cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%手动", nil)];
+					}
+                    
+                    cell.imageView.image = [UIImage imageNamed:@"options_icon_timer.png"];
+                    break;
+				case 1:
+					cell.selectionStyle = UITableViewCellSelectionStyleNone;
+					
+					UISwitch *aSwitch1 = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 94, 27)];
+					aSwitch1.on = [userDefault boolForKey:kUserDefaultKeyNotiPopoverEnabled];
+					[aSwitch1 addTarget:self
+								 action:@selector(notiPopoverOn:)
+					   forControlEvents:UIControlEventTouchUpInside];
+                    cell.accessoryView = aSwitch1;
+					[aSwitch1 release];
+					
+                    cell.textLabel.text = NSLocalizedString(@"气泡提醒", nil);
+                    cell.imageView.image = [UIImage imageNamed:@"options_icon_news.png"];
+                    break;
+				default:
+					break;
+			}
+			break;
+		case 4:
+			switch (indexPath.row) {
+				case 0:
+					cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+					cell.textLabel.text = NSLocalizedString(@"关于", nil);
+					cell.imageView.image = [UIImage imageNamed:@"options_icon_about.png"];
+					break;
+				case 1:
+					cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+					cell.textLabel.text = NSLocalizedString(@"版权", nil);
+					cell.imageView.image = [UIImage imageNamed:@"options_icon_legal.png"];
+					break;
+			}
         default:
             break;
     }
@@ -263,16 +288,31 @@
                 ivc.contentSizeForViewInPopover = kContentSizeForViewInPopover;
                 [self.navigationController pushViewController:ivc animated:YES];
                 [ivc release];
-            } else if(indexPath.row == 1) {
+            }
+			break;
+		case 3:
+			if (indexPath.row == 0) {
 				RefreshingIntervalViewController *ivc = [[RefreshingIntervalViewController alloc] initWithStyle:UITableViewStyleGrouped];
                 ivc.contentSizeForViewInPopover = kContentSizeForViewInPopover;
                 [self.navigationController pushViewController:ivc animated:YES];
                 [ivc release];
 			}
             break;
-		case 3:
-			[self showAbout];
+		case 4:
+			if (indexPath.row == 0) {
+				[self showAbout];
+			} else {
+				[self showLegacy];
+			}
 		}
+}
+
+- (NSString*)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+	if (section == 1) {
+		return @"选择浏览卡片时最舒适的背景色彩";
+	}
+	return nil;
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
