@@ -41,7 +41,6 @@
 @synthesize repostWebView = _repostWebView;
 @synthesize repostTextView = _repostTextView;
 @synthesize repostView = _repostView;
-@synthesize repostTweetImageView = _repostTweetImageView;
 @synthesize trackLabel = _trackLabel;
 @synthesize trackView = _trackView;
 @synthesize imageCoverImageView = _imageCoverImageView;
@@ -70,7 +69,6 @@
     [_tweetTextView release];
     [_repostTextView release];
     [_repostView release];
-    [_repostTweetImageView release];
     [_status release];
     [super dealloc];
 }
@@ -90,7 +88,6 @@
     self.tweetTextView = nil;
     self.repostTextView = nil;
     self.repostView = nil;
-    self.repostTweetImageView = nil;
     
 }
 
@@ -107,12 +104,6 @@
 	tapGesture.numberOfTapsRequired = 1;
 	tapGesture.numberOfTouchesRequired = 1;
 	[self.tweetImageView addGestureRecognizer:tapGesture];
-	[tapGesture release];
-	
-	tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClicked:)];
-	tapGesture.numberOfTapsRequired = 1;
-	tapGesture.numberOfTouchesRequired = 1;
-	[self.repostTweetImageView addGestureRecognizer:tapGesture];
 	[tapGesture release];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -315,12 +306,8 @@
     
 	self.tweetImageView.image = nil;
 	self.tweetImageView.alpha = 0.0;
-	
-	self.repostTweetImageView.alpha = 0.0;
-	self.repostTweetImageView.image = nil;
     
     self.tweetImageView.hidden = YES;
-    self.repostTweetImageView.hidden = YES;
     
     self.imageCoverImageView.alpha = 0.0;
     
@@ -368,7 +355,6 @@
     
     //
     [[self.tweetImageView layer] setCornerRadius:20.0];
-    [[self.repostTweetImageView layer] setCornerRadius:20.0];
 }
 
 - (void)loadStatusImage
@@ -394,14 +380,14 @@
 
 - (void)loadRepostStautsImage
 {
-    self.repostTweetImageView.hidden = NO;
+    self.tweetImageView.hidden = NO;
     self.imageCoverImageView.hidden = NO;
     Status *repostStatus = self.status.repostStatus;
-    [self.repostTweetImageView loadImageFromURL:repostStatus.originalPicURL 
+    [self.tweetImageView loadImageFromURL:repostStatus.originalPicURL 
                                      completion:^(void) 
      {
          [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
-             self.repostTweetImageView.alpha = 1.0;
+             self.tweetImageView.alpha = 1.0;
              self.imageCoverImageView.alpha = 1.0;
          } completion:^(BOOL fin) {
          }];
@@ -650,10 +636,10 @@
     self.musicLink = repostMusicVideoLink;
     //    self.musicBackgroundImageView.alpha = 0.0;
     //    self.repostTweetImageView.alpha = 1.0;
-    self.repostTweetImageView.hidden = YES;
+    self.tweetImageView.hidden = YES;
     [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
         self.musicBackgroundImageView.alpha = 1.0;
-        self.repostTweetImageView.alpha = 0.0;
+        self.tweetImageView.alpha = 0.0;
         self.imageCoverImageView.alpha = 1.0;
     } completion:^(BOOL fin) {
     }];
@@ -913,9 +899,6 @@
 			UIImage *img = nil;
 			if (self.tweetImageView.image) {
 				img = self.tweetImageView.image;
-			}
-			else if (self.repostTweetImageView.image) {
-				img = self.repostTweetImageView.image;
 			}
 			
 			if (img) {

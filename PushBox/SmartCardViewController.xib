@@ -408,24 +408,15 @@
 								<string key="NSFrame">{{0, -29}, {467, 348}}</string>
 								<reference key="NSSuperview" ref="978562341"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="96538064"/>
-								<reference key="IBUIBackgroundColor" ref="392801989"/>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">2</int>
-								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<bool key="IBUIHighlighted">YES</bool>
-							</object>
-							<object class="IBUIImageView" id="96538064">
-								<reference key="NSNextResponder" ref="978562341"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{0, -29}, {467, 349}}</string>
-								<reference key="NSSuperview" ref="978562341"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="470756897"/>
 								<reference key="IBUIBackgroundColor" ref="392801989"/>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">2</int>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">sc_image_default 2.png</string>
+								</object>
 								<bool key="IBUIHighlighted">YES</bool>
 							</object>
 							<object class="IBUIImageView" id="470756897">
@@ -598,6 +589,7 @@
 						<string key="NSFrame">{{57, 275}, {451, 134}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="70486562"/>
 						<string key="NSReuseIdentifierKey">_NS:693</string>
 						<reference key="IBUIBackgroundColor" ref="392801989"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -609,6 +601,7 @@
 						<string key="NSFrame">{{251, 373}, {68, 68}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:241</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -720,14 +713,6 @@
 						<reference key="destination" ref="308029235"/>
 					</object>
 					<int key="connectionID">32</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">repostTweetImageView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="96538064"/>
-					</object>
-					<int key="connectionID">33</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -1016,18 +1001,11 @@
 						<reference key="object" ref="978562341"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="96538064"/>
 							<reference ref="252177055"/>
 							<reference ref="470756897"/>
 							<reference ref="944684392"/>
 						</object>
 						<reference key="parent" ref="931374233"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">22</int>
-						<reference key="object" ref="96538064"/>
-						<reference key="parent" ref="978562341"/>
-						<string key="objectName">repost image view</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">51</int>
@@ -1124,7 +1102,6 @@
 					<string>14.IBPluginDependency</string>
 					<string>15.IBPluginDependency</string>
 					<string>19.IBPluginDependency</string>
-					<string>22.IBPluginDependency</string>
 					<string>23.IBPluginDependency</string>
 					<string>4.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
@@ -1153,7 +1130,6 @@
 					<string>SmartCardViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1291,7 +1267,6 @@
 							<string>recentActNotifyLabel</string>
 							<string>repostCountLabel</string>
 							<string>repostTextView</string>
-							<string>repostTweetImageView</string>
 							<string>repostView</string>
 							<string>repostWebView</string>
 							<string>screenNameLabel</string>
@@ -1317,7 +1292,6 @@
 							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UITextView</string>
-							<string>UIImageView</string>
 							<string>UIImageView</string>
 							<string>UIWebView</string>
 							<string>UILabel</string>
@@ -1346,7 +1320,6 @@
 							<string>recentActNotifyLabel</string>
 							<string>repostCountLabel</string>
 							<string>repostTextView</string>
-							<string>repostTweetImageView</string>
 							<string>repostView</string>
 							<string>repostWebView</string>
 							<string>screenNameLabel</string>
@@ -1415,10 +1388,6 @@
 								<string key="candidateClassName">UITextView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">repostTweetImageView</string>
-								<string key="candidateClassName">UIImageView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
 								<string key="name">repostView</string>
 								<string key="candidateClassName">UIImageView</string>
 							</object>
@@ -1480,6 +1449,7 @@
 				<string>sc_button_play_highlight.png</string>
 				<string>sc_button_repost.png</string>
 				<string>sc_image_cover.png</string>
+				<string>sc_image_default 2.png</string>
 				<string>sc_music_bg.png</string>
 				<string>sc_track_button_default.png</string>
 			</object>
@@ -1494,6 +1464,7 @@
 				<string>{68, 68}</string>
 				<string>{18, 13}</string>
 				<string>{467, 321}</string>
+				<string>{467, 349}</string>
 				<string>{443, 139}</string>
 				<string>{431, 42}</string>
 			</object>

@@ -36,6 +36,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+    //
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClicked:)];
+    tapGesture.numberOfTapsRequired = 1;
+    tapGesture.numberOfTouchesRequired = 1;
+    [self.scrollView addGestureRecognizer:tapGesture];
+    [tapGesture release];
+
     if (self.gifUrl) {
         [self.imageView setHidden:YES];
         
@@ -53,7 +60,6 @@
         frame.origin.x = 1024/2 - size.width/2;
         self.imageView.frame = frame;
         
-        
         self.scrollView.contentSize = CGSizeMake(self.imageView.frame.size.width, self.imageView.frame.size.height);
         float y = self.imageView.frame.size.height/2 - 768/2;
         self.scrollView.contentOffset = CGPointMake(0, y);
@@ -61,12 +67,6 @@
         self.scrollView.maximumZoomScale = 1.5;
         self.scrollView.minimumZoomScale = 0.5;
         self.scrollView.delegate = self;
-        
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClicked:)];
-        tapGesture.numberOfTapsRequired = 1;
-        tapGesture.numberOfTouchesRequired = 1;
-        [self.imageView addGestureRecognizer:tapGesture];
-        [tapGesture release];
     }
 }
 

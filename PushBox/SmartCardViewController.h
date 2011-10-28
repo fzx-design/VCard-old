@@ -39,7 +39,6 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
     UIWebView *_repostWebView;
 	UITextView *_repostTextView;
 	UIImageView *_repostView;
-	UIImageView *_repostTweetImageView;
     UILabel *_trackLabel;
     UIView *_trackView;
     UIImageView *_imageCoverImageView;
@@ -71,7 +70,6 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
 @property(nonatomic, retain) IBOutlet UIWebView* repostWebView;
 @property(nonatomic, retain) IBOutlet UITextView* repostTextView;
 @property(nonatomic, retain) IBOutlet UIImageView* repostView;
-@property(nonatomic, retain) IBOutlet UIImageView* repostTweetImageView;
 @property(nonatomic, retain) IBOutlet UILabel* trackLabel;
 @property(nonatomic, retain) IBOutlet UIView* trackView;
 @property(nonatomic, retain) IBOutlet UIImageView* imageCoverImageView;
