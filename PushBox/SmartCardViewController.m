@@ -144,25 +144,22 @@
     
     [self.tweetImageView loadImageFromURL:url
                                completion:nil
-                           cacheInContext:self.managedObjectContext]; 
+                           cacheInContext:self.managedObjectContext];
     
-	UIImageView *imageView = (UIImageView *)ges.view;
-	DetailImageViewController *dvc = [[DetailImageViewController alloc] initWithImage:imageView.image];
+    UIImageView *imageView = (UIImageView *)ges.view;
+    DetailImageViewController *dvc = [[DetailImageViewController alloc] initWithImage:imageView.image];
     
-    //
-    if ([self checkGif:self.status.originalPicURL]) {
+    if ([self checkGif:self.status.originalPicURL])
         dvc.gifUrl = self.status.originalPicURL;
-    }
-    if ([self checkGif:self.status.repostStatus.originalPicURL]) {
+    if ([self checkGif:self.status.repostStatus.originalPicURL])
         dvc.gifUrl = self.status.repostStatus.originalPicURL;
-    }
     
-	dvc.delegate = self;
-	dvc.view.alpha = 0.0;
-	[mainView addSubview:dvc.view];
-    [UIView animateWithDuration:0.5 animations:^{
-		dvc.view.alpha = 1.0;
-	}];
+    dvc.delegate = self;
+    dvc.view.alpha = 0.0;
+    [mainView addSubview:dvc.view];
+    [UIView animateWithDuration:0.3 animations:^{
+        dvc.view.alpha = 1.0;
+    }];
 }
 
 - (void)detailImageViewControllerShouldDismiss:(UIViewController *)vc
@@ -220,6 +217,7 @@
                                [[NSNumber alloc] initWithInt:12290],   // '"'
                                [[NSNumber alloc] initWithInt:65341],   // '"'
                                [[NSNumber alloc] initWithInt:65292],   // '，'
+                               [[NSNumber alloc] initWithInt:12289],   // '、'
                                [[NSNumber alloc] initWithInt:65371],   // '"'
                                [[NSNumber alloc] initWithInt:65373],   // '"'
                                [[NSNumber alloc] initWithInt:65374],   // '"'
@@ -300,6 +298,8 @@
                                [[NSNumber alloc] initWithInt:65295],   // '"'
                                [[NSNumber alloc] initWithInt:65311],   // '"'
                                [[NSNumber alloc] initWithInt:8230],   // '"'
+                               [[NSNumber alloc] initWithInt:65292],   // '，'
+                               [[NSNumber alloc] initWithInt:12289],   // '、'
                                nil];
     for (int i = 0; i < [atEndCharArray count]; i++)
     {

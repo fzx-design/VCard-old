@@ -4,17 +4,31 @@
    version = "1.0">
    <FileBreakpoints>
       <FileBreakpoint
-         shouldBeEnabled = "No"
+         shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "PushBox/SmartCardViewController.m"
-         timestampString = "341559557.60646"
+         filePath = "PushBox/DetailImageViewController.m"
+         timestampString = "341569580.30181"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "157"
-         endingLineNumber = "157"
-         landmarkName = "-imageViewClicked:"
+         startingLineNumber = "200"
+         endingLineNumber = "200"
+         landmarkName = "-scrollViewDidZoom:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "PushBox/DetailImageViewController.m"
+         timestampString = "341569580.30181"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "203"
+         endingLineNumber = "203"
+         landmarkName = "-scrollViewDidZoom:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

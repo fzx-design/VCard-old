@@ -84,14 +84,36 @@
         
         self.imageView.image = _image;
         
+        CGSize size = _image.size;
         CGRect frame = self.imageView.frame;
-        CGSize size = self.image.size;
         frame.size = size;
-        self.imageView.frame = frame;
-        self.imageView.center = kScreenCenter;
-        self.scrollView.contentSize = _imageView.frame.size;
+        // <
+        if (size.height <= 748) {
+            if (size.width <= 1024) {
+                //            self.imageView.center = kScreenCenter;
+                frame.origin.x = 1024/2 - size.width/2;
+                frame.origin.y = 748/2 - size.height/2;
+            }
+            else {
+                frame.origin.x = 0;
+                frame.origin.y = 748/2 - size.height/2;
+            }
+        }
         
-        self.scrollView.delegate = self;
+        // >
+        else {
+            frame.origin.y = 0;
+            if (size.width <= 1024) {
+                frame.origin.x = 1024/2 - size.width/2;
+            }
+            else {
+                frame.origin.x = 0;
+            }
+        }
+        
+        self.imageView.frame = frame;
+        
+        self.scrollView.contentSize = size;
     }
 }
 
@@ -168,10 +190,36 @@
     //	float y = self.imageView.frame.size.height/2 - 768/2;
     //	self.scrollView.contentOffset = CGPointMake(0, y);
     
-    self.imageView.center = kScreenCenter;
-    self.scrollView.contentSize = _imageView.frame.size;
+    CGSize size = _imageView.frame.size;
+    CGRect frame = self.imageView.frame;
+    // <
+    if (size.height <= 748) {
+        if (size.width <= 1024) {
+//            self.imageView.center = kScreenCenter;
+            frame.origin.x = 1024/2 - size.width/2;
+            frame.origin.y = 748/2 - size.height/2;
+        }
+        else {
+            frame.origin.x = 0;
+            frame.origin.y = 748/2 - size.height/2;
+        }
+    }
+    
+    // >
+    else {
+        frame.origin.y = 0;
+        if (size.width <= 1024) {
+            frame.origin.x = 1024/2 - size.width/2;
+        }
+        else {
+            frame.origin.x = 0;
+        }
+    }
+    
+    self.imageView.frame = frame;
+    
+    self.scrollView.contentSize = size;
 }
-
 
 #pragma - UIWebViewDelegate
 
