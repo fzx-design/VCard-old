@@ -8,7 +8,9 @@
 
 #import "DetailImageViewController.h"
 #import "UIApplicationAddition.h"
+#import "UIImageViewAddition.h"
 
+#define kScreenCenter CGPointMake(1024.0/2, 768.0/2)
 
 @implementation DetailImageViewController
 
@@ -19,7 +21,7 @@
 @synthesize delegate = _delegate;
 @synthesize image = _image;
 @synthesize gifUrl = _gifUrl;
-
+@synthesize url = _url;
 
 - (id)initWithImage:(UIImage *)image
 {   
@@ -32,7 +34,17 @@
 	return self;
 }
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+- (id)initWithUrl:(NSString*)url
+{
+    self.gifUrl = nil;
+    
+    self = [super init];
+    if (self) {
+        self.url = url;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
@@ -42,7 +54,7 @@
     tapGesture.numberOfTouchesRequired = 1;
     [self.scrollView addGestureRecognizer:tapGesture];
     [tapGesture release];
-
+    
     if (self.gifUrl) {
         [self.imageView setHidden:YES];
         
@@ -50,22 +62,35 @@
         [self.webView loadHTMLString:htmlStr baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
     }
     else {
+        //        [self.webView setHidden:YES];
+        //        
+        //        self.imageView.image = _image;
+        //        CGRect frame = self.imageView.frame;
+        //        CGSize size = self.image.size;
+        //        frame.size = size;
+        //        frame.origin.y = 0;
+        //        frame.origin.x = 1024/2 - size.width/2;
+        //        self.imageView.frame = frame;
+        //        
+        //        self.scrollView.contentSize = CGSizeMake(self.imageView.frame.size.width, self.imageView.frame.size.height);
+        //        float y = self.imageView.frame.size.height/2 - 768/2;
+        //        self.scrollView.contentOffset = CGPointMake(0, y);
+        //        
+        //        self.scrollView.maximumZoomScale = 1.5;
+        //        self.scrollView.minimumZoomScale = 0.5;
+        //        self.scrollView.delegate = self;
+        
         [self.webView setHidden:YES];
         
         self.imageView.image = _image;
+        
         CGRect frame = self.imageView.frame;
         CGSize size = self.image.size;
         frame.size = size;
-        frame.origin.y = 0;
-        frame.origin.x = 1024/2 - size.width/2;
         self.imageView.frame = frame;
+        self.imageView.center = kScreenCenter;
+        self.scrollView.contentSize = _imageView.frame.size;
         
-        self.scrollView.contentSize = CGSizeMake(self.imageView.frame.size.width, self.imageView.frame.size.height);
-        float y = self.imageView.frame.size.height/2 - 768/2;
-        self.scrollView.contentOffset = CGPointMake(0, y);
-        
-        self.scrollView.maximumZoomScale = 1.5;
-        self.scrollView.minimumZoomScale = 0.5;
         self.scrollView.delegate = self;
     }
 }
@@ -133,15 +158,18 @@
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView
 {
-	CGRect frame = _imageView.frame;
-	frame.origin.y = 0;
-	frame.origin.x = 1024/2 - frame.size.width/2;
-	self.imageView.frame = frame;
-	
-	self.scrollView.contentSize = CGSizeMake(_imageView.frame.size.width,
-                                             _imageView.frame.size.height);
-	float y = self.imageView.frame.size.height/2 - 768/2;
-	self.scrollView.contentOffset = CGPointMake(0, y);
+    //	CGRect frame = _imageView.frame;
+    //	frame.origin.y = 100;
+    //	frame.origin.x = 1024/2 - frame.size.width/2;
+    //	self.imageView.frame = frame;
+    //	
+    //	self.scrollView.contentSize = _imageView.frame.size;
+    
+    //	float y = self.imageView.frame.size.height/2 - 768/2;
+    //	self.scrollView.contentOffset = CGPointMake(0, y);
+    
+    self.imageView.center = kScreenCenter;
+    self.scrollView.contentSize = _imageView.frame.size;
 }
 
 

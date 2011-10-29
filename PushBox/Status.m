@@ -99,7 +99,7 @@
     return result;
 }
 
-- (int)countOfStatuseInContext:(NSManagedObjectContext *)context
++ (int)countOfStatuseInContext:(NSManagedObjectContext *)context
 
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -120,7 +120,7 @@
 
 + (Status *)insertStatus:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context
 {
-    int n = [[self countOfStatuseInContext:context] intValue];
+    int n = [self countOfStatuseInContext:context];
     NSLog(@"----------------------%d", n);
     
     NSString *statusID = [[dict objectForKey:@"id"] stringValue];

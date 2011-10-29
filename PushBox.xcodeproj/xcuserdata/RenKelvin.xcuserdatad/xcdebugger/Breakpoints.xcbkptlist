@@ -4,17 +4,17 @@
    version = "1.0">
    <FileBreakpoints>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "PushBox/DetailImageViewController.m"
-         timestampString = "341488428.205548"
+         filePath = "PushBox/SmartCardViewController.m"
+         timestampString = "341559557.60646"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "91"
-         endingLineNumber = "91"
-         landmarkName = "-dealloc"
+         startingLineNumber = "157"
+         endingLineNumber = "157"
+         landmarkName = "-imageViewClicked:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

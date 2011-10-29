@@ -86,8 +86,10 @@
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<bool key="IBUIAlwaysBounceVertical">YES</bool>
+						<bool key="IBUIAlwaysBounceHorizontal">YES</bool>
 						<float key="IBUIMinimumZoomScale">0.5</float>
-						<float key="IBUIMaximumZoomScale">3</float>
+						<float key="IBUIMaximumZoomScale">2</float>
 					</object>
 					<object class="IBUIWebView" id="625752625">
 						<reference key="NSNextResponder" ref="707811626"/>
@@ -170,6 +172,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{84, 21}, {34, 34}}</string>
 								<reference key="NSSuperview" ref="117629307"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
@@ -203,7 +206,7 @@
 						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{495, 354}, {37, 37}}</string>
 						<reference key="NSSuperview" ref="707811626"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="117629307"/>
 						<string key="NSReuseIdentifierKey">_NS:1062</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>

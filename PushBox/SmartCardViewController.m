@@ -136,8 +136,17 @@
 {
 	UIView *mainView = [[UIApplication sharedApplication] rootView];
 	
+    NSString* url;
+    if (self.status.originalPicURL)
+        url = self.status.originalPicURL;
+    if (self.status.repostStatus.originalPicURL)
+        url = self.status.repostStatus.originalPicURL;
+    
+    [self.tweetImageView loadImageFromURL:url
+                               completion:nil
+                           cacheInContext:self.managedObjectContext]; 
+    
 	UIImageView *imageView = (UIImageView *)ges.view;
-	
 	DetailImageViewController *dvc = [[DetailImageViewController alloc] initWithImage:imageView.image];
     
     //
@@ -363,7 +372,7 @@
 {
     self.tweetImageView.hidden = NO;
     self.imageCoverImageView.hidden = NO;
-    [self.tweetImageView loadImageFromURL:self.status.originalPicURL 
+    [self.tweetImageView loadImageFromURL:self.status.bmiddlePicURL
                                completion:^(void) 
      {
          [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
@@ -385,7 +394,7 @@
     self.tweetImageView.hidden = NO;
     self.imageCoverImageView.hidden = NO;
     Status *repostStatus = self.status.repostStatus;
-    [self.tweetImageView loadImageFromURL:repostStatus.originalPicURL 
+    [self.tweetImageView loadImageFromURL:repostStatus.bmiddlePicURL 
                                completion:^(void) 
      {
          [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{

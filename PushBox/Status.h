@@ -37,6 +37,7 @@
 + (Status *)insertMentionedStatus:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context;
 + (Status *)statusWithID:(NSString *)statudID inManagedObjectContext:(NSManagedObjectContext *)context;
 + (void)deleteAllObjectsInManagedObjectContext:(NSManagedObjectContext *)context;
++ (int)countOfStatuseInContext:(NSManagedObjectContext *)context;
 
 @end
 
@@ -51,6 +52,5 @@
 - (void)removeRepostedByObject:(Status *)value;
 - (void)addRepostedBy:(NSSet *)values;
 - (void)removeRepostedBy:(NSSet *)values;
-- (int)countOfStatuseInContext:(NSManagedObjectContext *)context;
 
 @end

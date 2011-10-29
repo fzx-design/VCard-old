@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CoreDataViewController.h"
 
 @protocol DetailImageViewControllerDelegate
 - (void)detailImageViewControllerShouldDismiss:(UIViewController *)vc;
 @end
 
 
-@interface DetailImageViewController : UIViewController <UIScrollViewDelegate, UIWebViewDelegate> {
+@interface DetailImageViewController : CoreDataViewController <UIScrollViewDelegate, UIWebViewDelegate> {
 	UIImageView *_imageView;
     UIWebView *_webView;
 	UIScrollView *_scrollView;
@@ -23,6 +23,7 @@
 	id _delegate;
 	UIImage *_image;
     NSString *_gifUrl;
+    NSString *_url;
 }
 
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
@@ -32,8 +33,10 @@
 @property (nonatomic, assign) IBOutlet id <DetailImageViewControllerDelegate> delegate;
 @property (nonatomic, retain) UIImage *image;
 @property (nonatomic, retain) NSString *gifUrl;
+@property (nonatomic, retain) NSString *url;
 
 - (id)initWithImage:(UIImage *)image;
+- (id)initWithUrl:(NSString*)url;
 - (IBAction)saveImage:(UIButton *)sender;
 - (IBAction)dismiss:(UIButton *)sender;
 
