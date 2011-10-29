@@ -92,7 +92,7 @@
             header = NSLocalizedString(@"可读性", nil);
             break;
         case 2:
-            header = NSLocalizedString(@"设置", nil);
+            header = NSLocalizedString(@"功能", nil);
             break;
 		case 3:
 			header = NSLocalizedString(@"",nil);
