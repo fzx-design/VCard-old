@@ -169,7 +169,11 @@
     if (self.dataSource == CardTableViewDataSourceFriendsTimeline) {
         if (self.fetchedResultsController.fetchedObjects.count) {
             Status *newest = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
+            
+            /////////
             sinceID = newest.statusID;
+            /////////
+            
             NSLog(@"%@", newest.text);
         }
     }

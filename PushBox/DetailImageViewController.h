@@ -14,7 +14,7 @@
 @end
 
 
-@interface DetailImageViewController : CoreDataViewController <UIScrollViewDelegate, UIWebViewDelegate> {
+@interface DetailImageViewController : UIViewController <UIScrollViewDelegate, UIWebViewDelegate> {
 	UIImageView *_imageView;
     UIWebView *_webView;
 	UIScrollView *_scrollView;
@@ -24,6 +24,7 @@
 	UIImage *_image;
     NSString *_gifUrl;
     NSString *_url;
+    NSManagedObjectContext* _context;
 }
 
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
@@ -36,7 +37,7 @@
 @property (nonatomic, retain) NSString *url;
 
 - (id)initWithImage:(UIImage *)image;
-- (id)initWithUrl:(NSString*)url;
+- (id)initWithUrl:(NSString*)url inContext:(NSManagedObjectContext*)context;
 - (IBAction)saveImage:(UIButton *)sender;
 - (IBAction)dismiss:(UIButton *)sender;
 

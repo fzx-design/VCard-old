@@ -135,19 +135,11 @@
 - (void)imageViewClicked:(UIGestureRecognizer *)ges
 {
 	UIView *mainView = [[UIApplication sharedApplication] rootView];
-	
-    NSString* url;
-    if (self.status.originalPicURL)
-        url = self.status.originalPicURL;
-    if (self.status.repostStatus.originalPicURL)
-        url = self.status.repostStatus.originalPicURL;
     
-    [self.tweetImageView loadImageFromURL:url
-                               completion:nil
-                           cacheInContext:self.managedObjectContext];
-    
-    UIImageView *imageView = (UIImageView *)ges.view;
-    DetailImageViewController *dvc = [[DetailImageViewController alloc] initWithImage:imageView.image];
+    //    UIImageView *imageView = (UIImageView *)ges.view;
+    //    DetailImageViewController *dvc = [[DetailImageViewController alloc] initWithImage:imageView.image];
+    NSString* url = self.status.originalPicURL ? self.status.originalPicURL : self.status.repostStatus.originalPicURL;
+    DetailImageViewController *dvc = [[DetailImageViewController alloc] initWithUrl:url inContext:self.managedObjectContext];
     
     if ([self checkGif:self.status.originalPicURL])
         dvc.gifUrl = self.status.originalPicURL;
@@ -155,8 +147,8 @@
         dvc.gifUrl = self.status.repostStatus.originalPicURL;
     
     dvc.delegate = self;
-    dvc.view.alpha = 0.0;
     [mainView addSubview:dvc.view];
+    dvc.view.alpha = 0.0;
     [UIView animateWithDuration:0.3 animations:^{
         dvc.view.alpha = 1.0;
     }];

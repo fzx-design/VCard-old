@@ -34,7 +34,7 @@
 	return self;
 }
 
-- (id)initWithUrl:(NSString*)url
+- (id)initWithUrl:(NSString*)url inContext:(NSManagedObjectContext *)context
 {
     self.gifUrl = nil;
     
@@ -42,10 +42,14 @@
     if (self) {
         self.url = url;
     }
+    _context = context;
     return self;
 }
 
 - (void)viewDidLoad {
+    self.activityView.alpha = 1.0;
+    [self.activityView startAnimating];
+    
     [super viewDidLoad];
 	
     //
@@ -62,58 +66,53 @@
         [self.webView loadHTMLString:htmlStr baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
     }
     else {
-        //        [self.webView setHidden:YES];
-        //        
-        //        self.imageView.image = _image;
-        //        CGRect frame = self.imageView.frame;
-        //        CGSize size = self.image.size;
-        //        frame.size = size;
-        //        frame.origin.y = 0;
-        //        frame.origin.x = 1024/2 - size.width/2;
-        //        self.imageView.frame = frame;
-        //        
-        //        self.scrollView.contentSize = CGSizeMake(self.imageView.frame.size.width, self.imageView.frame.size.height);
-        //        float y = self.imageView.frame.size.height/2 - 768/2;
-        //        self.scrollView.contentOffset = CGPointMake(0, y);
-        //        
-        //        self.scrollView.maximumZoomScale = 1.5;
-        //        self.scrollView.minimumZoomScale = 0.5;
-        //        self.scrollView.delegate = self;
-        
         [self.webView setHidden:YES];
         
-        self.imageView.image = _image;
-        
-        CGSize size = _image.size;
-        CGRect frame = self.imageView.frame;
-        frame.size = size;
-        // <
-        if (size.height <= 748) {
-            if (size.width <= 1024) {
-                //            self.imageView.center = kScreenCenter;
-                frame.origin.x = 1024/2 - size.width/2;
-                frame.origin.y = 748/2 - size.height/2;
-            }
-            else {
-                frame.origin.x = 0;
-                frame.origin.y = 748/2 - size.height/2;
-            }
-        }
-        
-        // >
-        else {
-            frame.origin.y = 0;
-            if (size.width <= 1024) {
-                frame.origin.x = 1024/2 - size.width/2;
-            }
-            else {
-                frame.origin.x = 0;
-            }
-        }
-        
-        self.imageView.frame = frame;
-        
-        self.scrollView.contentSize = size;
+        //        self.imageView.image = _image;
+        [self.imageView loadImageFromURL:_url 
+                              completion:^(void)
+         {
+             //             CGSize size = _image.size;
+             CGRect frame = self.imageView.frame;
+             CGSize size = self.imageView.image.size;
+             frame.size = size;
+             self.imageView.frame = frame;
+             // <
+             if (size.height <= 748) {
+                 if (size.width <= 1024) {
+                     frame.origin.x = 1024/2 - size.width/2;
+                     frame.origin.y = 748/2 - size.height/2;
+                 }
+                 else {
+                     frame.origin.x = 0;
+                     frame.origin.y = 748/2 - size.height/2;
+                 }
+             }
+             
+             // >
+             else {
+                 frame.origin.y = 0;
+                 if (size.width <= 1024) {
+                     frame.origin.x = 1024/2 - size.width/2;
+                 }
+                 else {
+                     frame.origin.x = 0;
+                 }
+             }
+             
+             self.imageView.frame = frame;
+             self.scrollView.delegate = self;
+             
+             self.scrollView.contentSize = size;
+             
+             [self.activityView stopAnimating];
+             self.imageView.alpha = 0.0;
+           [UIView animateWithDuration:0.3 animations:^(void) {
+                 self.imageView.alpha = 1.0;
+                 self.activityView.alpha = 0.0;
+             }];
+         }
+                          cacheInContext:_context];   
     }
 }
 
@@ -144,7 +143,7 @@
 {
     
 	[[UIApplication sharedApplication] showLoadingView];
-	UIImageWriteToSavedPhotosAlbum(self.image, self, @selector(image:finishedSavingWithError:contextInfo:), NULL);
+	UIImageWriteToSavedPhotosAlbum(self.imageView.image, self, @selector(image:finishedSavingWithError:contextInfo:), NULL);
 }
 
 -(void)image:(UIImage *)image finishedSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
@@ -180,22 +179,11 @@
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView
 {
-    //	CGRect frame = _imageView.frame;
-    //	frame.origin.y = 100;
-    //	frame.origin.x = 1024/2 - frame.size.width/2;
-    //	self.imageView.frame = frame;
-    //	
-    //	self.scrollView.contentSize = _imageView.frame.size;
-    
-    //	float y = self.imageView.frame.size.height/2 - 768/2;
-    //	self.scrollView.contentOffset = CGPointMake(0, y);
-    
     CGSize size = _imageView.frame.size;
     CGRect frame = self.imageView.frame;
     // <
     if (size.height <= 748) {
         if (size.width <= 1024) {
-//            self.imageView.center = kScreenCenter;
             frame.origin.x = 1024/2 - size.width/2;
             frame.origin.y = 748/2 - size.height/2;
         }
@@ -225,12 +213,16 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
+    self.activityView.alpha = 1.0;
     [self.activityView startAnimating];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [self.activityView stopAnimating];
+    [UIView animateWithDuration:0.3 animations:^(void) {
+        self.activityView.alpha = 0.0;
+    }];
 }
 
 @end
