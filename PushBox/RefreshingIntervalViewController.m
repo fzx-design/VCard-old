@@ -59,7 +59,7 @@
             break;
         case 1:
 			cellInterval = 30;
-			cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"每30秒", nil)];
+			cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"每 30 秒", nil)];
             break;
         case 2:
 			cellInterval = 60;
