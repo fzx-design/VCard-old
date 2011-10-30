@@ -55,7 +55,7 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     MessagesDialogTableViewCell *dialogCell = (MessagesDialogTableViewCell *)cell;
-//    Message *message = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    //    Message *message = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     if (NO) {
         dialogCell.fromTextView.text = DEFAULT_TEST_TEXT;
@@ -71,7 +71,7 @@
         CGRect frame = textView.frame;
         frame.size = textView.contentSize;
         textView.frame = frame;
-       
+        
         // image
         frame = dialogCell.fromCenterImageView.frame;
         frame.size.height = textView.frame.size.height - 28;
@@ -122,7 +122,7 @@
     UITextView *textView = [[UITextView alloc] initWithFrame:frame];
     textView.text = DEFAULT_TEST_TEXT;
     frame.size = textView.contentSize;
-
+    
     [textView release];
     
     return frame.size.height + 83;

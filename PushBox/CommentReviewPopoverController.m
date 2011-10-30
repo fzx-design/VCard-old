@@ -22,6 +22,11 @@ static CommentReviewPopoverController* sharedCommentReviewPopoverController;
 @synthesize actionsButton = _actionsButton;
 @synthesize tweetImageView = _tweetImageView;
 @synthesize tweetTextLabel = _tweetTextLabel;
+@synthesize repostTextLabel = _repostTextLabel;
+@synthesize postTextView = _postTextView;
+@synthesize repostTextView = _repostTextView;
+@synthesize repostBackgroundImageView = _repostBackgroundImageView;
+@synthesize scrollView = _scrollView;
 
 @synthesize statusView = _statusView;
 
@@ -65,22 +70,122 @@ static CommentReviewPopoverController* sharedCommentReviewPopoverController;
 
 - (void)prepare
 {
-	self.screenNameLabel.text = self.status.author.screenName;
-	
-    self.dateLabel.text = [self.status.createdAt stringRepresentation];
-	
-	self.tweetTextLabel.text = self.status.text;
-	
 	NSManagedObjectContext* context = [(PushBoxAppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
     NSString *profileImageString = self.status.author.profileImageURL;
     [self.profileImageView loadImageFromURL:profileImageString 
                                  completion:NULL
                              cacheInContext:context];
-//	
-//	NSString *tweetImageString = self.status.bmiddlePicURL;
-//	[self.tweetImageView loadImageFromURL:tweetImageString
-//							   completion:NULL 
-//						   cacheInContext:self.managedObjectContext];
+    
+	self.screenNameLabel.text = self.status.author.screenName;
+	
+    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setDateFormat:[NSDateFormatter dateFormatFromTemplate:@"HH:mm" options:0 locale:[NSLocale currentLocale]]];
+    NSTimeInterval time=[self.status.createdAt timeIntervalSinceDate:[NSDate date]];
+    int days=((int)time)/(3600*24);
+    NSString* dateStr;
+    NSString* timeStr = [dateFormatter stringFromDate:self.status.createdAt];
+    switch (days) {
+        case 0:
+            dateStr = [[NSString alloc] initWithFormat:@"%@ 今天",timeStr];
+            break;
+        case 1:
+            dateStr = [[NSString alloc] initWithFormat:@"%@ 昨天",timeStr];
+            break;
+        case 2:
+            dateStr = [[NSString alloc] initWithFormat:@"%@ 前天",timeStr];
+            break;
+        default:
+            dateStr = [[NSString alloc] initWithFormat:@"%@ %d天前",timeStr, days];
+            break;
+    }
+    self.dateLabel.text = dateStr;
+    
+	self.postTextView.text = self.status.text;
+    [self.postTextView sizeToFit];
+    self.scrollView.contentSize = CGSizeMake(289, self.postTextView.frame.origin.y + self.postTextView.frame.size.height + 10);
+    if (self.status.bmiddlePicURL) {
+        [self.tweetImageView loadImageFromURL:self.status.bmiddlePicURL 
+                                   completion:^(void) {
+                                       CGRect frame = self.tweetImageView.frame;
+                                       //                                       frame.size = self.tweetImageView.image.size;
+                                       frame.origin.y = self.postTextView.frame.origin.y + self.postTextView.frame.size.height + 8;
+                                       self.tweetImageView.frame = frame;
+                                       
+                                       self.scrollView.contentSize = CGSizeMake(289, self.tweetImageView.frame.origin.y + self.tweetImageView.frame.size.height + 10);
+                                   }
+                               cacheInContext:context];
+    }
+    
+    if (self.status.repostStatus) {
+        self.repostTextView.text = self.status.repostStatus.text;
+        [self.repostTextView sizeToFit];
+        self.repostTextView.hidden = NO;
+        
+        CGRect frame = self.repostBackgroundImageView.frame;
+        frame.origin.y = self.postTextView.frame.origin.y + self.postTextView.frame.size.height;
+        self.repostBackgroundImageView.frame = frame;
+        self.repostBackgroundImageView.hidden = NO;
+        
+        frame = self.repostTextView.frame;
+        frame.origin.y = self.postTextView.frame.origin.y + self.postTextView.frame.size.height + 8;
+        self.repostTextView.frame = frame;
+        
+        self.scrollView.contentSize = CGSizeMake(289, self.repostBackgroundImageView.frame.origin.y + self.repostBackgroundImageView.frame.size.height + 10);
+        
+        if (self.status.repostStatus.bmiddlePicURL) {
+            [self.tweetImageView loadImageFromURL:self.status.repostStatus.bmiddlePicURL 
+                                       completion:^(void) {
+                                           CGRect frame = self.tweetImageView.frame;
+                                           //                                           frame.size = self.tweetImageView.image.size;
+                                           frame.origin.y = self.repostTextView.frame.origin.y + self.repostTextView.frame.size.height + 8;
+                                           self.tweetImageView.frame = frame;
+                                           
+                                           self.scrollView.contentSize = CGSizeMake(289, self.tweetImageView.frame.origin.y + self.tweetImageView.frame.size.height + 10);
+                                       }
+                                   cacheInContext:context];
+        }
+    }    
+    
+    //    UITapGestureRecognizer* ges = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClicked:)];
+    //    [self.tweetImageView addGestureRecognizer:ges];
+}
+
+- (BOOL)checkGif:(NSString*)url
+{
+    if (url == nil) {
+        return NO;
+    }
+    
+    NSString* extName = [url substringFromIndex:([url length] - 3)];
+    
+    if ([extName compare:@"gif"] == NSOrderedSame) {
+        return YES;
+    }
+    else {
+        return NO;
+    }
+}
+
+- (void)imageViewClicked:(UIGestureRecognizer *)ges
+{
+	UIView *mainView = [[UIApplication sharedApplication] rootView];
+    
+    //    UIImageView *imageView = (UIImageView *)ges.view;
+    //    DetailImageViewController *dvc = [[DetailImageViewController alloc] initWithImage:imageView.image];
+    NSString* url = self.status.originalPicURL ? self.status.originalPicURL : self.status.repostStatus.originalPicURL;
+    DetailImageViewController *dvc = [[DetailImageViewController alloc] initWithUrl:url inContext:self.managedObjectContext];
+    
+    if ([self checkGif:self.status.originalPicURL])
+        dvc.gifUrl = self.status.originalPicURL;
+    if ([self checkGif:self.status.repostStatus.originalPicURL])
+        dvc.gifUrl = self.status.repostStatus.originalPicURL;
+    
+    dvc.delegate = self;
+    [mainView addSubview:dvc.view];
+    dvc.view.alpha = 0.0;
+    [UIView animateWithDuration:0.3 animations:^{
+        dvc.view.alpha = 1.0;
+    }];
 }
 
 - (void)viewDidLoad
@@ -89,33 +194,17 @@ static CommentReviewPopoverController* sharedCommentReviewPopoverController;
 	[self prepare];
 	[self.view addSubview:self.statusView];
 	
-	UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClicked:)];
-	tapGesture.numberOfTapsRequired = 1;
-	tapGesture.numberOfTouchesRequired = 1;
-	[self.tweetImageView addGestureRecognizer:tapGesture];
-	[tapGesture release];
+//	UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClicked:)];
+//	tapGesture.numberOfTapsRequired = 1;
+//	tapGesture.numberOfTouchesRequired = 1;
+//	[self.tweetImageView addGestureRecognizer:tapGesture];
+//	[tapGesture release];
 	
 	[self.statusView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
 	CGRect frame = self.statusView.frame;
 	frame.origin.x = 690;
 	frame.origin.y = 8;
 	self.statusView.frame = frame;
-}
-
-- (void)imageViewClicked:(UIGestureRecognizer *)ges
-{
-	UIView *mainView = [[UIApplication sharedApplication] rootView];
-	
-	UIImageView *imageView = (UIImageView *)ges.view;
-	
-	DetailImageViewController *dvc = [[DetailImageViewController alloc] initWithImage:imageView.image];
-	dvc.delegate = self;
-	dvc.view.alpha = 0.0;
-	[mainView addSubview:dvc.view];
-	
-	[UIView animateWithDuration:0.5 animations:^{
-		dvc.view.alpha = 1.0;
-	}];
 }
 
 - (void)detailImageViewControllerShouldDismiss:(UIViewController *)vc

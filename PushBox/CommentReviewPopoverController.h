@@ -19,6 +19,11 @@
 	UIButton *_actionsButton;
 	UIImageView *_tweetImageView;
 	UILabel *_tweetTextLabel;
+	UILabel *_repostTextLabel;
+    UITextView *_postTextView;
+    UITextView *_repostTextView;
+    UIImageView *_repostBackgroundImageView;
+    UIScrollView *_scrollView;
 
 	UIView *_statusView;
 	
@@ -31,6 +36,11 @@
 @property(nonatomic, retain) IBOutlet UIButton* actionsButton;
 @property(nonatomic, retain) IBOutlet UIImageView* tweetImageView;
 @property(nonatomic, retain) IBOutlet UILabel* tweetTextLabel;
+@property(nonatomic, retain) IBOutlet UILabel* repostTextLabel;
+@property(nonatomic, retain) IBOutlet UITextView* postTextView;
+@property(nonatomic, retain) IBOutlet UITextView* repostTextView;
+@property(nonatomic, retain) IBOutlet UIImageView* repostBackgroundImageView;
+@property(nonatomic, retain) IBOutlet UIScrollView* scrollView;
 
 @property(nonatomic, retain) IBOutlet UIView* statusView;
 
@@ -38,5 +48,6 @@
 
 - (IBAction)dismissButtonClicked:(id)sender;
 +(CommentReviewPopoverController*)sharedCommentReviewPopoverController;
+- (IBAction)imageViewClicked:(UIGestureRecognizer *)ges;
 
 @end

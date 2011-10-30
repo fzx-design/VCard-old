@@ -9,6 +9,10 @@
 #import "DetailImageViewController.h"
 #import "UIApplicationAddition.h"
 #import "UIImageViewAddition.h"
+#import "CoreDataViewController.h"
+#import "DetailImageViewController.h"
+#import "Status.h"
+#import "PushBoxAppDelegate.h"
 
 #define kScreenCenter CGPointMake(1024.0/2, 768.0/2)
 
@@ -34,7 +38,7 @@
 	return self;
 }
 
-- (id)initWithUrl:(NSString*)url inContext:(NSManagedObjectContext *)context
+- (id)initWithUrl:(NSString*)url
 {
     self.gifUrl = nil;
     
@@ -42,7 +46,7 @@
     if (self) {
         self.url = url;
     }
-    _context = context;
+    
     return self;
 }
 
@@ -52,6 +56,8 @@
     
     [super viewDidLoad];
 	
+    NSManagedObjectContext* context = [(PushBoxAppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    
     //
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClicked:)];
     tapGesture.numberOfTapsRequired = 1;
@@ -107,12 +113,12 @@
              
              [self.activityView stopAnimating];
              self.imageView.alpha = 0.0;
-           [UIView animateWithDuration:0.3 animations:^(void) {
+             [UIView animateWithDuration:0.3 animations:^(void) {
                  self.imageView.alpha = 1.0;
                  self.activityView.alpha = 0.0;
              }];
          }
-                          cacheInContext:_context];   
+                          cacheInContext:context];
     }
 }
 
@@ -124,7 +130,7 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.imageView = nil;
+    self.imageView = nil;
     self.scrollView = nil;
     self.delegate = nil;
     self.webView = nil;
@@ -132,9 +138,9 @@
 
 
 - (void)dealloc {
-	[_imageView release];
+    [_imageView release];
     [_scrollView release];
-	[_image release];
+    [_image release];
     [_webView release];
     [super dealloc];
 }
@@ -142,39 +148,39 @@
 - (IBAction)saveImage:(UIButton *)sender
 {
     
-	[[UIApplication sharedApplication] showLoadingView];
-	UIImageWriteToSavedPhotosAlbum(self.imageView.image, self, @selector(image:finishedSavingWithError:contextInfo:), NULL);
+    [[UIApplication sharedApplication] showLoadingView];
+    UIImageWriteToSavedPhotosAlbum(self.imageView.image, self, @selector(image:finishedSavingWithError:contextInfo:), NULL);
 }
 
 -(void)image:(UIImage *)image finishedSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
     
-	[[UIApplication sharedApplication] hideLoadingView];
-	if (error) {
-		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"保存失败", nil)
-							  message:NSLocalizedString(@"无法保存图片", nil)
-							  delegate:nil
-							  cancelButtonTitle:NSLocalizedString(@"确定", nil)
-							  otherButtonTitles:nil];
-		
-		[alert show];
-		[alert release];
-	}
-	else {
-		[[UIApplication sharedApplication] showOperationDoneView];
-	}
+    [[UIApplication sharedApplication] hideLoadingView];
+    if (error) {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:NSLocalizedString(@"保存失败", nil)
+                              message:NSLocalizedString(@"无法保存图片", nil)
+                              delegate:nil
+                              cancelButtonTitle:NSLocalizedString(@"确定", nil)
+                              otherButtonTitles:nil];
+        
+        [alert show];
+        [alert release];
+    }
+    else {
+        [[UIApplication sharedApplication] showOperationDoneView];
+    }
     
 }
 
 - (IBAction)dismiss:(UIButton *)sender
 {
-	[self.delegate detailImageViewControllerShouldDismiss:self];
+    [self.delegate detailImageViewControllerShouldDismiss:self];
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
-	return self.imageView;
+    return self.imageView;
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView

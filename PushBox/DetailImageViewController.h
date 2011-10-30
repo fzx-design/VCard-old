@@ -24,7 +24,6 @@
 	UIImage *_image;
     NSString *_gifUrl;
     NSString *_url;
-    NSManagedObjectContext* _context;
 }
 
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
@@ -37,7 +36,7 @@
 @property (nonatomic, retain) NSString *url;
 
 - (id)initWithImage:(UIImage *)image;
-- (id)initWithUrl:(NSString*)url inContext:(NSManagedObjectContext*)context;
+- (id)initWithUrl:(NSString*)url;
 - (IBAction)saveImage:(UIButton *)sender;
 - (IBAction)dismiss:(UIButton *)sender;
 

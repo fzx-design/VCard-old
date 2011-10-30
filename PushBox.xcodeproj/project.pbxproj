@@ -132,7 +132,6 @@
 		9BC6E652144A9B2400B28506 /* CCUserInfoCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BC6E650144A9B2400B28506 /* CCUserInfoCardViewController.xib */; };
 		9BC6FA1214572A2D001493D6 /* CommentReviewPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC6FA1014572A2D001493D6 /* CommentReviewPopoverController.m */; };
 		9BC6FA1314572A2D001493D6 /* CommentReviewPopoverController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BC6FA1114572A2D001493D6 /* CommentReviewPopoverController.xib */; };
-		9BC6FA1614572AFE001493D6 /* weibopop_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BC6FA1514572AFE001493D6 /* weibopop_bg.png */; };
 		9BF36CF614592DDC00A60A0F /* options_icon_news.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF36CF414592DDB00A60A0F /* options_icon_news.png */; };
 		9BF36CF714592DDC00A60A0F /* options_icon_timer.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF36CF514592DDB00A60A0F /* options_icon_timer.png */; };
 		9BF36CFA14592F6900A60A0F /* options_icon_about.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF36CF914592F6900A60A0F /* options_icon_about.png */; };
@@ -261,6 +260,8 @@
 		FE72B4E6145084D500C3EE5B /* smartcard.js in Sources */ = {isa = PBXBuildFile; fileRef = FE72B4E5145084D500C3EE5B /* smartcard.js */; };
 		FE72B4F51450AE9A00C3EE5B /* sc_image_default 2.png in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4F41450AE9A00C3EE5B /* sc_image_default 2.png */; };
 		FE777CC814568C3A00849B5B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE777CC714568C3A00849B5B /* MediaPlayer.framework */; };
+		FE7ADDC5145D554F00C403DF /* weibopop_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FE7ADDC3145D554F00C403DF /* weibopop_bg.png */; };
+		FE7ADDC6145D554F00C403DF /* weibopop_repost_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FE7ADDC4145D554F00C403DF /* weibopop_repost_bg.png */; };
 		FE8E1753145433A5004F6A7C /* InnerBroswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE8E1751145433A5004F6A7C /* InnerBroswerViewController.m */; };
 		FE8E1754145433A5004F6A7C /* InnerBroswerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE8E1752145433A5004F6A7C /* InnerBroswerViewController.xib */; };
 		FE8E175D14544255004F6A7C /* webview_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = FE8E175A14544255004F6A7C /* webview_bottom.png */; };
@@ -411,7 +412,6 @@
 		9BC6FA0F14572A2D001493D6 /* CommentReviewPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentReviewPopoverController.h; sourceTree = "<group>"; };
 		9BC6FA1014572A2D001493D6 /* CommentReviewPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentReviewPopoverController.m; sourceTree = "<group>"; };
 		9BC6FA1114572A2D001493D6 /* CommentReviewPopoverController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentReviewPopoverController.xib; sourceTree = "<group>"; };
-		9BC6FA1514572AFE001493D6 /* weibopop_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibopop_bg.png; sourceTree = "<group>"; };
 		9BE01AE814504B8B00450EE2 /* CardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTableViewCell.h; sourceTree = "<group>"; };
 		9BE01AE914504B8B00450EE2 /* CardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardTableViewCell.m; sourceTree = "<group>"; };
 		9BF36CF414592DDB00A60A0F /* options_icon_news.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = options_icon_news.png; sourceTree = "<group>"; };
@@ -610,6 +610,8 @@
 		FE72B4E5145084D500C3EE5B /* smartcard.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = smartcard.js; sourceTree = "<group>"; };
 		FE72B4F41450AE9A00C3EE5B /* sc_image_default 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sc_image_default 2.png"; sourceTree = "<group>"; };
 		FE777CC714568C3A00849B5B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		FE7ADDC3145D554F00C403DF /* weibopop_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibopop_bg.png; sourceTree = "<group>"; };
+		FE7ADDC4145D554F00C403DF /* weibopop_repost_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibopop_repost_bg.png; sourceTree = "<group>"; };
 		FE8E1750145433A5004F6A7C /* InnerBroswerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InnerBroswerViewController.h; sourceTree = "<group>"; };
 		FE8E1751145433A5004F6A7C /* InnerBroswerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InnerBroswerViewController.m; sourceTree = "<group>"; };
 		FE8E1752145433A5004F6A7C /* InnerBroswerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InnerBroswerViewController.xib; sourceTree = "<group>"; };
@@ -857,6 +859,8 @@
 				CB9E33D213E9CBE900AAE64C /* card_hole_bg.png */,
 				206902D9144AD44D00BA9EC3 /* head_cover_card_light.png */,
 				20F893C01452BE7100AE44AA /* news_bg.png */,
+				FE7ADDC3145D554F00C403DF /* weibopop_bg.png */,
+				FE7ADDC4145D554F00C403DF /* weibopop_repost_bg.png */,
 				20F893C11452BE7100AE44AA /* news_button_close.png */,
 				206902E7144B29AA00BA9EC3 /* switch_grey_off.png */,
 				206902E8144B29AA00BA9EC3 /* switch_grey_on.png */,
@@ -951,7 +955,6 @@
 		CBBA01EE13E451BD00641923 /* usercard */ = {
 			isa = PBXGroup;
 			children = (
-				9BC6FA1514572AFE001493D6 /* weibopop_bg.png */,
 				9B1128DF14510978001CE64E /* button_sendmsg_grey.png */,
 				9B1128E014510978001CE64E /* card_cover_bottom.png */,
 				9B1128E114510978001CE64E /* card_cover_top.png */,
@@ -1517,11 +1520,12 @@
 				FEC6D1DB14555F8B00576EF3 /* vc_noti_sound.wav in Resources */,
 				FEB5EA521455CF0500453B09 /* gif_icon.png in Resources */,
 				9BC6FA1314572A2D001493D6 /* CommentReviewPopoverController.xib in Resources */,
-				9BC6FA1614572AFE001493D6 /* weibopop_bg.png in Resources */,
 				9BF36CF614592DDC00A60A0F /* options_icon_news.png in Resources */,
 				9BF36CF714592DDC00A60A0F /* options_icon_timer.png in Resources */,
 				9BF36CFA14592F6900A60A0F /* options_icon_about.png in Resources */,
 				9BF36CFC1459359300A60A0F /* options_icon_legal.png in Resources */,
+				FE7ADDC5145D554F00C403DF /* weibopop_bg.png in Resources */,
+				FE7ADDC6145D554F00C403DF /* weibopop_repost_bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
