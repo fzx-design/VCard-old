@@ -221,8 +221,9 @@
     
     
     self.bottomStateView.alpha = 0.0;
-    _commandCenterFlag = NO;
-    
+	self.notificationView.hidden = YES;
+	_commandCenterFlag = NO;
+	
     if ([WeiboClient authorized]) {
         self.pushBoxHDImageView.alpha = 0.0;
         self.currentUser = [User userWithID:[WeiboClient currentUserID] inManagedObjectContext:self.managedObjectContext];
@@ -440,24 +441,26 @@
 
 - (void)showNotificationView:(id)sender
 {
-    NSDictionary *dict = [sender userInfo];
-    
-    if ([self needUpdateNotiViewWithUserInfo:dict]) {
-        CCUserInfoCardViewController *userCardVC = self.dockViewController.ccUserInfoCardViewController;
-        userCardVC.friendsCountLabel.text =  self.currentUser.friendsCount;
-        userCardVC.followersCountLabel.text = self.currentUser.followersCount;
-        
-        userCardVC.theNewFollowersCountLabel.text = self.notiNewFollowerLabel.text;
-        
-        CCCommentsTableViewController *commentVC = self.dockViewController.ccCommentTableViewController;
-        commentVC.theNewCommentCountLabel.text = self.notiNewCommentLabel.text;
-        commentVC.theNewMentionsCountLabel.text = self.notiNewAtLabel.text;
-        
-        BOOL enabled = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeyNotiPopoverEnabled];
-        if (self.notificationView.hidden && !_commandCenterFlag && enabled) {
-            self.notificationView.hidden = NO;
-            [self.notificationView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
-        }
+	NSDictionary *dict = [sender userInfo];
+	
+	if ([self needUpdateNotiViewWithUserInfo:dict]) {
+		_refreshFlag = YES;
+		
+		CCUserInfoCardViewController *userCardVC = self.dockViewController.ccUserInfoCardViewController;
+		userCardVC.friendsCountLabel.text =  self.currentUser.friendsCount;
+		userCardVC.followersCountLabel.text = self.currentUser.followersCount;
+		
+		userCardVC.theNewFollowersCountLabel.text = self.notiNewFollowerLabel.text;
+		
+		CCCommentsTableViewController *commentVC = self.dockViewController.ccCommentTableViewController;
+		commentVC.theNewCommentCountLabel.text = self.notiNewCommentLabel.text;
+		commentVC.theNewMentionsCountLabel.text = self.notiNewAtLabel.text;
+		
+		BOOL enabled = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeyNotiPopoverEnabled];
+		if (self.notificationView.hidden && !_commandCenterFlag && enabled) {
+			self.notificationView.hidden = NO;
+			[self.notificationView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
+		}
         if ([[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeySoundEnabled]) {
             UIAudioAddition* audioAddition = [[UIAudioAddition alloc] init];
             [audioAddition playNotificationSound];
@@ -473,7 +476,14 @@
 
 - (IBAction)closeNotificationPop:(id)sender
 {
-    self.notificationView.hidden = YES;
+	[UIView animateWithDuration:0.3 animations:^(){
+		self.notificationView.alpha = 0.0;
+	} completion:^(BOOL finished){
+		if (finished) {
+			self.notificationView.hidden = YES;
+			self.notificationView.alpha = 1.0;
+		}
+	}];
 }
 
 - (void)modalCardViewPresentedNotification:(id)sender
@@ -840,12 +850,15 @@
 
 - (void)showCommandCenter
 {
-    _commandCenterFlag = YES;
-    self.notificationView.hidden = YES;
-    
-    [self.dockViewController.ccCommentTableViewController refresh];
-    preNewCommentCount = 0;
-    
+	_commandCenterFlag = YES;
+	preNewCommentCount = 0;
+	self.notificationView.hidden = YES;
+	
+	if (_refreshFlag) {
+		_refreshFlag = NO;
+		[self.dockViewController.ccCommentTableViewController refresh];
+	}
+	
     [self.dockViewController viewWillAppear:YES];
     if (self.cardTableViewController.dataSource != CardTableViewDataSourceFriendsTimeline) {
         [self hideBottomStateView];
