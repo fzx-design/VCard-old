@@ -126,6 +126,7 @@
 
 - (void)start
 {	
+	_refreshFlag = NO;
 	preNewCommentCount = 0;
 	preNewFollowerCount = 0;
 	preNewMentionCount = 0;
@@ -427,6 +428,8 @@
 	NSDictionary *dict = [sender userInfo];
 	
 	if ([self needUpdateNotiViewWithUserInfo:dict]) {
+		_refreshFlag = YES;
+		
 		CCUserInfoCardViewController *userCardVC = self.dockViewController.ccUserInfoCardViewController;
 		userCardVC.friendsCountLabel.text =  self.currentUser.friendsCount;
 		userCardVC.followersCountLabel.text = self.currentUser.followersCount;
@@ -825,10 +828,13 @@
 - (void)showCommandCenter
 {
 	_commandCenterFlag = YES;
+	preNewCommentCount = 0;
 	self.notificationView.hidden = YES;
 	
-	[self.dockViewController.ccCommentTableViewController refresh];
-	preNewCommentCount = 0;
+	if (_refreshFlag) {
+		_refreshFlag = NO;
+		[self.dockViewController.ccCommentTableViewController refresh];
+	}
 	
     [self.dockViewController viewWillAppear:YES];
     if (self.cardTableViewController.dataSource != CardTableViewDataSourceFriendsTimeline) {
