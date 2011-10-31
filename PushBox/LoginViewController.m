@@ -17,6 +17,7 @@
 @synthesize usernameTextField = _usernameTextField;
 @synthesize passwordTextField = _passwordTextField;
 @synthesize autoSaveButton = _autoSaveButton;
+@synthesize confirmButton = _confirmButton;
 @synthesize providerLabel = _providerLabel;
 @synthesize delegate = _delegate;
 @synthesize loadingIndicator = _loadingIndicator;
@@ -39,6 +40,7 @@
 	[_autoSaveButton release];
     [_providerLabel release];
 	[_loadingIndicator release];
+    [_confirmButton release];
     _delegate = nil;
     [super dealloc];
 }
@@ -49,10 +51,10 @@
     
     self.providerLabel.text = NSLocalizedString(@"新浪微博", nil);
 	BOOL autoSave = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeyAutoSave];
+    self.confirmButton.enabled = YES;
 	self.autoSaveButton.selected = autoSave;
 	self.usernameTextField.text = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultName];
     [self.usernameTextField becomeFirstResponder];
-	self.loadingIndicator = nil;
 }
 
 - (void)viewDidUnload
@@ -61,10 +63,13 @@
     self.usernameTextField = nil;
     self.passwordTextField = nil;
     self.autoSaveButton = nil;
+    self.confirmButton = nil;
 	self.providerLabel = nil;
+	self.loadingIndicator = nil;
 }
 
 - (IBAction)login:(id)sender {
+    self.confirmButton.enabled = NO;
     NSString *username = self.usernameTextField.text;
     NSString *password = self.passwordTextField.text;
 	[[NSUserDefaults standardUserDefaults] setObject:username forKey:kUserDefaultName];
@@ -75,6 +80,7 @@
 	[self.loadingIndicator startAnimating];
 	
     [client setCompletionBlock:^(WeiboClient *client) {
+        self.confirmButton.enabled = YES;
 		self.loadingIndicator.hidden = YES;
 		[self.loadingIndicator stopAnimating];
         if (client.hasError || ![WeiboClient authorized]) {

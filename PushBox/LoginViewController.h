@@ -20,6 +20,7 @@
     UILabel *_providerLabel;
 	
 	UIButton *_autoSaveButton;
+    UIButton *_confirmButton;
 	
 	UIActivityIndicatorView *_loadingIndicator;
 
@@ -30,6 +31,7 @@
 @property(nonatomic, retain) IBOutlet UITextField* passwordTextField;
 @property(nonatomic, retain) IBOutlet UILabel* providerLabel;
 @property(nonatomic, retain) IBOutlet UIButton* autoSaveButton;
+@property(nonatomic, retain) IBOutlet UIButton* confirmButton;
 @property(nonatomic, retain) IBOutlet UIActivityIndicatorView* loadingIndicator;
 @property(nonatomic, assign) id<LoginViewControllerDelegate> delegate;
 
