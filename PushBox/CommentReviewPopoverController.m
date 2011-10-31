@@ -199,11 +199,11 @@ static CommentReviewPopoverController* sharedCommentReviewPopoverController;
 	[self prepare];
 	[self.view addSubview:self.statusView];
 	
-	UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClicked:)];
-	tapGesture.numberOfTapsRequired = 1;
-	tapGesture.numberOfTouchesRequired = 1;
-	[self.tweetImageView addGestureRecognizer:tapGesture];
-	[tapGesture release];
+//	UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClicked:)];
+//	tapGesture.numberOfTapsRequired = 1;
+//	tapGesture.numberOfTouchesRequired = 1;
+//	[self.tweetImageView addGestureRecognizer:tapGesture];
+//	[tapGesture release];
 	
 	self.statusView.layer.anchorPoint = CGPointMake(0, 0.5);
 	[self.statusView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
