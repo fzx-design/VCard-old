@@ -79,7 +79,10 @@
 {
 //	[self clearData];
 	_nextPage = 1;
-    [self loadMoreData];
+//    [self loadMoreData];
+	
+	[self performSelector:@selector(loadMoreData) withObject:nil afterDelay:0.05];
+	
     WeiboClient *client = [WeiboClient client];
     [client resetUnreadCount:ResetUnreadCountTypeComments];
 }
@@ -113,7 +116,7 @@
             for (NSDictionary *dict in dictArray) {
                 [Comment insertComment:dict inManagedObjectContext:self.managedObjectContext];
             }
-			[self.managedObjectContext processPendingChanges];
+//			[self.managedObjectContext processPendingChanges];
             _nextPage++;
 
         } else {

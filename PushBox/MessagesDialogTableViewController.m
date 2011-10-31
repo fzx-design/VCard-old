@@ -116,18 +116,6 @@
     
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    CGRect frame = CGRectMake(0, 0, 603, 10);
-    UITextView *textView = [[UITextView alloc] initWithFrame:frame];
-    textView.text = DEFAULT_TEST_TEXT;
-    frame.size = textView.contentSize;
-    
-    [textView release];
-    
-    return frame.size.height + 83;
-}
-
 - (NSString *)customCellClassName
 {
     return @"MessagesDialogTableViewCell";

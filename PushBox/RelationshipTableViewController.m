@@ -78,7 +78,8 @@
     [self hideLoadMoreDataButton];
 //    [self clearData];
 	_nextCursor = -1;
-    [self loadMoreData];
+	[self performSelector:@selector(loadMoreData) withObject:nil afterDelay:0.01];
+//    [self loadMoreData];
 }
 
 - (void)loadMoreData
