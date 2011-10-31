@@ -154,6 +154,21 @@
     }];
     
     [client getUser:[WeiboClient currentUserID]];
+    
+    int cursor = -1;
+    // getFriends
+    WeiboClient *client2 = [WeiboClient client];
+    [client2 setCompletionBlock:^(WeiboClient *client2) {
+        if (!client2.hasError) {
+            NSArray *dictArray = [client2.responseJSONObject objectForKey:@"users"];
+            for (NSDictionary *dict in dictArray) {
+                [User insertUser:dict inManagedObjectContext:self.managedObjectContext];
+            }
+        }
+    }];
+    
+    [client2 getFriendsOfUser:self.currentUser.userID cursor:cursor count:200];
+    
 }
 
 - (void)viewDidLoad
@@ -163,9 +178,9 @@
     [self setDefaultBackgroundImage:NO];
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	[center addObserver:self selector:@selector(backgroundChangedNotification:) 
-				   name:kNotificationNameBackgroundChanged 
-				 object:nil];
+    [center addObserver:self selector:@selector(backgroundChangedNotification:) 
+                   name:kNotificationNameBackgroundChanged 
+                 object:nil];
     
     [center addObserver:self
                selector:@selector(modalCardViewPresentedNotification:)
@@ -186,30 +201,30 @@
                selector:@selector(userSignoutNotification:) 
                    name:kNotificationNameUserSignedOut 
                  object:nil];
-	[center addObserver:self
-			   selector:@selector(moveCardIntoView) 
-				   name:kNotificationNameReMoveCardsIntoView 
-				 object:nil];
-	[center addObserver:self
-			   selector:@selector(configureUsablityAfterDeleted) 
-				   name:kNotificationNameCardDeleted 
-				 object:nil];
-	[center addObserver:self
-			   selector:@selector(showNotificationView:) 
-				   name:kNotificationNameNewNotification 
-				 object:nil];
-	[center addObserver:self 
-			   selector:@selector(showMentionsNotification:) 
-				   name:kNotificationNameShouldShowMentions 
-				 object:nil];
-	
+    [center addObserver:self
+               selector:@selector(moveCardIntoView) 
+                   name:kNotificationNameReMoveCardsIntoView 
+                 object:nil];
+    [center addObserver:self
+               selector:@selector(configureUsablityAfterDeleted) 
+                   name:kNotificationNameCardDeleted 
+                 object:nil];
+    [center addObserver:self
+               selector:@selector(showNotificationView:) 
+                   name:kNotificationNameNewNotification 
+                 object:nil];
+    [center addObserver:self 
+               selector:@selector(showMentionsNotification:) 
+                   name:kNotificationNameShouldShowMentions 
+                 object:nil];
+    
     
     self.bottomStateView.alpha = 0.0;
-	_commandCenterFlag = NO;
-	
+    _commandCenterFlag = NO;
+    
     if ([WeiboClient authorized]) {
         self.pushBoxHDImageView.alpha = 0.0;
-		self.currentUser = [User userWithID:[WeiboClient currentUserID] inManagedObjectContext:self.managedObjectContext];
+        self.currentUser = [User userWithID:[WeiboClient currentUserID] inManagedObjectContext:self.managedObjectContext];
         [self start];
     }
     else {
@@ -219,17 +234,17 @@
 
 - (void)userSignoutNotification:(id)sender
 {
-	preNewCommentCount = 0;
-	preNewFollowerCount = 0;
-	preNewMentionCount = 0;
-	
+    preNewCommentCount = 0;
+    preNewFollowerCount = 0;
+    preNewMentionCount = 0;
+    
     [WeiboClient signout];
     [self hideDockView];
     [self hideCardTableView];
-	self.bottomStateFrameView.hidden = YES;
-	[self hideBottomStateView];
-	self.notificationView.hidden = YES;
-	[self setDefaultBackgroundImage:YES];
+    self.bottomStateFrameView.hidden = YES;
+    [self hideBottomStateView];
+    self.notificationView.hidden = YES;
+    [self setDefaultBackgroundImage:YES];
     self.currentUser = nil;
     [User deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
     [self performSelector:@selector(showLoginView) withObject:nil afterDelay:1.0];
@@ -237,37 +252,37 @@
 
 - (void)configureUsablityAfterDeleted
 {
-	[self.cardTableViewController configureUsability];
+    [self.cardTableViewController configureUsability];
 }
 
 - (void)moveCardIntoView
 {
-	CGRect frame = self.cardTableViewController.tableView.frame;
-	frame.origin.x += 782;
-	self.cardTableViewController.tableView.frame = frame;
-	
-	self.cardTableViewController.tableView.alpha = 1.0;
-	self.cardTableViewController.rootShadowLeft.alpha = 1.0;
-	
+    CGRect frame = self.cardTableViewController.tableView.frame;
+    frame.origin.x += 782;
+    self.cardTableViewController.tableView.frame = frame;
+    
+    self.cardTableViewController.tableView.alpha = 1.0;
+    self.cardTableViewController.rootShadowLeft.alpha = 1.0;
+    
     [UIView animateWithDuration:1.0 animations:^{
-		
-		CGRect frame = self.cardTableViewController.tableView.frame;
-		frame.origin.x -= 782;
-		self.cardTableViewController.tableView.frame = frame;
+        
+        CGRect frame = self.cardTableViewController.tableView.frame;
+        frame.origin.x -= 782;
+        self.cardTableViewController.tableView.frame = frame;
     }];
 }
 
 - (void)showBottomStateView
 {
-	if (self.bottomStateInvisibleView.image == nil) {
-		self.bottomStateInvisibleView.image = _tmpImage;
-	}
-	self.bottomStateView.alpha = 1.0;
-	[self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimation] forKey:@"animation"];
-	[self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
-	
-	[self.bottomStateFrameView bringSubviewToFront:self.bottomStateView];
-	self.bottomBackButton.enabled = YES;
+    if (self.bottomStateInvisibleView.image == nil) {
+        self.bottomStateInvisibleView.image = _tmpImage;
+    }
+    self.bottomStateView.alpha = 1.0;
+    [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimation] forKey:@"animation"];
+    [self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
+    
+    [self.bottomStateFrameView bringSubviewToFront:self.bottomStateView];
+    self.bottomBackButton.enabled = YES;
 }
 
 - (void)showBottomStateViewForSearch
@@ -291,7 +306,7 @@
 {
     self.dockViewController.searchButton.selected = NO;
     [self.bottomStateTextField resignFirstResponder];
-
+    
     [UIView animateWithDuration:0.28 animations:^(void) {
         self.bottomStateView.alpha = 0.0;
         CGRect frame = self.bottomStateView.frame;
@@ -307,12 +322,12 @@
 
 - (void)hideBottomStateView
 {
-	[self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimation] forKey:@"animation"];
-	[self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
-
-	self.bottomStateView.alpha = 0.0;
-	self.bottomBackButton.enabled = NO;
-
+    [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimation] forKey:@"animation"];
+    [self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
+    
+    self.bottomStateView.alpha = 0.0;
+    self.bottomBackButton.enabled = NO;
+    
 }
 
 - (void)shouldShowUserTimelineNotification:(id)sender
@@ -340,26 +355,26 @@
 {
     self.cardTableViewController.dataSource = CardTableViewDataSourceUserTimeline;
     self.cardTableViewController.user = user;
-	
-	self.bottomStateLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@的微博", nil), user.screenName];
-	self.dockViewController.showFavoritesButton.selected = NO;
-	[self showBottomStateView];
-	
+    
+    self.bottomStateLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@的微博", nil), user.screenName];
+    self.dockViewController.showFavoritesButton.selected = NO;
+    [self showBottomStateView];
+    
     [self.cardTableViewController pushCardWithCompletion:^{
-		[self moveCardIntoView];
+        [self moveCardIntoView];
     }];
 }
 
 - (void)showSearchTimeline:(NSString *)searchString
 {
     self.cardTableViewController.dataSource = CardTableViewDataSourceSearchStatues;
-	
-	NSString* string = [[NSString alloc] initWithFormat:@"包含%@的微博", searchString];
-	self.bottomStateLabel.text = NSLocalizedString(string, nil); 
-	self.bottomStateTextField.text = @"";
-	self.bottomStateTextField.hidden = YES;
-	[self showBottomStateView];
-	
+    
+    NSString* string = [[NSString alloc] initWithFormat:@"包含%@的微博", searchString];
+    self.bottomStateLabel.text = NSLocalizedString(string, nil); 
+    self.bottomStateTextField.text = @"";
+    self.bottomStateTextField.hidden = YES;
+    [self showBottomStateView];
+    
     [self.cardTableViewController pushCardWithCompletion:^{
         [self moveCardIntoView];
     }];
@@ -368,128 +383,128 @@
 - (void)showFavorites
 {
     self.cardTableViewController.dataSource = CardTableViewDataSourceFavorites;
-	self.bottomStateLabel.text = NSLocalizedString(@"收藏", nil);
-	[self showBottomStateView];
-	
+    self.bottomStateLabel.text = NSLocalizedString(@"收藏", nil);
+    [self showBottomStateView];
+    
     [self.cardTableViewController pushCardWithCompletion:^{
         self.dockViewController.showFavoritesButton.userInteractionEnabled = YES;
-		[self moveCardIntoView];
+        [self moveCardIntoView];
     }];
 }
 
 - (void)showMentions
 {	
-	self.cardTableViewController.dataSource = CardTableViewDataSourceMentions;
-	self.bottomStateLabel.text = NSLocalizedString(@"@我的微博", nil);
-	[self showBottomStateView];
-	
-	[self.cardTableViewController pushCardWithCompletion:^{
-		WeiboClient *client = [WeiboClient client];
-		[client resetUnreadCount:ResetUnreadCountTypeReferMe];
-	}];
+    self.cardTableViewController.dataSource = CardTableViewDataSourceMentions;
+    self.bottomStateLabel.text = NSLocalizedString(@"@我的微博", nil);
+    [self showBottomStateView];
+    
+    [self.cardTableViewController pushCardWithCompletion:^{
+        WeiboClient *client = [WeiboClient client];
+        [client resetUnreadCount:ResetUnreadCountTypeReferMe];
+    }];
 }
 
 - (void)showMentionsNotification:(id)sender
 {
-	if (self.dockViewController.commandCenterButton.selected) {
+    if (self.dockViewController.commandCenterButton.selected) {
         [self hideCommandCenter];
     }
-	if (self.cardTableViewController.dataSource != CardTableViewDataSourceMentions) {
-		[self performSelector:@selector(showMentions) withObject:[sender object] afterDelay:1.0];
-	}
+    if (self.cardTableViewController.dataSource != CardTableViewDataSourceMentions) {
+        [self performSelector:@selector(showMentions) withObject:[sender object] afterDelay:1.0];
+    }
 }
 
 
 - (BOOL)needUpdateNotiViewWithUserInfo:(NSDictionary*)dict
 {
-	BOOL result = NO;
-	if (preNewCommentCount < [[dict objectForKey:@"comments"] intValue]) {
-		preNewCommentCount = [[dict objectForKey:@"comments"] intValue];
-		self.notiNewCommentLabel.text = [NSString stringWithFormat:@"%d", preNewCommentCount];
-		result = YES;
-	}
-	if (preNewFollowerCount < [[dict objectForKey:@"followers"] intValue]) {
-		preNewFollowerCount = [[dict objectForKey:@"followers"] intValue];
-		self.notiNewFollowerLabel.text = [NSString stringWithFormat:@"%d", preNewFollowerCount];
-		result = YES;
-	}
-	if (preNewMentionCount < [[dict objectForKey:@"mentions"] intValue]) {
-		preNewMentionCount = [[dict objectForKey:@"mentions"] intValue];
-		self.notiNewAtLabel.text = [NSString stringWithFormat:@"%d", preNewMentionCount];
-		result = YES;
-	}
-	
-	return result;
+    BOOL result = NO;
+    if (preNewCommentCount < [[dict objectForKey:@"comments"] intValue]) {
+        preNewCommentCount = [[dict objectForKey:@"comments"] intValue];
+        self.notiNewCommentLabel.text = [NSString stringWithFormat:@"%d", preNewCommentCount];
+        result = YES;
+    }
+    if (preNewFollowerCount < [[dict objectForKey:@"followers"] intValue]) {
+        preNewFollowerCount = [[dict objectForKey:@"followers"] intValue];
+        self.notiNewFollowerLabel.text = [NSString stringWithFormat:@"%d", preNewFollowerCount];
+        result = YES;
+    }
+    if (preNewMentionCount < [[dict objectForKey:@"mentions"] intValue]) {
+        preNewMentionCount = [[dict objectForKey:@"mentions"] intValue];
+        self.notiNewAtLabel.text = [NSString stringWithFormat:@"%d", preNewMentionCount];
+        result = YES;
+    }
+    
+    return result;
 }
 
 - (void)showNotificationView:(id)sender
 {
-	NSDictionary *dict = [sender userInfo];
-	
-	if ([self needUpdateNotiViewWithUserInfo:dict]) {
-		CCUserInfoCardViewController *userCardVC = self.dockViewController.ccUserInfoCardViewController;
-		userCardVC.friendsCountLabel.text =  self.currentUser.friendsCount;
-		userCardVC.followersCountLabel.text = self.currentUser.followersCount;
-		
-		userCardVC.theNewFollowersCountLabel.text = self.notiNewFollowerLabel.text;
-		
-		CCCommentsTableViewController *commentVC = self.dockViewController.ccCommentTableViewController;
-		commentVC.theNewCommentCountLabel.text = self.notiNewCommentLabel.text;
-		commentVC.theNewMentionsCountLabel.text = self.notiNewAtLabel.text;
-		
-		BOOL enabled = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeyNotiPopoverEnabled];
-		if (self.notificationView.hidden && !_commandCenterFlag && enabled) {
-			self.notificationView.hidden = NO;
-			[self.notificationView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
-		}
+    NSDictionary *dict = [sender userInfo];
+    
+    if ([self needUpdateNotiViewWithUserInfo:dict]) {
+        CCUserInfoCardViewController *userCardVC = self.dockViewController.ccUserInfoCardViewController;
+        userCardVC.friendsCountLabel.text =  self.currentUser.friendsCount;
+        userCardVC.followersCountLabel.text = self.currentUser.followersCount;
+        
+        userCardVC.theNewFollowersCountLabel.text = self.notiNewFollowerLabel.text;
+        
+        CCCommentsTableViewController *commentVC = self.dockViewController.ccCommentTableViewController;
+        commentVC.theNewCommentCountLabel.text = self.notiNewCommentLabel.text;
+        commentVC.theNewMentionsCountLabel.text = self.notiNewAtLabel.text;
+        
+        BOOL enabled = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeyNotiPopoverEnabled];
+        if (self.notificationView.hidden && !_commandCenterFlag && enabled) {
+            self.notificationView.hidden = NO;
+            [self.notificationView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
+        }
         if ([[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeySoundEnabled]) {
-			UIAudioAddition* audioAddition = [[UIAudioAddition alloc] init];
-			[audioAddition playNotificationSound];
-			[audioAddition release];
-		}
-	}
+            UIAudioAddition* audioAddition = [[UIAudioAddition alloc] init];
+            [audioAddition playNotificationSound];
+            [audioAddition release];
+        }
+    }
 }
 
 - (IBAction)refreshAndShowCommentCenter:(id)sender
 {
-	[self showCommandCenter];
+    [self showCommandCenter];
 }
 
 - (IBAction)closeNotificationPop:(id)sender
 {
-	self.notificationView.hidden = YES;
+    self.notificationView.hidden = YES;
 }
 
 - (void)modalCardViewPresentedNotification:(id)sender
 {
     if (!_holeImageView) {
-		UIImage *image = [UIImage imageNamed:@"card_hole_bg"];
-		_holeImageView = [[UIImageView alloc] initWithImage:image];
-		_holeImageView.frame = CGRectMake(0, 0, 1024, 768);
-		_holeImageView.userInteractionEnabled = NO;
-		_holeImageView.alpha = 0.0;
-		[self.view addSubview:_holeImageView];
-	}
+        UIImage *image = [UIImage imageNamed:@"card_hole_bg"];
+        _holeImageView = [[UIImageView alloc] initWithImage:image];
+        _holeImageView.frame = CGRectMake(0, 0, 1024, 768);
+        _holeImageView.userInteractionEnabled = NO;
+        _holeImageView.alpha = 0.0;
+        [self.view addSubview:_holeImageView];
+    }
     self.dockViewController.view.userInteractionEnabled = NO;
-	self.bottomStateView.userInteractionEnabled = NO;
-	self.cardTableViewController.tableView.scrollEnabled = NO;
+    self.bottomStateView.userInteractionEnabled = NO;
+    self.cardTableViewController.tableView.scrollEnabled = NO;
     self.cardTableViewController.swipeEnabled = NO;
-	[self.cardTableViewController enableDismissRegion];
-	[UIView animateWithDuration:0.5 animations:^{
-		_holeImageView.alpha = 1.0;
-	}];
+    [self.cardTableViewController enableDismissRegion];
+    [UIView animateWithDuration:0.5 animations:^{
+        _holeImageView.alpha = 1.0;
+    }];
 }
 
 - (void)modalCardViewDismissedNotification:(id)sender
 {
     [UIView animateWithDuration:0.5 animations:^{
-		_holeImageView.alpha = 0.0;
-	}];
-	self.bottomStateView.userInteractionEnabled = YES;
+        _holeImageView.alpha = 0.0;
+    }];
+    self.bottomStateView.userInteractionEnabled = YES;
     self.dockViewController.view.userInteractionEnabled = YES;
-	self.cardTableViewController.tableView.scrollEnabled = YES;
-	self.cardTableViewController.swipeEnabled = YES;
-	[self.cardTableViewController disableDismissRegion];
+    self.cardTableViewController.tableView.scrollEnabled = YES;
+    self.cardTableViewController.swipeEnabled = YES;
+    [self.cardTableViewController disableDismissRegion];
 }
 
 - (void)cardTableViewController:(CardTableViewController *)vc didScrollToRow:(int)row withNumberOfRows:(int)numberOfRows
@@ -508,72 +523,72 @@
 
 - (void)setDefaultBackgroundImage:(BOOL)animated
 {
-	NSString *fileName = [BackgroundManViewController backgroundImageFilePathFromEnum:PBBackgroundImageDefault];
-	NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"png"];
-	UIImage *img = [UIImage imageWithContentsOfFile:path];
-	
-	if (animated) {
+    NSString *fileName = [BackgroundManViewController backgroundImageFilePathFromEnum:PBBackgroundImageDefault];
+    NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"png"];
+    UIImage *img = [UIImage imageWithContentsOfFile:path];
+    
+    if (animated) {
         CATransition *transition = [CATransition animation];
         transition.duration = 1.0;
         transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
         transition.type = kCATransitionFade;
         [self.backgroundImageView.layer addAnimation:transition forKey:nil];
     }
-	
-	self.backgroundImageView.image = img;
+    
+    self.backgroundImageView.image = img;
 }
 
 - (void)updateBackgroundImageAnimated:(BOOL)animated
 {
     int enumValue = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeyBackground];
     
-	NSString *fileName = [BackgroundManViewController backgroundImageFilePathFromEnum:enumValue];
-	NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"png"];
-	UIImage *img = [UIImage imageWithContentsOfFile:path];
-	
-	CGRect myImageRect = CGRectMake(0.0, 642.0, img.size.width, 46);
+    NSString *fileName = [BackgroundManViewController backgroundImageFilePathFromEnum:enumValue];
+    NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"png"];
+    UIImage *img = [UIImage imageWithContentsOfFile:path];
+    
+    CGRect myImageRect = CGRectMake(0.0, 642.0, img.size.width, 46);
     UIImage *originalImage = img;	
     CGImageRef imageRef = originalImage.CGImage;
     CGImageRef subImageRef = CGImageCreateWithImageInRect(imageRef, myImageRect);
-	
+    
     CGSize size = CGSizeMake(1024, 46);
-	
+    
     UIGraphicsBeginImageContext(size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextDrawImage(context, myImageRect, subImageRef);
     UIImage* cutImage = [UIImage imageWithCGImage:subImageRef];
     UIGraphicsEndImageContext();
-	
-	if (_tmpImage == nil) {
-		_tmpImage = [cutImage retain];
-	} else {
-		self.bottomStateInvisibleView.image = cutImage;
-	}
-	
-	if (animated) {
+    
+    if (_tmpImage == nil) {
+        _tmpImage = [cutImage retain];
+    } else {
+        self.bottomStateInvisibleView.image = cutImage;
+    }
+    
+    if (animated) {
         CATransition *transition = [CATransition animation];
         transition.duration = 1.0;
         transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
         transition.type = kCATransitionFade;
         [self.backgroundImageView.layer addAnimation:transition forKey:nil];
-		[self.bottomStateInvisibleView.layer addAnimation:transition forKey:nil];
+        [self.bottomStateInvisibleView.layer addAnimation:transition forKey:nil];
     }
     
-	self.backgroundImageView.image = img;
-
+    self.backgroundImageView.image = img;
+    
 }
 
 - (void)backgroundChangedNotification:(id)sender
 {
-	[self updateBackgroundImageAnimated:YES];
+    [self updateBackgroundImageAnimated:YES];
 }
 
 - (void)refresh
 {
-	if (self.dockViewController.refreshButton.enabled) {
-		[self.dockViewController showLoadingView];
-		[self.cardTableViewController refresh];
-	}
+    if (self.dockViewController.refreshButton.enabled) {
+        [self.dockViewController showLoadingView];
+        [self.cardTableViewController refresh];
+    }
 }
 
 - (void)post
@@ -585,26 +600,26 @@
 
 - (void)setPlayTimerEnabled:(BOOL)enabled
 {
-	if (enabled) {
-		int interval = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeySiidePlayTimeInterval];
-		_playTimer = [NSTimer scheduledTimerWithTimeInterval:interval 
+    if (enabled) {
+        int interval = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeySiidePlayTimeInterval];
+        _playTimer = [NSTimer scheduledTimerWithTimeInterval:interval 
                                                       target:self 
                                                     selector:@selector(timerFired:) 
                                                     userInfo:nil 
                                                      repeats:YES];
-		[_playTimer fire];
-		self.dockViewController.slider.highlighted = YES;
-	}
-	else {
-		[_playTimer invalidate];
-		self.dockViewController.slider.highlighted = NO;
-		_playTimer = nil;
-	}
+        [_playTimer fire];
+        self.dockViewController.slider.highlighted = YES;
+    }
+    else {
+        [_playTimer invalidate];
+        self.dockViewController.slider.highlighted = NO;
+        _playTimer = nil;
+    }
 }
 
 - (void)timerFired:(NSTimer *)timer
 {
-	[self.cardTableViewController showNextCard];
+    [self.cardTableViewController showNextCard];
 }
 
 - (void)play
@@ -620,9 +635,9 @@
 
 - (void)playCanceled:(UIButton *)sender
 {
-	[sender removeFromSuperview];
-	self.dockViewController.playButton.selected = NO;
-	[self setPlayTimerEnabled:NO];
+    [sender removeFromSuperview];
+    self.dockViewController.playButton.selected = NO;
+    [self setPlayTimerEnabled:NO];
 }
 
 - (void)sliderValueChanged:(UISlider *)slider
@@ -634,16 +649,16 @@
 - (void)showDockView
 {
     [self.view insertSubview:self.dockViewController.view belowSubview:self.bottomBackButton];
-	
-	CGRect frame = self.dockViewController.view.frame;
-	frame.origin.y += 80;
-	self.dockViewController.view.frame = frame;
-	
+    
+    CGRect frame = self.dockViewController.view.frame;
+    frame.origin.y += 80;
+    self.dockViewController.view.frame = frame;
+    
     [UIView animateWithDuration:1.0 animations:^{
-		CGRect frame = self.dockViewController.view.frame;
-		frame.origin.y -= 80;
-		self.dockViewController.view.frame = frame;
-		
+        CGRect frame = self.dockViewController.view.frame;
+        frame.origin.y -= 80;
+        self.dockViewController.view.frame = frame;
+        
         self.dockViewController.view.alpha = 1.0;
     }];
 }
@@ -668,9 +683,9 @@
 {
     [self.dockViewController.optionsPopoverController dismissPopoverAnimated:YES];
     [UIView animateWithDuration:1.0 animations:^{
-		CGRect frame = self.dockViewController.view.frame;
-		frame.origin.y += 80;
-		self.dockViewController.view.frame = frame;
+        CGRect frame = self.dockViewController.view.frame;
+        frame.origin.y += 80;
+        self.dockViewController.view.frame = frame;
         self.dockViewController.view.alpha = 0.0;
     } completion:^(BOOL finished) {
         if (finished) {
@@ -824,12 +839,12 @@
 
 - (void)showCommandCenter
 {
-	_commandCenterFlag = YES;
-	self.notificationView.hidden = YES;
-	
-	[self.dockViewController.ccCommentTableViewController refresh];
-	preNewCommentCount = 0;
-	
+    _commandCenterFlag = YES;
+    self.notificationView.hidden = YES;
+    
+    [self.dockViewController.ccCommentTableViewController refresh];
+    preNewCommentCount = 0;
+    
     [self.dockViewController viewWillAppear:YES];
     if (self.cardTableViewController.dataSource != CardTableViewDataSourceFriendsTimeline) {
         [self hideBottomStateView];
@@ -861,13 +876,13 @@
     self.dockViewController.slider.enabled = NO;
     self.dockViewController.refreshButton.enabled = NO;
     self.dockViewController.messagesCenterButton.enabled = NO;
-	[self.dockViewController.userCardNaviViewController.naviController popToRootViewControllerAnimated:NO];
-	[self.dockViewController.commentNaviViewController.naviController popToRootViewControllerAnimated:NO];
+    [self.dockViewController.userCardNaviViewController.naviController popToRootViewControllerAnimated:NO];
+    [self.dockViewController.commentNaviViewController.naviController popToRootViewControllerAnimated:NO];
 }
 
 - (void)hideCommandCenter
 {	
-	_commandCenterFlag = NO;
+    _commandCenterFlag = NO;
     if (self.cardTableViewController.dataSource != CardTableViewDataSourceFriendsTimeline) {
         [self showBottomStateView];
     }
@@ -905,8 +920,8 @@
 {
     [self.view addSubview:self.loginViewController.view];
     
-	[self.loginViewController.view.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
-	
+    [self.loginViewController.view.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
+    
     [UIView animateWithDuration:1.0 animations:^{
         self.pushBoxHDImageView.alpha = 1.0;
         self.loginViewController.view.alpha = 1.0;
@@ -944,30 +959,30 @@
         [self.view addSubview:button];
     }
     
-	//self.cardTableViewController.tableview.tableHeaderView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 1024)] autorelease];
-	
-	CGRect frame = self.cardTableViewController.view.frame;
-	frame.origin.x += 782;
-	self.cardTableViewController.view.frame = frame;
-	frame = self.cardTableViewController.rootShadowLeft.frame;
-	frame.origin.x -= 782;
-	self.cardTableViewController.rootShadowLeft.frame = frame;
-
-	self.cardTableViewController.view.alpha = 0.0;
-	self.cardTableViewController.rootShadowLeft.alpha = 0.0;
-	
+    //self.cardTableViewController.tableview.tableHeaderView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 1024)] autorelease];
+    
+    CGRect frame = self.cardTableViewController.view.frame;
+    frame.origin.x += 782;
+    self.cardTableViewController.view.frame = frame;
+    frame = self.cardTableViewController.rootShadowLeft.frame;
+    frame.origin.x -= 782;
+    self.cardTableViewController.rootShadowLeft.frame = frame;
+    
+    self.cardTableViewController.view.alpha = 0.0;
+    self.cardTableViewController.rootShadowLeft.alpha = 0.0;
+    
     [UIView animateWithDuration:1.0 animations:^{
-		
-		CGRect frame = self.cardTableViewController.view.frame;
-		frame.origin.x -= 782;
-		self.cardTableViewController.view.frame = frame;
-		frame = self.cardTableViewController.rootShadowLeft.frame;
-		frame.origin.x += 782;
-		self.cardTableViewController.rootShadowLeft.frame = frame;
-		
+        
+        CGRect frame = self.cardTableViewController.view.frame;
+        frame.origin.x -= 782;
+        self.cardTableViewController.view.frame = frame;
+        frame = self.cardTableViewController.rootShadowLeft.frame;
+        frame.origin.x += 782;
+        self.cardTableViewController.rootShadowLeft.frame = frame;
+        
         self.cardTableViewController.view.alpha = 1.0;
-		self.cardTableViewController.rootShadowLeft.alpha = 1.0;
-		
+        self.cardTableViewController.rootShadowLeft.alpha = 1.0;
+        
         button.alpha = 1.0;
     }];
 }
@@ -975,14 +990,14 @@
 - (void)helpButtonClicked:(UIButton *)button
 {
     [UIView animateWithDuration:1.0 animations:^{
-		button.alpha  = 0.0;
-	} completion:^(BOOL fin) {
-		if (fin) {
-			[button removeFromSuperview];
-			[[NSUserDefaults standardUserDefaults] setBool:NO forKey:kUserDefaultKeyFirstTime];
-			[[NSUserDefaults standardUserDefaults] synchronize];
-		}
-	}];
+        button.alpha  = 0.0;
+    } completion:^(BOOL fin) {
+        if (fin) {
+            [button removeFromSuperview];
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kUserDefaultKeyFirstTime];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    }];
 }
 
 - (void)hideCardTableView
@@ -1005,7 +1020,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
 - (DockViewController *)dockViewController
@@ -1099,7 +1114,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
-
+    
     self.cardTableViewController.searchString = textField.text;
     [self showSearchTimeline:textField.text];
     [self hideBottomStateViewForSearch];

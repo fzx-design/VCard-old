@@ -631,8 +631,12 @@ report_completion:
 - (void)getFriendsOfUser:(NSString *)userID cursor:(int)cursor count:(int)count
 {
     self.path = @"statuses/friends.json";
-    [self.params setObject:userID forKey:@"user_id"];
-    [self.params setObject:[NSString stringWithFormat:@"%d", cursor] forKey:@"cursor"];
+    if (userID) {
+        [self.params setObject:userID forKey:@"user_id"];
+    }
+    if (cursor) {
+        [self.params setObject:[NSString stringWithFormat:@"%d", cursor] forKey:@"cursor"];
+    }
     if (count) {
         [self.params setObject:[NSString stringWithFormat:@"%d", count] forKey:@"count"];
     }

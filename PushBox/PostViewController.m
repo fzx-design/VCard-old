@@ -30,6 +30,10 @@
 @synthesize rightImageView = _rightImageView;
 @synthesize pc = _pc;
 @synthesize targetStatus = _targetStatus;
+@synthesize atView = _atView;
+@synthesize atScreenNames = _atScreenNames;
+@synthesize atTableView = _atTableView;
+@synthesize atTextField = _atTextField;
 
 - (void)dealloc
 {
@@ -45,7 +49,9 @@
     [_textView release];
     [_rightView release];
     [_rightImageView release];
+    [_atView release];
     [_pc release];
+    [_atScreenNames release];
     [_targetStatus release];
 	[_postingCircleImageView release];
 	[_postingRoundImageView release];
@@ -64,6 +70,7 @@
     self.camaraButton = nil;
     self.textView = nil;
     self.rightView = nil;
+    self.atView = nil;
     self.rightImageView = nil;
 	self.postingCircleImageView = nil;
 	self.postingRoundImageView = nil;
@@ -107,7 +114,7 @@
 - (void)textViewDidChange:(UITextView *)textView
 {
     NSString *text = self.textView.text;
-//    int leng = [text length];
+    //    int leng = [text length];
     int bytes = [text lengthOfBytesUsingEncoding:NSUTF16StringEncoding];
     const char *ptr = [text cStringUsingEncoding:NSUTF16StringEncoding];
     int words = 0;
@@ -123,6 +130,38 @@
     self.wordsCountLabel.text = [NSString stringWithFormat:@"%d", words];
     self.doneButton.enabled = words >= 0;
     
+    //
+    if ([text length] > 0 && bytes > textViewWordsCount) {
+        unichar c = [text characterAtIndex:([text length]-1)];
+        if (c == '@') {
+            [self atButtonClicked:nil];
+        }
+        
+    }
+    textViewWordsCount = bytes;
+}
+
+- (IBAction)atButtonClicked:(id)sender {
+    UIView *superView = [self.view superview];
+    
+    if (!_atBgButton)
+        _atBgButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 1024, 748)];
+    [_atBgButton addTarget:self action:@selector(dismissAtView) forControlEvents:UIControlEventTouchUpInside];
+    [superView addSubview:_atBgButton];
+    
+	[superView addSubview:self.atView];
+    CGRect frame = self.atView.frame;
+    frame.origin = CGPointMake(200, 105);
+    self.atView.frame = frame;
+    
+    self.atTextField.text = @"";
+    [self.atTextField becomeFirstResponder];
+    
+	[UIView animateWithDuration:1.0 animations:^{
+		self.atView.alpha = 1.0;
+	}];
+    
+    [self atTextFieldEditingBegan];
 }
 
 - (IBAction)cancelButtonClicked:(UIButton *)sender {
@@ -140,8 +179,22 @@
 	if (self.rightView.superview) {
 		[self.rightView removeFromSuperview];
 	}
+	if (self.atView.superview) {
+		[self.atView removeFromSuperview];
+	}
 	[self.textView resignFirstResponder];
     [[UIApplication sharedApplication] dismissModalViewController];
+}
+
+- (void)dismissAtView
+{
+	if (self.atView.superview) {
+		[self.atView removeFromSuperview];
+	}
+    
+    [_atBgButton removeFromSuperview];
+    
+	[self.textView becomeFirstResponder];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
@@ -179,15 +232,14 @@
     
 	if (!status.length) {
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"错误", nil)
-                                                         message:NSLocalizedString(@"微博内容不能为空", nil)
-                                                        delegate:self
-                                               cancelButtonTitle:NSLocalizedString(@"确定", nil)
-                                               otherButtonTitles:nil];
+                                                        message:NSLocalizedString(@"微博内容不能为空", nil)
+                                                       delegate:self
+                                              cancelButtonTitle:NSLocalizedString(@"确定", nil)
+                                              otherButtonTitles:nil];
 		[alert show];
         [alert release];
 		return;
 	}
-	
     
 	WeiboClient *client = [WeiboClient client];
 	
@@ -219,6 +271,150 @@
     
 }
 
+- (void)configureAtScreenNamesArray:(NSString*)text
+{    
+    if (self.atScreenNames) {
+        [self.atScreenNames removeAllObjects];
+    }
+    else {
+        self.atScreenNames = [[NSMutableArray alloc] initWithCapacity:1];
+    }
+    
+    // init
+    if ([text compare:@"init"] == NSOrderedSame) {
+        [self.atScreenNames addObject:[[NSString alloc] initWithFormat:@"@"]];
+    }
+    
+    // text
+    else {        
+        // TODO
+        [self.atScreenNames insertObject:[[NSString alloc] initWithFormat:@"@%@", text] atIndex:0];
+        
+        NSManagedObjectContext* context = [(PushBoxAppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
+        NSEntityDescription *entityDescription = [NSEntityDescription                                                  entityForName:@"User" inManagedObjectContext:context];
+        NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+        [request setEntity:entityDescription];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:[[NSString alloc] initWithFormat:@"screenName like[c] \"%@*\"", text]];
+        [request setPredicate:predicate];
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]                                                                      initWithKey:@"screenName" ascending:YES];
+        [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+        [sortDescriptor release];
+        NSError *error;
+        NSArray *array = [context executeFetchRequest:request error:&error];
+        
+        for (int i = 0; i < [array count]; i++) {
+            [self.atScreenNames addObject:[[NSString alloc] initWithFormat:@"@%@", [[array objectAtIndex:i] screenName]]];
+        }
+    }
+}
+
+
+- (Boolean)isAtEndChar:(unichar)c
+{
+    NSArray* atEndCharArray = [[NSArray alloc] initWithObjects:
+                               [[NSNumber alloc] initWithInt:44],   // ' '
+                               [[NSNumber alloc] initWithInt:46],   // ' '
+                               [[NSNumber alloc] initWithInt:32],   // ' '
+                               [[NSNumber alloc] initWithInt:64],   // '@'
+                               [[NSNumber alloc] initWithInt:58],   // ':'
+                               [[NSNumber alloc] initWithInt:59],   // ';'
+                               [[NSNumber alloc] initWithInt:35],   // '#'
+                               [[NSNumber alloc] initWithInt:39],   // '''
+                               [[NSNumber alloc] initWithInt:34],   // '"'
+                               [[NSNumber alloc] initWithInt:40],   // '('
+                               [[NSNumber alloc] initWithInt:41],   // ')'
+                               [[NSNumber alloc] initWithInt:91],   // '['
+                               [[NSNumber alloc] initWithInt:93],   // ']'
+                               [[NSNumber alloc] initWithInt:123],   // '{'
+                               [[NSNumber alloc] initWithInt:125],   // '}'
+                               [[NSNumber alloc] initWithInt:126],   // '~'
+                               [[NSNumber alloc] initWithInt:33],   // '!'
+                               [[NSNumber alloc] initWithInt:36],   // '$'
+                               [[NSNumber alloc] initWithInt:37],   // '%'
+                               [[NSNumber alloc] initWithInt:94],   // '^'
+                               [[NSNumber alloc] initWithInt:38],   // '&'
+                               [[NSNumber alloc] initWithInt:42],   // '*'
+                               [[NSNumber alloc] initWithInt:43],   // '+'
+                               [[NSNumber alloc] initWithInt:61],   // '='
+                               [[NSNumber alloc] initWithInt:124],   // '|'
+                               [[NSNumber alloc] initWithInt:60],   // '<'
+                               [[NSNumber alloc] initWithInt:62],   // '>'
+                               [[NSNumber alloc] initWithInt:92],   // '\'
+                               [[NSNumber alloc] initWithInt:47],   // '/'
+                               [[NSNumber alloc] initWithInt:63],   // '?'
+                               [[NSNumber alloc] initWithInt:65306],   // '"'
+                               [[NSNumber alloc] initWithInt:65307],   // '"'
+                               [[NSNumber alloc] initWithInt:8216],   // '"'
+                               [[NSNumber alloc] initWithInt:8217],   // '"'
+                               [[NSNumber alloc] initWithInt:8220],   // '"'
+                               [[NSNumber alloc] initWithInt:8221],   // '"'
+                               [[NSNumber alloc] initWithInt:65288],   // '"'
+                               [[NSNumber alloc] initWithInt:65289],   // '"'
+                               [[NSNumber alloc] initWithInt:65339],   // '"'
+                               [[NSNumber alloc] initWithInt:12290],   // '"'
+                               [[NSNumber alloc] initWithInt:65341],   // '"'
+                               [[NSNumber alloc] initWithInt:65292],   // '，'
+                               [[NSNumber alloc] initWithInt:12289],   // '、'
+                               [[NSNumber alloc] initWithInt:65371],   // '"'
+                               [[NSNumber alloc] initWithInt:65373],   // '"'
+                               [[NSNumber alloc] initWithInt:65374],   // '"'
+                               [[NSNumber alloc] initWithInt:65281],   // '"'
+                               [[NSNumber alloc] initWithInt:65283],   // '"'
+                               [[NSNumber alloc] initWithInt:65509],   // '"'
+                               [[NSNumber alloc] initWithInt:65285],   // '"'
+                               [[NSNumber alloc] initWithInt:8212],   // '"'
+                               [[NSNumber alloc] initWithInt:65290],   // '"'
+                               [[NSNumber alloc] initWithInt:65291],   // '"'
+                               [[NSNumber alloc] initWithInt:65309],   // '"'
+                               [[NSNumber alloc] initWithInt:65372],   // '"'
+                               [[NSNumber alloc] initWithInt:12298],   // '"'
+                               [[NSNumber alloc] initWithInt:65295],   // '"'
+                               [[NSNumber alloc] initWithInt:65311],   // '"'
+                               [[NSNumber alloc] initWithInt:8230],   // '"'
+                               nil];
+    for (int i = 0; i < [atEndCharArray count]; i++)
+    {
+        if (c == [[atEndCharArray objectAtIndex:i] intValue])
+            return YES;
+    }
+    
+    return NO;
+}
+
+- (BOOL)isAtStringValid:(NSString*)str {
+    for (int i = 0; i < [str length]; i++) {
+        if ([self isAtEndChar:[str characterAtIndex:i]]) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+- (IBAction)atTextFieldEditingChanged:(UITextField*)textField {
+    
+    if ([self isAtStringValid:textField.text]) {
+        [self configureAtScreenNamesArray:textField.text];
+        [self.atTableView reloadData];
+    }
+    else {
+        if (self.atScreenNames) {
+            [self.atScreenNames removeAllObjects];
+        }
+        self.atScreenNames = [[NSMutableArray alloc] initWithObjects:[[NSString alloc] initWithFormat:@"@%@", textField.text], nil];
+        [self.atTableView reloadData];
+    }
+}
+
+- (IBAction)atTextFieldEditingEnd {
+    [self dismissAtView];
+}
+
+- (IBAction)atTextFieldEditingBegan {
+    
+    [self configureAtScreenNamesArray:self.atTextField.text];
+    [self.atTableView reloadData];
+}
+
 - (IBAction)referButtonClicked:(id)sender {
     NSString *text = self.textView.text;
 	text = [text stringByAppendingString:@"@"];
@@ -248,7 +444,7 @@
 	
 	[self.textView resignFirstResponder];
 	[self.pc presentPopoverFromRect:self.camaraButton.bounds inView:self.camaraButton
-            permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+           permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (IBAction)removeImageButtonClicked:(id)sender {
@@ -288,6 +484,41 @@
 	[UIView animateWithDuration:1.0 animations:^{
 		self.rightView.alpha = 1.0;
 	}];
+}
+
+#pragma - UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.atScreenNames count];
+}
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSString *CellIdentifier = @"PostViewAtTableViewCell";
+    PostViewAtTableViewCell *cell = (PostViewAtTableViewCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (cell == nil) {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PostViewAtTableViewCell" owner:self options:nil];
+        cell = [nib lastObject];
+    }
+    
+    cell.screenNameLabel.text = [_atScreenNames objectAtIndex:[indexPath row]];
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.textView.text = [self.textView.text stringByAppendingString:([[[self.atScreenNames objectAtIndex:[indexPath row]] substringFromIndex:1] stringByAppendingString:@" "])];
+    [self dismissAtView];
+}
+
+#pragma - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    self.textView.text = [self.textView.text stringByAppendingString:([[[self.atScreenNames objectAtIndex:0] substringFromIndex:1] stringByAppendingString:@" "])];
+    [self dismissAtView];
+    
+    return NO;
 }
 
 @end

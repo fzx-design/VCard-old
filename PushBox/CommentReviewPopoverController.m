@@ -173,7 +173,7 @@ static CommentReviewPopoverController* sharedCommentReviewPopoverController;
     //    UIImageView *imageView = (UIImageView *)ges.view;
     //    DetailImageViewController *dvc = [[DetailImageViewController alloc] initWithImage:imageView.image];
     NSString* url = self.status.originalPicURL ? self.status.originalPicURL : self.status.repostStatus.originalPicURL;
-    DetailImageViewController *dvc = [[DetailImageViewController alloc] initWithUrl:url inContext:self.managedObjectContext];
+    DetailImageViewController *dvc = [[DetailImageViewController alloc] initWithUrl:url];
     
     if ([self checkGif:self.status.originalPicURL])
         dvc.gifUrl = self.status.originalPicURL;
