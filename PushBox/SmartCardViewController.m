@@ -833,8 +833,8 @@
     }
     
     [_status release];
-    //    _status = [status retain];
-    _status = status;
+    _status = [status retain];
+//    _status = status;
     
     [self prepare];
     [self performSelector:@selector(update) withObject:nil afterDelay:0.3];
