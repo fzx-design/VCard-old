@@ -126,6 +126,7 @@
 
 - (void)start
 {	
+	_refreshFlag = NO;
 	preNewCommentCount = 0;
 	preNewFollowerCount = 0;
 	preNewMentionCount = 0;

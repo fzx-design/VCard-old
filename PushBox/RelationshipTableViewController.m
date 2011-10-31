@@ -64,7 +64,6 @@
 
 - (void)clearData
 {
-    _nextCursor = -1;
     if (_type == RelationshipViewTypeFriends) {
         [self.user removeFriends:self.user.friends];
     }
@@ -77,8 +76,10 @@
 - (void)refresh
 {
     [self hideLoadMoreDataButton];
-    [self clearData];
-    [self loadMoreData];
+//    [self clearData];
+	_nextCursor = -1;
+	[self performSelector:@selector(loadMoreData) withObject:nil afterDelay:0.01];
+//    [self loadMoreData];
 }
 
 - (void)loadMoreData
@@ -89,9 +90,16 @@
     _loading = YES;
     
     WeiboClient *client = [WeiboClient client];
+	[[UIApplication sharedApplication] showLoadingView];
     [client setCompletionBlock:^(WeiboClient *client) {
+		[[UIApplication sharedApplication] hideLoadingView];
         if (!client.hasError) {
             NSArray *dictArray = [client.responseJSONObject objectForKey:@"users"];
+			
+			if (_nextCursor == -1) {
+				[self clearData];
+			}
+			
             for (NSDictionary *dict in dictArray) {
                 User *usr = [User insertUser:dict inManagedObjectContext:self.managedObjectContext];
                 if (_type == RelationshipViewTypeFollowers) {

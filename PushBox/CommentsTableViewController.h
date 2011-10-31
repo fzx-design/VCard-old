@@ -46,7 +46,6 @@ typedef enum {
 @property(nonatomic, retain) Status *status;
 @property(nonatomic, assign) CommentsTableViewDataSource dataSource;
 @property(nonatomic, assign) id<CommentsTableViewControllerDelegate> delegate;
-@property(nonatomic, retain) IBOutlet UIImageView* newCommentsImageView;
 
 @property(nonatomic, retain) IBOutlet UIImageView *authorImageView;
 @property(nonatomic, retain) IBOutlet UILabel *authorNameLabel;

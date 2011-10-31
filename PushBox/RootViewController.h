@@ -45,6 +45,7 @@
     NSTimer *_playTimer;
 	
 	BOOL _commandCenterFlag;
+	BOOL _refreshFlag;
 	NSInteger preNewFollowerCount;
 	NSInteger preNewCommentCount;
 	NSInteger preNewMentionCount;

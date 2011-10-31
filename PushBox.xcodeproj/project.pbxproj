@@ -785,6 +785,8 @@
 		CB1164DE13F1340500884118 /* Card controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9BC6FA0F14572A2D001493D6 /* CommentReviewPopoverController.h */,
+				9BC6FA1014572A2D001493D6 /* CommentReviewPopoverController.m */,
 				CBD36F0E13E697F5008BB428 /* CommentViewController.h */,
 				CBD36F0F13E697F5008BB428 /* CommentViewController.m */,
 				9BB5B8B31449A8B100352FF7 /* UserCardContentViewController.h */,

@@ -66,7 +66,11 @@
 - (void)refresh
 {
 //	[self clearData];
-    [self loadMoreData];
+	_nextPage = 1;
+//    [self loadMoreData];
+	
+	[self performSelector:@selector(loadMoreData) withObject:nil afterDelay:0.05];
+	
     WeiboClient *client = [WeiboClient client];
     [client resetUnreadCount:ResetUnreadCountTypeComments];
 }
@@ -80,34 +84,69 @@
     _loading = YES;
     
     WeiboClient *client = [WeiboClient client];
-//	[[UIApplication sharedApplication] showLoadingView];
+	[[UIApplication sharedApplication] showLoadingView];
     [client setCompletionBlock:^(WeiboClient *client) {
 		
-//		[[UIApplication sharedApplication] hideLoadingView];
-        if (!client.hasError) {
+//		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+			[[UIApplication sharedApplication] hideLoadingView];
+			if (!client.hasError) {
+				NSArray *dictArray = client.responseJSONObject;
+				
+				if (_nextPage == 1) {
+					[self clearData];
+				}
+				
+				int count = [dictArray count];
+				if (count < 20) {
+					[self hideLoadMoreDataButton];
+				}
+				else {
+					[self showLoadMoreDataButton];
+				}
+				
+				for (NSDictionary *dict in dictArray) {
+					[Comment insertComment:dict inManagedObjectContext:self.managedObjectContext];
+				}
+				[self.managedObjectContext processPendingChanges];
+				
+				_nextPage++;
+				
+			} else {
+				[ErrorNotification showLoadingError];
+			}
+			[self doneLoadingTableViewData];
+			_loading = NO;
+//		});
 
-            NSArray *dictArray = client.responseJSONObject;
-            for (NSDictionary *dict in dictArray) {
-                [Comment insertComment:dict inManagedObjectContext:self.managedObjectContext];
-            }
-			
-			int count = [dictArray count];
-            if (count < 20) {
-                [self hideLoadMoreDataButton];
-            }
-            else {
-                [self showLoadMoreDataButton];
-            }
-			
-			[self.managedObjectContext processPendingChanges];
-			
-            _nextPage++;
-			
-        } else {
-			[ErrorNotification showLoadingError];
-		}
-		[self doneLoadingTableViewData];
-		_loading = NO;
+		
+//		[[UIApplication sharedApplication] hideLoadingView];
+//        if (!client.hasError) {
+//            NSArray *dictArray = client.responseJSONObject;
+//
+//			if (_nextPage == 1) {
+//				[self clearData];
+//			}
+//			
+//			int count = [dictArray count];
+//            if (count < 20) {
+//                [self hideLoadMoreDataButton];
+//            }
+//            else {
+//                [self showLoadMoreDataButton];
+//            }
+//			
+//			for (NSDictionary *dict in dictArray) {
+//                [Comment insertComment:dict inManagedObjectContext:self.managedObjectContext];
+//            }
+//			[self.managedObjectContext processPendingChanges];
+//			
+//            _nextPage++;
+//			
+//        } else {
+//			[ErrorNotification showLoadingError];
+//		}
+//		[self doneLoadingTableViewData];
+//		_loading = NO;
     }];
     
     if (self.dataSource == CommentsTableViewDataSourceCommentsOfStatus) {
@@ -161,7 +200,7 @@
 	height = height > 65 ? height : 65;
 	commentCell.frame = CGRectMake(0, 0, 448, height);
 	
-	commentCell.separatorLine.frame = CGRectMake(0, height - 2, 
+	commentCell.separatorLine.frame = CGRectMake(0, height - 6, 
                                                  commentCell.separatorLine.frame.size.width, 
                                                  commentCell.separatorLine.frame.size.height);
 }
