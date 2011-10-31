@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "CoreDataViewController.h"
 #import "DetailImageViewController.h"
+#import "CommentsTableViewController.h"
 #import "Status.h"
 
-@interface CommentReviewPopoverController : CoreDataViewController<DetailImageViewControllerDelegate>
+@class CommentsTableViewController;
+
+@interface CommentReviewPopoverController : CoreDataViewController<DetailImageViewControllerDelegate, CommentseViewDelegates>
 {
 	UIImageView *_profileImageView;
 	UILabel *_screenNameLabel;
@@ -26,6 +29,9 @@
     UIScrollView *_scrollView;
 
 	UIView *_statusView;
+	
+	CGPoint _popPoint;
+	CommentsTableViewModel _commentsTableViewModel;
 	
 	Status *_status;
 }
@@ -44,10 +50,13 @@
 
 @property(nonatomic, retain) IBOutlet UIView* statusView;
 
+@property(nonatomic) CommentsTableViewModel commentsTableViewModel;
+
 @property(nonatomic, retain) Status* status;
 
 - (IBAction)dismissButtonClicked:(id)sender;
-+(CommentReviewPopoverController*)sharedCommentReviewPopoverController;
++(CommentReviewPopoverController*)sharedCommentReviewPopoverControllerWithTableType:(CommentsTableViewModel)type;
 - (IBAction)imageViewClicked:(UIGestureRecognizer *)ges;
+- (IBAction)commentButtonClicked:(id)sender;
 
 @end

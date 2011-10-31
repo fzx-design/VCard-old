@@ -206,6 +206,7 @@
 	
     
     self.bottomStateView.alpha = 0.0;
+	self.notificationView.hidden = YES;
 	_commandCenterFlag = NO;
 	
     if ([WeiboClient authorized]) {
@@ -460,7 +461,14 @@
 
 - (IBAction)closeNotificationPop:(id)sender
 {
-	self.notificationView.hidden = YES;
+	[UIView animateWithDuration:0.3 animations:^(){
+		self.notificationView.alpha = 0.0;
+	} completion:^(BOOL finished){
+		if (finished) {
+			self.notificationView.hidden = YES;
+			self.notificationView.alpha = 1.0;
+		}
+	}];
 }
 
 - (void)modalCardViewPresentedNotification:(id)sender

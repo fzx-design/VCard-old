@@ -1075,7 +1075,7 @@
     vc.currentUser = self.currentUser;
     vc.delegate = self;
     vc.status = self.status;
-//    vc.commentsTableViewModel = CommentsTableViewNormalModel;
+    vc.commentsTableViewModel = CommentsTableViewNormalModel;
     
     
     UserCardNaviViewController* navi = [[UserCardNaviViewController alloc] initWithRootViewController:vc];

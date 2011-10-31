@@ -30,6 +30,8 @@ static CommentReviewPopoverController* sharedCommentReviewPopoverController;
 
 @synthesize statusView = _statusView;
 
+@synthesize commentsTableViewModel = _commentsTableViewModel;
+
 @synthesize status = _status;
 
 #pragma mark - View lifecycle
@@ -59,12 +61,15 @@ static CommentReviewPopoverController* sharedCommentReviewPopoverController;
 	self.statusView = nil;
 }
 
-+(CommentReviewPopoverController*)sharedCommentReviewPopoverController
++(CommentReviewPopoverController*)sharedCommentReviewPopoverControllerWithTableType:(CommentsTableViewModel)type
 {
 	if (sharedCommentReviewPopoverController != nil) {
+		sharedCommentReviewPopoverController.commentsTableViewModel = type;
 		return sharedCommentReviewPopoverController;
 	}
+	
 	sharedCommentReviewPopoverController = [[CommentReviewPopoverController alloc] init];
+	sharedCommentReviewPopoverController.commentsTableViewModel = type;
 	return sharedCommentReviewPopoverController;
 }
 
@@ -194,16 +199,24 @@ static CommentReviewPopoverController* sharedCommentReviewPopoverController;
 	[self prepare];
 	[self.view addSubview:self.statusView];
 	
-//	UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClicked:)];
-//	tapGesture.numberOfTapsRequired = 1;
-//	tapGesture.numberOfTouchesRequired = 1;
-//	[self.tweetImageView addGestureRecognizer:tapGesture];
-//	[tapGesture release];
+	UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClicked:)];
+	tapGesture.numberOfTapsRequired = 1;
+	tapGesture.numberOfTouchesRequired = 1;
+	[self.tweetImageView addGestureRecognizer:tapGesture];
+	[tapGesture release];
 	
+	self.statusView.layer.anchorPoint = CGPointMake(0, 0.5);
 	[self.statusView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
 	CGRect frame = self.statusView.frame;
-	frame.origin.x = 690;
-	frame.origin.y = 8;
+	if (_commentsTableViewModel == CommentsTableViewNormalModel) {
+		frame.origin.x = 680;
+		frame.origin.y = -3;
+	} else {
+		frame.origin.x = 700;
+		frame.origin.y = 85;
+	}
+	
+
 	self.statusView.frame = frame;
 }
 
@@ -217,11 +230,31 @@ static CommentReviewPopoverController* sharedCommentReviewPopoverController;
 	}];
 }
 
+- (void)commentFinished
+{
+	[self dismissButtonClicked:nil];
+	
+}
+
+- (IBAction)commentButtonClicked:(id)sender
+{
+	CommentViewController *vc = [[CommentViewController alloc] init];
+	vc.delegate = self;
+	vc.targetStatus = self.status;
+	
+	[[UIApplication sharedApplication] presentModalViewController:vc atHeight:kModalViewHeight];
+	[vc release];
+}
+
 - (IBAction)dismissButtonClicked:(id)sender
 {
-	[sharedCommentReviewPopoverController.view removeFromSuperview];
-	[sharedCommentReviewPopoverController release];
-	sharedCommentReviewPopoverController = nil;
+	[UIView animateWithDuration:0.3 animations:^(){
+		sharedCommentReviewPopoverController.statusView.alpha = 0.0;
+	}completion:^(BOOL finished) {
+		[sharedCommentReviewPopoverController.view removeFromSuperview];
+		[sharedCommentReviewPopoverController release];
+		sharedCommentReviewPopoverController = nil;
+	}];
 }
 
 @end

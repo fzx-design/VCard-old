@@ -404,10 +404,12 @@
 		frame.origin.x -= 782;
 		self.tableView.frame = frame;
 	} completion:^(BOOL finished) {
-		if ([[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeySoundEnabled]) {
-			UIAudioAddition* audioAddition = [[UIAudioAddition alloc] init];
-			[audioAddition playRefreshDoneSound];
-			[audioAddition release];
+		if (finished) {
+			if ([[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeySoundEnabled]) {
+				UIAudioAddition* audioAddition = [[UIAudioAddition alloc] init];
+				[audioAddition playRefreshDoneSound];
+				[audioAddition release];
+			}
 		}
 	}];
 }
@@ -427,9 +429,11 @@
 	[UIView animateWithDuration:0.3 delay:0.0 options:0 animations:^{
 		self.tableView.alpha = 0.0;
 	} completion:^(BOOL finished) {
-		[self adjustCardViewPosition];
-		if (completion) {
-			completion();
+		if (finished) {
+			if (completion) {
+				completion();
+			}
+			[self adjustCardViewPosition];
 		}
  	}];
 }

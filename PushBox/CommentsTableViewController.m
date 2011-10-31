@@ -205,7 +205,8 @@
 
 - (IBAction)commentReviewButtonClicked:(id)sender
 {
-	CommentReviewPopoverController *vc = [CommentReviewPopoverController sharedCommentReviewPopoverController];
+
+	CommentReviewPopoverController *vc = [CommentReviewPopoverController sharedCommentReviewPopoverControllerWithTableType:_commentsTableViewModel];
 	vc.status = self.status;
 	vc.profileImageView = self.authorImageView;
 	UIView *mainView = [[UIApplication sharedApplication] rootView];
