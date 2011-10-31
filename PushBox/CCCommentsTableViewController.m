@@ -66,7 +66,18 @@
 - (void)refresh
 {
 //	[self clearData];
-    [self loadMoreData];
+	_nextPage = 1;
+//    [self loadMoreData];
+	
+	dispatch_queue_t refreshQueue = dispatch_queue_create("downloadQueue", NULL);
+    
+    dispatch_async(refreshQueue, ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self loadMoreData];
+        });
+    });
+    dispatch_release(refreshQueue);
+	
     WeiboClient *client = [WeiboClient client];
     [client resetUnreadCount:ResetUnreadCountTypeComments];
 }
@@ -80,16 +91,15 @@
     _loading = YES;
     
     WeiboClient *client = [WeiboClient client];
-//	[[UIApplication sharedApplication] showLoadingView];
-    [client setCompletionBlock:^(WeiboClient *client) {
-		
-//		[[UIApplication sharedApplication] hideLoadingView];
+	[[UIApplication sharedApplication] showLoadingView];
+    [client setCompletionBlock:^(WeiboClient *client) {		
+		[[UIApplication sharedApplication] hideLoadingView];
         if (!client.hasError) {
-
             NSArray *dictArray = client.responseJSONObject;
-            for (NSDictionary *dict in dictArray) {
-                [Comment insertComment:dict inManagedObjectContext:self.managedObjectContext];
-            }
+
+			if (_nextPage == 1) {
+				[self clearData];
+			}
 			
 			int count = [dictArray count];
             if (count < 20) {
@@ -99,6 +109,9 @@
                 [self showLoadMoreDataButton];
             }
 			
+			for (NSDictionary *dict in dictArray) {
+                [Comment insertComment:dict inManagedObjectContext:self.managedObjectContext];
+            }
 			[self.managedObjectContext processPendingChanges];
 			
             _nextPage++;

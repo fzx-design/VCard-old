@@ -21,7 +21,6 @@
 @synthesize titleLabel = _titleLabel;
 @synthesize dataSource = _dataSource;
 @synthesize delegate = _delegate;
-@synthesize newCommentsImageView = _newCommentsImageView;
 @synthesize authorImageView = _authorImageView;
 @synthesize authorNameLabel = _authorNameLabel;
 @synthesize authorPreviewLabel = _authorPreviewLabel;
@@ -33,7 +32,6 @@
     NSLog(@"CommentsTableViewController dealloc");
     [_titleLabel release];
     [_status release];
-    [_newCommentsImageView release];
 	[_authorImageView release];
     [_authorNameLabel release];
     [_authorPreviewLabel release];
@@ -43,7 +41,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    [_titleLabel release];
+    self.titleLabel= nil;
 	self.authorImageView = nil;
     self.authorNameLabel = nil;
     self.authorPreviewLabel = nil;
@@ -61,10 +59,8 @@
 	[self.authorImageView loadImageFromURL:self.status.author.profileImageURL 
                                  completion:NULL
                              cacheInContext:self.managedObjectContext];
-    self.newCommentsImageView.hidden = YES;
 	self.authorNameLabel.text = self.status.author.screenName;
 	self.authorPreviewLabel.text = self.status.text;
-	[self refresh];
 }
 
 - (void)clearData
@@ -81,9 +77,9 @@
 
 - (void)refresh
 {
-	[self clearData];
+//	[self clearData];
+	_nextPage = 1;
     [self loadMoreData];
-    self.newCommentsImageView.hidden = YES;
     WeiboClient *client = [WeiboClient client];
     [client resetUnreadCount:ResetUnreadCountTypeComments];
 }
@@ -110,14 +106,18 @@
             else {
                 [self showLoadMoreDataButton];
             }
-            
+            if (_nextPage == 1) {
+				[self clearData];
+			}
+			
             for (NSDictionary *dict in dictArray) {
                 [Comment insertComment:dict inManagedObjectContext:self.managedObjectContext];
             }
+			[self.managedObjectContext processPendingChanges];
             _nextPage++;
 
         } else {
-			[ErrorNotification showPostError];
+			[ErrorNotification showLoadingError];
 		}
 		[self doneLoadingTableViewData];
 		_loading = NO;
@@ -187,7 +187,6 @@
 	vc.delegate = self;
     vc.targetStatus = self.status;
 	
-	NSLog(@"the id is %@", self.status.statusID);
     [[UIApplication sharedApplication] presentModalViewController:vc atHeight:kModalViewHeight];
     [vc release];
 }
