@@ -99,7 +99,7 @@ typedef void (^WCCompletionBlock)(WeiboClient *client);
 - (void)comment:(NSString *)statusID 
             cid:(NSString *)cid 
            text:(NSString *)text
-  commentOrigin:(BOOL)commentOrigin;
+  withOutMention:(BOOL)withOutMention;
 
 - (void)destroyStatus:(NSString *)statusID;
 

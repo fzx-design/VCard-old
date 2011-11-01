@@ -819,19 +819,19 @@ report_completion:
 - (void)comment:(NSString *)statusID 
             cid:(NSString *)cid 
            text:(NSString *)text
-  commentOrigin:(BOOL)commentOrigin
+  withOutMention:(BOOL)withOutMention
 {
     self.httpMethod = HTTPMethodPost;
-    self.path = @"statuses/comment.json";
+    self.path = @"statuses/reply.json";
     if (statusID) {
         [self.params setObject:statusID forKey:@"id"];
     }
     if (cid) {
-        [self.params setObject:cid forKey:@"cir"];
+        [self.params setObject:cid forKey:@"cid"];
     }
     [self.params setObject:text forKey:@"comment"];
-    if (commentOrigin) {
-        [self.params setObject:@"1" forKey:@"comment_ori"];
+    if (withOutMention) {
+        [self.params setObject:@"1" forKey:@"without_mention"];
     }
     [self sendRequest];
 }
