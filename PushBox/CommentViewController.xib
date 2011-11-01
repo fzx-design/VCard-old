@@ -132,7 +132,6 @@
 						<string key="NSFrame">{{65, 100}, {440, 344}}</string>
 						<reference key="NSSuperview" ref="60294544"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<reference key="IBUIBackgroundColor" ref="626977176"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -208,6 +207,29 @@
 							<string key="NSResourceName">post_tools_bg.png</string>
 						</object>
 					</object>
+					<object class="IBUIButton" id="91539969">
+						<reference key="NSNextResponder" ref="60294544"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{60, 52}, {37, 37}}</string>
+						<reference key="NSSuperview" ref="60294544"/>
+						<reference key="NSWindow"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<reference key="IBUIHighlightedTitleColor" ref="514257325"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="664196743"/>
+						<object class="NSCustomResource" key="IBUINormalImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">post_button_@.png</string>
+						</object>
+						<reference key="IBUIFontDescription" ref="228334818"/>
+						<reference key="IBUIFont" ref="879111980"/>
+					</object>
 					<object class="IBUILabel" id="393950464">
 						<reference key="NSNextResponder" ref="60294544"/>
 						<int key="NSvFlags">292</int>
@@ -249,7 +271,7 @@
 					<object class="IBUILabel" id="723676581">
 						<reference key="NSNextResponder" ref="60294544"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{127, 59}, {107, 21}}</string>
+						<string key="NSFrame">{{156, 59}, {107, 21}}</string>
 						<reference key="NSSuperview" ref="60294544"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="713303695"/>
@@ -282,7 +304,7 @@
 					<object class="IBUIButton" id="517245432">
 						<reference key="NSNextResponder" ref="60294544"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{71, 56}, {48, 27}}</string>
+						<string key="NSFrame">{{100, 56}, {48, 27}}</string>
 						<reference key="NSSuperview" ref="60294544"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="723676581"/>
@@ -489,6 +511,7 @@
 							<reference ref="517245432"/>
 							<reference ref="713303695"/>
 							<reference ref="923954036"/>
+							<reference ref="91539969"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -549,6 +572,12 @@
 						<reference key="object" ref="713303695"/>
 						<reference key="parent" ref="60294544"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">34</int>
+						<reference key="object" ref="91539969"/>
+						<reference key="parent" ref="60294544"/>
+						<string key="objectName">@ button</string>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -566,6 +595,7 @@
 					<string>19.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>24.IBPluginDependency</string>
 					<string>25.IBPluginDependency</string>
+					<string>34.IBPluginDependency</string>
 					<string>4.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
@@ -592,6 +622,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -606,7 +637,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">31</int>
+			<int key="maxID">34</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -735,6 +766,7 @@
 				<string>button_add.png</string>
 				<string>button_cancel.png</string>
 				<string>grey_card_lines_bg.png</string>
+				<string>post_button_@.png</string>
 				<string>post_tools_bg.png</string>
 				<string>posting_bg.png</string>
 				<string>posting_circle.png</string>
@@ -746,6 +778,7 @@
 				<string>{19, 20}</string>
 				<string>{15, 19}</string>
 				<string>{596, 644}</string>
+				<string>{16, 18}</string>
 				<string>{467, 36}</string>
 				<string>{30, 31}</string>
 				<string>{34, 34}</string>
