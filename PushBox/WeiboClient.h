@@ -106,9 +106,13 @@ typedef void (^WCCompletionBlock)(WeiboClient *client);
 - (void)getFavoritesByPage:(int)page;
 
 - (void)getRelationshipWithUser:(NSString *)userID;
+
 - (void)getUserByScreenName:(NSString *)screenName;
+
 - (void)getUnreadCountSinceStatusID:(NSString *)statusID;
+
 - (void)resetUnreadCount:(int)type;
+
 - (void)getSearchStatuses:(NSString *)q
                filter_ori:(int)filter_ori 
                filter_pic:(int)filter_pic
@@ -121,8 +125,11 @@ typedef void (^WCCompletionBlock)(WeiboClient *client);
                      page:(int)page 
                 needcount:(Boolean)needcount
                  base_app:(int)base_app;
+
 - (void)getTrendsStatuses:(NSString *)trend_name;
-- (void)getShortUrlExpand:(NSString *)url_short ;
+
+- (void)getShortUrlExpand:(NSString *)url_short;
+
 - (void)getMessagesByUserSinceID:(NSString *)sinceID 
                            maxID:(NSString *)maxID 
                            count:(int)count
