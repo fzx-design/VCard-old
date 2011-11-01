@@ -112,8 +112,8 @@
 	
 	[self textViewDidChange:self.textView];
 	
-	self.atView.layer.anchorPoint = CGPointMake(0, 0.4);
-	self.rightView.layer.anchorPoint = CGPointMake(0.5, 0);
+	self.rightView.layer.anchorPoint = CGPointMake(0, 0.4);
+	self.atView.layer.anchorPoint = CGPointMake(0.5, 0);
     self.textView.delegate = self;
 }
 
@@ -464,7 +464,7 @@
 
 - (IBAction)removeImageButtonClicked:(id)sender {
     self.camaraButton.hidden = NO;
-	[UIView animateWithDuration:1.0 animations:^{
+	[UIView animateWithDuration:0.3 animations:^{
 		self.rightView.alpha = 0.0;
 	} completion:^(BOOL fin) {
 		if (fin) {
