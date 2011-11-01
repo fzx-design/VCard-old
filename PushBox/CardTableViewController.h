@@ -42,6 +42,7 @@ typedef enum {
     
     id _delegate;
     int _nextPage;
+	int _nextPageForMention;
     int _currentRowIndex;
     BOOL _swipeEnabled;
     

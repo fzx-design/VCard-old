@@ -147,7 +147,7 @@
 	self.commentNaviViewController.view.frame = frame;
 	[self.view addSubview:self.commentNaviViewController.view];
 	
-//	NSTimer* _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(calculateRefreshTime) userInfo:nil repeats:YES];
+	NSTimer* _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(calculateRefreshTime) userInfo:nil repeats:YES];
 	
 //    self.commentsTableViewController.dataSource = CommentsTableViewDataSourceCommentsToMe;
 //    self.commentsTableViewController.currentUser = self.currentUser;
