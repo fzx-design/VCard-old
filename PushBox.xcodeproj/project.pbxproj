@@ -137,6 +137,7 @@
 		9BF36CFA14592F6900A60A0F /* options_icon_about.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF36CF914592F6900A60A0F /* options_icon_about.png */; };
 		9BF36CFC1459359300A60A0F /* options_icon_legal.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF36CFB1459359300A60A0F /* options_icon_legal.png */; };
 		9BF36CFF14593B7700A60A0F /* LegacyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF36CFE14593B7600A60A0F /* LegacyViewController.m */; };
+		9BF4BC83145FBB390071CDD1 /* UserTempData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF4BC82145FBB390071CDD1 /* UserTempData.m */; };
 		CB018DD613DD3CC9004217E0 /* DockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB018DD413DD3CC8004217E0 /* DockViewController.m */; };
 		CB018DD713DD3CC9004217E0 /* DockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB018DD513DD3CC8004217E0 /* DockViewController.xib */; };
 		CB018DDB13DDCCCD004217E0 /* dock_slider_thumb_HL.png in Resources */ = {isa = PBXBuildFile; fileRef = CB018DD913DDCCCD004217E0 /* dock_slider_thumb_HL.png */; };
@@ -422,6 +423,8 @@
 		9BF36CFB1459359300A60A0F /* options_icon_legal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = options_icon_legal.png; sourceTree = "<group>"; };
 		9BF36CFD14593B7600A60A0F /* LegacyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LegacyViewController.h; sourceTree = "<group>"; };
 		9BF36CFE14593B7600A60A0F /* LegacyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LegacyViewController.m; sourceTree = "<group>"; };
+		9BF4BC81145FBB390071CDD1 /* UserTempData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTempData.h; sourceTree = "<group>"; };
+		9BF4BC82145FBB390071CDD1 /* UserTempData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTempData.m; sourceTree = "<group>"; };
 		CB018DD313DD3CC8004217E0 /* DockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DockViewController.h; sourceTree = "<group>"; };
 		CB018DD413DD3CC8004217E0 /* DockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DockViewController.m; sourceTree = "<group>"; };
 		CB018DD513DD3CC8004217E0 /* DockViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DockViewController.xib; sourceTree = "<group>"; };
@@ -1245,6 +1248,8 @@
 				9B4B49F714582FCF00C9B542 /* Status.m */,
 				FE1E629714441E2500A48CF9 /* Message.h */,
 				FE1E629814441E2600A48CF9 /* Message.m */,
+				9BF4BC81145FBB390071CDD1 /* UserTempData.h */,
+				9BF4BC82145FBB390071CDD1 /* UserTempData.m */,
 			);
 			name = "Core Data Models";
 			sourceTree = "<group>";
@@ -1620,6 +1625,7 @@
 				9B4B49FB14586C1000C9B542 /* RefreshingIntervalViewController.m in Sources */,
 				9BF36CFF14593B7700A60A0F /* LegacyViewController.m in Sources */,
 				FE831552145E803700909CF0 /* PostViewAtTableViewCell.m in Sources */,
+				9BF4BC83145FBB390071CDD1 /* UserTempData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

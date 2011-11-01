@@ -59,7 +59,9 @@
         [self.status removeComments:self.status.comments];
     }
     else {
-        [self.currentUser removeCommentsToMe:self.currentUser.commentsToMe];
+		User *tmp = [User userWithID:self.currentUser.userID inManagedObjectContext:self.managedObjectContext];
+		[tmp removeCommentsToMe:self.currentUser.commentsToMe];
+//        [self.currentUser removeCommentsToMe:self.currentUser.commentsToMe];
     }
 }
 
@@ -231,7 +233,8 @@
 	Comment *comment = [self.fetchedResultsController objectAtIndexPath:indexPath];
     CommentsTableViewController *vc = [[CommentsTableViewController alloc] init];
     vc.dataSource = CommentsTableViewDataSourceCommentsOfStatus;
-    vc.currentUser = comment.targetUser;
+	vc.currentUser = [User getUserTempDataFromUser:comment.targetUser];
+//    vc.currentUser = comment.targetUser;
     vc.status = comment.targetStatus;
 	vc.commentsTableViewModel = CommentsTableViewCommandCenterModel;
 	

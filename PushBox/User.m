@@ -35,6 +35,32 @@
 @dynamic favorites;
 @dynamic commentsToMe;
 
++ (UserTempData *)getUserTempDataFromUser:(User *)user
+{
+	UserTempData *result = [[UserTempData alloc] init];
+	result.userID = user.userID;
+	result.screenName = user.screenName;
+	result.location = user.location;
+	result.selfDescription = user.selfDescription;
+	result.blogURL = user.blogURL;
+	result.profileImageURL = user.profileImageURL;
+	result.domainURL = user.domainURL;
+	result.gender = user.gender;
+	result.followersCount = user.followersCount;
+	result.friendsCount = user.followersCount;
+	result.statusesCount = user.statusesCount;
+	result.favouritesCount = user.favouritesCount;
+	result.createdAt = user.createdAt;
+	result.verified = user.verified;
+	result.followers = user.followers;
+	result.updateDate = user.updateDate;
+	result.followers = user.followers;
+	result.friends = user.friends;
+	result.favorites = user.favorites;
+	result.commentsToMe = user.commentsToMe;
+	result.managedObjectContext = user.managedObjectContext;
+	return [result autorelease];
+}
 
 + (User *)insertUser:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context
 {

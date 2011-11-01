@@ -7,15 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserTempData.h"
 
 @class User;
 
 @interface CoreDataViewController : UIViewController {
     NSManagedObjectContext *_managedObjectContext;
-    User *_currentUser;
+    UserTempData *_currentUser;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain) User *currentUser;
+@property (nonatomic, retain) UserTempData *currentUser;
 
 @end

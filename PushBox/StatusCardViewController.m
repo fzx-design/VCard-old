@@ -487,7 +487,9 @@
         WeiboClient *client = [WeiboClient client];
         [client setCompletionBlock:^(WeiboClient *client) {
             if (!client.hasError) {
-                [self.currentUser removeFavoritesObject:self.status];
+				User *tmp = [User userWithID:self.currentUser.userID inManagedObjectContext:self.managedObjectContext];
+				[tmp removeFavoritesObject:self.status];
+//                [self.currentUser removeFavoritesObject:self.status];
                 sender.selected = NO;
             }
         }];
@@ -497,7 +499,9 @@
         WeiboClient *client = [WeiboClient client];
         [client setCompletionBlock:^(WeiboClient *client) {
             if (!client.hasError) {
-                [self.currentUser addFavoritesObject:self.status];
+				User *tmp = [User userWithID:self.currentUser.userID inManagedObjectContext:self.managedObjectContext];
+				[tmp addFavoritesObject:self.status];
+//                [self.currentUser addFavoritesObject:self.status];
                 sender.selected = YES;
                 
                 UIImage *img = [UIImage imageNamed:@"status_msg_addfav"];

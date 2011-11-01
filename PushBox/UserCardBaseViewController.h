@@ -7,6 +7,7 @@
 //
 
 #import "CoreDataViewController.h"
+#import "UserTempData.h"
 
 #define kNotificationNameShouldShowUserTimeline @"kNotificationNameShouldShowUserTimeline"
 #define kNotificationNameShouldDismissUserCard @"kNotificationNameShouldDismissUserCard"
@@ -30,7 +31,7 @@
 	
 	UITextView *_descriptionTextView;
     
-    User *_user;
+    UserTempData *_user;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView* profileImageView;
@@ -48,7 +49,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *blogURLLabel;
 @property (nonatomic, retain) IBOutlet UILabel *careerInfoLabel;
 
-@property(nonatomic, retain) User* user;
+@property(nonatomic, retain) UserTempData* user;
 
 - (void)configureView;
 

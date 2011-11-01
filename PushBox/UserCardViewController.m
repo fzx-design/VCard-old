@@ -17,6 +17,7 @@
 @synthesize backButton = _backButton;
 @synthesize relationshipStateLabel = _relationshipStateLabel;
 @synthesize delegate = _delegate;
+@synthesize userTempData = _userTempData;
 
 - (void)dealloc
 {
@@ -26,6 +27,7 @@
     [_unFollowButton release];
     [_backButton release];
     [_relationshipStateLabel release];
+	[_userTempData release];
     [super dealloc];
 }
 
@@ -36,12 +38,20 @@
     self.unFollowButton = nil;
     self.backButton = nil;
     self.relationshipStateLabel = nil;
+	self.userTempData = nil;
+}
+
+- (id)initWithUsrTempData:(UserTempData *)user
+{
+    self = [super init];
+    self.user = user;
+    return self;
 }
 
 - (id)initWithUsr:(User *)user
 {
     self = [super init];
-    self.user = user;
+    self.user = [User getUserTempDataFromUser:user];
     return self;
 }
 
@@ -60,7 +70,7 @@
             self.unFollowButton.hidden = NO;
         }
         else {
-            if (![self.user isEqualToUser:self.currentUser]) {
+            if (![self.user.userID isEqual:self.currentUser.userID]) {
                 self.followButton.hidden = NO;
             }
         }
