@@ -60,9 +60,9 @@
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MC4yMDAwMDAwMDMgMC4yMDAwMDAwMDMgMC4yMDAwMDAwMDMAA</bytes>
 								</object>
-								<object class="NSColor" key="IBUIHighlightedColor" id="517899537">
-									<int key="NSColorSpace">3</int>
-									<bytes key="NSWhite">MQA</bytes>
+								<object class="NSColor" key="IBUIHighlightedColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC4yMDAwMDAwMDMgMC4yMDAwMDAwMDMgMC4yMDAwMDAwMDMAA</bytes>
 								</object>
 								<object class="NSColor" key="IBUIShadowColor" id="986272994">
 									<int key="NSColorSpace">1</int>
@@ -90,6 +90,10 @@
 								<reference key="NSSuperview" ref="937741428"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="855603672"/>
+								<object class="NSColor" key="IBUIBackgroundColor" id="1028723802">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MCAwAA</bytes>
+								</object>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
@@ -101,7 +105,10 @@
 									<int key="NSColorSpace">2</int>
 									<bytes key="NSRGB">MC4xMDE5NjA3OTMxIDAuNDgyMzUyOTcyIDAuNTg4MjM1MzE4NwA</bytes>
 								</object>
-								<reference key="IBUIHighlightedColor" ref="517899537"/>
+								<object class="NSColor" key="IBUIHighlightedColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC4xMDE5NjA3ODQzIDAuNDgyMzUyOTQxMiAwLjU4ODIzNTI5NDEAA</bytes>
+								</object>
 								<reference key="IBUIShadowColor" ref="986272994"/>
 								<string key="IBUIShadowOffset">{0, 1}</string>
 								<int key="IBUIBaselineAdjustment">1</int>
@@ -127,10 +134,7 @@
 								<reference key="NSSuperview" ref="937741428"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="329436968"/>
-								<object class="NSColor" key="IBUIBackgroundColor" id="1028723802">
-									<int key="NSColorSpace">3</int>
-									<bytes key="NSWhite">MCAwAA</bytes>
-								</object>
+								<reference key="IBUIBackgroundColor" ref="1028723802"/>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<bool key="IBUIMultipleTouchEnabled">YES</bool>
 								<int key="IBUITag">-2</int>
@@ -170,11 +174,15 @@
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<reference key="IBUIHighlightedTitleColor" ref="517899537"/>
+								<object class="NSColor" key="IBUIHighlightedTitleColor">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MQA</bytes>
+								</object>
 								<object class="NSColor" key="IBUINormalTitleColor">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 								</object>
+								<reference key="IBUIHighlightedTitleShadowColor" ref="1028723802"/>
 								<object class="NSColor" key="IBUINormalTitleShadowColor">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MC41AA</bytes>
@@ -376,6 +384,7 @@
 				<string key="7.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<real value="1" key="9.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
