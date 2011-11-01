@@ -131,10 +131,19 @@
 			
 			if (_repostFlag) {
 				WeiboClient *client2 = [WeiboClient client];
-				NSString *first = [@"//@" stringByAppendingString:self.targetStatus.author.screenName];
-				NSString *second = [first stringByAppendingString:@": "];
-				NSString *third = [second stringByAppendingString:self.targetStatus.text];
-				NSString *content = [comment stringByAppendingString:third];
+				
+				NSString *content;
+				
+				if (self.targetStatus.repostStatus) {
+					NSString *first = [@"//@" stringByAppendingString:self.targetStatus.author.screenName];
+					NSString *second = [first stringByAppendingString:@": "];
+					NSString *third = [second stringByAppendingString:self.targetStatus.text];
+					content = [comment stringByAppendingString:third];
+				}
+				else {
+					content = comment;
+				}
+				
 				[client2 setCompletionBlock:^(WeiboClient *client) {
 					[self hidePostingView];
 					if (!client.hasError) {
