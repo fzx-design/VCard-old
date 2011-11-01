@@ -109,8 +109,9 @@
 		self.textView.selectedRange = range;
     }
 	
+	[self textViewDidChange:self.textView];
+	
 	self.atView.layer.anchorPoint = CGPointMake(0.5, 0);
-    
     self.textView.delegate = self;
 }
 
