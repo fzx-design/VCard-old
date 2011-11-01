@@ -71,9 +71,7 @@
         [self.status removeComments:self.status.comments];
     }
     else {
-		User *tmp = [User userWithID:self.currentUser.userID inManagedObjectContext:self.managedObjectContext];
-		[tmp removeCommentsToMe:self.currentUser.commentsToMe];
-//        [self.currentUser removeCommentsToMe:self.currentUser.commentsToMe];
+        [self.currentUser removeCommentsToMe:self.currentUser.commentsToMe];
     }
 }
 

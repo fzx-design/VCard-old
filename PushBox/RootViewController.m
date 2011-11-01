@@ -137,9 +137,7 @@
     [client setCompletionBlock:^(WeiboClient *client) {
         if (!client.hasError) {
             NSDictionary *userDict = client.responseJSONObject;
-//            self.currentUser = [User insertUser:userDict inManagedObjectContext:self.managedObjectContext];
-			User *tmp = [User insertUser:userDict inManagedObjectContext:self.managedObjectContext];
-			self.currentUser = [User getUserTempDataFromUser:tmp];
+            self.currentUser = [User insertUser:userDict inManagedObjectContext:self.managedObjectContext];
         }
 		
 		[self updateBackgroundImageAnimated:YES];
@@ -228,8 +226,7 @@
 	
     if ([WeiboClient authorized]) {
         self.pushBoxHDImageView.alpha = 0.0;
-		User *tmp = [User userWithID:[WeiboClient currentUserID] inManagedObjectContext:self.managedObjectContext];
-        self.currentUser = [User getUserTempDataFromUser:tmp];
+        self.currentUser = [User userWithID:[WeiboClient currentUserID] inManagedObjectContext:self.managedObjectContext];
         [self start];
     }
     else {

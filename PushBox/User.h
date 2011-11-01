@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "UserTempData.h"
 
 @class Status;
 @class Comment;
@@ -41,7 +40,6 @@
 @property (nonatomic, retain) NSSet *favorites;
 @property (nonatomic, retain) NSSet *commentsToMe;
 
-+ (UserTempData *)getUserTempDataFromUser:(User *)user;
 + (User *)insertUser:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context;
 + (User *)userWithID:(NSString *)userID inManagedObjectContext:(NSManagedObjectContext *)context;
 + (void)deleteAllObjectsInManagedObjectContext:(NSManagedObjectContext *)context;

@@ -8,7 +8,6 @@
 
 #import "EGOTableViewController.h"
 #import "ErrorNotification.h"
-#import "UserTempData.h"
 
 typedef enum {
     RelationshipViewTypeFriends,
@@ -22,13 +21,13 @@ typedef enum {
     UIButton *_backButton;
     int _nextCursor;
     
-    UserTempData *_user;
+    User *_user;
     RelationshipViewType _type;
 }
 
 @property(nonatomic, retain) IBOutlet UILabel* titleLabel;
 @property(nonatomic, retain) IBOutlet UIButton* backButton;
-@property(nonatomic, retain) UserTempData* user;
+@property(nonatomic, retain) User* user;
 
 - (id)initWithType:(RelationshipViewType)type;
 - (IBAction)backButtonClicked:(id)sender;

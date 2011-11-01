@@ -15,7 +15,6 @@
 #import "UIApplicationAddition.h"
 #import "PushBoxAppDelegate.h"
 #import "WeiboClient.h"
-#import "UserTempData.h"
 
 #define kLoadDelay 1.5
 #define kPlayButtonFrameTopRight CGRectMake(399, 306, 68, 68)
@@ -114,7 +113,7 @@
 
 - (void)clear
 {
-
+    
 }
 
 - (BOOL)checkGif:(NSString*)url
@@ -774,8 +773,7 @@
                                          self.profileImageView.alpha = 1.0;
                                      } completion:^(BOOL fin) {
                                      }];
-                                 }                                                                           
-							 cacheInContext:self.managedObjectContext];
+                                 }                                                                           cacheInContext:self.managedObjectContext];
     
     // post text
     [self loadPostWebView];
@@ -833,7 +831,7 @@
     if ([self.status isEqualToStatus:status]) {
         return;
     }
-    	
+    
     [_status release];
     _status = [status retain];
 //    _status = status;
@@ -1018,10 +1016,9 @@
     [client setCompletionBlock:^(WeiboClient *client) {
         if (!client.hasError) {
             NSDictionary *userDict = client.responseJSONObject;
-//            User* atUser = [User insertUser:userDict inManagedObjectContext:self.managedObjectContext];
-			UserTempData* atUser = [UserTempData getUserInDictionary:userDict withContext:self.managedObjectContext];
+            User* atUser = [User insertUser:userDict inManagedObjectContext:self.managedObjectContext];
             
-            UserCardViewController *vc = [[UserCardViewController alloc] initWithUsrTempData:atUser];
+            UserCardViewController *vc = [[UserCardViewController alloc] initWithUsr:atUser];
             [vc setRelationshipState];
             vc.currentUser = self.currentUser;
             vc.modalPresentationStyle = UIModalPresentationCurrentContext;
@@ -1036,8 +1033,7 @@
             
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardPresented object:self];
             
-            [self presentViewController:navi animated:YES completion:nil];
-			[atUser release];
+            [self presentModalViewController:navi animated:YES];
             [navi release];
             [vc release];
             
@@ -1125,9 +1121,7 @@
         WeiboClient *client = [WeiboClient client];
         [client setCompletionBlock:^(WeiboClient *client) {
             if (!client.hasError) {
-				User *tmp = [User userWithID:self.currentUser.userID inManagedObjectContext:self.managedObjectContext];
-                [tmp removeFavoritesObject:self.status];
-//				[self.currentUser removeFavoritesObject:self.status];
+                [self.currentUser removeFavoritesObject:self.status];
                 sender.selected = NO;
             } else {
                 [ErrorNotification showOperationError];
@@ -1140,9 +1134,7 @@
         [client setCompletionBlock:^(WeiboClient *client) {
             if (!client.hasError) {
                 //remain to be solved;
-				User *tmp = [User userWithID:self.currentUser.userID inManagedObjectContext:self.managedObjectContext];
-                [tmp addFavoritesObject:self.status];
-//                [self.currentUser addFavoritesObject:self.status];
+                [self.currentUser addFavoritesObject:self.status];
                 
                 sender.selected = YES;
                 

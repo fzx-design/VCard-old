@@ -371,9 +371,7 @@
             if ([dictsArray count]) {
                 for (NSDictionary *dict in dictsArray) {
                     Status *status = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-					User *tmp = [User userWithID:self.currentUser.userID inManagedObjectContext:self.managedObjectContext];
-//					[self.currentUser addFavoritesObject:status];
-					[tmp addFavoritesObject:status];
+                    [self.currentUser addFavoritesObject:status];
                 }
                 [self loadAllFavoritesWithCompletion:completion];
             }
@@ -463,9 +461,7 @@
 			[self.managedObjectContext processPendingChanges];
 			for (NSDictionary *dict in dictArray) {
 				Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-				User *tmp = [User userWithID:self.currentUser.userID inManagedObjectContext:self.managedObjectContext];
-//				[self.currentUser addFriendsStatusesObject:newStatus];
-				[tmp addFriendsStatusesObject:newStatus];
+				[self.currentUser addFriendsStatusesObject:newStatus];
 			}
 			[self.managedObjectContext processPendingChanges];
 			_lastStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
@@ -538,9 +534,7 @@
 				
 				for (NSDictionary *dict in dictArray) {
                     Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-					User *tmp = [User userWithID:self.currentUser.userID inManagedObjectContext:self.managedObjectContext];
-//                    [self.currentUser addFriendsStatusesObject:newStatus];
-					[tmp addFriendsStatusesObject:newStatus];
+                    [self.currentUser addFriendsStatusesObject:newStatus];
                 }
 				
 				[self.managedObjectContext processPendingChanges];
@@ -557,9 +551,7 @@
 							[self clearData];
 							for (NSDictionary *dict in dictArray) {
 								Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-								User *tmp = [User userWithID:self.currentUser.userID inManagedObjectContext:self.managedObjectContext];
-//								[self.currentUser addFriendsStatusesObject:newStatus];
-								[tmp addFriendsStatusesObject:newStatus];
+								[self.currentUser addFriendsStatusesObject:newStatus];
 							}
 							[self.managedObjectContext processPendingChanges];
 						}];
@@ -667,9 +659,8 @@
 				
                 NSArray *dictArray = client.responseJSONObject;
 				for (NSDictionary *dict in dictArray) {
-                   [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-//					User *tmp = [User userWithID:self.currentUser.userID inManagedObjectContext:self.managedObjectContext];
-//                    [self.currentUser addFriendsStatusesObject:newStatus];
+                    Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+                    [self.currentUser addFriendsStatusesObject:newStatus];
                 }
 				[self.managedObjectContext processPendingChanges];
 				
@@ -783,19 +774,15 @@
 
 - (void)clearData
 {
-	User *tmp = [User userWithID:self.currentUser.userID inManagedObjectContext:self.managedObjectContext];
     switch (self.dataSource) {
         case CardTableViewDataSourceUserTimeline:
             [self.user removeStatuses:self.user.statuses];
             break;
         case CardTableViewDataSourceFriendsTimeline:
-			
-//            [self.currentUser removeFriendsStatuses:self.currentUser.friendsStatuses];
-			[tmp removeFriendsStatuses:self.currentUser.friendsStatuses];
+            [self.currentUser removeFriendsStatuses:self.currentUser.friendsStatuses];
             break;
         case CardTableViewDataSourceFavorites:
-//            [self.currentUser removeFavorites:self.currentUser.favorites];
-			[tmp removeFavorites:self.currentUser.favorites];
+            [self.currentUser removeFavorites:self.currentUser.favorites];
             break;
 		case CardTableViewDataSourceMentions:
 			break;
@@ -816,10 +803,7 @@
     if (YES)
     {   
         CardTableViewCell *tableViewCell = (CardTableViewCell *)cell;
-//		[tableViewCell clear];
-//		SmartCardViewController *vc = tableViewCell.smartCardViewController;
-		
-//        tableViewCell.smartCardViewController = [[SmartCardViewController alloc] init];
+        //        tableViewCell.smartCardViewController = [[SmartCardViewController alloc] init];
         tableViewCell.smartCardViewController.currentUser = self.currentUser;
         tableViewCell.smartCardViewController.status = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	}
@@ -954,12 +938,16 @@
 
 -(void)enableDismissRegion
 {
+    //	self.regionLeftDetectButton.alpha = 1.0;
+    //	self.regionRightDetectButton.alpha = 1.0;
 	self.regionLeftDetectButton.enabled = YES;
 	self.regionRightDetectButton.enabled = YES;
 }
 
 -(void)disableDismissRegion
 {
+    //	self.regionLeftDetectButton.alpha = 0.0;
+    //	self.regionRightDetectButton.alpha = 0.0;
 	self.regionLeftDetectButton.enabled = NO;
 	self.regionRightDetectButton.enabled = NO;
 }
@@ -969,6 +957,9 @@
 	[self disableDismissRegion];
     [UserCardNaviViewController sharedUserCardDismiss];
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardDismissed object:self];
+    //	if ([UserCardNaviViewController sharedUserCardNaviViewControllerExisted]) {
+    //		[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameShouldDismissUserCard object:self];
+    //	} 
 }
 
 @end

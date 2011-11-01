@@ -10,7 +10,6 @@
 #import "UserCardNaviViewController.h"
 #import "PostViewController.h"
 #import "UIApplicationAddition.h"
-#import "UserTempData.h"
 
 @class UserCardViewController;
 @protocol UserCardViewControllerDelegate
@@ -23,8 +22,6 @@
 	UIButton *_unFollowButton;
     UIButton *_backButton;
     UILabel *_relationshipStateLabel;
-	
-	UserTempData *_userTempData;
     
     id<UserCardViewControllerDelegate> _delegate;
 }
@@ -33,11 +30,9 @@
 @property(nonatomic, retain) IBOutlet UIButton* unFollowButton;
 @property(nonatomic, retain) IBOutlet UIButton* backButton;
 @property(nonatomic, retain) IBOutlet UILabel* relationshipStateLabel;
-@property(nonatomic, retain) UserTempData* userTempData;
 @property(nonatomic, assign) id<UserCardViewControllerDelegate> delegate;
 
 - (id)initWithUsr:(User *)user;
-- (id)initWithUsrTempData:(UserTempData *)user;
 
 - (IBAction)followButtonClicked:(id)sender;
 - (IBAction)unfollowButtonClicked:(id)sender;

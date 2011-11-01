@@ -23,10 +23,9 @@
 
 - (void)setCurrentUser:(User *)currentUser
 {
-	UserTempData *currentUserData = [User getUserTempDataFromUser:currentUser];
-    if (_currentUser != currentUserData) {
+    if (_currentUser != currentUser) {
         [_currentUser release];
-        _currentUser = [currentUserData retain];
+        _currentUser = [currentUser retain];
         if (!self.managedObjectContext) {
             self.managedObjectContext = currentUser.managedObjectContext;
         }

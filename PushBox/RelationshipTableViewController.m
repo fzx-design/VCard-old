@@ -65,14 +65,10 @@
 - (void)clearData
 {
     if (_type == RelationshipViewTypeFriends) {
-		User *tmp = [User userWithID:self.user.userID inManagedObjectContext:self.managedObjectContext];
-		[tmp removeFriends:self.user.friends];
-//        [self.user removeFriends:self.user.friends];
+        [self.user removeFriends:self.user.friends];
     }
     else {
-		User *tmp = [User userWithID:self.user.userID inManagedObjectContext:self.managedObjectContext];
-		[tmp removeFollowers:self.user.followers];
-//        [self.user removeFollowers:self.user.followers];
+        [self.user removeFollowers:self.user.followers];
     }
     //[self.tableView reloadData];
 }
@@ -107,14 +103,10 @@
             for (NSDictionary *dict in dictArray) {
                 User *usr = [User insertUser:dict inManagedObjectContext:self.managedObjectContext];
                 if (_type == RelationshipViewTypeFollowers) {
-					User *tmp = [User userWithID:self.user.userID inManagedObjectContext:self.managedObjectContext];
-					[tmp addFollowersObject:usr];
-//                    [self.user addFollowersObject:usr];
+                    [self.user addFollowersObject:usr];
                 }
                 else {
-					User *tmp = [User userWithID:self.user.userID inManagedObjectContext:self.managedObjectContext];
-					[tmp addFriendsObject:usr];
-//                    [self.user addFriendsObject:usr];
+                    [self.user addFriendsObject:usr];
                 }
             }
             
