@@ -46,7 +46,7 @@
 
 - (IBAction)rate:(UIButton *)sender
 {
-	NSString *urlString = @"http://itunes.apple.com/us/app/id420598288?mt=8";
+	NSString *urlString = @"http://itunes.apple.com/cn/app/id420598288?mt=8";
 	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
 }
 
@@ -55,10 +55,10 @@
     WeiboClient *client = [WeiboClient client];
     [client setCompletionBlock:^(WeiboClient *client){
         if (!client.hasError) {
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"关注完成", nil) 
-															message:nil
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"完成", nil) 
+															message:NSLocalizedString(@"您可以在 VCard 官方微博中找到使用窍门和最新信息。", nil)
 														   delegate:nil
-												  cancelButtonTitle:NSLocalizedString(@"确定", nil)
+												  cancelButtonTitle:NSLocalizedString(@"好", nil)
 												  otherButtonTitles:nil];
 			[alert show];
 			[alert release];
@@ -75,13 +75,13 @@
     
 	PostViewController *vc = [[PostViewController alloc] initWithType:PostViewTypePost];
     [[UIApplication sharedApplication] presentModalViewController:vc atHeight:kModalViewHeight];
-	vc.textView.text = @"我正在用 VCard HD（创新而精美的新浪微博 iPad 客户端），下载地址http://itunes.apple.com/us/app/id420598288?mt=8";
+	vc.textView.text = @"我正在用 @VCard微博（创新而精美的新浪微博 iPad 客户端），下载地址http://itunes.apple.com/cn/app/id420598288?mt=8";
 	[vc release];
 }
 
 - (IBAction)otherApps:(UIButton *)sender
 {
-	NSString *urlString = @"http://itunes.apple.com/us/artist/mondev-tongji-u/id420593934";
+	NSString *urlString = @"http://itunes.apple.com/cn/artist/mondev-tongji-u/id420593934";
 	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
 }
 
