@@ -51,7 +51,7 @@
     
     self.providerLabel.text = NSLocalizedString(@"新浪微博", nil);
 	BOOL autoSave = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeyAutoSave];
-    self.confirmButton.enabled = YES;
+    self.confirmButton.hidden = NO;
 	self.autoSaveButton.selected = autoSave;
 	self.usernameTextField.text = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultName];
     [self.usernameTextField becomeFirstResponder];
@@ -69,7 +69,7 @@
 }
 
 - (IBAction)login:(id)sender {
-    self.confirmButton.enabled = NO;
+    self.confirmButton.hidden = YES;
     NSString *username = self.usernameTextField.text;
     NSString *password = self.passwordTextField.text;
 	[[NSUserDefaults standardUserDefaults] setObject:username forKey:kUserDefaultName];
@@ -80,10 +80,10 @@
 	[self.loadingIndicator startAnimating];
 	
     [client setCompletionBlock:^(WeiboClient *client) {
-        self.confirmButton.enabled = YES;
 		self.loadingIndicator.hidden = YES;
 		[self.loadingIndicator stopAnimating];
         if (client.hasError || ![WeiboClient authorized]) {
+			self.confirmButton.hidden = NO;
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"验证失败", nil)
                                                             message:NSLocalizedString(@"请检查用户名或网络设置", nil)
                                                             delegate:nil 
