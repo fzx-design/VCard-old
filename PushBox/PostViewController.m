@@ -308,7 +308,7 @@
         NSEntityDescription *entityDescription = [NSEntityDescription                                                  entityForName:@"User" inManagedObjectContext:context];
         NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
         [request setEntity:entityDescription];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:[[NSString alloc] initWithFormat:@"screenName like[c] \"%@*\"", text]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:[[NSString alloc] initWithFormat:@"screenName like[c] \"*%@*\"", text]];
         [request setPredicate:predicate];
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]                                                                      initWithKey:@"screenName" ascending:YES];
         [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
