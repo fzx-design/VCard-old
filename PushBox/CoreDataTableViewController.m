@@ -103,7 +103,13 @@
             [cell autorelease];
         }
     }
-
+//    else {
+//        if ([name compare:@"CardTableViewCell"] == NSOrderedSame) {
+//            CardTableViewCell* cardTableViewCell = (CardTableViewCell*)cell;
+//           [cardTableViewCell clear];
+//        }
+//    }
+    
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }

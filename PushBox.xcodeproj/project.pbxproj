@@ -262,8 +262,6 @@
 		FE777CC814568C3A00849B5B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE777CC714568C3A00849B5B /* MediaPlayer.framework */; };
 		FE7ADDC5145D554F00C403DF /* weibopop_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FE7ADDC3145D554F00C403DF /* weibopop_bg.png */; };
 		FE7ADDC6145D554F00C403DF /* weibopop_repost_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FE7ADDC4145D554F00C403DF /* weibopop_repost_bg.png */; };
-		FE831552145E803700909CF0 /* PostViewAtTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE831550145E803600909CF0 /* PostViewAtTableViewCell.m */; };
-		FE831553145E803700909CF0 /* PostViewAtTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE831551145E803600909CF0 /* PostViewAtTableViewCell.xib */; };
 		FE8E1753145433A5004F6A7C /* InnerBroswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE8E1751145433A5004F6A7C /* InnerBroswerViewController.m */; };
 		FE8E1754145433A5004F6A7C /* InnerBroswerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE8E1752145433A5004F6A7C /* InnerBroswerViewController.xib */; };
 		FE8E175D14544255004F6A7C /* webview_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = FE8E175A14544255004F6A7C /* webview_bottom.png */; };
@@ -614,9 +612,6 @@
 		FE777CC714568C3A00849B5B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		FE7ADDC3145D554F00C403DF /* weibopop_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibopop_bg.png; sourceTree = "<group>"; };
 		FE7ADDC4145D554F00C403DF /* weibopop_repost_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibopop_repost_bg.png; sourceTree = "<group>"; };
-		FE83154F145E803600909CF0 /* PostViewAtTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostViewAtTableViewCell.h; sourceTree = "<group>"; };
-		FE831550145E803600909CF0 /* PostViewAtTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostViewAtTableViewCell.m; sourceTree = "<group>"; };
-		FE831551145E803600909CF0 /* PostViewAtTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostViewAtTableViewCell.xib; sourceTree = "<group>"; };
 		FE8E1750145433A5004F6A7C /* InnerBroswerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InnerBroswerViewController.h; sourceTree = "<group>"; };
 		FE8E1751145433A5004F6A7C /* InnerBroswerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InnerBroswerViewController.m; sourceTree = "<group>"; };
 		FE8E1752145433A5004F6A7C /* InnerBroswerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InnerBroswerViewController.xib; sourceTree = "<group>"; };
@@ -821,8 +816,6 @@
 		CB1164DF13F1347100884118 /* Table view cells */ = {
 			isa = PBXGroup;
 			children = (
-				FE83154F145E803600909CF0 /* PostViewAtTableViewCell.h */,
-				FE831550145E803600909CF0 /* PostViewAtTableViewCell.m */,
 				CBBA01FD13E4742D00641923 /* RelationshipTableViewCell.h */,
 				CBBA01FE13E4742E00641923 /* RelationshipTableViewCell.m */,
 				CBBA020D13E53C0700641923 /* CommentsTableViewCell.h */,
@@ -1203,6 +1196,7 @@
 				FEFDACAE1443F7A5009CF7CD /* MessagesDialogTableViewCell.xib */,
 				FEFB31241443130700440DD5 /* MessageViewController.xib */,
 				CBD36F1013E697F5008BB428 /* CommentViewController.xib */,
+				CBBA01C913E3463300641923 /* PostViewController.xib */,
 				CB018DFE13DDE468004217E0 /* AboutViewController.xib */,
 				CB018DD513DD3CC8004217E0 /* DockViewController.xib */,
 				9B1129EE14514374001CE64E /* RootViewController.xib */,
@@ -1223,10 +1217,6 @@
 				CB9DCADD13E2C15C00DA3D3D /* UserCardViewController.xib */,
 				9B112A101451459A001CE64E /* SmartCardViewController.xib */,
 				9BC6E650144A9B2400B28506 /* CCUserInfoCardViewController.xib */,
-				CBBA01C913E3463300641923 /* PostViewController.xib */,
-				FE831551145E803600909CF0 /* PostViewAtTableViewCell.xib */,
-				9BC6FA0F14572A2D001493D6 /* CommentReviewPopoverController.h */,
-				9BC6FA1014572A2D001493D6 /* CommentReviewPopoverController.m */,
 				9BC6FA1114572A2D001493D6 /* CommentReviewPopoverController.xib */,
 			);
 			name = Nibs;
@@ -1536,7 +1526,6 @@
 				9BF36CFC1459359300A60A0F /* options_icon_legal.png in Resources */,
 				FE7ADDC5145D554F00C403DF /* weibopop_bg.png in Resources */,
 				FE7ADDC6145D554F00C403DF /* weibopop_repost_bg.png in Resources */,
-				FE831553145E803700909CF0 /* PostViewAtTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1619,7 +1608,6 @@
 				9B4B49F814582FCF00C9B542 /* Status.m in Sources */,
 				9B4B49FB14586C1000C9B542 /* RefreshingIntervalViewController.m in Sources */,
 				9BF36CFF14593B7700A60A0F /* LegacyViewController.m in Sources */,
-				FE831552145E803700909CF0 /* PostViewAtTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

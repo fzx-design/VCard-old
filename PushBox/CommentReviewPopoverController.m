@@ -150,6 +150,9 @@ static CommentReviewPopoverController* sharedCommentReviewPopoverController;
                                    cacheInContext:context];
         }
     }    
+    
+    //    UITapGestureRecognizer* ges = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClicked:)];
+    //    [self.tweetImageView addGestureRecognizer:ges];
 }
 
 - (BOOL)checkGif:(NSString*)url
@@ -168,6 +171,27 @@ static CommentReviewPopoverController* sharedCommentReviewPopoverController;
     }
 }
 
+- (void)imageViewClicked:(UIGestureRecognizer *)ges
+{
+	UIView *mainView = [[UIApplication sharedApplication] rootView];
+    
+    //    UIImageView *imageView = (UIImageView *)ges.view;
+    //    DetailImageViewController *dvc = [[DetailImageViewController alloc] initWithImage:imageView.image];
+    NSString* url = self.status.originalPicURL ? self.status.originalPicURL : self.status.repostStatus.originalPicURL;
+    DetailImageViewController *dvc = [[DetailImageViewController alloc] initWithUrl:url inContext:self.managedObjectContext];
+    
+    if ([self checkGif:self.status.originalPicURL])
+        dvc.gifUrl = self.status.originalPicURL;
+    if ([self checkGif:self.status.repostStatus.originalPicURL])
+        dvc.gifUrl = self.status.repostStatus.originalPicURL;
+    
+    dvc.delegate = self;
+    [mainView addSubview:dvc.view];
+    dvc.view.alpha = 0.0;
+    [UIView animateWithDuration:0.3 animations:^{
+        dvc.view.alpha = 1.0;
+    }];
+}
 
 - (void)viewDidLoad
 {
@@ -175,7 +199,12 @@ static CommentReviewPopoverController* sharedCommentReviewPopoverController;
 	[self prepare];
 	[self.view addSubview:self.statusView];
 	
-
+//	UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClicked:)];
+//	tapGesture.numberOfTapsRequired = 1;
+//	tapGesture.numberOfTouchesRequired = 1;
+//	[self.tweetImageView addGestureRecognizer:tapGesture];
+//	[tapGesture release];
+	
 	self.statusView.layer.anchorPoint = CGPointMake(0, 0.5);
 	[self.statusView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
 	CGRect frame = self.statusView.frame;
@@ -189,6 +218,16 @@ static CommentReviewPopoverController* sharedCommentReviewPopoverController;
 	
 
 	self.statusView.frame = frame;
+}
+
+- (void)detailImageViewControllerShouldDismiss:(UIViewController *)vc
+{
+	[UIView animateWithDuration:0.5 animations:^{
+		vc.view.alpha = 0.0;
+	} completion:^(BOOL fin){
+		[vc.view removeFromSuperview];
+		[vc release];
+	}];
 }
 
 - (void)commentFinished

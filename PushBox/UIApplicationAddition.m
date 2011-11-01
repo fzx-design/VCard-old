@@ -56,20 +56,6 @@ static BOOL refreshFlag = NO;
     return appDelegate.rootViewController;
 }
 
-- (void)hideRefreshView
-{
-	refreshFlag = NO;
-	refreshTime = 0;
-    
-	[UIView animateWithDuration:1.0 animations:^{
-		_refreshCircleImageView.alpha = 0.0;
-		_refreshRoundImageView.alpha = 0.0;
-    } completion:nil];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameEnableRefresh
-														object:nil];
-}
-
 - (void)calculateRefreshTime
 {
 	if (!refreshFlag) {
@@ -176,6 +162,20 @@ static BOOL refreshFlag = NO;
 		[_loadingImageView removeFromSuperview];
 		[_loadingRoundImageView removeFromSuperview];
 	}];
+}
+
+- (void)hideRefreshView
+{
+	refreshFlag = NO;
+	refreshTime = 0;
+
+	[UIView animateWithDuration:1.0 animations:^{
+		_refreshCircleImageView.alpha = 0.0;
+		_refreshRoundImageView.alpha = 0.0;
+    } completion:nil];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameEnableRefresh
+														object:nil];
 }
 
 - (void)presentModalViewController:(UIViewController *)vc atHeight:(CGFloat)height

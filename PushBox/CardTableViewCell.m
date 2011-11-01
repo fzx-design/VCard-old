@@ -46,13 +46,13 @@
 
 - (void)clear
 {
-    //    [_smartCardViewController.view removeFromSuperview];
-    //    [_smartCardViewController release];
-    //    
-    //    _smartCardViewController = [[SmartCardViewController alloc] init];
-    //    [self.contentView addSubview:_smartCardViewController.view];
+//    [_smartCardViewController.view removeFromSuperview];
+//    [_smartCardViewController release];
+//    
+//    _smartCardViewController = [[SmartCardViewController alloc] init];
+//    [self.contentView addSubview:_smartCardViewController.view];
     
-    //    [_smartCardViewController clear];
+    [_smartCardViewController clear];
 }
 
 @end
