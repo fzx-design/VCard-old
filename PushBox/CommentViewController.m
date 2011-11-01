@@ -127,31 +127,45 @@
 	
 	[self showPostingView];
     [client setCompletionBlock:^(WeiboClient *client) {
-		[self hidePostingView];
         if (!client.hasError) {
-			[self dismissView];
-			if (self.delegate != nil) {
-				[self.delegate commentFinished];
+			
+			if (_repostFlag) {
+				WeiboClient *client2 = [WeiboClient client];
+				NSString *first = [@"//@" stringByAppendingString:self.targetStatus.author.screenName];
+				NSString *second = [first stringByAppendingString:@": "];
+				NSString *third = [second stringByAppendingString:self.targetStatus.text];
+				NSString *content = [comment stringByAppendingString:third];
+				[client2 setCompletionBlock:^(WeiboClient *client) {
+					[self hidePostingView];
+					if (!client.hasError) {
+						[self dismissView];
+						if (self.delegate != nil) {
+							[self.delegate commentFinished];
+						}
+						[[UIApplication sharedApplication] showOperationDoneView];
+					} else {
+						[ErrorNotification showPostError];
+					}
+				}];
+				[client2 repost:self.targetStatus.statusID text:content commentStatus:NO commentOrigin:NO];
+			} else {			
+				[self dismissView];
+				if (self.delegate != nil) {
+					[self.delegate commentFinished];
+				}
+				[[UIApplication sharedApplication] showOperationDoneView];
 			}
-			[[UIApplication sharedApplication] showOperationDoneView];
         } else {
+			[self hidePostingView];
 			[ErrorNotification showPostError];
 		}
     }];
     
-	if (_repostFlag) {
-		NSString *first = [@"//@" stringByAppendingString:self.targetStatus.author.screenName];
-		NSString *second = [first stringByAppendingString:@": "];
-		NSString *third = [second stringByAppendingString:self.targetStatus.text];
-		NSString *content = [comment stringByAppendingString:third];
-		[client repost:self.targetStatus.statusID text:content commentStatus:YES commentOrigin:NO];
+	if (self.targetComment)
+	{
+		[client reply:self.targetStatus.statusID cid:self.targetComment.commentID text:comment withOutMention:YES];
 	} else {
-		if (self.targetComment)
-		{
-			[client reply:self.targetStatus.statusID cid:self.targetComment.commentID text:comment withOutMention:YES];
-		} else {
-			[client comment:self.targetStatus.statusID cid:nil text:comment withOutMention:YES];
-		}
+		[client comment:self.targetStatus.statusID cid:nil text:comment withOutMention:YES];
 	}
 	
 }
