@@ -44,9 +44,10 @@
 					<object class="IBUITableView" id="180514799">
 						<reference key="NSNextResponder" ref="143900249"/>
 						<int key="NSvFlags">256</int>
-						<string key="NSFrame">{{11, 49}, {440, 551}}</string>
+						<string key="NSFrame">{{11, 49}, {440, 533}}</string>
 						<reference key="NSSuperview" ref="143900249"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="692033167">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
@@ -141,6 +142,7 @@
 				<string key="NSFrameSize">{457, 582}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView" ref="212903670"/>
 				<reference key="IBUIBackgroundColor" ref="692033167"/>
 				<bool key="IBUIOpaque">NO</bool>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
