@@ -14,7 +14,7 @@
 
 @class CommentsTableViewController;
 
-@interface CommentReviewPopoverController : CoreDataViewController<DetailImageViewControllerDelegate, CommentseViewDelegates>
+@interface CommentReviewPopoverController : CoreDataViewController<CommentseViewDelegates>
 {
 	UIImageView *_profileImageView;
 	UILabel *_screenNameLabel;
@@ -55,8 +55,7 @@
 @property(nonatomic, retain) Status* status;
 
 - (IBAction)dismissButtonClicked:(id)sender;
-+(CommentReviewPopoverController*)sharedCommentReviewPopoverControllerWithTableType:(CommentsTableViewModel)type;
-- (IBAction)imageViewClicked:(UIGestureRecognizer *)ges;
 - (IBAction)commentButtonClicked:(id)sender;
++(CommentReviewPopoverController*)sharedCommentReviewPopoverControllerWithTableType:(CommentsTableViewModel)type;
 
 @end
