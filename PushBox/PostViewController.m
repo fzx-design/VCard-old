@@ -9,6 +9,7 @@
 #import "PostViewController.h"
 #import "UIApplicationAddition.h"
 #import "PushBoxAppDelegate.h"
+#import "AnimationProvider.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "WeiboClient.h"
 #import "Status.h"
@@ -107,6 +108,8 @@
 		range.length = 0;
 		self.textView.selectedRange = range;
     }
+	
+	self.atView.layer.anchorPoint = CGPointMake(0.5, 0);
     
     self.textView.delegate = self;
 }
@@ -154,6 +157,9 @@
     frame.origin = CGPointMake(200, 105);
     self.atView.frame = frame;
     
+//	self.atView.layer.anchorPoint = CGPointMake(0.5, 0);
+	[self.atView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
+	
     self.atTextField.text = @"";
     [self.atTextField becomeFirstResponder];
     
@@ -189,7 +195,14 @@
 - (void)dismissAtView
 {
 	if (self.atView.superview) {
-		[self.atView removeFromSuperview];
+		[UIView animateWithDuration:0.3 
+						 animations:^(){
+			self.atView.alpha = 0.0;
+		} 
+						 completion:^(BOOL finished) {
+			[self.atView removeFromSuperview];
+			self.atView.alpha = 1.0;
+		}];
 	}
     
     [_atBgButton removeFromSuperview];
