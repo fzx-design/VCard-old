@@ -97,6 +97,7 @@
     _loading = NO;
 	_checkingDirection = NO;
 	_refreshFlag = NO;
+	_pushFlag = NO;
 	
 	NSInteger interval = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeyRefreshingInterval];
 	
@@ -231,6 +232,8 @@
 		_refreshFlag = YES;
 	}
 	
+	_pushFlag = YES;
+	
     self.blurImageView.alpha = 0.0;
 	self.blurImageView.transform = CGAffineTransformMakeScale(kBlurImageViewScale, kBlurImageViewScale);
     
@@ -277,6 +280,8 @@
 
 - (void)popCardWithCompletion:(void (^)())completion
 {
+	_pushFlag = NO;
+	
 	[[UIApplication sharedApplication] showLoadingView];
 	
     self.dataSource = CardTableViewDataSourceFriendsTimeline;
@@ -503,11 +508,11 @@
             [self.delegate cardTableViewController:self 
                                     didScrollToRow:self.currentRowIndex
                                   withNumberOfRows:[self numberOfRows]];
-            if (completion) {
+            if (completion && _pushFlag) {
                 completion();
             }
 			[[UIApplication sharedApplication] hideLoadingView];
-            _loading = NO;
+			_loading = NO;
         }];
         
         return;

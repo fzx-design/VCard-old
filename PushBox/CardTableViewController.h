@@ -57,6 +57,7 @@ typedef enum {
     BOOL _insertionAnimationEnabled;
 	
 	BOOL _refreshFlag;
+	BOOL _pushFlag;
 	BOOL _checkingDirection;
 	Status *_lastStatus;
 	NSString *_lastMentionStatusID;
