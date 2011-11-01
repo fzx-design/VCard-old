@@ -171,6 +171,10 @@
 	commentCell.separatorLine.frame = CGRectMake(0, height - 6, 
                                                  commentCell.separatorLine.frame.size.width, 
                                                  commentCell.separatorLine.frame.size.height);
+	
+	UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_highlight.png"]];
+	imageView.contentMode = UIViewContentModeBottom;
+	[commentCell setSelectedBackgroundView:imageView];
 }
 
 - (NSString *)customCellClassName
@@ -196,6 +200,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	
 	Comment *comment = [self.fetchedResultsController objectAtIndexPath:indexPath];
     CommentsTableViewController *vc = [[CommentsTableViewController alloc] init];
     vc.dataSource = CommentsTableViewDataSourceCommentsOfStatus;

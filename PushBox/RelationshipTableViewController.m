@@ -157,6 +157,9 @@
     [relationshipCell.profileImageView loadImageFromURL:usr.profileImageURL 
                                              completion:NULL 
                                          cacheInContext:self.managedObjectContext];
+	UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_highlight.png"]];
+	imageView.contentMode = UIViewContentModeBottom;
+	[relationshipCell setSelectedBackgroundView:imageView];
 }
 
 - (NSString *)customCellClassName
@@ -166,6 +169,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
     User *usr = [self.fetchedResultsController objectAtIndexPath:indexPath];
     UserCardViewController *vc = [[UserCardViewController alloc] initWithUsr:usr];
     vc.currentUser = self.currentUser;

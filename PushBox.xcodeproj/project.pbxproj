@@ -128,6 +128,7 @@
 		9BB11CB514503ED3005B43AC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBDA5AF613DBEC1300FAE221 /* CoreGraphics.framework */; };
 		9BB5B8B61449A8B100352FF7 /* UserCardContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB5B8B41449A8B100352FF7 /* UserCardContentViewController.m */; };
 		9BB5B8B71449A8B100352FF7 /* UserCardContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BB5B8B51449A8B100352FF7 /* UserCardContentViewController.xib */; };
+		9BC26BB314604F4700724DAC /* cell_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BC26BB214604F4700724DAC /* cell_highlight.png */; };
 		9BC6E651144A9B2400B28506 /* CCUserInfoCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC6E64F144A9B2400B28506 /* CCUserInfoCardViewController.m */; };
 		9BC6E652144A9B2400B28506 /* CCUserInfoCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BC6E650144A9B2400B28506 /* CCUserInfoCardViewController.xib */; };
 		9BC6FA1214572A2D001493D6 /* CommentReviewPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC6FA1014572A2D001493D6 /* CommentReviewPopoverController.m */; };
@@ -408,6 +409,7 @@
 		9BB5B8B31449A8B100352FF7 /* UserCardContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCardContentViewController.h; sourceTree = "<group>"; };
 		9BB5B8B41449A8B100352FF7 /* UserCardContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCardContentViewController.m; sourceTree = "<group>"; };
 		9BB5B8B51449A8B100352FF7 /* UserCardContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCardContentViewController.xib; sourceTree = "<group>"; };
+		9BC26BB214604F4700724DAC /* cell_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_highlight.png; sourceTree = "<group>"; };
 		9BC6E64E144A9B2300B28506 /* CCUserInfoCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCUserInfoCardViewController.h; sourceTree = "<group>"; };
 		9BC6E64F144A9B2400B28506 /* CCUserInfoCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCUserInfoCardViewController.m; sourceTree = "<group>"; };
 		9BC6E650144A9B2400B28506 /* CCUserInfoCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCUserInfoCardViewController.xib; sourceTree = "<group>"; };
@@ -864,6 +866,7 @@
 				CB1164DC13F11D0300884118 /* login */,
 				CB1164DD13F11D1E00884118 /* options */,
 				20DC1AEC1428BE8E00213358 /* title_small.png */,
+				9BC26BB214604F4700724DAC /* cell_highlight.png */,
 				9B11290414510978001CE64E /* sc_repost_bg.png */,
 				CB9E33D213E9CBE900AAE64C /* card_hole_bg.png */,
 				206902D9144AD44D00BA9EC3 /* head_cover_card_light.png */,
@@ -1537,6 +1540,7 @@
 				FE7ADDC5145D554F00C403DF /* weibopop_bg.png in Resources */,
 				FE7ADDC6145D554F00C403DF /* weibopop_repost_bg.png in Resources */,
 				FE831553145E803700909CF0 /* PostViewAtTableViewCell.xib in Resources */,
+				9BC26BB314604F4700724DAC /* cell_highlight.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
