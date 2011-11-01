@@ -14,6 +14,7 @@
 #import "WeiboClient.h"
 #import "Status.h"
 #import "User.h"
+#import "AnimationProvider.h"
 
 @implementation PostViewController
 
@@ -111,7 +112,8 @@
 	
 	[self textViewDidChange:self.textView];
 	
-	self.atView.layer.anchorPoint = CGPointMake(0.5, 0);
+	self.atView.layer.anchorPoint = CGPointMake(0, 0.4);
+	self.rightView.layer.anchorPoint = CGPointMake(0.5, 0);
     self.textView.delegate = self;
 }
 
@@ -158,7 +160,6 @@
     frame.origin = CGPointMake(200, 105);
     self.atView.frame = frame;
     
-//	self.atView.layer.anchorPoint = CGPointMake(0.5, 0);
 	[self.atView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
 	
     self.atTextField.text = @"";
@@ -495,9 +496,13 @@
     
 	UIView *superView = [self.view superview];
 	[superView addSubview:self.rightView];
-	[UIView animateWithDuration:1.0 animations:^{
-		self.rightView.alpha = 1.0;
-	}];
+	self.rightView.alpha = 1.0;
+	[self.rightView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
+	
+	[self.textView becomeFirstResponder];
+//	[UIView animateWithDuration:1.0 animations:^{
+//		self.rightView.alpha = 1.0;
+//	}];
 }
 
 #pragma - UITableViewDataSource
