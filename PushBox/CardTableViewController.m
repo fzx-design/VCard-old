@@ -93,6 +93,7 @@
     self.blurImageView.alpha = 0.0;
     self.insertionAnimationEnabled = YES;
     _nextPage = 1;
+	_nextPageForMention = 1;
     _loading = NO;
 	_checkingDirection = NO;
 	_refreshFlag = NO;
@@ -766,7 +767,7 @@
 		
 		[client getMentionsSinceID:nil 
 							 maxID:[NSString stringWithFormat:@""] 
-							  page:0 
+							  page:_nextPageForMention++ 
 							 count:20];
         
 	}
@@ -794,6 +795,7 @@
 
 - (void)refresh
 {
+	_nextPageForMention = 1;
 	_refreshFlag = YES;
     [self loadMoreDataCompletion:NULL];
 }

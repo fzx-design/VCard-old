@@ -1017,7 +1017,7 @@
         if (!client.hasError) {
             NSDictionary *userDict = client.responseJSONObject;
             User* atUser = [User insertUser:userDict inManagedObjectContext:self.managedObjectContext];
-            
+			
             UserCardViewController *vc = [[UserCardViewController alloc] initWithUsr:atUser];
             [vc setRelationshipState];
             vc.currentUser = self.currentUser;
@@ -1033,10 +1033,9 @@
             
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardPresented object:self];
             
-            [self presentModalViewController:navi animated:YES];
+            [self presentViewController:navi animated:YES completion:nil];
             [navi release];
             [vc release];
-            
         }
         else
         {

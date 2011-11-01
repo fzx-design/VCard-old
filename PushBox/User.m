@@ -75,11 +75,11 @@
 
     result.following = [NSNumber numberWithBool:following];
     
-    NSDictionary *statusDict = [dict objectForKey:@"status"];
-    
-    if (statusDict) {
-        [result addStatusesObject:[Status insertStatus:statusDict inManagedObjectContext:context]];
-    }
+//	NSDictionary *statusDict = [dict objectForKey:@"status"];
+//    
+//    if (statusDict) {
+//        [result addStatusesObject:[Status insertStatus:statusDict inManagedObjectContext:context]];
+//    }
     
     return result;
 }
