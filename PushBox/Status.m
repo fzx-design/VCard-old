@@ -120,8 +120,8 @@
 
 + (Status *)insertStatus:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context
 {
-    int n = [self countOfStatuseInContext:context];
-    NSLog(@"----------------------%d", n);
+//    int n = [self countOfStatuseInContext:context];
+//    NSLog(@"----------------------%d", n);
     
     NSString *statusID = [[dict objectForKey:@"id"] stringValue];
     

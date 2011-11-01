@@ -94,10 +94,10 @@
 {
     [super viewDidLoad];
     
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"smartcard" ofType:@"js"];  
-    NSString *jsString = [[NSString alloc] initWithContentsOfFile:filePath];  
-    [self.postWebView stringByEvaluatingJavaScriptFromString:jsString];  
-    [self.repostWebView stringByEvaluatingJavaScriptFromString:jsString];  
+//    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"smartcard" ofType:@"js"];  
+//    NSString *jsString = [[NSString alloc] initWithContentsOfFile:filePath];  
+//    [self.postWebView stringByEvaluatingJavaScriptFromString:jsString];  
+//    [self.repostWebView stringByEvaluatingJavaScriptFromString:jsString];  
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClicked:)];
 	tapGesture.numberOfTapsRequired = 1;
