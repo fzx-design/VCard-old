@@ -47,6 +47,7 @@
 - (void)showCardTableView;
 - (void)hideCardTableView;
 - (void)showNotificationView:(id)sender;
+- (void)notificationRefreshed:(id)sender;
 - (void)setDefaultBackgroundImage:(BOOL)animated;
 - (void)updateBackgroundImageAnimated:(BOOL)animated;
 @end
@@ -218,6 +219,10 @@
                selector:@selector(showMentionsNotification:) 
                    name:kNotificationNameShouldShowMentions 
                  object:nil];
+	[center addObserver:self
+			   selector:@selector(notificationRefreshed:) 
+				   name:kNotificationNameNotificationRefreshed 
+				 object:nil];
     
     
     self.bottomStateView.alpha = 0.0;
@@ -400,10 +405,7 @@
     self.bottomStateLabel.text = NSLocalizedString(@"@我的微博", nil);
     [self showBottomStateView];
     
-    [self.cardTableViewController pushCardWithCompletion:^{
-        WeiboClient *client = [WeiboClient client];
-        [client resetUnreadCount:ResetUnreadCountTypeReferMe];
-    }];
+    [self.cardTableViewController pushCardWithCompletion:nil];
 }
 
 - (void)showMentionsNotification:(id)sender
@@ -416,23 +418,60 @@
     }
 }
 
+- (void)notificationRefreshed:(id)sender
+{
+	NSDictionary *dict = [sender userInfo];
+	NSString *typeName = [dict objectForKey:@"type"];
+	if ([typeName isEqual:kNotificationObjectNameFollower]) {
+		preNewFollowerCount = 0;
+		self.dockViewController.ccUserInfoCardViewController.theNewFollowersCountLabel.text = @"";
+		WeiboClient *client = [WeiboClient client];
+		[client resetUnreadCount:ResetUnreadCountTypeFollowers];
+	} else if([typeName isEqual:kNotificationObjectNameComment]) {
+		preNewCommentCount = 0;
+		self.dockViewController.ccCommentTableViewController.theNewCommentCountLabel.text = @"";
+		WeiboClient *client = [WeiboClient client];
+		[client resetUnreadCount:ResetUnreadCountTypeComments];
+	} else if([typeName isEqual:kNotificationObjectNameMention]) {
+		preNewMentionCount = 0;
+		self.dockViewController.ccCommentTableViewController.theNewMentionsCountLabel.text = @"";
+		WeiboClient *client = [WeiboClient client];
+        [client resetUnreadCount:ResetUnreadCountTypeReferMe];
+	}
+}
 
 - (BOOL)needUpdateNotiViewWithUserInfo:(NSDictionary*)dict
 {
     BOOL result = NO;
     if (preNewCommentCount < [[dict objectForKey:@"comments"] intValue]) {
         preNewCommentCount = [[dict objectForKey:@"comments"] intValue];
-        self.notiNewCommentLabel.text = [NSString stringWithFormat:@"%d", preNewCommentCount];
+        if (preNewCommentCount == 0) {
+			self.dockViewController.ccCommentTableViewController.theNewCommentCountLabel.text = @"";
+		} else {
+			self.notiNewCommentLabel.text = [NSString stringWithFormat:@"%d", preNewCommentCount];
+			self.dockViewController.ccCommentTableViewController.theNewCommentCountLabel.text = [NSString stringWithFormat:@"%d", preNewCommentCount];
+		}
+		
         result = YES;
     }
     if (preNewFollowerCount < [[dict objectForKey:@"followers"] intValue]) {
         preNewFollowerCount = [[dict objectForKey:@"followers"] intValue];
-        self.notiNewFollowerLabel.text = [NSString stringWithFormat:@"%d", preNewFollowerCount];
-        result = YES;
+		if (preNewFollowerCount == 0) {
+			self.dockViewController.ccUserInfoCardViewController.theNewFollowersCountLabel.text = @"";
+		} else {
+			self.notiNewFollowerLabel.text = [NSString stringWithFormat:@"%d", preNewFollowerCount];
+			self.dockViewController.ccUserInfoCardViewController.theNewFollowersCountLabel.text = [NSString stringWithFormat:@"%d", preNewFollowerCount];
+        }
+		result = YES;
     }
     if (preNewMentionCount < [[dict objectForKey:@"mentions"] intValue]) {
         preNewMentionCount = [[dict objectForKey:@"mentions"] intValue];
-        self.notiNewAtLabel.text = [NSString stringWithFormat:@"%d", preNewMentionCount];
+		if (preNewMentionCount == 0) {
+			self.dockViewController.ccCommentTableViewController.theNewMentionsCountLabel.text = @"";
+		} else {
+			self.notiNewAtLabel.text = [NSString stringWithFormat:@"%d", preNewMentionCount];
+			self.dockViewController.ccCommentTableViewController.theNewMentionsCountLabel.text = [NSString stringWithFormat:@"%d", preNewMentionCount];
+		}
         result = YES;
     }
     
@@ -449,12 +488,10 @@
 		CCUserInfoCardViewController *userCardVC = self.dockViewController.ccUserInfoCardViewController;
 		userCardVC.friendsCountLabel.text =  self.currentUser.friendsCount;
 		userCardVC.followersCountLabel.text = self.currentUser.followersCount;
+		userCardVC.statusesCountLabel.text = self.currentUser.statusesCount;
 		
-		userCardVC.theNewFollowersCountLabel.text = self.notiNewFollowerLabel.text;
-		
-		CCCommentsTableViewController *commentVC = self.dockViewController.ccCommentTableViewController;
-		commentVC.theNewCommentCountLabel.text = self.notiNewCommentLabel.text;
-		commentVC.theNewMentionsCountLabel.text = self.notiNewAtLabel.text;
+		NSLog(@"%@", self.notiNewCommentLabel.text);
+		NSLog(@"%@", self.notiNewAtLabel.text);
 		
 		BOOL enabled = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeyNotiPopoverEnabled];
 		if (self.notificationView.hidden && !_commandCenterFlag && enabled) {
@@ -851,7 +888,6 @@
 - (void)showCommandCenter
 {
 	_commandCenterFlag = YES;
-	preNewCommentCount = 0;
 	self.notificationView.hidden = YES;
 	
 	if (_refreshFlag) {

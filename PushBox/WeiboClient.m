@@ -816,13 +816,33 @@ report_completion:
     [self sendRequest];
 }
 
-- (void)comment:(NSString *)statusID 
+- (void)reply:(NSString *)statusID 
             cid:(NSString *)cid 
            text:(NSString *)text
   withOutMention:(BOOL)withOutMention
 {
     self.httpMethod = HTTPMethodPost;
     self.path = @"statuses/reply.json";
+    if (statusID) {
+        [self.params setObject:statusID forKey:@"id"];
+    }
+    if (cid) {
+        [self.params setObject:cid forKey:@"cid"];
+    }
+    [self.params setObject:text forKey:@"comment"];
+    if (withOutMention) {
+        [self.params setObject:@"1" forKey:@"without_mention"];
+    }
+    [self sendRequest];
+}
+
+- (void)comment:(NSString *)statusID 
+		  cid:(NSString *)cid 
+		 text:(NSString *)text
+withOutMention:(BOOL)withOutMention
+{
+    self.httpMethod = HTTPMethodPost;
+    self.path = @"statuses/comment.json";
     if (statusID) {
         [self.params setObject:statusID forKey:@"id"];
     }

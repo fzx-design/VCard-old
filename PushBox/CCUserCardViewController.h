@@ -9,9 +9,6 @@
 #import "UserCardBaseViewController.h"
 
 @interface CCUserCardViewController : UserCardBaseViewController {
-	UILabel *_theNewFollowersCountLabel;
 }
-
-@property(nonatomic, retain) IBOutlet UILabel *theNewFollowersCountLabel;
 
 @end

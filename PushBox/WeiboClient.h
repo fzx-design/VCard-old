@@ -96,10 +96,15 @@ typedef void (^WCCompletionBlock)(WeiboClient *client);
  commentStatus:(BOOL)commentStatus 
  commentOrigin:(BOOL)commentOrigin;
 
-- (void)comment:(NSString *)statusID 
+- (void)reply:(NSString *)statusID 
             cid:(NSString *)cid 
            text:(NSString *)text
   withOutMention:(BOOL)withOutMention;
+
+- (void)comment:(NSString *)statusID 
+			cid:(NSString *)cid 
+		   text:(NSString *)text
+ withOutMention:(BOOL)withOutMention;
 
 - (void)destroyStatus:(NSString *)statusID;
 

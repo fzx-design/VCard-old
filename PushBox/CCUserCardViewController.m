@@ -11,19 +11,13 @@
 
 @implementation CCUserCardViewController
 
-@synthesize theNewFollowersCountLabel = _theNewFollowersCountLabel;
-
-
 - (void)dealloc
 {
-	[_theNewFollowersCountLabel release];
-
     [super dealloc];
 }
 
 - (void)viewDidUnload
 {
-	self.theNewFollowersCountLabel = nil;
     [super viewDidUnload];
 }
 
@@ -42,11 +36,6 @@
 - (void)showFollowersButtonClicked:(id)sender
 {
     [super showFollowersButtonClicked:sender];
-	
-	self.theNewFollowersCountLabel.hidden = YES;
-	
-    WeiboClient *client = [WeiboClient client];
-    [client resetUnreadCount:ResetUnreadCountTypeFollowers];
 }
 
 @end

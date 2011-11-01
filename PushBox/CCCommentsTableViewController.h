@@ -13,6 +13,8 @@
 #import "CommentsTableViewController.h"
 
 #define kNotificationNameShouldShowMentions @"kNotificationNameShouldShowMentions"
+#define kNotificationObjectNameComment @"kNotificationObjectNameComment"
+#define kNotificationObjectNameMention @"kNotificationObjectNameMention"
 
 @class CommentsTableViewController;
 @class Status;

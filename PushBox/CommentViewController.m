@@ -146,7 +146,12 @@
 		NSString *content = [comment stringByAppendingString:third];
 		[client repost:self.targetStatus.statusID text:content commentStatus:YES commentOrigin:NO];
 	} else {
-		[client comment:self.targetStatus.statusID cid:self.targetComment.commentID text:comment withOutMention:YES];
+		if (self.targetComment)
+		{
+			[client reply:self.targetStatus.statusID cid:self.targetComment.commentID text:comment withOutMention:YES];
+		} else {
+			[client comment:self.targetStatus.statusID cid:nil text:comment withOutMention:YES];
+		}
 	}
 	
 }

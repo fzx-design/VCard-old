@@ -8,6 +8,9 @@
 
 #import "UserCardBaseViewController.h"
 
+#define kNotificationNameNotificationRefreshed @"kNotificationNameNotificationRefreshed"
+#define kNotificationObjectNameFollower @"kNotificationObjectNameFollower"
+
 @interface CCUserInfoCardViewController : UserCardBaseViewController{
 	UILabel *_theNewFollowersCountLabel;
 }

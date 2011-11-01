@@ -8,6 +8,7 @@
 
 #import "CCCommentsTableViewController.h"
 #import "UserCardBaseViewController.h"		//To get define
+#import "CCUserInfoCardViewController.h"	//To get define
 #import "WeiboClient.h"
 #import "Comment.h"
 #import "User.h"
@@ -65,14 +66,12 @@
 
 - (void)refresh
 {
-//	[self clearData];
 	_nextPage = 1;
-//    [self loadMoreData];
 	
+	NSDictionary *userData = [NSDictionary dictionaryWithObject:kNotificationObjectNameComment forKey:@"type"];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameNotificationRefreshed object:self userInfo:userData];
+
 	[self performSelector:@selector(loadMoreData) withObject:nil afterDelay:0.05];
-	
-    WeiboClient *client = [WeiboClient client];
-    [client resetUnreadCount:ResetUnreadCountTypeComments];
 }
 
 - (void)loadMoreData
@@ -87,66 +86,35 @@
 	[[UIApplication sharedApplication] showLoadingView];
     [client setCompletionBlock:^(WeiboClient *client) {
 		
-//		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-			[[UIApplication sharedApplication] hideLoadingView];
-			if (!client.hasError) {
-				NSArray *dictArray = client.responseJSONObject;
-				
-				if (_nextPage == 1) {
-					[self clearData];
-				}
-				
-				int count = [dictArray count];
-				if (count < 20) {
-					[self hideLoadMoreDataButton];
-				}
-				else {
-					[self showLoadMoreDataButton];
-				}
-				
-				for (NSDictionary *dict in dictArray) {
-					[Comment insertComment:dict inManagedObjectContext:self.managedObjectContext];
-				}
-				[self.managedObjectContext processPendingChanges];
-				
-				_nextPage++;
-				
-			} else {
-				[ErrorNotification showLoadingError];
+		[[UIApplication sharedApplication] hideLoadingView];
+		if (!client.hasError) {
+			NSArray *dictArray = client.responseJSONObject;
+			
+			if (_nextPage == 1) {
+				[self clearData];
 			}
-			[self doneLoadingTableViewData];
-			_loading = NO;
-//		});
+			
+			int count = [dictArray count];
+			if (count < 20) {
+				[self hideLoadMoreDataButton];
+			}
+			else {
+				[self showLoadMoreDataButton];
+			}
+			
+			for (NSDictionary *dict in dictArray) {
+				[Comment insertComment:dict inManagedObjectContext:self.managedObjectContext];
+			}
+			[self.managedObjectContext processPendingChanges];
+			
+			_nextPage++;
+			
+		} else {
+			[ErrorNotification showLoadingError];
+		}
+		[self doneLoadingTableViewData];
+		_loading = NO;
 
-		
-//		[[UIApplication sharedApplication] hideLoadingView];
-//        if (!client.hasError) {
-//            NSArray *dictArray = client.responseJSONObject;
-//
-//			if (_nextPage == 1) {
-//				[self clearData];
-//			}
-//			
-//			int count = [dictArray count];
-//            if (count < 20) {
-//                [self hideLoadMoreDataButton];
-//            }
-//            else {
-//                [self showLoadMoreDataButton];
-//            }
-//			
-//			for (NSDictionary *dict in dictArray) {
-//                [Comment insertComment:dict inManagedObjectContext:self.managedObjectContext];
-//            }
-//			[self.managedObjectContext processPendingChanges];
-//			
-//            _nextPage++;
-//			
-//        } else {
-//			[ErrorNotification showLoadingError];
-//		}
-//		[self doneLoadingTableViewData];
-//		_loading = NO;
     }];
     
     if (self.dataSource == CommentsTableViewDataSourceCommentsOfStatus) {
@@ -241,13 +209,14 @@
 
 - (IBAction)mentionButtonClicked:(id)sender
 {
-	self.theNewMentionsCountLabel.hidden = YES;
 	[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameShouldShowMentions object:self];
+	
+	NSDictionary *userData = [NSDictionary dictionaryWithObject:kNotificationObjectNameMention forKey:@"type"];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameNotificationRefreshed object:self userInfo:userData];
 }
 
 - (IBAction)commentButtonClicked:(id)sender
 {
-	self.theNewCommentCountLabel.hidden = YES;
 	[self refresh];
 }
 

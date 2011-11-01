@@ -124,6 +124,11 @@
 			   selector:@selector(enableRefreshButton) 
 				   name:kNotificationNameEnableRefresh 
 				 object:nil];
+	
+	[center addObserver:self
+			   selector:@selector(notificationRefreshed) 
+				   name:kNotificationNameNotificationRefreshed
+				 object:nil];
     
     self.refreshNotiImageView.hidden = YES;
     self.commandCenterNotiImageView.hidden = YES;
@@ -203,10 +208,13 @@
 	}];
 }
 
+- (void)notificationRefreshed
+{
+	self.commandCenterNotiImageView.hidden = YES;
+}
+
 - (void)newCommentsToMeNotification:(id)sender
 {
-//    self.commentsTableViewController.newCommentsImageView.hidden = NO;
-	self.ccCommentTableViewController.theNewCommentCountLabel.hidden = NO;
     if (!self.commandCenterButton.selected) {
         self.commandCenterNotiImageView.hidden = NO;
     }
@@ -219,7 +227,6 @@
 
 - (void)newFollowersNotification:(id)sender
 {
-	self.ccUserInfoCardViewController.theNewFollowersCountLabel.hidden = NO;
     if (!self.commandCenterButton.selected) {
         self.commandCenterNotiImageView.hidden = NO;
     }
@@ -227,7 +234,6 @@
 
 - (void)newMentionsNotification:(id)sender
 {
-	self.ccCommentTableViewController.theNewMentionsCountLabel.hidden = NO;
     if (!self.commandCenterButton.selected) {
         self.commandCenterNotiImageView.hidden = NO;
     }

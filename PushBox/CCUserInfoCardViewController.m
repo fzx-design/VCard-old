@@ -43,10 +43,8 @@
 {
     [super showFollowersButtonClicked:sender];
 	
-	self.theNewFollowersCountLabel.hidden = YES;
-	
-    WeiboClient *client = [WeiboClient client];
-    [client resetUnreadCount:ResetUnreadCountTypeFollowers];
+	NSDictionary *userData = [NSDictionary dictionaryWithObject:kNotificationObjectNameFollower forKey:@"type"];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameNotificationRefreshed object:self userInfo:userData];
 }
 
 - (void)updateUserInfo
