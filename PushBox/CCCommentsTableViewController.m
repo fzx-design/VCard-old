@@ -142,9 +142,8 @@
     CommentViewController *vc = [[CommentViewController alloc] init];
     vc.targetComment = comment;
     vc.targetStatus = comment.targetStatus;
-	
-	NSLog(@"the status id is : %@", comment.targetStatus.statusID);
-	
+	vc.delegate = self;
+		
     [[UIApplication sharedApplication] presentModalViewController:vc atHeight:kModalViewHeight];
     [vc release];
 }

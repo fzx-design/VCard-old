@@ -82,42 +82,7 @@ static CommentReviewPopoverController* sharedCommentReviewPopoverController;
                              cacheInContext:context];
     
 	self.screenNameLabel.text = self.status.author.screenName;
-	
-    //    NSDate *now = [NSDate date];
-    //    NSCalendar *calendar = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
-    //    NSDateComponents *components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:now];
-    //    [components setHour:0];
-    //    NSDate *today0am = [calendar dateFromComponents:components];  
-    //    
-    //    NSTimeInterval time = [today0am timeIntervalSinceDate:self.status.createdAt];
-    //    int days = ((int)time)/(3600*24);
-    //    if (time < 0) {
-    //        days = -1;
-    //    }
-    //    days++;
-    //    
-    //    NSString* dateStr;
-    //    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    //    [dateFormatter setDateFormat:[NSDateFormatter dateFormatFromTemplate:@"HH:mm" options:0 locale:[NSLocale currentLocale]]];
-    //    NSString* timeStr = [dateFormatter stringFromDate:self.status.createdAt];
-    //    switch (days) {
-    //        case 0:
-    //            dateStr = [[NSString alloc] initWithFormat:@"%@ 今天",timeStr];
-    //            break;
-    //        case 1:
-    //            dateStr = [[NSString alloc] initWithFormat:@"%@ 昨天",timeStr];
-    //            break;
-    //        case 2:
-    //            dateStr = [[NSString alloc] initWithFormat:@"%@ 前天",timeStr];
-    //            break;
-    //        case 3:
-    //        case 4:
-    //        case 5:
-    //            dateStr = [[NSString alloc] initWithFormat:@"%@ %d天前",timeStr, days];
-    //        default:
-    //            dateStr = [self.status.createdAt stringRepresentation];
-    //            break;
-    //    }
+
     self.dateLabel.text = self.status.createdAt.customString;
     
 	self.postTextView.text = self.status.text;

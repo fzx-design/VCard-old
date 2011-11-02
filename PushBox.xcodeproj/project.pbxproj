@@ -131,7 +131,6 @@
 		9BC26BB314604F4700724DAC /* cell_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BC26BB214604F4700724DAC /* cell_highlight.png */; };
 		9BC6E651144A9B2400B28506 /* CCUserInfoCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC6E64F144A9B2400B28506 /* CCUserInfoCardViewController.m */; };
 		9BC6E652144A9B2400B28506 /* CCUserInfoCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BC6E650144A9B2400B28506 /* CCUserInfoCardViewController.xib */; };
-		9BC6FA1214572A2D001493D6 /* CommentReviewPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC6FA1014572A2D001493D6 /* CommentReviewPopoverController.m */; };
 		9BC6FA1314572A2D001493D6 /* CommentReviewPopoverController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BC6FA1114572A2D001493D6 /* CommentReviewPopoverController.xib */; };
 		9BF36CF614592DDC00A60A0F /* options_icon_news.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF36CF414592DDB00A60A0F /* options_icon_news.png */; };
 		9BF36CF714592DDC00A60A0F /* options_icon_timer.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF36CF514592DDB00A60A0F /* options_icon_timer.png */; };
@@ -139,6 +138,7 @@
 		9BF36CFC1459359300A60A0F /* options_icon_legal.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF36CFB1459359300A60A0F /* options_icon_legal.png */; };
 		9BF36CFF14593B7700A60A0F /* LegacyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF36CFE14593B7600A60A0F /* LegacyViewController.m */; };
 		9BFD85CF14617A2600E16A79 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFD85CE14617A2600E16A79 /* Comment.m */; };
+		9BFD85EA14618A8E00E16A79 /* CommentReviewPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFD85E914618A8E00E16A79 /* CommentReviewPopoverController.m */; };
 		CB018DD613DD3CC9004217E0 /* DockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB018DD413DD3CC8004217E0 /* DockViewController.m */; };
 		CB018DD713DD3CC9004217E0 /* DockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB018DD513DD3CC8004217E0 /* DockViewController.xib */; };
 		CB018DDB13DDCCCD004217E0 /* dock_slider_thumb_HL.png in Resources */ = {isa = PBXBuildFile; fileRef = CB018DD913DDCCCD004217E0 /* dock_slider_thumb_HL.png */; };
@@ -413,8 +413,6 @@
 		9BC6E64E144A9B2300B28506 /* CCUserInfoCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCUserInfoCardViewController.h; sourceTree = "<group>"; };
 		9BC6E64F144A9B2400B28506 /* CCUserInfoCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCUserInfoCardViewController.m; sourceTree = "<group>"; };
 		9BC6E650144A9B2400B28506 /* CCUserInfoCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCUserInfoCardViewController.xib; sourceTree = "<group>"; };
-		9BC6FA0F14572A2D001493D6 /* CommentReviewPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentReviewPopoverController.h; sourceTree = "<group>"; };
-		9BC6FA1014572A2D001493D6 /* CommentReviewPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentReviewPopoverController.m; sourceTree = "<group>"; };
 		9BC6FA1114572A2D001493D6 /* CommentReviewPopoverController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentReviewPopoverController.xib; sourceTree = "<group>"; };
 		9BE01AE814504B8B00450EE2 /* CardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTableViewCell.h; sourceTree = "<group>"; };
 		9BE01AE914504B8B00450EE2 /* CardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardTableViewCell.m; sourceTree = "<group>"; };
@@ -426,6 +424,10 @@
 		9BF36CFE14593B7600A60A0F /* LegacyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LegacyViewController.m; sourceTree = "<group>"; };
 		9BFD85CD14617A2600E16A79 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		9BFD85CE14617A2600E16A79 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		9BFD85D81461842500E16A79 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "/Users/yegabriel/Documents/Projects/iOS_Projects/VCardDev/PushBox/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<absolute>"; };
+		9BFD85D91461842500E16A79 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "/Users/yegabriel/Documents/Projects/iOS_Projects/VCardDev/PushBox/zh-Hans.lproj/MainWindow.xib"; sourceTree = "<absolute>"; };
+		9BFD85E814618A8E00E16A79 /* CommentReviewPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentReviewPopoverController.h; sourceTree = "<group>"; };
+		9BFD85E914618A8E00E16A79 /* CommentReviewPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentReviewPopoverController.m; sourceTree = "<group>"; };
 		CB018DD313DD3CC8004217E0 /* DockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DockViewController.h; sourceTree = "<group>"; };
 		CB018DD413DD3CC8004217E0 /* DockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DockViewController.m; sourceTree = "<group>"; };
 		CB018DD513DD3CC8004217E0 /* DockViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DockViewController.xib; sourceTree = "<group>"; };
@@ -787,8 +789,8 @@
 		CB1164DE13F1340500884118 /* Card controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9BC6FA0F14572A2D001493D6 /* CommentReviewPopoverController.h */,
-				9BC6FA1014572A2D001493D6 /* CommentReviewPopoverController.m */,
+				9BFD85E814618A8E00E16A79 /* CommentReviewPopoverController.h */,
+				9BFD85E914618A8E00E16A79 /* CommentReviewPopoverController.m */,
 				CBD36F0E13E697F5008BB428 /* CommentViewController.h */,
 				CBD36F0F13E697F5008BB428 /* CommentViewController.m */,
 				9BB5B8B31449A8B100352FF7 /* UserCardContentViewController.h */,
@@ -1228,8 +1230,6 @@
 				9BC6E650144A9B2400B28506 /* CCUserInfoCardViewController.xib */,
 				CBBA01C913E3463300641923 /* PostViewController.xib */,
 				FE831551145E803600909CF0 /* PostViewAtTableViewCell.xib */,
-				9BC6FA0F14572A2D001493D6 /* CommentReviewPopoverController.h */,
-				9BC6FA1014572A2D001493D6 /* CommentReviewPopoverController.m */,
 				9BC6FA1114572A2D001493D6 /* CommentReviewPopoverController.xib */,
 			);
 			name = Nibs;
@@ -1619,12 +1619,12 @@
 				FE8E1753145433A5004F6A7C /* InnerBroswerViewController.m in Sources */,
 				9B5F867F1454124B004B01D6 /* CCCommentsTableViewController.m in Sources */,
 				FEC6D1E314555FF900576EF3 /* UIAudioAddition.m in Sources */,
-				9BC6FA1214572A2D001493D6 /* CommentReviewPopoverController.m in Sources */,
 				9B4B49F814582FCF00C9B542 /* Status.m in Sources */,
 				9B4B49FB14586C1000C9B542 /* RefreshingIntervalViewController.m in Sources */,
 				9BF36CFF14593B7700A60A0F /* LegacyViewController.m in Sources */,
 				FE831552145E803700909CF0 /* PostViewAtTableViewCell.m in Sources */,
 				9BFD85CF14617A2600E16A79 /* Comment.m in Sources */,
+				9BFD85EA14618A8E00E16A79 /* CommentReviewPopoverController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
