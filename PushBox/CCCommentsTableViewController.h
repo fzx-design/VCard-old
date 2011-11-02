@@ -19,7 +19,7 @@
 @class CommentsTableViewController;
 @class Status;
 
-@interface CCCommentsTableViewController : EGOTableViewController<CommentsTableViewCellDelegats> {
+@interface CCCommentsTableViewController : EGOTableViewController<CommentsTableViewCellDelegats, CommentseViewDelegates> {
     UILabel *_titleLabel;
     int _nextPage;
     CommentsTableViewDataSource _dataSource;
