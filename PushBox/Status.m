@@ -66,11 +66,12 @@
         result = [NSEntityDescription insertNewObjectForEntityForName:@"Status" inManagedObjectContext:context];
     }
 	
-    result.updateDate = [NSDate date];
+//    result.updateDate = [NSDate date];
     
     result.statusID = statusID;
     
     NSString *dateString = [dict objectForKey:@"created_at"];
+	result.updateDate = [NSDate dateFromStringRepresentation:dateString];
     result.createdAt = [NSDate dateFromStringRepresentation:dateString];
     
     result.text = [dict objectForKey:@"text"];

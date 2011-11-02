@@ -792,6 +792,7 @@
             [self.currentUser removeFavorites:self.currentUser.favorites];
             break;
 		case CardTableViewDataSourceMentions:
+//			[self.currentUser removestatuses::<#(Status *)#>]
 			break;
 		default:
 			break;
@@ -825,24 +826,34 @@
 
 - (void)configureRequest:(NSFetchRequest *)request
 {
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"statusID"
-                                                                     ascending:NO];
-    request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    
+    NSSortDescriptor *sortDescriptor;
+
     switch (self.dataSource) {
         case CardTableViewDataSourceFriendsTimeline:
+			sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"statusID" ascending:NO];
+			request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+			
 			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.managedObjectContext];
             request.predicate = [NSPredicate predicateWithFormat:@"isFriendsStatusOf == %@", self.currentUser];
             break;
         case CardTableViewDataSourceUserTimeline:
+			sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"statusID" ascending:NO];
+			request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+			
 			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.managedObjectContext];
             request.predicate = [NSPredicate predicateWithFormat:@"author == %@", self.user];
             break;
         case CardTableViewDataSourceFavorites:
+			sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:NO];
+			request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+			
 			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.managedObjectContext];
             request.predicate = [NSPredicate predicateWithFormat:@"favoritedBy == %@", self.currentUser];
 			break;
 		case CardTableViewDataSourceMentions:
+			sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:NO];
+			request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+			
 			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.managedObjectContext];
             request.predicate = [NSPredicate predicateWithFormat:@"isMentioned == %@", [NSNumber numberWithBool:YES]];
 			break;

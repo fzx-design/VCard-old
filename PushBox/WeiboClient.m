@@ -606,7 +606,7 @@ report_completion:
 	[self setPreCompletionBlock:^(WeiboClient *client1) {
         if (!client1.hasError) {            
             NSArray *statusesDict = client1.responseJSONObject;
-            if (statusesDict) {
+            if (statusesDict.count != 0) {
                 WeiboClient *client2 = [WeiboClient client];
                 [client2 setCompletionBlock:client1.completionBlock];
                 [client1 setCompletionBlock:NULL];
