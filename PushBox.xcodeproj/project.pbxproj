@@ -426,6 +426,8 @@
 		9BF36CFE14593B7600A60A0F /* LegacyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LegacyViewController.m; sourceTree = "<group>"; };
 		9BFD85CD14617A2600E16A79 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		9BFD85CE14617A2600E16A79 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		9BFD85D81461842500E16A79 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "/Users/yegabriel/Documents/Projects/iOS_Projects/VCardDev/PushBox/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<absolute>"; };
+		9BFD85D91461842500E16A79 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "/Users/yegabriel/Documents/Projects/iOS_Projects/VCardDev/PushBox/zh-Hans.lproj/MainWindow.xib"; sourceTree = "<absolute>"; };
 		CB018DD313DD3CC8004217E0 /* DockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DockViewController.h; sourceTree = "<group>"; };
 		CB018DD413DD3CC8004217E0 /* DockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DockViewController.m; sourceTree = "<group>"; };
 		CB018DD513DD3CC8004217E0 /* DockViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DockViewController.xib; sourceTree = "<group>"; };
@@ -547,12 +549,10 @@
 		CBDA5AF613DBEC1300FAE221 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CBDA5AF813DBEC1300FAE221 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		CBDA5AFC13DBEC1300FAE221 /* PushBox-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PushBox-Info.plist"; sourceTree = "<group>"; };
-		CBDA5AFE13DBEC1300FAE221 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CBDA5B0013DBEC1300FAE221 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CBDA5B0213DBEC1300FAE221 /* PushBox-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PushBox-Prefix.pch"; sourceTree = "<group>"; };
 		CBDA5B0313DBEC1300FAE221 /* PushBoxAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushBoxAppDelegate.h; sourceTree = "<group>"; };
 		CBDA5B0413DBEC1300FAE221 /* PushBoxAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PushBoxAppDelegate.m; sourceTree = "<group>"; };
-		CBDA5B0713DBEC1300FAE221 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		CBDA5B0A13DBEC1300FAE221 /* PushBox.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PushBox.xcdatamodel; sourceTree = "<group>"; };
 		CBDA5B1113DBEC2500FAE221 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		CBDA5B1313DBEC2B00FAE221 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1633,7 +1633,7 @@
 		CBDA5AFD13DBEC1300FAE221 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				CBDA5AFE13DBEC1300FAE221 /* en */,
+				9BFD85D81461842500E16A79 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1641,7 +1641,7 @@
 		CBDA5B0613DBEC1300FAE221 /* MainWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				CBDA5B0713DBEC1300FAE221 /* en */,
+				9BFD85D91461842500E16A79 /* zh-Hans */,
 			);
 			name = MainWindow.xib;
 			sourceTree = "<group>";
