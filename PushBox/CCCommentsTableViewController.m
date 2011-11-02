@@ -56,8 +56,8 @@
 {
     _nextPage = 1;
     [self hideLoadMoreDataButton];
-    if (self.dataSource == CommentsTableViewDataSourceCommentsOfStatus) {
-        [self.status removeComments:self.status.comments];
+    if (self.dataSource == CommentsTableViewDataSourceCommentsByMe) {
+//        [self.status removeComments:self.status.comments];
     }
     else {
         [self.currentUser removeCommentsToMe:self.currentUser.commentsToMe];
@@ -68,8 +68,10 @@
 {
 	_nextPage = 1;
 	
-	NSDictionary *userData = [NSDictionary dictionaryWithObject:kNotificationObjectNameComment forKey:@"type"];
-	[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameNotificationRefreshed object:self userInfo:userData];
+	if (_dataSource == CommentsTableViewDataSourceCommentsToMe) {
+		NSDictionary *userData = [NSDictionary dictionaryWithObject:kNotificationObjectNameComment forKey:@"type"];
+		[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameNotificationRefreshed object:self userInfo:userData];
+	}
 
 	[self performSelector:@selector(loadMoreData) withObject:nil afterDelay:0.05];
 }
@@ -102,10 +104,17 @@
 				[self showLoadMoreDataButton];
 			}
 			
-			for (NSDictionary *dict in dictArray) {
-				[Comment insertCommentToMe:dict inManagedObjectContext:self.managedObjectContext];
+			if (_dataSource == CommentsTableViewDataSourceCommentsToMe) {
+				for (NSDictionary *dict in dictArray) {
+					[Comment insertCommentToMe:dict inManagedObjectContext:self.managedObjectContext];
+				}
+				[self.managedObjectContext processPendingChanges];
+			} else if(_dataSource == CommentsTableViewDataSourceCommentsByMe) {
+				for (NSDictionary *dict in dictArray) {
+					[Comment insertCommentByMe:dict inManagedObjectContext:self.managedObjectContext];
+				}
+				[self.managedObjectContext processPendingChanges];
 			}
-			[self.managedObjectContext processPendingChanges];
 			
 			_nextPage++;
 			
@@ -117,21 +126,26 @@
 
     }];
     
-    if (self.dataSource == CommentsTableViewDataSourceCommentsOfStatus) {
-        [client getCommentsOfStatus:self.status.statusID page:_nextPage count:20];
+    if (self.dataSource == CommentsTableViewDataSourceCommentsByMe) {
+		[client getCommentsByMeSinceID:nil maxID:nil page:_nextPage count:20];
     }
-    else {
+    else if(self.dataSource == CommentsTableViewDataSourceCommentsToMe){
         [client getCommentsToMeSinceID:nil maxID:nil page:_nextPage count:20];
     }
 }
+
+
 
 - (void)configureRequest:(NSFetchRequest *)request
 {
     request.entity = [NSEntityDescription entityForName:@"Comment" inManagedObjectContext:self.managedObjectContext];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:NO];
     request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    
-	request.predicate = [NSPredicate predicateWithFormat:@"toMe == %@", [NSNumber numberWithBool:YES]];
+    if (_dataSource == CommentsTableViewDataSourceCommentsToMe) {
+		request.predicate = [NSPredicate predicateWithFormat:@"toMe == %@", [NSNumber numberWithBool:YES]];
+	} else if(_dataSource == CommentsTableViewDataSourceCommentsByMe) {
+		request.predicate = [NSPredicate predicateWithFormat:@"byMe == %@", [NSNumber numberWithBool:YES]];
+	}
 }
 
 - (void)commentsTableViewCellCommentButtonClicked:(CommentsTableViewCell *)cell
@@ -210,6 +224,29 @@
 	
 	[self.navigationController pushViewController:vc animated:YES];
     [vc release];
+}
+
+- (IBAction)toMeButtonClicked:(id)sender
+{
+	[[UIApplication sharedApplication] showLoadingView];
+	_dataSource = CommentsTableViewDataSourceCommentsToMe;
+    self.fetchedResultsController.delegate = nil;
+    self.fetchedResultsController = nil;
+//	self.fetchedResultsController = _fetchedResultsController;
+	[self refresh];
+	
+	[self.tableView reloadData];
+}
+
+- (IBAction)byMeButtonClicked:(id)sender
+{
+	[[UIApplication sharedApplication] showLoadingView];
+	_dataSource = CommentsTableViewDataSourceCommentsByMe;
+    self.fetchedResultsController.delegate = nil;
+    self.fetchedResultsController = nil;
+//	_fetchedResultsController = self.fetchedResultsController;
+	[self refresh];
+	[self.tableView reloadData];
 }
 
 - (IBAction)mentionButtonClicked:(id)sender

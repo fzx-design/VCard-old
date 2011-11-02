@@ -20,11 +20,13 @@
 @class Status;
 
 @interface CCCommentsTableViewController : EGOTableViewController<CommentsTableViewCellDelegats, CommentseViewDelegates> {
-    UILabel *_titleLabel;
     int _nextPage;
-    CommentsTableViewDataSource _dataSource;
     id _delegate;
+    CommentsTableViewDataSource _dataSource;
 	
+	NSFetchedResultsController *_commentsToMeFetchedResultsController;
+	
+    UILabel *_titleLabel;
 	UILabel *_theNewCommentCountLabel;
 	UILabel *_theNewMentionsCountLabel;
 }
@@ -38,5 +40,7 @@
 @property(nonatomic, retain) IBOutlet UILabel *theNewMentionsCountLabel;
 
 - (IBAction)mentionButtonClicked:(id)sender;
+- (IBAction)toMeButtonClicked:(id)sender;
+- (IBAction)byMeButtonClicked:(id)sender;
 
 @end

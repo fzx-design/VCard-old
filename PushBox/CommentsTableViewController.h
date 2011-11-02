@@ -13,6 +13,7 @@
 
 typedef enum {
     CommentsTableViewDataSourceCommentsToMe,
+	CommentsTableViewDataSourceCommentsByMe,
     CommentsTableViewDataSourceCommentsOfStatus,
 } CommentsTableViewDataSource;
 
