@@ -157,7 +157,7 @@
     [relationshipCell.profileImageView loadImageFromURL:usr.profileImageURL 
                                              completion:NULL 
                                          cacheInContext:self.managedObjectContext];
-	UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_highlight.png"]];
+	UIImageView *imageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_highlight.png"]] autorelease];
 	imageView.contentMode = UIViewContentModeBottom;
 	[relationshipCell setSelectedBackgroundView:imageView];
 }

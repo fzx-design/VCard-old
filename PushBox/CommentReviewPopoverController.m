@@ -104,6 +104,7 @@ static CommentReviewPopoverController* sharedCommentReviewPopoverController;
             break;
     }
     self.dateLabel.text = dateStr;
+	[dateStr release];
     
 	self.postTextView.text = self.status.text;
     [self.postTextView sizeToFit];

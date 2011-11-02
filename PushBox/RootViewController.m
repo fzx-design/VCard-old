@@ -153,6 +153,7 @@
 			[self showMessagesView];
 			[self.dockViewController hideLoadingView];
 		}];
+		
     }];
     
     [client getUser:[WeiboClient currentUserID]];
@@ -376,7 +377,7 @@
 {
     self.cardTableViewController.dataSource = CardTableViewDataSourceSearchStatues;
     
-    NSString* string = [[NSString alloc] initWithFormat:@"包含%@的微博", searchString];
+    NSString* string = [[[NSString alloc] initWithFormat:@"包含%@的微博", searchString] autorelease];
     self.bottomStateLabel.text = NSLocalizedString(string, nil); 
     self.bottomStateTextField.text = @"";
     self.bottomStateTextField.hidden = YES;

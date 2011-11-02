@@ -89,7 +89,7 @@
 	}
         
     [self.verifiedImageView setHidden:YES];
-    if ([_user.verified compare:[[NSNumber alloc] initWithInt:1]] == NSOrderedSame) {
+    if ([_user.verified compare:[[[NSNumber alloc] initWithInt:1] autorelease]] == NSOrderedSame) {
         [self.verifiedImageView setHidden:NO];
     }
 }

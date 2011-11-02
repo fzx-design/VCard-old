@@ -44,6 +44,11 @@
     }
 }
 
+- (void)prepareForReuse
+{
+	[_smartCardViewController clear];
+}
+
 - (void)clear
 {
     //    [_smartCardViewController.view removeFromSuperview];

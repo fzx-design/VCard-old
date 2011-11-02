@@ -291,11 +291,11 @@ report_completion:
             [self.request addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
             self.request.requestMethod = @"POST";
             NSString *postBody = [self queryString];
-            NSMutableData *postData = [[NSMutableData alloc] initWithData:[postBody dataUsingEncoding:NSUTF8StringEncoding]];
+            NSMutableData *postData = [[[NSMutableData alloc] initWithData:[postBody dataUsingEncoding:NSUTF8StringEncoding]] autorelease];
             [self.request setPostBody:postData];
         }
         else {
-            NSString* contentType = [[NSString alloc] initWithFormat:@"multipart/form-data; boundary=%@", TWITTERFON_FORM_BOUNDARY];
+            NSString* contentType = [[[NSString alloc] initWithFormat:@"multipart/form-data; boundary=%@", TWITTERFON_FORM_BOUNDARY] autorelease];
             [self.request addRequestHeader:@"Content-Type" value:contentType];
             self.request.requestMethod = @"POST";
         }
@@ -800,7 +800,9 @@ report_completion:
     [params setObject:text forKey:@"status"];
     
     //    [self post:[self getURL:self.path queryParameters:params] data:data];
-    NSURL* url = [[NSURL alloc] initWithString:[self getURL:self.path queryParameters:params]];
+	
+	//REMAIN_TO_BE_CHECKED
+    NSURL* url = [[[NSURL alloc] initWithString:[self getURL:self.path queryParameters:params]] autorelease];
     NSLog(@"%@", [url description]);
     [self.request setURL:url];
     [self.request setPostBody:data];

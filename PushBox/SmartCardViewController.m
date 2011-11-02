@@ -113,7 +113,18 @@
 
 - (void)clear
 {
-    
+// 	self.profileImageView = nil;
+//    self.screenNameLabel = nil;
+//    self.dateLabel = nil;
+//    self.actionsButton = nil;
+//    self.repostCountLabel = nil;
+//    self.commentCountLabel = nil;
+//    self.addFavourateButton = nil;
+//    self.tweetScrollView = nil;
+//    self.tweetImageView = nil;
+//    self.tweetTextView = nil;
+//    self.repostTextView = nil;
+//    self.repostView = nil;
 }
 
 - (BOOL)checkGif:(NSString*)url
@@ -166,73 +177,72 @@
 
 - (Boolean)isAtEndChar:(unichar)c
 {
-    NSArray* atEndCharArray = [[NSArray alloc] initWithObjects:
-                               [[NSNumber alloc] initWithInt:44],   // ' '
-                               [[NSNumber alloc] initWithInt:46],   // ' '
-                               [[NSNumber alloc] initWithInt:32],   // ' '
-                               [[NSNumber alloc] initWithInt:64],   // '@'
-                               [[NSNumber alloc] initWithInt:58],   // ':'
-                               [[NSNumber alloc] initWithInt:59],   // ';'
-                               [[NSNumber alloc] initWithInt:35],   // '#'
-                               [[NSNumber alloc] initWithInt:39],   // '''
-                               [[NSNumber alloc] initWithInt:34],   // '"'
-                               [[NSNumber alloc] initWithInt:40],   // '('
-                               [[NSNumber alloc] initWithInt:41],   // ')'
-                               [[NSNumber alloc] initWithInt:91],   // '['
-                               [[NSNumber alloc] initWithInt:93],   // ']'
-                               [[NSNumber alloc] initWithInt:123],   // '{'
-                               [[NSNumber alloc] initWithInt:125],   // '}'
-                               [[NSNumber alloc] initWithInt:126],   // '~'
-                               [[NSNumber alloc] initWithInt:33],   // '!'
-                               [[NSNumber alloc] initWithInt:36],   // '$'
-                               [[NSNumber alloc] initWithInt:37],   // '%'
-                               [[NSNumber alloc] initWithInt:94],   // '^'
-                               [[NSNumber alloc] initWithInt:38],   // '&'
-                               [[NSNumber alloc] initWithInt:42],   // '*'
-                               [[NSNumber alloc] initWithInt:43],   // '+'
-                               [[NSNumber alloc] initWithInt:61],   // '='
-                               [[NSNumber alloc] initWithInt:124],   // '|'
-                               [[NSNumber alloc] initWithInt:60],   // '<'
-                               [[NSNumber alloc] initWithInt:62],   // '>'
-                               [[NSNumber alloc] initWithInt:92],   // '\'
-                               [[NSNumber alloc] initWithInt:47],   // '/'
-                               [[NSNumber alloc] initWithInt:63],   // '?'
-                               [[NSNumber alloc] initWithInt:65306],   // '"'
-                               [[NSNumber alloc] initWithInt:65307],   // '"'
-                               [[NSNumber alloc] initWithInt:8216],   // '"'
-                               [[NSNumber alloc] initWithInt:8217],   // '"'
-                               [[NSNumber alloc] initWithInt:8220],   // '"'
-                               [[NSNumber alloc] initWithInt:8221],   // '"'
-                               [[NSNumber alloc] initWithInt:65288],   // '"'
-                               [[NSNumber alloc] initWithInt:65289],   // '"'
-                               [[NSNumber alloc] initWithInt:65339],   // '"'
-                               [[NSNumber alloc] initWithInt:12290],   // '"'
-                               [[NSNumber alloc] initWithInt:65341],   // '"'
-                               [[NSNumber alloc] initWithInt:65292],   // '，'
-                               [[NSNumber alloc] initWithInt:12289],   // '、'
-                               [[NSNumber alloc] initWithInt:65371],   // '"'
-                               [[NSNumber alloc] initWithInt:65373],   // '"'
-                               [[NSNumber alloc] initWithInt:65374],   // '"'
-                               [[NSNumber alloc] initWithInt:65281],   // '"'
-                               [[NSNumber alloc] initWithInt:65283],   // '"'
-                               [[NSNumber alloc] initWithInt:65509],   // '"'
-                               [[NSNumber alloc] initWithInt:65285],   // '"'
-                               [[NSNumber alloc] initWithInt:8212],   // '"'
-                               [[NSNumber alloc] initWithInt:65290],   // '"'
-                               [[NSNumber alloc] initWithInt:65291],   // '"'
-                               [[NSNumber alloc] initWithInt:65309],   // '"'
-                               [[NSNumber alloc] initWithInt:65372],   // '"'
-                               [[NSNumber alloc] initWithInt:12298],   // '"'
-                               [[NSNumber alloc] initWithInt:65295],   // '"'
-                               [[NSNumber alloc] initWithInt:65311],   // '"'
-                               [[NSNumber alloc] initWithInt:8230],   // '"'
-                               nil];
+    NSArray* atEndCharArray = [[[NSArray alloc] initWithObjects:
+                               [[[NSNumber alloc] initWithInt:44] autorelease],   // ' '
+                               [[[NSNumber alloc] initWithInt:46] autorelease],   // ' '
+                               [[[NSNumber alloc] initWithInt:32] autorelease],   // ' '
+                               [[[NSNumber alloc] initWithInt:64] autorelease],   // '@'
+                               [[[NSNumber alloc] initWithInt:58] autorelease],   // ':'
+                               [[[NSNumber alloc] initWithInt:59] autorelease],   // ';'
+                               [[[NSNumber alloc] initWithInt:35] autorelease],   // '#'
+                               [[[NSNumber alloc] initWithInt:39] autorelease],   // '''
+                               [[[NSNumber alloc] initWithInt:34] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:40] autorelease],   // '('
+                               [[[NSNumber alloc] initWithInt:41] autorelease],   // ')'
+                               [[[NSNumber alloc] initWithInt:91] autorelease],   // '['
+                               [[[NSNumber alloc] initWithInt:93] autorelease],   // ']'
+                               [[[NSNumber alloc] initWithInt:123] autorelease],   // '{'
+                               [[[NSNumber alloc] initWithInt:125] autorelease],   // '}'
+                               [[[NSNumber alloc] initWithInt:126] autorelease],   // '~'
+                               [[[NSNumber alloc] initWithInt:33] autorelease],   // '!'
+                               [[[NSNumber alloc] initWithInt:36] autorelease],   // '$'
+                               [[[NSNumber alloc] initWithInt:37] autorelease],   // '%'
+                               [[[NSNumber alloc] initWithInt:94] autorelease],   // '^'
+                               [[[NSNumber alloc] initWithInt:38] autorelease],   // '&'
+                               [[[NSNumber alloc] initWithInt:42] autorelease],   // '*'
+                               [[[NSNumber alloc] initWithInt:43] autorelease],   // '+'
+                               [[[NSNumber alloc] initWithInt:61] autorelease],   // '='
+                               [[[NSNumber alloc] initWithInt:124] autorelease],   // '|'
+                               [[[NSNumber alloc] initWithInt:60] autorelease],   // '<'
+                               [[[NSNumber alloc] initWithInt:62] autorelease],   // '>'
+                               [[[NSNumber alloc] initWithInt:92] autorelease],   // '\'
+                               [[[NSNumber alloc] initWithInt:47] autorelease],   // '/'
+                               [[[NSNumber alloc] initWithInt:63] autorelease],   // '?'
+                               [[[NSNumber alloc] initWithInt:65306] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65307] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:8216] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:8217] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:8220] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:8221] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65288] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65289] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65339] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:12290] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65341] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65292] autorelease],   // '，'
+                               [[[NSNumber alloc] initWithInt:12289] autorelease],   // '、'
+                               [[[NSNumber alloc] initWithInt:65371] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65373] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65374] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65281] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65283] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65509] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65285] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:8212] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65290] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65291] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65309] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65372] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:12298] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65295] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65311] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:8230] autorelease],   // '"'
+                               nil] autorelease];
     for (int i = 0; i < [atEndCharArray count]; i++)
     {
         if (c == [[atEndCharArray objectAtIndex:i] intValue])
             return YES;
     }
-    
     return NO;
 }
 
@@ -242,63 +252,62 @@
         return YES;
     }
     
-    NSArray* atEndCharArray = [[NSArray alloc] initWithObjects:
-                               [[NSNumber alloc] initWithInt:44],   // ' '
-                               [[NSNumber alloc] initWithInt:32],   // ' '
-                               [[NSNumber alloc] initWithInt:64],   // '@'
-                               [[NSNumber alloc] initWithInt:59],   // ';'
-                               [[NSNumber alloc] initWithInt:39],   // '''
-                               [[NSNumber alloc] initWithInt:34],   // '"'
-                               [[NSNumber alloc] initWithInt:40],   // '('
-                               [[NSNumber alloc] initWithInt:41],   // ')'
-                               [[NSNumber alloc] initWithInt:91],   // '['
-                               [[NSNumber alloc] initWithInt:93],   // ']'
-                               [[NSNumber alloc] initWithInt:123],   // '{'
-                               [[NSNumber alloc] initWithInt:125],   // '}'
-                               [[NSNumber alloc] initWithInt:126],   // '~'
-                               [[NSNumber alloc] initWithInt:33],   // '!'
-                               [[NSNumber alloc] initWithInt:36],   // '$'
-                               [[NSNumber alloc] initWithInt:94],   // '^'
-                               [[NSNumber alloc] initWithInt:42],   // '*'
-                               [[NSNumber alloc] initWithInt:43],   // '+'
-                               [[NSNumber alloc] initWithInt:124],   // '|'
-                               [[NSNumber alloc] initWithInt:60],   // '<'
-                               [[NSNumber alloc] initWithInt:62],   // '>'
-                               [[NSNumber alloc] initWithInt:65306],   // '"'
-                               [[NSNumber alloc] initWithInt:65307],   // '"'
-                               [[NSNumber alloc] initWithInt:8216],   // '"'
-                               [[NSNumber alloc] initWithInt:8217],   // '"'
-                               [[NSNumber alloc] initWithInt:8220],   // '"'
-                               [[NSNumber alloc] initWithInt:8221],   // '"'
-                               [[NSNumber alloc] initWithInt:65288],   // '"'
-                               [[NSNumber alloc] initWithInt:65289],   // '"'
-                               [[NSNumber alloc] initWithInt:65339],   // '"'
-                               [[NSNumber alloc] initWithInt:65341],   // '"'
-                               [[NSNumber alloc] initWithInt:65371],   // '"'
-                               [[NSNumber alloc] initWithInt:65373],   // '"'
-                               [[NSNumber alloc] initWithInt:65374],   // '"'
-                               [[NSNumber alloc] initWithInt:65281],   // '"'
-                               [[NSNumber alloc] initWithInt:65283],   // '"'
-                               [[NSNumber alloc] initWithInt:65509],   // '"'
-                               [[NSNumber alloc] initWithInt:65285],   // '"'
-                               [[NSNumber alloc] initWithInt:8212],   // '"'
-                               [[NSNumber alloc] initWithInt:65290],   // '"'
-                               [[NSNumber alloc] initWithInt:65291],   // '"'
-                               [[NSNumber alloc] initWithInt:65309],   // '"'
-                               [[NSNumber alloc] initWithInt:65372],   // '"'
-                               [[NSNumber alloc] initWithInt:12298],   // '"'
-                               [[NSNumber alloc] initWithInt:65295],   // '"'
-                               [[NSNumber alloc] initWithInt:65311],   // '"'
-                               [[NSNumber alloc] initWithInt:8230],   // '"'
-                               [[NSNumber alloc] initWithInt:65292],   // '，'
-                               [[NSNumber alloc] initWithInt:12289],   // '、'
-                               nil];
+    NSArray* atEndCharArray = [[[NSArray alloc] initWithObjects:
+                               [[[NSNumber alloc] initWithInt:44] autorelease],   // ' '
+                               [[[NSNumber alloc] initWithInt:32] autorelease],   // ' '
+                               [[[NSNumber alloc] initWithInt:64] autorelease],   // '@'
+                               [[[NSNumber alloc] initWithInt:59] autorelease],   // ';'
+                               [[[NSNumber alloc] initWithInt:39] autorelease],   // '''
+                               [[[NSNumber alloc] initWithInt:34] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:40] autorelease],   // '('
+                               [[[NSNumber alloc] initWithInt:41] autorelease],   // ')'
+                               [[[NSNumber alloc] initWithInt:91] autorelease],   // '['
+                               [[[NSNumber alloc] initWithInt:93] autorelease],   // ']'
+                               [[[NSNumber alloc] initWithInt:123] autorelease],   // '{'
+                               [[[NSNumber alloc] initWithInt:125] autorelease],   // '}'
+                               [[[NSNumber alloc] initWithInt:126] autorelease],   // '~'
+                               [[[NSNumber alloc] initWithInt:33] autorelease],   // '!'
+                               [[[NSNumber alloc] initWithInt:36] autorelease],   // '$'
+                               [[[NSNumber alloc] initWithInt:94] autorelease],   // '^'
+                               [[[NSNumber alloc] initWithInt:42] autorelease],   // '*'
+                               [[[NSNumber alloc] initWithInt:43] autorelease],   // '+'
+                               [[[NSNumber alloc] initWithInt:124] autorelease],   // '|'
+                               [[[NSNumber alloc] initWithInt:60] autorelease],   // '<'
+                               [[[NSNumber alloc] initWithInt:62] autorelease],   // '>'
+                               [[[NSNumber alloc] initWithInt:65306] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65307] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:8216] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:8217] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:8220] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:8221] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65288] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65289] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65339] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65341] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65371] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65373] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65374] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65281] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65283] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65509] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65285] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:8212] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65290] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65291] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65309] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65372] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:12298] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65295] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65311] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:8230] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65292] autorelease],   // '，'
+                               [[[NSNumber alloc] initWithInt:12289] autorelease],   // '、'
+                               nil] autorelease];
     for (int i = 0; i < [atEndCharArray count]; i++)
     {
         if (c == [[atEndCharArray objectAtIndex:i] intValue])
             return YES;
-    }
-    
+    }    
     return NO;
 }
 
@@ -352,9 +361,7 @@
 	
     self.commentCountLabel.text = self.status.commentsCount;
     self.repostCountLabel.text = self.status.repostsCount;
-	
-	NSLog(@"%@, %@", self.status.commentsCount, self.status.repostsCount);
-	
+		
 	self.tweetTextView.text = @"";
     self.repostTextView.text = @"";
     
@@ -417,7 +424,7 @@
         switch ([originStatus characterAtIndex:i]) {
             case '@':
             {
-                int j = i + 1;
+                int j;
                 for (j = i + 1; j < originStatus.length; j++) {
                     if ([self isAtEndChar:[originStatus characterAtIndex:j]]) {
                         NSLog(@"%d", [originStatus characterAtIndex:j]);
@@ -429,7 +436,7 @@
                     NSRange range = NSMakeRange(startIndex, endIndex-startIndex);
                     NSString* subStr = [originStatus substringWithRange:range];
                     if (endIndex > startIndex + 1)
-                        phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='atClicked(\"%@\")'>%@</a></span>", [subStr substringFromIndex:1], subStr]];
+                        phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='atClicked(\"%@\")'>%@</a></span>", [subStr substringFromIndex:1], subStr] autorelease]];
                 }
                 break;
             }
@@ -446,7 +453,7 @@
                 {
                     NSRange range = NSMakeRange(startIndex, endIndex+1-startIndex);
                     NSString* subStr = [originStatus substringWithRange:range];
-                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='spClicked(\"%@\")'>%@</a></span>", [subStr substringFromIndex:1], subStr]];
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='spClicked(\"%@\")'>%@</a></span>", [subStr substringFromIndex:1], subStr] autorelease]];
                 }
                 
                 break;
@@ -459,7 +466,7 @@
                 NSRange range = NSMakeRange(i, 7);
                 NSString* subStr = [originStatus substringWithRange:range];
                 if ([subStr compare:@"http://"] == NSOrderedSame) {
-                    int j = i + 1;
+                    int j;
                     for (j = i + 1; j < originStatus.length; j++) {
                         if ([self isLinkEndChar:[originStatus characterAtIndex:j]]) {
                             break;
@@ -468,7 +475,7 @@
                     endIndex = j;
                     range = NSMakeRange(startIndex, endIndex-startIndex);
                     subStr = [originStatus substringWithRange:range];
-                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='lkClicked(\"%@\")'>%@</a></span>", subStr, subStr]];
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='lkClicked(\"%@\")'>%@</a></span>", subStr, subStr] autorelease]];
                 }
                 break;
             }
@@ -478,7 +485,7 @@
     }
     
     //    NSString* htmlText = [[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><style type=\"text/css\">@import url(\"smartcard.css\");</style></head><body><div id=\"post\">%@</div></body></html>", phasedStatus];
-    NSString* htmlText = [[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><link href=\"smartcard.css\" rel=\"stylesheet\" type=\"text/css\" /><script type='text/javascript' src='smartcard.js'></script></head><body><div id=\"post\">%@</div></body></html>", phasedStatus];
+    NSString* htmlText = [[[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><link href=\"smartcard.css\" rel=\"stylesheet\" type=\"text/css\" /><script type='text/javascript' src='smartcard.js'></script></head><body><div id=\"post\">%@</div></body></html>", phasedStatus] autorelease];
     //    NSLog(htmlText);
     NSString *path = [[NSBundle mainBundle] pathForResource:@"smartcard" ofType:@"html"]; 
     [self.postWebView loadHTMLString:htmlText baseURL:[NSURL fileURLWithPath: path]];    
@@ -509,7 +516,7 @@
         switch ([originStatus characterAtIndex:i]) {
             case '@':
             {
-                int j = i + 1;
+                int j;
                 for (j = i + 1; j < originStatus.length; j++) {
                     if ([self isAtEndChar:[originStatus characterAtIndex:j]]) {
                         break;
@@ -521,7 +528,7 @@
                     NSRange range = NSMakeRange(startIndex, endIndex-startIndex);
                     NSString* subStr = [originStatus substringWithRange:range];
                     if (endIndex > startIndex + 1)
-                        phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='atClicked(\"%@\")'>%@</a></span>", [subStr substringFromIndex:1], subStr]];
+                        phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='atClicked(\"%@\")'>%@</a></span>", [subStr substringFromIndex:1], subStr] autorelease]];
                 }
                 break;
             }
@@ -538,7 +545,7 @@
                 {
                     NSRange range = NSMakeRange(startIndex, endIndex+1-startIndex);
                     NSString* subStr = [originStatus substringWithRange:range];
-                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='spClicked(\"%@\")'>%@</a></span>", [subStr substringFromIndex:1], subStr]];
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='spClicked(\"%@\")'>%@</a></span>", [subStr substringFromIndex:1], subStr] autorelease]];
                 }
                 break;
             }
@@ -550,7 +557,7 @@
                 NSRange range = NSMakeRange(i, 7);
                 NSString* subStr = [originStatus substringWithRange:range];
                 if ([subStr compare:@"http://"] == NSOrderedSame) {
-                    int j = i + 1;
+                    int j;
                     for (j = i + 1; j < originStatus.length; j++) {
                         if ([self isLinkEndChar:[originStatus characterAtIndex:j]]) {
                             break;
@@ -559,7 +566,7 @@
                     endIndex = j;
                     range = NSMakeRange(startIndex, endIndex-startIndex);
                     subStr = [originStatus substringWithRange:range];
-                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='lkClicked(\"%@\")'>%@</a></span>", subStr, subStr]];
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='lkClicked(\"%@\")'>%@</a></span>", subStr, subStr] autorelease]];
                 }
                 break;
             }
@@ -569,7 +576,7 @@
     }
     
     //    NSString* htmlText = [[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><style type=\"text/css\">@import url(\"smartcard.css\");</style></head><body><div id=\"post\">%@</div></body></html>", phasedStatus];
-    NSString* htmlText = [[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><link href=\"smartcard.css\" rel=\"stylesheet\" type=\"text/css\" /><script type='text/javascript' src='smartcard.js'></script></head><body style=\"background-color:transparent\"><div id=\"repost\"><span class='highlight'><a href='javascript:void(0);' onclick='atClicked(\"%@\")'>@%@</a></span>: %@</div></body></html>", self.status.repostStatus.author.screenName, self.status.repostStatus.author.screenName, phasedStatus];
+    NSString* htmlText = [[[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><link href=\"smartcard.css\" rel=\"stylesheet\" type=\"text/css\" /><script type='text/javascript' src='smartcard.js'></script></head><body style=\"background-color:transparent\"><div id=\"repost\"><span class='highlight'><a href='javascript:void(0);' onclick='atClicked(\"%@\")'>@%@</a></span>: %@</div></body></html>", self.status.repostStatus.author.screenName, self.status.repostStatus.author.screenName, phasedStatus] autorelease];
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"smartcard" ofType:@"html"]; 
     [self.repostWebView loadHTMLString:htmlText baseURL:[NSURL fileURLWithPath: path]];
@@ -601,7 +608,7 @@
 - (void)openLinkInSafari:(NSString*)link
 {
     if (link) {
-        NSURL* url = [[NSURL alloc] initWithString:link];
+        NSURL* url = [[[NSURL alloc] initWithString:link] autorelease];
         [[UIApplication sharedApplication] openURL:url];
     }
 }
@@ -671,7 +678,7 @@
             NSRange range = NSMakeRange(i, 7);
             shortUrl = [statusText substringWithRange:range];
             if ([shortUrl compare:@"http://"] == NSOrderedSame) {
-                int j = i + 1;
+                int j;
                 for (j = i + 1; j < statusText.length; j++) {
                     if ([statusText characterAtIndex:j] == ' ') {
                         break;
@@ -725,7 +732,7 @@
             NSRange range = NSMakeRange(i, 7);
             shortUrl = [statusText substringWithRange:range];
             if ([shortUrl compare:@"http://"] == NSOrderedSame) {
-                int j = i + 1;
+                int j;
                 for (j = i + 1; j < statusText.length; j++) {
                     if ([statusText characterAtIndex:j] == ' ') {
                         break;
@@ -811,9 +818,9 @@
     if (isTrack)
         //    if (NO)
     {
-        NSString* trackString = [[NSString alloc] initWithFormat:@"询问 %@", status.author.screenName];
+        NSString* trackString = [[[NSString alloc] initWithFormat:@"询问 %@", status.author.screenName] autorelease];
         self.trackLabel.text = trackString;
-        trackString = [[NSString alloc] initWithFormat:@"%@ 关于此微博的最新进展", status.author.screenName];
+        trackString = [[[NSString alloc] initWithFormat:@"%@ 关于此微博的最新进展", status.author.screenName] autorelease];
         self.recentActNotifyLabel.text = trackString;
         self.trackLabel.hidden = NO;
         self.recentActNotifyLabel.hidden = NO;
@@ -1042,7 +1049,7 @@
         else
         {
             // alert
-            NSString *msg = [[NSString alloc] initWithFormat:@"VCard 无法找到名为 \"%@\" 的新浪微博用户", screenName];
+            NSString *msg = [[[NSString alloc] initWithFormat:@"VCard 无法找到名为 \"%@\" 的新浪微博用户", screenName] autorelease];
             
             UIAlertView *alert = [[UIAlertView alloc]
                                   initWithTitle:NSLocalizedString(@"未找到此用户", nil)
@@ -1173,7 +1180,9 @@
     }
     else if ([type compare:@"/sp/"] == NSOrderedSame) {
         //        NSLog(@"sp %@", para);
-        NSString* content = [[NSString alloc] initWithFormat:@"#%@# ", para];
+		
+		//REMAIN_TO
+        NSString* content = [[[NSString alloc] initWithFormat:@"#%@# ", para] autorelease];
         [self postWithContent:content];
     }
     else if ([type compare:@"/lk/"] == NSOrderedSame) {

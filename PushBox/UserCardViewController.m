@@ -82,7 +82,7 @@
 {
     PostViewController *vc = [[PostViewController alloc] initWithType:PostViewTypePost];
     [[UIApplication sharedApplication] presentModalViewController:vc atHeight:kModalViewHeight];
-    vc.textView.text = [[NSString alloc] initWithFormat:@"@%@ ", self.user.screenName];
+    vc.textView.text = [[[NSString alloc] initWithFormat:@"@%@ ", self.user.screenName] autorelease];
     
     [vc release];
 }

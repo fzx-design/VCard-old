@@ -44,7 +44,7 @@ static UserCardNaviViewController *sharedUserCardNaviViewController = nil;
 {
 	self = [super init];
 	if (self) {
-		self.naviController = [[UINavigationController alloc] initWithRootViewController:vc];
+		self.naviController = [[[UINavigationController alloc] initWithRootViewController:vc] autorelease];
 		self.naviController.navigationBarHidden = YES;
 		[self.naviController.view setFrame:[self.contentViewController.view bounds]];
 		[self.contentViewController.view addSubview:self.naviController.view];
@@ -61,7 +61,7 @@ static UserCardNaviViewController *sharedUserCardNaviViewController = nil;
 - (UserCardContentViewController*)contentViewController
 {
 	if (!contentViewController) {
-		self.contentViewController = [[UserCardContentViewController alloc] init];
+		self.contentViewController = [[[UserCardContentViewController alloc] init] autorelease];
 		CGRect frame = CGRectMake(self.view.frame.origin.x	+ 49, self.view.frame.origin.y, contentViewController.view.frame.size.width, contentViewController.view.frame.size.height);
 		self.contentViewController.view.frame = frame;
 		[self.view addSubview:self.contentViewController.view];

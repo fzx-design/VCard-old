@@ -32,7 +32,7 @@
 
 - (NSString *)stringRepresentation
 {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     
     NSString *dateStr = [formatter stringFromDate:self];
