@@ -227,10 +227,8 @@
 		CBBA021113E53F2900641923 /* CommentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBBA021013E53F2900641923 /* CommentsTableViewCell.xib */; };
 		CBD36F1113E697F6008BB428 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD36F0F13E697F5008BB428 /* CommentViewController.m */; };
 		CBD36F1213E697F6008BB428 /* CommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD36F1013E697F5008BB428 /* CommentViewController.xib */; };
-		CBDA5AFF13DBEC1300FAE221 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CBDA5AFD13DBEC1300FAE221 /* InfoPlist.strings */; };
 		CBDA5B0113DBEC1300FAE221 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B0013DBEC1300FAE221 /* main.m */; };
 		CBDA5B0513DBEC1300FAE221 /* PushBoxAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B0413DBEC1300FAE221 /* PushBoxAppDelegate.m */; };
-		CBDA5B0813DBEC1300FAE221 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBDA5B0613DBEC1300FAE221 /* MainWindow.xib */; };
 		CBDA5B0B13DBEC1300FAE221 /* PushBox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B0913DBEC1300FAE221 /* PushBox.xcdatamodeld */; };
 		CBDA5B3E13DBECBD00FAE221 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B1D13DBECBC00FAE221 /* ASIAuthenticationDialog.m */; };
 		CBDA5B3F13DBECBD00FAE221 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B2013DBECBC00FAE221 /* ASIDataCompressor.m */; };
@@ -254,6 +252,7 @@
 		CBDA5B7613DC25FA00FAE221 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B7513DC25FA00FAE221 /* CoreDataTableViewController.m */; };
 		FE1E629914441E2600A48CF9 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1E629814441E2600A48CF9 /* Message.m */; };
 		FE1E629C14441E3F00A48CF9 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1E629B14441E3F00A48CF9 /* User.m */; };
+		FE3EE0EF14618CA800F92F17 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FE3EE0ED14618CA800F92F17 /* InfoPlist.strings */; };
 		FE72B4CB144FFD3000C3EE5B /* repost_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4C7144FFD3000C3EE5B /* repost_bg.jpg */; };
 		FE72B4CC144FFD3000C3EE5B /* smartcard.css in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4C8144FFD3000C3EE5B /* smartcard.css */; };
 		FE72B4CD144FFD3000C3EE5B /* smartcard.html in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4C9144FFD3000C3EE5B /* smartcard.html */; };
@@ -281,6 +280,7 @@
 		FEC6D1DB14555F8B00576EF3 /* vc_noti_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEC6D1D914555F8B00576EF3 /* vc_noti_sound.wav */; };
 		FEC6D1DD14555F9800576EF3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEC6D1DC14555F9800576EF3 /* AudioToolbox.framework */; };
 		FEC6D1E314555FF900576EF3 /* UIAudioAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = FEC6D1E214555FF900576EF3 /* UIAudioAddition.m */; };
+		FEE7868F14618C4B00AC791B /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEE7868D14618C4B00AC791B /* MainWindow.xib */; };
 		FEFB3120144311D600440DD5 /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEFB311E144311D600440DD5 /* MessagesViewController.m */; };
 		FEFB3121144311D600440DD5 /* MessagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEFB311F144311D600440DD5 /* MessagesViewController.xib */; };
 		FEFB31251443130700440DD5 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEFB31231443130700440DD5 /* MessageViewController.m */; };
@@ -426,8 +426,6 @@
 		9BF36CFE14593B7600A60A0F /* LegacyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LegacyViewController.m; sourceTree = "<group>"; };
 		9BFD85CD14617A2600E16A79 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		9BFD85CE14617A2600E16A79 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
-		9BFD85D81461842500E16A79 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "/Users/yegabriel/Documents/Projects/iOS_Projects/VCardDev/PushBox/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<absolute>"; };
-		9BFD85D91461842500E16A79 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "/Users/yegabriel/Documents/Projects/iOS_Projects/VCardDev/PushBox/zh-Hans.lproj/MainWindow.xib"; sourceTree = "<absolute>"; };
 		CB018DD313DD3CC8004217E0 /* DockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DockViewController.h; sourceTree = "<group>"; };
 		CB018DD413DD3CC8004217E0 /* DockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DockViewController.m; sourceTree = "<group>"; };
 		CB018DD513DD3CC8004217E0 /* DockViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DockViewController.xib; sourceTree = "<group>"; };
@@ -607,6 +605,7 @@
 		FE1E629814441E2600A48CF9 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		FE1E629A14441E3F00A48CF9 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		FE1E629B14441E3F00A48CF9 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		FE3EE0EE14618CA800F92F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		FE72B4C7144FFD3000C3EE5B /* repost_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = repost_bg.jpg; sourceTree = "<group>"; };
 		FE72B4C8144FFD3000C3EE5B /* smartcard.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = smartcard.css; sourceTree = "<group>"; };
 		FE72B4C9144FFD3000C3EE5B /* smartcard.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = smartcard.html; sourceTree = "<group>"; };
@@ -640,6 +639,7 @@
 		FEC6D1DC14555F9800576EF3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		FEC6D1E114555FF900576EF3 /* UIAudioAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAudioAddition.h; sourceTree = "<group>"; };
 		FEC6D1E214555FF900576EF3 /* UIAudioAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAudioAddition.m; sourceTree = "<group>"; };
+		FEE7868E14618C4B00AC791B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/MainWindow.xib"; sourceTree = "<group>"; };
 		FEFB311D144311D600440DD5 /* MessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesViewController.h; sourceTree = "<group>"; };
 		FEFB311E144311D600440DD5 /* MessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesViewController.m; sourceTree = "<group>"; };
 		FEFB311F144311D600440DD5 /* MessagesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesViewController.xib; sourceTree = "<group>"; };
@@ -1132,7 +1132,7 @@
 			children = (
 				CBDA5B0913DBEC1300FAE221 /* PushBox.xcdatamodeld */,
 				CBDA5AFC13DBEC1300FAE221 /* PushBox-Info.plist */,
-				CBDA5AFD13DBEC1300FAE221 /* InfoPlist.strings */,
+				FE3EE0ED14618CA800F92F17 /* InfoPlist.strings */,
 				CBDA5B0013DBEC1300FAE221 /* main.m */,
 				CBDA5B0213DBEC1300FAE221 /* PushBox-Prefix.pch */,
 			);
@@ -1211,8 +1211,8 @@
 				9B1129EE14514374001CE64E /* RootViewController.xib */,
 				CB018E0F13DE00F0004217E0 /* CardTableViewController.xib */,
 				CB26225213DF07820062EDE7 /* CardTableViewCell.xib */,
-				CBDA5B0613DBEC1300FAE221 /* MainWindow.xib */,
 				CB4AAC9113DC7BE60053E3A6 /* LoginViewController.xib */,
+				FEE7868D14618C4B00AC791B /* MainWindow.xib */,
 				CBBA020413E52F8100641923 /* CommentsTableViewController.xib */,
 				CBBA021013E53F2900641923 /* CommentsTableViewCell.xib */,
 				9B11DC0514553AAC001F75EF /* CCCommentsTableViewCell.xib */,
@@ -1328,6 +1328,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hans",
 			);
 			mainGroup = CBDA5AE313DBEC1300FAE221;
 			productRefGroup = CBDA5AEF13DBEC1300FAE221 /* Products */;
@@ -1345,8 +1346,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE94DEFA1453379800D8A12E /* smartcard.js in Resources */,
-				CBDA5AFF13DBEC1300FAE221 /* InfoPlist.strings in Resources */,
-				CBDA5B0813DBEC1300FAE221 /* MainWindow.xib in Resources */,
 				CB4AAC6013DC6C4D0053E3A6 /* root_pushbox.png in Resources */,
 				CB4AAC6213DC6FA30053E3A6 /* root_loading_bg.png in Resources */,
 				CB4AAC6413DC6FD00053E3A6 /* root_bottom_bar_bg.png in Resources */,
@@ -1541,6 +1540,8 @@
 				FE7ADDC6145D554F00C403DF /* weibopop_repost_bg.png in Resources */,
 				FE831553145E803700909CF0 /* PostViewAtTableViewCell.xib in Resources */,
 				9BC26BB314604F4700724DAC /* cell_highlight.png in Resources */,
+				FEE7868F14618C4B00AC791B /* MainWindow.xib in Resources */,
+				FE3EE0EF14618CA800F92F17 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1630,18 +1631,18 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		CBDA5AFD13DBEC1300FAE221 /* InfoPlist.strings */ = {
+		FE3EE0ED14618CA800F92F17 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				9BFD85D81461842500E16A79 /* zh-Hans */,
+				FE3EE0EE14618CA800F92F17 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		CBDA5B0613DBEC1300FAE221 /* MainWindow.xib */ = {
+		FEE7868D14618C4B00AC791B /* MainWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				9BFD85D91461842500E16A79 /* zh-Hans */,
+				FEE7868E14618C4B00AC791B /* zh-Hans */,
 			);
 			name = MainWindow.xib;
 			sourceTree = "<group>";
