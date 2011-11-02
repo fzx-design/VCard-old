@@ -180,6 +180,7 @@
     
     CommentViewController *vc = [[CommentViewController alloc] init];
     vc.targetComment = comment;
+	vc.delegate = self;
     vc.targetStatus = self.status;
     [[UIApplication sharedApplication] presentModalViewController:vc atHeight:kModalViewHeight];
     [vc release];

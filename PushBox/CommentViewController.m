@@ -277,7 +277,7 @@
 					[self hidePostingView];
 					if (!client.hasError) {
 						[self dismissView];
-						if (self.delegate != nil) {
+						if ([self.delegate respondsToSelector:@selector(commentFinished)]) {
 							[self.delegate commentFinished];
 						}
 						[[UIApplication sharedApplication] showOperationDoneView];
@@ -288,7 +288,7 @@
 				[client2 repost:self.targetStatus.statusID text:content commentStatus:NO commentOrigin:NO];
 			} else {			
 				[self dismissView];
-				if (self.delegate != nil) {
+				if ([self.delegate respondsToSelector:@selector(commentFinished)]) {
 					[self.delegate commentFinished];
 				}
 				[[UIApplication sharedApplication] showOperationDoneView];

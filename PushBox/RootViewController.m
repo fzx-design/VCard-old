@@ -127,7 +127,8 @@
 }
 
 - (void)start
-{	
+{
+	[[UIApplication sharedApplication] showLoadingView];
 	_refreshFlag = NO;
 	preNewCommentCount = 0;
 	preNewFollowerCount = 0;
