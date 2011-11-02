@@ -172,7 +172,7 @@
                                                  commentCell.separatorLine.frame.size.width, 
                                                  commentCell.separatorLine.frame.size.height);
 	
-	UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_highlight.png"]];
+	UIImageView *imageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_highlight.png"]] autorelease];
 	imageView.contentMode = UIViewContentModeBottom;
 	[commentCell setSelectedBackgroundView:imageView];
 }

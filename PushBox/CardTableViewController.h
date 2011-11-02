@@ -47,7 +47,6 @@ typedef enum {
     BOOL _swipeEnabled;
     
     NSFetchedResultsController *_prevFetchedResultsController;
-	NSManagedObjectContext *_mentionsManagedObjectContext;
 	
     int _prevRowIndex;
     

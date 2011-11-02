@@ -41,14 +41,19 @@
     dispatch_async(downloadQueue, ^{ 
         NSData *imageData = [NSData dataWithContentsOfURL:url];
         UIImage *img = [UIImage imageWithData:imageData];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            //            [Image insertImage:imageData withURL:urlString inManagedObjectContext:context];
-            NSLog(@"cache image url:%@", urlString);
-            self.image = img;
-            if (completion) {
-                completion();
-            }				
-        });
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            //            [Image insertImage:imageData withURL:urlString inManagedObjectContext:context];
+//            NSLog(@"cache image url:%@", urlString);
+//            self.image = img;
+//            if (completion) {
+//                completion();
+//            }				
+//        });
+		self.image = nil;
+		self.image = img;
+		if (completion) {
+			completion();
+		}
     });
     
     dispatch_release(downloadQueue);

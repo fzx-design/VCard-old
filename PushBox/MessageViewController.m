@@ -90,10 +90,10 @@
 
 # pragma - UITextViewDelegate
 
-- (void)textViewDidChange:(UITextView *)textView
+- (void)textViewDidChange:(UITextView *)thetextView
 {
-    int count = [textView.text length];
-    self.countLabel.text = [[NSString alloc] initWithFormat:@"%d", count];
+    int count = [thetextView.text length];
+    self.countLabel.text = [[[NSString alloc] initWithFormat:@"%d", count] autorelease];
 }
 
 @end

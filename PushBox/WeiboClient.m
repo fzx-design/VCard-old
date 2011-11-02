@@ -291,11 +291,11 @@ report_completion:
             [self.request addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
             self.request.requestMethod = @"POST";
             NSString *postBody = [self queryString];
-            NSMutableData *postData = [[NSMutableData alloc] initWithData:[postBody dataUsingEncoding:NSUTF8StringEncoding]];
+            NSMutableData *postData = [[[NSMutableData alloc] initWithData:[postBody dataUsingEncoding:NSUTF8StringEncoding]] autorelease];
             [self.request setPostBody:postData];
         }
         else {
-            NSString* contentType = [[NSString alloc] initWithFormat:@"multipart/form-data; boundary=%@", TWITTERFON_FORM_BOUNDARY];
+            NSString* contentType = [[[NSString alloc] initWithFormat:@"multipart/form-data; boundary=%@", TWITTERFON_FORM_BOUNDARY] autorelease];
             [self.request addRequestHeader:@"Content-Type" value:contentType];
             self.request.requestMethod = @"POST";
         }
@@ -558,7 +558,8 @@ report_completion:
     if (count) {
         [self.params setObject:[NSString stringWithFormat:@"%d", count] forKey:@"count"];
     }
-    [self sendRequest];}
+    [self sendRequest];
+}
 
 
 - (void)getCommentsToMeSinceID:(NSString *)sinceID 
@@ -601,6 +602,19 @@ report_completion:
     if (count) {
         [self.params setObject:[NSString stringWithFormat:@"%d", count] forKey:@"count"];
     }
+	
+	[self setPreCompletionBlock:^(WeiboClient *client1) {
+        if (!client1.hasError) {            
+            NSArray *statusesDict = client1.responseJSONObject;
+            if (statusesDict) {
+                WeiboClient *client2 = [WeiboClient client];
+                [client2 setCompletionBlock:client1.completionBlock];
+                [client1 setCompletionBlock:NULL];
+                [client2 getCommentsAndRepostsCountForStatusesDict:statusesDict];
+            }
+        }
+    }];
+	
     [self sendRequest];
 }
 
@@ -786,7 +800,9 @@ report_completion:
     [params setObject:text forKey:@"status"];
     
     //    [self post:[self getURL:self.path queryParameters:params] data:data];
-    NSURL* url = [[NSURL alloc] initWithString:[self getURL:self.path queryParameters:params]];
+	
+	//REMAIN_TO_BE_CHECKED
+    NSURL* url = [[[NSURL alloc] initWithString:[self getURL:self.path queryParameters:params]] autorelease];
     NSLog(@"%@", [url description]);
     [self.request setURL:url];
     [self.request setPostBody:data];

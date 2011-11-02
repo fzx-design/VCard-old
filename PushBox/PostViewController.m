@@ -292,24 +292,24 @@
         [self.atScreenNames removeAllObjects];
     }
     else {
-        self.atScreenNames = [[NSMutableArray alloc] initWithCapacity:1];
+        self.atScreenNames = [[[NSMutableArray alloc] initWithCapacity:1] autorelease];
     }
     
     // init
     if ([text compare:@"init"] == NSOrderedSame) {
-        [self.atScreenNames addObject:[[NSString alloc] initWithFormat:@"@"]];
+        [self.atScreenNames addObject:[[[NSString alloc] initWithFormat:@"@"] autorelease]];
     }
     
     // text
     else {        
         // TODO
-        [self.atScreenNames insertObject:[[NSString alloc] initWithFormat:@"@%@", text] atIndex:0];
+        [self.atScreenNames insertObject:[[[NSString alloc] initWithFormat:@"@%@", text] autorelease] atIndex:0];
         
         NSManagedObjectContext* context = [(PushBoxAppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
         NSEntityDescription *entityDescription = [NSEntityDescription                                                  entityForName:@"User" inManagedObjectContext:context];
         NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
         [request setEntity:entityDescription];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:[[NSString alloc] initWithFormat:@"screenName like[c] \"*%@*\"", text]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:[[[NSString alloc] initWithFormat:@"screenName like[c] \"*%@*\"", text] autorelease]];
         [request setPredicate:predicate];
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]                                                                      initWithKey:@"screenName" ascending:YES];
         [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
@@ -318,7 +318,7 @@
         NSArray *array = [context executeFetchRequest:request error:&error];
         
         for (int i = 0; i < [array count]; i++) {
-            [self.atScreenNames addObject:[[NSString alloc] initWithFormat:@"@%@", [[array objectAtIndex:i] screenName]]];
+            [self.atScreenNames addObject:[[[NSString alloc] initWithFormat:@"@%@", [[array objectAtIndex:i] screenName]] autorelease]];
         }
     }
 }
@@ -326,67 +326,67 @@
 
 - (Boolean)isAtEndChar:(unichar)c
 {
-    NSArray* atEndCharArray = [[NSArray alloc] initWithObjects:
-                               [[NSNumber alloc] initWithInt:44],   // ' '
-                               [[NSNumber alloc] initWithInt:46],   // ' '
-                               [[NSNumber alloc] initWithInt:32],   // ' '
-                               [[NSNumber alloc] initWithInt:64],   // '@'
-                               [[NSNumber alloc] initWithInt:58],   // ':'
-                               [[NSNumber alloc] initWithInt:59],   // ';'
-                               [[NSNumber alloc] initWithInt:35],   // '#'
-                               [[NSNumber alloc] initWithInt:39],   // '''
-                               [[NSNumber alloc] initWithInt:34],   // '"'
-                               [[NSNumber alloc] initWithInt:40],   // '('
-                               [[NSNumber alloc] initWithInt:41],   // ')'
-                               [[NSNumber alloc] initWithInt:91],   // '['
-                               [[NSNumber alloc] initWithInt:93],   // ']'
-                               [[NSNumber alloc] initWithInt:123],   // '{'
-                               [[NSNumber alloc] initWithInt:125],   // '}'
-                               [[NSNumber alloc] initWithInt:126],   // '~'
-                               [[NSNumber alloc] initWithInt:33],   // '!'
-                               [[NSNumber alloc] initWithInt:36],   // '$'
-                               [[NSNumber alloc] initWithInt:37],   // '%'
-                               [[NSNumber alloc] initWithInt:94],   // '^'
-                               [[NSNumber alloc] initWithInt:38],   // '&'
-                               [[NSNumber alloc] initWithInt:42],   // '*'
-                               [[NSNumber alloc] initWithInt:43],   // '+'
-                               [[NSNumber alloc] initWithInt:61],   // '='
-                               [[NSNumber alloc] initWithInt:124],   // '|'
-                               [[NSNumber alloc] initWithInt:60],   // '<'
-                               [[NSNumber alloc] initWithInt:62],   // '>'
-                               [[NSNumber alloc] initWithInt:92],   // '\'
-                               [[NSNumber alloc] initWithInt:47],   // '/'
-                               [[NSNumber alloc] initWithInt:63],   // '?'
-                               [[NSNumber alloc] initWithInt:65306],   // '"'
-                               [[NSNumber alloc] initWithInt:65307],   // '"'
-                               [[NSNumber alloc] initWithInt:8216],   // '"'
-                               [[NSNumber alloc] initWithInt:8217],   // '"'
-                               [[NSNumber alloc] initWithInt:8220],   // '"'
-                               [[NSNumber alloc] initWithInt:8221],   // '"'
-                               [[NSNumber alloc] initWithInt:65288],   // '"'
-                               [[NSNumber alloc] initWithInt:65289],   // '"'
-                               [[NSNumber alloc] initWithInt:65339],   // '"'
-                               [[NSNumber alloc] initWithInt:12290],   // '"'
-                               [[NSNumber alloc] initWithInt:65341],   // '"'
-                               [[NSNumber alloc] initWithInt:65292],   // '，'
-                               [[NSNumber alloc] initWithInt:12289],   // '、'
-                               [[NSNumber alloc] initWithInt:65371],   // '"'
-                               [[NSNumber alloc] initWithInt:65373],   // '"'
-                               [[NSNumber alloc] initWithInt:65374],   // '"'
-                               [[NSNumber alloc] initWithInt:65281],   // '"'
-                               [[NSNumber alloc] initWithInt:65283],   // '"'
-                               [[NSNumber alloc] initWithInt:65509],   // '"'
-                               [[NSNumber alloc] initWithInt:65285],   // '"'
-                               [[NSNumber alloc] initWithInt:8212],   // '"'
-                               [[NSNumber alloc] initWithInt:65290],   // '"'
-                               [[NSNumber alloc] initWithInt:65291],   // '"'
-                               [[NSNumber alloc] initWithInt:65309],   // '"'
-                               [[NSNumber alloc] initWithInt:65372],   // '"'
-                               [[NSNumber alloc] initWithInt:12298],   // '"'
-                               [[NSNumber alloc] initWithInt:65295],   // '"'
-                               [[NSNumber alloc] initWithInt:65311],   // '"'
-                               [[NSNumber alloc] initWithInt:8230],   // '"'
-                               nil];
+    NSArray* atEndCharArray = [[[NSArray alloc] initWithObjects:
+                               [[[NSNumber alloc] initWithInt:44] autorelease],   // ' '
+                               [[[NSNumber alloc] initWithInt:46] autorelease],   // ' '
+                               [[[NSNumber alloc] initWithInt:32] autorelease],   // ' '
+                               [[[NSNumber alloc] initWithInt:64] autorelease],   // '@'
+                               [[[NSNumber alloc] initWithInt:58] autorelease],   // ':'
+                               [[[NSNumber alloc] initWithInt:59] autorelease],   // ';'
+                               [[[NSNumber alloc] initWithInt:35] autorelease],   // '#'
+                               [[[NSNumber alloc] initWithInt:39] autorelease],   // '''
+                               [[[NSNumber alloc] initWithInt:34] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:40] autorelease],   // '('
+                               [[[NSNumber alloc] initWithInt:41] autorelease],   // ')'
+                               [[[NSNumber alloc] initWithInt:91] autorelease],   // '['
+                               [[[NSNumber alloc] initWithInt:93] autorelease],   // ']'
+                               [[[NSNumber alloc] initWithInt:123] autorelease],   // '{'
+                               [[[NSNumber alloc] initWithInt:125] autorelease],   // '}'
+                               [[[NSNumber alloc] initWithInt:126] autorelease],   // '~'
+                               [[[NSNumber alloc] initWithInt:33] autorelease],   // '!'
+                               [[[NSNumber alloc] initWithInt:36] autorelease],   // '$'
+                               [[[NSNumber alloc] initWithInt:37] autorelease],   // '%'
+                               [[[NSNumber alloc] initWithInt:94] autorelease],   // '^'
+                               [[[NSNumber alloc] initWithInt:38] autorelease],   // '&'
+                               [[[NSNumber alloc] initWithInt:42] autorelease],   // '*'
+                               [[[NSNumber alloc] initWithInt:43] autorelease],   // '+'
+                               [[[NSNumber alloc] initWithInt:61] autorelease],   // '='
+                               [[[NSNumber alloc] initWithInt:124] autorelease],   // '|'
+                               [[[NSNumber alloc] initWithInt:60] autorelease],   // '<'
+                               [[[NSNumber alloc] initWithInt:62] autorelease],   // '>'
+                               [[[NSNumber alloc] initWithInt:92] autorelease],   // '\'
+                               [[[NSNumber alloc] initWithInt:47] autorelease],   // '/'
+                               [[[NSNumber alloc] initWithInt:63] autorelease],   // '?'
+                               [[[NSNumber alloc] initWithInt:65306] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65307] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:8216] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:8217] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:8220] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:8221] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65288] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65289] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65339] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:12290] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65341] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65292] autorelease],   // '，'
+                               [[[NSNumber alloc] initWithInt:12289] autorelease],   // '、'
+                               [[[NSNumber alloc] initWithInt:65371] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65373] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65374] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65281] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65283] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65509] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65285] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:8212] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65290] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65291] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65309] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65372] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:12298] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65295] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:65311] autorelease],   // '"'
+                               [[[NSNumber alloc] initWithInt:8230] autorelease],   // '"'
+                               nil] autorelease];
     for (int i = 0; i < [atEndCharArray count]; i++)
     {
         if (c == [[atEndCharArray objectAtIndex:i] intValue])
@@ -415,7 +415,7 @@
         if (self.atScreenNames) {
             [self.atScreenNames removeAllObjects];
         }
-        self.atScreenNames = [[NSMutableArray alloc] initWithObjects:[[NSString alloc] initWithFormat:@"@%@", textField.text], nil];
+        self.atScreenNames = [[[NSMutableArray alloc] initWithObjects:[[[NSString alloc] initWithFormat:@"@%@", textField.text] autorelease], nil] autorelease];
         [self.atTableView reloadData];
     }
 }

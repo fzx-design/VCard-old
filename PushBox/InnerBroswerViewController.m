@@ -70,15 +70,16 @@
 
 - (void)loadLink:(NSString*)link
 {
-    NSURLRequest* request = [[NSURLRequest alloc] initWithURL:[[NSURL alloc] initWithString:link]];
+    NSURLRequest* request = [[NSURLRequest alloc] initWithURL:[[[NSURL alloc] initWithString:link] autorelease]];
     [_webView loadRequest:request];
+	[request release];
 }
 
 - (IBAction)closeButtonClicked:(id)sender
 {
     //
     [[UIApplication sharedApplication] dismissModalViewController];
-    [self.webView loadRequest:[[NSURLRequest alloc] initWithURL:[[NSURL alloc] initWithString:@"about:blank"]]];
+    [self.webView loadRequest:[[[NSURLRequest alloc] initWithURL:[[[NSURL alloc] initWithString:@"about:blank"] autorelease]] autorelease]];
     if (isIpodPlaying) {
         MPMusicPlayerController* ipodMusicPlayer = [MPMusicPlayerController iPodMusicPlayer];
         NSLog(@"%@", [[ipodMusicPlayer nowPlayingItem] description]);
