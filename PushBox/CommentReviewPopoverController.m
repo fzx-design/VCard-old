@@ -83,11 +83,22 @@ static CommentReviewPopoverController* sharedCommentReviewPopoverController;
     
 	self.screenNameLabel.text = self.status.author.screenName;
 	
+    NSDate *now = [NSDate date];
+    NSCalendar *calendar = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+    NSDateComponents *components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:now];
+    [components setHour:0];
+    NSDate *today0am = [calendar dateFromComponents:components];  
+    
+    NSTimeInterval time = [today0am timeIntervalSinceDate:self.status.createdAt];
+    int days = ((int)time)/(3600*24);
+    if (time < 0) {
+        days = -1;
+    }
+    days++;
+    
+    NSString* dateStr;
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     [dateFormatter setDateFormat:[NSDateFormatter dateFormatFromTemplate:@"HH:mm" options:0 locale:[NSLocale currentLocale]]];
-    NSTimeInterval time=[self.status.createdAt timeIntervalSinceDate:[NSDate date]];
-    int days=((int)time)/(3600*24);
-    NSString* dateStr;
     NSString* timeStr = [dateFormatter stringFromDate:self.status.createdAt];
     switch (days) {
         case 0:
@@ -99,8 +110,12 @@ static CommentReviewPopoverController* sharedCommentReviewPopoverController;
         case 2:
             dateStr = [[NSString alloc] initWithFormat:@"%@ 前天",timeStr];
             break;
-        default:
+        case 3:
+        case 4:
+        case 5:
             dateStr = [[NSString alloc] initWithFormat:@"%@ %d天前",timeStr, days];
+        default:
+            dateStr = [self.status.createdAt stringRepresentation];
             break;
     }
     self.dateLabel.text = dateStr;
@@ -175,7 +190,7 @@ static CommentReviewPopoverController* sharedCommentReviewPopoverController;
     [super viewDidLoad];
 	[self prepare];
 	[self.view addSubview:self.statusView];
-
+    
 	self.statusView.layer.anchorPoint = CGPointMake(0, 0.5);
 	[self.statusView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
 	CGRect frame = self.statusView.frame;
@@ -187,7 +202,7 @@ static CommentReviewPopoverController* sharedCommentReviewPopoverController;
 		frame.origin.y = 85;
 	}
 	
-
+    
 	self.statusView.frame = frame;
 }
 

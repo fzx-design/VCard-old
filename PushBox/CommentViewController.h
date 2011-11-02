@@ -25,12 +25,22 @@
 	UIButton *_repostButton;
 	UIButton *_doneButton;
 	
+    UIView *_atView;
+    UITableView *_atTableView;
+    UITextField *_atTextField;
+ 
+    UIButton* _atBgButton;
+    
+    NSMutableArray *_atScreenNames;
+
     Status *_targetStatus;
     Comment *_targetComment;
 	
 	id<CommentseViewDelegates> _delegate;
 	
 	BOOL _repostFlag;
+
+    int textViewWordsCount;
 }
 
 @property(nonatomic, retain) IBOutlet UITextView* textView;
@@ -40,6 +50,10 @@
 @property(nonatomic, retain) IBOutlet UIImageView* postingRoundImageView;
 @property(nonatomic, retain) IBOutlet UIButton* repostButton;
 @property(nonatomic, retain) IBOutlet UIButton* doneButton;
+@property(nonatomic, retain) IBOutlet UIView* atView;
+@property(nonatomic, retain) IBOutlet UITableView* atTableView;
+@property(nonatomic, retain) IBOutlet UITextField* atTextField;
+@property(nonatomic, retain) NSMutableArray *atScreenNames;
 
 
 @property(nonatomic, retain) Status* targetStatus;
@@ -49,6 +63,6 @@
 
 - (IBAction)doneButtonClicked:(UIButton *)sender;
 - (IBAction)backButtonClicked:(UIButton *)sender;
-
+- (IBAction)atButtonClicked:(id)sender;
 
 @end

@@ -37,7 +37,7 @@ typedef enum {
     UITableView *_atTableView;
     UITextField *_atTextField;
 
-    UIPopoverController *_pc;
+     UIPopoverController *_pc;
     
     PostViewType _type;
     
