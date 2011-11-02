@@ -48,6 +48,8 @@ typedef enum {
     Status* _targetStatus;
     
     int textViewWordsCount;
+    
+    NSString* _lastChar;
 }
 
 @property(nonatomic, retain) IBOutlet UILabel* titleLabel;

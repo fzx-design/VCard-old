@@ -137,14 +137,9 @@
     self.doneButton.enabled = words >= 0;
     
     //
-    if ([text length] > 0 && bytes > textViewWordsCount) {
-        unichar c = [text characterAtIndex:([text length]-1)];
-        if (c == '@') {
-            [self atButtonClicked:nil];
-        }
-        
+    if (_lastChar && [_lastChar compare:@"@"] == NSOrderedSame) {
+        [self atButtonClicked:nil];
     }
-    textViewWordsCount = bytes;
 }
 
 - (IBAction)atButtonClicked:(id)sender {
@@ -152,6 +147,7 @@
     
     if (!_atBgButton)
         _atBgButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 1024, 748)];
+    
     [_atBgButton addTarget:self action:@selector(dismissAtView) forControlEvents:UIControlEventTouchUpInside];
     [superView addSubview:_atBgButton];
     
@@ -538,6 +534,13 @@
     [self dismissAtView];
     
     return NO;
+}
+
+#pragma - UITextViewDelegate
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    _lastChar = text;
+    return YES;
 }
 
 @end

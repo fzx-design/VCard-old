@@ -41,6 +41,8 @@
 	BOOL _repostFlag;
 
     int textViewWordsCount;
+    
+    NSString* _lastChar;
 }
 
 @property(nonatomic, retain) IBOutlet UITextView* textView;

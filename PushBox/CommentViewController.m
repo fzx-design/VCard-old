@@ -243,14 +243,9 @@
     self.doneButton.enabled = words >= 0;
     
     //
-    if ([text length] > 0 && bytes > textViewWordsCount) {
-        unichar c = [text characterAtIndex:([text length]-1)];
-        if (c == '@') {
-            [self atButtonClicked:nil];
-        }
-        
+    if (_lastChar && [_lastChar compare:@"@"] == NSOrderedSame) {
+        [self atButtonClicked:nil];
     }
-    textViewWordsCount = bytes;
 }
 
 
@@ -446,5 +441,11 @@
     return NO;
 }
 
+#pragma - UITextViewDelegate
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    _lastChar = text;
+    return YES;
+}
 
 @end

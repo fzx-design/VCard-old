@@ -1057,7 +1057,7 @@
             
         }];
         
-        [client getRelationshipWithUser:@"2478499604"];        
+        [client getRelationshipWithUser:@"2478499604"];
     }
     
     //self.cardTableViewController.tableview.tableHeaderView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 1024)] autorelease];
