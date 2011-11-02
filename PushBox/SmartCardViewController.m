@@ -1147,13 +1147,7 @@
                 sender.selected = YES;
 				
 				[[UIApplication sharedApplication] showOperationDoneView];
-                
-//                UIImage *img = [UIImage imageNamed:@"status_msg_addfav"];
-//                UIImageView *imageView = [[UIImageView alloc] initWithImage:img];
-//                imageView.center = self.view.center;
-//                [self.view addSubview:imageView];
-//                [imageView release];
-//                [imageView performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:2.0];
+
             } else {
                 [ErrorNotification showOperationError];
             }
