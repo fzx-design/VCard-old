@@ -2,7 +2,7 @@
 //  Comment.m
 //  PushBox
 //
-//  Created by Xie Hasky on 11-7-24.
+//  Created by Gabriel Yeah on 11-11-2.
 //  Copyright (c) 2011年 同济大学. All rights reserved.
 //
 
@@ -11,16 +11,99 @@
 #import "User.h"
 #import "NSDateAddition.h"
 
+
 @implementation Comment
+
 @dynamic commentID;
-@dynamic text;
-@dynamic source;
 @dynamic createdAt;
+@dynamic source;
+@dynamic text;
+@dynamic updateDate;
+@dynamic toMe;
+@dynamic byMe;
 @dynamic author;
 @dynamic targetStatus;
-@dynamic updateDate;
 @dynamic targetUser;
 
++ (Comment *)insertCommentByMe:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context
+{
+    NSString *commentID = [[dict objectForKey:@"id"] stringValue];
+    
+    if (!commentID || [commentID isEqualToString:@""]) {
+        return nil;
+    }
+    
+    Comment *result = [Comment commentWithID:commentID inManagedObjectContext:context];
+    if (!result) {
+        result = [NSEntityDescription insertNewObjectForEntityForName:@"Comment" inManagedObjectContext:context];
+    }
+    
+    result.commentID = commentID;
+    
+    result.updateDate = [NSDate date];
+    
+    NSString *dateString = [dict objectForKey:@"created_at"];
+    result.createdAt = [NSDate dateFromStringRepresentation:dateString];
+    
+    result.text = [dict objectForKey:@"text"];
+	result.toMe = [NSNumber numberWithBool:NO];
+	result.byMe = [NSNumber numberWithBool:YES];
+    
+    NSDictionary *statusDict = [dict objectForKey:@"status"];
+    
+    if (statusDict) {
+        result.targetStatus = [Status insertStatus:statusDict inManagedObjectContext:context];
+        result.targetUser = result.targetStatus.author;
+    }
+    
+    NSDictionary *userDict = [dict objectForKey:@"user"];
+    
+    if (userDict) {
+        result.author = [User insertUser:userDict inManagedObjectContext:context];
+    }
+    
+    return result;
+}
+
++ (Comment *)insertCommentToMe:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context
+{
+    NSString *commentID = [[dict objectForKey:@"id"] stringValue];
+    
+    if (!commentID || [commentID isEqualToString:@""]) {
+        return nil;
+    }
+    
+    Comment *result = [Comment commentWithID:commentID inManagedObjectContext:context];
+    if (!result) {
+        result = [NSEntityDescription insertNewObjectForEntityForName:@"Comment" inManagedObjectContext:context];
+    }
+    
+    result.commentID = commentID;
+    
+    result.updateDate = [NSDate date];
+    
+    NSString *dateString = [dict objectForKey:@"created_at"];
+    result.createdAt = [NSDate dateFromStringRepresentation:dateString];
+    
+    result.text = [dict objectForKey:@"text"];
+	result.toMe = [NSNumber numberWithBool:YES];
+	result.byMe = [NSNumber numberWithBool:NO];
+    
+    NSDictionary *statusDict = [dict objectForKey:@"status"];
+    
+    if (statusDict) {
+        result.targetStatus = [Status insertStatus:statusDict inManagedObjectContext:context];
+        result.targetUser = result.targetStatus.author;
+    }
+    
+    NSDictionary *userDict = [dict objectForKey:@"user"];
+    
+    if (userDict) {
+        result.author = [User insertUser:userDict inManagedObjectContext:context];
+    }
+    
+    return result;
+}
 
 + (Comment *)insertComment:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context
 {
@@ -58,7 +141,6 @@
     }
     
     return result;
-    
 }
 
 + (Comment *)commentWithID:(NSString *)commentID inManagedObjectContext:(NSManagedObjectContext *)context
@@ -93,5 +175,6 @@
 {
     return [self.commentID isEqualToString:comment.commentID];
 }
+
 
 @end

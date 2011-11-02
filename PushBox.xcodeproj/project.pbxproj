@@ -138,6 +138,7 @@
 		9BF36CFA14592F6900A60A0F /* options_icon_about.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF36CF914592F6900A60A0F /* options_icon_about.png */; };
 		9BF36CFC1459359300A60A0F /* options_icon_legal.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF36CFB1459359300A60A0F /* options_icon_legal.png */; };
 		9BF36CFF14593B7700A60A0F /* LegacyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF36CFE14593B7600A60A0F /* LegacyViewController.m */; };
+		9BFD85CF14617A2600E16A79 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFD85CE14617A2600E16A79 /* Comment.m */; };
 		CB018DD613DD3CC9004217E0 /* DockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB018DD413DD3CC8004217E0 /* DockViewController.m */; };
 		CB018DD713DD3CC9004217E0 /* DockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB018DD513DD3CC8004217E0 /* DockViewController.xib */; };
 		CB018DDB13DDCCCD004217E0 /* dock_slider_thumb_HL.png in Resources */ = {isa = PBXBuildFile; fileRef = CB018DD913DDCCCD004217E0 /* dock_slider_thumb_HL.png */; };
@@ -249,7 +250,6 @@
 		CBDA5B5813DBECEE00FAE221 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B5113DBECEE00FAE221 /* NSString+URLEncoding.m */; };
 		CBDA5B5913DBECEE00FAE221 /* OAuthHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B5313DBECEE00FAE221 /* OAuthHTTPRequest.m */; };
 		CBDA5B5A13DBECEE00FAE221 /* WeiboClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B5513DBECEE00FAE221 /* WeiboClient.m */; };
-		CBDA5B6513DBF47E00FAE221 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B6413DBF47E00FAE221 /* Comment.m */; };
 		CBDA5B7313DC25C600FAE221 /* CoreDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B7213DC25C500FAE221 /* CoreDataViewController.m */; };
 		CBDA5B7613DC25FA00FAE221 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B7513DC25FA00FAE221 /* CoreDataTableViewController.m */; };
 		FE1E629914441E2600A48CF9 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1E629814441E2600A48CF9 /* Message.m */; };
@@ -424,6 +424,8 @@
 		9BF36CFB1459359300A60A0F /* options_icon_legal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = options_icon_legal.png; sourceTree = "<group>"; };
 		9BF36CFD14593B7600A60A0F /* LegacyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LegacyViewController.h; sourceTree = "<group>"; };
 		9BF36CFE14593B7600A60A0F /* LegacyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LegacyViewController.m; sourceTree = "<group>"; };
+		9BFD85CD14617A2600E16A79 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		9BFD85CE14617A2600E16A79 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		CB018DD313DD3CC8004217E0 /* DockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DockViewController.h; sourceTree = "<group>"; };
 		CB018DD413DD3CC8004217E0 /* DockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DockViewController.m; sourceTree = "<group>"; };
 		CB018DD513DD3CC8004217E0 /* DockViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DockViewController.xib; sourceTree = "<group>"; };
@@ -596,8 +598,6 @@
 		CBDA5B5313DBECEE00FAE221 /* OAuthHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthHTTPRequest.m; sourceTree = "<group>"; };
 		CBDA5B5413DBECEE00FAE221 /* WeiboClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboClient.h; sourceTree = "<group>"; };
 		CBDA5B5513DBECEE00FAE221 /* WeiboClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboClient.m; sourceTree = "<group>"; };
-		CBDA5B6313DBF47E00FAE221 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
-		CBDA5B6413DBF47E00FAE221 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		CBDA5B7113DC25C500FAE221 /* CoreDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataViewController.h; sourceTree = "<group>"; };
 		CBDA5B7213DC25C500FAE221 /* CoreDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataViewController.m; sourceTree = "<group>"; };
 		CBDA5B7413DC25FA00FAE221 /* CoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataTableViewController.h; sourceTree = "<group>"; };
@@ -1240,8 +1240,8 @@
 			children = (
 				CB9E33CF13E87F5C00AAE64C /* Image.h */,
 				CB9E33D013E87F5C00AAE64C /* Image.m */,
-				CBDA5B6313DBF47E00FAE221 /* Comment.h */,
-				CBDA5B6413DBF47E00FAE221 /* Comment.m */,
+				9BFD85CD14617A2600E16A79 /* Comment.h */,
+				9BFD85CE14617A2600E16A79 /* Comment.m */,
 				FE1E629A14441E3F00A48CF9 /* User.h */,
 				FE1E629B14441E3F00A48CF9 /* User.m */,
 				9B4B49F614582FCF00C9B542 /* Status.h */,
@@ -1572,7 +1572,6 @@
 				CBDA5B5813DBECEE00FAE221 /* NSString+URLEncoding.m in Sources */,
 				CBDA5B5913DBECEE00FAE221 /* OAuthHTTPRequest.m in Sources */,
 				CBDA5B5A13DBECEE00FAE221 /* WeiboClient.m in Sources */,
-				CBDA5B6513DBF47E00FAE221 /* Comment.m in Sources */,
 				CBDA5B7313DC25C600FAE221 /* CoreDataViewController.m in Sources */,
 				CBDA5B7613DC25FA00FAE221 /* CoreDataTableViewController.m in Sources */,
 				CB4AAC4013DC671F0053E3A6 /* RootViewController.m in Sources */,
@@ -1624,6 +1623,7 @@
 				9B4B49FB14586C1000C9B542 /* RefreshingIntervalViewController.m in Sources */,
 				9BF36CFF14593B7700A60A0F /* LegacyViewController.m in Sources */,
 				FE831552145E803700909CF0 /* PostViewAtTableViewCell.m in Sources */,
+				9BFD85CF14617A2600E16A79 /* Comment.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="872" systemVersion="11C74" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Comment" representedClassName="Comment">
+        <attribute name="byMe" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="commentID" attributeType="String"/>
         <attribute name="createdAt" attributeType="Date"/>
         <attribute name="source" optional="YES" attributeType="String"/>
         <attribute name="text" attributeType="String"/>
+        <attribute name="toMe" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="updateDate" attributeType="Date"/>
         <relationship name="author" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="comments" inverseEntity="User"/>
         <relationship name="targetStatus" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Status" inverseName="comments" inverseEntity="Status"/>
@@ -74,7 +76,7 @@
         <relationship name="statuses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Status" inverseName="author" inverseEntity="Status"/>
     </entity>
     <elements>
-        <element name="Comment" positionX="-11" positionY="207" width="128" height="165"/>
+        <element name="Comment" positionX="-11" positionY="207" width="128" height="195"/>
         <element name="Image" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Message" positionX="160" positionY="192" width="128" height="45"/>
         <element name="Status" positionX="223" positionY="81" width="128" height="315"/>

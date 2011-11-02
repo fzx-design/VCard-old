@@ -2,7 +2,7 @@
 //  Comment.h
 //  PushBox
 //
-//  Created by Xie Hasky on 11-7-24.
+//  Created by Gabriel Yeah on 11-11-2.
 //  Copyright (c) 2011年 同济大学. All rights reserved.
 //
 
@@ -11,18 +11,21 @@
 
 @class Status, User;
 
-@interface Comment : NSManagedObject 
+@interface Comment : NSManagedObject
 
 @property (nonatomic, retain) NSString * commentID;
-@property (nonatomic, retain) NSString * text;
-@property (nonatomic, retain) NSString * source;
 @property (nonatomic, retain) NSDate * createdAt;
+@property (nonatomic, retain) NSString * source;
+@property (nonatomic, retain) NSString * text;
+@property (nonatomic, retain) NSDate * updateDate;
+@property (nonatomic, retain) NSNumber * toMe;
+@property (nonatomic, retain) NSNumber * byMe;
 @property (nonatomic, retain) User *author;
 @property (nonatomic, retain) Status *targetStatus;
-@property (nonatomic, retain) NSDate * updateDate;
 @property (nonatomic, retain) User *targetUser;
 
-
++ (Comment *)insertCommentByMe:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context;
++ (Comment *)insertCommentToMe:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context;
 + (Comment *)insertComment:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context;
 + (Comment *)commentWithID:(NSString *)commentID inManagedObjectContext:(NSManagedObjectContext *)context;
 + (void)deleteAllObjectsInManagedObjectContext:(NSManagedObjectContext *)context;

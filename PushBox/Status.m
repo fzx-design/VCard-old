@@ -67,7 +67,6 @@
     }
 	
 //    result.updateDate = [NSDate date];
-    
     result.statusID = statusID;
     
     NSString *dateString = [dict objectForKey:@"created_at"];

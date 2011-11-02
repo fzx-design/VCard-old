@@ -103,7 +103,7 @@
 			}
 			
 			for (NSDictionary *dict in dictArray) {
-				[Comment insertComment:dict inManagedObjectContext:self.managedObjectContext];
+				[Comment insertCommentToMe:dict inManagedObjectContext:self.managedObjectContext];
 			}
 			[self.managedObjectContext processPendingChanges];
 			
@@ -131,7 +131,7 @@
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:NO];
     request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     
-	request.predicate = [NSPredicate predicateWithFormat:@"targetUser == %@ && author != %@", self.currentUser, self.currentUser];
+	request.predicate = [NSPredicate predicateWithFormat:@"toMe == %@", [NSNumber numberWithBool:YES]];
 }
 
 - (void)commentsTableViewCellCommentButtonClicked:(CommentsTableViewCell *)cell

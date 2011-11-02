@@ -84,7 +84,7 @@
 	       
 	if ([self.user.gender isEqualToString:@"m"]) {
 		self.genderLabel.text = @"男";
-	} else {
+	} else if ([self.user.gender isEqualToString:@"f"]){
 		self.genderLabel.text = @"女";
 	}
         
