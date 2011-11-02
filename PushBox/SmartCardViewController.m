@@ -353,6 +353,8 @@
     self.commentCountLabel.text = self.status.commentsCount;
     self.repostCountLabel.text = self.status.repostsCount;
 	
+	NSLog(@"%@, %@", self.status.commentsCount, self.status.repostsCount);
+	
 	self.tweetTextView.text = @"";
     self.repostTextView.text = @"";
     

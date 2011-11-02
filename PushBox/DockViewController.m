@@ -133,26 +133,29 @@
     self.refreshNotiImageView.hidden = YES;
     self.commandCenterNotiImageView.hidden = YES;
 
-	self.ccUserInfoCardViewController = [[CCUserInfoCardViewController alloc] init];
+	self.ccUserInfoCardViewController = [[[CCUserInfoCardViewController alloc] init] autorelease];
 	self.ccUserInfoCardViewController.currentUser = self.currentUser;
-	self.userCardNaviViewController = [[UserCardNaviViewController alloc] initWithRootViewController:self.ccUserInfoCardViewController];
+	self.ccUserInfoCardViewController.managedObjectContext = self.managedObjectContext;
+	
+	self.userCardNaviViewController = [[[UserCardNaviViewController alloc] initWithRootViewController:self.ccUserInfoCardViewController] autorelease];
 	self.userCardNaviViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
 	CGRect frame = CGRectMake(-16, 121, self.userCardNaviViewController.view.frame.size.width, self.userCardNaviViewController.view.frame.size.height);
 	self.userCardNaviViewController.view.frame = frame;
 	[self.view addSubview:self.userCardNaviViewController.view];
 	
-	self.ccCommentTableViewController = [[CCCommentsTableViewController alloc] init];
+	self.ccCommentTableViewController = [[[CCCommentsTableViewController alloc] init] autorelease];
 	self.ccCommentTableViewController.dataSource = CommentsTableViewDataSourceCommentsToMe;
 	self.ccCommentTableViewController.currentUser = self.currentUser;
-	self.commentNaviViewController = [[UserCardNaviViewController alloc] initWithRootViewController:self.ccCommentTableViewController];
+	self.ccCommentTableViewController.managedObjectContext = self.managedObjectContext;
+	self.commentNaviViewController = [[[UserCardNaviViewController alloc] initWithRootViewController:self.ccCommentTableViewController] autorelease];
 	self.commentNaviViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 	
 	frame = CGRectMake(470, 121, self.commentNaviViewController.view.frame.size.width, self.commentNaviViewController.view.frame.size.height);
 	self.commentNaviViewController.view.frame = frame;
 	[self.view addSubview:self.commentNaviViewController.view];
 	
-	NSTimer* _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(calculateRefreshTime) userInfo:nil repeats:YES];
+	[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(calculateRefreshTime) userInfo:nil repeats:YES];
 	
 //    self.commentsTableViewController.dataSource = CommentsTableViewDataSourceCommentsToMe;
 //    self.commentsTableViewController.currentUser = self.currentUser;

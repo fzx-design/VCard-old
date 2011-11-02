@@ -1078,6 +1078,7 @@
     if (!_dockViewController) {
         _dockViewController = [[DockViewController alloc] init];
         self.dockViewController.currentUser = self.currentUser;
+		self.dockViewController.managedObjectContext = self.managedObjectContext;
         CGRect frame = self.dockViewController.view.frame;
         frame.origin.y = kDockViewFrameOriginY;
         self.dockViewController.view.frame = frame;
@@ -1135,6 +1136,7 @@
     if (!_cardTableViewController) {
         _cardTableViewController = [[CardTableViewController alloc] init];
         self.cardTableViewController.currentUser = self.currentUser;
+		self.cardTableViewController.managedObjectContext = self.managedObjectContext;
         self.cardTableViewController.delegate = self;
         CGRect frame = self.cardTableViewController.view.frame;
         frame.origin.y = kCardTableViewFrameOriginY;
@@ -1148,7 +1150,6 @@
 {
     if (!_messagesViewController) {
         _messagesViewController = [[MessagesViewController alloc] init];
-        self.messagesViewController.view.center = kMessagesViewCenter;
         
         self.messagesViewController.contactsTableViewController.delegate = self;
         self.messagesViewController.dialogTableViewController.delegate = self;
@@ -1156,6 +1157,10 @@
         self.messagesViewController.currentUser = self.currentUser;
         self.messagesViewController.contactsTableViewController.currentUser = self.currentUser;
         self.messagesViewController.dialogTableViewController.currentUser = self.currentUser;
+		self.messagesViewController.dialogTableViewController.managedObjectContext = self.managedObjectContext;
+		self.messagesViewController.contactsTableViewController.managedObjectContext = self.managedObjectContext;
+		
+        self.messagesViewController.view.center = kMessagesViewCenter;
     }
     return _messagesViewController;
 }

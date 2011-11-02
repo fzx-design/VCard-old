@@ -558,7 +558,8 @@ report_completion:
     if (count) {
         [self.params setObject:[NSString stringWithFormat:@"%d", count] forKey:@"count"];
     }
-    [self sendRequest];}
+    [self sendRequest];
+}
 
 
 - (void)getCommentsToMeSinceID:(NSString *)sinceID 
@@ -601,6 +602,19 @@ report_completion:
     if (count) {
         [self.params setObject:[NSString stringWithFormat:@"%d", count] forKey:@"count"];
     }
+	
+	[self setPreCompletionBlock:^(WeiboClient *client1) {
+        if (!client1.hasError) {            
+            NSArray *statusesDict = client1.responseJSONObject;
+            if (statusesDict) {
+                WeiboClient *client2 = [WeiboClient client];
+                [client2 setCompletionBlock:client1.completionBlock];
+                [client1 setCompletionBlock:NULL];
+                [client2 getCommentsAndRepostsCountForStatusesDict:statusesDict];
+            }
+        }
+    }];
+	
     [self sendRequest];
 }
 
