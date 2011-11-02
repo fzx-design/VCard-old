@@ -1,4 +1,4 @@
-    //
+//
 //  AboutViewController.m
 //  VCard HD
 //
@@ -84,6 +84,66 @@
 {
 	NSString *urlString = @"http://itunes.apple.com/cn/artist/mondev-tongji-u/id420593934";
 	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+}
+
+- (IBAction)feedback:(UIButton *)sender
+{
+    MFMailComposeViewController *picker = nil;
+    picker = [[MFMailComposeViewController alloc] init];
+    if (!picker) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"未设置邮件帐户", nil)
+//                                                        message:NSLocalizedString(@"可以在Mail中添加您的邮件帐户", nil)
+//                                                       delegate:self
+//                                              cancelButtonTitle:NSLocalizedString(@"好", nil)
+//                                              otherButtonTitles:nil];
+//        [alert show];
+//        [alert release];
+    }
+    else {
+        picker.mailComposeDelegate = self;
+        picker.modalPresentationStyle = UIModalPresentationPageSheet;
+        
+        NSString *subject = [NSString stringWithFormat:@"VCard HD 新浪微博用户反馈"];
+        
+        [picker setSubject:subject];
+        NSString *emailBody = [NSString stringWithFormat:@""];
+        [picker setMessageBody:emailBody isHTML:NO];
+        
+        [[[UIApplication sharedApplication] rootViewController] presentModalViewController:picker animated:YES];
+        [picker release];
+    }
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller 
+          didFinishWithResult:(MFMailComposeResult)result 
+                        error:(NSError*)error
+{
+    NSString *message = nil;
+    switch (result)
+    {
+        case MFMailComposeResultSaved:
+            message = NSLocalizedString(@"保存成功", nil);
+            [[[UIApplication sharedApplication] rootViewController] dismissModalViewControllerAnimated:YES];
+            break;
+        case MFMailComposeResultSent:
+            message = NSLocalizedString(@"发送成功", nil);
+            [[[UIApplication sharedApplication] rootViewController] dismissModalViewControllerAnimated:YES];
+            break;
+        case MFMailComposeResultFailed:
+            message = NSLocalizedString(@"发送失败", nil);
+            break;
+        default:
+            [[[UIApplication sharedApplication] rootViewController] dismissModalViewControllerAnimated:YES];
+            return;
+    }
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:message 
+                                                        message:nil
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"确定", nil)
+                                              otherButtonTitles:nil];
+    [alertView show];
+    [alertView release];
 }
 
 @end

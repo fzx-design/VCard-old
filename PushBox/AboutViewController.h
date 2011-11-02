@@ -22,5 +22,6 @@
 - (IBAction)followAuthor:(UIButton *)sender;
 - (IBAction)tellFriends:(UIButton *)sender;
 - (IBAction)otherApps:(UIButton *)sender;
+- (IBAction)feedback:(UIButton *)sender;
 
 @end

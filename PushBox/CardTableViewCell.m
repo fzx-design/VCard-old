@@ -46,7 +46,7 @@
 
 - (void)prepareForReuse
 {
-	[_smartCardViewController clear];
+    //	[_smartCardViewController clear];
 }
 
 - (void)clear
