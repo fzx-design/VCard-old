@@ -13,6 +13,7 @@
 #import "AnimationProvider.h"
 #import "Status.h"
 #import "User.h"
+#import "PushBoxAppDelegate.h"
 
 #define kLoginViewCenter CGPointMake(512.0, 370.0)
 
@@ -238,6 +239,31 @@
     else {
         [self showLoginView];
     }
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+	if (buttonIndex == alertView.cancelButtonIndex) {
+		return;
+	}
+	else {
+        WeiboClient *client = [WeiboClient client];
+        [client setCompletionBlock:^(WeiboClient *client){
+            if (!client.hasError) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"完成", nil) 
+                                                                message:NSLocalizedString(@"您可以在 VCard 官方微博中找到使用窍门和最新信息。", nil)
+                                                               delegate:nil
+                                                      cancelButtonTitle:NSLocalizedString(@"好", nil)
+                                                      otherButtonTitles:nil];
+                [alert show];
+                [alert release];
+            } else {
+                [ErrorNotification showLoadingError];
+            }
+        }];
+        [client follow:@"2478499604"]; 
+    }
+    
 }
 
 - (void)userSignoutNotification:(id)sender
@@ -1009,6 +1035,29 @@
         button.alpha = 0.0;
         [button addTarget:self action:@selector(helpButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:button];
+        
+        // 
+        WeiboClient *client = [WeiboClient client];
+        
+        [client setCompletionBlock:^(WeiboClient *client) {
+            NSDictionary *dict = client.responseJSONObject;
+            dict = [dict objectForKey:@"target"];
+            
+            BOOL followedByMe = [[dict objectForKey:@"followed_by"] boolValue];
+            
+            if (!followedByMe) {                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"关注 VCard HD", nil)
+                                                                message:NSLocalizedString(@"您可以在 VCard 官方微博中找到使用窍门和最新信息。", nil)
+                                                               delegate:self
+                                                      cancelButtonTitle:NSLocalizedString(@"不, 谢谢", nil)
+                                                      otherButtonTitles:NSLocalizedString(@"好", nil), nil];
+                [alert show];
+                [alert release];
+            }
+            
+        }];
+        
+        [client getRelationshipWithUser:@"2478499604"];        
     }
     
     //self.cardTableViewController.tableview.tableHeaderView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 1024)] autorelease];

@@ -13,7 +13,7 @@
 #import "PostViewController.h"
 #import "MessagesViewController.h"
 
-@interface RootViewController : CoreDataViewController<LoginViewControllerDelegate, CardTableViewControllerDelegate> {
+@interface RootViewController : CoreDataViewController<LoginViewControllerDelegate, CardTableViewControllerDelegate, UIAlertViewDelegate> {
     UIImageView *_backgroundImageView;
     UIImageView *_pushBoxHDImageView;
     

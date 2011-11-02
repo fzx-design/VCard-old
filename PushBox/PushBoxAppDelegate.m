@@ -8,6 +8,7 @@
 
 #import "PushBoxAppDelegate.h"
 #import "RootViewController.h"
+#import "WeiboClient.h"
 
 #define kUserDefaultKeyLoginCount @"kUserDefaultKeyLoginCount"
 
@@ -80,15 +81,16 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    
 	int loginCount = [userDefault integerForKey:kUserDefaultKeyLoginCount];
 	loginCount++;
 	[userDefault setInteger:loginCount forKey:kUserDefaultKeyLoginCount];
-	
+    
 	if (loginCount == 10) {
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"评分", nil)
 														message:NSLocalizedString(@"喜欢 VCard HD？在 App Store 为它评分", nil)
 													   delegate:self
-											  cancelButtonTitle:NSLocalizedString(@"不，谢谢", nil)
+											  cancelButtonTitle:NSLocalizedString(@"不, 谢谢", nil)
 											  otherButtonTitles:NSLocalizedString(@"好", nil), nil];
 		[alert show];
 		[alert release];
@@ -101,8 +103,8 @@
 		return;
 	}
 	else {
-		NSString *urlString = @"http://itunes.apple.com/us/app/id420598288?mt=8";
-		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+            NSString *urlString = @"http://itunes.apple.com/us/app/id420598288?mt=8";
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];        
 	}
     
 }
@@ -145,7 +147,7 @@
              abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
              */
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-//            abort();
+            //            abort();
         } 
     }
 }
