@@ -348,7 +348,7 @@
     
 	self.profileImageView.image = nil;
 	self.screenNameLabel.text = self.status.author.screenName;
-    self.dateLabel.text = [self.status.createdAt stringRepresentation];
+    self.dateLabel.text = [self.status.createdAt customString];
 	
     self.commentCountLabel.text = self.status.commentsCount;
     self.repostCountLabel.text = self.status.repostsCount;

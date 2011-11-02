@@ -153,7 +153,7 @@
     CommentsTableViewCell *commentCell = (CommentsTableViewCell *)cell;
     Comment *comment = [self.fetchedResultsController objectAtIndexPath:indexPath];
     commentCell.screenNameLabel.text = comment.author.screenName;
-    commentCell.dateLabel.text = [comment.createdAt stringRepresentation];
+    commentCell.dateLabel.text = [comment.createdAt customString];
     commentCell.delegate = self;
     
     UITextView *textView = commentCell.textView;

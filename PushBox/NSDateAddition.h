@@ -12,5 +12,6 @@
 
 + (NSDate *)dateFromStringRepresentation:(NSString *)dateString;
 - (NSString *)stringRepresentation;
+- (NSString *)customString;
 
 @end
