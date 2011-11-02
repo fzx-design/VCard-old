@@ -343,6 +343,7 @@
     self.repostWebView.frame = kRepostWebViewFrameTop;
     
     self.musicCoverImageView.hidden = YES;
+    self.musicCoverImageView.alpha = 0;
     
     self.recentActNotifyLabel.hidden = YES;
     
@@ -596,7 +597,6 @@
     [self.musicCoverImageView loadImageFromURL:self.status.repostStatus.thumbnailPicURL 
                                     completion:^(void) 
      {
-         //         self.musicCoverImageView.alpha = 0.0;
          [UIView animateWithDuration:0.5 delay:0.1 options:0 animations:^{
              self.musicCoverImageView.alpha = 1.0;
          } completion:^(BOOL fin) {

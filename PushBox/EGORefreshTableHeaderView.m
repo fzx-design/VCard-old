@@ -242,7 +242,6 @@
 
 }
 
-
 #pragma mark -
 #pragma mark Dealloc
 
@@ -255,6 +254,5 @@
 	_lastUpdatedLabel = nil;
     [super dealloc];
 }
-
 
 @end
