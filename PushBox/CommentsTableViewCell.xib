@@ -137,9 +137,7 @@
 									<bytes key="NSWhite">MCAwAA</bytes>
 								</object>
 								<bool key="IBUIClipsSubviews">YES</bool>
-								<bool key="IBUIMultipleTouchEnabled">YES</bool>
 								<int key="IBUITag">-2</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<bool key="IBUIScrollEnabled">NO</bool>
 								<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
@@ -505,7 +503,6 @@
 							<string>authorImageView</string>
 							<string>authorNameLabel</string>
 							<string>authorPreviewLabel</string>
-							<string>newCommentsImageView</string>
 							<string>titleLabel</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -513,7 +510,6 @@
 							<string>UIImageView</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
-							<string>UIImageView</string>
 							<string>UILabel</string>
 						</object>
 					</object>
@@ -524,7 +520,6 @@
 							<string>authorImageView</string>
 							<string>authorNameLabel</string>
 							<string>authorPreviewLabel</string>
-							<string>newCommentsImageView</string>
 							<string>titleLabel</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -540,10 +535,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">authorPreviewLabel</string>
 								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">newCommentsImageView</string>
-								<string key="candidateClassName">UIImageView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">titleLabel</string>
