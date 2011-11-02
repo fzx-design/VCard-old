@@ -73,6 +73,7 @@
 	[self textViewDidChange:self.textView];
 	
 	self.textView.delegate = self;
+	self.atView.layer.anchorPoint = CGPointMake(0.5, 0);
 }
 
 - (void)dismissView
