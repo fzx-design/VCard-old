@@ -281,6 +281,7 @@
 - (void)popCardWithCompletion:(void (^)())completion
 {
 	_pushFlag = NO;
+	_nextPageForMention = 1;
 	
 	[[UIApplication sharedApplication] showLoadingView];
 	
