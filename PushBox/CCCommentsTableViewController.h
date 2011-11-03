@@ -11,6 +11,7 @@
 #import "CommentViewController.h"
 #import "UserCardNaviViewController.h"
 #import "CommentsTableViewController.h"
+#import "RCSwitchClone.h"
 
 #define kNotificationNameShouldShowMentions @"kNotificationNameShouldShowMentions"
 #define kNotificationObjectNameComment @"kNotificationObjectNameComment"
@@ -19,12 +20,14 @@
 @class CommentsTableViewController;
 @class Status;
 
-@interface CCCommentsTableViewController : EGOTableViewController<CommentsTableViewCellDelegats, CommentseViewDelegates> {
+@interface CCCommentsTableViewController : EGOTableViewController<CommentsTableViewCellDelegats, CommentseViewDelegates, SwitchValueChanged> {
     int _nextPage;
     id _delegate;
     CommentsTableViewDataSource _dataSource;
 	
 	NSFetchedResultsController *_commentsToMeFetchedResultsController;
+	
+	RCSwitchClone *_switchView;
 	
     UILabel *_titleLabel;
 	UILabel *_theNewCommentCountLabel;
@@ -32,15 +35,15 @@
 }
 
 @property(nonatomic, retain) Status *status;
-@property(nonatomic, retain) IBOutlet UILabel *titleLabel;
 @property(nonatomic, assign) CommentsTableViewDataSource dataSource;
 @property(nonatomic, assign) id<CommentsTableViewControllerDelegate> delegate;
 
+@property(nonatomic, retain) IBOutlet RCSwitchClone *switchView;
+
+@property(nonatomic, retain) IBOutlet UILabel *titleLabel;
 @property(nonatomic, retain) IBOutlet UILabel *theNewCommentCountLabel;
 @property(nonatomic, retain) IBOutlet UILabel *theNewMentionsCountLabel;
 
 - (IBAction)mentionButtonClicked:(id)sender;
-- (IBAction)toMeButtonClicked:(id)sender;
-- (IBAction)byMeButtonClicked:(id)sender;
 
 @end

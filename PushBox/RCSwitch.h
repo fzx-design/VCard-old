@@ -25,6 +25,7 @@
 typedef enum {
 	SwitchTypeFollow,
 	SwitchTypeNormal,
+	SwitchTypeComment,
 } SwitchType;
 
 @protocol SwitchValueChanged <NSObject>
@@ -56,6 +57,8 @@ typedef enum {
 	
 	NSDate *endDate;
 	BOOL mustFlip;
+	
+	BOOL preOnflag;
 	
 	SwitchType _type;
 	id<SwitchValueChanged> _delegate;

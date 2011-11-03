@@ -44,8 +44,6 @@
 	self.contentMode = UIViewContentModeRedraw;
 	[self setKnobWidth:44];
 	[self regenerateImages];
-//	UIEdgeInsets inset = UIEdgeInsetsMake(0.0, 22, 0, 22);
-//	sliderOff = [[UIImage imageNamed:@"switch_bg.png"] resizableImageWithCapInsets:inset];
 	sliderOff = [[[UIImage imageNamed:@"switch_bg.png"] stretchableImageWithLeftCapWidth:22.0
 																				 topCapHeight:0.0] retain];
 	if([[UIScreen mainScreen] respondsToSelector:@selector(scale)])
@@ -92,8 +90,6 @@
 	
 	{
 		UIImage *knobTmpImage = [[[UIImage imageNamed:@"switch_follow_thumb.png"] retain] autorelease];
-//		UIEdgeInsets inset = UIEdgeInsetsMake(0.0, 22, 0, 22);
-//		UIImage *knobImageStretch = [knobTmpImage resizableImageWithCapInsets:inset];
 		UIImage *knobImageStretch = [knobTmpImage stretchableImageWithLeftCapWidth:22.0
 																	  topCapHeight:0.0];
 		CGRect knobRect = CGRectMake(0, 0, knobWidth, [knobImageStretch size].height);
@@ -178,8 +174,15 @@
 - (void)regenerateImages
 {
 	CGRect boundsRect = self.bounds;
-	UIImage *sliderOnBase = [[UIImage imageNamed:@"switch_hl_bg.png"] stretchableImageWithLeftCapWidth:22.0
-																						   topCapHeight:0.0];
+	
+	UIImage *sliderOnBase;
+	if (_type == SwitchTypeComment) {
+		sliderOnBase = [[UIImage imageNamed:@"switch_bg.png"] stretchableImageWithLeftCapWidth:22.0
+																					 topCapHeight:0.0];
+	} else {
+		sliderOnBase = [[UIImage imageNamed:@"switch_hl_bg.png"] stretchableImageWithLeftCapWidth:22.0
+																					 topCapHeight:0.0];
+	}
 	CGRect sliderOnRect = boundsRect;
 	sliderOnRect.size.height = [sliderOnBase size].height;
 	if(UIGraphicsBeginImageContextWithOptions != NULL)
@@ -476,6 +479,11 @@
 	[self setNeedsDisplay];
 	[self sendActionsForControlEvents:UIControlEventValueChanged];
 	[self sendActionsForControlEvents:UIControlEventTouchUpInside];
+	if (preOnflag == [self isOn]) {
+		return;
+	}
+	preOnflag = [self isOn];
+	
 	if ([self isOn]) {
 		if ([self.delegate respondsToSelector:@selector(switchedOn)]) {
 			[delegate switchedOn];

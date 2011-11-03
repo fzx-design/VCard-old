@@ -13,6 +13,7 @@
 #import "AnimationProvider.h"
 #import "Status.h"
 #import "User.h"
+#import "Comment.h"
 #import "PushBoxAppDelegate.h"
 
 #define kLoginViewCenter CGPointMake(512.0, 370.0)
@@ -283,6 +284,7 @@
     self.currentUser = nil;
     [User deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
 	[Status deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
+	[Comment deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
     [self performSelector:@selector(showLoginView) withObject:nil afterDelay:1.0];
 }
 

@@ -24,6 +24,7 @@
 @synthesize status = _status;
 @synthesize theNewCommentCountLabel = _theNewCommentCountLabel;
 @synthesize theNewMentionsCountLabel = _theNewMentionsCountLabel;
+@synthesize switchView = _switchView;
 
 - (void)dealloc
 {
@@ -31,13 +32,15 @@
     [_titleLabel release];
 	[_theNewCommentCountLabel release];
     [_theNewMentionsCountLabel release];
+	[_switchView release];
     [super dealloc];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    [_titleLabel release];
+    self.titleLabel = nil;
+	self.switchView = nil;
     self.theNewCommentCountLabel = nil;
     self.theNewMentionsCountLabel = nil;
 }
@@ -48,6 +51,10 @@
     self.titleLabel.text = NSLocalizedString(@"评论", nil);
     
     _nextPage = 1;
+	
+	self.switchView.delegate = self;
+	[self.switchView setType:SwitchTypeComment];
+	
     [self performSelector:@selector(loadMoreData) withObject:nil afterDelay:0.5];
     [self performSelector:@selector(hideLoadMoreDataButton) withObject:nil afterDelay:0.1];
 }
@@ -121,6 +128,7 @@
 		} else {
 			[ErrorNotification showLoadingError];
 		}
+		self.switchView.userInteractionEnabled = YES;
 		[self doneLoadingTableViewData];
 		_loading = NO;
 
@@ -226,26 +234,27 @@
     [vc release];
 }
 
-- (IBAction)toMeButtonClicked:(id)sender
+- (void)switchedOn
 {
 	[[UIApplication sharedApplication] showLoadingView];
-	_dataSource = CommentsTableViewDataSourceCommentsToMe;
+	_dataSource = CommentsTableViewDataSourceCommentsByMe;
+	self.switchView.userInteractionEnabled = NO;
     self.fetchedResultsController.delegate = nil;
     self.fetchedResultsController = nil;
-//	self.fetchedResultsController = _fetchedResultsController;
 	[self refresh];
 	
 	[self.tableView reloadData];
 }
 
-- (IBAction)byMeButtonClicked:(id)sender
+- (void)switchedOff
 {
 	[[UIApplication sharedApplication] showLoadingView];
-	_dataSource = CommentsTableViewDataSourceCommentsByMe;
+	_dataSource = CommentsTableViewDataSourceCommentsToMe;
+	self.switchView.userInteractionEnabled = NO;
     self.fetchedResultsController.delegate = nil;
     self.fetchedResultsController = nil;
-//	_fetchedResultsController = self.fetchedResultsController;
 	[self refresh];
+	
 	[self.tableView reloadData];
 }
 
