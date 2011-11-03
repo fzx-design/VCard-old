@@ -319,6 +319,8 @@
 
 - (void)prepare
 {		
+    b = YES;
+    
     self.profileImageView.alpha = 0.0;
     self.musicLink = nil;
     
@@ -409,12 +411,13 @@
     [self.tweetImageView loadImageFromURL:repostStatus.bmiddlePicURL 
                                completion:^(void) 
      {
-         self.tweetImageView.hidden = YES;
-         //         [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
-         //             self.tweetImageView.alpha = 1.0;
-         //             self.imageCoverImageView.alpha = 1.0;
-         //         } completion:^(BOOL fin) {
-         //         }];
+         [UIView animateWithDuration:0.5 delay:1.0 options:0 animations:^{
+             if (b) {
+                 self.tweetImageView.alpha = 1.0;
+                 self.imageCoverImageView.alpha = 1.0;
+             }
+         } completion:^(BOOL fin) {
+         }];
      }
                            cacheInContext:self.managedObjectContext];
     if ([self checkGif:self.status.repostStatus.originalPicURL])
@@ -727,6 +730,7 @@
 
 - (void)getRepostMusicVideoLink:(NSString*)statusText
 {
+    
     NSString* shortUrl = nil;
     
     for (int i = 0; i < statusText.length; i++) {
@@ -764,25 +768,37 @@
                             
                             if ([longUrl rangeOfString:@"http://v.youku.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.tudou.com"].location != NSNotFound || [longUrl rangeOfString:@"http://v.ku6.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.56.com"].location != NSNotFound || [longUrl rangeOfString:@"http://music.sina.com"].location != NSNotFound|| [longUrl rangeOfString:@"xiami.com"].location != NSNotFound || [longUrl rangeOfString:@"songtaste.com"].location != NSNotFound) {
                                 isTrack = NO;
+                                b = NO;
                                 [self loadRepostMusicVideo:longUrl];
                             } 
-                            else {
-                                self.tweetImageView.hidden = NO;
-                                [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
-                                    self.tweetImageView.alpha = 1.0;
-                                    self.imageCoverImageView.alpha = 1.0;
-                                } completion:^(BOOL fin) {
-                                }];
-                            }
+                            //                            else {
+                            //                                self.tweetImageView.hidden = NO;
+                            //                                [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+                            //                                    self.tweetImageView.alpha = 1.0;
+                            //                                    self.imageCoverImageView.alpha = 1.0;
+                            //                                } completion:^(BOOL fin) {
+                            //                                }];
+                            //                            }
                         }
                     }
                 }];
                 
                 if (shortUrl)
+                {
                     [client getShortUrlExpand:shortUrl];
+                }
             }
         }
     }
+    
+//    if (b) {
+//        self.tweetImageView.hidden = NO;
+//        [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+//            self.tweetImageView.alpha = 1.0;
+//            self.imageCoverImageView.alpha = 1.0;
+//        } completion:^(BOOL fin) {
+//        }];
+//    } 
 }
 
 - (void)update
