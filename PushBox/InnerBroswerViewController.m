@@ -91,7 +91,6 @@
 - (IBAction)goSafariButtonClicked:(id)sender
 {
     [[UIApplication sharedApplication] openURL:[[self.webView request] URL]];
-
 }
 
 #pragma - UIWebViewDelegate
