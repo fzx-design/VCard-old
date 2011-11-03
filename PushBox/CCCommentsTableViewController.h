@@ -20,18 +20,23 @@
 @class CommentsTableViewController;
 @class Status;
 
-@interface CCCommentsTableViewController : EGOTableViewController<CommentsTableViewCellDelegats, CommentseViewDelegates, SwitchValueChanged> {
+@interface CCCommentsTableViewController : EGOTableViewController<CommentsTableViewCellDelegats, SwitchValueChanged> {
     int _nextPage;
+	int _nextByMePage;
     id _delegate;
     CommentsTableViewDataSource _dataSource;
 	
 	NSFetchedResultsController *_commentsToMeFetchedResultsController;
+	NSFetchedResultsController *_commentsByMeFetchedResultsController;
 	
 	RCSwitchClone *_switchView;
 	
     UILabel *_titleLabel;
 	UILabel *_theNewCommentCountLabel;
 	UILabel *_theNewMentionsCountLabel;
+	
+	UILabel *_fromMeLabel;
+	UILabel *_toMeLabel;
 }
 
 @property(nonatomic, retain) Status *status;
@@ -44,6 +49,10 @@
 @property(nonatomic, retain) IBOutlet UILabel *theNewCommentCountLabel;
 @property(nonatomic, retain) IBOutlet UILabel *theNewMentionsCountLabel;
 
+@property(nonatomic, retain) IBOutlet UILabel *fromMeLabel;
+@property(nonatomic, retain) IBOutlet UILabel *toMeLabel;
+
 - (IBAction)mentionButtonClicked:(id)sender;
+- (void)returnToCommandCenter;
 
 @end

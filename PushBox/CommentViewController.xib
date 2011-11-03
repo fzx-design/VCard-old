@@ -237,7 +237,7 @@
 					<object class="IBUILabel" id="393950464">
 						<reference key="NSNextResponder" ref="60294544"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{459, 59}, {42, 21}}</string>
+						<string key="NSFrame">{{318, 59}, {183, 21}}</string>
 						<reference key="NSSuperview" ref="60294544"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="822398791"/>
@@ -278,7 +278,7 @@
 						<string key="NSFrame">{{168, 59}, {107, 21}}</string>
 						<reference key="NSSuperview" ref="60294544"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="1025381382"/>
+						<reference key="NSNextKeyView" ref="579498281"/>
 						<string key="NSReuseIdentifierKey">_NS:345</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -339,7 +339,7 @@
 							<string key="NSResourceName">posting_circle.png</string>
 						</object>
 					</object>
-					<object class="IBUIView" id="1025381382">
+					<object class="IBUIView" id="579498281">
 						<reference key="NSNextResponder" ref="60294544"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{98, 54}, {65, 30}}</string>
@@ -568,7 +568,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">repostSwitchView</string>
 						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="1025381382"/>
+						<reference key="destination" ref="579498281"/>
 					</object>
 					<int key="connectionID">49</int>
 				</object>
@@ -671,7 +671,7 @@
 							<reference ref="713303695"/>
 							<reference ref="923954036"/>
 							<reference ref="91539969"/>
-							<reference ref="1025381382"/>
+							<reference ref="579498281"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -767,7 +767,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">48</int>
-						<reference key="object" ref="1025381382"/>
+						<reference key="object" ref="579498281"/>
 						<reference key="parent" ref="60294544"/>
 					</object>
 				</object>

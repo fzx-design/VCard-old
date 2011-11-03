@@ -127,6 +127,13 @@
 	[userDefault registerDefaults:dict];
 }
 
+- (void)clearData
+{
+	[User deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
+	[Status deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
+	[Comment deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
+}
+
 - (void)start
 {
 	[[UIApplication sharedApplication] showLoadingView];
@@ -240,6 +247,7 @@
     }
     else {
         [self showLoginView];
+		[self clearData];
     }
 }
 
@@ -282,9 +290,7 @@
     self.notificationView.hidden = YES;
     [self setDefaultBackgroundImage:YES];
     self.currentUser = nil;
-    [User deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
-	[Status deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
-	[Comment deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
+    [self clearData];
     [self performSelector:@selector(showLoginView) withObject:nil afterDelay:1.0];
 }
 
@@ -925,6 +931,8 @@
 		_refreshFlag = NO;
 		[self.dockViewController.ccCommentTableViewController refresh];
 	}
+	
+	[self.dockViewController.ccCommentTableViewController returnToCommandCenter];
 	
     [self.dockViewController viewWillAppear:YES];
     if (self.cardTableViewController.dataSource != CardTableViewDataSourceFriendsTimeline) {
