@@ -429,7 +429,7 @@
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="928190392"/>
-				<reference key="IBUIBackgroundColor" ref="90466321"/>
+				<reference key="IBUIBackgroundColor" ref="266418242"/>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
 					<int key="IBUIStatusBarStyle">2</int>
 				</object>
@@ -1044,7 +1044,7 @@
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{1024, 768}</string>
+				<string>{1024, 748}</string>
 				<string>{78, 40}</string>
 				<string>{215, 69}</string>
 				<string>{33, 34}</string>
