@@ -22,6 +22,8 @@
 
 @interface CCCommentsTableViewController : EGOTableViewController<CommentsTableViewCellDelegats, CommentseViewDelegates, SwitchValueChanged> {
     int _nextPage;
+	int _nextByMePage;
+	
     id _delegate;
     CommentsTableViewDataSource _dataSource;
 	

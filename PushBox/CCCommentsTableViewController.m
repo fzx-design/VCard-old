@@ -51,6 +51,7 @@
     self.titleLabel.text = NSLocalizedString(@"评论", nil);
     
     _nextPage = 1;
+	_nextByMePage = 1;
 	
 	self.switchView.delegate = self;
 	[self.switchView setType:SwitchTypeComment];
@@ -61,23 +62,25 @@
 
 - (void)clearData
 {
-    _nextPage = 1;
     [self hideLoadMoreDataButton];
     if (self.dataSource == CommentsTableViewDataSourceCommentsByMe) {
 //        [self.status removeComments:self.status.comments];
+		[Comment deleteCommentsByMeInManagedObjectContext:self.managedObjectContext];
     }
     else {
-        [self.currentUser removeCommentsToMe:self.currentUser.commentsToMe];
+//        [self.currentUser removeCommentsToMe:self.currentUser.commentsToMe];
+		[Comment deleteCommentsToMeInManagedObjectContext:self.managedObjectContext];
     }
 }
 
 - (void)refresh
 {
-	_nextPage = 1;
-	
 	if (_dataSource == CommentsTableViewDataSourceCommentsToMe) {
+		_nextPage = 1;
 		NSDictionary *userData = [NSDictionary dictionaryWithObject:kNotificationObjectNameComment forKey:@"type"];
 		[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameNotificationRefreshed object:self userInfo:userData];
+	} else if(_dataSource == CommentsTableViewDataSourceCommentsByMe){
+		_nextByMePage = 1;
 	}
 
 	[self performSelector:@selector(loadMoreData) withObject:nil afterDelay:0.05];
@@ -99,7 +102,10 @@
 		if (!client.hasError) {
 			NSArray *dictArray = client.responseJSONObject;
 			
-			if (_nextPage == 1) {
+			if (_nextPage == 1 && _dataSource == CommentsTableViewDataSourceCommentsToMe) {
+				[self clearData];
+			} 
+			if (_nextByMePage == 1 && _dataSource == CommentsTableViewDataSourceCommentsByMe) {
 				[self clearData];
 			}
 			
@@ -116,14 +122,17 @@
 					[Comment insertCommentToMe:dict inManagedObjectContext:self.managedObjectContext];
 				}
 				[self.managedObjectContext processPendingChanges];
+				
+				_nextPage++;
 			} else if(_dataSource == CommentsTableViewDataSourceCommentsByMe) {
 				for (NSDictionary *dict in dictArray) {
 					[Comment insertCommentByMe:dict inManagedObjectContext:self.managedObjectContext];
 				}
 				[self.managedObjectContext processPendingChanges];
+				
+				_nextByMePage++;
 			}
 			
-			_nextPage++;
 			
 		} else {
 			[ErrorNotification showLoadingError];
@@ -135,7 +144,7 @@
     }];
     
     if (self.dataSource == CommentsTableViewDataSourceCommentsByMe) {
-		[client getCommentsByMeSinceID:nil maxID:nil page:_nextPage count:20];
+		[client getCommentsByMeSinceID:nil maxID:nil page:_nextByMePage count:20];
     }
     else if(self.dataSource == CommentsTableViewDataSourceCommentsToMe){
         [client getCommentsToMeSinceID:nil maxID:nil page:_nextPage count:20];

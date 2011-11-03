@@ -171,6 +171,34 @@
     }
 }
 
++ (void)deleteCommentsToMeInManagedObjectContext:(NSManagedObjectContext *)context
+{
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    
+    [request setEntity:[NSEntityDescription entityForName:@"Comment" inManagedObjectContext:context]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"toMe == %@", [NSNumber numberWithBool:YES]]];
+	NSArray *items = [context executeFetchRequest:request error:NULL];
+    [request release];
+    
+    for (NSManagedObject *managedObject in items) {
+        [context deleteObject:managedObject];
+    }
+}
+
++ (void)deleteCommentsByMeInManagedObjectContext:(NSManagedObjectContext *)context
+{
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    
+    [request setEntity:[NSEntityDescription entityForName:@"Comment" inManagedObjectContext:context]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"byMe == %@", [NSNumber numberWithBool:YES]]];
+	NSArray *items = [context executeFetchRequest:request error:NULL];
+    [request release];
+    
+    for (NSManagedObject *managedObject in items) {
+        [context deleteObject:managedObject];
+    }
+}
+
 - (BOOL)isEqualToComment:(Comment *)comment
 {
     return [self.commentID isEqualToString:comment.commentID];
