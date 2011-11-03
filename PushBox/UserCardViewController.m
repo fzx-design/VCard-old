@@ -12,18 +12,16 @@
 
 @implementation UserCardViewController
 
-@synthesize followButton = _followButton;
-@synthesize unFollowButton = _unFollowButton;
 @synthesize backButton = _backButton;
 @synthesize relationshipStateLabel = _relationshipStateLabel;
 @synthesize delegate = _delegate;
+
+@synthesize switchView = _switchView;
 
 - (void)dealloc
 {
     NSLog(@"UserCardViewController dealloc");
     
-    [_followButton release];
-    [_unFollowButton release];
     [_backButton release];
     [_relationshipStateLabel release];
     [super dealloc];
@@ -32,8 +30,6 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    self.followButton = nil;
-    self.unFollowButton = nil;
     self.backButton = nil;
     self.relationshipStateLabel = nil;
 }
@@ -56,14 +52,7 @@
         BOOL followedByMe = [[dict objectForKey:@"followed_by"] boolValue];
         BOOL followingMe = [[dict objectForKey:@"following"] boolValue];
         
-        if (followedByMe) {
-            self.unFollowButton.hidden = NO;
-        }
-        else {
-            if (![self.user isEqualToUser:self.currentUser]) {
-                self.followButton.hidden = NO;
-            }
-        }
+		[self.switchView setOn:followedByMe animated:YES];
         
         NSString *state = nil;
         if (followingMe) {
@@ -90,8 +79,6 @@
 - (void)configureView
 {
     [super configureView];
-    self.followButton.hidden = YES;
-    self.unFollowButton.hidden = YES;
     self.relationshipStateLabel.text = @"";
     [self setRelationshipState];
 }
@@ -100,26 +87,7 @@
 {
     [super viewDidLoad];
     [self configureView];
-}
-
-- (IBAction)followButtonClicked:(id)sender {
-    WeiboClient *client = [WeiboClient client];
-    [client setCompletionBlock:^(WeiboClient *client) {
-        
-    }];
-    [client follow:self.user.userID];
-	self.unFollowButton.hidden = NO;
-	self.followButton.hidden = YES;
-}
-
-- (IBAction)unfollowButtonClicked:(id)sender {
-    WeiboClient *client = [WeiboClient client];
-    [client setCompletionBlock:^(WeiboClient *client) {
-        
-    }];
-    [client unfollow:self.user.userID];
-	self.unFollowButton.hidden = YES;
-	self.followButton.hidden = NO;
+	self.switchView.delegate = self;
 }
 
 - (IBAction)backButtonClicked:(id)sender {
@@ -129,6 +97,24 @@
 		[UserCardNaviViewController sharedUserCardDismiss];
 		[self.delegate userCardViewControllerDidDismiss:self];
 	}
+}
+
+- (void)switchedOn
+{
+	WeiboClient *client = [WeiboClient client];
+    [client setCompletionBlock:^(WeiboClient *client) {
+        
+    }];
+    [client follow:self.user.userID];
+}
+
+- (void)switchedOff
+{
+	WeiboClient *client = [WeiboClient client];
+    [client setCompletionBlock:^(WeiboClient *client) {
+        
+    }];
+    [client unfollow:self.user.userID];
 }
 
 @end

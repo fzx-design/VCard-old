@@ -152,7 +152,7 @@
 						<string key="NSFrame">{{437, 166}, {9, 16}}</string>
 						<reference key="NSSuperview" ref="317278890"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="558958614"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">4</int>
@@ -272,56 +272,6 @@
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-					</object>
-					<object class="IBUIButton" id="862607195">
-						<reference key="NSNextResponder" ref="317278890"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 207}, {48, 30}}</string>
-						<reference key="NSSuperview" ref="317278890"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="396326300"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<reference key="IBUIHighlightedTitleColor" ref="857333094"/>
-						<object class="NSColor" key="IBUINormalTitleColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-						</object>
-						<reference key="IBUINormalTitleShadowColor" ref="1027003732"/>
-						<object class="NSCustomResource" key="IBUIHighlightedImage" id="396916768">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">usercard_button_unfollow.png</string>
-						</object>
-						<object class="NSCustomResource" key="IBUINormalImage" id="531994240">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">usercard_button_follow.png</string>
-						</object>
-						<reference key="IBUIFontDescription" ref="268622513"/>
-						<reference key="IBUIFont" ref="438676074"/>
-					</object>
-					<object class="IBUIButton" id="558958614">
-						<reference key="NSNextResponder" ref="317278890"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 206}, {48, 33}}</string>
-						<reference key="NSSuperview" ref="317278890"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="862607195"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<reference key="IBUIHighlightedTitleColor" ref="857333094"/>
-						<object class="NSColor" key="IBUINormalTitleColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-						</object>
-						<reference key="IBUINormalTitleShadowColor" ref="1027003732"/>
-						<reference key="IBUIHighlightedImage" ref="531994240"/>
-						<reference key="IBUINormalImage" ref="396916768"/>
-						<reference key="IBUIFontDescription" ref="268622513"/>
-						<reference key="IBUIFont" ref="438676074"/>
 					</object>
 					<object class="IBUIButton" id="14587921">
 						<reference key="NSNextResponder" ref="317278890"/>
@@ -531,6 +481,7 @@
 						<string key="NSFrame">{{168, 440}, {268, 111}}</string>
 						<reference key="NSSuperview" ref="317278890"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<reference key="IBUIBackgroundColor" ref="410786381"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -889,13 +840,24 @@
 						<reference key="IBUIFontDescription" ref="261125798"/>
 						<reference key="IBUIFont" ref="187218004"/>
 					</object>
+					<object class="IBUIView" id="838792934">
+						<reference key="NSNextResponder" ref="317278890"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{20, 208}, {65, 30}}</string>
+						<reference key="NSSuperview" ref="317278890"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="887718994"/>
+						<string key="NSReuseIdentifierKey">_NS:212</string>
+						<reference key="IBUIBackgroundColor" ref="410786381"/>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					</object>
 					<object class="IBUIButton" id="648398642">
 						<reference key="NSNextResponder" ref="317278890"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{130, 207}, {34, 32}}</string>
 						<reference key="NSSuperview" ref="317278890"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="887718994"/>
+						<reference key="NSNextKeyView" ref="838792934"/>
 						<string key="NSReuseIdentifierKey">_NS:241</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -1012,22 +974,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">followButton</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="862607195"/>
-					</object>
-					<int key="connectionID">59</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">unFollowButton</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="558958614"/>
-					</object>
-					<int key="connectionID">68</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">careerInfoLabel</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="271138623"/>
@@ -1059,22 +1005,12 @@
 					<int key="connectionID">135</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">unfollowButtonClicked:</string>
-						<reference key="source" ref="558958614"/>
-						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">7</int>
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">switchView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="838792934"/>
 					</object>
-					<int key="connectionID">71</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">followButtonClicked:</string>
-						<reference key="source" ref="862607195"/>
-						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">70</int>
+					<int key="connectionID">138</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -1169,8 +1105,6 @@
 							<reference ref="193919512"/>
 							<reference ref="887718994"/>
 							<reference ref="332834530"/>
-							<reference ref="862607195"/>
-							<reference ref="558958614"/>
 							<reference ref="958061252"/>
 							<reference ref="667360936"/>
 							<reference ref="271165709"/>
@@ -1183,6 +1117,7 @@
 							<reference ref="257517753"/>
 							<reference ref="545144648"/>
 							<reference ref="817976475"/>
+							<reference ref="838792934"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">View</string>
@@ -1262,18 +1197,6 @@
 						<reference key="object" ref="887718994"/>
 						<reference key="parent" ref="317278890"/>
 						<string key="objectName">relationship state label</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">32</int>
-						<reference key="object" ref="862607195"/>
-						<reference key="parent" ref="317278890"/>
-						<string key="objectName">follow button</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">31</int>
-						<reference key="object" ref="558958614"/>
-						<reference key="parent" ref="317278890"/>
-						<string key="objectName">unfollow button</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">108</int>
@@ -1374,6 +1297,11 @@
 						<reference key="parent" ref="317278890"/>
 						<string key="objectName">location label</string>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">137</int>
+						<reference key="object" ref="838792934"/>
+						<reference key="parent" ref="317278890"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1403,11 +1331,9 @@
 					<string>124.IBPluginDependency</string>
 					<string>125.IBPluginDependency</string>
 					<string>126.IBPluginDependency</string>
+					<string>137.CustomClassName</string>
+					<string>137.IBPluginDependency</string>
 					<string>30.IBPluginDependency</string>
-					<string>31.IBPluginDependency</string>
-					<string>31.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
-					<string>32.IBPluginDependency</string>
-					<string>32.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>33.IBPluginDependency</string>
 					<string>33.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>38.IBPluginDependency</string>
@@ -1451,11 +1377,9 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>RCSwitchClone</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<real value="1"/>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<real value="1"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<real value="0.0"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1487,7 +1411,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">135</int>
+			<int key="maxID">138</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1498,6 +1422,22 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/CoreDataViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">RCSwitch</string>
+					<string key="superclassName">UIControl</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/RCSwitch.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">RCSwitchClone</string>
+					<string key="superclassName">RCSwitch</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/RCSwitchClone.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -1665,13 +1605,9 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>atButtonClicked:</string>
 							<string>backButtonClicked:</string>
-							<string>followButtonClicked:</string>
-							<string>unfollowButtonClicked:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 						</object>
@@ -1682,8 +1618,6 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>atButtonClicked:</string>
 							<string>backButtonClicked:</string>
-							<string>followButtonClicked:</string>
-							<string>unfollowButtonClicked:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1695,14 +1629,6 @@
 								<string key="name">backButtonClicked:</string>
 								<string key="candidateClassName">id</string>
 							</object>
-							<object class="IBActionInfo">
-								<string key="name">followButtonClicked:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">unfollowButtonClicked:</string>
-								<string key="candidateClassName">id</string>
-							</object>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
@@ -1712,6 +1638,7 @@
 							<string>backButton</string>
 							<string>followButton</string>
 							<string>relationshipStateLabel</string>
+							<string>switchView</string>
 							<string>unFollowButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -1719,6 +1646,7 @@
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UILabel</string>
+							<string>RCSwitchClone</string>
 							<string>UIButton</string>
 						</object>
 					</object>
@@ -1729,6 +1657,7 @@
 							<string>backButton</string>
 							<string>followButton</string>
 							<string>relationshipStateLabel</string>
+							<string>switchView</string>
 							<string>unFollowButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -1744,6 +1673,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">relationshipStateLabel</string>
 								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">switchView</string>
+								<string key="candidateClassName">RCSwitchClone</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">unFollowButton</string>
@@ -1777,8 +1710,6 @@
 				<string>post_button_@.png</string>
 				<string>user_detail_bg.png</string>
 				<string>usercard_button_HL.png</string>
-				<string>usercard_button_follow.png</string>
-				<string>usercard_button_unfollow.png</string>
 				<string>usercard_pointer.png</string>
 				<string>v_large.png</string>
 			</object>
@@ -1791,8 +1722,6 @@
 				<string>{16, 18}</string>
 				<string>{424, 288}</string>
 				<string>{262, 36}</string>
-				<string>{47, 22}</string>
-				<string>{47, 22}</string>
 				<string>{9, 14}</string>
 				<string>{19, 18}</string>
 			</object>

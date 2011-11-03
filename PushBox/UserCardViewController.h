@@ -10,19 +10,20 @@
 #import "UserCardNaviViewController.h"
 #import "PostViewController.h"
 #import "UIApplicationAddition.h"
+#import "RCSwitchClone.h"
 
 @class UserCardViewController;
 @protocol UserCardViewControllerDelegate
 - (void)userCardViewControllerDidDismiss:(UserCardViewController *)vc;
 @end
 
-@interface UserCardViewController : UserCardBaseViewController
+@interface UserCardViewController: UserCardBaseViewController <SwitchValueChanged>
 {
-	UIButton *_followButton;
-	UIButton *_unFollowButton;
     UIButton *_backButton;
     UILabel *_relationshipStateLabel;
     
+	RCSwitchClone *_switchView;
+	
     id<UserCardViewControllerDelegate> _delegate;
 }
 
@@ -30,12 +31,11 @@
 @property(nonatomic, retain) IBOutlet UIButton* unFollowButton;
 @property(nonatomic, retain) IBOutlet UIButton* backButton;
 @property(nonatomic, retain) IBOutlet UILabel* relationshipStateLabel;
+@property(nonatomic, retain) IBOutlet RCSwitchClone* switchView;
 @property(nonatomic, assign) id<UserCardViewControllerDelegate> delegate;
 
 - (id)initWithUsr:(User *)user;
 
-- (IBAction)followButtonClicked:(id)sender;
-- (IBAction)unfollowButtonClicked:(id)sender;
 - (IBAction)backButtonClicked:(id)sender;
 - (IBAction)atButtonClicked:(id)sender;
 
