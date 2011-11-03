@@ -17,6 +17,11 @@
 #import "UIApplicationAddition.h"
 #import "UIImageViewAddition.h"
 
+#define LabelNormalColor [UIColor colorWithRed:66.0/255 green:66.0/255 blue:66.0/255 alpha:1.0]
+#define LabelHilightColor [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0]
+#define LabelHilightShadowColor [UIColor colorWithRed:66.0/255 green:66.0/255 blue:66.0/255 alpha:0.5]
+#define LabelNormalShadowColor [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.5]
+
 @implementation CCCommentsTableViewController
 @synthesize titleLabel = _titleLabel;
 @synthesize dataSource = _dataSource;
@@ -25,6 +30,8 @@
 @synthesize theNewCommentCountLabel = _theNewCommentCountLabel;
 @synthesize theNewMentionsCountLabel = _theNewMentionsCountLabel;
 @synthesize switchView = _switchView;
+@synthesize tomeLabel = _tomeLabel;
+@synthesize bymeLabel = _bymeLabel;
 
 - (void)dealloc
 {
@@ -33,6 +40,8 @@
 	[_theNewCommentCountLabel release];
     [_theNewMentionsCountLabel release];
 	[_switchView release];
+	[_tomeLabel release];
+	[_bymeLabel release];
     [super dealloc];
 }
 
@@ -43,6 +52,8 @@
 	self.switchView = nil;
     self.theNewCommentCountLabel = nil;
     self.theNewMentionsCountLabel = nil;
+	self.tomeLabel = nil;
+	self.bymeLabel = nil;
 }
 
 - (void)viewDidLoad
@@ -123,12 +134,24 @@
 				}
 				[self.managedObjectContext processPendingChanges];
 				
+				if (_commentsToMeFetchedResultsController) {
+					[_commentsToMeFetchedResultsController release];
+				}
+				
+				_commentsToMeFetchedResultsController = [self.fetchedResultsController retain];
+				
 				_nextPage++;
 			} else if(_dataSource == CommentsTableViewDataSourceCommentsByMe) {
 				for (NSDictionary *dict in dictArray) {
 					[Comment insertCommentByMe:dict inManagedObjectContext:self.managedObjectContext];
 				}
 				[self.managedObjectContext processPendingChanges];
+				
+				if (_commentsByMeFetchedResultsController) {
+					[_commentsByMeFetchedResultsController release];
+				}
+				
+				_commentsByMeFetchedResultsController = [self.fetchedResultsController retain];
 				
 				_nextByMePage++;
 			}
@@ -245,24 +268,38 @@
 
 - (void)switchToToMe
 {
-	[[UIApplication sharedApplication] showLoadingView];
 	self.dataSource = CommentsTableViewDataSourceCommentsToMe;
-	self.switchView.userInteractionEnabled = NO;
-    self.fetchedResultsController.delegate = nil;
-    self.fetchedResultsController = nil;
-	[self refresh];
+	
+	self.bymeLabel.textColor = LabelNormalColor;
+	self.bymeLabel.shadowColor = LabelNormalShadowColor;
+	self.tomeLabel.textColor = LabelHilightColor;
+	self.tomeLabel.shadowColor = LabelHilightShadowColor;
+	
+	if (_commentsToMeFetchedResultsController) {
+		self.fetchedResultsController = _commentsToMeFetchedResultsController;
+	} else {
+		self.fetchedResultsController = nil;
+		[self refresh];
+	}
 	
 	[self.tableView reloadData];
 }
 
 - (void)switchToByMe
 {
-	[[UIApplication sharedApplication] showLoadingView];
 	self.dataSource = CommentsTableViewDataSourceCommentsByMe;
-	self.switchView.userInteractionEnabled = NO;
-    self.fetchedResultsController.delegate = nil;
-    self.fetchedResultsController = nil;
-	[self refresh];
+	
+	self.tomeLabel.textColor = LabelNormalColor;
+	self.tomeLabel.shadowColor = LabelNormalShadowColor;
+	self.bymeLabel.textColor = LabelHilightColor;
+	self.bymeLabel.shadowColor = LabelHilightShadowColor;
+	
+	if (_commentsByMeFetchedResultsController) {
+		self.fetchedResultsController = _commentsByMeFetchedResultsController;
+	} else {
+		self.fetchedResultsController = nil;
+		[self refresh];
+	}
 	
 	[self.tableView reloadData];
 }
@@ -274,8 +311,13 @@
 
 - (void)switchedOff
 {
-	
 	[self performSelector:@selector(switchToToMe) withObject:nil afterDelay:0.25];
+}
+
+- (void)returnToCommandCenter
+{
+	[self.switchView setOn:NO];
+	[self switchedOff];
 }
 
 - (IBAction)mentionButtonClicked:(id)sender

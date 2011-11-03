@@ -927,6 +927,7 @@
 	}
 	
     [self.dockViewController viewWillAppear:YES];
+	[self.dockViewController.ccCommentTableViewController returnToCommandCenter];
     if (self.cardTableViewController.dataSource != CardTableViewDataSourceFriendsTimeline) {
         [self hideBottomStateView];
     }
