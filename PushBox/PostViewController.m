@@ -139,7 +139,7 @@
     self.wordsCountLabel.text = [NSString stringWithFormat:@"%d", words];
     self.doneButton.enabled = words >= 0;
     
-	if (words > 0) {
+	if (words >= 0) {
 		self.wordsCountLabel.text = [NSString stringWithFormat:@"%d", words];
 		self.wordsCountLabel.textColor = LabelBlackColor;
 	} else {

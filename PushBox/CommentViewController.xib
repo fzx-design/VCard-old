@@ -134,7 +134,6 @@
 						<string key="NSFrame">{{65, 100}, {440, 344}}</string>
 						<reference key="NSSuperview" ref="60294544"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<reference key="IBUIBackgroundColor" ref="626977176"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -216,7 +215,6 @@
 						<string key="NSFrame">{{60, 52}, {37, 37}}</string>
 						<reference key="NSSuperview" ref="60294544"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -237,7 +235,7 @@
 					<object class="IBUILabel" id="393950464">
 						<reference key="NSNextResponder" ref="60294544"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{459, 59}, {42, 21}}</string>
+						<string key="NSFrame">{{346, 59}, {155, 21}}</string>
 						<reference key="NSSuperview" ref="60294544"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="822398791"/>
