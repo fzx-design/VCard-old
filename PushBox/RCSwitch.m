@@ -466,7 +466,6 @@
 			[self performSwitchToPercent:toPercent];
 	} else {
 		percent = aBool ? 1.0 : 0.0;
-		preOnflag = aBool;
 		[self setNeedsDisplay];
 		[self sendActionsForControlEvents:UIControlEventValueChanged];
 	}

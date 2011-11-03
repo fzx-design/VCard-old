@@ -127,10 +127,10 @@
     }];
     
     if (self.dataSource == CommentsTableViewDataSourceCommentsOfStatus) {
-        [client getCommentsOfStatus:self.status.statusID page:_nextPage count:21];
+        [client getCommentsOfStatus:self.status.statusID page:_nextPage count:20];
     }
     else {
-        [client getCommentsToMeSinceID:nil maxID:nil page:_nextPage count:21];
+        [client getCommentsToMeSinceID:nil maxID:nil page:_nextPage count:20];
     }
 }
 
