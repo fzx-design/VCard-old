@@ -105,6 +105,12 @@
 	[self.tweetImageView addGestureRecognizer:tapGesture];
 	[tapGesture release];
     
+    UITapGestureRecognizer *tapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClicked:)];
+    tapGesture2.numberOfTapsRequired = 1;
+    tapGesture2.numberOfTouchesRequired = 1;
+    [self.musicCoverImageView addGestureRecognizer:tapGesture2];
+    [tapGesture2 release];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(shouldDismissUserCardNotification:)
                                                  name:kNotificationNameShouldDismissUserCard
@@ -399,11 +405,12 @@
     [self.tweetImageView loadImageFromURL:repostStatus.bmiddlePicURL 
                                completion:^(void) 
      {
-         [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
-             self.tweetImageView.alpha = 1.0;
-             self.imageCoverImageView.alpha = 1.0;
-         } completion:^(BOOL fin) {
-         }];
+         self.tweetImageView.hidden = YES;
+         //         [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+         //             self.tweetImageView.alpha = 1.0;
+         //             self.imageCoverImageView.alpha = 1.0;
+         //         } completion:^(BOOL fin) {
+         //         }];
      }
                            cacheInContext:self.managedObjectContext];
     if ([self checkGif:self.status.repostStatus.originalPicURL])
@@ -752,10 +759,17 @@
                             NSString* longUrl = [dict objectForKey:@"url_long"];
                             
                             
-                            if ([longUrl rangeOfString:@"http://v.youku.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.tudou.com"].location != NSNotFound || [longUrl rangeOfString:@"http://v.ku6.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.56.com"].location != NSNotFound || [longUrl rangeOfString:@"http://music.sina.com"].location != NSNotFound|| [longUrl rangeOfString:@"xiami.com"].location != NSNotFound || [longUrl rangeOfString:@"songtaste.com"].location != NSNotFound)
-                            {
+                            if ([longUrl rangeOfString:@"http://v.youku.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.tudou.com"].location != NSNotFound || [longUrl rangeOfString:@"http://v.ku6.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.56.com"].location != NSNotFound || [longUrl rangeOfString:@"http://music.sina.com"].location != NSNotFound|| [longUrl rangeOfString:@"xiami.com"].location != NSNotFound || [longUrl rangeOfString:@"songtaste.com"].location != NSNotFound) {
                                 isTrack = NO;
                                 [self loadRepostMusicVideo:longUrl];
+                            } 
+                            else {
+                                self.tweetImageView.hidden = NO;
+                                [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+                                    self.tweetImageView.alpha = 1.0;
+                                    self.imageCoverImageView.alpha = 1.0;
+                                } completion:^(BOOL fin) {
+                                }];
                             }
                         }
                     }
