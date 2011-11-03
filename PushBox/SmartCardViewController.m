@@ -322,6 +322,10 @@
     self.profileImageView.alpha = 0.0;
     self.musicLink = nil;
     
+    self.musicCoverImageView.hidden = YES;
+    
+    self.musicBackgroundImageView.hidden = YES;
+    
 	self.tweetImageView.image = nil;
 	self.tweetImageView.alpha = 0.0;
     
@@ -655,9 +659,8 @@
     self.repostView.frame = kRepostViewFrameBottom;
     self.repostWebView.frame = kRepostWebViewFrameBottom;
     self.musicLink = repostMusicVideoLink;
-    //    self.musicBackgroundImageView.alpha = 0.0;
-    //    self.repostTweetImageView.alpha = 1.0;
     self.tweetImageView.hidden = YES;
+    self.musicBackgroundImageView.hidden = NO;
     [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
         self.musicBackgroundImageView.alpha = 1.0;
         self.tweetImageView.alpha = 0.0;
@@ -813,7 +816,7 @@
     
     if (self.status.repostStatus) {
         Status *repostStatus = self.status.repostStatus;
-        //        self.imageCoverImageView.hidden = NO;
+        // self.imageCoverImageView.hidden = NO;
         isTrack = NO;
         // repost text
         [self loadRepostWebView];
@@ -844,6 +847,7 @@
             self.trackLabel.alpha = 1.0;
             self.trackView.alpha = 1.0;
         } completion:^(BOOL fin) {
+            
         }];
     }
     

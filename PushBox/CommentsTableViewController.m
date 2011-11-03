@@ -57,8 +57,8 @@
     [self performSelector:@selector(hideLoadMoreDataButton) withObject:nil afterDelay:0.1];
     
 	[self.authorImageView loadImageFromURL:self.status.author.profileImageURL 
-                                 completion:NULL
-                             cacheInContext:self.managedObjectContext];
+                                completion:NULL
+                            cacheInContext:self.managedObjectContext];
 	self.authorNameLabel.text = self.status.author.screenName;
 	self.authorPreviewLabel.text = self.status.text;
 }
@@ -77,9 +77,9 @@
 
 - (void)refresh
 {
-//	[self clearData];
+    //	[self clearData];
 	_nextPage = 1;
-//    [self loadMoreData];
+    //    [self loadMoreData];
 	
 	[self performSelector:@selector(loadMoreData) withObject:nil afterDelay:0.05];
 	
@@ -105,7 +105,7 @@
             if (_nextPage == 1) {
 				[self clearData];
 			}
-
+            
             int count = [dictArray count];
             if (count < 20) {
                 [self hideLoadMoreDataButton];
@@ -116,9 +116,9 @@
             for (NSDictionary *dict in dictArray) {
                 [Comment insertComment:dict inManagedObjectContext:self.managedObjectContext];
             }
-//			[self.managedObjectContext processPendingChanges];
+            //			[self.managedObjectContext processPendingChanges];
             _nextPage++;
-
+            
         } else {
 			[ErrorNotification showLoadingError];
 		}
@@ -206,7 +206,7 @@
 
 - (IBAction)commentReviewButtonClicked:(id)sender
 {
-
+    
 	CommentReviewPopoverController *vc = [CommentReviewPopoverController sharedCommentReviewPopoverControllerWithTableType:_commentsTableViewModel];
 	vc.status = self.status;
 	vc.profileImageView = self.authorImageView;
@@ -230,7 +230,7 @@
 	
 	UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(11, 26, 383, 39)];
 	[self.view addSubview:textView];
-//	textView.font = [textView.font fontWithSize:14];
+    //	textView.font = [textView.font fontWithSize:14];
 	textView.text = comment.text;
     
 	CGFloat height = textView.frame.origin.y + textView.contentSize.height + 16;

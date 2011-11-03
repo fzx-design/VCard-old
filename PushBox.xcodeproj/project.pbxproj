@@ -263,7 +263,6 @@
 		FE72B4CC144FFD3000C3EE5B /* smartcard.css in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4C8144FFD3000C3EE5B /* smartcard.css */; };
 		FE72B4CD144FFD3000C3EE5B /* smartcard.html in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4C9144FFD3000C3EE5B /* smartcard.html */; };
 		FE72B4CE144FFD3000C3EE5B /* webview_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4CA144FFD3000C3EE5B /* webview_bg.jpg */; };
-		FE72B4E6145084D500C3EE5B /* smartcard.js in Sources */ = {isa = PBXBuildFile; fileRef = FE72B4E5145084D500C3EE5B /* smartcard.js */; };
 		FE72B4F51450AE9A00C3EE5B /* sc_image_default 2.png in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4F41450AE9A00C3EE5B /* sc_image_default 2.png */; };
 		FE777CC814568C3A00849B5B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE777CC714568C3A00849B5B /* MediaPlayer.framework */; };
 		FE7ADDC5145D554F00C403DF /* weibopop_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FE7ADDC3145D554F00C403DF /* weibopop_bg.png */; };
@@ -1651,7 +1650,6 @@
 				9B5F2E3814498FDA008AC0B8 /* UserCardNaviViewController.m in Sources */,
 				9BB5B8B61449A8B100352FF7 /* UserCardContentViewController.m in Sources */,
 				9BC6E651144A9B2400B28506 /* CCUserInfoCardViewController.m in Sources */,
-				FE72B4E6145084D500C3EE5B /* smartcard.js in Sources */,
 				9B1128DD1450EC44001CE64E /* ErrorNotification.m in Sources */,
 				9B1129E514511116001CE64E /* CardTableViewCell.m in Sources */,
 				9B1129E61451112A001CE64E /* SmartCardViewController.m in Sources */,
