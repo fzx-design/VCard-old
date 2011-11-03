@@ -27,8 +27,6 @@
     id<UserCardViewControllerDelegate> _delegate;
 }
 
-@property(nonatomic, retain) IBOutlet UIButton* followButton;
-@property(nonatomic, retain) IBOutlet UIButton* unFollowButton;
 @property(nonatomic, retain) IBOutlet UIButton* backButton;
 @property(nonatomic, retain) IBOutlet UILabel* relationshipStateLabel;
 @property(nonatomic, retain) IBOutlet RCSwitchClone* switchView;

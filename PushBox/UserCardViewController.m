@@ -24,6 +24,7 @@
     
     [_backButton release];
     [_relationshipStateLabel release];
+	[_switchView release];
     [super dealloc];
 }
 
@@ -32,6 +33,7 @@
     [super viewDidUnload];
     self.backButton = nil;
     self.relationshipStateLabel = nil;
+	self.switchView = nil;
 }
 
 - (id)initWithUsr:(User *)user
@@ -79,6 +81,8 @@
 - (void)configureView
 {
     [super configureView];
+	self.switchView.delegate = self;
+	[self.switchView setType:SwitchTypeFollow];
     self.relationshipStateLabel.text = @"";
     [self setRelationshipState];
 }
@@ -87,7 +91,6 @@
 {
     [super viewDidLoad];
     [self configureView];
-	self.switchView.delegate = self;
 }
 
 - (IBAction)backButtonClicked:(id)sender {

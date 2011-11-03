@@ -32,6 +32,8 @@
 @synthesize atTableView = _atTableView;
 @synthesize atTextField = _atTextField;
 
+@synthesize repostSwitchView = _repostSwitchView;
+
 - (void)dealloc
 {
     [_textView release];
@@ -41,6 +43,7 @@
 	[_repostButton release];
 	[_doneButton release];
 	[_wordsCountLabel release];
+	[_repostSwitchView release];
 	[_postingRoundImageView release];
 	[_postingCircleImageView release];
     [super dealloc];
@@ -56,6 +59,7 @@
 	self.repostButton = nil;
 	self.doneButton = nil;
 	self.wordsCountLabel = nil;
+	self.repostSwitchView = nil;
 	self.postingRoundImageView = nil;
 	self.postingCircleImageView = nil;
 }
@@ -63,6 +67,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
+	[self.repostSwitchView setType:SwitchTypeNormal];
+	self.repostSwitchView.delegate = self;
+	
     self.titleLabel.text = NSLocalizedString(@"发表评论", nil);
     self.textView.text = @"";
     [self.textView becomeFirstResponder];
@@ -242,7 +250,7 @@
     self.wordsCountLabel.text = [NSString stringWithFormat:@"%d", words];
     self.doneButton.enabled = words >= 0;
     
-    //
+    //REMAIN_TO_BE_CHECKED!
     if (_lastChar && [_lastChar compare:@"@"] == NSOrderedSame) {
         [self atButtonClicked:nil];
     }
@@ -404,6 +412,17 @@
 	}];
     
     [self atTextFieldEditingBegan];
+}
+
+
+- (void)switchedOn
+{
+	_repostFlag = YES;
+}
+
+- (void)switchedOff
+{
+	_repostFlag = NO;
 }
 
 #pragma - UITableViewDataSource
