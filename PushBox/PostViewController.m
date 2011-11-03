@@ -16,6 +16,9 @@
 #import "User.h"
 #import "AnimationProvider.h"
 
+#define LabelRedColor [UIColor colorWithRed:143/255.0 green:63/255.0 blue:63/255.0 alpha:1.0]
+#define LabelBlackColor [UIColor colorWithRed:100/255.0 green:100/255.0 blue:100/255.0 alpha:1.0]
+
 @implementation PostViewController
 
 @synthesize titleLabel = _titleLabel;
@@ -136,6 +139,14 @@
     self.wordsCountLabel.text = [NSString stringWithFormat:@"%d", words];
     self.doneButton.enabled = words >= 0;
     
+	if (words > 0) {
+		self.wordsCountLabel.text = [NSString stringWithFormat:@"%d", words];
+		self.wordsCountLabel.textColor = LabelBlackColor;
+	} else {
+		self.wordsCountLabel.text = [NSString stringWithFormat:@"超出 %d", -words];
+		self.wordsCountLabel.textColor = LabelRedColor;
+	}
+	
     //
     if (_lastChar && [_lastChar compare:@"@"] == NSOrderedSame) {
         [self atButtonClicked:nil];
