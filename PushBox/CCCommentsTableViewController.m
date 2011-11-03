@@ -149,9 +149,9 @@
     request.entity = [NSEntityDescription entityForName:@"Comment" inManagedObjectContext:self.managedObjectContext];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:NO];
     request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    if (_dataSource == CommentsTableViewDataSourceCommentsToMe) {
+    if (self.dataSource == CommentsTableViewDataSourceCommentsToMe) {
 		request.predicate = [NSPredicate predicateWithFormat:@"toMe == %@", [NSNumber numberWithBool:YES]];
-	} else if(_dataSource == CommentsTableViewDataSourceCommentsByMe) {
+	} else if(self.dataSource == CommentsTableViewDataSourceCommentsByMe) {
 		request.predicate = [NSPredicate predicateWithFormat:@"byMe == %@", [NSNumber numberWithBool:YES]];
 	}
 }
@@ -234,10 +234,10 @@
     [vc release];
 }
 
-- (void)switchedOn
+- (void)switchToToMe
 {
 	[[UIApplication sharedApplication] showLoadingView];
-	_dataSource = CommentsTableViewDataSourceCommentsByMe;
+	self.dataSource = CommentsTableViewDataSourceCommentsToMe;
 	self.switchView.userInteractionEnabled = NO;
     self.fetchedResultsController.delegate = nil;
     self.fetchedResultsController = nil;
@@ -246,16 +246,27 @@
 	[self.tableView reloadData];
 }
 
-- (void)switchedOff
+- (void)switchToByMe
 {
 	[[UIApplication sharedApplication] showLoadingView];
-	_dataSource = CommentsTableViewDataSourceCommentsToMe;
+	self.dataSource = CommentsTableViewDataSourceCommentsByMe;
 	self.switchView.userInteractionEnabled = NO;
     self.fetchedResultsController.delegate = nil;
     self.fetchedResultsController = nil;
 	[self refresh];
 	
 	[self.tableView reloadData];
+}
+
+- (void)switchedOn
+{
+	[self performSelector:@selector(switchToByMe) withObject:nil afterDelay:0.25];
+}
+
+- (void)switchedOff
+{
+	
+	[self performSelector:@selector(switchToToMe) withObject:nil afterDelay:0.25];
 }
 
 - (IBAction)mentionButtonClicked:(id)sender
