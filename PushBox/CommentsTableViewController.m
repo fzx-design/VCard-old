@@ -102,17 +102,17 @@
         if (!client.hasError) {
             NSArray *dictArray = client.responseJSONObject;
             
+            if (_nextPage == 1) {
+				[self clearData];
+			}
+
             int count = [dictArray count];
             if (count < 20) {
                 [self hideLoadMoreDataButton];
             }
             else {
                 [self showLoadMoreDataButton];
-            }
-            if (_nextPage == 1) {
-				[self clearData];
-			}
-			
+            }			
             for (NSDictionary *dict in dictArray) {
                 [Comment insertComment:dict inManagedObjectContext:self.managedObjectContext];
             }
