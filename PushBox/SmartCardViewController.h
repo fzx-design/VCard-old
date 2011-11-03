@@ -53,6 +53,8 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
     NSString *_musicLink;
     
     Status *_status;
+
+    int b;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView* profileImageView;

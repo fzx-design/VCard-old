@@ -103,8 +103,9 @@
             [cell autorelease];
         }
     }
-
+    
     [self configureCell:cell atIndexPath:indexPath];
+    
     return cell;
 }
 
