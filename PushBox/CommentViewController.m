@@ -256,7 +256,6 @@
     }
 }
 
-
 - (IBAction)doneButtonClicked:(UIButton *)sender {
     NSString *comment = self.textView.text;
     
@@ -387,8 +386,16 @@
 }
 
 - (IBAction)atButtonClicked:(id)sender {
-    if (sender)
-        self.textView.text = [self.textView.text stringByAppendingFormat:@"@"];
+    if (sender) {
+        int location = self.textView.selectedRange.location;
+        NSString *content = self.textView.text;
+        NSString *result = [NSString stringWithFormat:@"%@@%@",[content substringToIndex:location], [content substringFromIndex:location]];
+        self.textView.text = result;
+        
+        NSRange range = self.textView.selectedRange;
+        range.location = location + 1;
+        self.textView.selectedRange = range;
+    }
     
     UIView *superView = [self.view superview];
     
@@ -447,14 +454,32 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.textView.text = [self.textView.text stringByAppendingString:([[[self.atScreenNames objectAtIndex:[indexPath row]] substringFromIndex:1] stringByAppendingString:@" "])];
+    
+    int location = self.textView.selectedRange.location;
+    NSString *content = self.textView.text;
+    NSString *result = [NSString stringWithFormat:@"%@%@%@",[content substringToIndex:location], ([[[self.atScreenNames objectAtIndex:[indexPath row]] substringFromIndex:1] stringByAppendingString:@" "]), [content substringFromIndex:location]];
+    
+    self.textView.text = result;
+    NSRange range = self.textView.selectedRange;
+    range.location = location + [([[[self.atScreenNames objectAtIndex:[indexPath row]] substringFromIndex:1] stringByAppendingString:@" "]) length];
+    self.textView.selectedRange = range;
+    
     [self dismissAtView];
 }
 
 #pragma - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    self.textView.text = [self.textView.text stringByAppendingString:([[[self.atScreenNames objectAtIndex:0] substringFromIndex:1] stringByAppendingString:@" "])];
+    
+    int location = self.textView.selectedRange.location;
+    NSString *content = self.textView.text;
+    NSString *result = [NSString stringWithFormat:@"%@%@%@",[content substringToIndex:location], ([[[self.atScreenNames objectAtIndex:0] substringFromIndex:1] stringByAppendingString:@" "]), [content substringFromIndex:location]];
+    self.textView.text = result;
+    
+    NSRange range = self.textView.selectedRange;
+    range.location = location + [([[[self.atScreenNames objectAtIndex:0] substringFromIndex:1] stringByAppendingString:@" "]) length];
+    self.textView.selectedRange = range;
+    
     [self dismissAtView];
     
     return NO;
@@ -463,7 +488,7 @@
 #pragma - UITextViewDelegate
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    _lastChar = text;
+    _lastChar = [text retain];
     return YES;
 }
 
