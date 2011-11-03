@@ -20,6 +20,7 @@
 #define kNotificationNameModalCardPresented @"kNotificationNameModalCardPresented"
 #define kNotificationNameModalCardDismissed @"kNotificationNameModalCardDismissed"
 #define kNotificationNameCardDeleted @"kNotificationNameCardDeleted"
+#define kNotificationNameCardShouldDeleteCard @"kNotificationNameCardShouldDeleteCard"
 
 @class Status;
 
@@ -53,7 +54,7 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
     NSString *_musicLink;
     
     Status *_status;
-
+	
     int b;
 }
 

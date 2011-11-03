@@ -52,6 +52,7 @@
 @synthesize status = _status;
 @synthesize musicLink = _musicLink;
 
+
 - (void)dealloc
 {    
     [_postWebView release];
@@ -1009,6 +1010,14 @@
     [alertView release];
 }
 
+
+- (void)deleteCardFromCoreData
+{
+	NSManagedObjectContext *managedContext = [self.status managedObjectContext];
+	[managedContext deleteObject:self.status];
+	[managedContext processPendingChanges];
+}
+
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex != alertView.cancelButtonIndex) {
@@ -1017,12 +1026,14 @@
             if (!client.hasError) {
                 
                 //remain to be solved;
-                
-                NSManagedObjectContext *managedContext = [self.status managedObjectContext];
-                [managedContext deleteObject:self.status];
-                [managedContext processPendingChanges];
-                //                [self.managedObjectContext deleteObject:self.status];
-                //				[self.managedObjectContext processPendingChanges];
+               	NSManagedObjectContext *managedContext = [self.status managedObjectContext];
+				[managedContext deleteObject:self.status];
+				[managedContext processPendingChanges];
+				
+//				 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameCardShouldDeleteCard object:self];
+//				
+//				[self performSelector:@selector(deleteCardFromCoreData) withObject:nil afterDelay:5.0];
+				
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameCardDeleted object:self];
             } else {
                 [ErrorNotification showOperationError];
@@ -1031,6 +1042,7 @@
         [client destroyStatus:self.status.statusID];
     }
 }
+
 
 - (IBAction)profileImageButtonClicked:(id)sender {
     UserCardViewController *vc = [[UserCardViewController alloc] initWithUsr:self.status.author];
