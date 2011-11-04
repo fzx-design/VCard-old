@@ -454,16 +454,19 @@
 	if ([typeName isEqual:kNotificationObjectNameFollower]) {
 		preNewFollowerCount = 0;
 		self.dockViewController.ccUserInfoCardViewController.theNewFollowersCountLabel.text = @"";
+		self.notiNewFollowerLabel.text = @"0";
 		WeiboClient *client = [WeiboClient client];
 		[client resetUnreadCount:ResetUnreadCountTypeFollowers];
 	} else if([typeName isEqual:kNotificationObjectNameComment]) {
 		preNewCommentCount = 0;
 		self.dockViewController.ccCommentTableViewController.theNewCommentCountLabel.text = @"";
+		self.notiNewCommentLabel.text = @"0";
 		WeiboClient *client = [WeiboClient client];
 		[client resetUnreadCount:ResetUnreadCountTypeComments];
 	} else if([typeName isEqual:kNotificationObjectNameMention]) {
 		preNewMentionCount = 0;
 		self.dockViewController.ccCommentTableViewController.theNewMentionsCountLabel.text = @"";
+		self.notiNewAtLabel.text = @"0";
 		WeiboClient *client = [WeiboClient client];
         [client resetUnreadCount:ResetUnreadCountTypeReferMe];
 	}
@@ -518,10 +521,7 @@
 		userCardVC.friendsCountLabel.text =  self.currentUser.friendsCount;
 		userCardVC.followersCountLabel.text = self.currentUser.followersCount;
 		userCardVC.statusesCountLabel.text = self.currentUser.statusesCount;
-		
-		NSLog(@"%@", self.notiNewCommentLabel.text);
-		NSLog(@"%@", self.notiNewAtLabel.text);
-		
+
 		BOOL enabled = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeyNotiPopoverEnabled];
 		if (self.notificationView.hidden && !_commandCenterFlag && enabled) {
 			self.notificationView.hidden = NO;
