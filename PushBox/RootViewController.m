@@ -229,7 +229,8 @@
 				 object:nil];
     
     
-    self.bottomStateView.alpha = 0.0;
+//    self.bottomStateView.alpha = 0.0;
+	self.bottomStateView.hidden = YES;
 	self.notificationView.hidden = YES;
 	_commandCenterFlag = NO;
 	
@@ -275,16 +276,24 @@
     preNewMentionCount = 0;
     
     [WeiboClient signout];
+	
+	if (_tmpImage != nil) {
+		[_tmpImage release];
+	}
+	_tmpImage = nil;
+	self.bottomStateInvisibleView.image = nil;
+	
     [self hideDockView];
     [self hideCardTableView];
-    self.bottomStateFrameView.hidden = YES;
     [self hideBottomStateView];
+    self.bottomStateFrameView.hidden = YES;
     self.notificationView.hidden = YES;
-    [self setDefaultBackgroundImage:YES];
     self.currentUser = nil;
+    [self setDefaultBackgroundImage:YES];
     [User deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
 	[Status deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
 	[Comment deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
+	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:PBBackgroundImageDefault] forKey:kUserDefaultKeyBackground];
     [self performSelector:@selector(showLoginView) withObject:nil afterDelay:1.0];
 }
 
@@ -315,7 +324,8 @@
     if (self.bottomStateInvisibleView.image == nil) {
         self.bottomStateInvisibleView.image = _tmpImage;
     }
-    self.bottomStateView.alpha = 1.0;
+//    self.bottomStateView.alpha = 1.0;
+	self.bottomStateView.hidden = NO;
     [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimation] forKey:@"animation"];
     [self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
     
@@ -328,7 +338,8 @@
     self.dockViewController.searchButton.selected = YES;
     
     [UIView animateWithDuration:0.28 animations:^(void) {
-        self.bottomStateView.alpha = 1.0;
+//        self.bottomStateView.alpha = 1.0;
+		self.bottomStateView.hidden = NO;
         CGRect frame = self.bottomStateView.frame;
         frame.origin.y = 768 - 352 - 46 - 18;
         [self.bottomStateView setFrame:frame];
@@ -346,7 +357,8 @@
     [self.bottomStateTextField resignFirstResponder];
     
     [UIView animateWithDuration:0.28 animations:^(void) {
-        self.bottomStateView.alpha = 0.0;
+//        self.bottomStateView.alpha = 0.0;
+		self.bottomStateView.hidden = YES;
         CGRect frame = self.bottomStateView.frame;
         frame.origin.y = 618;
         [self.bottomStateView setFrame:frame];
@@ -363,7 +375,8 @@
     [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimation] forKey:@"animation"];
     [self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
     
-    self.bottomStateView.alpha = 0.0;
+//    self.bottomStateView.alpha = 0.0;
+	self.bottomStateView.hidden = YES;
     self.bottomBackButton.enabled = NO;
     
 }
@@ -905,7 +918,8 @@
 
 - (void)searchButtonClicked:(UIButton *)button
 {
-    self.bottomStateView.alpha = 1.0;
+//    self.bottomStateView.alpha = 1.0;
+	self.bottomStateView.hidden = NO;
     [self.bottomStateTextField becomeFirstResponder];
     
     if (button.selected) {
