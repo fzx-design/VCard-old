@@ -16,6 +16,9 @@
 #import "User.h"
 #import "AnimationProvider.h"
 
+#define LabelRedColor [UIColor colorWithRed:143/255.0 green:63/255.0 blue:63/255.0 alpha:1.0]
+#define LabelBlackColor [UIColor colorWithRed:100/255.0 green:100/255.0 blue:100/255.0 alpha:1.0]
+
 @implementation PostViewController
 
 @synthesize titleLabel = _titleLabel;
@@ -136,13 +139,33 @@
     self.wordsCountLabel.text = [NSString stringWithFormat:@"%d", words];
     self.doneButton.enabled = words >= 0;
     
+	if (words >= 0) {
+		self.wordsCountLabel.text = [NSString stringWithFormat:@"%d", words];
+		self.wordsCountLabel.textColor = LabelBlackColor;
+	} else {
+		self.wordsCountLabel.text = [NSString stringWithFormat:@"超出 %d", -words];
+		self.wordsCountLabel.textColor = LabelRedColor;
+	}
+	
     //
-    if (_lastChar && [_lastChar compare:@"@"] == NSOrderedSame) {
+    if ((NSString*)_lastChar && [(NSString*)_lastChar compare:@"@"] == NSOrderedSame) {
+        NSLog(@"!!!!!!!!!!!!%@", _lastChar);
         [self atButtonClicked:nil];
     }
 }
 
-- (IBAction)atButtonClicked:(id)sender {
+- (IBAction)atButtonClicked:(id)sender {    
+    if (sender) {
+        int location = self.textView.selectedRange.location;
+        NSString *content = self.textView.text;
+        NSString *result = [NSString stringWithFormat:@"%@@%@",[content substringToIndex:location], [content substringFromIndex:location]];
+        self.textView.text = result;
+        
+        NSRange range = self.textView.selectedRange;
+        range.location = location + 1;
+        self.textView.selectedRange = range;
+    }
+    
     UIView *superView = [self.view superview];
     
     if (!_atBgButton)
@@ -195,12 +218,12 @@
 	if (self.atView.superview) {
 		[UIView animateWithDuration:0.3 
 						 animations:^(){
-			self.atView.alpha = 0.0;
-		} 
+                             self.atView.alpha = 0.0;
+                         } 
 						 completion:^(BOOL finished) {
-			[self.atView removeFromSuperview];
-			self.atView.alpha = 1.0;
-		}];
+                             [self.atView removeFromSuperview];
+                             self.atView.alpha = 1.0;
+                         }];
 	}
     
     [_atBgButton removeFromSuperview];
@@ -323,66 +346,66 @@
 - (Boolean)isAtEndChar:(unichar)c
 {
     NSArray* atEndCharArray = [[[NSArray alloc] initWithObjects:
-                               [[[NSNumber alloc] initWithInt:44] autorelease],   // ' '
-                               [[[NSNumber alloc] initWithInt:46] autorelease],   // ' '
-                               [[[NSNumber alloc] initWithInt:32] autorelease],   // ' '
-                               [[[NSNumber alloc] initWithInt:64] autorelease],   // '@'
-                               [[[NSNumber alloc] initWithInt:58] autorelease],   // ':'
-                               [[[NSNumber alloc] initWithInt:59] autorelease],   // ';'
-                               [[[NSNumber alloc] initWithInt:35] autorelease],   // '#'
-                               [[[NSNumber alloc] initWithInt:39] autorelease],   // '''
-                               [[[NSNumber alloc] initWithInt:34] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:40] autorelease],   // '('
-                               [[[NSNumber alloc] initWithInt:41] autorelease],   // ')'
-                               [[[NSNumber alloc] initWithInt:91] autorelease],   // '['
-                               [[[NSNumber alloc] initWithInt:93] autorelease],   // ']'
-                               [[[NSNumber alloc] initWithInt:123] autorelease],   // '{'
-                               [[[NSNumber alloc] initWithInt:125] autorelease],   // '}'
-                               [[[NSNumber alloc] initWithInt:126] autorelease],   // '~'
-                               [[[NSNumber alloc] initWithInt:33] autorelease],   // '!'
-                               [[[NSNumber alloc] initWithInt:36] autorelease],   // '$'
-                               [[[NSNumber alloc] initWithInt:37] autorelease],   // '%'
-                               [[[NSNumber alloc] initWithInt:94] autorelease],   // '^'
-                               [[[NSNumber alloc] initWithInt:38] autorelease],   // '&'
-                               [[[NSNumber alloc] initWithInt:42] autorelease],   // '*'
-                               [[[NSNumber alloc] initWithInt:43] autorelease],   // '+'
-                               [[[NSNumber alloc] initWithInt:61] autorelease],   // '='
-                               [[[NSNumber alloc] initWithInt:124] autorelease],   // '|'
-                               [[[NSNumber alloc] initWithInt:60] autorelease],   // '<'
-                               [[[NSNumber alloc] initWithInt:62] autorelease],   // '>'
-                               [[[NSNumber alloc] initWithInt:92] autorelease],   // '\'
-                               [[[NSNumber alloc] initWithInt:47] autorelease],   // '/'
-                               [[[NSNumber alloc] initWithInt:63] autorelease],   // '?'
-                               [[[NSNumber alloc] initWithInt:65306] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:65307] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:8216] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:8217] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:8220] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:8221] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:65288] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:65289] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:65339] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:12290] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:65341] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:65292] autorelease],   // '，'
-                               [[[NSNumber alloc] initWithInt:12289] autorelease],   // '、'
-                               [[[NSNumber alloc] initWithInt:65371] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:65373] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:65374] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:65281] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:65283] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:65509] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:65285] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:8212] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:65290] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:65291] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:65309] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:65372] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:12298] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:65295] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:65311] autorelease],   // '"'
-                               [[[NSNumber alloc] initWithInt:8230] autorelease],   // '"'
-                               nil] autorelease];
+                                [[[NSNumber alloc] initWithInt:44] autorelease],   // ' '
+                                [[[NSNumber alloc] initWithInt:46] autorelease],   // ' '
+                                [[[NSNumber alloc] initWithInt:32] autorelease],   // ' '
+                                [[[NSNumber alloc] initWithInt:64] autorelease],   // '@'
+                                [[[NSNumber alloc] initWithInt:58] autorelease],   // ':'
+                                [[[NSNumber alloc] initWithInt:59] autorelease],   // ';'
+                                [[[NSNumber alloc] initWithInt:35] autorelease],   // '#'
+                                [[[NSNumber alloc] initWithInt:39] autorelease],   // '''
+                                [[[NSNumber alloc] initWithInt:34] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:40] autorelease],   // '('
+                                [[[NSNumber alloc] initWithInt:41] autorelease],   // ')'
+                                [[[NSNumber alloc] initWithInt:91] autorelease],   // '['
+                                [[[NSNumber alloc] initWithInt:93] autorelease],   // ']'
+                                [[[NSNumber alloc] initWithInt:123] autorelease],   // '{'
+                                [[[NSNumber alloc] initWithInt:125] autorelease],   // '}'
+                                [[[NSNumber alloc] initWithInt:126] autorelease],   // '~'
+                                [[[NSNumber alloc] initWithInt:33] autorelease],   // '!'
+                                [[[NSNumber alloc] initWithInt:36] autorelease],   // '$'
+                                [[[NSNumber alloc] initWithInt:37] autorelease],   // '%'
+                                [[[NSNumber alloc] initWithInt:94] autorelease],   // '^'
+                                [[[NSNumber alloc] initWithInt:38] autorelease],   // '&'
+                                [[[NSNumber alloc] initWithInt:42] autorelease],   // '*'
+                                [[[NSNumber alloc] initWithInt:43] autorelease],   // '+'
+                                [[[NSNumber alloc] initWithInt:61] autorelease],   // '='
+                                [[[NSNumber alloc] initWithInt:124] autorelease],   // '|'
+                                [[[NSNumber alloc] initWithInt:60] autorelease],   // '<'
+                                [[[NSNumber alloc] initWithInt:62] autorelease],   // '>'
+                                [[[NSNumber alloc] initWithInt:92] autorelease],   // '\'
+                                [[[NSNumber alloc] initWithInt:47] autorelease],   // '/'
+                                [[[NSNumber alloc] initWithInt:63] autorelease],   // '?'
+                                [[[NSNumber alloc] initWithInt:65306] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:65307] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:8216] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:8217] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:8220] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:8221] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:65288] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:65289] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:65339] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:12290] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:65341] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:65292] autorelease],   // '，'
+                                [[[NSNumber alloc] initWithInt:12289] autorelease],   // '、'
+                                [[[NSNumber alloc] initWithInt:65371] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:65373] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:65374] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:65281] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:65283] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:65509] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:65285] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:8212] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:65290] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:65291] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:65309] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:65372] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:12298] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:65295] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:65311] autorelease],   // '"'
+                                [[[NSNumber alloc] initWithInt:8230] autorelease],   // '"'
+                                nil] autorelease];
     for (int i = 0; i < [atEndCharArray count]; i++)
     {
         if (c == [[atEndCharArray objectAtIndex:i] intValue])
@@ -424,12 +447,6 @@
     
     [self configureAtScreenNamesArray:self.atTextField.text];
     [self.atTableView reloadData];
-}
-
-- (IBAction)referButtonClicked:(id)sender {
-    NSString *text = self.textView.text;
-	text = [text stringByAppendingString:@"@"];
-	self.textView.text = text;
 }
 
 - (IBAction)topicButtonClicked:(id)sender {
@@ -496,9 +513,6 @@
 	[self.rightView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
 	
 	[self.textView becomeFirstResponder];
-//	[UIView animateWithDuration:1.0 animations:^{
-//		self.rightView.alpha = 1.0;
-//	}];
 }
 
 #pragma - UITableViewDataSource
@@ -523,14 +537,32 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.textView.text = [self.textView.text stringByAppendingString:([[[self.atScreenNames objectAtIndex:[indexPath row]] substringFromIndex:1] stringByAppendingString:@" "])];
+    
+    int location = self.textView.selectedRange.location;
+    NSString *content = self.textView.text;
+    NSString *result = [NSString stringWithFormat:@"%@%@%@",[content substringToIndex:location], ([[[self.atScreenNames objectAtIndex:[indexPath row]] substringFromIndex:1] stringByAppendingString:@" "]), [content substringFromIndex:location]];
+    
+    self.textView.text = result;
+    NSRange range = self.textView.selectedRange;
+    range.location = location + [([[[self.atScreenNames objectAtIndex:[indexPath row]] substringFromIndex:1] stringByAppendingString:@" "]) length];
+    self.textView.selectedRange = range;
+    
     [self dismissAtView];
 }
 
 #pragma - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    self.textView.text = [self.textView.text stringByAppendingString:([[[self.atScreenNames objectAtIndex:0] substringFromIndex:1] stringByAppendingString:@" "])];
+    
+    int location = self.textView.selectedRange.location;
+    NSString *content = self.textView.text;
+    NSString *result = [NSString stringWithFormat:@"%@%@%@",[content substringToIndex:location], ([[[self.atScreenNames objectAtIndex:0] substringFromIndex:1] stringByAppendingString:@" "]), [content substringFromIndex:location]];
+    self.textView.text = result;
+    
+    NSRange range = self.textView.selectedRange;
+    range.location = location + [([[[self.atScreenNames objectAtIndex:0] substringFromIndex:1] stringByAppendingString:@" "]) length];
+    self.textView.selectedRange = range;
+    
     [self dismissAtView];
     
     return NO;
@@ -539,7 +571,7 @@
 #pragma - UITextViewDelegate
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    _lastChar = text;
+    _lastChar = [text retain];
     return YES;
 }
 

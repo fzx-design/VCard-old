@@ -16,6 +16,9 @@
 @synthesize relationshipStateLabel = _relationshipStateLabel;
 @synthesize delegate = _delegate;
 
+@synthesize atButton = _atButton;
+@synthesize messagesButton = _messageButton;
+
 @synthesize switchView = _switchView;
 
 - (void)dealloc
@@ -24,14 +27,20 @@
     
     [_backButton release];
     [_relationshipStateLabel release];
+    [_messageButton release];
+    [_atButton release];
+	[_switchView release];
     [super dealloc];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    self.atButton = nil;
+    self.messagesButton = nil;
     self.backButton = nil;
     self.relationshipStateLabel = nil;
+	self.switchView = nil;
 }
 
 - (id)initWithUsr:(User *)user
@@ -43,28 +52,38 @@
 
 - (void)setRelationshipState
 {
-    WeiboClient *client = [WeiboClient client];
-    
-    [client setCompletionBlock:^(WeiboClient *client) {
-        NSDictionary *dict = client.responseJSONObject;
-        dict = [dict objectForKey:@"target"];
+    // 自己
+    if ([self.user.userID compare:self.currentUser.userID] == NSOrderedSame) {
+        self.switchView.hidden = YES;
+        self.relationshipStateLabel.text = @"";
+        self.atButton.hidden = YES;
+        self.messagesButton.hidden = YES;
+    }
+    // 别人
+    else {
+        WeiboClient *client = [WeiboClient client];
         
-        BOOL followedByMe = [[dict objectForKey:@"followed_by"] boolValue];
-        BOOL followingMe = [[dict objectForKey:@"following"] boolValue];
+        [client setCompletionBlock:^(WeiboClient *client) {
+            NSDictionary *dict = client.responseJSONObject;
+            dict = [dict objectForKey:@"target"];
+            
+            BOOL followedByMe = [[dict objectForKey:@"followed_by"] boolValue];
+            BOOL followingMe = [[dict objectForKey:@"following"] boolValue];
+            
+            [self.switchView setOn:followedByMe animated:YES];
+            
+            NSString *state = nil;
+            if (followingMe) {
+                state = [NSString stringWithFormat:NSLocalizedString(@"%@ 正关注你", nil), self.user.screenName];
+            }
+            else {
+                state = [NSString stringWithFormat:NSLocalizedString(@"%@ 未关注你", nil), self.user.screenName];
+            }
+            self.relationshipStateLabel.text = state;
+        }];
         
-		[self.switchView setOn:followedByMe animated:YES];
-        
-        NSString *state = nil;
-        if (followingMe) {
-            state = [NSString stringWithFormat:NSLocalizedString(@"%@ 正关注你", nil), self.user.screenName];
-        }
-        else {
-            state = [NSString stringWithFormat:NSLocalizedString(@"%@ 未关注你", nil), self.user.screenName];
-        }
-        self.relationshipStateLabel.text = state;
-    }];
-    
-    [client getRelationshipWithUser:self.user.userID];
+        [client getRelationshipWithUser:self.user.userID];
+    }
 }
 
 - (IBAction)atButtonClicked:(id)sender
@@ -79,6 +98,8 @@
 - (void)configureView
 {
     [super configureView];
+	self.switchView.delegate = self;
+	[self.switchView setType:SwitchTypeFollow];
     self.relationshipStateLabel.text = @"";
     [self setRelationshipState];
 }
@@ -87,7 +108,6 @@
 {
     [super viewDidLoad];
     [self configureView];
-	self.switchView.delegate = self;
 }
 
 - (IBAction)backButtonClicked:(id)sender {

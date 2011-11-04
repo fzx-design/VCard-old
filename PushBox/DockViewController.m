@@ -25,7 +25,6 @@
 @synthesize commandCenterNotiImageView = _commandCenterNotiImageView;
 @synthesize optionsPopoverController = _optionsPopoverController;
 @synthesize controlContainerView = _controlContainerView;
-
 @synthesize postingRoundImageView = _postingRoundImageView;
 @synthesize postingCircleImageView = _postingCircleImageView;
 

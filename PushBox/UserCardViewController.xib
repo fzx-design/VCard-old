@@ -152,7 +152,7 @@
 						<string key="NSFrame">{{437, 166}, {9, 16}}</string>
 						<reference key="NSSuperview" ref="317278890"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="838792934"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">4</int>
@@ -846,7 +846,7 @@
 						<string key="NSFrame">{{20, 208}, {65, 30}}</string>
 						<reference key="NSSuperview" ref="317278890"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="887718994"/>
+						<reference key="NSNextKeyView" ref="396326300"/>
 						<string key="NSReuseIdentifierKey">_NS:212</string>
 						<reference key="IBUIBackgroundColor" ref="410786381"/>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -857,7 +857,7 @@
 						<string key="NSFrame">{{130, 207}, {34, 32}}</string>
 						<reference key="NSSuperview" ref="317278890"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="838792934"/>
+						<reference key="NSNextKeyView" ref="887718994"/>
 						<string key="NSReuseIdentifierKey">_NS:241</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -1011,6 +1011,22 @@
 						<reference key="destination" ref="838792934"/>
 					</object>
 					<int key="connectionID">138</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">messagesButton</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="648398642"/>
+					</object>
+					<int key="connectionID">139</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">atButton</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="396326300"/>
+					</object>
+					<int key="connectionID">140</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -1411,7 +1427,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">138</int>
+			<int key="maxID">140</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1635,39 +1651,43 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>atButton</string>
 							<string>backButton</string>
-							<string>followButton</string>
+							<string>messagesButton</string>
 							<string>relationshipStateLabel</string>
 							<string>switchView</string>
-							<string>unFollowButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIButton</string>
 							<string>UIButton</string>
+							<string>UIButton</string>
 							<string>UILabel</string>
 							<string>RCSwitchClone</string>
-							<string>UIButton</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>atButton</string>
 							<string>backButton</string>
-							<string>followButton</string>
+							<string>messagesButton</string>
 							<string>relationshipStateLabel</string>
 							<string>switchView</string>
-							<string>unFollowButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">atButton</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">backButton</string>
 								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">followButton</string>
+								<string key="name">messagesButton</string>
 								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
@@ -1677,10 +1697,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">switchView</string>
 								<string key="candidateClassName">RCSwitchClone</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">unFollowButton</string>
-								<string key="candidateClassName">UIButton</string>
 							</object>
 						</object>
 					</object>

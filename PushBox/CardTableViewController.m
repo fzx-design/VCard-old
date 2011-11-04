@@ -105,6 +105,9 @@
 	[center addObserver:self selector:@selector(changeRefreshingIntervalTime) 
 				   name:kNotificationNameRefreshingIntervalChanged 
 				 object:nil];
+	[center addObserver:self selector:@selector(deleteCurrentCard) 
+				   name:kNotificationNameCardShouldDeleteCard 
+				 object:nil];
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:interval
 											  target:self 
@@ -868,44 +871,44 @@
 }
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-//	[self.tableView beginUpdates];
+	[self.tableView beginUpdates];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath {
     
-//    UITableView *tableView = self.tableView;
-//    
-//    switch(type) {
-//            
-//        case NSFetchedResultsChangeInsert:
-//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-//                             withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//            
-//        case NSFetchedResultsChangeDelete:
-//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-//                             withRowAnimation:UITableViewRowAnimationRight];
-//            break;
-//            
-//        case NSFetchedResultsChangeUpdate:
-//            [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
-//                    atIndexPath:indexPath];
-//            break;
-//            
-//        case NSFetchedResultsChangeMove:
-//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-//                             withRowAnimation:UITableViewRowAnimationFade];
-//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-//                             withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//    }
+    UITableView *tableView = self.tableView;
+    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                             withRowAnimation:UITableViewRowAnimationRight];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
+                    atIndexPath:indexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-//    [self.tableView endUpdates];
-	[self.tableView reloadData];
+    [self.tableView endUpdates];
+//	[self.tableView reloadData];
 }
 
 
@@ -979,6 +982,13 @@
     //	if ([UserCardNaviViewController sharedUserCardNaviViewControllerExisted]) {
     //		[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameShouldDismissUserCard object:self];
     //	} 
+}
+
+- (void)deleteCurrentCard
+{
+	 NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.currentRowIndex inSection:0];
+	NSArray *array = [NSArray arrayWithObject:indexPath];
+	[self.tableView deleteRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationRight];
 }
 
 @end

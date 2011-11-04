@@ -78,7 +78,6 @@ typedef enum {
 
 - (IBAction)cancelButtonClicked:(UIButton *)sender;
 - (IBAction)doneButtonClicked:(id)sender;
-- (IBAction)referButtonClicked:(id)sender;
 - (IBAction)topicButtonClicked:(id)sender;
 - (IBAction)camaraButtonClicked:(id)sender;
 - (IBAction)atButtonClicked:(id)sender;

@@ -17,6 +17,11 @@
 #import "UIApplicationAddition.h"
 #import "UIImageViewAddition.h"
 
+#define LabelNormalColor [UIColor colorWithRed:66.0/255 green:66.0/255 blue:66.0/255 alpha:1.0]
+#define LabelHilightColor [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0]
+#define LabelHilightShadowColor [UIColor colorWithRed:66.0/255 green:66.0/255 blue:66.0/255 alpha:0.5]
+#define LabelNormalShadowColor [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.5]
+
 @implementation CCCommentsTableViewController
 @synthesize titleLabel = _titleLabel;
 @synthesize dataSource = _dataSource;
@@ -24,6 +29,9 @@
 @synthesize status = _status;
 @synthesize theNewCommentCountLabel = _theNewCommentCountLabel;
 @synthesize theNewMentionsCountLabel = _theNewMentionsCountLabel;
+@synthesize switchView = _switchView;
+@synthesize tomeLabel = _tomeLabel;
+@synthesize bymeLabel = _bymeLabel;
 
 - (void)dealloc
 {
@@ -31,15 +39,21 @@
     [_titleLabel release];
 	[_theNewCommentCountLabel release];
     [_theNewMentionsCountLabel release];
+	[_switchView release];
+	[_tomeLabel release];
+	[_bymeLabel release];
     [super dealloc];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    [_titleLabel release];
+    self.titleLabel = nil;
+	self.switchView = nil;
     self.theNewCommentCountLabel = nil;
     self.theNewMentionsCountLabel = nil;
+	self.tomeLabel = nil;
+	self.bymeLabel = nil;
 }
 
 - (void)viewDidLoad
@@ -48,29 +62,36 @@
     self.titleLabel.text = NSLocalizedString(@"评论", nil);
     
     _nextPage = 1;
+	_nextByMePage = 1;
+	
+	self.switchView.delegate = self;
+	[self.switchView setType:SwitchTypeComment];
+	
     [self performSelector:@selector(loadMoreData) withObject:nil afterDelay:0.5];
     [self performSelector:@selector(hideLoadMoreDataButton) withObject:nil afterDelay:0.1];
 }
 
 - (void)clearData
 {
-    _nextPage = 1;
     [self hideLoadMoreDataButton];
     if (self.dataSource == CommentsTableViewDataSourceCommentsByMe) {
 //        [self.status removeComments:self.status.comments];
+		[Comment deleteCommentsByMeInManagedObjectContext:self.managedObjectContext];
     }
     else {
-        [self.currentUser removeCommentsToMe:self.currentUser.commentsToMe];
+//        [self.currentUser removeCommentsToMe:self.currentUser.commentsToMe];
+		[Comment deleteCommentsToMeInManagedObjectContext:self.managedObjectContext];
     }
 }
 
 - (void)refresh
 {
-	_nextPage = 1;
-	
 	if (_dataSource == CommentsTableViewDataSourceCommentsToMe) {
+		_nextPage = 1;
 		NSDictionary *userData = [NSDictionary dictionaryWithObject:kNotificationObjectNameComment forKey:@"type"];
 		[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameNotificationRefreshed object:self userInfo:userData];
+	} else if(_dataSource == CommentsTableViewDataSourceCommentsByMe){
+		_nextByMePage = 1;
 	}
 
 	[self performSelector:@selector(loadMoreData) withObject:nil afterDelay:0.05];
@@ -92,7 +113,10 @@
 		if (!client.hasError) {
 			NSArray *dictArray = client.responseJSONObject;
 			
-			if (_nextPage == 1) {
+			if (_nextPage == 1 && _dataSource == CommentsTableViewDataSourceCommentsToMe) {
+				[self clearData];
+			} 
+			if (_nextByMePage == 1 && _dataSource == CommentsTableViewDataSourceCommentsByMe) {
 				[self clearData];
 			}
 			
@@ -109,25 +133,41 @@
 					[Comment insertCommentToMe:dict inManagedObjectContext:self.managedObjectContext];
 				}
 				[self.managedObjectContext processPendingChanges];
+				
+				if (_commentsToMeFetchedResultsController) {
+					[_commentsToMeFetchedResultsController release];
+				}
+				
+				_commentsToMeFetchedResultsController = [self.fetchedResultsController retain];
+				
+				_nextPage++;
 			} else if(_dataSource == CommentsTableViewDataSourceCommentsByMe) {
 				for (NSDictionary *dict in dictArray) {
 					[Comment insertCommentByMe:dict inManagedObjectContext:self.managedObjectContext];
 				}
 				[self.managedObjectContext processPendingChanges];
+				
+				if (_commentsByMeFetchedResultsController) {
+					[_commentsByMeFetchedResultsController release];
+				}
+				
+				_commentsByMeFetchedResultsController = [self.fetchedResultsController retain];
+				
+				_nextByMePage++;
 			}
 			
-			_nextPage++;
 			
 		} else {
 			[ErrorNotification showLoadingError];
 		}
+		self.switchView.userInteractionEnabled = YES;
 		[self doneLoadingTableViewData];
 		_loading = NO;
 
     }];
     
     if (self.dataSource == CommentsTableViewDataSourceCommentsByMe) {
-		[client getCommentsByMeSinceID:nil maxID:nil page:_nextPage count:20];
+		[client getCommentsByMeSinceID:nil maxID:nil page:_nextByMePage count:20];
     }
     else if(self.dataSource == CommentsTableViewDataSourceCommentsToMe){
         [client getCommentsToMeSinceID:nil maxID:nil page:_nextPage count:20];
@@ -141,9 +181,9 @@
     request.entity = [NSEntityDescription entityForName:@"Comment" inManagedObjectContext:self.managedObjectContext];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:NO];
     request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    if (_dataSource == CommentsTableViewDataSourceCommentsToMe) {
+    if (self.dataSource == CommentsTableViewDataSourceCommentsToMe) {
 		request.predicate = [NSPredicate predicateWithFormat:@"toMe == %@", [NSNumber numberWithBool:YES]];
-	} else if(_dataSource == CommentsTableViewDataSourceCommentsByMe) {
+	} else if(self.dataSource == CommentsTableViewDataSourceCommentsByMe) {
 		request.predicate = [NSPredicate predicateWithFormat:@"byMe == %@", [NSNumber numberWithBool:YES]];
 	}
 }
@@ -226,27 +266,58 @@
     [vc release];
 }
 
-- (IBAction)toMeButtonClicked:(id)sender
+- (void)switchToToMe
 {
-	[[UIApplication sharedApplication] showLoadingView];
-	_dataSource = CommentsTableViewDataSourceCommentsToMe;
-    self.fetchedResultsController.delegate = nil;
-    self.fetchedResultsController = nil;
-//	self.fetchedResultsController = _fetchedResultsController;
-	[self refresh];
+	self.dataSource = CommentsTableViewDataSourceCommentsToMe;
+	
+	self.bymeLabel.textColor = LabelNormalColor;
+	self.bymeLabel.shadowColor = LabelNormalShadowColor;
+	self.tomeLabel.textColor = LabelHilightColor;
+	self.tomeLabel.shadowColor = LabelHilightShadowColor;
+	
+	if (_commentsToMeFetchedResultsController) {
+		self.fetchedResultsController = _commentsToMeFetchedResultsController;
+	} else {
+		self.fetchedResultsController = nil;
+		[self refresh];
+	}
 	
 	[self.tableView reloadData];
 }
 
-- (IBAction)byMeButtonClicked:(id)sender
+- (void)switchToByMe
 {
-	[[UIApplication sharedApplication] showLoadingView];
-	_dataSource = CommentsTableViewDataSourceCommentsByMe;
-    self.fetchedResultsController.delegate = nil;
-    self.fetchedResultsController = nil;
-//	_fetchedResultsController = self.fetchedResultsController;
-	[self refresh];
+	self.dataSource = CommentsTableViewDataSourceCommentsByMe;
+	
+	self.tomeLabel.textColor = LabelNormalColor;
+	self.tomeLabel.shadowColor = LabelNormalShadowColor;
+	self.bymeLabel.textColor = LabelHilightColor;
+	self.bymeLabel.shadowColor = LabelHilightShadowColor;
+	
+	if (_commentsByMeFetchedResultsController) {
+		self.fetchedResultsController = _commentsByMeFetchedResultsController;
+	} else {
+		self.fetchedResultsController = nil;
+		[self refresh];
+	}
+	
 	[self.tableView reloadData];
+}
+
+- (void)switchedOn
+{
+	[self performSelector:@selector(switchToByMe) withObject:nil afterDelay:0.25];
+}
+
+- (void)switchedOff
+{
+	[self performSelector:@selector(switchToToMe) withObject:nil afterDelay:0.25];
+}
+
+- (void)returnToCommandCenter
+{
+	[self.switchView setOn:NO];
+	[self switchedOff];
 }
 
 - (IBAction)mentionButtonClicked:(id)sender

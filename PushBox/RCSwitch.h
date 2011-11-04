@@ -22,6 +22,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+	SwitchTypeFollow,
+	SwitchTypeNormal,
+	SwitchTypeComment,
+} SwitchType;
+
 @protocol SwitchValueChanged <NSObject>
 
 - (void)switchedOn;
@@ -52,6 +58,9 @@
 	NSDate *endDate;
 	BOOL mustFlip;
 	
+	BOOL preOnflag;
+	
+	SwitchType _type;
 	id<SwitchValueChanged> _delegate;
 }
 
@@ -66,6 +75,7 @@
 
 
 - (void)setOn:(BOOL)aBool animated:(BOOL)animated;
+- (void)setType:(SwitchType)type;
 
 @property(readwrite, assign, getter=isOn) BOOL on;
 @property(readwrite, assign) float knobWidth;

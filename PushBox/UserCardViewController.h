@@ -21,18 +21,23 @@
 {
     UIButton *_backButton;
     UILabel *_relationshipStateLabel;
+
+    UIButton *_atButton;
+    UIButton *_messageButton;
     
 	RCSwitchClone *_switchView;
 	
     id<UserCardViewControllerDelegate> _delegate;
 }
 
-@property(nonatomic, retain) IBOutlet UIButton* followButton;
-@property(nonatomic, retain) IBOutlet UIButton* unFollowButton;
 @property(nonatomic, retain) IBOutlet UIButton* backButton;
+@property(nonatomic, retain) IBOutlet UIButton* atButton;
+@property(nonatomic, retain) IBOutlet UIButton* messagesButton;
 @property(nonatomic, retain) IBOutlet UILabel* relationshipStateLabel;
 @property(nonatomic, retain) IBOutlet RCSwitchClone* switchView;
 @property(nonatomic, assign) id<UserCardViewControllerDelegate> delegate;
+
+
 
 - (id)initWithUsr:(User *)user;
 

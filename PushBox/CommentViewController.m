@@ -15,6 +15,9 @@
 #import "Comment.h"
 #import "AnimationProvider.h"
 
+#define LabelRedColor [UIColor colorWithRed:143/255.0 green:63/255.0 blue:63/255.0 alpha:1.0]
+#define LabelBlackColor [UIColor colorWithRed:100/255.0 green:100/255.0 blue:100/255.0 alpha:1.0]
+
 @implementation CommentViewController
 
 @synthesize textView = _textView;
@@ -32,6 +35,8 @@
 @synthesize atTableView = _atTableView;
 @synthesize atTextField = _atTextField;
 
+@synthesize repostSwitchView = _repostSwitchView;
+
 - (void)dealloc
 {
     [_textView release];
@@ -41,6 +46,7 @@
 	[_repostButton release];
 	[_doneButton release];
 	[_wordsCountLabel release];
+	[_repostSwitchView release];
 	[_postingRoundImageView release];
 	[_postingCircleImageView release];
     [super dealloc];
@@ -56,6 +62,7 @@
 	self.repostButton = nil;
 	self.doneButton = nil;
 	self.wordsCountLabel = nil;
+	self.repostSwitchView = nil;
 	self.postingRoundImageView = nil;
 	self.postingCircleImageView = nil;
 }
@@ -63,6 +70,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
+	[self.repostSwitchView setType:SwitchTypeNormal];
+	self.repostSwitchView.delegate = self;
+	
     self.titleLabel.text = NSLocalizedString(@"发表评论", nil);
     self.textView.text = @"";
     [self.textView becomeFirstResponder];
@@ -239,15 +250,22 @@
     words += 1;
     words /= 2;
     words = 140 - words;
-    self.wordsCountLabel.text = [NSString stringWithFormat:@"%d", words];
-    self.doneButton.enabled = words >= 0;
     
-    //
+    self.doneButton.enabled = words >= 0;
+	
+	if (words >= 0) {
+		self.wordsCountLabel.text = [NSString stringWithFormat:@"%d", words];
+		self.wordsCountLabel.textColor = LabelBlackColor;
+	} else {
+		self.wordsCountLabel.text = [NSString stringWithFormat:@"超出 %d", -words];
+		self.wordsCountLabel.textColor = LabelRedColor;
+	}
+    
+    //REMAIN_TO_BE_CHECKED!
     if (_lastChar && [_lastChar compare:@"@"] == NSOrderedSame) {
         [self atButtonClicked:nil];
     }
 }
-
 
 - (IBAction)doneButtonClicked:(UIButton *)sender {
     NSString *comment = self.textView.text;
@@ -379,8 +397,16 @@
 }
 
 - (IBAction)atButtonClicked:(id)sender {
-    if (sender)
-        self.textView.text = [self.textView.text stringByAppendingFormat:@"@"];
+    if (sender) {
+        int location = self.textView.selectedRange.location;
+        NSString *content = self.textView.text;
+        NSString *result = [NSString stringWithFormat:@"%@@%@",[content substringToIndex:location], [content substringFromIndex:location]];
+        self.textView.text = result;
+        
+        NSRange range = self.textView.selectedRange;
+        range.location = location + 1;
+        self.textView.selectedRange = range;
+    }
     
     UIView *superView = [self.view superview];
     
@@ -406,6 +432,17 @@
     [self atTextFieldEditingBegan];
 }
 
+
+- (void)switchedOn
+{
+	_repostFlag = YES;
+}
+
+- (void)switchedOff
+{
+	_repostFlag = NO;
+}
+
 #pragma - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -428,14 +465,32 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.textView.text = [self.textView.text stringByAppendingString:([[[self.atScreenNames objectAtIndex:[indexPath row]] substringFromIndex:1] stringByAppendingString:@" "])];
+    
+    int location = self.textView.selectedRange.location;
+    NSString *content = self.textView.text;
+    NSString *result = [NSString stringWithFormat:@"%@%@%@",[content substringToIndex:location], ([[[self.atScreenNames objectAtIndex:[indexPath row]] substringFromIndex:1] stringByAppendingString:@" "]), [content substringFromIndex:location]];
+    
+    self.textView.text = result;
+    NSRange range = self.textView.selectedRange;
+    range.location = location + [([[[self.atScreenNames objectAtIndex:[indexPath row]] substringFromIndex:1] stringByAppendingString:@" "]) length];
+    self.textView.selectedRange = range;
+    
     [self dismissAtView];
 }
 
 #pragma - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    self.textView.text = [self.textView.text stringByAppendingString:([[[self.atScreenNames objectAtIndex:0] substringFromIndex:1] stringByAppendingString:@" "])];
+    
+    int location = self.textView.selectedRange.location;
+    NSString *content = self.textView.text;
+    NSString *result = [NSString stringWithFormat:@"%@%@%@",[content substringToIndex:location], ([[[self.atScreenNames objectAtIndex:0] substringFromIndex:1] stringByAppendingString:@" "]), [content substringFromIndex:location]];
+    self.textView.text = result;
+    
+    NSRange range = self.textView.selectedRange;
+    range.location = location + [([[[self.atScreenNames objectAtIndex:0] substringFromIndex:1] stringByAppendingString:@" "]) length];
+    self.textView.selectedRange = range;
+    
     [self dismissAtView];
     
     return NO;
@@ -444,7 +499,7 @@
 #pragma - UITextViewDelegate
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    _lastChar = text;
+    _lastChar = [text retain];
     return YES;
 }
 

@@ -105,7 +105,7 @@
         
         NSString *subject = [NSString stringWithFormat:@"VCard HD 新浪微博用户反馈"];
         
-        NSString *receiver = [NSString stringWithFormat:@"evanfun.work@gmail.com"];
+        NSString *receiver = [NSString stringWithFormat:@"vcardhd@gmail.com"];
         [picker setToRecipients:[NSArray arrayWithObject:receiver]];
         
         [picker setSubject:subject];

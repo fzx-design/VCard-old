@@ -29,6 +29,9 @@
 + (Comment *)insertComment:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context;
 + (Comment *)commentWithID:(NSString *)commentID inManagedObjectContext:(NSManagedObjectContext *)context;
 + (void)deleteAllObjectsInManagedObjectContext:(NSManagedObjectContext *)context;
++ (void)deleteCommentsToMeInManagedObjectContext:(NSManagedObjectContext *)context;
++ (void)deleteCommentsByMeInManagedObjectContext:(NSManagedObjectContext *)context;
+
 - (BOOL)isEqualToComment:(Comment *)comment;
 
 @end

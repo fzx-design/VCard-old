@@ -286,7 +286,7 @@
 					<object class="IBUILabel" id="349437318">
 						<reference key="NSNextResponder" ref="789785206"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{469, 63}, {42, 21}}</string>
+						<string key="NSFrame">{{308, 63}, {203, 21}}</string>
 						<reference key="NSSuperview" ref="789785206"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="861138872"/>
@@ -714,15 +714,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">referButtonClicked:</string>
-						<reference key="source" ref="562598154"/>
-						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">33</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">atButtonClicked:</string>
 						<reference key="source" ref="562598154"/>
 						<reference key="destination" ref="841351856"/>
@@ -1052,7 +1043,6 @@
 							<string>camaraButtonClicked:</string>
 							<string>cancelButtonClicked:</string>
 							<string>doneButtonClicked:</string>
-							<string>referButtonClicked:</string>
 							<string>removeImageButtonClicked:</string>
 							<string>topicButtonClicked:</string>
 						</object>
@@ -1064,7 +1054,6 @@
 							<string>id</string>
 							<string>id</string>
 							<string>UIButton</string>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -1081,7 +1070,6 @@
 							<string>camaraButtonClicked:</string>
 							<string>cancelButtonClicked:</string>
 							<string>doneButtonClicked:</string>
-							<string>referButtonClicked:</string>
 							<string>removeImageButtonClicked:</string>
 							<string>topicButtonClicked:</string>
 						</object>
@@ -1113,10 +1101,6 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">doneButtonClicked:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">referButtonClicked:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">

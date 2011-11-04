@@ -52,6 +52,7 @@
 @synthesize status = _status;
 @synthesize musicLink = _musicLink;
 
+
 - (void)dealloc
 {    
     [_postWebView release];
@@ -104,6 +105,12 @@
 	tapGesture.numberOfTouchesRequired = 1;
 	[self.tweetImageView addGestureRecognizer:tapGesture];
 	[tapGesture release];
+    
+    UITapGestureRecognizer *tapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClicked:)];
+    tapGesture2.numberOfTapsRequired = 1;
+    tapGesture2.numberOfTouchesRequired = 1;
+    [self.musicCoverImageView addGestureRecognizer:tapGesture2];
+    [tapGesture2 release];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(shouldDismissUserCardNotification:)
@@ -313,8 +320,14 @@
 
 - (void)prepare
 {		
+    b = YES;
+    
     self.profileImageView.alpha = 0.0;
     self.musicLink = nil;
+    
+    self.musicCoverImageView.hidden = YES;
+    
+    self.musicBackgroundImageView.hidden = YES;
     
 	self.tweetImageView.image = nil;
 	self.tweetImageView.alpha = 0.0;
@@ -399,9 +412,11 @@
     [self.tweetImageView loadImageFromURL:repostStatus.bmiddlePicURL 
                                completion:^(void) 
      {
-         [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
-             self.tweetImageView.alpha = 1.0;
-             self.imageCoverImageView.alpha = 1.0;
+         [UIView animateWithDuration:0.5 delay:1.0 options:0 animations:^{
+             if (b) {
+                 self.tweetImageView.alpha = 1.0;
+                 self.imageCoverImageView.alpha = 1.0;
+             }
          } completion:^(BOOL fin) {
          }];
      }
@@ -648,9 +663,8 @@
     self.repostView.frame = kRepostViewFrameBottom;
     self.repostWebView.frame = kRepostWebViewFrameBottom;
     self.musicLink = repostMusicVideoLink;
-    //    self.musicBackgroundImageView.alpha = 0.0;
-    //    self.repostTweetImageView.alpha = 1.0;
     self.tweetImageView.hidden = YES;
+    self.musicBackgroundImageView.hidden = NO;
     [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
         self.musicBackgroundImageView.alpha = 1.0;
         self.tweetImageView.alpha = 0.0;
@@ -698,7 +712,7 @@
                             NSString* longUrl = [dict objectForKey:@"url_long"];
                             
                             
-                            if ([longUrl rangeOfString:@"http://v.youku.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.tudou.com"].location != NSNotFound || [longUrl rangeOfString:@"http://v.ku6.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.56.com"].location != NSNotFound || [longUrl rangeOfString:@"http://music.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"xiami.com"].location != NSNotFound || [longUrl rangeOfString:@"songtaste.com"].location != NSNotFound)
+                            if ([longUrl rangeOfString:@"http://v.youku.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.tudou.com"].location != NSNotFound || [longUrl rangeOfString:@"http://v.ku6.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.56.com"].location != NSNotFound || [longUrl rangeOfString:@"http://music.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.xiami.com"].location != NSNotFound || [longUrl rangeOfString:@"songtaste.com"].location != NSNotFound)
                             {
                                 isTrack = NO;
                                 [self loadPostMusicVideo:longUrl];
@@ -717,6 +731,7 @@
 
 - (void)getRepostMusicVideoLink:(NSString*)statusText
 {
+    
     NSString* shortUrl = nil;
     
     for (int i = 0; i < statusText.length; i++) {
@@ -752,20 +767,38 @@
                             NSString* longUrl = [dict objectForKey:@"url_long"];
                             
                             
-                            if ([longUrl rangeOfString:@"http://v.youku.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.tudou.com"].location != NSNotFound || [longUrl rangeOfString:@"http://v.ku6.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.56.com"].location != NSNotFound || [longUrl rangeOfString:@"http://music.sina.com"].location != NSNotFound|| [longUrl rangeOfString:@"xiami.com"].location != NSNotFound || [longUrl rangeOfString:@"songtaste.com"].location != NSNotFound)
-                            {
+                            if ([longUrl rangeOfString:@"http://v.youku.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.tudou.com"].location != NSNotFound || [longUrl rangeOfString:@"http://v.ku6.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.56.com"].location != NSNotFound || [longUrl rangeOfString:@"http://music.sina.com"].location != NSNotFound|| [longUrl rangeOfString:@"http://www.xiami.com"].location != NSNotFound || [longUrl rangeOfString:@"songtaste.com"].location != NSNotFound) {
                                 isTrack = NO;
+                                b = NO;
                                 [self loadRepostMusicVideo:longUrl];
-                            }
+                            } 
+                            //                            else {
+                            //                                self.tweetImageView.hidden = NO;
+                            //                                [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+                            //                                    self.tweetImageView.alpha = 1.0;
+                            //                                    self.imageCoverImageView.alpha = 1.0;
+                            //                                } completion:^(BOOL fin) {
+                            //                                }];
+                            //                            }
                         }
                     }
                 }];
                 
-                if (shortUrl)
+                if (shortUrl) {
                     [client getShortUrlExpand:shortUrl];
+                }
             }
         }
     }
+    
+    //    if (b) {
+    //        self.tweetImageView.hidden = NO;
+    //        [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+    //            self.tweetImageView.alpha = 1.0;
+    //            self.imageCoverImageView.alpha = 1.0;
+    //        } completion:^(BOOL fin) {
+    //        }];
+    //    } 
 }
 
 - (void)update
@@ -799,7 +832,7 @@
     
     if (self.status.repostStatus) {
         Status *repostStatus = self.status.repostStatus;
-        //        self.imageCoverImageView.hidden = NO;
+        // self.imageCoverImageView.hidden = NO;
         isTrack = NO;
         // repost text
         [self loadRepostWebView];
@@ -830,6 +863,7 @@
             self.trackLabel.alpha = 1.0;
             self.trackView.alpha = 1.0;
         } completion:^(BOOL fin) {
+            
         }];
     }
     
@@ -976,6 +1010,14 @@
     [alertView release];
 }
 
+
+- (void)deleteCardFromCoreData
+{
+	NSManagedObjectContext *managedContext = [self.status managedObjectContext];
+	[managedContext deleteObject:self.status];
+	[managedContext processPendingChanges];
+}
+
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex != alertView.cancelButtonIndex) {
@@ -984,12 +1026,14 @@
             if (!client.hasError) {
                 
                 //remain to be solved;
-                
-                NSManagedObjectContext *managedContext = [self.status managedObjectContext];
-                [managedContext deleteObject:self.status];
-                [managedContext processPendingChanges];
-                //                [self.managedObjectContext deleteObject:self.status];
-                //				[self.managedObjectContext processPendingChanges];
+               	NSManagedObjectContext *managedContext = [self.status managedObjectContext];
+				[managedContext deleteObject:self.status];
+				[managedContext processPendingChanges];
+				
+//				 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameCardShouldDeleteCard object:self];
+//				
+//				[self performSelector:@selector(deleteCardFromCoreData) withObject:nil afterDelay:5.0];
+				
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameCardDeleted object:self];
             } else {
                 [ErrorNotification showOperationError];
@@ -998,6 +1042,7 @@
         [client destroyStatus:self.status.statusID];
     }
 }
+
 
 - (IBAction)profileImageButtonClicked:(id)sender {
     UserCardViewController *vc = [[UserCardViewController alloc] initWithUsr:self.status.author];

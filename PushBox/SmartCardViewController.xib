@@ -84,7 +84,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">3</string>
+						<string key="IBUIText"/>
 						<object class="NSColor" key="IBUITextColor" id="351241743">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC42MTk2MDc4NDMxIDAuNjE5NjA3ODQzMSAwLjYxOTYwNzg0MzEAA</bytes>
@@ -121,7 +121,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">21</string>
+						<string key="IBUIText"/>
 						<reference key="IBUITextColor" ref="351241743"/>
 						<reference key="IBUIHighlightedColor" ref="371620557"/>
 						<reference key="IBUIShadowColor" ref="371620557"/>
@@ -143,7 +143,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">Mondev 关于此微博的最新进展</string>
+						<string key="IBUIText"/>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC42MTk2MDc4NDMxIDAuNjE5NjA3ODQzMSAwLjYxOTYwNzg0MzEAA</bytes>
@@ -227,7 +227,7 @@
 						<bool key="IBUIScrollEnabled">NO</bool>
 						<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
 						<bool key="IBUIEditable">NO</bool>
-						<string key="IBUIText">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+						<string key="IBUIText"/>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIAutocapitalizationType">2</int>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -255,7 +255,7 @@
 						<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
 						<bool key="IBUIShowsVerticalScrollIndicator">NO</bool>
 						<bool key="IBUIEditable">NO</bool>
-						<string key="IBUIText">repost text</string>
+						<string key="IBUIText"/>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4yMDAwMDAwMDMgMC4yMDAwMDAwMDMgMC4yMDAwMDAwMDMAA</bytes>
@@ -304,7 +304,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">Name</string>
+						<string key="IBUIText"/>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC45MDE5NjA3OTAyIDAuOTAxOTYwNzkwMiAwLjkwMTk2MDc5MDIAA</bytes>
@@ -340,7 +340,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">Time</string>
+						<string key="IBUIText"/>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC41OTc4MjYwODcgMC41OTc4MjYwODcgMC41OTc4MjYwODcAA</bytes>
@@ -399,11 +399,6 @@
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">2</int>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<object class="NSCustomResource" key="IBUIImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">sc_image_default 2.png</string>
-								</object>
-								<bool key="IBUIHighlighted">YES</bool>
 							</object>
 							<object class="IBUIImageView" id="470756897">
 								<reference key="NSNextResponder" ref="978562341"/>
@@ -423,7 +418,7 @@
 							</object>
 							<object class="IBUIImageView" id="944684392">
 								<reference key="NSNextResponder" ref="978562341"/>
-								<int key="NSvFlags">292</int>
+								<int key="NSvFlags">-2147483356</int>
 								<string key="NSFrame">{{425, 292}, {33, 19}}</string>
 								<reference key="NSSuperview" ref="978562341"/>
 								<reference key="NSNextKeyView" ref="738363382"/>
@@ -446,7 +441,7 @@
 					</object>
 					<object class="IBUIView" id="60335549">
 						<reference key="NSNextResponder" ref="931374233"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">-2147483356</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUIButton" id="620434925">
@@ -538,7 +533,7 @@
 					</object>
 					<object class="IBUIImageView" id="70486562">
 						<reference key="NSNextResponder" ref="931374233"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{61, 278}, {443, 139}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
 						<reference key="NSNextKeyView" ref="308029235"/>
@@ -573,7 +568,7 @@
 					</object>
 					<object class="IBUIButton" id="259776592">
 						<reference key="NSNextResponder" ref="931374233"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{251, 373}, {68, 68}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
 						<reference key="NSNextKeyView"/>
@@ -601,14 +596,13 @@
 					</object>
 					<object class="IBUIImageView" id="620621228">
 						<reference key="NSNextResponder" ref="931374233"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{69, 286}, {106, 106}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
 						<reference key="NSNextKeyView" ref="259776592"/>
 						<string key="NSReuseIdentifierKey">_NS:569</string>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">2</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
 				</object>
@@ -1170,7 +1164,6 @@
 				<string>sc_button_play_highlight.png</string>
 				<string>sc_button_repost.png</string>
 				<string>sc_image_cover.png</string>
-				<string>sc_image_default 2.png</string>
 				<string>sc_music_bg.png</string>
 				<string>sc_track_button_default.png</string>
 			</object>
@@ -1185,7 +1178,6 @@
 				<string>{68, 68}</string>
 				<string>{18, 13}</string>
 				<string>{467, 321}</string>
-				<string>{467, 349}</string>
 				<string>{443, 139}</string>
 				<string>{431, 42}</string>
 			</object>

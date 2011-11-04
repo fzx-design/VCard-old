@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ErrorNotification.h"
+#import "RCSwitchClone.h"
 
 @class Status;
 @class Comment;
@@ -16,7 +17,7 @@
 - (void)commentFinished;
 @end
 
-@interface CommentViewController : UIViewController<UITextViewDelegate,UIActionSheetDelegate, UIAlertViewDelegate> {
+@interface CommentViewController : UIViewController<UITextViewDelegate,UIActionSheetDelegate, UIAlertViewDelegate, SwitchValueChanged> {
     UITextView *_textView;
     UILabel *_titleLabel;
 	UILabel *_wordsCountLabel;
@@ -24,6 +25,8 @@
 	UIImageView *_postingRoundImageView;
 	UIButton *_repostButton;
 	UIButton *_doneButton;
+	
+	RCSwitchClone *_repostSwitchView;
 	
     UIView *_atView;
     UITableView *_atTableView;
@@ -57,6 +60,8 @@
 @property(nonatomic, retain) IBOutlet UITextField* atTextField;
 @property(nonatomic, retain) NSMutableArray *atScreenNames;
 
+@property(nonatomic, retain) IBOutlet RCSwitchClone* repostSwitchView;
+
 
 @property(nonatomic, retain) Status* targetStatus;
 @property(nonatomic, retain) Comment* targetComment;
@@ -66,5 +71,4 @@
 - (IBAction)doneButtonClicked:(UIButton *)sender;
 - (IBAction)backButtonClicked:(UIButton *)sender;
 - (IBAction)atButtonClicked:(id)sender;
-
 @end

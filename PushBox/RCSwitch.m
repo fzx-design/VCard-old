@@ -44,8 +44,6 @@
 	self.contentMode = UIViewContentModeRedraw;
 	[self setKnobWidth:44];
 	[self regenerateImages];
-//	UIEdgeInsets inset = UIEdgeInsetsMake(0.0, 22, 0, 22);
-//	sliderOff = [[UIImage imageNamed:@"switch_bg.png"] resizableImageWithCapInsets:inset];
 	sliderOff = [[[UIImage imageNamed:@"switch_bg.png"] stretchableImageWithLeftCapWidth:22.0
 																				 topCapHeight:0.0] retain];
 	if([[UIScreen mainScreen] respondsToSelector:@selector(scale)])
@@ -92,8 +90,6 @@
 	
 	{
 		UIImage *knobTmpImage = [[[UIImage imageNamed:@"switch_follow_thumb.png"] retain] autorelease];
-//		UIEdgeInsets inset = UIEdgeInsetsMake(0.0, 22, 0, 22);
-//		UIImage *knobImageStretch = [knobTmpImage resizableImageWithCapInsets:inset];
 		UIImage *knobImageStretch = [knobTmpImage stretchableImageWithLeftCapWidth:22.0
 																	  topCapHeight:0.0];
 		CGRect knobRect = CGRectMake(0, 0, knobWidth, [knobImageStretch size].height);
@@ -127,6 +123,49 @@
 	}
 }
 
+- (void)setType:(SwitchType) type
+{
+	_type = type;
+	NSString *imageName;
+	if (type == SwitchTypeFollow) {
+		imageName = [NSString stringWithString:@"switch_follow_thumb.png"];
+	} else {
+		imageName = [NSString stringWithString:@"switch_thumb.png"];
+	}
+	
+	{
+		UIImage *knobTmpImage = [[[UIImage imageNamed:imageName] retain] autorelease];
+		UIImage *knobImageStretch = [knobTmpImage stretchableImageWithLeftCapWidth:22.0
+																	  topCapHeight:0.0];
+		CGRect knobRect = CGRectMake(0, 0, knobWidth, [knobImageStretch size].height);
+		
+		if(UIGraphicsBeginImageContextWithOptions != NULL)
+			UIGraphicsBeginImageContextWithOptions(knobRect.size, NO, scale);
+		else
+			UIGraphicsBeginImageContext(knobRect.size);
+		
+		[knobImageStretch drawInRect:knobRect];
+		[knobImage release];
+		knobImage = [UIGraphicsGetImageFromCurrentImageContext() retain];
+	}
+	
+	{
+		UIImage *knobTmpImage = [[[UIImage imageNamed:imageName] retain] autorelease];
+		UIImage *knobImageStretch = [knobTmpImage stretchableImageWithLeftCapWidth:22.0
+																	  topCapHeight:0.0];
+		CGRect knobRect = CGRectMake(0, 0, knobWidth, [knobImageStretch size].height);
+		if(UIGraphicsBeginImageContextWithOptions != NULL)
+			UIGraphicsBeginImageContextWithOptions(knobRect.size, NO, scale);
+		else
+			UIGraphicsBeginImageContext(knobRect.size);
+		[knobImageStretch drawInRect:knobRect];
+		[knobImagePressed release];
+		knobImagePressed = [UIGraphicsGetImageFromCurrentImageContext() retain];
+		UIGraphicsEndImageContext();	
+	}
+}
+
+
 - (float)knobWidth
 {
 	return knobWidth;
@@ -135,10 +174,15 @@
 - (void)regenerateImages
 {
 	CGRect boundsRect = self.bounds;
-//	UIEdgeInsets inset = UIEdgeInsetsMake(0.0, 22, 0, 22);
-//	UIImage *sliderOnBase = [[UIImage imageNamed:@"switch_hl_bg.png"] resizableImageWithCapInsets:inset];
-	UIImage *sliderOnBase = [[UIImage imageNamed:@"switch_hl_bg.png"] stretchableImageWithLeftCapWidth:22.0
-																						   topCapHeight:0.0];
+	
+	UIImage *sliderOnBase;
+	if (_type == SwitchTypeComment) {
+		sliderOnBase = [[UIImage imageNamed:@"switch_bg.png"] stretchableImageWithLeftCapWidth:22.0
+																					 topCapHeight:0.0];
+	} else {
+		sliderOnBase = [[UIImage imageNamed:@"switch_hl_bg.png"] stretchableImageWithLeftCapWidth:22.0
+																					 topCapHeight:0.0];
+	}
 	CGRect sliderOnRect = boundsRect;
 	sliderOnRect.size.height = [sliderOnBase size].height;
 	if(UIGraphicsBeginImageContextWithOptions != NULL)
@@ -166,10 +210,13 @@
 #endif
 	
 	{
-		UIImage *buttonTmpImage = [UIImage imageNamed:@"switch_follow_thumb.png"];
+		UIImage *buttonTmpImage;
+		if (_type == SwitchTypeFollow) {
+			buttonTmpImage = [UIImage imageNamed:@"switch_follow_thumb.png"];
+		}  else {
+			buttonTmpImage = [UIImage imageNamed:@"switch_thumb.png"];
+		}
 		
-//		UIEdgeInsets inset = UIEdgeInsetsMake(0.0, 22, 0, 22);
-//		UIImage *buttonEndTrackBase = [buttonTmpImage resizableImageWithCapInsets:inset];
 		UIImage *buttonEndTrackBase = [buttonTmpImage stretchableImageWithLeftCapWidth:22.0
 																		  topCapHeight:0.0];
 		CGRect sliderOnRect = boundsRect;
@@ -186,9 +233,12 @@
 	}
 	
 	{
-		UIImage *buttonTmpImage = [UIImage imageNamed:@"switch_follow_thumb.png"];
-//		UIEdgeInsets inset = UIEdgeInsetsMake(0.0, 22, 0, 22);
-//		UIImage *buttonEndTrackBase = [buttonTmpImage resizableImageWithCapInsets:inset];
+		UIImage *buttonTmpImage;
+		if (_type == SwitchTypeFollow) {
+			buttonTmpImage = [UIImage imageNamed:@"switch_follow_thumb.png"];
+		}  else {
+			buttonTmpImage = [UIImage imageNamed:@"switch_thumb.png"];
+		}
 		UIImage *buttonEndTrackBase = [buttonTmpImage stretchableImageWithLeftCapWidth:22.0
 																		  topCapHeight:0.0];
 		CGRect sliderOnRect = boundsRect;
@@ -416,6 +466,7 @@
 			[self performSwitchToPercent:toPercent];
 	} else {
 		percent = aBool ? 1.0 : 0.0;
+		preOnflag = aBool;
 		[self setNeedsDisplay];
 		[self sendActionsForControlEvents:UIControlEventValueChanged];
 	}
@@ -429,6 +480,11 @@
 	[self setNeedsDisplay];
 	[self sendActionsForControlEvents:UIControlEventValueChanged];
 	[self sendActionsForControlEvents:UIControlEventTouchUpInside];
+	if (preOnflag == [self isOn]) {
+		return;
+	}
+	preOnflag = [self isOn];
+	
 	if ([self isOn]) {
 		if ([self.delegate respondsToSelector:@selector(switchedOn)]) {
 			[delegate switchedOn];
