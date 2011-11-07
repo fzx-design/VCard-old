@@ -62,7 +62,7 @@ static UserCardNaviViewController *sharedUserCardNaviViewController = nil;
 {
 	if (!contentViewController) {
 		self.contentViewController = [[[UserCardContentViewController alloc] init] autorelease];
-		CGRect frame = CGRectMake(self.view.frame.origin.x	+ 49, self.view.frame.origin.y, contentViewController.view.frame.size.width, contentViewController.view.frame.size.height);
+		CGRect frame = CGRectMake(self.view.frame.origin.x	+ 49, self.view.frame.origin.y + 5, contentViewController.view.frame.size.width, contentViewController.view.frame.size.height);
 		self.contentViewController.view.frame = frame;
 		[self.view addSubview:self.contentViewController.view];
 	}

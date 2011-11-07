@@ -56,7 +56,7 @@
 						</object>
 					</object>
 				</array>
-				<string key="NSFrameSize">{570, 640}</string>
+				<string key="NSFrameSize">{570, 645}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="IBUIBackgroundColor" ref="591968906"/>
