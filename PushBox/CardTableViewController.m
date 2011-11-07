@@ -424,14 +424,16 @@
 	}];
 }
 
-- (void)adjustCardViewPosition
+- (void)processData
 {
-	[self.managedObjectContext processPendingChanges];
 	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
 	[self scrollToRowAtIndexPath:indexPath];
-	
+}
+
+- (void)adjustCardViewPosition
+{
+    [self performSelector:@selector(processData) withObject:nil afterDelay:1.0];
 	[self performSelector:@selector(moveCardsIn) withObject:nil afterDelay:0.5];
-	
 }
 
 - (void)adjustCardViewAfterLoadingWithCompletion:(void (^)())completion
