@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		206902DA144AD44D00BA9EC3 /* head_cover_card_light.png in Resources */ = {isa = PBXBuildFile; fileRef = 206902D9144AD44D00BA9EC3 /* head_cover_card_light.png */; };
+		20C831051468FDA800C1886B /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20C831021468FDA800C1886B /* MainWindow.xib */; };
+		20C831081468FDEB00C1886B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 20C831061468FDEB00C1886B /* InfoPlist.strings */; };
 		20D54764142ADC35006A79A1 /* autologin_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D54762142ADC35006A79A1 /* autologin_on.png */; };
 		20D54765142ADC35006A79A1 /* autologin_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D54763142ADC35006A79A1 /* autologin_off.png */; };
 		20D54768142ADDA6006A79A1 /* login_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D54767142ADDA6006A79A1 /* login_shadow.png */; };
@@ -241,7 +243,6 @@
 		CBDA5B7613DC25FA00FAE221 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B7513DC25FA00FAE221 /* CoreDataTableViewController.m */; };
 		FE1E629914441E2600A48CF9 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1E629814441E2600A48CF9 /* Message.m */; };
 		FE1E629C14441E3F00A48CF9 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1E629B14441E3F00A48CF9 /* User.m */; };
-		FE3EE0EF14618CA800F92F17 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FE3EE0ED14618CA800F92F17 /* InfoPlist.strings */; };
 		FE72B4CB144FFD3000C3EE5B /* repost_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4C7144FFD3000C3EE5B /* repost_bg.jpg */; };
 		FE72B4CC144FFD3000C3EE5B /* smartcard.css in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4C8144FFD3000C3EE5B /* smartcard.css */; };
 		FE72B4CD144FFD3000C3EE5B /* smartcard.html in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4C9144FFD3000C3EE5B /* smartcard.html */; };
@@ -268,7 +269,6 @@
 		FEC6D1DB14555F8B00576EF3 /* vc_noti_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEC6D1D914555F8B00576EF3 /* vc_noti_sound.wav */; };
 		FEC6D1DD14555F9800576EF3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEC6D1DC14555F9800576EF3 /* AudioToolbox.framework */; };
 		FEC6D1E314555FF900576EF3 /* UIAudioAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = FEC6D1E214555FF900576EF3 /* UIAudioAddition.m */; };
-		FEE7868F14618C4B00AC791B /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEE7868D14618C4B00AC791B /* MainWindow.xib */; };
 		FEFB3120144311D600440DD5 /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEFB311E144311D600440DD5 /* MessagesViewController.m */; };
 		FEFB3121144311D600440DD5 /* MessagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEFB311F144311D600440DD5 /* MessagesViewController.xib */; };
 		FEFB31251443130700440DD5 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEFB31231443130700440DD5 /* MessageViewController.m */; };
@@ -281,6 +281,8 @@
 
 /* Begin PBXFileReference section */
 		206902D9144AD44D00BA9EC3 /* head_cover_card_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = head_cover_card_light.png; sourceTree = "<group>"; };
+		20C831031468FDA800C1886B /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/MainWindow.xib"; sourceTree = "<group>"; };
+		20C831071468FDEB00C1886B /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		20C8D90F1429FE9C00C94B86 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		20D54762142ADC35006A79A1 /* autologin_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autologin_on.png; sourceTree = "<group>"; };
 		20D54763142ADC35006A79A1 /* autologin_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autologin_off.png; sourceTree = "<group>"; };
@@ -389,8 +391,6 @@
 		9B5F867C14541248004B01D6 /* CCCommentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCCommentsTableViewController.h; sourceTree = "<group>"; };
 		9B5F867D14541249004B01D6 /* CCCommentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCCommentsTableViewController.m; sourceTree = "<group>"; };
 		9B5F867E1454124A004B01D6 /* CCCommentsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCCommentsTableViewController.xib; sourceTree = "<group>"; };
-		9B9FBA9814683E7D0013D0C9 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "/Users/yegabriel/Documents/Projects/iOS_Projects/VCardDev/PushBox/zh-Hans-CN.lproj/InfoPlist.strings"; sourceTree = "<absolute>"; };
-		9B9FBA9914683E7D0013D0C9 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans-CN"; path = "/Users/yegabriel/Documents/Projects/iOS_Projects/VCardDev/PushBox/zh-Hans-CN.lproj/MainWindow.xib"; sourceTree = "<absolute>"; };
 		9BB5B8B31449A8B100352FF7 /* UserCardContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCardContentViewController.h; sourceTree = "<group>"; };
 		9BB5B8B41449A8B100352FF7 /* UserCardContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCardContentViewController.m; sourceTree = "<group>"; };
 		9BB5B8B51449A8B100352FF7 /* UserCardContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCardContentViewController.xib; sourceTree = "<group>"; };
@@ -1118,7 +1118,7 @@
 			children = (
 				CBDA5B0913DBEC1300FAE221 /* PushBox.xcdatamodeld */,
 				CBDA5AFC13DBEC1300FAE221 /* PushBox-Info.plist */,
-				FE3EE0ED14618CA800F92F17 /* InfoPlist.strings */,
+				20C831061468FDEB00C1886B /* InfoPlist.strings */,
 				CBDA5B0013DBEC1300FAE221 /* main.m */,
 				CBDA5B0213DBEC1300FAE221 /* PushBox-Prefix.pch */,
 			);
@@ -1198,12 +1198,12 @@
 				CB018E0F13DE00F0004217E0 /* CardTableViewController.xib */,
 				CB26225213DF07820062EDE7 /* CardTableViewCell.xib */,
 				CB4AAC9113DC7BE60053E3A6 /* LoginViewController.xib */,
-				FEE7868D14618C4B00AC791B /* MainWindow.xib */,
 				CBBA020413E52F8100641923 /* CommentsTableViewController.xib */,
 				CBBA021013E53F2900641923 /* CommentsTableViewCell.xib */,
 				9B11DC0514553AAC001F75EF /* CCCommentsTableViewCell.xib */,
 				9B5F867E1454124A004B01D6 /* CCCommentsTableViewController.xib */,
 				CBBA01F913E470F100641923 /* RelationshipTableViewCell.xib */,
+				20C831021468FDA800C1886B /* MainWindow.xib */,
 				CBBA01F413E454FC00641923 /* RelationshipTableViewController.xib */,
 				CB9DCACD13E1E54700DA3D3D /* DetailImageViewController.xib */,
 				CB26224F13DF06780062EDE7 /* StatusCardViewController.xib */,
@@ -1313,6 +1313,7 @@
 			knownRegions = (
 				en,
 				"zh-Hans",
+				"zh-Hans-CN",
 			);
 			mainGroup = CBDA5AE313DBEC1300FAE221;
 			productRefGroup = CBDA5AEF13DBEC1300FAE221 /* Products */;
@@ -1507,12 +1508,12 @@
 				FE7ADDC6145D554F00C403DF /* weibopop_repost_bg.png in Resources */,
 				FE831553145E803700909CF0 /* PostViewAtTableViewCell.xib in Resources */,
 				9BC26BB314604F4700724DAC /* cell_highlight.png in Resources */,
-				FEE7868F14618C4B00AC791B /* MainWindow.xib in Resources */,
-				FE3EE0EF14618CA800F92F17 /* InfoPlist.strings in Resources */,
 				9B2153A914626C1500942EBE /* switch_bg.png in Resources */,
 				9B2153AA14626C1500942EBE /* switch_follow_thumb.png in Resources */,
 				9B2153AB14626C1500942EBE /* switch_hl_bg.png in Resources */,
 				9B2153AC14626C1500942EBE /* switch_thumb.png in Resources */,
+				20C831051468FDA800C1886B /* MainWindow.xib in Resources */,
+				20C831081468FDEB00C1886B /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1603,20 +1604,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		FE3EE0ED14618CA800F92F17 /* InfoPlist.strings */ = {
+		20C831021468FDA800C1886B /* MainWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				9B9FBA9814683E7D0013D0C9 /* zh-Hans-CN */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		FEE7868D14618C4B00AC791B /* MainWindow.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9B9FBA9914683E7D0013D0C9 /* zh-Hans-CN */,
+				20C831031468FDA800C1886B /* zh-Hans-CN */,
 			);
 			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		20C831061468FDEB00C1886B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				20C831071468FDEB00C1886B /* zh-Hans-CN */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
