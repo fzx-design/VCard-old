@@ -199,6 +199,7 @@
 						<string key="NSFrame">{{26, 491}, {266, 21}}</string>
 						<reference key="NSSuperview" ref="353028653"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -236,13 +237,13 @@
 						<string key="NSFrame">{{26, 436}, {266, 21}}</string>
 						<reference key="NSSuperview" ref="353028653"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="146474111"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">3.0</string>
+						<string key="IBUIText">3.1</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4wMTU2OTA4NjUwNiAwLjM5Njk5MTIxNTMgMC41MzkzODEzNzc2AA</bytes>
@@ -489,7 +490,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">24</int>
+			<int key="maxID">26</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
