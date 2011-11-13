@@ -134,6 +134,7 @@
 						<string key="NSFrame">{{65, 100}, {440, 344}}</string>
 						<reference key="NSSuperview" ref="60294544"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<reference key="IBUIBackgroundColor" ref="626977176"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -196,7 +197,7 @@
 					<object class="IBUIImageView" id="671916552">
 						<reference key="NSNextResponder" ref="60294544"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{51, 46}, {468, 44}}</string>
+						<string key="NSFrame">{{50, 46}, {469, 44}}</string>
 						<reference key="NSSuperview" ref="60294544"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="9686542"/>
@@ -215,6 +216,7 @@
 						<string key="NSFrame">{{60, 52}, {37, 37}}</string>
 						<reference key="NSSuperview" ref="60294544"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="586774482"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -273,17 +275,17 @@
 					<object class="IBUILabel" id="723676581">
 						<reference key="NSNextResponder" ref="60294544"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{168, 59}, {107, 21}}</string>
+						<string key="NSFrame">{{210, 58}, {63, 21}}</string>
 						<reference key="NSSuperview" ref="60294544"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="1025381382"/>
+						<reference key="NSNextKeyView" ref="393950464"/>
 						<string key="NSReuseIdentifierKey">_NS:345</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">同时转发到我的微博</string>
+						<string key="IBUIText">同时转发</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4yOTgwMzkyMjc3IDAuMjk4MDM5MjI3NyAwLjI5ODAzOTIyNzcAA</bytes>
@@ -340,13 +342,37 @@
 					<object class="IBUIView" id="1025381382">
 						<reference key="NSNextResponder" ref="60294544"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{98, 54}, {65, 30}}</string>
+						<string key="NSFrame">{{140, 54}, {65, 30}}</string>
 						<reference key="NSSuperview" ref="60294544"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="393950464"/>
+						<reference key="NSNextKeyView" ref="723676581"/>
 						<string key="NSReuseIdentifierKey">_NS:212</string>
 						<reference key="IBUIBackgroundColor" ref="626977176"/>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					</object>
+					<object class="IBUIButton" id="586774482">
+						<reference key="NSNextResponder" ref="60294544"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{98, 52}, {37, 37}}</string>
+						<reference key="NSSuperview" ref="60294544"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="1025381382"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<reference key="IBUIHighlightedTitleColor" ref="514257325"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="664196743"/>
+						<object class="NSCustomResource" key="IBUINormalImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">post_button_emoticons.png</string>
+						</object>
+						<reference key="IBUIFontDescription" ref="228334818"/>
+						<reference key="IBUIFont" ref="879111980"/>
 					</object>
 				</object>
 				<string key="NSFrameSize">{574, 636}</string>
@@ -358,7 +384,7 @@
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
 			<object class="IBUIView" id="452387653">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -367,7 +393,6 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrameSize">{233, 238}</string>
 						<reference key="NSSuperview" ref="452387653"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="333029714"/>
 						<string key="NSReuseIdentifierKey">_NS:569</string>
 						<reference key="IBUIBackgroundColor" ref="626977176"/>
@@ -384,7 +409,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{43, 18}, {170, 31}}</string>
 						<reference key="NSSuperview" ref="452387653"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="967030952"/>
 						<string key="NSReuseIdentifierKey">_NS:320</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -423,7 +447,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{26, 23}, {15, 21}}</string>
 						<reference key="NSSuperview" ref="452387653"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="836283153"/>
 						<string key="NSReuseIdentifierKey">_NS:345</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -456,7 +479,6 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{17, 54}, {199, 159}}</string>
 						<reference key="NSSuperview" ref="452387653"/>
-						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:408</string>
 						<reference key="IBUIBackgroundColor" ref="626977176"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -471,8 +493,6 @@
 					</object>
 				</object>
 				<string key="NSFrameSize">{233, 238}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="241272556"/>
 				<string key="NSReuseIdentifierKey">_NS:212</string>
 				<reference key="IBUIBackgroundColor" ref="626977176"/>
@@ -670,6 +690,7 @@
 							<reference ref="923954036"/>
 							<reference ref="91539969"/>
 							<reference ref="1025381382"/>
+							<reference ref="586774482"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -768,6 +789,12 @@
 						<reference key="object" ref="1025381382"/>
 						<reference key="parent" ref="60294544"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">50</int>
+						<reference key="object" ref="586774482"/>
+						<reference key="parent" ref="60294544"/>
+						<string key="objectName">camara button</string>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -793,6 +820,7 @@
 					<string>48.CustomClassName</string>
 					<string>48.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
+					<string>50.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
 					<string>8.IBPluginDependency</string>
@@ -823,6 +851,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -837,7 +866,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">49</int>
+			<int key="maxID">50</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1019,6 +1048,7 @@
 				<string>button_cancel.png</string>
 				<string>grey_card_lines_bg.png</string>
 				<string>post_button_@.png</string>
+				<string>post_button_emoticons.png</string>
 				<string>post_tools_bg.png</string>
 				<string>posting_bg.png</string>
 				<string>posting_circle.png</string>
@@ -1030,6 +1060,7 @@
 				<string>{15, 19}</string>
 				<string>{596, 644}</string>
 				<string>{16, 18}</string>
+				<string>{13, 13}</string>
 				<string>{467, 36}</string>
 				<string>{30, 31}</string>
 				<string>{34, 34}</string>
