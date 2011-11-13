@@ -64,7 +64,7 @@
 						<string key="NSFrame">{{0, -12}, {1024, 640}}</string>
 						<reference key="NSSuperview" ref="544957833"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="229692080"/>
+						<reference key="NSNextKeyView" ref="288234077"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="837072327">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
@@ -78,6 +78,17 @@
 						<bool key="IBUIShowsVerticalScrollIndicator">NO</bool>
 						<int key="IBUISectionIndexMinimumDisplayRowCount">0</int>
 						<float key="IBUIRowHeight">560</float>
+					</object>
+					<object class="IBUIView" id="288234077">
+						<reference key="NSNextResponder" ref="544957833"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrameSize">{1024, 640}</string>
+						<reference key="NSSuperview" ref="544957833"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="229692080"/>
+						<string key="NSReuseIdentifierKey">_NS:212</string>
+						<reference key="IBUIBackgroundColor" ref="837072327"/>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
 					<object class="IBUIImageView" id="507698943">
 						<reference key="NSNextResponder" ref="544957833"/>
@@ -242,6 +253,14 @@
 					<int key="connectionID">28</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">castView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="288234077"/>
+					</object>
+					<int key="connectionID">36</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">dismissRegionTouched:</string>
 						<reference key="source" ref="148824391"/>
@@ -302,6 +321,7 @@
 							<reference ref="491138225"/>
 							<reference ref="148824391"/>
 							<reference ref="229692080"/>
+							<reference ref="288234077"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -340,6 +360,11 @@
 						<reference key="object" ref="229692080"/>
 						<reference key="parent" ref="544957833"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">35</int>
+						<reference key="object" ref="288234077"/>
+						<reference key="parent" ref="544957833"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -353,6 +378,8 @@
 					<string>11.IBPluginDependency</string>
 					<string>17.IBPluginDependency</string>
 					<string>23.IBPluginDependency</string>
+					<string>35.CustomClassName</string>
+					<string>35.IBPluginDependency</string>
 					<string>4.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
@@ -366,6 +393,8 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>GYCastView</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -385,7 +414,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">34</int>
+			<int key="maxID">36</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -409,6 +438,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>blurImageView</string>
+							<string>castView</string>
 							<string>regionLeftDetectButton</string>
 							<string>regionRightDetectButton</string>
 							<string>rootShadowLeft</string>
@@ -416,6 +446,7 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIImageView</string>
+							<string>GYCastView</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIImageView</string>
@@ -426,6 +457,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>blurImageView</string>
+							<string>castView</string>
 							<string>regionLeftDetectButton</string>
 							<string>regionRightDetectButton</string>
 							<string>rootShadowLeft</string>
@@ -435,6 +467,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">blurImageView</string>
 								<string key="candidateClassName">UIImageView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">castView</string>
+								<string key="candidateClassName">GYCastView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">regionLeftDetectButton</string>
@@ -480,6 +516,14 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/CoreDataViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">GYCastView</string>
+					<string key="superclassName">UIView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/GYCastView.h</string>
 					</object>
 				</object>
 			</object>

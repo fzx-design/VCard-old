@@ -29,6 +29,8 @@
 
 @implementation CardTableViewController
 
+@synthesize castView = _castView;
+
 @synthesize regionLeftDetectButton;
 @synthesize regionRightDetectButton;
 @synthesize rootShadowLeft = _rootShadowLeft;
@@ -51,6 +53,7 @@
     [_blurImageView release];
     [_user release];
     [_prevFetchedResultsController release];
+	[_castView release];
     [_timer invalidate];
     [super dealloc];
 }
@@ -67,6 +70,9 @@
     
     self.tableView.scrollEnabled = YES;
 	self.tableView.pagingEnabled = YES;
+	
+	//TODO
+	self.tableView.hidden = YES;
 	
 	CGRect oldFrame = self.tableView.frame;
 	
@@ -962,16 +968,12 @@
 
 -(void)enableDismissRegion
 {
-    //	self.regionLeftDetectButton.alpha = 1.0;
-    //	self.regionRightDetectButton.alpha = 1.0;
 	self.regionLeftDetectButton.enabled = YES;
 	self.regionRightDetectButton.enabled = YES;
 }
 
 -(void)disableDismissRegion
 {
-    //	self.regionLeftDetectButton.alpha = 0.0;
-    //	self.regionRightDetectButton.alpha = 0.0;
 	self.regionLeftDetectButton.enabled = NO;
 	self.regionRightDetectButton.enabled = NO;
 }
@@ -986,11 +988,31 @@
     //	} 
 }
 
-- (void)deleteCurrentCard
+#pragma mark -
+#pragma mark GYCastViewDelegate methods
+-(UIView*)viewForItemAtIndex:(GYCastView *)scrollView index:(int)index
 {
-	 NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.currentRowIndex inSection:0];
-	NSArray *array = [NSArray arrayWithObject:indexPath];
-	[self.tableView deleteRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationRight];
+	// Note that the images are actually smaller than the image view frame, each image
+	// is 210x280. Images are centered and because they are smaller than the actual 
+	// view it creates a padding between each image. 
+	CGRect viewFrame = CGRectMake(0.0f, 0.0f, 560, 645);
+	
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+	
+	SmartCardViewController *smartCardViewController = [[SmartCardViewController alloc] init];
+	
+	smartCardViewController.currentUser = self.currentUser;
+	smartCardViewController.status = [self.fetchedResultsController objectAtIndexPath:indexPath];
+	smartCardViewController.view.frame = viewFrame;
+	
+	return smartCardViewController.view;
 }
+
+-(int)itemCount:(GYCastView *)scrollView
+{
+	// Return the number of pages we intend to display
+	return 10;
+}
+
 
 @end

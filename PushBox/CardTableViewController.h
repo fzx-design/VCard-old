@@ -10,6 +10,7 @@
 #import "CardTableViewCell.h"
 #import "UserCardNaviViewController.h"
 #import "ErrorNotification.h"
+#import "GYCastView.h"
 
 #define kNotificationNameNewCommentsToMe @"kNotificationNameNewCommentsToMe"
 #define kNotificationNameNewStatuses @"kNotificationNameNewStatuses"
@@ -33,9 +34,11 @@ typedef enum {
 
 @class User;
 
-@interface CardTableViewController : CoreDataTableViewController {
+@interface CardTableViewController : CoreDataTableViewController <GYCastViewDelegate> {
     UIImageView *_blurImageView;
 	UIImageView *_rootShadowLeft;
+	
+	GYCastView *_castView;
     
     CardTableViewDataSource _dataSource;
     User *_user;
@@ -64,6 +67,8 @@ typedef enum {
 	CGFloat dragStartOffset;
 	CGFloat preDiff;
 }
+
+@property(nonatomic, retain) IBOutlet GYCastView *castView; 
 
 @property(nonatomic, retain) IBOutlet UIButton *regionLeftDetectButton;
 @property(nonatomic, retain) IBOutlet UIButton *regionRightDetectButton;
