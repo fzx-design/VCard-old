@@ -73,6 +73,10 @@
 	
 	//TODO
 	self.tableView.hidden = YES;
+	self.castView.pageSize = CGSizeMake(560, 640);
+	self.castView.delegate = self;
+	self.fetchedResultsController.delegate = nil;
+//	self.castView.hidden = YES;
 	
 	CGRect oldFrame = self.tableView.frame;
 	

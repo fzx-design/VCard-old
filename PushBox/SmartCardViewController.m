@@ -879,8 +879,9 @@
     _status = [status retain];
     //    _status = status;
     
-    [self prepare];
-    [self performSelector:@selector(update) withObject:nil afterDelay:0.3];
+//    [self prepare];
+	[self performSelector:@selector(prepare) withObject:nil afterDelay:0.3];
+    [self performSelector:@selector(update) withObject:nil afterDelay:0.6];
 }
 
 - (IBAction)actionsButtonClicked:(UIButton *)sender {

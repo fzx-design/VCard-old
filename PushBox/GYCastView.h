@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
-
 @class GYCastView;
 
 @protocol GYCastViewDelegate

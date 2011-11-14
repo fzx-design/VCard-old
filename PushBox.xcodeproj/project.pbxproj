@@ -123,6 +123,9 @@
 		9B2153AC14626C1500942EBE /* switch_thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B2153A814626C1500942EBE /* switch_thumb.png */; };
 		9B2153B214626CB200942EBE /* RCSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2153AF14626CB200942EBE /* RCSwitch.m */; };
 		9B2153B314626CB200942EBE /* RCSwitchClone.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2153B114626CB200942EBE /* RCSwitchClone.m */; };
+		9B250BFE146FFE60002F7E09 /* GYCastView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B250BFD146FFE60002F7E09 /* GYCastView.m */; };
+		9B2D8D691470BABD005B2D8E /* CastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2D8D671470BABD005B2D8E /* CastViewController.m */; };
+		9B2D8D6A1470BABD005B2D8E /* CastViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B2D8D681470BABD005B2D8E /* CastViewController.xib */; };
 		9B4B49F814582FCF00C9B542 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4B49F714582FCF00C9B542 /* Status.m */; };
 		9B4B49FB14586C1000C9B542 /* RefreshingIntervalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4B49FA14586C1000C9B542 /* RefreshingIntervalViewController.m */; };
 		9B5F2E2014497374008AC0B8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F2E1F14497373008AC0B8 /* Default-Landscape~ipad.png */; };
@@ -416,6 +419,11 @@
 		9B2153AF14626CB200942EBE /* RCSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCSwitch.m; sourceTree = "<group>"; };
 		9B2153B014626CB200942EBE /* RCSwitchClone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCSwitchClone.h; sourceTree = "<group>"; };
 		9B2153B114626CB200942EBE /* RCSwitchClone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCSwitchClone.m; sourceTree = "<group>"; };
+		9B250BFC146FFE60002F7E09 /* GYCastView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYCastView.h; sourceTree = "<group>"; };
+		9B250BFD146FFE60002F7E09 /* GYCastView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYCastView.m; sourceTree = "<group>"; };
+		9B2D8D661470BABD005B2D8E /* CastViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CastViewController.h; sourceTree = "<group>"; };
+		9B2D8D671470BABD005B2D8E /* CastViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CastViewController.m; sourceTree = "<group>"; };
+		9B2D8D681470BABD005B2D8E /* CastViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CastViewController.xib; sourceTree = "<group>"; };
 		9B39EAA2144DCDB900F234D6 /* ErrorNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorNotification.h; sourceTree = "<group>"; };
 		9B39EAA3144DCDB900F234D6 /* ErrorNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorNotification.m; sourceTree = "<group>"; };
 		9B4B49F614582FCF00C9B542 /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
@@ -754,6 +762,17 @@
 				9B39EAA3144DCDB900F234D6 /* ErrorNotification.m */,
 			);
 			name = Tools;
+			sourceTree = "<group>";
+		};
+		9B250BFA146FFDE5002F7E09 /* Cast View */ = {
+			isa = PBXGroup;
+			children = (
+				9B250BFC146FFE60002F7E09 /* GYCastView.h */,
+				9B250BFD146FFE60002F7E09 /* GYCastView.m */,
+				9B2D8D661470BABD005B2D8E /* CastViewController.h */,
+				9B2D8D671470BABD005B2D8E /* CastViewController.m */,
+			);
+			name = "Cast View";
 			sourceTree = "<group>";
 		};
 		9BE01AFD145098CB00450EE2 /* loading */ = {
@@ -1145,6 +1164,7 @@
 				CB1164DE13F1340500884118 /* Card controllers */,
 				CB018DDF13DDD015004217E0 /* Options view controllers */,
 				9B2153AD14626C3800942EBE /* Tools */,
+				9B250BFA146FFDE5002F7E09 /* Cast View */,
 				CB4AAC3D13DC671F0053E3A6 /* RootViewController.h */,
 				CB4AAC3E13DC671F0053E3A6 /* RootViewController.m */,
 				CBBA01E213E4187800641923 /* EGORefreshTableHeaderView.h */,
@@ -1256,6 +1276,7 @@
 				CB018DD513DD3CC8004217E0 /* DockViewController.xib */,
 				9B1129EE14514374001CE64E /* RootViewController.xib */,
 				CB018E0F13DE00F0004217E0 /* CardTableViewController.xib */,
+				9B2D8D681470BABD005B2D8E /* CastViewController.xib */,
 				CB26225213DF07820062EDE7 /* CardTableViewCell.xib */,
 				CB4AAC9113DC7BE60053E3A6 /* LoginViewController.xib */,
 				CBBA020413E52F8100641923 /* CommentsTableViewController.xib */,
@@ -1594,6 +1615,7 @@
 				203DBF04146FECC900F43D5A /* post_button_emoticons.png in Resources */,
 				203DBF07146FECCF00F43D5A /* post_button_locate.png in Resources */,
 				203DBF08146FECCF00F43D5A /* post_button_located.png in Resources */,
+				9B2D8D6A1470BABD005B2D8E /* CastViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1678,6 +1700,8 @@
 				9BFD85EA14618A8E00E16A79 /* CommentReviewPopoverController.m in Sources */,
 				9B2153B214626CB200942EBE /* RCSwitch.m in Sources */,
 				9B2153B314626CB200942EBE /* RCSwitchClone.m in Sources */,
+				9B250BFE146FFE60002F7E09 /* GYCastView.m in Sources */,
+				9B2D8D691470BABD005B2D8E /* CastViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1708,8 +1732,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Apple Club Tongji (752DRL3CLE)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Apple Club Tongji (752DRL3CLE)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Haishan Ye (5X6WEQSLFQ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Haishan Ye (5X6WEQSLFQ)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1724,8 +1748,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PROVISIONING_PROFILE = "A960AFF4-1258-4A5A-B63C-CAB41A5AD4D2";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A960AFF4-1258-4A5A-B63C-CAB41A5AD4D2";
+				PROVISIONING_PROFILE = "D00D38A6-D20C-472F-B8F3-7ED62AFA2660";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D00D38A6-D20C-472F-B8F3-7ED62AFA2660";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = NO;

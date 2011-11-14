@@ -47,23 +47,23 @@
 {
 	// Sanity checks
     if (page < 0) return;
-    if (page >= [scrollViewPages count]) {
-		pageNum += 3;
+    if (page >= pageNum) {
+		pageNum += 10;
 		self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
-		//		return;
+		return;
 	}
 	
 	//	UIView *view;
 	
 	// Check if the page is already loaded
-	UIView *view = [scrollViewPages objectAtIndex:page % 3];
+	UIView *view = [scrollViewPages objectAtIndex:page];
 	
 	// if the view is null we request the view from our delegate
-	//	if ((NSNull *)view == [NSNull null]) 
-	//	{
-	view = [delegate viewForItemAtIndex:self index:page];
-	[scrollViewPages replaceObjectAtIndex:page % 3 withObject:view];
-	//	}
+	if ((NSNull *)view == [NSNull null]) 
+	{
+		view = [delegate viewForItemAtIndex:self index:page];
+		[scrollViewPages replaceObjectAtIndex:page withObject:view];
+	}
 	
 	// add the controller's view to the scroll view	if it's not already added
 	if (view.superview == nil) 
