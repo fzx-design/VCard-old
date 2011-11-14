@@ -156,10 +156,16 @@
 		prePage = page;
 		
 		// Load the visible and neighbouring pages 
-		[self loadPage:page-1];
+		[self loadPage:page - 1];
 		[self loadPage:page];
-		[self loadPage:page+1];
+		[self loadPage:page + 1];
+		[self loadPage:page + 2];
 	}
+}
+
+- (void)setScrollsToTop:(BOOL)scrollsToTop
+{
+	[self.scrollView setScrollsToTop:scrollsToTop];
 }
 
 #pragma mark -

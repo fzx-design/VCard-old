@@ -12,8 +12,9 @@
 #import "CardTableViewController.h"
 #import "PostViewController.h"
 #import "MessagesViewController.h"
+#import "CastViewController.h"
 
-@interface RootViewController : CoreDataViewController<LoginViewControllerDelegate, CardTableViewControllerDelegate, UIAlertViewDelegate> {
+@interface RootViewController : CoreDataViewController<LoginViewControllerDelegate, CardTableViewControllerDelegate, CastViewControllerDelegate, UIAlertViewDelegate> {
     UIImageView *_backgroundImageView;
     UIImageView *_pushBoxHDImageView;
     
@@ -40,7 +41,9 @@
     LoginViewController *_loginViewController;
     DockViewController *_dockViewController;
     MessagesViewController *_messagesViewController;
-    CardTableViewController *_cardTableViewController;
+//    CardTableViewController *_cardTableViewController;
+	
+	CastViewController *_castViewController;
     
     NSTimer *_playTimer;
 	
@@ -75,7 +78,9 @@
 @property(nonatomic, retain) LoginViewController* loginViewController;
 @property(nonatomic, retain) DockViewController *dockViewController;
 @property(nonatomic, retain) MessagesViewController *messagesViewController;
-@property(nonatomic, retain) CardTableViewController* cardTableViewController;
+//@property(nonatomic, retain) CardTableViewController* cardTableViewController;
+
+@property(nonatomic, retain) CastViewController* castViewController;
 
 - (IBAction)showFriendsTimeline:(id)sender;
 - (IBAction)refreshAndShowCommentCenter:(id)sender;

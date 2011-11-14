@@ -10,6 +10,7 @@
 #import "UserCardNaviViewController.h"
 #import "ErrorNotification.h"
 #import "GYCastView.h"
+#import "Status.h"
 
 #define kNotificationNameNewCommentsToMe @"kNotificationNameNewCommentsToMe"
 #define kNotificationNameNewStatuses @"kNotificationNameNewStatuses"
@@ -52,9 +53,14 @@ typedef enum {
 	NSMutableArray *_nextPageStack;
 	NSMutableArray *_rowIndexStack;
 	
+	int _nextPage;
+	
 	NSFetchedResultsController *_prevFetchedResultsController;
 	
+	Status *_lastStatus;
 	BOOL _loading;
+	BOOL _refreshFlag;
+	
 }
 
 @property(nonatomic, retain) IBOutlet UIButton *regionLeftDetectButton;
@@ -70,5 +76,26 @@ typedef enum {
 @property(nonatomic, assign) int currentIndex;
 
 @property(nonatomic, retain) NSFetchedResultsController* prevFetchedResultsController;
+
+
+- (void)pushCardWithCompletion:(void (^)())completion;
+- (void)popCardWithCompletion:(void (^)())completion;
+
+- (int)numberOfRows;
+
+- (void)getUnread;
+
+- (void)loadAllFavoritesWithCompletion:(void (^)())completion;
+- (void)loadMoreDataCompletion:(void (^)())completion;
+- (void)clearData;
+- (void)refresh;
+- (void)firstLoad:(void (^)())completion;
+
+- (void)showNextCard;
+- (void)scrollToRow:(int)row;
+- (void)configureUsability;
+- (IBAction)dismissRegionTouched:(id)sender;
+- (void)enableDismissRegion;
+- (void)disableDismissRegion;
 
 @end

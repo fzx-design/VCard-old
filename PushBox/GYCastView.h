@@ -34,5 +34,6 @@
 
 - (void)didReceiveMemoryWarning;
 - (id)initWithFrameAndPageSize:(CGRect)frame pageSize:(CGSize)size;
+- (void)setScrollsToTop:(BOOL)scrollsToTop;
 
 @end

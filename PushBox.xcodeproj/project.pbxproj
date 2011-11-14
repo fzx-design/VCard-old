@@ -126,6 +126,8 @@
 		9B250BFE146FFE60002F7E09 /* GYCastView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B250BFD146FFE60002F7E09 /* GYCastView.m */; };
 		9B2D8D691470BABD005B2D8E /* CastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2D8D671470BABD005B2D8E /* CastViewController.m */; };
 		9B2D8D6A1470BABD005B2D8E /* CastViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B2D8D681470BABD005B2D8E /* CastViewController.xib */; };
+		9B2D8D731470E672005B2D8E /* CardFrameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2D8D711470E672005B2D8E /* CardFrameViewController.m */; };
+		9B2D8D741470E672005B2D8E /* CardFrameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B2D8D721470E672005B2D8E /* CardFrameViewController.xib */; };
 		9B4B49F814582FCF00C9B542 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4B49F714582FCF00C9B542 /* Status.m */; };
 		9B4B49FB14586C1000C9B542 /* RefreshingIntervalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4B49FA14586C1000C9B542 /* RefreshingIntervalViewController.m */; };
 		9B5F2E2014497374008AC0B8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F2E1F14497373008AC0B8 /* Default-Landscape~ipad.png */; };
@@ -424,6 +426,9 @@
 		9B2D8D661470BABD005B2D8E /* CastViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CastViewController.h; sourceTree = "<group>"; };
 		9B2D8D671470BABD005B2D8E /* CastViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CastViewController.m; sourceTree = "<group>"; };
 		9B2D8D681470BABD005B2D8E /* CastViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CastViewController.xib; sourceTree = "<group>"; };
+		9B2D8D701470E672005B2D8E /* CardFrameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardFrameViewController.h; sourceTree = "<group>"; };
+		9B2D8D711470E672005B2D8E /* CardFrameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardFrameViewController.m; sourceTree = "<group>"; };
+		9B2D8D721470E672005B2D8E /* CardFrameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardFrameViewController.xib; sourceTree = "<group>"; };
 		9B39EAA2144DCDB900F234D6 /* ErrorNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorNotification.h; sourceTree = "<group>"; };
 		9B39EAA3144DCDB900F234D6 /* ErrorNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorNotification.m; sourceTree = "<group>"; };
 		9B4B49F614582FCF00C9B542 /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
@@ -771,6 +776,8 @@
 				9B250BFD146FFE60002F7E09 /* GYCastView.m */,
 				9B2D8D661470BABD005B2D8E /* CastViewController.h */,
 				9B2D8D671470BABD005B2D8E /* CastViewController.m */,
+				9B2D8D701470E672005B2D8E /* CardFrameViewController.h */,
+				9B2D8D711470E672005B2D8E /* CardFrameViewController.m */,
 			);
 			name = "Cast View";
 			sourceTree = "<group>";
@@ -1277,6 +1284,7 @@
 				9B1129EE14514374001CE64E /* RootViewController.xib */,
 				CB018E0F13DE00F0004217E0 /* CardTableViewController.xib */,
 				9B2D8D681470BABD005B2D8E /* CastViewController.xib */,
+				9B2D8D721470E672005B2D8E /* CardFrameViewController.xib */,
 				CB26225213DF07820062EDE7 /* CardTableViewCell.xib */,
 				CB4AAC9113DC7BE60053E3A6 /* LoginViewController.xib */,
 				CBBA020413E52F8100641923 /* CommentsTableViewController.xib */,
@@ -1616,6 +1624,7 @@
 				203DBF07146FECCF00F43D5A /* post_button_locate.png in Resources */,
 				203DBF08146FECCF00F43D5A /* post_button_located.png in Resources */,
 				9B2D8D6A1470BABD005B2D8E /* CastViewController.xib in Resources */,
+				9B2D8D741470E672005B2D8E /* CardFrameViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1702,6 +1711,7 @@
 				9B2153B314626CB200942EBE /* RCSwitchClone.m in Sources */,
 				9B250BFE146FFE60002F7E09 /* GYCastView.m in Sources */,
 				9B2D8D691470BABD005B2D8E /* CastViewController.m in Sources */,
+				9B2D8D731470E672005B2D8E /* CardFrameViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
