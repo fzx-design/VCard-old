@@ -452,7 +452,7 @@
                     NSRange range = NSMakeRange(startIndex, endIndex-startIndex);
                     NSString* subStr = [originStatus substringWithRange:range];
                     if (endIndex > startIndex + 1)
-                        phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='atClicked(\"%@\")'>%@</a></span>", [subStr substringFromIndex:1], subStr] autorelease]];
+                        phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[[NSString alloc] initWithFormat:@"<span class='posthighlight'><a href='javascript:void(0);' onclick='atClicked(\"%@\")'>%@</a></span>", [subStr substringFromIndex:1], subStr] autorelease]];
                 }
                 break;
             }
@@ -469,7 +469,7 @@
                 {
                     NSRange range = NSMakeRange(startIndex, endIndex+1-startIndex);
                     NSString* subStr = [originStatus substringWithRange:range];
-                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='spClicked(\"%@\")'>%@</a></span>", [subStr substringFromIndex:1], subStr] autorelease]];
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[[NSString alloc] initWithFormat:@"<span class='posthighlight'><a href='javascript:void(0);' onclick='spClicked(\"%@\")'>%@</a></span>", [subStr substringFromIndex:1], subStr] autorelease]];
                 }
                 
                 break;
@@ -491,7 +491,7 @@
                     endIndex = j;
                     range = NSMakeRange(startIndex, endIndex-startIndex);
                     subStr = [originStatus substringWithRange:range];
-                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='lkClicked(\"%@\")'>%@</a></span>", subStr, subStr] autorelease]];
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[[NSString alloc] initWithFormat:@"<span class='posthighlight'><a href='javascript:void(0);' onclick='lkClicked(\"%@\")'>%@</a></span>", subStr, subStr] autorelease]];
                 }
                 break;
             }
