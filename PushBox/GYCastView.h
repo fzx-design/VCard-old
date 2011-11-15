@@ -16,6 +16,7 @@
 - (UIView*)viewForItemAtIndex:(GYCastView*)scrollView index:(int)index;
 - (int)itemCount:(GYCastView*)scrollView;
 - (void)didScrollToIndex:(int)index;
+- (void)loadMoreViews;
 
 @end
 
@@ -34,6 +35,10 @@
 @property (nonatomic, assign) CGSize pageSize;
 @property (nonatomic, assign) BOOL dropShadow;
 @property (nonatomic) NSInteger pageNum;
+
+- (void)reloadViews;
+- (void)addMoreViews;
+- (void)refreshViews;
 
 - (void)didReceiveMemoryWarning;
 - (id)initWithFrameAndPageSize:(CGRect)frame pageSize:(CGSize)size;

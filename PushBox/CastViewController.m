@@ -234,12 +234,25 @@
  	}];
 }
 
-
 #pragma mark - Load Cards methods
 
 - (int)numberOfRows
 {
 	return [self.fetchedResultsController.fetchedObjects count];
+}
+
+- (long long)getMaxID
+{
+	long long maxID = 0;
+    Status *lastStatus = [self.fetchedResultsController.fetchedObjects lastObject];
+    
+    if (lastStatus && _lastStatus && !_refreshFlag) {
+        NSString *statusID = lastStatus.statusID;
+        maxID = [statusID longLongValue] - 1;
+		_refreshFlag = NO;
+    }
+	
+	return maxID;
 }
 
 - (void)clearData
@@ -261,6 +274,31 @@
 			break;
     }
     [self.managedObjectContext processPendingChanges];
+}
+
+- (void)reloadCards
+{
+	[self.fetchedResultsController performFetch:nil];
+	for (CardFrameViewController *cardFrameViewController in self.cardFrames) {
+		if (abs(cardFrameViewController.index - self.currentIndex) <= 3) {
+			cardFrameViewController.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:cardFrameViewController.index];
+		}
+	}
+	
+	[self.castView reloadViews];
+}
+
+- (void)insertFriendStatusFromClient:(WeiboClient *)client
+{
+	NSArray *dictArray = client.responseJSONObject;
+	for (NSDictionary *dict in dictArray) {
+		Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+		[self.currentUser addFriendsStatusesObject:newStatus];
+		
+		NSLog(@"__________ %@", newStatus.text);
+	}
+	[self.managedObjectContext processPendingChanges];
+	[self.fetchedResultsController performFetch:nil];
 }
 
 - (void)loadAllFavoritesWithCompletion:(void (^)())completion
@@ -294,38 +332,19 @@
 - (void)firstLoad:(void (^)())completion
 {
 	WeiboClient *client = [WeiboClient client];
-    
-    long long maxID = 0;
-    Status *lastStatus = [self.fetchedResultsController.fetchedObjects lastObject];
-	
-	NSLog(@"%@", lastStatus.text);
-    if (lastStatus && _lastStatus && !_refreshFlag) {
-        NSString *statusID = lastStatus.statusID;
-        maxID = [statusID longLongValue] - 1;
-		[[UIApplication sharedApplication] showLoadingView];
-    }
-	
+    	
 	[client setCompletionBlock:^(WeiboClient *client) {
 		if (!client.hasError) {
-			
-			NSArray *dictArray = client.responseJSONObject;
             
 			[self clearData];
-			[self.managedObjectContext processPendingChanges];
-			for (NSDictionary *dict in dictArray) {
-				Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-				[self.currentUser addFriendsStatusesObject:newStatus];
-			}
-			[self.managedObjectContext processPendingChanges];
+			
+			[self insertFriendStatusFromClient:client];
+			
+			[self reloadCards];
+			
 			_lastStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
-			if (completion) {
-				completion();
-			}
-			[[UIApplication sharedApplication] hideLoadingView];
-            
-			return;
-            
-		} 
+		
+		}
 		if (completion) {
 			completion();
 		}
@@ -333,8 +352,64 @@
 	}];
 	
 	[client getFriendsTimelineSinceID:nil
-								maxID:[NSString stringWithFormat:@"%lld", maxID]
+								maxID:[NSString stringWithFormat:@"%lld", (long long)0]
 					   startingAtPage:0
+								count:kStatusCountPerRequest
+							  feature:0];
+}
+
+
+- (void)loadMoreFriendTimeline:(void (^)())completion
+{
+	
+	WeiboClient *client = [WeiboClient client];
+	
+	[client setCompletionBlock:^(WeiboClient *client) {
+		
+		_loading = NO;
+		
+		if (!client.hasError) {
+			
+			[self insertFriendStatusFromClient:client];
+			
+			if (_refreshFlag) {
+				_refreshFlag = NO;
+				
+				Status *newStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
+				
+				if (_lastStatus == nil || ![newStatus.statusID isEqualToString:_lastStatus.statusID]){
+					
+					_lastStatus = newStatus;
+					
+					[self adjustCardViewAfterLoadingWithCompletion:^(){
+						
+						[self clearData];
+						
+						[self insertFriendStatusFromClient:client];
+						
+						[self reloadCards];
+					}];
+					
+				}
+			}
+			
+			[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
+			
+			[self.delegate castViewController:self 
+							   didScrollToRow:self.currentIndex
+							 withNumberOfRows:[self numberOfRows]];
+			
+		} else {
+			[ErrorNotification showLoadingError];
+		}
+		if (completion) {
+			completion();
+		}
+	}];
+	
+	[client getFriendsTimelineSinceID:nil
+								maxID:[NSString stringWithFormat:@"%lld", [self getMaxID]]
+					   startingAtPage:0 
 								count:kStatusCountPerRequest
 							  feature:0];
 }
@@ -374,68 +449,12 @@
         NSString *statusID = lastStatus.statusID;
         maxID = [statusID longLongValue] - 1;
 		_refreshFlag = NO;
-		[[UIApplication sharedApplication] showLoadingView];
+//		[[UIApplication sharedApplication] showLoadingView];
     }
     
-    //
+    
     if (self.dataSource == CardTableViewDataSourceFriendsTimeline) {
-        [client setCompletionBlock:^(WeiboClient *client) {
-            if (!client.hasError) {
-                
-                NSArray *dictArray = client.responseJSONObject;
-				
-				for (NSDictionary *dict in dictArray) {
-                    Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-                    [self.currentUser addFriendsStatusesObject:newStatus];
-                }
-				
-				[self.managedObjectContext processPendingChanges];
-                
-				if (_refreshFlag) {
-					_refreshFlag = NO;
-                    
-					Status *newStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
-					
-					if (_lastStatus == nil || ![newStatus.statusID isEqualToString:_lastStatus.statusID]){
-						_lastStatus = newStatus;
-						
-						[self adjustCardViewAfterLoadingWithCompletion:^(){
-							[self clearData];
-							for (NSDictionary *dict in dictArray) {
-								Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-								[self.currentUser addFriendsStatusesObject:newStatus];
-							}
-							[self.managedObjectContext processPendingChanges];
-						}];
-						
-					} else if ([newStatus.statusID isEqualToString:_lastStatus.statusID]) {
-						if (completion) {
-							completion();
-						}
-						[[UIApplication sharedApplication] hideLoadingView];
-						_loading = NO;
-						return;
-					}
-				}
-                [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
-                [self.delegate castViewController:self 
-                                        didScrollToRow:self.currentIndex
-                                      withNumberOfRows:[self numberOfRows]];
-            } else {
-				[ErrorNotification showLoadingError];
-			}
-			if (completion) {
-				completion();
-			}
-			[[UIApplication sharedApplication] hideLoadingView];
-			_loading = NO;
-        }];
-        
-        [client getFriendsTimelineSinceID:nil
-									maxID:[NSString stringWithFormat:@"%lld", maxID]
-                           startingAtPage:0 
-                                    count:kStatusCountPerRequest
-                                  feature:0];
+        [self loadMoreFriendTimeline:completion];
     }
     
     //
@@ -736,30 +755,25 @@
 		if (cardFrameViewController.view.superview != nil) {
 			[cardFrameViewController.contentViewController clear];
 			[cardFrameViewController.view removeFromSuperview];
-
 		}
 	}
-	
-	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-	
+		
 	cardFrameViewController.index = index;
 	cardFrameViewController.contentViewController.currentUser = self.currentUser;
-	cardFrameViewController.contentViewController.status = [self.fetchedResultsController objectAtIndexPath:indexPath];
+	cardFrameViewController.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:index];
 	cardFrameViewController.contentViewController.view.frame = CastViewFrame;
-	
-	NSLog(@"Current Page : %d,  Page : %d , Status : %@", self.currentIndex, index, cardFrameViewController.contentViewController.status.text);
-	
+		
 	return cardFrameViewController;
 
 }
+
+#pragma mark - GYCastViewDelegate methods
 
 - (void)didScrollToIndex:(int)index
 {
 	self.currentIndex = index;
 	[self.delegate castViewController:self didScrollToRow:self.currentIndex withNumberOfRows:[self numberOfRows]];
 }
-
-#pragma mark - GYCastViewDelegate methods
 
 - (UIView*)viewForItemAtIndex:(GYCastView *)scrollView index:(int)index
 {	
@@ -768,9 +782,16 @@
 	return cardFrameViewController.view;
 }
 
--(int)itemCount:(GYCastView *)scrollView
+- (int)itemCount:(GYCastView *)scrollView
 {
 	return 10;
+}
+
+- (void)loadMoreViews
+{
+	[self loadMoreDataCompletion:^(){
+		[self.castView addMoreViews];
+	}];
 }
 
 #pragma mark - Properties

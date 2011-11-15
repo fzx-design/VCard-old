@@ -43,23 +43,16 @@
     return self;
 }
 
--(void)loadPage:(int)page
+#pragma mark - Load Page methods
+
+- (void)loadPage:(int)page
 {
 	// Sanity checks
     if (page < 0) return;
     if (page >= pageNum) {
-//		pageNum += 10;
-		self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
+		[self.delegate loadMoreViews];
 		return;
 	}
-
-//	UIView *view = [scrollViewPages objectAtIndex:page];
-//	
-//	if ((NSNull *)view == [NSNull null]) 
-//	{
-//		view = [delegate viewForItemAtIndex:self index:page];
-//		[scrollViewPages replaceObjectAtIndex:page withObject:view];
-//	}
 	
 	UIView *view = [delegate viewForItemAtIndex:self index:page];
 	
@@ -76,12 +69,17 @@
 	}
 }
 
+- (void)loadFreshPage
+{
+	
+}
+
+#pragma mark - Set Up methods
+
 - (void)layoutSubviews
 {
-	// We need to do some setup once the view is visible. This will only be done once.
 	if(firstLayout)
 	{  
-		// Position and size the scrollview. It will be centered in the view.
 		CGRect scrollViewRect = CGRectMake(0, 0, pageSize.width, pageSize.height);
 		scrollViewRect.origin.x = ((self.frame.size.width - pageSize.width) / 2);
 		scrollViewRect.origin.y = ((self.frame.size.height - pageSize.height) / 2);
@@ -95,22 +93,13 @@
 		
 		[self addSubview:scrollView];
 		
-		
 		int pageCount = [delegate itemCount:self];
 		scrollViewPages = [[NSMutableArray alloc] initWithCapacity:pageCount];
 		
-		// Fill our pages collection with empty placeholders
-		for(int i = 0; i < pageCount; i++)
-		{
-			[scrollViewPages addObject:[NSNull null]];
-		}
-		
 		pageNum = [delegate itemCount:self];
 		
-		// Calculate the size of all combined views that we are scrolling through 
 		self.scrollView.contentSize = CGSizeMake([delegate itemCount:self] * self.scrollView.frame.size.width, scrollView.frame.size.height);
 		
-		// Load the first two pages
 		[self loadPage:0];
 		[self loadPage:1];
 		[self loadPage:2];
@@ -136,13 +125,34 @@
 
 -(int)currentPage
 {
-	// Calculate which page is visible 
 	CGFloat pageWidth = scrollView.frame.size.width;
 	int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
 	
 	return page;
 }
 
+#pragma mark - Adjust Views in Castview
+
+- (void)reloadViews
+{
+	[self layoutSubviews];
+
+	int page = [self currentPage] - 3;
+	for (int i = 0; i < 7; ++i) {
+		[self loadPage:page + i];
+	}
+}
+
+- (void)addMoreViews
+{
+	pageNum += 10;
+	self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
+}
+
+- (void)refreshViews
+{
+	self.scrollView.contentSize = CGSizeMake((pageNum + 3) * self.scrollView.frame.size.width, scrollView.frame.size.height);
+}
 
 
 #pragma mark -
@@ -157,14 +167,10 @@
 		
 		[self.delegate didScrollToIndex:page];
 		
-		// Load the visible and neighbouring pages
-		[self loadPage:page - 3];
-		[self loadPage:page - 2];
-		[self loadPage:page - 1];
-		[self loadPage:page];
-		[self loadPage:page + 1];
-		[self loadPage:page + 2];
-		[self loadPage:page + 3];
+		page -= 3;
+		for (int i = 0; i < 7; ++i) {
+			[self loadPage:page + i];
+		}
 	}
 }
 

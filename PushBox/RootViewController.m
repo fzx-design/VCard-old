@@ -176,6 +176,7 @@
     [client getUser:[WeiboClient currentUserID]];
     
     int cursor = -1;
+	
     // getFriends
     WeiboClient *client2 = [WeiboClient client];
     [client2 setCompletionBlock:^(WeiboClient *client2) {
