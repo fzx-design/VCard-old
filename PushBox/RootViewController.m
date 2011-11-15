@@ -23,7 +23,7 @@
 #define kDockViewOffsetY 635.0
 #define kDockAnimationInterval 0.3
 
-#define kCardTableViewFrameOriginY 37.0
+#define kCardTableViewFrameOriginY 27.0
 #define kCardTableViewOffsetY 650.0
 
 #define kMessagesViewCenter CGPointMake(512.0 - 1024.0, 350.0)

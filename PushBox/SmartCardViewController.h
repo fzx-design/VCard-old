@@ -85,6 +85,8 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
 
 @property(nonatomic, retain) Status* status;
 
+- (void)clear;
+
 - (IBAction)actionsButtonClicked:(UIButton *)sender;
 - (IBAction)profileImageButtonClicked:(id)sender;
 - (IBAction)commentButtonClicked:(id)sender;

@@ -52,6 +52,7 @@ typedef enum {
 	int _currentIndex;
 	NSMutableArray *_nextPageStack;
 	NSMutableArray *_rowIndexStack;
+	NSMutableArray *_cardFrames;
 	
 	int _nextPage;
 	
@@ -74,6 +75,8 @@ typedef enum {
 
 @property(nonatomic, assign) id<CastViewControllerDelegate> delegate;
 @property(nonatomic, assign) int currentIndex;
+
+@property(nonatomic, retain) NSMutableArray *cardFrames;
 
 @property(nonatomic, retain) NSFetchedResultsController* prevFetchedResultsController;
 

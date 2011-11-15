@@ -11,9 +11,12 @@
 @class GYCastView;
 
 @protocol GYCastViewDelegate
+
 @required
--(UIView*)viewForItemAtIndex:(GYCastView*)scrollView index:(int)index;
--(int)itemCount:(GYCastView*)scrollView;
+- (UIView*)viewForItemAtIndex:(GYCastView*)scrollView index:(int)index;
+- (int)itemCount:(GYCastView*)scrollView;
+- (void)didScrollToIndex:(int)index;
+
 @end
 
 @interface GYCastView : UIView<UIScrollViewDelegate> {

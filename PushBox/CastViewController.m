@@ -15,6 +15,7 @@
 #import "CardFrameViewController.h"
 
 #define CastViewPageSize CGSizeMake(560, 640)
+#define CastViewFrame CGRectMake(0.0f, 0.0f, 560, 640)
 #define kStatusCountPerRequest 10
 #define kBlurImageViewScale 2.27
 
@@ -31,6 +32,7 @@
 
 @synthesize delegate = _delegate;
 @synthesize currentIndex = _currentIndex;
+@synthesize cardFrames = _cardFrames;
 
 @synthesize prevFetchedResultsController = _prevFetchedResultsController;
 
@@ -674,44 +676,95 @@
 }
 
 #pragma mark - Usercard Dismiss methods
--(void)enableDismissRegion
+- (void)enableDismissRegion
 {
 	self.regionLeftDetectButton.enabled = YES;
 	self.regionRightDetectButton.enabled = YES;
 }
 
--(void)disableDismissRegion
+- (void)disableDismissRegion
 {
 	self.regionLeftDetectButton.enabled = NO;
 	self.regionRightDetectButton.enabled = NO;
 }
 
--(IBAction)dismissRegionTouched:(id)sender
+- (IBAction)dismissRegionTouched:(id)sender
 {
 	[self disableDismissRegion];
     [UserCardNaviViewController sharedUserCardDismiss];
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardDismissed object:self];
 }
 
-#pragma mark - GYCastViewDelegate methods
+#pragma mark - Card Frames methods
 
--(UIView*)viewForItemAtIndex:(GYCastView *)scrollView index:(int)index
+- (CardFrameViewController*)getReusableFrameViewController
 {
-	CGRect viewFrame = CGRectMake(0.0f, 0.0f, 560, 645);
+	for (CardFrameViewController* cardFrameViewController in self.cardFrames) {
+		if (abs(cardFrameViewController.index - self.currentIndex) > 3) {
+			return cardFrameViewController;
+		}
+	}
+	return nil;
+}
+
+- (CardFrameViewController*)findCardFrameViewControllerForIndex:(int)index
+{
+	for (CardFrameViewController* cardFrameViewController in self.cardFrames) {
+		if (cardFrameViewController.index == index) {
+			return cardFrameViewController;
+		}
+	}
+	return nil;
+}
+
+- (CardFrameViewController*)getCardFrameViewControllerForIndex:(int)index
+{
+	CardFrameViewController *cardFrameViewController = [self findCardFrameViewControllerForIndex:index];
+	if (cardFrameViewController != nil) {
+		return cardFrameViewController;
+	}
+	
+	cardFrameViewController = [self getReusableFrameViewController];
+	
+	if (cardFrameViewController == nil) {
+		SmartCardViewController *smartCardViewController = [[[SmartCardViewController alloc] init] autorelease];
+		cardFrameViewController = [[[CardFrameViewController alloc] init] autorelease];
+		cardFrameViewController.contentViewController = smartCardViewController;
+		
+		[self.cardFrames addObject:cardFrameViewController];
+	} else {
+		if (cardFrameViewController.view.superview != nil) {
+			[cardFrameViewController.contentViewController clear];
+			[cardFrameViewController.view removeFromSuperview];
+
+		}
+	}
 	
 	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
 	
-	SmartCardViewController *smartCardViewController = [[SmartCardViewController alloc] init];
+	cardFrameViewController.index = index;
+	cardFrameViewController.contentViewController.currentUser = self.currentUser;
+	cardFrameViewController.contentViewController.status = [self.fetchedResultsController objectAtIndexPath:indexPath];
+	cardFrameViewController.contentViewController.view.frame = CastViewFrame;
 	
-	smartCardViewController.currentUser = self.currentUser;
-	smartCardViewController.status = [self.fetchedResultsController objectAtIndexPath:indexPath];
-	smartCardViewController.view.frame = viewFrame;
+	NSLog(@"Current Page : %d,  Page : %d , Status : %@", self.currentIndex, index, cardFrameViewController.contentViewController.status.text);
 	
-	CardFrameViewController *cardFrameViewController = [[CardFrameViewController alloc] init];
-	cardFrameViewController.contentViewController = smartCardViewController;
-	
-	[smartCardViewController release];
-	
+	return cardFrameViewController;
+
+}
+
+- (void)didScrollToIndex:(int)index
+{
+	self.currentIndex = index;
+	[self.delegate castViewController:self didScrollToRow:self.currentIndex withNumberOfRows:[self numberOfRows]];
+}
+
+#pragma mark - GYCastViewDelegate methods
+
+- (UIView*)viewForItemAtIndex:(GYCastView *)scrollView index:(int)index
+{	
+	CardFrameViewController *cardFrameViewController = [self getCardFrameViewControllerForIndex:index];
+
 	return cardFrameViewController.view;
 }
 
@@ -719,5 +772,16 @@
 {
 	return 10;
 }
+
+#pragma mark - Properties
+
+- (NSMutableArray*)cardFrames
+{
+	if (_cardFrames == nil) {
+		_cardFrames = [[NSMutableArray alloc] init];
+	}
+	return _cardFrames;
+}
+
 
 @end

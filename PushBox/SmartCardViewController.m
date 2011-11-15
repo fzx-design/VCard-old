@@ -120,18 +120,15 @@
 
 - (void)clear
 {
-    // 	self.profileImageView = nil;
-    //    self.screenNameLabel = nil;
-    //    self.dateLabel = nil;
-    //    self.actionsButton = nil;
-    //    self.repostCountLabel = nil;
-    //    self.commentCountLabel = nil;
-    //    self.addFavourateButton = nil;
-    //    self.tweetScrollView = nil;
-    //    self.tweetImageView = nil;
-    //    self.tweetTextView = nil;
-    //    self.repostTextView = nil;
-    //    self.repostView = nil;
+ 	self.profileImageView.image = nil;
+    self.screenNameLabel.text = @"";
+    self.dateLabel.text = @"";
+    self.repostCountLabel.text = @"0";
+    self.commentCountLabel.text = @"0";
+    self.tweetImageView.image = nil;
+    self.tweetTextView = nil;
+    self.repostTextView = nil;
+    self.repostView = nil;
 }
 
 - (BOOL)checkGif:(NSString*)url
@@ -877,11 +874,10 @@
     
     [_status release];
     _status = [status retain];
-    //    _status = status;
     
-//    [self prepare];
-	[self performSelector:@selector(prepare) withObject:nil afterDelay:0.3];
-    [self performSelector:@selector(update) withObject:nil afterDelay:0.6];
+    [self prepare];
+//	[self performSelector:@selector(prepare) withObject:nil afterDelay:0.1];
+    [self performSelector:@selector(update) withObject:nil afterDelay:0.2];
 }
 
 - (IBAction)actionsButtonClicked:(UIButton *)sender {

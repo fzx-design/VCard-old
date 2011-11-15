@@ -48,24 +48,21 @@
 	// Sanity checks
     if (page < 0) return;
     if (page >= pageNum) {
-		pageNum += 10;
+//		pageNum += 10;
 		self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
 		return;
 	}
+
+//	UIView *view = [scrollViewPages objectAtIndex:page];
+//	
+//	if ((NSNull *)view == [NSNull null]) 
+//	{
+//		view = [delegate viewForItemAtIndex:self index:page];
+//		[scrollViewPages replaceObjectAtIndex:page withObject:view];
+//	}
 	
-	//	UIView *view;
+	UIView *view = [delegate viewForItemAtIndex:self index:page];
 	
-	// Check if the page is already loaded
-	UIView *view = [scrollViewPages objectAtIndex:page];
-	
-	// if the view is null we request the view from our delegate
-	if ((NSNull *)view == [NSNull null]) 
-	{
-		view = [delegate viewForItemAtIndex:self index:page];
-		[scrollViewPages replaceObjectAtIndex:page withObject:view];
-	}
-	
-	// add the controller's view to the scroll view	if it's not already added
 	if (view.superview == nil) 
 	{
 		// Position the view in our scrollview
@@ -116,6 +113,7 @@
 		// Load the first two pages
 		[self loadPage:0];
 		[self loadPage:1];
+		[self loadPage:2];
 		
 		firstLayout = NO;
 	}
@@ -145,6 +143,8 @@
 	return page;
 }
 
+
+
 #pragma mark -
 #pragma mark UIScrollViewDelegate methods
 
@@ -155,11 +155,16 @@
 	if (prePage != page) {
 		prePage = page;
 		
-		// Load the visible and neighbouring pages 
+		[self.delegate didScrollToIndex:page];
+		
+		// Load the visible and neighbouring pages
+		[self loadPage:page - 3];
+		[self loadPage:page - 2];
 		[self loadPage:page - 1];
 		[self loadPage:page];
 		[self loadPage:page + 1];
 		[self loadPage:page + 2];
+		[self loadPage:page + 3];
 	}
 }
 
@@ -178,7 +183,7 @@
 	for (int i = 0; i < [scrollViewPages count]; i++) {
 		UIView *viewController = [scrollViewPages objectAtIndex:i];
         if((NSNull *)viewController != [NSNull null]){
-			if(i < currentPage-1 || i > currentPage+1){
+			if(i < currentPage - 1 || i > currentPage+1){
 				[viewController removeFromSuperview];
 				[scrollViewPages replaceObjectAtIndex:i withObject:[NSNull null]];
 			}

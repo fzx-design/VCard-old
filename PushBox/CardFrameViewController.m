@@ -24,6 +24,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+	
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -31,8 +32,15 @@
 #pragma mark - Set ContentViewController methods
 - (void)setContentViewController:(SmartCardViewController *)contentViewController
 {
-	_contentViewController = contentViewController;
-	[self.view addSubview:self.contentViewController.view];
+	if (_contentViewController != nil) {
+		[_contentViewController release];
+	}
+	
+	_contentViewController = [contentViewController retain];
+	
+	if (self.contentViewController.view.superview == nil) {
+		[self.view addSubview:self.contentViewController.view];
+	}
 }
 
 @end
