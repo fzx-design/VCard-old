@@ -19,6 +19,7 @@
 #define kLoadDelay 1.5
 #define kPlayButtonFrameTopRight CGRectMake(399, 306, 68, 68)
 #define kPlayButtonFrameCenter CGRectMake(251, 373, 68, 68)
+#define kPlayButtonFrameBottom CGRectMake(251, 413, 68, 68)
 #define kRepostViewFrameTop CGRectMake(57, 275, 451, 134)
 #define kRepostWebViewFrameTop CGRectMake(57, 275, 451, 134)
 #define kRepostViewFrameBottom CGRectMake(57, 275+125, 451, 134)
@@ -427,6 +428,28 @@
     }
 }
 
+- (void)loadRepostStautsImageV2
+{
+    self.tweetImageView.hidden = NO;
+    self.imageCoverImageView.hidden = NO;
+    Status *repostStatus = self.status.repostStatus;
+    [self.tweetImageView loadImageFromURL:repostStatus.bmiddlePicURL 
+                               completion:^(void) 
+     {
+         [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+             self.tweetImageView.alpha = 1.0;
+             self.imageCoverImageView.alpha = 1.0;
+         } completion:^(BOOL fin) {
+         }];
+     }
+                           cacheInContext:self.managedObjectContext];
+    
+    if ([self checkGif:self.status.repostStatus.originalPicURL])
+    {
+        [self.gifIcon setHidden:NO];
+    }
+}
+
 - (void)loadPostWebView
 {
     NSString* originStatus = self.status.text;
@@ -675,6 +698,12 @@
     [self loadMusicCoverImage];
 }
 
+- (void)loadRepostMusicVideoV2:(NSString*)repostMusicVideoLink
+{
+    self.playButton.hidden = NO;
+    self.playButton.frame = kPlayButtonFrameBottom;
+}
+
 - (void)getPostMusicVideoLink:(NSString*)statusText
 {
     NSString* shortUrl = nil;
@@ -770,16 +799,8 @@
                             if ([longUrl rangeOfString:@"http://v.youku.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.tudou.com"].location != NSNotFound || [longUrl rangeOfString:@"http://v.ku6.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.56.com"].location != NSNotFound || [longUrl rangeOfString:@"http://music.sina.com"].location != NSNotFound|| [longUrl rangeOfString:@"http://www.xiami.com"].location != NSNotFound || [longUrl rangeOfString:@"songtaste.com"].location != NSNotFound) {
                                 isTrack = NO;
                                 b = NO;
-                                [self loadRepostMusicVideo:longUrl];
+                                [self loadRepostMusicVideoV2:longUrl];
                             } 
-                            //                            else {
-                            //                                self.tweetImageView.hidden = NO;
-                            //                                [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
-                            //                                    self.tweetImageView.alpha = 1.0;
-                            //                                    self.imageCoverImageView.alpha = 1.0;
-                            //                                } completion:^(BOOL fin) {
-                            //                                }];
-                            //                            }
                         }
                     }
                 }];
@@ -838,7 +859,7 @@
         [self loadRepostWebView];
         // repost image
         if (imageLoadingEnabled && repostStatus.originalPicURL.length) {
-            [self performSelector:@selector(loadRepostStautsImage) withObject:nil afterDelay:kLoadDelay];
+            [self performSelector:@selector(loadRepostStautsImageV2) withObject:nil afterDelay:kLoadDelay];
         }
         // repost music or video
         if (YES)
@@ -1030,9 +1051,9 @@
 				[managedContext deleteObject:self.status];
 				[managedContext processPendingChanges];
 				
-//				 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameCardShouldDeleteCard object:self];
-//				
-//				[self performSelector:@selector(deleteCardFromCoreData) withObject:nil afterDelay:5.0];
+                //				 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameCardShouldDeleteCard object:self];
+                //				
+                //				[self performSelector:@selector(deleteCardFromCoreData) withObject:nil afterDelay:5.0];
 				
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameCardDeleted object:self];
             } else {
