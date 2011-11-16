@@ -13,7 +13,7 @@
 @implementation DockViewController
 
 @synthesize refreshButton = _refreshButton;
-@synthesize newTweetButton = _newTweetButton;
+@synthesize postButton = _newTweetButton;
 @synthesize playButton = _playButton;
 @synthesize commandCenterButton = _commandCenterButton;
 @synthesize messagesCenterButton = _messagesCenterButton;
@@ -49,7 +49,7 @@
     [_refreshNotiImageView release];
     [_commandCenterNotiImageView release];
     [_optionsPopoverController release];
-//    [_commentsTableViewController release];
+    //    [_commentsTableViewController release];
 	[_userCardNaviViewController release];
 	[_ccUserInfoCardViewController release];
 	
@@ -66,7 +66,7 @@
 {
     [super viewDidUnload];
     self.refreshButton = nil;
-    self.newTweetButton = nil;
+    self.postButton = nil;
     self.playButton = nil;
     self.commandCenterButton = nil;
     self.messagesCenterButton = nil;
@@ -131,7 +131,7 @@
     
     self.refreshNotiImageView.hidden = YES;
     self.commandCenterNotiImageView.hidden = YES;
-
+    
 	self.ccUserInfoCardViewController = [[[CCUserInfoCardViewController alloc] init] autorelease];
 	self.ccUserInfoCardViewController.currentUser = self.currentUser;
 	self.ccUserInfoCardViewController.managedObjectContext = self.managedObjectContext;
@@ -156,9 +156,9 @@
 	
 	[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(calculateRefreshTime) userInfo:nil repeats:YES];
 	
-//    self.commentsTableViewController.dataSource = CommentsTableViewDataSourceCommentsToMe;
-//    self.commentsTableViewController.currentUser = self.currentUser;
-//	
+    //    self.commentsTableViewController.dataSource = CommentsTableViewDataSourceCommentsToMe;
+    //    self.commentsTableViewController.currentUser = self.currentUser;
+    //	
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -166,7 +166,7 @@
     [super viewWillAppear:animated];
 	[self.ccUserInfoCardViewController viewWillAppear:YES];
 	[self.ccCommentTableViewController viewWillAppear:YES];
-//    [self.commentsTableViewController viewWillAppear:YES];
+    //    [self.commentsTableViewController viewWillAppear:YES];
 }
 
 - (void)calculateRefreshTime

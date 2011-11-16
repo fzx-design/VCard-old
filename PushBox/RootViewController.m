@@ -1157,7 +1157,7 @@
                                                   action:@selector(refresh) 
                                         forControlEvents:UIControlEventTouchUpInside];
         
-        [self.dockViewController.newTweetButton addTarget:self
+        [self.dockViewController.postButton addTarget:self
                                                    action:@selector(post)
                                          forControlEvents:UIControlEventTouchUpInside];
         
