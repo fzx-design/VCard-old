@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-#define RefreshFirstPageIndex 0
-#define RefreshSecondPageIndex 1
+#define FirstPageIndex 0
+#define SecondPageIndex 1
 
 @class GYCastView;
 

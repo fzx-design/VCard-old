@@ -13,6 +13,8 @@
 #define SHADOW_HEIGHT 20.0
 #define SHADOW_INVERSE_HEIGHT 10.0
 #define SHADOW_RATIO (SHADOW_INVERSE_HEIGHT / SHADOW_HEIGHT)
+#define RefreshCardsOffsetPage 3
+#define MoveCardsOffsetPage 2
 
 @synthesize scrollView, pageSize, dropShadow, delegate, pageNum;
 
@@ -77,25 +79,29 @@
 	}
 }
 
-- (void)loadRefreshPage:(int)page WithView:(UIView*)view
+- (void)setDistantPage:(int)page WithView:(UIView*)view
 {
-	int index = [self currentPage] + page + 6;
+	int index = [self currentPage] + page + MoveCardsOffsetPage;
 	
 	CGRect viewFrame = view.frame;
 	viewFrame.origin.x = viewFrame.size.width * index;
 	viewFrame.origin.y = 0;
 	
 	view.frame = viewFrame;
-	
+		
 	[self.scrollView addSubview:view];
+}
+
+- (void)setRefreshPage:(int)page WithView:(UIView*)view
+{
+	[self setDistantPage:(page + RefreshCardsOffsetPage) WithView:view];
 }
 
 #pragma mark - Set Up methods
 
 - (void)layoutSubviews
 {
-	if(firstLayout)
-	{
+	if(firstLayout){
 		testKey = YES;
 		
 		CGRect scrollViewRect = CGRectMake(0, 0, pageSize.width, pageSize.height);
@@ -103,7 +109,7 @@
 		scrollViewRect.origin.y = ((self.frame.size.height - pageSize.height) / 2);
 		
 		scrollView = [[UIScrollView alloc] initWithFrame:scrollViewRect];
-		scrollView.clipsToBounds = NO; // Important, this creates the "preview"
+		scrollView.clipsToBounds = NO;
 		scrollView.pagingEnabled = YES;
 		scrollView.showsHorizontalScrollIndicator = NO;
 		scrollView.showsVerticalScrollIndicator = NO;
@@ -114,19 +120,17 @@
 		int pageCount = [delegate itemCount:self];
 		scrollViewPages = [[NSMutableArray alloc] initWithCapacity:pageCount];
 		
-		pageNum = 10;
+		pageNum = [delegate itemCount:self];
 		
 		self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
 		
-		[self loadPage:0];
-		[self loadPage:1];
-		[self loadPage:2];
+		for (int i = 0; i < pageNum; ++i) {
+			[self loadPage:i];
+		}
 		
 		firstLayout = NO;
 	}
 }
-
-
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
 	
@@ -162,20 +166,18 @@
 - (void)refreshViewsWithFirstPage:(UIView*)firstView 
 					andSecondPage:(UIView*)secondView
 {
+	float page = [self currentPage];
 	self.scrollView.contentSize = CGSizeMake((pageNum + 3) * self.scrollView.frame.size.width, scrollView.frame.size.height);
-	[self loadRefreshPage:RefreshFirstPageIndex WithView:firstView];
-	[self loadRefreshPage:RefreshSecondPageIndex WithView:secondView];
+	[self setRefreshPage:FirstPageIndex WithView:firstView];
+	[self setRefreshPage:SecondPageIndex WithView:secondView];
 	
-	[UIView animateWithDuration:5.0 animations:^(){
-		[self.scrollView setContentOffset:CGPointMake(([self currentPage] + 3) * self.scrollView.frame.size.width, 0)];
-		for (UIView* view in self.scrollView.subviews) {
-			CGRect frame = view.frame;
-			frame.origin.x -= 3 * self.scrollView.frame.size.width;
-			view.frame = frame;
-		}
+	
+	testKey = NO;
+	
+	[UIView animateWithDuration:1.25 animations:^(){
+		[self.scrollView setContentOffset:CGPointMake((page + MoveCardsOffsetPage + RefreshCardsOffsetPage) * self.scrollView.frame.size.width, 0)];
 	}];
 
-	testKey = NO;
 }
 
 

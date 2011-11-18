@@ -39,18 +39,6 @@
 
 #pragma mark - Card Frames methods
 
-- (void)reloadCards
-{
-	[self.fetchedResultsController performFetch:nil];
-	for (CardFrameViewController *cardFrameViewController in self.cardFrames) {
-		if (abs(cardFrameViewController.index - self.currentIndex) <= 3) {
-			cardFrameViewController.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:cardFrameViewController.index];
-		}
-	}
-	
-	[self.castView reloadViews];
-}
-
 - (CardFrameViewController*)getRefreshCardFrameViewControllerWithIndex:(int)index
 {
 	for (CardFrameViewController* cardFrameViewController in self.cardFrames) {
@@ -108,9 +96,48 @@
 	cardFrameViewController.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:index];
 	cardFrameViewController.contentViewController.view.frame = CastViewFrame;
 	
-	return cardFrameViewController;
-	
+	return cardFrameViewController;	
 }
+
+#pragma mark - Operations
+
+- (void)prepareForMovingCards
+{
+	for (CardFrameViewController* cardFrameViewController in self.cardFrames) {
+		if (abs(cardFrameViewController.index - self.currentIndex) >= 2) {
+			[cardFrameViewController.view removeFromSuperview];
+			NSLog(@"View with index %d removed!", cardFrameViewController.index);
+		}
+	}
+}
+
+- (void)reloadCards
+{
+	[self.fetchedResultsController performFetch:nil];
+	for (CardFrameViewController *cardFrameViewController in self.cardFrames) {
+		if (abs(cardFrameViewController.index - self.currentIndex) <= 3) {
+			cardFrameViewController.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:cardFrameViewController.index];
+		}
+	}
+	
+	[self.castView reloadViews];
+}
+
+- (void)refreshCards
+{
+	[self prepareForMovingCards];
+	
+	CardFrameViewController* vc1 = [self getRefreshCardFrameViewControllerWithIndex:FirstPageIndex];
+	CardFrameViewController* vc2 = [self getRefreshCardFrameViewControllerWithIndex:SecondPageIndex];
+	
+	NSLog(@"Got %d and %d", vc1.index, vc2.index);
+	
+	vc1.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:FirstPageIndex];
+	vc2.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:SecondPageIndex];
+	
+	[self.castView refreshViewsWithFirstPage:vc1.view andSecondPage:vc2.view];
+}
+
 
 
 
@@ -118,7 +145,6 @@
 
 - (void)didScrollToIndex:(int)index
 {
-	NSLog(@"Currently %d views", self.cardFrames.count);
 	self.currentIndex = index;
 	[self.delegate castViewControllerdidScrollToRow:self.currentIndex withNumberOfRows:[self numberOfRows]];
 }
@@ -132,7 +158,11 @@
 
 - (int)itemCount:(GYCastView *)scrollView
 {
-	return 10;
+	int count = self.fetchedResultsController.fetchedObjects.count;
+	if (count >= 10) {
+		count = 10;
+	}
+	return count;
 }
 
 - (void)loadMoreViews
@@ -148,10 +178,6 @@
 - (NSMutableArray*)cardFrames
 {
 	if (_cardFrames == nil) {
-//		_cardFrames = [[NSMutableArray alloc] initWithCapacity:PreLoadCardNumber];
-//		for (int i = 0; i < PreLoadCardNumber; ++i) {
-//			[_cardFrames replaceObjectAtIndex:i withObject:[NSNull null]];
-//		}
 		_cardFrames = [[NSMutableArray alloc] init];
 	}
 	return _cardFrames;

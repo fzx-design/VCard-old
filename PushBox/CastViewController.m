@@ -289,19 +289,6 @@
     [self.managedObjectContext processPendingChanges];
 }
 
-//- (void)refreshCards
-//{
-//	CardFrameViewController* view1 = [self getRefreshCardFrameViewControllerWithIndex:RefreshFirstPageIndex];
-//	CardFrameViewController* view2 = [self getRefreshCardFrameViewControllerWithIndex:RefreshSecondPageIndex];
-//	
-//	[view1.view removeFromSuperview];
-//	[view2.view removeFromSuperview];
-//	
-//	view1.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:RefreshFirstPageIndex];
-//	view2.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:RefreshSecondPageIndex];
-//	
-//	[self.castView refreshViewsWithFirstPage:view1.view andSecondPage:view2.view];
-//}
 
 - (void)insertFriendStatusFromClient:(WeiboClient *)client
 {
@@ -407,7 +394,7 @@
 					
 					[self insertFriendStatusFromClient:client];
 										
-//					[self refreshCards];
+					[self.castViewManager refreshCards];
 				}
 			}
 			

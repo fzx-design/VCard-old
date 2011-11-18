@@ -38,5 +38,6 @@
 @property(nonatomic, assign) id<CastViewControllerDelegate> delegate;
 
 - (void)initialSetUp;
+- (void)refreshCards;
 
 @end
