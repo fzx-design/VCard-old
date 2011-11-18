@@ -10,6 +10,7 @@
 #import "UserCardNaviViewController.h"
 #import "ErrorNotification.h"
 #import "GYCastView.h"
+#import "CastViewManager.h"
 #import "Status.h"
 
 #define kNotificationNameNewCommentsToMe @"kNotificationNameNewCommentsToMe"
@@ -28,15 +29,9 @@ typedef enum {
 } CastViewDataSource;
 
 @class User;
-@class CastViewController;
 
-@protocol CastViewControllerDelegate <NSObject>
-- (void)castViewController:(CastViewController *)vc 
-			didScrollToRow:(int)row 
-		  withNumberOfRows:(int)maxRow;
-@end
 
-@interface CastViewController : CoreDataTableViewController<GYCastViewDelegate> {
+@interface CastViewController : CoreDataTableViewController {
 	UIImageView *_blurImageView;
 	UIImageView *_rootShadowLeft;
 	UIButton *_regionLeftDetectButton;
@@ -46,13 +41,11 @@ typedef enum {
 	User *_user;
 	CastViewDataSource _dataSource;
 	
-	id _delegate;
 	NSTimer *_timer;
 	
-	int _currentIndex;
 	NSMutableArray *_nextPageStack;
 	NSMutableArray *_rowIndexStack;
-	NSMutableArray *_cardFrames;
+	CastViewManager *_castViewManager;
 	
 	int _nextPage;
 	
@@ -72,19 +65,14 @@ typedef enum {
 
 @property(nonatomic, retain) User *user;
 @property(nonatomic, assign) CastViewDataSource dataSource;
+@property(nonatomic, retain) CastViewManager *castViewManager;
 
-@property(nonatomic, assign) id<CastViewControllerDelegate> delegate;
-@property(nonatomic, assign) int currentIndex;
-
-@property(nonatomic, retain) NSMutableArray *cardFrames;
 
 @property(nonatomic, retain) NSFetchedResultsController* prevFetchedResultsController;
 
 
 - (void)pushCardWithCompletion:(void (^)())completion;
 - (void)popCardWithCompletion:(void (^)())completion;
-
-- (int)numberOfRows;
 
 - (void)getUnread;
 

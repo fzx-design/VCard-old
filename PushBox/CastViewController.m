@@ -14,8 +14,6 @@
 #import "UIApplicationAddition.h"
 #import "CardFrameViewController.h"
 
-#define CastViewPageSize CGSizeMake(560, 640)
-#define CastViewFrame CGRectMake(0.0f, 0.0f, 560, 640)
 #define kStatusCountPerRequest 10
 #define kBlurImageViewScale 2.27
 
@@ -29,10 +27,7 @@
 
 @synthesize user = _user;
 @synthesize dataSource = _dataSource;
-
-@synthesize delegate = _delegate;
-@synthesize currentIndex = _currentIndex;
-@synthesize cardFrames = _cardFrames;
+@synthesize castViewManager = _castViewManager;
 
 @synthesize prevFetchedResultsController = _prevFetchedResultsController;
 
@@ -41,6 +36,45 @@
     [super didReceiveMemoryWarning];
     
 }
+
+#pragma mark - Initialization
+
+- (void)setUpCastViewManager
+{
+	self.castViewManager.castView = self.castView;
+	self.castViewManager.fetchedResultsController = self.fetchedResultsController;
+	self.castViewManager.currentUser = self.currentUser;
+	[self.castViewManager initialSetUp];
+}
+
+- (void)setUpArguments
+{
+	_nextPage = 1;
+	_loading = NO;
+	_refreshFlag = NO;
+}
+
+- (void)setUpRefreshSettings
+{
+	NSInteger interval = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeyRefreshingInterval];
+	_timer = [NSTimer scheduledTimerWithTimeInterval:interval
+											  target:self 
+											selector:@selector(timerFired:) 
+											userInfo:nil 
+											 repeats:YES];
+}
+
+- (void)setUpNotification
+{
+	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+	[center addObserver:self selector:@selector(changeRefreshingIntervalTime) 
+				   name:kNotificationNameRefreshingIntervalChanged 
+				 object:nil];
+	[center addObserver:self selector:@selector(deleteCurrentCard) 
+				   name:kNotificationNameCardShouldDeleteCard 
+				 object:nil];
+}
+
 
 #pragma mark - View lifecycle
 
@@ -55,32 +89,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
 	self.fetchedResultsController.delegate = nil;
-	self.castView.pageSize = CastViewPageSize;
-	self.castView.delegate = self;
-	[self.castView setScrollsToTop:NO];
 	
-	_nextPage = 1;
-	self.currentIndex = 0;
 	self.blurImageView.alpha = 0.0;
-	_loading = NO;
-	_refreshFlag = NO;
 	
-	NSInteger interval = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeyRefreshingInterval];
+	[self setUpCastViewManager];
 	
-	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	[center addObserver:self selector:@selector(changeRefreshingIntervalTime) 
-				   name:kNotificationNameRefreshingIntervalChanged 
-				 object:nil];
-	[center addObserver:self selector:@selector(deleteCurrentCard) 
-				   name:kNotificationNameCardShouldDeleteCard 
-				 object:nil];
-    
-    _timer = [NSTimer scheduledTimerWithTimeInterval:interval
-											  target:self 
-											selector:@selector(timerFired:) 
-											userInfo:nil 
-											 repeats:YES];
+	[self setUpArguments];
+	
+	[self setUpNotification];
 }
 
 #pragma mark - Get Unread methods
@@ -236,11 +254,6 @@
 
 #pragma mark - Load Cards methods
 
-- (int)numberOfRows
-{
-	return [self.fetchedResultsController.fetchedObjects count];
-}
-
 - (long long)getMaxID
 {
 	long long maxID = 0;
@@ -276,17 +289,19 @@
     [self.managedObjectContext processPendingChanges];
 }
 
-- (void)reloadCards
-{
-	[self.fetchedResultsController performFetch:nil];
-	for (CardFrameViewController *cardFrameViewController in self.cardFrames) {
-		if (abs(cardFrameViewController.index - self.currentIndex) <= 3) {
-			cardFrameViewController.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:cardFrameViewController.index];
-		}
-	}
-	
-	[self.castView reloadViews];
-}
+//- (void)refreshCards
+//{
+//	CardFrameViewController* view1 = [self getRefreshCardFrameViewControllerWithIndex:RefreshFirstPageIndex];
+//	CardFrameViewController* view2 = [self getRefreshCardFrameViewControllerWithIndex:RefreshSecondPageIndex];
+//	
+//	[view1.view removeFromSuperview];
+//	[view2.view removeFromSuperview];
+//	
+//	view1.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:RefreshFirstPageIndex];
+//	view2.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:RefreshSecondPageIndex];
+//	
+//	[self.castView refreshViewsWithFirstPage:view1.view andSecondPage:view2.view];
+//}
 
 - (void)insertFriendStatusFromClient:(WeiboClient *)client
 {
@@ -294,8 +309,6 @@
 	for (NSDictionary *dict in dictArray) {
 		Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
 		[self.currentUser addFriendsStatusesObject:newStatus];
-		
-		NSLog(@"__________ %@", newStatus.text);
 	}
 	[self.managedObjectContext processPendingChanges];
 	[self.fetchedResultsController performFetch:nil];
@@ -340,7 +353,7 @@
 			
 			[self insertFriendStatusFromClient:client];
 			
-			[self reloadCards];
+//			[self reloadCards];
 			
 			_lastStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
 		
@@ -381,23 +394,30 @@
 					
 					_lastStatus = newStatus;
 					
-					[self adjustCardViewAfterLoadingWithCompletion:^(){
-						
-						[self clearData];
-						
-						[self insertFriendStatusFromClient:client];
-						
-						[self reloadCards];
-					}];
+//					[self adjustCardViewAfterLoadingWithCompletion:^(){
+//						
+//						[self clearData];
+//						
+//						[self insertFriendStatusFromClient:client];
+//						
+//						[self reloadCards];
+//					}];
 					
+					[self clearData];
+					
+					[self insertFriendStatusFromClient:client];
+										
+//					[self refreshCards];
 				}
 			}
 			
 			[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
 			
-			[self.delegate castViewController:self 
-							   didScrollToRow:self.currentIndex
-							 withNumberOfRows:[self numberOfRows]];
+//			[self.delegate castViewController:self 
+//							   didScrollToRow:self.castViewManager.currentIndex
+//							 withNumberOfRows:[self numberOfRows]];
+			
+			[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
 			
 		} else {
 			[ErrorNotification showLoadingError];
@@ -426,9 +446,12 @@
         [self loadAllFavoritesWithCompletion:^(void) {
             [self.managedObjectContext processPendingChanges];
             [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
-            [self.delegate castViewController:self 
-                                    didScrollToRow:self.currentIndex
-                                  withNumberOfRows:[self numberOfRows]];
+//            [self.delegate castViewController:self 
+//                                    didScrollToRow:self.castViewManager.currentIndex
+//                                  withNumberOfRows:[self numberOfRows]];
+			
+			[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
+			
             if (completion) {
                 completion();
             }
@@ -496,9 +519,11 @@
 				}
                 
                 [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
-                [self.delegate castViewController:self 
-                                        didScrollToRow:self.currentIndex
-                                      withNumberOfRows:[self numberOfRows]];
+//                [self.delegate castViewController:self 
+//                                        didScrollToRow:self.castViewManager.currentIndex
+//                                      withNumberOfRows:[self numberOfRows]];
+				
+				[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
                 
                 if (completion) {
                     completion();
@@ -714,95 +739,16 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardDismissed object:self];
 }
 
-#pragma mark - Card Frames methods
-
-- (CardFrameViewController*)getReusableFrameViewController
+#pragma mark - Property
+- (CastViewManager*)castViewManager
 {
-	for (CardFrameViewController* cardFrameViewController in self.cardFrames) {
-		if (abs(cardFrameViewController.index - self.currentIndex) > 3) {
-			return cardFrameViewController;
-		}
-	}
-	return nil;
-}
-
-- (CardFrameViewController*)findCardFrameViewControllerForIndex:(int)index
-{
-	for (CardFrameViewController* cardFrameViewController in self.cardFrames) {
-		if (cardFrameViewController.index == index) {
-			return cardFrameViewController;
-		}
-	}
-	return nil;
-}
-
-- (CardFrameViewController*)getCardFrameViewControllerForIndex:(int)index
-{
-	CardFrameViewController *cardFrameViewController = [self findCardFrameViewControllerForIndex:index];
-	if (cardFrameViewController != nil) {
-		return cardFrameViewController;
+	if (_castViewManager == nil) {
+		_castViewManager = [[CastViewManager alloc] init];
 	}
 	
-	cardFrameViewController = [self getReusableFrameViewController];
-	
-	if (cardFrameViewController == nil) {
-		SmartCardViewController *smartCardViewController = [[[SmartCardViewController alloc] init] autorelease];
-		cardFrameViewController = [[[CardFrameViewController alloc] init] autorelease];
-		cardFrameViewController.contentViewController = smartCardViewController;
-		
-		[self.cardFrames addObject:cardFrameViewController];
-	} else {
-		if (cardFrameViewController.view.superview != nil) {
-			[cardFrameViewController.contentViewController clear];
-			[cardFrameViewController.view removeFromSuperview];
-		}
-	}
-		
-	cardFrameViewController.index = index;
-	cardFrameViewController.contentViewController.currentUser = self.currentUser;
-	cardFrameViewController.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:index];
-	cardFrameViewController.contentViewController.view.frame = CastViewFrame;
-		
-	return cardFrameViewController;
-
+	return _castViewManager;
 }
 
-#pragma mark - GYCastViewDelegate methods
-
-- (void)didScrollToIndex:(int)index
-{
-	self.currentIndex = index;
-	[self.delegate castViewController:self didScrollToRow:self.currentIndex withNumberOfRows:[self numberOfRows]];
-}
-
-- (UIView*)viewForItemAtIndex:(GYCastView *)scrollView index:(int)index
-{	
-	CardFrameViewController *cardFrameViewController = [self getCardFrameViewControllerForIndex:index];
-
-	return cardFrameViewController.view;
-}
-
-- (int)itemCount:(GYCastView *)scrollView
-{
-	return 10;
-}
-
-- (void)loadMoreViews
-{
-	[self loadMoreDataCompletion:^(){
-		[self.castView addMoreViews];
-	}];
-}
-
-#pragma mark - Properties
-
-- (NSMutableArray*)cardFrames
-{
-	if (_cardFrames == nil) {
-		_cardFrames = [[NSMutableArray alloc] init];
-	}
-	return _cardFrames;
-}
 
 
 @end

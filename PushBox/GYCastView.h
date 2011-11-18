@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+#define RefreshFirstPageIndex 0
+#define RefreshSecondPageIndex 1
+
 @class GYCastView;
 
 @protocol GYCastViewDelegate
@@ -29,6 +32,8 @@
 	BOOL dropShadow;
 	NSInteger pageNum;
 	NSInteger prePage;
+	
+	BOOL testKey;
 }
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, assign) id<GYCastViewDelegate, NSObject> delegate;
@@ -38,7 +43,8 @@
 
 - (void)reloadViews;
 - (void)addMoreViews;
-- (void)refreshViews;
+- (void)refreshViewsWithFirstPage:(UIView*)firstView 
+					andSecondPage:(UIView*)secondView;
 
 - (void)didReceiveMemoryWarning;
 - (id)initWithFrameAndPageSize:(CGRect)frame pageSize:(CGSize)size;

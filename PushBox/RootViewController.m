@@ -758,7 +758,7 @@
     }
 }
 
-- (void)castViewController:(CastViewController *)vc didScrollToRow:(int)row withNumberOfRows:(int)numberOfRows
+- (void)castViewControllerdidScrollToRow:(int)row withNumberOfRows:(int)numberOfRows
 {
     UISlider *slider = self.dockViewController.slider;
     [slider setMaximumValue:numberOfRows-1];
@@ -1449,7 +1449,7 @@
         _castViewController = [[CastViewController alloc] init];
         self.castViewController.currentUser = self.currentUser;
 		self.castViewController.managedObjectContext = self.managedObjectContext;
-        self.castViewController.delegate = self;
+        self.castViewController.castViewManager.delegate = self;
         CGRect frame = self.castViewController.view.frame;
         frame.origin.y = kCardTableViewFrameOriginY;
         self.castViewController.view.frame = frame;

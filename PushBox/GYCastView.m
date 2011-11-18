@@ -43,6 +43,16 @@
     return self;
 }
 
+#pragma mark - Tool Functions
+
+-(int)currentPage
+{
+	CGFloat pageWidth = scrollView.frame.size.width;
+	int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+	
+	return page;
+}
+
 #pragma mark - Load Page methods
 
 - (void)loadPage:(int)page
@@ -56,22 +66,28 @@
 	
 	UIView *view = [delegate viewForItemAtIndex:self index:page];
 	
-	if (view.superview == nil) 
-	{
-		// Position the view in our scrollview
-		CGRect viewFrame = view.frame;
-		viewFrame.origin.x = viewFrame.size.width * page;
-		viewFrame.origin.y = 0;
-		
-		view.frame = viewFrame;
-		
+	// Position the view in our scrollview
+	CGRect viewFrame = view.frame;
+	viewFrame.origin.x = viewFrame.size.width * page;
+	viewFrame.origin.y = 0;
+	view.frame = viewFrame;
+	
+	if (view.superview == nil) {
 		[self.scrollView addSubview:view];
 	}
 }
 
-- (void)loadFreshPage
+- (void)loadRefreshPage:(int)page WithView:(UIView*)view
 {
+	int index = [self currentPage] + page + 6;
 	
+	CGRect viewFrame = view.frame;
+	viewFrame.origin.x = viewFrame.size.width * index;
+	viewFrame.origin.y = 0;
+	
+	view.frame = viewFrame;
+	
+	[self.scrollView addSubview:view];
 }
 
 #pragma mark - Set Up methods
@@ -79,7 +95,9 @@
 - (void)layoutSubviews
 {
 	if(firstLayout)
-	{  
+	{
+		testKey = YES;
+		
 		CGRect scrollViewRect = CGRectMake(0, 0, pageSize.width, pageSize.height);
 		scrollViewRect.origin.x = ((self.frame.size.width - pageSize.width) / 2);
 		scrollViewRect.origin.y = ((self.frame.size.height - pageSize.height) / 2);
@@ -96,9 +114,9 @@
 		int pageCount = [delegate itemCount:self];
 		scrollViewPages = [[NSMutableArray alloc] initWithCapacity:pageCount];
 		
-		pageNum = [delegate itemCount:self];
+		pageNum = 10;
 		
-		self.scrollView.contentSize = CGSizeMake([delegate itemCount:self] * self.scrollView.frame.size.width, scrollView.frame.size.height);
+		self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
 		
 		[self loadPage:0];
 		[self loadPage:1];
@@ -123,14 +141,6 @@
 	return [super hitTest:point	withEvent:event];
 }
 
--(int)currentPage
-{
-	CGFloat pageWidth = scrollView.frame.size.width;
-	int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
-	
-	return page;
-}
-
 #pragma mark - Adjust Views in Castview
 
 - (void)reloadViews
@@ -149,9 +159,23 @@
 	self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
 }
 
-- (void)refreshViews
+- (void)refreshViewsWithFirstPage:(UIView*)firstView 
+					andSecondPage:(UIView*)secondView
 {
 	self.scrollView.contentSize = CGSizeMake((pageNum + 3) * self.scrollView.frame.size.width, scrollView.frame.size.height);
+	[self loadRefreshPage:RefreshFirstPageIndex WithView:firstView];
+	[self loadRefreshPage:RefreshSecondPageIndex WithView:secondView];
+	
+	[UIView animateWithDuration:5.0 animations:^(){
+		[self.scrollView setContentOffset:CGPointMake(([self currentPage] + 3) * self.scrollView.frame.size.width, 0)];
+		for (UIView* view in self.scrollView.subviews) {
+			CGRect frame = view.frame;
+			frame.origin.x -= 3 * self.scrollView.frame.size.width;
+			view.frame = frame;
+		}
+	}];
+
+	testKey = NO;
 }
 
 
@@ -160,6 +184,9 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)sv
 {
+	if (!testKey) {
+		return;
+	}
 	int page = [self currentPage];
 	
 	if (prePage != page) {
