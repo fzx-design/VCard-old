@@ -31,7 +31,7 @@ typedef enum {
 @class User;
 
 
-@interface CastViewController : CoreDataTableViewController {
+@interface CastViewController : CoreDataTableViewController <GYCastViewDelegate> {
 	UIImageView *_blurImageView;
 	UIImageView *_rootShadowLeft;
 	UIButton *_regionLeftDetectButton;

@@ -75,6 +75,11 @@
 				 object:nil];
 }
 
+- (void)setUpView
+{
+	self.castView.delegate = self;
+	self.blurImageView.alpha = 0.0;
+}
 
 #pragma mark - View lifecycle
 
@@ -92,11 +97,11 @@
 	
 	self.fetchedResultsController.delegate = nil;
 	
-	self.blurImageView.alpha = 0.0;
-	
 	[self setUpCastViewManager];
 	
 	[self setUpArguments];
+	
+	[self setUpView];
 	
 	[self setUpNotification];
 }
@@ -381,15 +386,6 @@
 					
 					_lastStatus = newStatus;
 					
-//					[self adjustCardViewAfterLoadingWithCompletion:^(){
-//						
-//						[self clearData];
-//						
-//						[self insertFriendStatusFromClient:client];
-//						
-//						[self reloadCards];
-//					}];
-					
 					[self clearData];
 					
 					[self insertFriendStatusFromClient:client];
@@ -399,10 +395,6 @@
 			}
 			
 			[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
-			
-//			[self.delegate castViewController:self 
-//							   didScrollToRow:self.castViewManager.currentIndex
-//							 withNumberOfRows:[self numberOfRows]];
 			
 			[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
 			
@@ -433,9 +425,6 @@
         [self loadAllFavoritesWithCompletion:^(void) {
             [self.managedObjectContext processPendingChanges];
             [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
-//            [self.delegate castViewController:self 
-//                                    didScrollToRow:self.castViewManager.currentIndex
-//                                  withNumberOfRows:[self numberOfRows]];
 			
 			[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
 			
@@ -725,6 +714,37 @@
     [UserCardNaviViewController sharedUserCardDismiss];
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardDismissed object:self];
 }
+
+#pragma mark - GYCastViewDelegate methods
+
+- (void)didScrollToIndex:(int)index
+{
+	[self.castViewManager didScrollToIndex:index];
+}
+
+- (UIView*)viewForItemAtIndex:(GYCastView *)scrollView index:(int)index
+{	
+	return [self.castViewManager viewForItemAtIndex:scrollView index:index];
+}
+
+- (int)itemCount:(GYCastView *)scrollView
+{
+	return [self.castViewManager itemCount:scrollView];
+}
+
+- (void)loadMoreViews
+{
+	//	[self loadMoreDataCompletion:^(){
+	//		[self.castView addMoreViews];
+	//	}];
+}
+
+- (void)resetViews
+{
+	[self.castViewManager resetViews];
+}
+
+
 
 #pragma mark - Property
 - (CastViewManager*)castViewManager

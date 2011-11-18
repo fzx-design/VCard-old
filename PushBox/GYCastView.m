@@ -175,9 +175,7 @@
 	animating = YES;
 	
 	int page = (int)[self currentPage];
-	
-	NSLog(@"pages left %d", self.scrollView.subviews.count);
-	
+		
 	self.scrollView.contentSize = CGSizeMake((pageNum + 3) * self.scrollView.frame.size.width, scrollView.frame.size.height);
 	[self setRefreshPage:FirstPageIndex WithView:firstView];
 	[self setRefreshPage:SecondPageIndex WithView:secondView];

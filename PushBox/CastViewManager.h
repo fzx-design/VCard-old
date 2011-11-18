@@ -14,7 +14,7 @@
 - (void)castViewControllerdidScrollToRow:(int)row withNumberOfRows:(int)maxRow;
 @end
 
-@interface CastViewManager : NSObject <GYCastViewDelegate> {
+@interface CastViewManager : NSObject {
 	GYCastView *_castView;
 	
 	int _currentIndex;
@@ -39,5 +39,11 @@
 
 - (void)initialSetUp;
 - (void)refreshCards;
+
+- (UIView*)viewForItemAtIndex:(GYCastView*)scrollView index:(int)index;
+- (int)itemCount:(GYCastView*)scrollView;
+- (void)didScrollToIndex:(int)index;
+- (void)loadMoreViews;
+- (void)resetViews;
 
 @end

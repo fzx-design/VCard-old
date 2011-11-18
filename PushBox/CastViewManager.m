@@ -26,7 +26,6 @@
 - (void)initialSetUp
 {
 	self.castView.pageSize = CastViewPageSize;
-	self.castView.delegate = self;
 	[self.castView setScrollsToTop:NO];
 	self.currentIndex = 1;
 }
@@ -43,7 +42,7 @@
 - (CardFrameViewController*)getRefreshCardFrameViewControllerWithIndex:(int)index
 {
 	for (CardFrameViewController* cardFrameViewController in self.cardFrames) {
-		if (cardFrameViewController.index - self.currentIndex == index + 2) {
+		if (abs(cardFrameViewController.index - self.currentIndex) == index + 2) {
 			return cardFrameViewController;
 		}
 	}
