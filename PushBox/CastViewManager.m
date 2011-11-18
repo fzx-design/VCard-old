@@ -180,13 +180,6 @@
 	return count;
 }
 
-- (void)loadMoreViews
-{
-//	[self loadMoreDataCompletion:^(){
-//		[self.castView addMoreViews];
-//	}];
-}
-
 - (void)resetViews
 {
 	for (CardFrameViewController *vc in self.cardFrames) {

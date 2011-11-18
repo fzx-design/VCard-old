@@ -448,7 +448,6 @@
         NSString *statusID = lastStatus.statusID;
         maxID = [statusID longLongValue] - 1;
 		_refreshFlag = NO;
-//		[[UIApplication sharedApplication] showLoadingView];
     }
     
     
@@ -495,10 +494,7 @@
 				}
                 
                 [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
-//                [self.delegate castViewController:self 
-//                                        didScrollToRow:self.castViewManager.currentIndex
-//                                      withNumberOfRows:[self numberOfRows]];
-				
+
 				[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
                 
                 if (completion) {
@@ -734,9 +730,9 @@
 
 - (void)loadMoreViews
 {
-	//	[self loadMoreDataCompletion:^(){
-	//		[self.castView addMoreViews];
-	//	}];
+	[self loadMoreDataCompletion:^(){
+		[self.castView addMoreViews];
+	}];
 }
 
 - (void)resetViews
