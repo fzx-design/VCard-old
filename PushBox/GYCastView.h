@@ -18,8 +18,10 @@
 @required
 - (UIView*)viewForItemAtIndex:(GYCastView*)scrollView index:(int)index;
 - (int)itemCount:(GYCastView*)scrollView;
+
 - (void)didScrollToIndex:(int)index;
 - (void)loadMoreViews;
+- (void)resetViews;
 
 @end
 
@@ -28,12 +30,11 @@
 	id <GYCastViewDelegate, NSObject> delegate;
 	NSMutableArray *scrollViewPages;
 	BOOL firstLayout;
+	BOOL animating;
 	CGSize pageSize;
 	BOOL dropShadow;
 	NSInteger pageNum;
 	NSInteger prePage;
-	
-	BOOL testKey;
 }
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, assign) id<GYCastViewDelegate, NSObject> delegate;

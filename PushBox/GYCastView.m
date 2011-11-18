@@ -47,7 +47,7 @@
 
 #pragma mark - Tool Functions
 
--(int)currentPage
+- (int)currentPage
 {
 	CGFloat pageWidth = scrollView.frame.size.width;
 	int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
@@ -99,10 +99,27 @@
 
 #pragma mark - Set Up methods
 
+- (void)reset
+{
+	pageNum = [delegate itemCount:self];
+		
+	self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
+	
+	self.scrollView.contentOffset = CGPointMake(0.0, 0.0);
+	
+	[self.delegate resetViews];
+	
+	for (int i = 0; i < pageNum; ++i) {
+		[self loadPage:i];
+	}
+	
+	animating = NO;
+}
+
 - (void)layoutSubviews
 {
 	if(firstLayout){
-		testKey = YES;
+		animating = NO;
 		
 		CGRect scrollViewRect = CGRectMake(0, 0, pageSize.width, pageSize.height);
 		scrollViewRect.origin.x = ((self.frame.size.width - pageSize.width) / 2);
@@ -117,18 +134,7 @@
 		
 		[self addSubview:scrollView];
 		
-		int pageCount = [delegate itemCount:self];
-		scrollViewPages = [[NSMutableArray alloc] initWithCapacity:pageCount];
-		
-		pageNum = [delegate itemCount:self];
-		
-		self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
-		
-		for (int i = 0; i < pageNum; ++i) {
-			[self loadPage:i];
-		}
-		
-		firstLayout = NO;
+		[self reset];
 	}
 }
 
@@ -166,27 +172,32 @@
 - (void)refreshViewsWithFirstPage:(UIView*)firstView 
 					andSecondPage:(UIView*)secondView
 {
-	float page = [self currentPage];
+	animating = YES;
+	
+	int page = (int)[self currentPage];
+	
+	NSLog(@"pages left %d", self.scrollView.subviews.count);
+	
 	self.scrollView.contentSize = CGSizeMake((pageNum + 3) * self.scrollView.frame.size.width, scrollView.frame.size.height);
 	[self setRefreshPage:FirstPageIndex WithView:firstView];
 	[self setRefreshPage:SecondPageIndex WithView:secondView];
 	
-	
-	testKey = NO;
-	
 	[UIView animateWithDuration:1.25 animations:^(){
+		[self.delegate didScrollToIndex:0];
 		[self.scrollView setContentOffset:CGPointMake((page + MoveCardsOffsetPage + RefreshCardsOffsetPage) * self.scrollView.frame.size.width, 0)];
+	} completion:^(BOOL finished) {
+		if (finished) {
+			[self reset];
+		}
 	}];
 
 }
 
-
-#pragma mark -
-#pragma mark UIScrollViewDelegate methods
+#pragma mark - UIScrollViewDelegate methods
 
 -(void)scrollViewDidScroll:(UIScrollView *)sv
 {
-	if (!testKey) {
+	if (animating) {
 		return;
 	}
 	int page = [self currentPage];

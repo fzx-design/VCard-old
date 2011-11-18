@@ -12,6 +12,7 @@
 #define CastViewPageSize CGSizeMake(560, 640)
 #define CastViewFrame CGRectMake(0.0f, 0.0f, 560, 640)
 #define PreLoadCardNumber 7
+#define InitialIndex 100
 
 @implementation CastViewManager
 
@@ -106,8 +107,14 @@
 	for (CardFrameViewController* cardFrameViewController in self.cardFrames) {
 		if (abs(cardFrameViewController.index - self.currentIndex) >= 2) {
 			[cardFrameViewController.view removeFromSuperview];
-			NSLog(@"View with index %d removed!", cardFrameViewController.index);
 		}
+	}
+}
+
+- (void)resetCardFrameIndex
+{
+	for (CardFrameViewController *vc in self.cardFrames) {
+		vc.index = InitialIndex;
 	}
 }
 
@@ -130,15 +137,24 @@
 	CardFrameViewController* vc1 = [self getRefreshCardFrameViewControllerWithIndex:FirstPageIndex];
 	CardFrameViewController* vc2 = [self getRefreshCardFrameViewControllerWithIndex:SecondPageIndex];
 	
-	NSLog(@"Got %d and %d", vc1.index, vc2.index);
+	if (self.fetchedResultsController.fetchedObjects.count > 0) {
+		vc1.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:FirstPageIndex];
+	} else {
+		vc1 = nil;
+	}
+	if (self.fetchedResultsController.fetchedObjects.count > 1) {
+		vc2.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:SecondPageIndex];
+	} else {
+		vc2 = nil;
+	}
 	
-	vc1.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:FirstPageIndex];
-	vc2.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:SecondPageIndex];
+	[self resetCardFrameIndex];
+	
+	vc1.index = 0;
+	vc2.index = 1;
 	
 	[self.castView refreshViewsWithFirstPage:vc1.view andSecondPage:vc2.view];
 }
-
-
 
 
 #pragma mark - GYCastViewDelegate methods
@@ -170,6 +186,16 @@
 //	[self loadMoreDataCompletion:^(){
 //		[self.castView addMoreViews];
 //	}];
+}
+
+- (void)resetViews
+{
+	for (CardFrameViewController *vc in self.cardFrames) {
+		if (vc.index > 1) {
+			vc.index = InitialIndex;
+			[vc.view removeFromSuperview];
+		}
+	}
 }
 
 
