@@ -368,7 +368,7 @@
     
     self.playButton.hidden = YES;
     self.musicBackgroundImageView.alpha = 0.0;
-    self.playButton.frame = kPlayButtonFrameCenter;
+    //    self.playButton.frame = kPlayButtonFrameCenter;
     
 	self.profileImageView.image = nil;
 	self.screenNameLabel.text = self.status.author.screenName;
@@ -670,7 +670,7 @@
 {    
     if (!self.status.repostStatus) {
         self.playButton.hidden = NO;
-        self.playButton.frame = kPlayButtonFrameCenter;
+        //        self.playButton.frame = kPlayButtonFrameCenter;
         self.musicLink = postMusicVideoLink;
         [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
             self.playButton.alpha = 1.0;
@@ -682,7 +682,7 @@
 - (void)loadRepostMusicVideo:(NSString*)repostMusicVideoLink
 {
     self.playButton.hidden = NO;
-    self.playButton.frame = kPlayButtonFrameTopRight;
+    //    self.playButton.frame = kPlayButtonFrameTopRight;
     self.repostView.frame = kRepostViewFrameBottom;
     self.repostWebView.frame = kRepostWebViewFrameBottom;
     self.musicLink = repostMusicVideoLink;
@@ -701,7 +701,7 @@
 - (void)loadRepostMusicVideoV2:(NSString*)repostMusicVideoLink
 {
     self.playButton.hidden = NO;
-    self.playButton.frame = kPlayButtonFrameBottom;
+    //    self.playButton.frame = kPlayButtonFrameBottom;
 }
 
 - (void)getPostMusicVideoLink:(NSString*)statusText
@@ -811,15 +811,6 @@
             }
         }
     }
-    
-    //    if (b) {
-    //        self.tweetImageView.hidden = NO;
-    //        [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
-    //            self.tweetImageView.alpha = 1.0;
-    //            self.imageCoverImageView.alpha = 1.0;
-    //        } completion:^(BOOL fin) {
-    //        }];
-    //    } 
 }
 
 - (void)update
