@@ -16,7 +16,8 @@
 #import "CardFrameViewController.h"
 
 #define kStatusCountPerRequest 10
-#define kBlurImageViewScale 2.27
+#define kBlurImageViewScale 2.0
+#define kCastViewScale 2.5
 
 @implementation CastViewController
 
@@ -229,22 +230,23 @@
 		self.blurImageView.alpha = 1.0;
 		self.blurImageView.transform = CGAffineTransformMakeScale(1, 1);
         self.castView.alpha = 0.0;
-        self.castView.transform = CGAffineTransformScale(self.castView.transform, 1/kBlurImageViewScale, 1/kBlurImageViewScale);
+        self.castView.transform = CGAffineTransformScale(self.castView.transform, 1/kCastViewScale, 1/kCastViewScale);
     } completion:^(BOOL fin) {
 		[self.castViewManager pushNewViews];
 		self.rootShadowLeft.alpha = 1.0;
-		self.castView.transform = CGAffineTransformScale(self.castView.transform, kBlurImageViewScale, kBlurImageViewScale);
+		self.castView.transform = CGAffineTransformScale(self.castView.transform, kCastViewScale, kCastViewScale);
         self.castView.alpha = 0.0;
 		
 		if (completion) {
 			completion();
 		}
-		
+		[[UIApplication sharedApplication] hideLoadingView];
     }];
 }
 
 - (BOOL)popCardWithCompletion:(void (^)())completion
 {
+	[[UIApplication sharedApplication] showLoadingView];
 	CastViewInfo *castViewInfo = [self.infoStack lastObject];
 	
 	BOOL needPopAnimation = (self.infoStack.count == 1);
@@ -272,11 +274,14 @@
         self.blurImageView.alpha = 1.0;
         self.blurImageView.transform = CGAffineTransformMakeScale(1, 1);
 		
-		self.castView.transform = CGAffineTransformScale(self.castView.transform, 1/kBlurImageViewScale, 1/kBlurImageViewScale);
+		self.castView.transform = CGAffineTransformScale(self.castView.transform, 1/kCastViewScale, 1/kCastViewScale);
+		self.castView.alpha = 0.0;
 		[UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
-			self.blurImageView.alpha = 0.0;
-            self.blurImageView.transform = CGAffineTransformMakeScale(kBlurImageViewScale, kBlurImageViewScale);
-			self.castView.transform = CGAffineTransformScale(self.castView.transform, kBlurImageViewScale, kBlurImageViewScale);
+			if (needPopAnimation) {
+				self.blurImageView.alpha = 0.0;
+				self.blurImageView.transform = CGAffineTransformMakeScale(kBlurImageViewScale, kBlurImageViewScale);
+			}
+			self.castView.transform = CGAffineTransformScale(self.castView.transform, kCastViewScale, kCastViewScale);
 			self.castView.alpha = 1.0;
 		} completion:^(BOOL fin) {
 			if (!needPopAnimation) {
@@ -325,54 +330,11 @@
     [self swipeRight];
 }
 
-#pragma mark - Refresh Animation methods
-
-- (void)moveCardsIn
+- (void)deleteCurrentCard
 {
-	CGRect frame = self.castView.frame;
-	frame.origin.x += 782;
-	self.castView.frame = frame;
-	
-	[UIView animateWithDuration:1.0 delay:0.5 options:0 animations:^{
-		self.castView.alpha = 1.0;
-		CGRect frame = self.castView.frame;
-		frame.origin.x -= 782;
-		self.castView.frame = frame;
-	} completion:^(BOOL finished) {
-		if (finished) {
-			if ([[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeySoundEnabled]) {
-				UIAudioAddition* audioAddition = [[UIAudioAddition alloc] init];
-				[audioAddition playRefreshDoneSound];
-				[audioAddition release];
-			}
-		}
-	}];
+	[self.castViewManager deleteCurrentView];
 }
 
-- (void)processData
-{
-	[self scrollToRow:0];
-}
-
-- (void)adjustCardViewPosition
-{
-    [self performSelector:@selector(processData) withObject:nil afterDelay:1.0];
-	[self performSelector:@selector(moveCardsIn) withObject:nil afterDelay:0.5];
-}
-
-- (void)adjustCardViewAfterLoadingWithCompletion:(void (^)())completion
-{
-	[UIView animateWithDuration:0.3 delay:0.0 options:0 animations:^{
-		self.castView.alpha = 0.0;
-	} completion:^(BOOL finished) {
-		if (finished) {
-			if (completion) {
-				completion();
-			}
-			[self adjustCardViewPosition];
-		}
- 	}];
-}
 
 #pragma mark - Load Cards methods
 
@@ -498,7 +460,6 @@
 								count:kStatusCountPerRequest
 							  feature:0];
 }
-
 
 - (void)loadMoreFriendTimeline:(void (^)())completion
 {

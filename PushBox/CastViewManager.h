@@ -43,8 +43,10 @@
 
 - (void)pushNewViews;
 - (void)popNewViews:(CastViewInfo *)info;
+- (void)deleteCurrentView;
 
 - (int)numberOfRows;
+
 
 - (UIView*)viewForItemAtIndex:(GYCastView*)scrollView index:(int)index;
 - (int)itemCount:(GYCastView*)scrollView;

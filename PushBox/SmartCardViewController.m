@@ -1027,7 +1027,7 @@
 				[managedContext deleteObject:self.status];
 				[managedContext processPendingChanges];
 				
-//				 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameCardShouldDeleteCard object:self];
+				[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameCardShouldDeleteCard object:self];
 //				
 //				[self performSelector:@selector(deleteCardFromCoreData) withObject:nil afterDelay:5.0];
 				

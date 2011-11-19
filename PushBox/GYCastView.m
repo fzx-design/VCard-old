@@ -209,6 +209,18 @@
 	}];
 }
 
+- (void)deleteView
+{
+	CGSize size = self.scrollView.contentSize;
+	size.width -= self.scrollView.frame.size.width;
+	self.scrollView.contentSize = size;
+	
+	int page = [self currentPage];
+	for (int i = page - 3; i <= page + 3; ++i) {
+		[self loadPage:i];
+	}
+}
+
 - (void)addMoreViews
 {
 	pageSection++;

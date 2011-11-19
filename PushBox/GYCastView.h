@@ -49,6 +49,7 @@
 
 - (void)changeViews;
 - (void)reloadViews;
+- (void)deleteView;
 - (void)moveOutViews:(void (^)())completion;
 - (void)addMoreViews;
 - (void)refreshViewsWithFirstPage:(UIView*)firstView 

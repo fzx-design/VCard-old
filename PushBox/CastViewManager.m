@@ -8,9 +8,11 @@
 
 #import "CastViewManager.h"
 #import "CardFrameViewController.h"
+#import "OptionsTableViewController.h"
 
 #define CastViewPageSize CGSizeMake(560, 640)
 #define CastViewFrame CGRectMake(0.0f, 0.0f, 560, 640)
+#define CastViewPageWidth 560
 #define PreLoadCardNumber 7
 
 @implementation CastViewManager
@@ -127,6 +129,15 @@
 	[self.castView reloadViews];
 }
 
+- (void)playSoundEffect
+{
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeySoundEnabled]) {
+		UIAudioAddition* audioAddition = [[UIAudioAddition alloc] init];
+		[audioAddition playRefreshDoneSound];
+		[audioAddition release];
+	}
+}
+
 - (void)refreshCards
 {
 	[self prepareForMovingCards];
@@ -151,6 +162,43 @@
 	vc2.index = 1;
 	
 	[self.castView refreshViewsWithFirstPage:vc1.view andSecondPage:vc2.view];
+	
+	[self performSelector:@selector(playSoundEffect) withObject:nil afterDelay:1];
+}
+
+- (void)deleteCurrentView
+{
+	CardFrameViewController *toDelete;
+	for (CardFrameViewController *cardFrameViewController in self.cardFrames) {
+		if (cardFrameViewController.index - self.currentIndex == 0) {
+			toDelete = cardFrameViewController;
+		}
+	}
+	
+	[UIView animateWithDuration:0.3 animations:^{
+		for (CardFrameViewController *cardFrameViewController in self.cardFrames) {
+			UIView* view = cardFrameViewController.view;
+			if ((cardFrameViewController.index - self.currentIndex == 0)) {
+				CGRect frame = view.frame;
+				frame.origin.y -= 640;
+				view.frame = frame;
+			} else if (cardFrameViewController.index - self.currentIndex > 0) {
+				CGRect frame = view.frame;
+				frame.origin.x -= 560;
+				view.frame = frame;
+				cardFrameViewController.index--;
+				
+			} 
+		}
+	} completion:^(BOOL finished) {
+		if (finished) {
+			self.castView.pageNum--;
+			[toDelete.view removeFromSuperview];
+			toDelete.index = InitialIndex;
+			[self.castView deleteView];
+			[self reloadCards];
+		}
+	}];
 }
 
 - (void)pushNewViews
