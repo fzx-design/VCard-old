@@ -458,7 +458,7 @@
 					</object>
 					<object class="IBUIView" id="60335549">
 						<reference key="NSNextResponder" ref="931374233"/>
-						<int key="NSvFlags">-2147483356</int>
+						<int key="NSvFlags">292</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUIButton" id="620434925">
@@ -1049,7 +1049,7 @@
 						<int key="objectID">76</int>
 						<reference key="object" ref="1004938188"/>
 						<reference key="parent" ref="931374233"/>
-						<string key="objectName">comment count label</string>
+						<string key="objectName">recent act notify</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">83</int>

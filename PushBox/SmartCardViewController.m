@@ -322,6 +322,7 @@
 - (void)prepare
 {		
     b = YES;
+    isTrack = YES;
     
     self.profileImageView.alpha = 0.0;
     self.musicLink = nil;
@@ -359,12 +360,10 @@
     self.musicCoverImageView.hidden = YES;
     self.musicCoverImageView.alpha = 0;
     
-    self.recentActNotifyLabel.hidden = YES;
-    
-    self.trackView.hidden = YES;
-    self.trackLabel.text = @"";
-    self.trackView.alpha = 0.0;
     self.trackLabel.alpha = 0.0;
+    self.trackView.alpha = 0.0;
+    self.recentActNotifyLabel.alpha = 0.0;    
+    self.trackLabel.text = @"";
     
     self.playButton.hidden = YES;
     self.musicBackgroundImageView.alpha = 0.0;
@@ -741,8 +740,7 @@
                             NSString* longUrl = [dict objectForKey:@"url_long"];
                             
                             
-                            if ([longUrl rangeOfString:@"http://v.youku.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.tudou.com"].location != NSNotFound || [longUrl rangeOfString:@"http://v.ku6.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.56.com"].location != NSNotFound || [longUrl rangeOfString:@"http://music.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.xiami.com"].location != NSNotFound || [longUrl rangeOfString:@"songtaste.com"].location != NSNotFound)
-                            {
+                            if ([longUrl rangeOfString:@"http://v.youku.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.tudou.com"].location != NSNotFound || [longUrl rangeOfString:@"http://v.ku6.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.56.com"].location != NSNotFound || [longUrl rangeOfString:@"http://music.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.xiami.com"].location != NSNotFound || [longUrl rangeOfString:@"songtaste.com"].location != NSNotFound) {
                                 isTrack = NO;
                                 [self loadPostMusicVideo:longUrl];
                             }
@@ -797,7 +795,6 @@
                             
                             
                             if ([longUrl rangeOfString:@"http://v.youku.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.tudou.com"].location != NSNotFound || [longUrl rangeOfString:@"http://v.ku6.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.56.com"].location != NSNotFound || [longUrl rangeOfString:@"http://music.sina.com"].location != NSNotFound|| [longUrl rangeOfString:@"http://www.xiami.com"].location != NSNotFound || [longUrl rangeOfString:@"songtaste.com"].location != NSNotFound) {
-                                isTrack = NO;
                                 b = NO;
                                 [self loadRepostMusicVideoV2:longUrl];
                             } 
@@ -818,6 +815,7 @@
 	BOOL imageLoadingEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeyImageDownloadingEnabled];
     
     Status *status = self.status;
+    
     isTrack = YES;
     
     NSString *profileImageString = self.status.author.profileImageURL;
@@ -831,52 +829,58 @@
     
     // post text
     [self loadPostWebView];
+    
     // post image
     if (imageLoadingEnabled && self.status.originalPicURL) {
         [self performSelector:@selector(loadStatusImage) withObject:nil afterDelay:kLoadDelay];
         isTrack = NO;
     }
+    
     // post music or video
-    if (YES)
-    {
+    if (YES) {
         [self getPostMusicVideoLink:status.text];
     }
     
     if (self.status.repostStatus) {
         Status *repostStatus = self.status.repostStatus;
-        // self.imageCoverImageView.hidden = NO;
+        
         isTrack = NO;
+        
         // repost text
         [self loadRepostWebView];
+        
         // repost image
         if (imageLoadingEnabled && repostStatus.originalPicURL.length) {
             [self performSelector:@selector(loadRepostStautsImageV2) withObject:nil afterDelay:kLoadDelay];
         }
+        
         // repost music or video
-        if (YES)
-        {
+        if (YES) {
             [self getRepostMusicVideoLink:repostStatus.text];
         }
     }
     
     // Track
-    if (isTrack)
-        //    if (NO)
-    {
+    if (isTrack) {
+        NSString* actNotiString = [[[NSString alloc] initWithFormat:@"%@ 关于此微博的最新进展", status.author.screenName] autorelease];
+        self.recentActNotifyLabel.text = actNotiString;
+        
+        // 
         NSString* trackString = [[[NSString alloc] initWithFormat:@"询问 %@", status.author.screenName] autorelease];
         self.trackLabel.text = trackString;
-        trackString = [[[NSString alloc] initWithFormat:@"%@ 关于此微博的最新进展", status.author.screenName] autorelease];
-        self.recentActNotifyLabel.text = trackString;
-        self.trackLabel.hidden = NO;
-        self.recentActNotifyLabel.hidden = NO;
-        self.trackView.hidden = NO;
-        //        self.imageCoverImageView.hidden = YES;
+        
+        self.trackLabel.alpha = 0.0;
+        self.trackView.alpha = 0.0;
+        self.recentActNotifyLabel.alpha = 0.0;
+        
         [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
             self.trackLabel.alpha = 1.0;
             self.trackView.alpha = 1.0;
+//            self.recentActNotifyLabel.alpha = 1.0;
         } completion:^(BOOL fin) {
             
         }];
+        
     }
     
 }
