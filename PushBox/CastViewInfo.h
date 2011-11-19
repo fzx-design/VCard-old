@@ -22,6 +22,7 @@ typedef enum {
 @property (nonatomic, assign) int nextPage;
 @property (nonatomic, assign) int currentIndex;
 @property (nonatomic, assign) int indexCount;
+@property (nonatomic, assign) int indexSection;
 @property (nonatomic, assign) CastViewDataSource dataSource;
 
 @end

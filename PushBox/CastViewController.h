@@ -32,6 +32,7 @@
 	
 	User *_user;
 	CastViewDataSource _dataSource;
+	CastViewDataSource _prevDataSource;
 	
 	NSTimer *_timer;
 	
@@ -61,6 +62,7 @@
 
 @property(nonatomic, retain) User *user;
 @property(nonatomic, assign) CastViewDataSource dataSource;
+@property(nonatomic, assign) CastViewDataSource prevDataSource;
 @property(nonatomic, retain) CastViewManager *castViewManager;
 
 //@property(nonatomic, retain) NSMutableArray *nextPageStack;

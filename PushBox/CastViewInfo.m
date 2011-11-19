@@ -14,6 +14,7 @@
 @synthesize nextPage;
 @synthesize currentIndex;
 @synthesize indexCount;
+@synthesize indexSection;
 @synthesize dataSource;
 
 - (void)dealloc

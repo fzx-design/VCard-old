@@ -165,6 +165,7 @@
 //		}];
 
 		self.castViewController.dataSource = CastViewDataSourceFriendsTimeline;
+		self.castViewController.prevDataSource = self.castViewController.dataSource;
 		[self.castViewController firstLoad:^(void) {
 			[self.castViewController loadAllFavoritesWithCompletion:nil];
 			[self showCardTableView];
@@ -367,7 +368,7 @@
     }
 //    self.bottomStateView.alpha = 1.0;
 	self.bottomStateView.hidden = NO;
-    [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimation] forKey:@"animation"];
+    [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimationDown] forKey:@"animation"];
     [self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
     
     [self.bottomStateFrameView bringSubviewToFront:self.bottomStateView];
@@ -413,7 +414,7 @@
 
 - (void)hideBottomStateView
 {
-    [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimation] forKey:@"animation"];
+    [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimationUp] forKey:@"animation"];
     [self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
     
 //    self.bottomStateView.alpha = 0.0;
@@ -423,7 +424,7 @@
 
 - (void)popBottomStateView
 {
-	[self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimation] forKey:@"animation"];
+	[self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimationUp] forKey:@"animation"];
     [self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
 }
 

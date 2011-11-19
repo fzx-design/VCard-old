@@ -190,6 +190,25 @@
 	}
 }
 
+- (void)moveOutViews:(void (^)())completion
+{
+	animating = YES;
+	
+	int page = (int)[self currentPage];
+	
+	[self.delegate resetViewsAroundCurrentIndex:page];
+	
+	self.scrollView.contentSize = CGSizeMake((pageNum + 3) * self.scrollView.frame.size.width, scrollView.frame.size.height);
+	
+	[UIView animateWithDuration:0.5 animations:^(){
+		[self.scrollView setContentOffset:CGPointMake((page + 3) * self.scrollView.frame.size.width, 0)];
+	} completion:^(BOOL finished) {
+		if (finished && completion) {
+			completion();
+		}
+	}];
+}
+
 - (void)addMoreViews
 {
 	pageSection++;
@@ -197,7 +216,7 @@
 	int pre = pageNum;
 	pageNum = [self.delegate itemCount:self];
 	
-	if (pageNum == pre) {
+	if (pageNum <= pre) {
 		pageSection--;
 	} else {
 		self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);

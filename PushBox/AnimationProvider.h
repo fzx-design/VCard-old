@@ -12,6 +12,7 @@
 @interface AnimationProvider : NSObject
 
 + (CAKeyframeAnimation*)popoverAnimation;
-+ (CATransition*)cubeAnimation;
++ (CATransition*)cubeAnimationDown;
++ (CATransition*)cubeAnimationUp;
 
 @end

@@ -49,6 +49,7 @@
 
 - (void)changeViews;
 - (void)reloadViews;
+- (void)moveOutViews:(void (^)())completion;
 - (void)addMoreViews;
 - (void)refreshViewsWithFirstPage:(UIView*)firstView 
 					andSecondPage:(UIView*)secondView;

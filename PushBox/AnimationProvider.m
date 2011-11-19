@@ -29,7 +29,20 @@
 	return animation;
 }
 
-+ (CATransition*)cubeAnimation
++ (CATransition*)cubeAnimationDown
+{
+	CATransition *animation = [CATransition animation];
+    animation.duration = 0.5f;
+    animation.timingFunction = UIViewAnimationCurveEaseInOut;
+	animation.fillMode = kCAFillModeForwards;
+	animation.removedOnCompletion = NO;
+	animation.type = @"cube";
+	animation.subtype = kCATransitionFromTop;
+	
+	return animation;
+}
+
++ (CATransition*)cubeAnimationUp
 {
 	CATransition *animation = [CATransition animation];
     animation.duration = 0.5f;

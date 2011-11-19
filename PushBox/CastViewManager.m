@@ -86,7 +86,6 @@
 	} else {
 		if (cardFrameViewController.view.superview != nil) {
 			[cardFrameViewController.contentViewController clear];
-//			[cardFrameViewController.view removeFromSuperview];
 		}
 	}
 	
@@ -156,14 +155,12 @@
 
 - (void)pushNewViews
 {
-	NSLog(@"Push____ numberOfPages: %d", [self itemCount:nil]);
 	[self.castView resetWithCurrentIndex:0 numberOfPages:[self itemCount:nil]];
 	[self reloadCards];
 }
 
 - (void)popNewViews:(CastViewInfo*)info
 {
-	NSLog(@"Pre info ci: %d and ic: %d", info.currentIndex, info.indexCount);
 	[self.castView resetWithCurrentIndex:info.currentIndex numberOfPages:info.indexCount];
 	[self reloadCards];
 }
@@ -178,7 +175,6 @@
 
 - (UIView*)viewForItemAtIndex:(GYCastView *)scrollView index:(int)index
 {
-	NSLog(@"The index is %d and the pageNum is %d", index, self.castView.pageNum);
 	
 	CardFrameViewController *cardFrameViewController = [self getCardFrameViewControllerForIndex:index];
 	
@@ -198,9 +194,6 @@
 {
 	for (CardFrameViewController *vc in self.cardFrames) {
 		if (abs(vc.index - index) > 1) {
-			
-			NSLog(@"%d removed", vc.index);
-			
 			vc.index = InitialIndex;
 			[vc.view removeFromSuperview];
 		}

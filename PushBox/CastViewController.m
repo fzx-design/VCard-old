@@ -28,6 +28,7 @@
 
 @synthesize user = _user;
 @synthesize dataSource = _dataSource;
+@synthesize prevDataSource = _prevDataSource;
 @synthesize castViewManager = _castViewManager;
 
 //@synthesize nextPageStack = _nextPageStack;
@@ -111,6 +112,8 @@
 	[self setUpView];
 	
 	[self setUpNotification];
+	
+	[self setUpRefreshSettings];
 }
 
 #pragma mark - Get Unread methods
@@ -185,8 +188,11 @@
 	castViewInfo.fetchedResultsController = self.fetchedResultsController;
 	castViewInfo.nextPage = _nextPage;
 	castViewInfo.currentIndex = self.castViewManager.currentIndex;
-	castViewInfo.dataSource = self.dataSource;
+	castViewInfo.dataSource = self.prevDataSource;
 	castViewInfo.indexCount = [self.castViewManager numberOfRows];
+	castViewInfo.indexSection = self.castView.pageSection;
+	
+	self.prevDataSource = self.dataSource;
 	
 	[self.infoStack addObject:castViewInfo];
 	
@@ -196,6 +202,7 @@
 	self.castViewManager.fetchedResultsController = nil;
 	self.castViewManager.fetchedResultsController = self.fetchedResultsController;
 	self.castViewManager.currentIndex = 0;
+	self.castView.pageSection = 1;
 	
 	_nextPage = 1;
 }
@@ -205,7 +212,9 @@
 	[[UIApplication sharedApplication] showLoadingView];
 	
 	[self recordCurrentState];
-
+	
+//	[self clearData];
+	
 	[self loadMoreDataCompletion:nil];
 	
 	BOOL firstPush = (self.infoStack.count == 1);
@@ -222,11 +231,11 @@
         self.castView.alpha = 0.0;
         self.castView.transform = CGAffineTransformScale(self.castView.transform, 1/kBlurImageViewScale, 1/kBlurImageViewScale);
     } completion:^(BOOL fin) {
-//		[self clearData];
 		[self.castViewManager pushNewViews];
 		self.rootShadowLeft.alpha = 1.0;
 		self.castView.transform = CGAffineTransformScale(self.castView.transform, kBlurImageViewScale, kBlurImageViewScale);
         self.castView.alpha = 0.0;
+		
 		if (completion) {
 			completion();
 		}
@@ -241,10 +250,9 @@
 	BOOL needPopAnimation = (self.infoStack.count == 1);
 	
 	self.dataSource = castViewInfo.dataSource;
+	self.prevDataSource = self.dataSource;
 	
-	[UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
-		self.castView.alpha = 0.0;
-	} completion:^(BOOL fin) {
+	[self.castView moveOutViews:^() {
 
 		self.fetchedResultsController = castViewInfo.fetchedResultsController;
         self.fetchedResultsController.delegate = nil;
@@ -252,6 +260,8 @@
 		self.castViewManager.fetchedResultsController = nil;
 		self.castViewManager.fetchedResultsController = self.fetchedResultsController;
         self.castViewManager.currentIndex = castViewInfo.currentIndex;
+		self.castView.pageSection = castViewInfo.indexSection;
+		self.dataSource = castViewInfo.dataSource;
 		
 		_nextPage = 1;
 		
@@ -261,7 +271,7 @@
 		
         self.blurImageView.alpha = 1.0;
         self.blurImageView.transform = CGAffineTransformMakeScale(1, 1);
-
+		
 		self.castView.transform = CGAffineTransformScale(self.castView.transform, 1/kBlurImageViewScale, 1/kBlurImageViewScale);
 		[UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
 			self.blurImageView.alpha = 0.0;
@@ -271,6 +281,7 @@
 		} completion:^(BOOL fin) {
 			if (!needPopAnimation) {
 				self.blurImageView.alpha = 1.0;
+				self.blurImageView.transform = CGAffineTransformMakeScale(1, 1);
 			}
 			
             [self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
@@ -400,13 +411,32 @@
     [self.managedObjectContext processPendingChanges];
 }
 
-
 - (void)insertFriendStatusFromClient:(WeiboClient *)client
 {
 	NSArray *dictArray = client.responseJSONObject;
 	for (NSDictionary *dict in dictArray) {
 		Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
 		[self.currentUser addFriendsStatusesObject:newStatus];
+	}
+	[self.managedObjectContext processPendingChanges];
+	[self.fetchedResultsController performFetch:nil];
+}
+
+- (void)insertUserStatusFromClient:(WeiboClient *)client
+{
+	NSArray *dictArray = client.responseJSONObject;
+	for (NSDictionary *dict in dictArray) {
+		[Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+	}
+	[self.managedObjectContext processPendingChanges];
+	[self.fetchedResultsController performFetch:nil];
+}
+
+- (void)insertMentionsStatusFromClient:(WeiboClient *)client
+{
+	NSArray *dictArray = client.responseJSONObject;
+	for (NSDictionary *dict in dictArray) {
+		[Status insertMentionedStatus:dict inManagedObjectContext:self.managedObjectContext];
 	}
 	[self.managedObjectContext processPendingChanges];
 	[self.fetchedResultsController performFetch:nil];
@@ -519,6 +549,73 @@
 							  feature:0];
 }
 
+- (void)loadMoreUserTimeline:(void (^)())completion
+{
+	
+	WeiboClient *client = [WeiboClient client];
+	
+	[client setCompletionBlock:^(WeiboClient *client) {
+		
+		_loading = NO;
+		
+		if (!client.hasError) {
+			
+			[self insertUserStatusFromClient:client];
+						
+			[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
+			
+			[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
+			
+		} else {
+			[ErrorNotification showLoadingError];
+		}
+		
+		if (completion) {
+			completion();
+		}
+	}];
+	
+	[client getUserTimeline:self.user.userID
+					SinceID:nil
+					  maxID:[NSString stringWithFormat:@"%lld", [self getMaxID]]
+			 startingAtPage:0
+					  count:kStatusCountPerRequest
+					feature:0];
+}
+
+- (void)loadMoreMention:(void (^)())completion
+{
+	
+	WeiboClient *client = [WeiboClient client];
+	
+	[client setCompletionBlock:^(WeiboClient *client) {
+		
+		_loading = NO;
+		
+		if (!client.hasError) {
+			
+			[self insertMentionsStatusFromClient:client];
+			
+			[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
+			
+			[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
+			
+		} else {
+			[ErrorNotification showLoadingError];
+		}
+		
+		if (completion) {
+			completion();
+		}
+	}];
+	
+	[client getMentionsSinceID:nil 
+						 maxID:[NSString stringWithFormat:@""] 
+						  page:_nextPage++ 
+						 count:20];
+
+}
+
 - (void)loadMoreDataCompletion:(void (^)())completion
 {
     if (_loading) {
@@ -544,87 +641,18 @@
         return;
     }
     
-    WeiboClient *client = [WeiboClient client];
-    
-    long long maxID = 0;
-    Status *lastStatus = [self.fetchedResultsController.fetchedObjects lastObject];
-    
-	NSLog(@"%@", lastStatus.text);
-    if (lastStatus && _lastStatus && !_refreshFlag) {
-        NSString *statusID = lastStatus.statusID;
-        maxID = [statusID longLongValue] - 1;
-		_refreshFlag = NO;
-    }
-    
-    
     if (self.dataSource == CastViewDataSourceFriendsTimeline) {
         [self loadMoreFriendTimeline:completion];
     }
     
     //
     if (self.dataSource == CastViewDataSourceUserTimeline) {
-        [[UIApplication sharedApplication] showLoadingView];
-		[client setCompletionBlock:^(WeiboClient *client) {
-            if (!client.hasError) {
-				
-                NSArray *dictArray = client.responseJSONObject;
-				for (NSDictionary *dict in dictArray) {
-					[Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-                }
-				[self.managedObjectContext processPendingChanges];
-				
-				if (_refreshFlag) {
-					_refreshFlag = NO;
-					
-					Status *newStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
-					
-					if (_lastStatus == nil || ![newStatus.statusID isEqualToString:_lastStatus.statusID]) {
-						
-						[self adjustCardViewAfterLoadingWithCompletion:^(){
-							[self clearData];
-							[self.managedObjectContext processPendingChanges];
-							
-							for (NSDictionary *dict in dictArray) {
-								[Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-							}
-						}];
-						
-					} else if ([newStatus.statusID isEqualToString:_lastStatus.statusID]) {
-						if (completion) {
-							completion();
-						}
-						[[UIApplication sharedApplication] hideLoadingView];
-						_loading = NO;
-						return;
-					} 
-				}
-                
-                [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
-
-				[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
-                
-                if (completion) {
-                    completion();
-                }
-				
-            } else {
-				if (completion) {
-                    completion();
-                }
-				[ErrorNotification showLoadingError];
-			}
-			[[UIApplication sharedApplication] hideLoadingView];
-			_loading = NO;
-        }];
-        
-        [client getUserTimeline:self.user.userID
-                        SinceID:nil
-						  maxID:[NSString stringWithFormat:@"%lld", maxID]
-                 startingAtPage:0
-                          count:kStatusCountPerRequest
-                        feature:0];
+		[self loadMoreUserTimeline:completion];
     }
-    
+	
+	if (self.dataSource == CastViewDataSourceMentions) {
+		[self loadMoreMention:completion];
+	}
 //    //
 //    if (self.dataSource == CastViewDataSourceSearchStatues) {
 //        [[UIApplication sharedApplication] showLoadingView];
@@ -680,70 +708,7 @@
 //    }
 //	
 //	//
-//	if (self.dataSource == CastViewDataSourceMentions) {
-//		[client setCompletionBlock:^(WeiboClient *client) {
-//            if (!client.hasError) {
-//				
-//                NSArray *dictArray = client.responseJSONObject;
-//				
-//				for (NSDictionary *dict in dictArray) {
-//                    Status * status = [Status insertMentionedStatus:dict inManagedObjectContext:self.managedObjectContext];
-//					NSLog(@"%@", status.text);
-//                }
-//				
-//				[self.managedObjectContext processPendingChanges];
-//				
-//				if (_refreshFlag) {
-//					_refreshFlag = NO;
-//					
-//					Status *newStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
-//					
-//					if (_lastMentionStatusID == nil || ![newStatus.statusID isEqualToString:_lastMentionStatusID]){
-//						[_lastMentionStatusID release];
-//						_lastMentionStatusID = [[NSString stringWithString:newStatus.statusID] copy];
-//						
-//						[self adjustCardViewAfterLoadingWithCompletion:^(){
-//							[self clearData];
-//							for (NSDictionary *dict in dictArray) {
-//								[Status insertMentionedStatus:dict inManagedObjectContext:self.managedObjectContext];
-//							}
-//							[self.managedObjectContext processPendingChanges];
-//						}];
-//						
-//					} else if ([newStatus.statusID isEqualToString:_lastMentionStatusID]) {
-//						[self adjustCardViewAfterLoadingWithCompletion:nil];
-//						[[UIApplication sharedApplication] hideLoadingView];
-//						_loading = NO;
-//						[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
-//						[self.delegate cardTableViewController:self 
-//												didScrollToRow:self.currentRowIndex
-//											  withNumberOfRows:[self numberOfRows]];
-//						if (completion) {
-//							completion();
-//						}
-//						return;
-//					}
-//				}
-//                [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
-//                [self.delegate cardTableViewController:self 
-//                                        didScrollToRow:self.currentRowIndex
-//                                      withNumberOfRows:[self numberOfRows]];
-//				if (completion) {
-//					completion();
-//				}
-//            } else {
-//				[ErrorNotification showLoadingError];
-//			}
-//			[[UIApplication sharedApplication] hideLoadingView];
-//			_loading = NO;
-//        }];
-//		
-//		[client getMentionsSinceID:nil 
-//							 maxID:[NSString stringWithFormat:@""] 
-//							  page:_nextPageForMention++ 
-//							 count:20];
-        
-//	}
+
 }
 
 - (void)refresh
@@ -838,6 +803,7 @@
 {
 	[self loadMoreDataCompletion:^(){
 		[self.castView addMoreViews];
+		NSLog(@"The number of fetched results is %d", self.fetchedResultsController.fetchedObjects.count);
 	}];
 }
 
@@ -857,30 +823,6 @@
 	
 	return _castViewManager;
 }
-
-//- (NSMutableArray*)nextPageStack
-//{
-//	if (_nextPageStack == nil) {
-//		_nextPageStack = [[NSMutableArray alloc] init];
-//	}
-//	return _nextPageStack;
-//}
-//
-//- (NSMutableArray*)rowIndexStack
-//{
-//	if (_rowIndexStack == nil) {
-//		_rowIndexStack = [[NSMutableArray alloc] init];
-//	}
-//	return _rowIndexStack;
-//}
-//
-//- (NSMutableArray*)fetchedResultsControllerStack
-//{
-//	if (_fetchedResultsControllerStack == nil) {
-//		_fetchedResultsControllerStack = [[NSMutableArray alloc] init];
-//	}
-//	return _fetchedResultsControllerStack;
-//}
 
 - (NSMutableArray*)infoStack
 {
