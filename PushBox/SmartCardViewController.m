@@ -9,6 +9,7 @@
 #import "SmartCardViewController.h"
 #import "Status.h"
 #import "User.h"
+#import "Emotion.h"
 #import "UIImageViewAddition.h"
 #import "NSDateAddition.h"
 #import "OptionsTableViewController.h"
@@ -19,6 +20,7 @@
 #define kLoadDelay 1.5
 #define kPlayButtonFrameTopRight CGRectMake(399, 306, 68, 68)
 #define kPlayButtonFrameCenter CGRectMake(251, 373, 68, 68)
+#define kPlayButtonFrameBottom CGRectMake(251, 413, 68, 68)
 #define kRepostViewFrameTop CGRectMake(57, 275, 451, 134)
 #define kRepostWebViewFrameTop CGRectMake(57, 275, 451, 134)
 #define kRepostViewFrameBottom CGRectMake(57, 275+125, 451, 134)
@@ -318,6 +320,7 @@
 - (void)prepare
 {		
     b = YES;
+    isTrack = YES;
     
     self.profileImageView.alpha = 0.0;
     self.musicLink = nil;
@@ -355,16 +358,14 @@
     self.musicCoverImageView.hidden = YES;
     self.musicCoverImageView.alpha = 0;
     
-    self.recentActNotifyLabel.hidden = YES;
-    
-    self.trackView.hidden = YES;
-    self.trackLabel.text = @"";
-    self.trackView.alpha = 0.0;
     self.trackLabel.alpha = 0.0;
+    self.trackView.alpha = 0.0;
+    self.recentActNotifyLabel.alpha = 0.0;    
+    self.trackLabel.text = @"";
     
     self.playButton.hidden = YES;
     self.musicBackgroundImageView.alpha = 0.0;
-    self.playButton.frame = kPlayButtonFrameCenter;
+    //    self.playButton.frame = kPlayButtonFrameCenter;
     
 	self.profileImageView.image = nil;
 	self.screenNameLabel.text = self.status.author.screenName;
@@ -424,6 +425,28 @@
     }
 }
 
+- (void)loadRepostStautsImageV2
+{
+    self.tweetImageView.hidden = NO;
+    self.imageCoverImageView.hidden = NO;
+    Status *repostStatus = self.status.repostStatus;
+    [self.tweetImageView loadImageFromURL:repostStatus.bmiddlePicURL 
+                               completion:^(void) 
+     {
+         [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+             self.tweetImageView.alpha = 1.0;
+             self.imageCoverImageView.alpha = 1.0;
+         } completion:^(BOOL fin) {
+         }];
+     }
+                           cacheInContext:self.managedObjectContext];
+    
+    if ([self checkGif:self.status.repostStatus.originalPicURL])
+    {
+        [self.gifIcon setHidden:NO];
+    }
+}
+
 - (void)loadPostWebView
 {
     NSString* originStatus = self.status.text;
@@ -449,7 +472,7 @@
                     NSRange range = NSMakeRange(startIndex, endIndex-startIndex);
                     NSString* subStr = [originStatus substringWithRange:range];
                     if (endIndex > startIndex + 1)
-                        phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='atClicked(\"%@\")'>%@</a></span>", [subStr substringFromIndex:1], subStr] autorelease]];
+                        phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[[NSString alloc] initWithFormat:@"<span class='posthighlight'><a href='javascript:void(0);' onclick='atClicked(\"%@\")'>%@</a></span>", [subStr substringFromIndex:1], subStr] autorelease]];
                 }
                 break;
             }
@@ -466,7 +489,7 @@
                 {
                     NSRange range = NSMakeRange(startIndex, endIndex+1-startIndex);
                     NSString* subStr = [originStatus substringWithRange:range];
-                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='spClicked(\"%@\")'>%@</a></span>", [subStr substringFromIndex:1], subStr] autorelease]];
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[[NSString alloc] initWithFormat:@"<span class='posthighlight'><a href='javascript:void(0);' onclick='spClicked(\"%@\")'>%@</a></span>", [subStr substringFromIndex:1], subStr] autorelease]];
                 }
                 
                 break;
@@ -488,18 +511,47 @@
                     endIndex = j;
                     range = NSMakeRange(startIndex, endIndex-startIndex);
                     subStr = [originStatus substringWithRange:range];
-                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='lkClicked(\"%@\")'>%@</a></span>", subStr, subStr] autorelease]];
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[[NSString alloc] initWithFormat:@"<span class='posthighlight'><a href='javascript:void(0);' onclick='lkClicked(\"%@\")'>%@</a></span>", subStr, subStr] autorelease]];
                 }
                 break;
+            }
+            case '[':
+            {
+                int j = i + 1;
+                for (j = i + 1; j < originStatus.length; j++) {
+                    if ([originStatus characterAtIndex:j] == ']') {
+                        break;
+                    }
+                }
+                endIndex = j;
+                
+                NSRange range = NSMakeRange(startIndex, endIndex-startIndex+1);
+                NSString* subStr = [originStatus substringWithRange:range];                
+                
+                NSManagedObjectContext* context = [(PushBoxAppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
+                NSEntityDescription *entityDescription = [NSEntityDescription                                                  entityForName:@"Emotion" inManagedObjectContext:context];
+                NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+                [request setEntity:entityDescription];
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:[[[NSString alloc] initWithFormat:@"phrase == \"%@\"", subStr] autorelease]];
+                [request setPredicate:predicate];
+                NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]                                                                      initWithKey:@"phrase" ascending:YES];
+                [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+                [sortDescriptor release];
+                NSError *error;
+                NSArray *array = [context executeFetchRequest:request error:&error];
+                NSString* url = [(Emotion*)[array lastObject] url];
+                
+                if (url) {
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[[NSString alloc] initWithFormat:@"<span><img src=\"%@\"></span>", url] autorelease]];
+                }
             }
             default:
                 break;
         }
     }
     
-    //    NSString* htmlText = [[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><style type=\"text/css\">@import url(\"smartcard.css\");</style></head><body><div id=\"post\">%@</div></body></html>", phasedStatus];
     NSString* htmlText = [[[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><link href=\"smartcard.css\" rel=\"stylesheet\" type=\"text/css\" /><script type='text/javascript' src='smartcard.js'></script></head><body><div id=\"post\">%@</div></body></html>", phasedStatus] autorelease];
-    //    NSLog(htmlText);
+
     NSString *path = [[NSBundle mainBundle] pathForResource:@"smartcard" ofType:@"html"]; 
     [self.postWebView loadHTMLString:htmlText baseURL:[NSURL fileURLWithPath: path]];    
     
@@ -583,6 +635,36 @@
                 }
                 break;
             }
+            case '[':
+            {
+                int j = i + 1;
+                for (j = i + 1; j < originStatus.length; j++) {
+                    if ([originStatus characterAtIndex:j] == ']') {
+                        break;
+                    }
+                }
+                endIndex = j;
+                
+                NSRange range = NSMakeRange(startIndex, endIndex-startIndex+1);
+                NSString* subStr = [originStatus substringWithRange:range];                
+                
+                NSManagedObjectContext* context = [(PushBoxAppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
+                NSEntityDescription *entityDescription = [NSEntityDescription                                                  entityForName:@"Emotion" inManagedObjectContext:context];
+                NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+                [request setEntity:entityDescription];
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:[[[NSString alloc] initWithFormat:@"phrase == \"%@\"", subStr] autorelease]];
+                [request setPredicate:predicate];
+                NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]                                                                      initWithKey:@"phrase" ascending:YES];
+                [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+                [sortDescriptor release];
+                NSError *error;
+                NSArray *array = [context executeFetchRequest:request error:&error];
+                NSString* url = [(Emotion*)[array lastObject] url];
+                
+                if (url) {
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[[NSString alloc] initWithFormat:@"<span><img src=\"%@\"></span>", url] autorelease]];
+                }
+            }
             default:
                 break;
         }
@@ -644,7 +726,7 @@
 {    
     if (!self.status.repostStatus) {
         self.playButton.hidden = NO;
-        self.playButton.frame = kPlayButtonFrameCenter;
+        //        self.playButton.frame = kPlayButtonFrameCenter;
         self.musicLink = postMusicVideoLink;
         [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
             self.playButton.alpha = 1.0;
@@ -656,7 +738,7 @@
 - (void)loadRepostMusicVideo:(NSString*)repostMusicVideoLink
 {
     self.playButton.hidden = NO;
-    self.playButton.frame = kPlayButtonFrameTopRight;
+    //    self.playButton.frame = kPlayButtonFrameTopRight;
     self.repostView.frame = kRepostViewFrameBottom;
     self.repostWebView.frame = kRepostWebViewFrameBottom;
     self.musicLink = repostMusicVideoLink;
@@ -670,6 +752,13 @@
     }];
     
     [self loadMusicCoverImage];
+}
+
+- (void)loadRepostMusicVideoV2:(NSString*)repostMusicVideoLink
+{
+    self.playButton.hidden = NO;
+    self.musicLink = repostMusicVideoLink;
+    //    self.playButton.frame = kPlayButtonFrameBottom;
 }
 
 - (void)getPostMusicVideoLink:(NSString*)statusText
@@ -709,8 +798,7 @@
                             NSString* longUrl = [dict objectForKey:@"url_long"];
                             
                             
-                            if ([longUrl rangeOfString:@"http://v.youku.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.tudou.com"].location != NSNotFound || [longUrl rangeOfString:@"http://v.ku6.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.56.com"].location != NSNotFound || [longUrl rangeOfString:@"http://music.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.xiami.com"].location != NSNotFound || [longUrl rangeOfString:@"songtaste.com"].location != NSNotFound)
-                            {
+                            if ([longUrl rangeOfString:@"http://v.youku.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.tudou.com"].location != NSNotFound || [longUrl rangeOfString:@"http://v.ku6.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.56.com"].location != NSNotFound || [longUrl rangeOfString:@"http://music.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.xiami.com"].location != NSNotFound || [longUrl rangeOfString:@"songtaste.com"].location != NSNotFound) {
                                 isTrack = NO;
                                 [self loadPostMusicVideo:longUrl];
                             }
@@ -765,18 +853,9 @@
                             
                             
                             if ([longUrl rangeOfString:@"http://v.youku.com"].location != NSNotFound || [longUrl rangeOfString:@"http://video.sina.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.tudou.com"].location != NSNotFound || [longUrl rangeOfString:@"http://v.ku6.com"].location != NSNotFound || [longUrl rangeOfString:@"http://www.56.com"].location != NSNotFound || [longUrl rangeOfString:@"http://music.sina.com"].location != NSNotFound|| [longUrl rangeOfString:@"http://www.xiami.com"].location != NSNotFound || [longUrl rangeOfString:@"songtaste.com"].location != NSNotFound) {
-                                isTrack = NO;
                                 b = NO;
-                                [self loadRepostMusicVideo:longUrl];
+                                [self loadRepostMusicVideoV2:longUrl];
                             } 
-                            //                            else {
-                            //                                self.tweetImageView.hidden = NO;
-                            //                                [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
-                            //                                    self.tweetImageView.alpha = 1.0;
-                            //                                    self.imageCoverImageView.alpha = 1.0;
-                            //                                } completion:^(BOOL fin) {
-                            //                                }];
-                            //                            }
                         }
                     }
                 }];
@@ -787,15 +866,6 @@
             }
         }
     }
-    
-    //    if (b) {
-    //        self.tweetImageView.hidden = NO;
-    //        [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
-    //            self.tweetImageView.alpha = 1.0;
-    //            self.imageCoverImageView.alpha = 1.0;
-    //        } completion:^(BOOL fin) {
-    //        }];
-    //    } 
 }
 
 - (void)update
@@ -803,6 +873,7 @@
 	BOOL imageLoadingEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeyImageDownloadingEnabled];
     
     Status *status = self.status;
+    
     isTrack = YES;
     
     NSString *profileImageString = self.status.author.profileImageURL;
@@ -816,52 +887,58 @@
     
     // post text
     [self loadPostWebView];
+    
     // post image
     if (imageLoadingEnabled && self.status.originalPicURL) {
         [self performSelector:@selector(loadStatusImage) withObject:nil afterDelay:kLoadDelay];
         isTrack = NO;
     }
+    
     // post music or video
-    if (YES)
-    {
+    if (YES) {
         [self getPostMusicVideoLink:status.text];
     }
     
     if (self.status.repostStatus) {
         Status *repostStatus = self.status.repostStatus;
-        // self.imageCoverImageView.hidden = NO;
+        
         isTrack = NO;
+        
         // repost text
         [self loadRepostWebView];
+        
         // repost image
         if (imageLoadingEnabled && repostStatus.originalPicURL.length) {
-            [self performSelector:@selector(loadRepostStautsImage) withObject:nil afterDelay:kLoadDelay];
+            [self performSelector:@selector(loadRepostStautsImageV2) withObject:nil afterDelay:kLoadDelay];
         }
+        
         // repost music or video
-        if (YES)
-        {
+        if (YES) {
             [self getRepostMusicVideoLink:repostStatus.text];
         }
     }
     
     // Track
-    if (isTrack)
-        //    if (NO)
-    {
+    if (isTrack) {
+        NSString* actNotiString = [[[NSString alloc] initWithFormat:@"%@ 关于此微博的最新进展", status.author.screenName] autorelease];
+        self.recentActNotifyLabel.text = actNotiString;
+        
+        // 
         NSString* trackString = [[[NSString alloc] initWithFormat:@"询问 %@", status.author.screenName] autorelease];
         self.trackLabel.text = trackString;
-        trackString = [[[NSString alloc] initWithFormat:@"%@ 关于此微博的最新进展", status.author.screenName] autorelease];
-        self.recentActNotifyLabel.text = trackString;
-        self.trackLabel.hidden = NO;
-        self.recentActNotifyLabel.hidden = NO;
-        self.trackView.hidden = NO;
-        //        self.imageCoverImageView.hidden = YES;
+        
+        self.trackLabel.alpha = 0.0;
+        self.trackView.alpha = 0.0;
+        self.recentActNotifyLabel.alpha = 0.0;
+        
         [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
             self.trackLabel.alpha = 1.0;
             self.trackView.alpha = 1.0;
+            //            self.recentActNotifyLabel.alpha = 1.0;
         } completion:^(BOOL fin) {
             
         }];
+        
     }
     
 }

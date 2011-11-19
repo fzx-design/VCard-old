@@ -296,6 +296,7 @@
 		FEC6D1DB14555F8B00576EF3 /* vc_noti_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEC6D1D914555F8B00576EF3 /* vc_noti_sound.wav */; };
 		FEC6D1DD14555F9800576EF3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEC6D1DC14555F9800576EF3 /* AudioToolbox.framework */; };
 		FEC6D1E314555FF900576EF3 /* UIAudioAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = FEC6D1E214555FF900576EF3 /* UIAudioAddition.m */; };
+		FEDC9F101477DBA300D6A2CD /* Emotion.m in Sources */ = {isa = PBXBuildFile; fileRef = FEDC9F0F1477DBA300D6A2CD /* Emotion.m */; };
 		FEFB3120144311D600440DD5 /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEFB311E144311D600440DD5 /* MessagesViewController.m */; };
 		FEFB3121144311D600440DD5 /* MessagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEFB311F144311D600440DD5 /* MessagesViewController.xib */; };
 		FEFB31251443130700440DD5 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEFB31231443130700440DD5 /* MessageViewController.m */; };
@@ -678,6 +679,9 @@
 		FEC6D1DC14555F9800576EF3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		FEC6D1E114555FF900576EF3 /* UIAudioAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAudioAddition.h; sourceTree = "<group>"; };
 		FEC6D1E214555FF900576EF3 /* UIAudioAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAudioAddition.m; sourceTree = "<group>"; };
+		FEDC9F0D1477DB0100D6A2CD /* PushBox 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PushBox 3.xcdatamodel"; sourceTree = "<group>"; };
+		FEDC9F0E1477DBA300D6A2CD /* Emotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Emotion.h; sourceTree = "<group>"; };
+		FEDC9F0F1477DBA300D6A2CD /* Emotion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Emotion.m; sourceTree = "<group>"; };
 		FEFB311D144311D600440DD5 /* MessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesViewController.h; sourceTree = "<group>"; };
 		FEFB311E144311D600440DD5 /* MessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesViewController.m; sourceTree = "<group>"; };
 		FEFB311F144311D600440DD5 /* MessagesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesViewController.xib; sourceTree = "<group>"; };
@@ -1196,7 +1200,6 @@
 				CB018DD413DD3CC8004217E0 /* DockViewController.m */,
 				FE8E1750145433A5004F6A7C /* InnerBroswerViewController.h */,
 				FE8E1751145433A5004F6A7C /* InnerBroswerViewController.m */,
-				FE8E1752145433A5004F6A7C /* InnerBroswerViewController.xib */,
 				CBDA5B7113DC25C500FAE221 /* CoreDataViewController.h */,
 				CBDA5B7213DC25C500FAE221 /* CoreDataViewController.m */,
 				CBDA5B7413DC25FA00FAE221 /* CoreDataTableViewController.h */,
@@ -1282,6 +1285,7 @@
 		CBDA5B5C13DBED1600FAE221 /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
+				FE8E1752145433A5004F6A7C /* InnerBroswerViewController.xib */,
 				FEFB311F144311D600440DD5 /* MessagesViewController.xib */,
 				FE8F6D41144327B4001A62FD /* MessagesContactsTableViewController.xib */,
 				FEA4265514432103002E80B3 /* MessagesContactsTableViewCell.xib */,
@@ -1327,6 +1331,8 @@
 				9BFD85CE14617A2600E16A79 /* Comment.m */,
 				FE1E629A14441E3F00A48CF9 /* User.h */,
 				FE1E629B14441E3F00A48CF9 /* User.m */,
+				FEDC9F0E1477DBA300D6A2CD /* Emotion.h */,
+				FEDC9F0F1477DBA300D6A2CD /* Emotion.m */,
 				9B4B49F614582FCF00C9B542 /* Status.h */,
 				9B4B49F714582FCF00C9B542 /* Status.m */,
 				FE1E629714441E2500A48CF9 /* Message.h */,
@@ -1857,9 +1863,10 @@
 			isa = XCVersionGroup;
 			children = (
 				FE1E628D14441BCD00A48CF9 /* PushBox 2.xcdatamodel */,
+				FEDC9F0D1477DB0100D6A2CD /* PushBox 3.xcdatamodel */,
 				CBDA5B0A13DBEC1300FAE221 /* PushBox.xcdatamodel */,
 			);
-			currentVersion = FE1E628D14441BCD00A48CF9 /* PushBox 2.xcdatamodel */;
+			currentVersion = FEDC9F0D1477DB0100D6A2CD /* PushBox 3.xcdatamodel */;
 			path = PushBox.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

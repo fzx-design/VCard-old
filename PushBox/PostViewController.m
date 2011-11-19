@@ -105,7 +105,7 @@
                                   self.targetStatus.text];
 		}
 		else {
-			self.textView.text = NSLocalizedString(@"转发微博。", nil);
+			self.textView.text = NSLocalizedString(@"转发微博", nil);
 		}
 		NSRange range;
 		range.location = 0;
@@ -321,7 +321,6 @@
     
     // text
     else {        
-        // TODO
         [self.atScreenNames insertObject:[[[NSString alloc] initWithFormat:@"@%@", text] autorelease] atIndex:0];
         
         NSManagedObjectContext* context = [(PushBoxAppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];

@@ -219,7 +219,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{57, 93}, {451, 138}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
-						<reference key="NSNextKeyView" ref="1004938188"/>
+						<reference key="NSNextKeyView" ref="259776592"/>
 						<string key="NSReuseIdentifierKey">_NS:640</string>
 						<reference key="IBUIBackgroundColor" ref="392801989"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -441,7 +441,7 @@
 					</object>
 					<object class="IBUIView" id="60335549">
 						<reference key="NSNextResponder" ref="931374233"/>
-						<int key="NSvFlags">-2147483356</int>
+						<int key="NSvFlags">292</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUIButton" id="620434925">
@@ -569,9 +569,9 @@
 					<object class="IBUIButton" id="259776592">
 						<reference key="NSNextResponder" ref="931374233"/>
 						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{251, 373}, {68, 68}}</string>
+						<string key="NSFrame">{{49, 239}, {76, 32}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="1004938188"/>
 						<string key="NSReuseIdentifierKey">_NS:241</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -583,10 +583,6 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="805400912"/>
-						<object class="NSCustomResource" key="IBUIHighlightedImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">sc_button_play_highlight.png</string>
-						</object>
 						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">sc_button_play.png</string>
@@ -599,7 +595,7 @@
 						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{69, 286}, {106, 106}}</string>
 						<reference key="NSSuperview" ref="931374233"/>
-						<reference key="NSNextKeyView" ref="259776592"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:569</string>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">2</int>
@@ -723,22 +719,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">playButton</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="259776592"/>
-					</object>
-					<int key="connectionID">73</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">musicBackgroundImageView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="70486562"/>
-					</object>
-					<int key="connectionID">75</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">tweetImageView</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="252177055"/>
@@ -776,6 +756,22 @@
 						<reference key="destination" ref="738363382"/>
 					</object>
 					<int key="connectionID">70</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">playButton</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="259776592"/>
+					</object>
+					<int key="connectionID">73</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">musicBackgroundImageView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="70486562"/>
+					</object>
+					<int key="connectionID">75</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -1017,16 +1013,6 @@
 						<reference key="parent" ref="931374233"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">72</int>
-						<reference key="object" ref="259776592"/>
-						<reference key="parent" ref="931374233"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">74</int>
-						<reference key="object" ref="70486562"/>
-						<reference key="parent" ref="931374233"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">19</int>
 						<reference key="object" ref="252177055"/>
 						<reference key="parent" ref="978562341"/>
@@ -1036,7 +1022,7 @@
 						<int key="objectID">76</int>
 						<reference key="object" ref="1004938188"/>
 						<reference key="parent" ref="931374233"/>
-						<string key="objectName">comment count label</string>
+						<string key="objectName">recent act notify</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">83</int>
@@ -1051,6 +1037,16 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">69</int>
 						<reference key="object" ref="738363382"/>
+						<reference key="parent" ref="931374233"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">72</int>
+						<reference key="object" ref="259776592"/>
+						<reference key="parent" ref="931374233"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">74</int>
+						<reference key="object" ref="70486562"/>
 						<reference key="parent" ref="931374233"/>
 					</object>
 				</object>
@@ -1161,7 +1157,6 @@
 				<string>sc_bg.png</string>
 				<string>sc_button_comment.png</string>
 				<string>sc_button_play.png</string>
-				<string>sc_button_play_highlight.png</string>
 				<string>sc_button_repost.png</string>
 				<string>sc_image_cover.png</string>
 				<string>sc_music_bg.png</string>
@@ -1174,8 +1169,7 @@
 				<string>{19, 20}</string>
 				<string>{596, 650}</string>
 				<string>{17, 14}</string>
-				<string>{68, 68}</string>
-				<string>{68, 68}</string>
+				<string>{73, 30}</string>
 				<string>{18, 13}</string>
 				<string>{467, 321}</string>
 				<string>{443, 139}</string>

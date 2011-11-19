@@ -46,7 +46,7 @@
 }
 
 @property(nonatomic, retain) IBOutlet UIButton* refreshButton;
-@property(nonatomic, retain) IBOutlet UIButton* newTweetButton;
+@property(nonatomic, retain) IBOutlet UIButton* postButton;
 @property(nonatomic, retain) IBOutlet UIButton* playButton;
 @property(nonatomic, retain) IBOutlet UIButton* commandCenterButton;
 @property(nonatomic, retain) IBOutlet UIButton* messagesCenterButton;
