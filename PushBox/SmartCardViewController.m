@@ -760,6 +760,7 @@
 - (void)loadRepostMusicVideoV2:(NSString*)repostMusicVideoLink
 {
     self.playButton.hidden = NO;
+    self.musicLink = repostMusicVideoLink;
     //    self.playButton.frame = kPlayButtonFrameBottom;
 }
 
