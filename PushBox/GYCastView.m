@@ -126,9 +126,7 @@
 	self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
 	
 	self.scrollView.contentOffset = CGPointMake(index * self.scrollView.frame.size.width, 0.0);
-	
-	NSLog(@"_________, size %f , offset %f", self.scrollView.contentSize.width, self.scrollView.contentOffset.x);
-	
+		
 	[self.delegate resetViewsAroundCurrentIndex:InitialIndex];
 	
 	for (int i = index - 3; i <= index + 3; ++i) {

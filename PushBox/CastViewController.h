@@ -73,7 +73,7 @@
 
 
 - (void)pushCardWithCompletion:(void (^)())completion;
-- (void)popCardWithCompletion:(void (^)())completion;
+- (BOOL)popCardWithCompletion:(void (^)())completion;
 
 - (void)getUnread;
 

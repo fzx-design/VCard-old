@@ -43,6 +43,8 @@
     MessagesViewController *_messagesViewController;
 //    CardTableViewController *_cardTableViewController;
 	
+	NSMutableArray *_statusTypeStack;
+	
 	CastViewController *_castViewController;
     
     NSTimer *_playTimer;

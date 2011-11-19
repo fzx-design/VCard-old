@@ -156,6 +156,7 @@
 
 - (void)pushNewViews
 {
+	NSLog(@"Push____ numberOfPages: %d", [self itemCount:nil]);
 	[self.castView resetWithCurrentIndex:0 numberOfPages:[self itemCount:nil]];
 	[self reloadCards];
 }

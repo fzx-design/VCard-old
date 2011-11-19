@@ -142,6 +142,8 @@
 	self.notificationView.hidden = YES;
 	self.bottomStateFrameView.hidden = NO;
 	
+	_statusTypeStack = [[NSMutableArray alloc] init];
+	
     WeiboClient *client = [WeiboClient client];
     [client setCompletionBlock:^(WeiboClient *client) {
         if (!client.hasError) {
@@ -296,6 +298,8 @@
 		[_tmpImage release];
 	}
 	_tmpImage = nil;
+	_statusTypeStack = nil;
+	
 	self.bottomStateInvisibleView.image = nil;
 	
     [self hideDockView];
@@ -415,7 +419,12 @@
 //    self.bottomStateView.alpha = 0.0;
 	self.bottomStateView.hidden = YES;
     self.bottomBackButton.enabled = NO;
-    
+}
+
+- (void)popBottomStateView
+{
+	[self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimation] forKey:@"animation"];
+    [self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
 }
 
 - (void)shouldShowUserTimelineNotification:(id)sender
@@ -505,11 +514,17 @@
         [self hideBottomStateViewForSearch];
     
     self.castViewController.dataSource = CastViewDataSourceFriendsTimeline;
-    [self hideBottomStateView];
-    [self.castViewController popCardWithCompletion:^{
+	BOOL needHideBottomStateView = [self.castViewController popCardWithCompletion:^{
         self.dockViewController.showFavoritesButton.selected = NO;
         self.dockViewController.showFavoritesButton.userInteractionEnabled = YES;
     }];
+	if (needHideBottomStateView) {
+		[self hideBottomStateView];
+	} else {
+		[self popBottomStateView];
+		[_statusTypeStack removeLastObject];
+		self.bottomStateLabel.text = [_statusTypeStack lastObject];
+	}
 }
 
 - (void)showUserTimeline:(User *)user
@@ -517,7 +532,10 @@
     self.castViewController.dataSource = CastViewDataSourceUserTimeline;
     self.castViewController.user = user;
     
-    self.bottomStateLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@的微博", nil), user.screenName];
+	NSString* string = [NSString stringWithFormat:NSLocalizedString(@"%@的微博", nil), user.screenName];
+    self.bottomStateLabel.text = string;
+	[_statusTypeStack addObject:string];
+
     self.dockViewController.showFavoritesButton.selected = NO;
     [self showBottomStateView];
     
@@ -531,6 +549,9 @@
     self.castViewController.dataSource = CastViewDataSourceSearchStatues;
     
     NSString* string = [[[NSString alloc] initWithFormat:@"包含%@的微博", searchString] autorelease];
+	[_statusTypeStack addObject:self.bottomStateLabel.text];
+	[_statusTypeStack addObject:string];
+	
     self.bottomStateLabel.text = NSLocalizedString(string, nil); 
     self.bottomStateTextField.text = @"";
     self.bottomStateTextField.hidden = YES;
@@ -544,7 +565,9 @@
 - (void)showFavorites
 {
     self.castViewController.dataSource = CastViewDataSourceFavorites;
-    self.bottomStateLabel.text = NSLocalizedString(@"收藏", nil);
+	NSString *string = [NSString stringWithString:NSLocalizedString(@"收藏", nil)];
+    self.bottomStateLabel.text = string;
+	[_statusTypeStack addObject:string];
     [self showBottomStateView];
     
     [self.castViewController pushCardWithCompletion:^{
@@ -556,7 +579,9 @@
 - (void)showMentions
 {	
     self.castViewController.dataSource = CastViewDataSourceMentions;
-    self.bottomStateLabel.text = NSLocalizedString(@"@我的微博", nil);
+	NSString *string = [NSString stringWithString:NSLocalizedString(@"@我的微博", nil)];
+    self.bottomStateLabel.text = string;
+	[_statusTypeStack addObject:string];
     [self showBottomStateView];
     
     [self.castViewController pushCardWithCompletion:nil];
@@ -1113,9 +1138,9 @@
 	[self.dockViewController.ccCommentTableViewController returnToCommandCenter];
 
 	
-	if (self.castViewController.dataSource != CastViewDataSourceFriendsTimeline) {
-        [self hideBottomStateView];
-    }
+//	if (self.castViewController.dataSource != CastViewDataSourceFriendsTimeline) {
+//        [self hideBottomStateView];
+//    }
 	
 //    if (self.cardTableViewController.dataSource != CardTableViewDataSourceFriendsTimeline) {
 //        [self hideBottomStateView];
@@ -1159,9 +1184,9 @@
 {	
     _commandCenterFlag = NO;
 	
-	if (self.castViewController.dataSource != CastViewDataSourceFriendsTimeline) {
-        [self showBottomStateView];
-    }
+//	if (self.castViewController.dataSource != CastViewDataSourceFriendsTimeline) {
+//        [self showBottomStateView];
+//    }
 	
 //    if (self.cardTableViewController.dataSource != CardTableViewDataSourceFriendsTimeline) {
 //        [self showBottomStateView];

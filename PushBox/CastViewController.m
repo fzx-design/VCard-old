@@ -178,10 +178,8 @@
 
 #pragma mark - Push And Pop Cards methods
 
-- (void)pushCardWithCompletion:(void (^)())completion
+- (void)recordCurrentState
 {
-	[[UIApplication sharedApplication] showLoadingView];
-	
 	CastViewInfo *castViewInfo = [[[CastViewInfo alloc] init] autorelease];
 	
 	castViewInfo.fetchedResultsController = self.fetchedResultsController;
@@ -191,7 +189,7 @@
 	castViewInfo.indexCount = [self.castViewManager numberOfRows];
 	
 	[self.infoStack addObject:castViewInfo];
-
+	
 	self.fetchedResultsController = nil;
 	self.fetchedResultsController.delegate = nil;
 	
@@ -199,12 +197,28 @@
 	self.castViewManager.fetchedResultsController = self.fetchedResultsController;
 	self.castViewManager.currentIndex = 0;
 	
-	self.blurImageView.alpha = 0.0;
+	_nextPage = 1;
+}
+
+- (void)pushCardWithCompletion:(void (^)())completion
+{
+	[[UIApplication sharedApplication] showLoadingView];
+	
+	[self recordCurrentState];
+
+	[self loadMoreDataCompletion:nil];
+	
+	BOOL firstPush = (self.infoStack.count == 1);
+	
+	if (firstPush) {
+		self.blurImageView.alpha = 0.0;
+	}
+	
 	self.blurImageView.transform = CGAffineTransformMakeScale(kBlurImageViewScale, kBlurImageViewScale);
 	
 	[UIView animateWithDuration:0.5 animations:^{
-        self.blurImageView.alpha = 1.0;
-        self.blurImageView.transform = CGAffineTransformMakeScale(1, 1);
+		self.blurImageView.alpha = 1.0;
+		self.blurImageView.transform = CGAffineTransformMakeScale(1, 1);
         self.castView.alpha = 0.0;
         self.castView.transform = CGAffineTransformScale(self.castView.transform, 1/kBlurImageViewScale, 1/kBlurImageViewScale);
     } completion:^(BOOL fin) {
@@ -213,14 +227,18 @@
 		self.rootShadowLeft.alpha = 1.0;
 		self.castView.transform = CGAffineTransformScale(self.castView.transform, kBlurImageViewScale, kBlurImageViewScale);
         self.castView.alpha = 0.0;
-        [self loadMoreDataCompletion:completion];
+		if (completion) {
+			completion();
+		}
 		
     }];
 }
 
-- (void)popCardWithCompletion:(void (^)())completion
+- (BOOL)popCardWithCompletion:(void (^)())completion
 {
 	CastViewInfo *castViewInfo = [self.infoStack lastObject];
+	
+	BOOL needPopAnimation = (self.infoStack.count == 1);
 	
 	self.dataSource = castViewInfo.dataSource;
 	
@@ -233,8 +251,9 @@
 		
 		self.castViewManager.fetchedResultsController = nil;
 		self.castViewManager.fetchedResultsController = self.fetchedResultsController;
-
         self.castViewManager.currentIndex = castViewInfo.currentIndex;
+		
+		_nextPage = 1;
 		
         [self.castViewManager popNewViews:castViewInfo];
 		
@@ -242,15 +261,21 @@
 		
         self.blurImageView.alpha = 1.0;
         self.blurImageView.transform = CGAffineTransformMakeScale(1, 1);
+
 		self.castView.transform = CGAffineTransformScale(self.castView.transform, 1/kBlurImageViewScale, 1/kBlurImageViewScale);
 		[UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
-            self.blurImageView.alpha = 0.0;
+			self.blurImageView.alpha = 0.0;
             self.blurImageView.transform = CGAffineTransformMakeScale(kBlurImageViewScale, kBlurImageViewScale);
 			self.castView.transform = CGAffineTransformScale(self.castView.transform, kBlurImageViewScale, kBlurImageViewScale);
 			self.castView.alpha = 1.0;
 		} completion:^(BOOL fin) {
+			if (!needPopAnimation) {
+				self.blurImageView.alpha = 1.0;
+			}
 			
             [self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
+			
+			[self.infoStack removeLastObject];
 			
             if (completion) {
                 completion();
@@ -258,6 +283,8 @@
 			[[UIApplication sharedApplication] hideLoadingView];
         }];
 	}];
+	
+	return needPopAnimation;
 }
 
 #pragma mark - Card Movement Settings methods
@@ -530,12 +557,12 @@
     }
     
     
-    if (self.dataSource == CardTableViewDataSourceFriendsTimeline) {
+    if (self.dataSource == CastViewDataSourceFriendsTimeline) {
         [self loadMoreFriendTimeline:completion];
     }
     
     //
-    if (self.dataSource == CardTableViewDataSourceUserTimeline) {
+    if (self.dataSource == CastViewDataSourceUserTimeline) {
         [[UIApplication sharedApplication] showLoadingView];
 		[client setCompletionBlock:^(WeiboClient *client) {
             if (!client.hasError) {
@@ -599,7 +626,7 @@
     }
     
 //    //
-//    if (self.dataSource == CardTableViewDataSourceSearchStatues) {
+//    if (self.dataSource == CastViewDataSourceSearchStatues) {
 //        [[UIApplication sharedApplication] showLoadingView];
 //		[client setCompletionBlock:^(WeiboClient *client) {
 //            if (!client.hasError) {
@@ -653,7 +680,7 @@
 //    }
 //	
 //	//
-//	if (self.dataSource == CardTableViewDataSourceMentions) {
+//	if (self.dataSource == CastViewDataSourceMentions) {
 //		[client setCompletionBlock:^(WeiboClient *client) {
 //            if (!client.hasError) {
 //				
