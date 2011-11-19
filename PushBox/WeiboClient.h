@@ -81,6 +81,9 @@ typedef void (^WCCompletionBlock)(WeiboClient *client);
                        page:(int)page
                       count:(int)count;
 
+- (void)getEmotionsWithType:(NSString *)type
+                   language:(NSString *)language;
+
 - (void)getCommentsAndRepostsCount:(NSArray *)statusIDs;
 
 - (void)getUser:(NSString *)userID;
@@ -102,9 +105,9 @@ typedef void (^WCCompletionBlock)(WeiboClient *client);
  commentOrigin:(BOOL)commentOrigin;
 
 - (void)reply:(NSString *)statusID 
-            cid:(NSString *)cid 
-           text:(NSString *)text
-  withOutMention:(BOOL)withOutMention;
+          cid:(NSString *)cid 
+         text:(NSString *)text
+withOutMention:(BOOL)withOutMention;
 
 - (void)comment:(NSString *)statusID 
 			cid:(NSString *)cid 

@@ -13,6 +13,7 @@
 #import "AnimationProvider.h"
 #import "Status.h"
 #import "User.h"
+#import "Emotion.h"
 #import "Comment.h"
 #import "PushBoxAppDelegate.h"
 
@@ -175,6 +176,18 @@
     
     [client2 getFriendsOfUser:self.currentUser.userID cursor:cursor count:200];
     
+    // getEmotions
+    WeiboClient *client3 = [WeiboClient client];
+    [client3 setCompletionBlock:^(WeiboClient *client3) {
+        if (!client3.hasError) {
+            NSArray *dictArray = client3.responseJSONObject;
+            for (NSDictionary *dict in dictArray) {
+                [Emotion insertEmotion:dict inManagedObjectContext:self.managedObjectContext];
+            }
+        }
+    }];
+    [client3 getEmotionsWithType:nil language:nil];
+    
 }
 
 - (void)viewDidLoad
@@ -229,7 +242,6 @@
 				 object:nil];
     
     
-//    self.bottomStateView.alpha = 0.0;
 	self.bottomStateView.hidden = YES;
 	self.notificationView.hidden = YES;
 	_commandCenterFlag = NO;
@@ -324,7 +336,7 @@
     if (self.bottomStateInvisibleView.image == nil) {
         self.bottomStateInvisibleView.image = _tmpImage;
     }
-//    self.bottomStateView.alpha = 1.0;
+    //    self.bottomStateView.alpha = 1.0;
 	self.bottomStateView.hidden = NO;
     [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimation] forKey:@"animation"];
     [self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
@@ -338,7 +350,7 @@
     self.dockViewController.searchButton.selected = YES;
     
     [UIView animateWithDuration:0.28 animations:^(void) {
-//        self.bottomStateView.alpha = 1.0;
+        //        self.bottomStateView.alpha = 1.0;
 		self.bottomStateView.hidden = NO;
         CGRect frame = self.bottomStateView.frame;
         frame.origin.y = 768 - 352 - 46 - 18;
@@ -357,7 +369,7 @@
     [self.bottomStateTextField resignFirstResponder];
     
     [UIView animateWithDuration:0.28 animations:^(void) {
-//        self.bottomStateView.alpha = 0.0;
+        //        self.bottomStateView.alpha = 0.0;
 		self.bottomStateView.hidden = YES;
         CGRect frame = self.bottomStateView.frame;
         frame.origin.y = 618;
@@ -375,7 +387,7 @@
     [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimation] forKey:@"animation"];
     [self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
     
-//    self.bottomStateView.alpha = 0.0;
+    //    self.bottomStateView.alpha = 0.0;
 	self.bottomStateView.hidden = YES;
     self.bottomBackButton.enabled = NO;
     
@@ -536,7 +548,7 @@
 		userCardVC.friendsCountLabel.text =  self.currentUser.friendsCount;
 		userCardVC.followersCountLabel.text = self.currentUser.followersCount;
 		userCardVC.statusesCountLabel.text = self.currentUser.statusesCount;
-
+        
 		BOOL enabled = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeyNotiPopoverEnabled];
 		if (self.notificationView.hidden && !_commandCenterFlag && enabled) {
 			self.notificationView.hidden = NO;
@@ -918,7 +930,7 @@
 
 - (void)searchButtonClicked:(UIButton *)button
 {
-//    self.bottomStateView.alpha = 1.0;
+    //    self.bottomStateView.alpha = 1.0;
 	self.bottomStateView.hidden = NO;
     [self.bottomStateTextField becomeFirstResponder];
     
@@ -1158,8 +1170,8 @@
                                         forControlEvents:UIControlEventTouchUpInside];
         
         [self.dockViewController.postButton addTarget:self
-                                                   action:@selector(post)
-                                         forControlEvents:UIControlEventTouchUpInside];
+                                               action:@selector(post)
+                                     forControlEvents:UIControlEventTouchUpInside];
         
         [self.dockViewController.playButton addTarget:self
                                                action:@selector(play)

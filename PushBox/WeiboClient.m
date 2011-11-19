@@ -922,6 +922,21 @@ withOutMention:(BOOL)withOutMention
     [self sendRequest];
 }
 
+- (void)getEmotionsWithType:(NSString *)type
+                   language:(NSString *)language
+{
+    self.path = [NSString stringWithFormat:@"emotions.json"];
+    
+    if (type) {
+        [self.params setObject:[NSString stringWithString:type] forKey:@"type"];
+    }
+    if (language) {
+        [self.params setObject:[NSString stringWithString:language] forKey:@"language"];
+    }
+    
+    [self sendRequest];
+}
+
 - (void)getRelationshipWithUser:(NSString *)userID
 {
     self.path = @"friendships/show.json";

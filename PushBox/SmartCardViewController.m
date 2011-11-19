@@ -9,6 +9,7 @@
 #import "SmartCardViewController.h"
 #import "Status.h"
 #import "User.h"
+#import "Emotion.h"
 #import "UIImageViewAddition.h"
 #import "NSDateAddition.h"
 #import "OptionsTableViewController.h"
@@ -517,14 +518,43 @@
                 }
                 break;
             }
+            case '[':
+            {
+                int j = i + 1;
+                for (j = i + 1; j < originStatus.length; j++) {
+                    if ([originStatus characterAtIndex:j] == ']') {
+                        break;
+                    }
+                }
+                endIndex = j;
+                
+                NSRange range = NSMakeRange(startIndex, endIndex-startIndex+1);
+                NSString* subStr = [originStatus substringWithRange:range];                
+                
+                NSManagedObjectContext* context = [(PushBoxAppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
+                NSEntityDescription *entityDescription = [NSEntityDescription                                                  entityForName:@"Emotion" inManagedObjectContext:context];
+                NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+                [request setEntity:entityDescription];
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:[[[NSString alloc] initWithFormat:@"phrase == \"%@\"", subStr] autorelease]];
+                [request setPredicate:predicate];
+                NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]                                                                      initWithKey:@"phrase" ascending:YES];
+                [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+                [sortDescriptor release];
+                NSError *error;
+                NSArray *array = [context executeFetchRequest:request error:&error];
+                NSString* url = [(Emotion*)[array lastObject] url];
+                
+                if (url) {
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[[NSString alloc] initWithFormat:@"<span><img src=\"%@\"></span>", url] autorelease]];
+                }
+            }
             default:
                 break;
         }
     }
     
-    //    NSString* htmlText = [[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><style type=\"text/css\">@import url(\"smartcard.css\");</style></head><body><div id=\"post\">%@</div></body></html>", phasedStatus];
     NSString* htmlText = [[[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><link href=\"smartcard.css\" rel=\"stylesheet\" type=\"text/css\" /><script type='text/javascript' src='smartcard.js'></script></head><body><div id=\"post\">%@</div></body></html>", phasedStatus] autorelease];
-    //    NSLog(htmlText);
+
     NSString *path = [[NSBundle mainBundle] pathForResource:@"smartcard" ofType:@"html"]; 
     [self.postWebView loadHTMLString:htmlText baseURL:[NSURL fileURLWithPath: path]];    
     
@@ -607,6 +637,36 @@
                     phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[[NSString alloc] initWithFormat:@"<span class='highlight'><a href='javascript:void(0);' onclick='lkClicked(\"%@\")'>%@</a></span>", subStr, subStr] autorelease]];
                 }
                 break;
+            }
+            case '[':
+            {
+                int j = i + 1;
+                for (j = i + 1; j < originStatus.length; j++) {
+                    if ([originStatus characterAtIndex:j] == ']') {
+                        break;
+                    }
+                }
+                endIndex = j;
+                
+                NSRange range = NSMakeRange(startIndex, endIndex-startIndex+1);
+                NSString* subStr = [originStatus substringWithRange:range];                
+                
+                NSManagedObjectContext* context = [(PushBoxAppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
+                NSEntityDescription *entityDescription = [NSEntityDescription                                                  entityForName:@"Emotion" inManagedObjectContext:context];
+                NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+                [request setEntity:entityDescription];
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:[[[NSString alloc] initWithFormat:@"phrase == \"%@\"", subStr] autorelease]];
+                [request setPredicate:predicate];
+                NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]                                                                      initWithKey:@"phrase" ascending:YES];
+                [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+                [sortDescriptor release];
+                NSError *error;
+                NSArray *array = [context executeFetchRequest:request error:&error];
+                NSString* url = [(Emotion*)[array lastObject] url];
+                
+                if (url) {
+                    phasedStatus = [phasedStatus stringByReplacingOccurrencesOfString:subStr withString:[[[NSString alloc] initWithFormat:@"<span><img src=\"%@\"></span>", url] autorelease]];
+                }
             }
             default:
                 break;
@@ -876,7 +936,7 @@
         [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
             self.trackLabel.alpha = 1.0;
             self.trackView.alpha = 1.0;
-//            self.recentActNotifyLabel.alpha = 1.0;
+            //            self.recentActNotifyLabel.alpha = 1.0;
         } completion:^(BOOL fin) {
             
         }];
