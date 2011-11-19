@@ -10,6 +10,7 @@
 #import "UserCardNaviViewController.h"
 #import "ErrorNotification.h"
 #import "GYCastView.h"
+#import "CastViewInfo.h"
 #import "CastViewManager.h"
 #import "Status.h"
 
@@ -20,16 +21,7 @@
 #define kNotificationNameNewNotification @"kNotificationNameNewNotification"
 #define kNotificationNameNewMentions @"kNotificationNameNewMentions"
 
-typedef enum {
-    CastViewDataSourceFriendsTimeline,
-    CastViewDataSourceUserTimeline,
-    CastViewDataSourceFavorites,
-    CastViewDataSourceSearchStatues,
-	CastViewDataSourceMentions,
-} CastViewDataSource;
-
 @class User;
-
 
 @interface CastViewController : CoreDataTableViewController <GYCastViewDelegate> {
 	UIImageView *_blurImageView;
@@ -43,8 +35,12 @@ typedef enum {
 	
 	NSTimer *_timer;
 	
-	NSMutableArray *_nextPageStack;
-	NSMutableArray *_rowIndexStack;
+//	NSMutableArray *_nextPageStack;
+//	NSMutableArray *_rowIndexStack;
+//	NSMutableArray *_fetchedResultsControllerStack;
+	
+	NSMutableArray *_infoStack;
+	
 	CastViewManager *_castViewManager;
 	
 	int _nextPage;
@@ -67,6 +63,11 @@ typedef enum {
 @property(nonatomic, assign) CastViewDataSource dataSource;
 @property(nonatomic, retain) CastViewManager *castViewManager;
 
+//@property(nonatomic, retain) NSMutableArray *nextPageStack;
+//@property(nonatomic, retain) NSMutableArray *rowIndexStack;
+//@property(nonatomic, retain) NSMutableArray *fetchedResultsControllerStack;
+
+@property(nonatomic, retain) NSMutableArray *infoStack;
 
 @property(nonatomic, retain) NSFetchedResultsController* prevFetchedResultsController;
 

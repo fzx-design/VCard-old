@@ -148,6 +148,7 @@
 		9BB11CB514503ED3005B43AC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBDA5AF613DBEC1300FAE221 /* CoreGraphics.framework */; };
 		9BB5B8B61449A8B100352FF7 /* UserCardContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB5B8B41449A8B100352FF7 /* UserCardContentViewController.m */; };
 		9BB5B8B71449A8B100352FF7 /* UserCardContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BB5B8B51449A8B100352FF7 /* UserCardContentViewController.xib */; };
+		9BBC487314778878000A69AC /* CastViewInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC487214778878000A69AC /* CastViewInfo.m */; };
 		9BC26BB314604F4700724DAC /* cell_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BC26BB214604F4700724DAC /* cell_highlight.png */; };
 		9BC6E651144A9B2400B28506 /* CCUserInfoCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC6E64F144A9B2400B28506 /* CCUserInfoCardViewController.m */; };
 		9BC6E652144A9B2400B28506 /* CCUserInfoCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BC6E650144A9B2400B28506 /* CCUserInfoCardViewController.xib */; };
@@ -448,6 +449,8 @@
 		9BB5B8B31449A8B100352FF7 /* UserCardContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCardContentViewController.h; sourceTree = "<group>"; };
 		9BB5B8B41449A8B100352FF7 /* UserCardContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCardContentViewController.m; sourceTree = "<group>"; };
 		9BB5B8B51449A8B100352FF7 /* UserCardContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCardContentViewController.xib; sourceTree = "<group>"; };
+		9BBC487114778878000A69AC /* CastViewInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CastViewInfo.h; sourceTree = "<group>"; };
+		9BBC487214778878000A69AC /* CastViewInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CastViewInfo.m; sourceTree = "<group>"; };
 		9BC26BB214604F4700724DAC /* cell_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_highlight.png; sourceTree = "<group>"; };
 		9BC6E64E144A9B2300B28506 /* CCUserInfoCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCUserInfoCardViewController.h; sourceTree = "<group>"; };
 		9BC6E64F144A9B2400B28506 /* CCUserInfoCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCUserInfoCardViewController.m; sourceTree = "<group>"; };
@@ -781,6 +784,8 @@
 				9B2D8D671470BABD005B2D8E /* CastViewController.m */,
 				9BD2BB6B1476358D0064169B /* CastViewManager.h */,
 				9BD2BB6C1476358D0064169B /* CastViewManager.m */,
+				9BBC487114778878000A69AC /* CastViewInfo.h */,
+				9BBC487214778878000A69AC /* CastViewInfo.m */,
 				9B2D8D701470E672005B2D8E /* CardFrameViewController.h */,
 				9B2D8D711470E672005B2D8E /* CardFrameViewController.m */,
 			);
@@ -1718,6 +1723,7 @@
 				9B2D8D691470BABD005B2D8E /* CastViewController.m in Sources */,
 				9B2D8D731470E672005B2D8E /* CardFrameViewController.m in Sources */,
 				9BD2BB6D1476358D0064169B /* CastViewManager.m in Sources */,
+				9BBC487314778878000A69AC /* CastViewInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

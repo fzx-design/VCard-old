@@ -16,7 +16,7 @@
 #define RefreshCardsOffsetPage 3
 #define MoveCardsOffsetPage 2
 
-@synthesize scrollView, pageSize, dropShadow, delegate, pageNum;
+@synthesize scrollView, pageSize, dropShadow, delegate, pageNum, pageSection;
 
 
 - (void)awakeFromNib
@@ -88,8 +88,9 @@
 	viewFrame.origin.y = 0;
 	
 	view.frame = viewFrame;
-		
-	[self.scrollView addSubview:view];
+	if (view.superview == nil) {
+		[self.scrollView addSubview:view];
+	}
 }
 
 - (void)setRefreshPage:(int)page WithView:(UIView*)view
@@ -101,15 +102,36 @@
 
 - (void)reset
 {
+	pageSection = 1;
+	
 	pageNum = [delegate itemCount:self];
-		
+
 	self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
 	
 	self.scrollView.contentOffset = CGPointMake(0.0, 0.0);
 	
-	[self.delegate resetViews];
+	[self.delegate resetViewsAroundCurrentIndex:0];
 	
 	for (int i = 0; i < pageNum; ++i) {
+		[self loadPage:i];
+	}
+	
+	animating = NO;
+}
+
+- (void)resetWithCurrentIndex:(int)index numberOfPages:(int)page
+{
+	pageNum = page;
+	
+	self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
+	
+	self.scrollView.contentOffset = CGPointMake(index * self.scrollView.frame.size.width, 0.0);
+	
+	NSLog(@"_________, size %f , offset %f", self.scrollView.contentSize.width, self.scrollView.contentOffset.x);
+	
+	[self.delegate resetViewsAroundCurrentIndex:InitialIndex];
+	
+	for (int i = index - 3; i <= index + 3; ++i) {
 		[self loadPage:i];
 	}
 	
@@ -119,6 +141,8 @@
 - (void)layoutSubviews
 {
 	if(firstLayout){
+		
+		firstLayout = NO;
 		animating = NO;
 		
 		CGRect scrollViewRect = CGRectMake(0, 0, pageSize.width, pageSize.height);
@@ -153,6 +177,11 @@
 
 #pragma mark - Adjust Views in Castview
 
+- (void)changeViews
+{
+	[self reset];
+}
+
 - (void)reloadViews
 {
 	[self layoutSubviews];
@@ -165,8 +194,16 @@
 
 - (void)addMoreViews
 {
-	pageNum += 10;
-	self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
+	pageSection++;
+	
+	int pre = pageNum;
+	pageNum = [self.delegate itemCount:self];
+	
+	if (pageNum == pre) {
+		pageSection--;
+	} else {
+		self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
+	}
 }
 
 - (void)refreshViewsWithFirstPage:(UIView*)firstView 

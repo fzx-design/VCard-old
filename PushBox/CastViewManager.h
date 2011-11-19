@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "GYCastView.h"
 #import "User.h"
+#import "CastViewInfo.h"
 
 @protocol CastViewControllerDelegate <NSObject>
 - (void)castViewControllerdidScrollToRow:(int)row withNumberOfRows:(int)maxRow;
@@ -40,10 +41,14 @@
 - (void)initialSetUp;
 - (void)refreshCards;
 
+- (void)pushNewViews;
+- (void)popNewViews:(CastViewInfo *)info;
+
+- (int)numberOfRows;
+
 - (UIView*)viewForItemAtIndex:(GYCastView*)scrollView index:(int)index;
 - (int)itemCount:(GYCastView*)scrollView;
 - (void)didScrollToIndex:(int)index;
-- (void)loadMoreViews;
-- (void)resetViews;
+- (void)resetViewsAroundCurrentIndex:(int)index;
 
 @end

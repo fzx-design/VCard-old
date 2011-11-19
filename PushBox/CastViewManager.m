@@ -12,7 +12,6 @@
 #define CastViewPageSize CGSizeMake(560, 640)
 #define CastViewFrame CGRectMake(0.0f, 0.0f, 560, 640)
 #define PreLoadCardNumber 7
-#define InitialIndex 100
 
 @implementation CastViewManager
 
@@ -155,6 +154,18 @@
 	[self.castView refreshViewsWithFirstPage:vc1.view andSecondPage:vc2.view];
 }
 
+- (void)pushNewViews
+{
+	[self.castView resetWithCurrentIndex:0 numberOfPages:[self itemCount:nil]];
+	[self reloadCards];
+}
+
+- (void)popNewViews:(CastViewInfo*)info
+{
+	NSLog(@"Pre info ci: %d and ic: %d", info.currentIndex, info.indexCount);
+	[self.castView resetWithCurrentIndex:info.currentIndex numberOfPages:info.indexCount];
+	[self reloadCards];
+}
 
 #pragma mark - GYCastViewDelegate methods
 
@@ -165,7 +176,9 @@
 }
 
 - (UIView*)viewForItemAtIndex:(GYCastView *)scrollView index:(int)index
-{	
+{
+	NSLog(@"The index is %d and the pageNum is %d", index, self.castView.pageNum);
+	
 	CardFrameViewController *cardFrameViewController = [self getCardFrameViewControllerForIndex:index];
 	
 	return cardFrameViewController.view;
@@ -174,16 +187,19 @@
 - (int)itemCount:(GYCastView *)scrollView
 {
 	int count = self.fetchedResultsController.fetchedObjects.count;
-	if (count >= 10) {
-		count = 10;
+	if (count > 10 * self.castView.pageSection) {
+		count = 10 * self.castView.pageSection;
 	}
 	return count;
 }
 
-- (void)resetViews
+- (void)resetViewsAroundCurrentIndex:(int)index
 {
 	for (CardFrameViewController *vc in self.cardFrames) {
-		if (vc.index > 1) {
+		if (abs(vc.index - index) > 1) {
+			
+			NSLog(@"%d removed", vc.index);
+			
 			vc.index = InitialIndex;
 			[vc.view removeFromSuperview];
 		}

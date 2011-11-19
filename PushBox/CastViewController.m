@@ -11,6 +11,7 @@
 #import "WeiboClient.h"
 #import "Status.h"
 #import "User.h"
+#import "CastViewInfo.h"
 #import "UIApplicationAddition.h"
 #import "CardFrameViewController.h"
 
@@ -28,6 +29,12 @@
 @synthesize user = _user;
 @synthesize dataSource = _dataSource;
 @synthesize castViewManager = _castViewManager;
+
+//@synthesize nextPageStack = _nextPageStack;
+//@synthesize rowIndexStack = _rowIndexStack;
+//@synthesize fetchedResultsControllerStack = _fetchedResultsControllerStack;
+
+@synthesize infoStack = _infoStack;
 
 @synthesize prevFetchedResultsController = _prevFetchedResultsController;
 
@@ -173,12 +180,84 @@
 
 - (void)pushCardWithCompletion:(void (^)())completion
 {
+	[[UIApplication sharedApplication] showLoadingView];
 	
+	CastViewInfo *castViewInfo = [[[CastViewInfo alloc] init] autorelease];
+	
+	castViewInfo.fetchedResultsController = self.fetchedResultsController;
+	castViewInfo.nextPage = _nextPage;
+	castViewInfo.currentIndex = self.castViewManager.currentIndex;
+	castViewInfo.dataSource = self.dataSource;
+	castViewInfo.indexCount = [self.castViewManager numberOfRows];
+	
+	[self.infoStack addObject:castViewInfo];
+
+	self.fetchedResultsController = nil;
+	self.fetchedResultsController.delegate = nil;
+	
+	self.castViewManager.fetchedResultsController = nil;
+	self.castViewManager.fetchedResultsController = self.fetchedResultsController;
+	self.castViewManager.currentIndex = 0;
+	
+	self.blurImageView.alpha = 0.0;
+	self.blurImageView.transform = CGAffineTransformMakeScale(kBlurImageViewScale, kBlurImageViewScale);
+	
+	[UIView animateWithDuration:0.5 animations:^{
+        self.blurImageView.alpha = 1.0;
+        self.blurImageView.transform = CGAffineTransformMakeScale(1, 1);
+        self.castView.alpha = 0.0;
+        self.castView.transform = CGAffineTransformScale(self.castView.transform, 1/kBlurImageViewScale, 1/kBlurImageViewScale);
+    } completion:^(BOOL fin) {
+//		[self clearData];
+		[self.castViewManager pushNewViews];
+		self.rootShadowLeft.alpha = 1.0;
+		self.castView.transform = CGAffineTransformScale(self.castView.transform, kBlurImageViewScale, kBlurImageViewScale);
+        self.castView.alpha = 0.0;
+        [self loadMoreDataCompletion:completion];
+		
+    }];
 }
 
 - (void)popCardWithCompletion:(void (^)())completion
 {
+	CastViewInfo *castViewInfo = [self.infoStack lastObject];
 	
+	self.dataSource = castViewInfo.dataSource;
+	
+	[UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
+		self.castView.alpha = 0.0;
+	} completion:^(BOOL fin) {
+
+		self.fetchedResultsController = castViewInfo.fetchedResultsController;
+        self.fetchedResultsController.delegate = nil;
+		
+		self.castViewManager.fetchedResultsController = nil;
+		self.castViewManager.fetchedResultsController = self.fetchedResultsController;
+
+        self.castViewManager.currentIndex = castViewInfo.currentIndex;
+		
+        [self.castViewManager popNewViews:castViewInfo];
+		
+        [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
+		
+        self.blurImageView.alpha = 1.0;
+        self.blurImageView.transform = CGAffineTransformMakeScale(1, 1);
+		self.castView.transform = CGAffineTransformScale(self.castView.transform, 1/kBlurImageViewScale, 1/kBlurImageViewScale);
+		[UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
+            self.blurImageView.alpha = 0.0;
+            self.blurImageView.transform = CGAffineTransformMakeScale(kBlurImageViewScale, kBlurImageViewScale);
+			self.castView.transform = CGAffineTransformScale(self.castView.transform, kBlurImageViewScale, kBlurImageViewScale);
+			self.castView.alpha = 1.0;
+		} completion:^(BOOL fin) {
+			
+            [self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
+			
+            if (completion) {
+                completion();
+            }
+			[[UIApplication sharedApplication] hideLoadingView];
+        }];
+	}];
 }
 
 #pragma mark - Card Movement Settings methods
@@ -735,9 +814,9 @@
 	}];
 }
 
-- (void)resetViews
+- (void)resetViewsAroundCurrentIndex:(int)index
 {
-	[self.castViewManager resetViews];
+	[self.castViewManager resetViewsAroundCurrentIndex:index];
 }
 
 
@@ -752,6 +831,37 @@
 	return _castViewManager;
 }
 
+//- (NSMutableArray*)nextPageStack
+//{
+//	if (_nextPageStack == nil) {
+//		_nextPageStack = [[NSMutableArray alloc] init];
+//	}
+//	return _nextPageStack;
+//}
+//
+//- (NSMutableArray*)rowIndexStack
+//{
+//	if (_rowIndexStack == nil) {
+//		_rowIndexStack = [[NSMutableArray alloc] init];
+//	}
+//	return _rowIndexStack;
+//}
+//
+//- (NSMutableArray*)fetchedResultsControllerStack
+//{
+//	if (_fetchedResultsControllerStack == nil) {
+//		_fetchedResultsControllerStack = [[NSMutableArray alloc] init];
+//	}
+//	return _fetchedResultsControllerStack;
+//}
+
+- (NSMutableArray*)infoStack
+{
+	if (_infoStack == nil) {
+		_infoStack = [[NSMutableArray alloc] init];
+	}
+	return _infoStack;
+}
 
 
 @end
