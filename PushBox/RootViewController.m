@@ -292,32 +292,35 @@
 
 - (void)userSignoutNotification:(id)sender
 {
-    preNewCommentCount = 0;
-    preNewFollowerCount = 0;
-    preNewMentionCount = 0;
-    
-    [WeiboClient signout];
+	[self hideDockView];
+	[self hideCardTableView];
+	[self hideBottomStateView];
 	
-	if (_tmpImage != nil) {
-		[_tmpImage release];
-	}
-	_tmpImage = nil;
-	_statusTypeStack = nil;
-	
-	self.bottomStateInvisibleView.image = nil;
-	
-    [self hideDockView];
-    [self hideCardTableView];
-    [self hideBottomStateView];
-    self.bottomStateFrameView.hidden = YES;
-    self.notificationView.hidden = YES;
-    self.currentUser = nil;
-    [self setDefaultBackgroundImage:YES];
-    [User deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
-	[Status deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
-	[Comment deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:PBBackgroundImageDefault] forKey:kUserDefaultKeyBackground];
-    [self performSelector:@selector(showLoginView) withObject:nil afterDelay:1.0];
+	[self.castViewController.castView moveOutViews:^(){
+		preNewCommentCount = 0;
+		preNewFollowerCount = 0;
+		preNewMentionCount = 0;
+		
+		[WeiboClient signout];
+		
+		if (_tmpImage != nil) {
+			[_tmpImage release];
+		}
+		_tmpImage = nil;
+		_statusTypeStack = nil;
+		
+		self.bottomStateInvisibleView.image = nil;
+			
+		self.bottomStateFrameView.hidden = YES;
+		self.notificationView.hidden = YES;
+		self.currentUser = nil;
+		[self setDefaultBackgroundImage:YES];
+		[User deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
+		[Status deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
+		[Comment deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
+		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:PBBackgroundImageDefault] forKey:kUserDefaultKeyBackground];
+		[self performSelector:@selector(showLoginView) withObject:nil afterDelay:0.1];
+	}];
 }
 
 - (void)configureUsablityAfterDeleted

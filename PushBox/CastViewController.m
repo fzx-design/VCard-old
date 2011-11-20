@@ -569,11 +569,6 @@
 	}
 
 	
-	
-	
-	
-	
-	//    //
 //    if (self.dataSource == CastViewDataSourceSearchStatues) {
 //        [[UIApplication sharedApplication] showLoadingView];
 //		[client setCompletionBlock:^(WeiboClient *client) {
