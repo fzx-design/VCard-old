@@ -342,19 +342,19 @@
 
 #pragma mark - Load Cards methods
 
-- (long long)getMaxID
-{
-	long long maxID = 0;
-    Status *lastStatus = [self.fetchedResultsController.fetchedObjects lastObject];
-    
-    if (lastStatus && !_refreshFlag) {
-        NSString *statusID = lastStatus.statusID;
-        maxID = [statusID longLongValue] - 1;
-		_refreshFlag = NO;
-    }
-	
-	return maxID;
-}
+//- (long long)getMaxID
+//{
+//	long long maxID = 0;
+//    Status *lastStatus = [self.fetchedResultsController.fetchedObjects lastObject];
+//    
+//    if (lastStatus && !_refreshFlag) {
+//        NSString *statusID = lastStatus.statusID;
+//        maxID = [statusID longLongValue] - 1;
+//		_refreshFlag = NO;
+//    }
+//	
+//	return maxID;
+//}
 
 - (void)clearData
 {
@@ -504,9 +504,14 @@
 			if (_refreshFlag) {
 				_refreshFlag = NO;
 				
-				Status *newStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
+				long long statusID = 0;
 				
-				long long statusID = [newStatus.statusID longLongValue];
+				if (self.fetchedResultsController.fetchedObjects.count) {
+					
+					Status *newStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
+					
+					statusID = [newStatus.statusID longLongValue];
+				}
 				
 				if (_lastStatusID < statusID){
 					
@@ -719,7 +724,6 @@
 {
 	[self loadMoreDataCompletion:^(){
 		[self.castView addMoreViews];
-		NSLog(@"The number of fetched results is %d", self.fetchedResultsController.fetchedObjects.count);
 	}];
 }
 

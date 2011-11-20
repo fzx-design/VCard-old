@@ -93,7 +93,11 @@
 	
 	cardFrameViewController.index = index;
 	cardFrameViewController.contentViewController.currentUser = self.currentUser;
-	cardFrameViewController.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:index];
+	if (self.fetchedResultsController.fetchedObjects.count > index) {
+		cardFrameViewController.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:index];
+	} else {
+		NSLog(@"_________________Error1");
+	}
 	cardFrameViewController.contentViewController.view.frame = CastViewFrame;
 	
 	return cardFrameViewController;	
@@ -122,7 +126,11 @@
 	[self.fetchedResultsController performFetch:nil];
 	for (CardFrameViewController *cardFrameViewController in self.cardFrames) {
 		if (abs(cardFrameViewController.index - self.currentIndex) <= 3) {
-			cardFrameViewController.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:cardFrameViewController.index];
+			if (self.fetchedResultsController.fetchedObjects.count > cardFrameViewController.index) {
+				cardFrameViewController.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:cardFrameViewController.index];
+			} else {
+				NSLog(@"_________________Error2");
+			}
 		}
 	}
 	
