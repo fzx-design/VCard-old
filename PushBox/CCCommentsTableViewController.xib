@@ -101,7 +101,6 @@
 						<string key="NSFrame">{{283, 59}, {50, 17}}</string>
 						<reference key="NSSuperview" ref="540035684"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:328</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -151,7 +150,7 @@
 								<bool key="IBUIBouncesZoom">NO</bool>
 								<int key="IBUISectionIndexMinimumDisplayRowCount">0</int>
 								<bool key="IBUIShowsSelectionImmediatelyOnTouchBegin">YES</bool>
-								<float key="IBUIRowHeight">65</float>
+								<float key="IBUIRowHeight">67</float>
 								<float key="IBUISectionHeaderHeight">22</float>
 								<float key="IBUISectionFooterHeight">22</float>
 							</object>

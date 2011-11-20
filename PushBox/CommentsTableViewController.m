@@ -165,7 +165,7 @@
 	textView.frame = frame;
 	
 	CGFloat height = textView.frame.origin.y + textView.contentSize.height + 10;
-	height = height > 65 ? height : 65;
+	height = height > 71 ? height : 71;
 	commentCell.frame = CGRectMake(0, 0, 448, height);
 	
 	commentCell.separatorLine.frame = CGRectMake(0, height - 2, 
@@ -233,7 +233,7 @@
     //	textView.font = [textView.font fontWithSize:14];
 	textView.text = comment.text;
     
-	CGFloat height = textView.frame.origin.y + textView.contentSize.height + 16;
+	CGFloat height = textView.frame.origin.y + textView.contentSize.height + 22;
 	[textView removeFromSuperview];
 	[textView release];
 	
