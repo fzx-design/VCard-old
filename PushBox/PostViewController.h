@@ -75,6 +75,7 @@ typedef enum {
 @property(nonatomic, retain) NSMutableArray *atScreenNames;
  
 - (id)initWithType:(PostViewType)type;
+- (void)dismissView;
 
 - (IBAction)cancelButtonClicked:(UIButton *)sender;
 - (IBAction)doneButtonClicked:(id)sender;

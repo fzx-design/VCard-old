@@ -191,16 +191,6 @@
     [self atTextFieldEditingBegan];
 }
 
-- (IBAction)cancelButtonClicked:(UIButton *)sender {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
-															 delegate:self 
-													cancelButtonTitle:nil 
-											   destructiveButtonTitle:NSLocalizedString(@"取消" , nil)
-													otherButtonTitles:nil];
-	[actionSheet showFromRect:sender.bounds inView:sender animated:YES];
-	[actionSheet release];
-}
-
 - (void)dismissView
 {
 	if (self.rightView.superview) {
@@ -211,6 +201,21 @@
 	}
 	[self.textView resignFirstResponder];
     [[UIApplication sharedApplication] dismissModalViewController];
+}
+
+- (IBAction)cancelButtonClicked:(UIButton *)sender {
+    if ([self.textView.text length] == 0) {
+        [self dismissView];
+    }
+    else {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
+                                                                 delegate:self 
+                                                        cancelButtonTitle:nil 
+                                                   destructiveButtonTitle:NSLocalizedString(@"取消" , nil)
+                                                        otherButtonTitles:nil];
+        [actionSheet showFromRect:sender.bounds inView:sender animated:YES];
+        [actionSheet release];
+    }
 }
 
 - (void)dismissAtView

@@ -331,13 +331,18 @@
 }
 
 - (IBAction)backButtonClicked:(UIButton *)sender {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
-															 delegate:self 
-													cancelButtonTitle:nil 
-											   destructiveButtonTitle:NSLocalizedString(@"取消", nil)
-													otherButtonTitles:nil];
-	[actionSheet showFromRect:sender.bounds inView:sender animated:YES];
-	[actionSheet release];
+    if ([self.textView.text length] == 0) {
+        [self dismissView];
+    }
+    else {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
+                                                                 delegate:self 
+                                                        cancelButtonTitle:nil 
+                                                   destructiveButtonTitle:NSLocalizedString(@"取消", nil)
+                                                        otherButtonTitles:nil];
+        [actionSheet showFromRect:sender.bounds inView:sender animated:YES];
+        [actionSheet release];
+    }
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
