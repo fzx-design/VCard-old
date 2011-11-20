@@ -59,9 +59,11 @@
 - (void)setUpArguments
 {
 	_nextPage = 1;
+	_currentNextPage = 1;
 	_loading = NO;
 	_refreshFlag = NO;
 	_lastStatusID = 0;
+	_lastMaxID = 0;
 }
 
 - (void)setUpRefreshSettings
@@ -188,11 +190,12 @@
 	CastViewInfo *castViewInfo = [[[CastViewInfo alloc] init] autorelease];
 	
 	castViewInfo.fetchedResultsController = self.fetchedResultsController;
-	castViewInfo.nextPage = _nextPage;
+	castViewInfo.nextPage = _currentNextPage;
 	castViewInfo.currentIndex = self.castViewManager.currentIndex;
 	castViewInfo.dataSource = self.prevDataSource;
 	castViewInfo.indexCount = [self.castViewManager numberOfRows];
 	castViewInfo.indexSection = self.castView.pageSection;
+	castViewInfo.statusID = _lastStatusID;
 	
 	self.prevDataSource = self.dataSource;
 	
@@ -206,7 +209,9 @@
 	self.castViewManager.currentIndex = 0;
 	self.castView.pageSection = 1;
 	
-	_nextPage = 1;
+	_currentNextPage = 1;
+	_oldNextPage = 1;
+	_lastStatusID = 0;
 }
 
 - (void)pushCardWithCompletion:(void (^)())completion
@@ -214,9 +219,7 @@
 	[[UIApplication sharedApplication] showLoadingView];
 	
 	[self recordCurrentState];
-	
-//	[self clearData];
-	
+		
 	[self loadMoreDataCompletion:nil];
 	
 	BOOL firstPush = (self.infoStack.count == 1);
@@ -266,7 +269,9 @@
 		self.castView.pageSection = castViewInfo.indexSection;
 		self.dataSource = castViewInfo.dataSource;
 		
-		_nextPage = 1;
+		_lastStatusID = castViewInfo.statusID;
+		
+		_currentNextPage = castViewInfo.nextPage;
 		
         [self.castViewManager popNewViews:castViewInfo];
 		
@@ -336,7 +341,6 @@
 	[self.castViewManager deleteCurrentView];
 }
 
-
 #pragma mark - Load Cards methods
 
 - (long long)getMaxID
@@ -344,7 +348,7 @@
 	long long maxID = 0;
     Status *lastStatus = [self.fetchedResultsController.fetchedObjects lastObject];
     
-    if (lastStatus && _lastStatusID != 0 && !_refreshFlag) {
+    if (lastStatus && !_refreshFlag) {
         NSString *statusID = lastStatus.statusID;
         maxID = [statusID longLongValue] - 1;
 		_refreshFlag = NO;
@@ -383,6 +387,7 @@
 	}
 	[self.managedObjectContext processPendingChanges];
 	[self.fetchedResultsController performFetch:nil];
+	NSLog(@"Friend timeline current number %d", self.fetchedResultsController.fetchedObjects.count);
 }
 
 - (void)insertUserStatusFromClient:(WeiboClient *)client
@@ -393,14 +398,51 @@
 	}
 	[self.managedObjectContext processPendingChanges];
 	[self.fetchedResultsController performFetch:nil];
+	NSLog(@"User timeline current number %d", self.fetchedResultsController.fetchedObjects.count);
 }
 
 - (void)insertMentionsStatusFromClient:(WeiboClient *)client
 {
 	NSArray *dictArray = client.responseJSONObject;
 	for (NSDictionary *dict in dictArray) {
-		[Status insertMentionedStatus:dict inManagedObjectContext:self.managedObjectContext];
+		Status *newStatus = [Status insertMentionedStatus:dict inManagedObjectContext:self.managedObjectContext];
+		NSLog(@"Mentions: %@", newStatus.text);
 	}
+	[self.managedObjectContext processPendingChanges];
+	[self.fetchedResultsController performFetch:nil];
+	NSLog(@"Mention timeline current number %d", self.fetchedResultsController.fetchedObjects.count);
+}
+
+- (void)insertStatusFromClient:(WeiboClient *)client
+{
+	NSArray *dictArray = client.responseJSONObject;
+	
+	for (NSDictionary *dict in dictArray) {
+		
+		Status *newStatus = nil;
+		
+		if (self.dataSource == CastViewDataSourceFriendsTimeline) {
+			
+			newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+			
+			[self.currentUser addFriendsStatusesObject:newStatus];
+			
+		} else if(self.dataSource == CastViewDataSourceUserTimeline){
+			
+			newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+			
+		} else {
+			
+			newStatus = [Status insertMentionedStatus:dict inManagedObjectContext:self.managedObjectContext];
+		}
+		
+		long long statusID = [newStatus.statusID longLongValue];
+		
+		if (statusID < _lastMaxID) {
+			_lastMaxID = statusID - 1;
+		}
+	}
+
 	[self.managedObjectContext processPendingChanges];
 	[self.fetchedResultsController performFetch:nil];
 }
@@ -480,7 +522,11 @@
 		
 		if (!client.hasError) {
 			
-			[self insertFriendStatusFromClient:client];
+			_oldNextPage = _currentNextPage;
+			
+//			[self insertFriendStatusFromClient:client];
+			
+			[self insertStatusFromClient:client];
 			
 			if (_refreshFlag) {
 				_refreshFlag = NO;
@@ -509,6 +555,9 @@
 			[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
 			
 		} else {
+			
+			_currentNextPage = _oldNextPage;
+			
 			[ErrorNotification showLoadingError];
 		}
 		if (completion) {
@@ -516,11 +565,18 @@
 		}
 	}];
 	
+//	[client getFriendsTimelineSinceID:nil
+//								maxID:[NSString stringWithFormat:@"%lld", [self getMaxID]]
+//					   startingAtPage:0 
+//								count:kStatusCountPerRequest
+//							  feature:0];
+	
 	[client getFriendsTimelineSinceID:nil
-								maxID:[NSString stringWithFormat:@"%lld", [self getMaxID]]
-					   startingAtPage:0 
+								maxID:(long long)0
+					   startingAtPage:_currentNextPage++
 								count:kStatusCountPerRequest
 							  feature:0];
+
 }
 
 - (void)loadMoreUserTimeline:(void (^)())completion
@@ -534,13 +590,20 @@
 		
 		if (!client.hasError) {
 			
-			[self insertUserStatusFromClient:client];
-						
+			_oldNextPage = _currentNextPage;
+			
+//			[self insertUserStatusFromClient:client];
+			
+			[self insertStatusFromClient:client];
+			
 			[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
 			
 			[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
 			
 		} else {
+			
+			_currentNextPage = _oldNextPage;
+			
 			[ErrorNotification showLoadingError];
 		}
 		
@@ -549,10 +612,17 @@
 		}
 	}];
 	
+//	[client getUserTimeline:self.user.userID
+//					SinceID:nil
+//					  maxID:[NSString stringWithFormat:@"%lld", [self getMaxID]]
+//			 startingAtPage:0
+//					  count:kStatusCountPerRequest
+//					feature:0];
+	
 	[client getUserTimeline:self.user.userID
 					SinceID:nil
-					  maxID:[NSString stringWithFormat:@"%lld", [self getMaxID]]
-			 startingAtPage:0
+					  maxID:(long long)0
+			 startingAtPage:_currentNextPage++
 					  count:kStatusCountPerRequest
 					feature:0];
 }
@@ -568,13 +638,20 @@
 		
 		if (!client.hasError) {
 			
-			[self insertMentionsStatusFromClient:client];
+			_oldNextPage = _currentNextPage;
+			
+//			[self insertMentionsStatusFromClient:client];
+			
+			[self insertStatusFromClient:client];
 			
 			[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
 			
 			[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
 			
 		} else {
+			
+			_currentNextPage = _oldNextPage;
+			
 			[ErrorNotification showLoadingError];
 		}
 		
@@ -585,7 +662,7 @@
 	
 	[client getMentionsSinceID:nil 
 						 maxID:[NSString stringWithFormat:@""] 
-						  page:_nextPage++ 
+						  page:_currentNextPage++ 
 						 count:20];
 
 }
@@ -688,6 +765,7 @@
 - (void)refresh
 {
 	_refreshFlag = YES;
+	_currentNextPage = 1;
     [self loadMoreDataCompletion:NULL];
 }
 
@@ -785,8 +863,6 @@
 {
 	[self.castViewManager resetViewsAroundCurrentIndex:index];
 }
-
-
 
 #pragma mark - Property
 - (CastViewManager*)castViewManager

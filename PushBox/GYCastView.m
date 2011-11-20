@@ -69,6 +69,7 @@
 	UIView *view = [delegate viewForItemAtIndex:self index:page];
 	
 	// Position the view in our scrollview
+	
 	CGRect viewFrame = view.frame;
 	viewFrame.origin.x = viewFrame.size.width * page;
 	viewFrame.origin.y = 0;
@@ -102,6 +103,8 @@
 
 - (void)reset
 {
+	animating = YES;
+	
 	pageSection = 1;
 	
 	pageNum = [delegate itemCount:self];
@@ -121,6 +124,8 @@
 
 - (void)resetWithCurrentIndex:(int)index numberOfPages:(int)page
 {
+	animating = YES;
+	
 	pageNum = page;
 	
 	self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
@@ -232,6 +237,8 @@
 		pageSection--;
 	} else {
 		self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
+		[self.delegate didScrollToIndex:[self currentPage]];
+		
 	}
 }
 

@@ -45,12 +45,14 @@
 	CastViewManager *_castViewManager;
 	
 	int _nextPage;
+	int _currentNextPage;
+	int _oldNextPage;
 	
 	NSFetchedResultsController *_prevFetchedResultsController;
 	
 	Status *_lastStatus;
 	long long _lastStatusID;
-	
+	long long _lastMaxID;
 	
 	BOOL _loading;
 	BOOL _refreshFlag;
