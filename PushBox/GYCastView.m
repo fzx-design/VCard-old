@@ -199,6 +199,8 @@
 {
 	animating = YES;
 	
+	self.scrollView.userInteractionEnabled = NO;
+	
 	int page = (int)[self currentPage];
 	
 	[self.delegate resetViewsAroundCurrentIndex:page];
@@ -211,6 +213,7 @@
 		if (finished && completion) {
 			completion();
 		}
+		self.scrollView.userInteractionEnabled = YES;
 	}];
 }
 
@@ -247,6 +250,8 @@
 {
 	animating = YES;
 	
+	self.scrollView.userInteractionEnabled = NO;
+	
 	int page = (int)[self currentPage];
 		
 	self.scrollView.contentSize = CGSizeMake((pageNum + 3) * self.scrollView.frame.size.width, scrollView.frame.size.height);
@@ -259,6 +264,7 @@
 	} completion:^(BOOL finished) {
 		if (finished) {
 			[self reset];
+			self.scrollView.userInteractionEnabled = YES;
 		}
 	}];
 
