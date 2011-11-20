@@ -63,7 +63,6 @@
 	_loading = NO;
 	_refreshFlag = NO;
 	_lastStatusID = 0;
-	_lastMaxID = 0;
 }
 
 - (void)setUpRefreshSettings
@@ -378,41 +377,6 @@
     [self.managedObjectContext processPendingChanges];
 }
 
-- (void)insertFriendStatusFromClient:(WeiboClient *)client
-{
-	NSArray *dictArray = client.responseJSONObject;
-	for (NSDictionary *dict in dictArray) {
-		Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-		[self.currentUser addFriendsStatusesObject:newStatus];
-	}
-	[self.managedObjectContext processPendingChanges];
-	[self.fetchedResultsController performFetch:nil];
-	NSLog(@"Friend timeline current number %d", self.fetchedResultsController.fetchedObjects.count);
-}
-
-- (void)insertUserStatusFromClient:(WeiboClient *)client
-{
-	NSArray *dictArray = client.responseJSONObject;
-	for (NSDictionary *dict in dictArray) {
-		[Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-	}
-	[self.managedObjectContext processPendingChanges];
-	[self.fetchedResultsController performFetch:nil];
-	NSLog(@"User timeline current number %d", self.fetchedResultsController.fetchedObjects.count);
-}
-
-- (void)insertMentionsStatusFromClient:(WeiboClient *)client
-{
-	NSArray *dictArray = client.responseJSONObject;
-	for (NSDictionary *dict in dictArray) {
-		Status *newStatus = [Status insertMentionedStatus:dict inManagedObjectContext:self.managedObjectContext];
-		NSLog(@"Mentions: %@", newStatus.text);
-	}
-	[self.managedObjectContext processPendingChanges];
-	[self.fetchedResultsController performFetch:nil];
-	NSLog(@"Mention timeline current number %d", self.fetchedResultsController.fetchedObjects.count);
-}
-
 - (void)insertStatusFromClient:(WeiboClient *)client
 {
 	NSArray *dictArray = client.responseJSONObject;
@@ -434,12 +398,6 @@
 		} else {
 			
 			newStatus = [Status insertMentionedStatus:dict inManagedObjectContext:self.managedObjectContext];
-		}
-		
-		long long statusID = [newStatus.statusID longLongValue];
-		
-		if (statusID < _lastMaxID) {
-			_lastMaxID = statusID - 1;
 		}
 	}
 
@@ -484,11 +442,7 @@
             
 			[self clearData];
 			
-			[self insertFriendStatusFromClient:client];
-			
-//			[self reloadCards];
-			
-//			_lastStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
+			[self insertStatusFromClient:client];
 			
 			if (self.fetchedResultsController.fetchedObjects.count != 0) {
 				
@@ -509,162 +463,6 @@
 					   startingAtPage:0
 								count:kStatusCountPerRequest
 							  feature:0];
-}
-
-- (void)loadMoreFriendTimeline:(void (^)())completion
-{
-	
-	WeiboClient *client = [WeiboClient client];
-	
-	[client setCompletionBlock:^(WeiboClient *client) {
-		
-		_loading = NO;
-		
-		if (!client.hasError) {
-			
-			_oldNextPage = _currentNextPage;
-			
-//			[self insertFriendStatusFromClient:client];
-			
-			[self insertStatusFromClient:client];
-			
-			if (_refreshFlag) {
-				_refreshFlag = NO;
-				
-				Status *newStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
-				
-				long long statusID = [newStatus.statusID longLongValue];
-//				if (_lastStatus == nil || ![newStatus.statusID isEqualToString:_lastStatus.statusID]){
-
-				if (_lastStatusID < statusID){
-									
-//					_lastStatus = newStatus;
-					
-					_lastStatusID = statusID;
-					
-					[self clearData];
-					
-					[self insertFriendStatusFromClient:client];
-										
-					[self.castViewManager refreshCards];
-				}
-			}
-			
-			[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
-			
-			[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
-			
-		} else {
-			
-			_currentNextPage = _oldNextPage;
-			
-			[ErrorNotification showLoadingError];
-		}
-		if (completion) {
-			completion();
-		}
-	}];
-	
-//	[client getFriendsTimelineSinceID:nil
-//								maxID:[NSString stringWithFormat:@"%lld", [self getMaxID]]
-//					   startingAtPage:0 
-//								count:kStatusCountPerRequest
-//							  feature:0];
-	
-	[client getFriendsTimelineSinceID:nil
-								maxID:(long long)0
-					   startingAtPage:_currentNextPage++
-								count:kStatusCountPerRequest
-							  feature:0];
-
-}
-
-- (void)loadMoreUserTimeline:(void (^)())completion
-{
-	
-	WeiboClient *client = [WeiboClient client];
-	
-	[client setCompletionBlock:^(WeiboClient *client) {
-		
-		_loading = NO;
-		
-		if (!client.hasError) {
-			
-			_oldNextPage = _currentNextPage;
-			
-//			[self insertUserStatusFromClient:client];
-			
-			[self insertStatusFromClient:client];
-			
-			[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
-			
-			[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
-			
-		} else {
-			
-			_currentNextPage = _oldNextPage;
-			
-			[ErrorNotification showLoadingError];
-		}
-		
-		if (completion) {
-			completion();
-		}
-	}];
-	
-//	[client getUserTimeline:self.user.userID
-//					SinceID:nil
-//					  maxID:[NSString stringWithFormat:@"%lld", [self getMaxID]]
-//			 startingAtPage:0
-//					  count:kStatusCountPerRequest
-//					feature:0];
-	
-	[client getUserTimeline:self.user.userID
-					SinceID:nil
-					  maxID:(long long)0
-			 startingAtPage:_currentNextPage++
-					  count:kStatusCountPerRequest
-					feature:0];
-}
-
-- (void)loadMoreMention:(void (^)())completion
-{
-	
-	WeiboClient *client = [WeiboClient client];
-	
-	[client setCompletionBlock:^(WeiboClient *client) {
-		
-		_loading = NO;
-		
-		if (!client.hasError) {
-			
-			_oldNextPage = _currentNextPage;
-			
-//			[self insertMentionsStatusFromClient:client];
-			
-			[self insertStatusFromClient:client];
-			
-			[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
-			
-			[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
-			
-		} else {
-			
-			_currentNextPage = _oldNextPage;
-			
-			[ErrorNotification showLoadingError];
-		}
-		
-		if (completion) {
-			completion();
-		}
-	}];
-	
-	[client getMentionsSinceID:nil 
-						 maxID:[NSString stringWithFormat:@""] 
-						  page:_currentNextPage++ 
-						 count:20];
-
 }
 
 - (void)loadMoreDataCompletion:(void (^)())completion
@@ -692,19 +490,90 @@
         return;
     }
     
-    if (self.dataSource == CastViewDataSourceFriendsTimeline) {
-        [self loadMoreFriendTimeline:completion];
+
+	WeiboClient *client = [WeiboClient client];
+	
+	[client setCompletionBlock:^(WeiboClient *client) {
+		
+		_loading = NO;
+		
+		if (!client.hasError) {
+			
+			[self insertStatusFromClient:client];
+			
+			if (_refreshFlag) {
+				_refreshFlag = NO;
+				
+				Status *newStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
+				
+				long long statusID = [newStatus.statusID longLongValue];
+				
+				if (_lastStatusID < statusID){
+					
+					_oldNextPage = _currentNextPage;
+					
+					_lastStatusID = statusID;
+					
+					[self clearData];
+					
+					[self insertStatusFromClient:client];
+					
+					[self.castViewManager refreshCards];
+					
+				} else {
+					
+					_currentNextPage = _oldNextPage;
+				}
+			}
+			
+			[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
+			
+			[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
+			
+		} else {
+			
+			_currentNextPage = _oldNextPage;
+			
+			[ErrorNotification showLoadingError];
+		}
+		if (completion) {
+			completion();
+		}
+	}];
+
+	
+	
+	
+	if (self.dataSource == CastViewDataSourceFriendsTimeline) {
+		[client getFriendsTimelineSinceID:nil
+									maxID:(long long)0
+						   startingAtPage:_currentNextPage++
+									count:kStatusCountPerRequest
+								  feature:0];
     }
     
-    //
     if (self.dataSource == CastViewDataSourceUserTimeline) {
-		[self loadMoreUserTimeline:completion];
+		[client getUserTimeline:self.user.userID
+						SinceID:nil
+						  maxID:(long long)0
+				 startingAtPage:_currentNextPage++
+						  count:kStatusCountPerRequest
+						feature:0];
     }
 	
 	if (self.dataSource == CastViewDataSourceMentions) {
-		[self loadMoreMention:completion];
+		[client getMentionsSinceID:nil 
+							 maxID:[NSString stringWithFormat:@""] 
+							  page:_currentNextPage++ 
+							 count:20];
 	}
-//    //
+
+	
+	
+	
+	
+	
+	//    //
 //    if (self.dataSource == CastViewDataSourceSearchStatues) {
 //        [[UIApplication sharedApplication] showLoadingView];
 //		[client setCompletionBlock:^(WeiboClient *client) {

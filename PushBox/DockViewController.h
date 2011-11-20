@@ -32,7 +32,6 @@
 	UIImageView *_postingRoundImageView;
 
     UIPopoverController *_optionsPopoverController;
-//    CommentsTableViewController *_commentsTableViewController;
 	
 	UserCardNaviViewController *_userCardNaviViewController;
 	CCUserInfoCardViewController *_ccUserInfoCardViewController;
@@ -61,6 +60,8 @@
 
 @property(nonatomic, retain) IBOutlet UIImageView* postingCircleImageView;
 @property(nonatomic, retain) IBOutlet UIImageView* postingRoundImageView;
+
+@property(nonatomic, assign) BOOL refreshNotiImageShown;
 
 @property(nonatomic, retain) UserCardNaviViewController* commentNaviViewController;
 @property(nonatomic, retain) CCCommentsTableViewController* ccCommentTableViewController;

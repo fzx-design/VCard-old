@@ -28,6 +28,8 @@
 @synthesize postingRoundImageView = _postingRoundImageView;
 @synthesize postingCircleImageView = _postingCircleImageView;
 
+@synthesize refreshNotiImageShown;
+
 @synthesize userCardNaviViewController = _userCardNaviViewController;
 @synthesize ccUserInfoCardViewController = _ccUserInfoCardViewController;
 @synthesize commentNaviViewController = _commentNaviViewController;
@@ -49,7 +51,6 @@
     [_refreshNotiImageView release];
     [_commandCenterNotiImageView release];
     [_optionsPopoverController release];
-    //    [_commentsTableViewController release];
 	[_userCardNaviViewController release];
 	[_ccUserInfoCardViewController release];
 	
@@ -130,6 +131,7 @@
 				 object:nil];
     
     self.refreshNotiImageView.hidden = YES;
+	refreshNotiImageShown = YES;
     self.commandCenterNotiImageView.hidden = YES;
     
 	self.ccUserInfoCardViewController = [[[CCUserInfoCardViewController alloc] init] autorelease];
@@ -225,6 +227,7 @@
 - (void)newStatusesNotification:(id)sender
 {
     self.refreshNotiImageView.hidden = NO;
+	self.refreshNotiImageShown = NO;
 }
 
 - (void)newFollowersNotification:(id)sender
@@ -294,6 +297,7 @@
 
 - (IBAction)refreshButtonClicked:(id)sender {
     self.refreshNotiImageView.hidden = YES;
+	self.refreshNotiImageShown = YES;
 }
 
 - (IBAction)commandCenterButtonClicked:(id)sender {

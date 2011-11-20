@@ -41,7 +41,6 @@
     LoginViewController *_loginViewController;
     DockViewController *_dockViewController;
     MessagesViewController *_messagesViewController;
-//    CardTableViewController *_cardTableViewController;
 	
 	NSMutableArray *_statusTypeStack;
 	
@@ -51,6 +50,7 @@
 	
 	BOOL _commandCenterFlag;
 	BOOL _refreshFlag;
+	BOOL _newStatusFlag;
 	NSInteger preNewFollowerCount;
 	NSInteger preNewCommentCount;
 	NSInteger preNewMentionCount;
@@ -80,7 +80,6 @@
 @property(nonatomic, retain) LoginViewController* loginViewController;
 @property(nonatomic, retain) DockViewController *dockViewController;
 @property(nonatomic, retain) MessagesViewController *messagesViewController;
-//@property(nonatomic, retain) CardTableViewController* cardTableViewController;
 
 @property(nonatomic, retain) CastViewController* castViewController;
 
