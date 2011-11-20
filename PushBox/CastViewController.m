@@ -61,6 +61,7 @@
 	_nextPage = 1;
 	_loading = NO;
 	_refreshFlag = NO;
+	_lastStatusID = 0;
 }
 
 - (void)setUpRefreshSettings
@@ -343,7 +344,7 @@
 	long long maxID = 0;
     Status *lastStatus = [self.fetchedResultsController.fetchedObjects lastObject];
     
-    if (lastStatus && _lastStatus && !_refreshFlag) {
+    if (lastStatus && _lastStatusID != 0 && !_refreshFlag) {
         NSString *statusID = lastStatus.statusID;
         maxID = [statusID longLongValue] - 1;
 		_refreshFlag = NO;
@@ -445,8 +446,15 @@
 			
 //			[self reloadCards];
 			
-			_lastStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
-		
+//			_lastStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
+			
+			if (self.fetchedResultsController.fetchedObjects.count != 0) {
+				
+				Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
+				
+				_lastStatusID = [status.statusID longLongValue];
+			}
+					
 		}
 		if (completion) {
 			completion();
@@ -479,9 +487,14 @@
 				
 				Status *newStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
 				
-				if (_lastStatus == nil || ![newStatus.statusID isEqualToString:_lastStatus.statusID]){
+				long long statusID = [newStatus.statusID longLongValue];
+//				if (_lastStatus == nil || ![newStatus.statusID isEqualToString:_lastStatus.statusID]){
+
+				if (_lastStatusID < statusID){
+									
+//					_lastStatus = newStatus;
 					
-					_lastStatus = newStatus;
+					_lastStatusID = statusID;
 					
 					[self clearData];
 					

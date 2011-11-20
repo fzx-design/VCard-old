@@ -49,6 +49,9 @@
 	NSFetchedResultsController *_prevFetchedResultsController;
 	
 	Status *_lastStatus;
+	long long _lastStatusID;
+	
+	
 	BOOL _loading;
 	BOOL _refreshFlag;
 	
