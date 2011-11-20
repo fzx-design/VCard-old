@@ -91,9 +91,7 @@
     [_bottomStateView release];
     [_bottomStateLabel release];
     [_loginViewController release];
-    [_dockViewController release];
-//     [_cardTableViewController release];
-	
+    [_dockViewController release];	
 	[_castViewController release];
 	
 	[_tmpImage release];
@@ -652,25 +650,10 @@
 
 #pragma mark - 
 
-
-- (void)cardTableViewController:(CardTableViewController *)vc didScrollToRow:(int)row withNumberOfRows:(int)numberOfRows
-{
-    UISlider *slider = self.dockViewController.slider;
-    [slider setMaximumValue:numberOfRows-1];
-    [slider setMinimumValue:0];
-    if (row == slider.value) {
-        [slider setValue:row + 1 animated:NO];
-        [slider setValue:row animated:NO];
-    }
-    else {
-        [slider setValue:row animated:YES];
-    }
-}
-
 - (void)castViewControllerdidScrollToRow:(int)row withNumberOfRows:(int)numberOfRows
 {
     UISlider *slider = self.dockViewController.slider;
-    [slider setMaximumValue:numberOfRows-1];
+    [slider setMaximumValue:numberOfRows - 1];
     [slider setMinimumValue:0];
     if (row == slider.value) {
         [slider setValue:row + 1 animated:NO];
@@ -804,6 +787,13 @@
 {
     int index = slider.value;
 	[self.castViewController scrollToRow:index];
+}
+
+- (void)sliderDidEndDragging:(UISlider *)slider
+{
+	int index = slider.value;
+	[self.castViewController.castViewManager moveCardsToIndex:index];
+	NSLog(@"___ index is %d ", index);
 }
 
 - (void)showDockView
@@ -1237,7 +1227,15 @@
         [self.dockViewController.slider addTarget:self 
                                            action:@selector(sliderValueChanged:)
                                  forControlEvents:UIControlEventValueChanged];
+		
+		[self.dockViewController.slider addTarget:self
+										   action:@selector(sliderDidEndDragging:)
+								 forControlEvents:UIControlEventTouchUpInside];
         
+		[self.dockViewController.slider addTarget:self
+										   action:@selector(sliderDidEndDragging:)
+								 forControlEvents:UIControlEventTouchUpOutside];
+		
         [self.dockViewController.showFavoritesButton addTarget:self
                                                         action:@selector(showFavorites:)
                                               forControlEvents:UIControlEventTouchUpInside];
@@ -1263,7 +1261,7 @@
         _castViewController = [[CastViewController alloc] init];
         self.castViewController.currentUser = self.currentUser;
 		self.castViewController.managedObjectContext = self.managedObjectContext;
-        self.castViewController.castViewManager.delegate = self;
+        self.castViewController.delegate = self;
         CGRect frame = self.castViewController.view.frame;
         frame.origin.y = kCardTableViewFrameOriginY;
         self.castViewController.view.frame = frame;

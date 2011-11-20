@@ -14,7 +14,7 @@
 #import "MessagesViewController.h"
 #import "CastViewController.h"
 
-@interface RootViewController : CoreDataViewController<LoginViewControllerDelegate, CardTableViewControllerDelegate, CastViewControllerDelegate, UIAlertViewDelegate> {
+@interface RootViewController : CoreDataViewController<LoginViewControllerDelegate, CastViewControllerDelegate, UIAlertViewDelegate> {
     UIImageView *_backgroundImageView;
     UIImageView *_pushBoxHDImageView;
     

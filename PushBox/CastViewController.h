@@ -23,6 +23,10 @@
 
 @class User;
 
+@protocol CastViewControllerDelegate <NSObject>
+- (void)castViewControllerdidScrollToRow:(int)row withNumberOfRows:(int)maxRow;
+@end
+
 @interface CastViewController : CoreDataTableViewController <GYCastViewDelegate> {
 	UIImageView *_blurImageView;
 	UIImageView *_rootShadowLeft;
@@ -55,6 +59,7 @@
 	BOOL _loading;
 	BOOL _refreshFlag;
 	
+	id _delegate;
 }
 
 @property(nonatomic, retain) IBOutlet UIButton *regionLeftDetectButton;
@@ -71,6 +76,8 @@
 //@property(nonatomic, retain) NSMutableArray *nextPageStack;
 //@property(nonatomic, retain) NSMutableArray *rowIndexStack;
 //@property(nonatomic, retain) NSMutableArray *fetchedResultsControllerStack;
+
+@property(nonatomic, assign) id<CastViewControllerDelegate> delegate;
 
 @property(nonatomic, retain) NSMutableArray *infoStack;
 

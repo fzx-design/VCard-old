@@ -36,6 +36,8 @@
 //@synthesize rowIndexStack = _rowIndexStack;
 //@synthesize fetchedResultsControllerStack = _fetchedResultsControllerStack;
 
+@synthesize delegate = _delegate;
+
 @synthesize infoStack = _infoStack;
 
 @synthesize prevFetchedResultsController = _prevFetchedResultsController;
@@ -294,7 +296,7 @@
 				self.blurImageView.transform = CGAffineTransformMakeScale(1, 1);
 			}
 			
-            [self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
+            [self didScrollToIndex:self.castViewManager.currentIndex];
 			
 			[self.infoStack removeLastObject];
 			
@@ -341,20 +343,6 @@
 }
 
 #pragma mark - Load Cards methods
-
-//- (long long)getMaxID
-//{
-//	long long maxID = 0;
-//    Status *lastStatus = [self.fetchedResultsController.fetchedObjects lastObject];
-//    
-//    if (lastStatus && !_refreshFlag) {
-//        NSString *statusID = lastStatus.statusID;
-//        maxID = [statusID longLongValue] - 1;
-//		_refreshFlag = NO;
-//    }
-//	
-//	return maxID;
-//}
 
 - (void)clearData
 {
@@ -455,6 +443,13 @@
 		if (completion) {
 			completion();
 		}
+		
+		int count = self.fetchedResultsController.fetchedObjects.count;
+		
+		int numberOfRow = count > kStatusCountPerRequest ? kStatusCountPerRequest : count;
+		
+		[self.delegate castViewControllerdidScrollToRow:0 withNumberOfRows:numberOfRow];
+						
 		[[UIApplication sharedApplication] hideLoadingView];
 	}];
 	
@@ -478,7 +473,7 @@
             [self.managedObjectContext processPendingChanges];
             [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
 			
-			[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
+			[self didScrollToIndex:self.castViewManager.currentIndex];
 			
             if (completion) {
                 completion();
@@ -533,7 +528,7 @@
 			
 			[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
 			
-			[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
+			[self didScrollToIndex:self.castViewManager.currentIndex];
 			
 		} else {
 			
@@ -707,7 +702,8 @@
 
 - (void)didScrollToIndex:(int)index
 {
-	[self.castViewManager didScrollToIndex:index];
+	self.castViewManager.currentIndex = index;
+	[self.delegate castViewControllerdidScrollToRow:index withNumberOfRows:[self.castViewManager numberOfRows]];
 }
 
 - (UIView*)viewForItemAtIndex:(GYCastView *)scrollView index:(int)index

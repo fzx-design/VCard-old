@@ -21,7 +21,6 @@
 @synthesize castView = _castView;
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize currentIndex = _currentIndex;
-@synthesize delegate = _delegate;
 @synthesize currentUser = _currentUser;
 
 - (void)initialSetUp
@@ -44,6 +43,17 @@
 {
 	for (CardFrameViewController* cardFrameViewController in self.cardFrames) {
 		if (abs(cardFrameViewController.index - self.currentIndex) == index + 2) {
+			return cardFrameViewController;
+		}
+	}
+	return nil;
+}
+
+- (CardFrameViewController*)getNeighborCardFrameViewControllerWithIndex
+{
+	for (CardFrameViewController* cardFrameViewController in self.cardFrames) {
+		if (abs(cardFrameViewController.index - self.currentIndex) > 1) {
+			cardFrameViewController.index = self.currentIndex;
 			return cardFrameViewController;
 		}
 	}
@@ -109,6 +119,7 @@
 {
 	for (CardFrameViewController* cardFrameViewController in self.cardFrames) {
 		if (abs(cardFrameViewController.index - self.currentIndex) >= 2) {
+			cardFrameViewController.index = InitialIndex;
 			[cardFrameViewController.view removeFromSuperview];
 		}
 	}
@@ -150,8 +161,8 @@
 {
 	[self prepareForMovingCards];
 	
-	CardFrameViewController* vc1 = [self getRefreshCardFrameViewControllerWithIndex:FirstPageIndex];
-	CardFrameViewController* vc2 = [self getRefreshCardFrameViewControllerWithIndex:SecondPageIndex];
+	CardFrameViewController* vc1 = [self getNeighborCardFrameViewControllerWithIndex];
+	CardFrameViewController* vc2 = [self getNeighborCardFrameViewControllerWithIndex];
 	
 	if (self.fetchedResultsController.fetchedObjects.count > 0) {
 		vc1.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:FirstPageIndex];
@@ -172,6 +183,43 @@
 	[self.castView refreshViewsWithFirstPage:vc1.view andSecondPage:vc2.view];
 	
 	[self performSelector:@selector(playSoundEffect) withObject:nil afterDelay:1];
+}
+
+- (void)moveCardsToIndex:(int)index
+{
+	int diff = index - self.currentIndex;
+	if (abs(diff) < 3) {
+		[self.castView moveViewsWithPageOffset:diff andCurrentPage:index];
+	} else if (diff) {
+		[self prepareForMovingCards];
+		
+		diff = diff > 0 ? 3 : -3;
+		
+		CardFrameViewController* vc1 = [self getNeighborCardFrameViewControllerWithIndex];
+		CardFrameViewController* vc2 = [self getNeighborCardFrameViewControllerWithIndex];
+		CardFrameViewController* vc3 = [self getNeighborCardFrameViewControllerWithIndex];
+		
+		if (index - 1 >= 0) {
+			vc1.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:index - 1];
+			vc1.index = index - 1;
+		} else {
+			vc1 = nil;
+		}
+		
+		vc2.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:index];
+		vc2.index = index;
+		
+		if (index + 1 < [self numberOfRows]) {
+			vc3.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:index + 1];
+			vc3.index = index + 1;
+		} else {
+			vc3 = nil;
+		}
+		
+		
+		[self.castView moveViewsWithPageOffset:diff andCurrentPage:index withFirstPage:vc1.view secondPage:vc2.view thirdPage:vc3.view];
+	}
+	
 }
 
 - (void)deleteCurrentView
@@ -222,12 +270,6 @@
 }
 
 #pragma mark - GYCastViewDelegate methods
-
-- (void)didScrollToIndex:(int)index
-{
-	self.currentIndex = index;
-	[self.delegate castViewControllerdidScrollToRow:self.currentIndex withNumberOfRows:[self numberOfRows]];
-}
 
 - (UIView*)viewForItemAtIndex:(GYCastView *)scrollView index:(int)index
 {

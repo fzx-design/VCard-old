@@ -11,10 +11,6 @@
 #import "User.h"
 #import "CastViewInfo.h"
 
-@protocol CastViewControllerDelegate <NSObject>
-- (void)castViewControllerdidScrollToRow:(int)row withNumberOfRows:(int)maxRow;
-@end
-
 @interface CastViewManager : NSObject {
 	GYCastView *_castView;
 	
@@ -24,7 +20,6 @@
 	NSFetchedResultsController *_fetchedResultsController;
 	User *_currentUser;
 	
-	id _delegate;
 }
 
 @property(nonatomic, retain) GYCastView *castView;
@@ -36,13 +31,14 @@
 @property(nonatomic, retain) User *currentUser;
 
 
-@property(nonatomic, assign) id<CastViewControllerDelegate> delegate;
 
 - (void)initialSetUp;
 - (void)refreshCards;
 
 - (void)pushNewViews;
 - (void)popNewViews:(CastViewInfo *)info;
+- (void)moveCardsToIndex:(int)index;
+
 - (void)deleteCurrentView;
 
 - (int)numberOfRows;
@@ -50,7 +46,6 @@
 
 - (UIView*)viewForItemAtIndex:(GYCastView*)scrollView index:(int)index;
 - (int)itemCount:(GYCastView*)scrollView;
-- (void)didScrollToIndex:(int)index;
 - (void)resetViewsAroundCurrentIndex:(int)index;
 
 @end
