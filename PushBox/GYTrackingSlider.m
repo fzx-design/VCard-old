@@ -49,7 +49,7 @@
 	
 	CGRect frame = trackPopoverView.view.frame;
 	frame.origin.x = popupRect.origin.x - 8;
-	frame.origin.y = popupRect.origin.y;
+	frame.origin.y = popupRect.origin.y - 20;
 	
 	trackPopoverView.view.frame = frame;
 }

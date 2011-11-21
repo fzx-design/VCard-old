@@ -788,11 +788,17 @@
 {
 	GYTrackingSlider *trackingSlider = (GYTrackingSlider*)slider;
 	[self.castViewController.castViewManager configureTrackingPopover:trackingSlider.trackPopoverView AtIndex:self.castViewController.castViewManager.currentIndex];
+	
+	_trackingIndex = self.castViewController.castViewManager.currentIndex;
 }
 
 - (void)sliderValueChanged:(UISlider *)slider
 {
     int index = slider.value;
+	if (_trackingIndex == index) {
+		return;
+	}
+	_trackingIndex = index;
 	GYTrackingSlider *trackingSlider = (GYTrackingSlider*)slider;
 	[self.castViewController.castViewManager configureTrackingPopover:trackingSlider.trackPopoverView AtIndex:index];
 }
@@ -800,6 +806,9 @@
 - (void)sliderDidEndDragging:(UISlider *)slider
 {
 	int index = slider.value;
+	if (index == self.castViewController.castViewManager.currentIndex) {
+		return;
+	}
 	[self.castViewController.castViewManager moveCardsToIndex:index];
 }
 

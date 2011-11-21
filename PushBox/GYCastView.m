@@ -257,6 +257,8 @@
 	[self setRefreshPage:FirstPageIndex WithView:firstView];
 	[self setRefreshPage:SecondPageIndex WithView:secondView];
 	
+	self.pageNum = [self.delegate itemCount:self];
+	
 	[UIView animateWithDuration:1.25 animations:^(){
 		[self.delegate didScrollToIndex:0];
 		[self.scrollView setContentOffset:CGPointMake((page + MoveCardsOffsetPage + RefreshCardsOffsetPage) * self.scrollView.frame.size.width, 0)];

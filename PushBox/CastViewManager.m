@@ -29,7 +29,7 @@
 {
 	self.castView.pageSize = CastViewPageSize;
 	[self.castView setScrollsToTop:NO];
-	self.currentIndex = 1;
+	self.currentIndex = 0;
 }
 
 #pragma mark - Tools
@@ -284,6 +284,7 @@
     [popover.proFileImage loadImageFromURL:profileImageString
 				   completion:nil
 			   cacheInContext:self.fetchedResultsController.managedObjectContext];
+	popover.screenNameLabel.text = status.author.screenName;
 }
 
 #pragma mark - GYCastViewDelegate methods

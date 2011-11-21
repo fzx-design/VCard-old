@@ -51,6 +51,9 @@
 	BOOL _commandCenterFlag;
 	BOOL _refreshFlag;
 	BOOL _newStatusFlag;
+	
+	int _trackingIndex;
+	
 	NSInteger preNewFollowerCount;
 	NSInteger preNewCommentCount;
 	NSInteger preNewMentionCount;
