@@ -839,7 +839,7 @@
 					<real value="2"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<real value="2"/>
-					<string>MNEValueTrackingSlider</string>
+					<string>GYTrackingSlider</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<real value="2"/>
@@ -1073,11 +1073,11 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">MNEValueTrackingSlider</string>
+					<string key="className">GYTrackingSlider</string>
 					<string key="superclassName">UISlider</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/MNEValueTrackingSlider.h</string>
+						<string key="minorKey">./Classes/GYTrackingSlider.h</string>
 					</object>
 				</object>
 			</object>

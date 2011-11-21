@@ -16,6 +16,7 @@
 #import "Emotion.h"
 #import "Comment.h"
 #import "PushBoxAppDelegate.h"
+#import "GYTrackingSlider.h"
 
 #define kLoginViewCenter CGPointMake(512.0, 370.0)
 
@@ -785,21 +786,15 @@
 
 - (void)sliderTouchedIn:(UISlider *)slider
 {
-	self.dockViewController.sliderPopoverView.hidden = NO;
-	self.dockViewController.sliderPopoverView.layer.anchorPoint = CGPointMake(0.5, 1);
-	
-	[self.dockViewController.sliderPopoverView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
-	CGFloat originX = slider.value / slider.maximumValue * slider.frame.size.width + slider.frame.origin.x;
-	CGPoint origin = CGPointMake(originX, self.dockViewController.sliderPopoverView.frame.origin.y);
-	CGRect frame = self.dockViewController.sliderPopoverView.frame;
-	frame.origin = origin;
-	self.dockViewController.sliderPopoverView.frame = frame;
+	GYTrackingSlider *trackingSlider = (GYTrackingSlider*)slider;
+	[self.castViewController.castViewManager configureTrackingPopover:trackingSlider.trackPopoverView AtIndex:self.castViewController.castViewManager.currentIndex];
 }
 
 - (void)sliderValueChanged:(UISlider *)slider
 {
     int index = slider.value;
-	[self.castViewController scrollToRow:index];
+	GYTrackingSlider *trackingSlider = (GYTrackingSlider*)slider;
+	[self.castViewController.castViewManager configureTrackingPopover:trackingSlider.trackPopoverView AtIndex:index];
 }
 
 - (void)sliderDidEndDragging:(UISlider *)slider

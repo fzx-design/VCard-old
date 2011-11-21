@@ -10,6 +10,7 @@
 #import "GYCastView.h"
 #import "User.h"
 #import "CastViewInfo.h"
+#import "SliderTrackPopoverView.h"
 
 @interface CastViewManager : NSObject {
 	GYCastView *_castView;
@@ -38,6 +39,7 @@
 - (void)pushNewViews;
 - (void)popNewViews:(CastViewInfo *)info;
 - (void)moveCardsToIndex:(int)index;
+- (void)configureTrackingPopover:(SliderTrackPopoverView*)popover AtIndex:(int)index;
 
 - (void)deleteCurrentView;
 

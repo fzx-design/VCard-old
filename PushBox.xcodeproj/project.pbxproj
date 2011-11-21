@@ -128,9 +128,9 @@
 		9B2D8D6A1470BABD005B2D8E /* CastViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B2D8D681470BABD005B2D8E /* CastViewController.xib */; };
 		9B2D8D731470E672005B2D8E /* CardFrameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2D8D711470E672005B2D8E /* CardFrameViewController.m */; };
 		9B2D8D741470E672005B2D8E /* CardFrameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B2D8D721470E672005B2D8E /* CardFrameViewController.xib */; };
-		9B494D00147A121F001C1050 /* MNEValueTrackingSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B494CFF147A121F001C1050 /* MNEValueTrackingSlider.m */; };
 		9B494D07147A15A8001C1050 /* SliderTrackPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B494D05147A15A7001C1050 /* SliderTrackPopoverView.m */; };
 		9B494D08147A15A8001C1050 /* SliderTrackPopoverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B494D06147A15A8001C1050 /* SliderTrackPopoverView.xib */; };
+		9B494D0B147A23F7001C1050 /* GYTrackingSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B494D0A147A23F6001C1050 /* GYTrackingSlider.m */; };
 		9B4B49F814582FCF00C9B542 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4B49F714582FCF00C9B542 /* Status.m */; };
 		9B4B49FB14586C1000C9B542 /* RefreshingIntervalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4B49FA14586C1000C9B542 /* RefreshingIntervalViewController.m */; };
 		9B5F2E2014497374008AC0B8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F2E1F14497373008AC0B8 /* Default-Landscape~ipad.png */; };
@@ -437,11 +437,11 @@
 		9B2D8D721470E672005B2D8E /* CardFrameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardFrameViewController.xib; sourceTree = "<group>"; };
 		9B39EAA2144DCDB900F234D6 /* ErrorNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorNotification.h; sourceTree = "<group>"; };
 		9B39EAA3144DCDB900F234D6 /* ErrorNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorNotification.m; sourceTree = "<group>"; };
-		9B494CFE147A121F001C1050 /* MNEValueTrackingSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNEValueTrackingSlider.h; sourceTree = "<group>"; };
-		9B494CFF147A121F001C1050 /* MNEValueTrackingSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNEValueTrackingSlider.m; sourceTree = "<group>"; };
 		9B494D04147A15A7001C1050 /* SliderTrackPopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderTrackPopoverView.h; sourceTree = "<group>"; };
 		9B494D05147A15A7001C1050 /* SliderTrackPopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderTrackPopoverView.m; sourceTree = "<group>"; };
 		9B494D06147A15A8001C1050 /* SliderTrackPopoverView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderTrackPopoverView.xib; sourceTree = "<group>"; };
+		9B494D09147A23F6001C1050 /* GYTrackingSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYTrackingSlider.h; sourceTree = "<group>"; };
+		9B494D0A147A23F6001C1050 /* GYTrackingSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYTrackingSlider.m; sourceTree = "<group>"; };
 		9B4B49F614582FCF00C9B542 /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
 		9B4B49F714582FCF00C9B542 /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
 		9B4B49F914586C1000C9B542 /* RefreshingIntervalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshingIntervalViewController.h; sourceTree = "<group>"; };
@@ -775,8 +775,6 @@
 		9B2153AD14626C3800942EBE /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				9B494CFE147A121F001C1050 /* MNEValueTrackingSlider.h */,
-				9B494CFF147A121F001C1050 /* MNEValueTrackingSlider.m */,
 				9B494D04147A15A7001C1050 /* SliderTrackPopoverView.h */,
 				9B494D05147A15A7001C1050 /* SliderTrackPopoverView.m */,
 				9B2153AE14626CB200942EBE /* RCSwitch.h */,
@@ -787,6 +785,8 @@
 				9B5F867514540190004B01D6 /* AnimationProvider.m */,
 				9B39EAA2144DCDB900F234D6 /* ErrorNotification.h */,
 				9B39EAA3144DCDB900F234D6 /* ErrorNotification.m */,
+				9B494D09147A23F6001C1050 /* GYTrackingSlider.h */,
+				9B494D0A147A23F6001C1050 /* GYTrackingSlider.m */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -1745,8 +1745,8 @@
 				9B2D8D731470E672005B2D8E /* CardFrameViewController.m in Sources */,
 				9BD2BB6D1476358D0064169B /* CastViewManager.m in Sources */,
 				9BBC487314778878000A69AC /* CastViewInfo.m in Sources */,
-				9B494D00147A121F001C1050 /* MNEValueTrackingSlider.m in Sources */,
 				9B494D07147A15A8001C1050 /* SliderTrackPopoverView.m in Sources */,
+				9B494D0B147A23F7001C1050 /* GYTrackingSlider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

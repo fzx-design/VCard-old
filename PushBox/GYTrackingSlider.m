@@ -1,24 +1,23 @@
 //
-//  CustomSlider.m
-//  Measures
+//  GYTrackingSlider.m
+//  PushBox
 //
-//  Created by Michael Neuwert on 4/26/11.
-//  Copyright 2011 Neuwert Media. All rights reserved.
+//  Created by Gabriel Yeah on 11-11-21.
+//  Copyright (c) 2011年 同济大学. All rights reserved.
 //
 
-#import "MNEValueTrackingSlider.h"
+#import "GYTrackingSlider.h"
 #import "AnimationProvider.h"
 
-#pragma mark - MNEValueTrackingSlider implementations
+@implementation GYTrackingSlider
 
-@implementation MNEValueTrackingSlider
-
+@synthesize trackPopoverView;
 @synthesize thumbRect;
 
 #pragma mark - Private methods
 
 - (void)_constructSlider {
-
+	
 	trackPopoverView = [[SliderTrackPopoverView alloc] init];
 	
 	trackPopoverView.view.hidden = YES;
@@ -27,7 +26,7 @@
 }
 
 - (void)_fadePopupViewInAndOut:(BOOL)aFadeIn {
-
+	
 	if (aFadeIn) {
 		trackPopoverView.view.hidden = NO;
 		trackPopoverView.view.layer.anchorPoint = CGPointMake(0, 0.5);
@@ -110,8 +109,8 @@
 - (CGRect)thumbRect {
     CGRect trackRect = [self trackRectForBounds:self.bounds];
     CGRect thumbR = [self thumbRectForBounds:self.bounds 
-                                         trackRect:trackRect
-                                             value:self.value];
+								   trackRect:trackRect
+									   value:self.value];
     return thumbR;
 }
 

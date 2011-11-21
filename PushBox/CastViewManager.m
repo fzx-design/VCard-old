@@ -9,6 +9,8 @@
 #import "CastViewManager.h"
 #import "CardFrameViewController.h"
 #import "OptionsTableViewController.h"
+#import "Status.h"
+#import "UIImageViewAddition.h"
 
 #define CastViewPageSize CGSizeMake(560, 640)
 #define CastViewFrame CGRectMake(0.0f, 0.0f, 560, 640)
@@ -267,6 +269,21 @@
 {
 	[self.castView resetWithCurrentIndex:info.currentIndex numberOfPages:info.indexCount];
 	[self reloadCards];
+}
+
+#pragma mark - Tracking View methods
+
+- (void)configureTrackingPopover:(SliderTrackPopoverView*)popover AtIndex:(int)index
+{
+	int count = self.fetchedResultsController.fetchedObjects.count;
+	if (index < 0 || index >= count) {
+		return;
+	}
+	Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:index];
+	NSString *profileImageString = status.author.profileImageURL;
+    [popover.proFileImage loadImageFromURL:profileImageString
+				   completion:nil
+			   cacheInContext:self.fetchedResultsController.managedObjectContext];
 }
 
 #pragma mark - GYCastViewDelegate methods
