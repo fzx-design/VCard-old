@@ -11,6 +11,7 @@
 #import "OptionsTableViewController.h"
 #import "Status.h"
 #import "UIImageViewAddition.h"
+#import "NSDateAddition.h"
 
 #define CastViewPageSize CGSizeMake(560, 640)
 #define CastViewFrame CGRectMake(0.0f, 0.0f, 560, 640)
@@ -273,18 +274,26 @@
 
 #pragma mark - Tracking View methods
 
-- (void)configureTrackingPopover:(SliderTrackPopoverView*)popover AtIndex:(int)index
+- (void)configureTrackingPopover:(SliderTrackPopoverView*)popover AtIndex:(int)index andDataSource:(CastViewDataSource)dataSource
 {
 	int count = self.fetchedResultsController.fetchedObjects.count;
 	if (index < 0 || index >= count) {
 		return;
 	}
+	
 	Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:index];
 	NSString *profileImageString = status.author.profileImageURL;
-    [popover.proFileImage loadImageFromURL:profileImageString
-				   completion:nil
-			   cacheInContext:self.fetchedResultsController.managedObjectContext];
-	popover.screenNameLabel.text = status.author.screenName;
+	[popover.proFileImage loadImageFromURL:profileImageString
+								completion:nil
+							cacheInContext:self.fetchedResultsController.managedObjectContext];
+	
+	if (dataSource == CastViewDataSourceUserTimeline) {
+		popover.screenNameLabel.text = [status.createdAt customString];
+	} else {
+		popover.screenNameLabel.text = status.author.screenName;
+	}
+	
+
 }
 
 #pragma mark - GYCastViewDelegate methods

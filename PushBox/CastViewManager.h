@@ -39,7 +39,9 @@
 - (void)pushNewViews;
 - (void)popNewViews:(CastViewInfo *)info;
 - (void)moveCardsToIndex:(int)index;
-- (void)configureTrackingPopover:(SliderTrackPopoverView*)popover AtIndex:(int)index;
+- (void)configureTrackingPopover:(SliderTrackPopoverView*)popover 
+						 AtIndex:(int)index 
+				   andDataSource:(CastViewDataSource)dataSource;
 
 - (void)deleteCurrentView;
 
