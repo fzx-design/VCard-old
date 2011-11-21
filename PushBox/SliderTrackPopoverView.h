@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FXLabel.h"
 
 @interface SliderTrackPopoverView : UIViewController
 
 @property (nonatomic, retain) IBOutlet UIImageView *proFileImage;
-@property (nonatomic, retain) IBOutlet UILabel *screenNameLabel;
+@property (nonatomic, retain) IBOutlet FXLabel *screenNameLabel;
 
 @end

@@ -240,6 +240,8 @@
 	} else {
 		self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
 		[self.delegate didScrollToIndex:[self currentPage]];
+		[self loadPage:[self currentPage] + 1];
+		[self loadPage:[self currentPage] + 2];
 		
 	}
 }

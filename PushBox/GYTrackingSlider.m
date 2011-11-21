@@ -22,6 +22,16 @@
 	
 	trackPopoverView.view.hidden = YES;
 	
+	CGRect _thumbRect = self.thumbRect;
+	
+	CGRect popupRect = CGRectOffset(_thumbRect, 0, -_thumbRect.size.height);
+	
+	CGRect frame = trackPopoverView.view.frame;
+	frame.origin.x = popupRect.origin.x - 8;
+	frame.origin.y = popupRect.origin.y - 20;
+	
+	trackPopoverView.view.frame = frame;
+	
 	[self addSubview:trackPopoverView.view];
 }
 
@@ -29,7 +39,7 @@
 	
 	if (aFadeIn) {
 		trackPopoverView.view.hidden = NO;
-		trackPopoverView.view.layer.anchorPoint = CGPointMake(0, 0.5);
+		trackPopoverView.view.layer.anchorPoint = CGPointMake(0.5, 1);
 		[trackPopoverView.view.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
 	} else {
 		[UIView animateWithDuration:0.3 animations:^{

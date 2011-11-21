@@ -131,6 +131,7 @@
 		9B494D07147A15A8001C1050 /* SliderTrackPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B494D05147A15A7001C1050 /* SliderTrackPopoverView.m */; };
 		9B494D08147A15A8001C1050 /* SliderTrackPopoverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B494D06147A15A8001C1050 /* SliderTrackPopoverView.xib */; };
 		9B494D0B147A23F7001C1050 /* GYTrackingSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B494D0A147A23F6001C1050 /* GYTrackingSlider.m */; };
+		9B494D16147A40F7001C1050 /* FXLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B494D15147A40F6001C1050 /* FXLabel.m */; };
 		9B4B49F814582FCF00C9B542 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4B49F714582FCF00C9B542 /* Status.m */; };
 		9B4B49FB14586C1000C9B542 /* RefreshingIntervalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4B49FA14586C1000C9B542 /* RefreshingIntervalViewController.m */; };
 		9B5F2E2014497374008AC0B8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F2E1F14497373008AC0B8 /* Default-Landscape~ipad.png */; };
@@ -442,6 +443,8 @@
 		9B494D06147A15A8001C1050 /* SliderTrackPopoverView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderTrackPopoverView.xib; sourceTree = "<group>"; };
 		9B494D09147A23F6001C1050 /* GYTrackingSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYTrackingSlider.h; sourceTree = "<group>"; };
 		9B494D0A147A23F6001C1050 /* GYTrackingSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYTrackingSlider.m; sourceTree = "<group>"; };
+		9B494D14147A40F6001C1050 /* FXLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXLabel.h; sourceTree = "<group>"; };
+		9B494D15147A40F6001C1050 /* FXLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXLabel.m; sourceTree = "<group>"; };
 		9B4B49F614582FCF00C9B542 /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
 		9B4B49F714582FCF00C9B542 /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
 		9B4B49F914586C1000C9B542 /* RefreshingIntervalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshingIntervalViewController.h; sourceTree = "<group>"; };
@@ -785,6 +788,8 @@
 				9B5F867514540190004B01D6 /* AnimationProvider.m */,
 				9B39EAA2144DCDB900F234D6 /* ErrorNotification.h */,
 				9B39EAA3144DCDB900F234D6 /* ErrorNotification.m */,
+				9B494D14147A40F6001C1050 /* FXLabel.h */,
+				9B494D15147A40F6001C1050 /* FXLabel.m */,
 				9B494D09147A23F6001C1050 /* GYTrackingSlider.h */,
 				9B494D0A147A23F6001C1050 /* GYTrackingSlider.m */,
 			);
@@ -1747,6 +1752,7 @@
 				9BBC487314778878000A69AC /* CastViewInfo.m in Sources */,
 				9B494D07147A15A8001C1050 /* SliderTrackPopoverView.m in Sources */,
 				9B494D0B147A23F7001C1050 /* GYTrackingSlider.m in Sources */,
+				9B494D16147A40F7001C1050 /* FXLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
