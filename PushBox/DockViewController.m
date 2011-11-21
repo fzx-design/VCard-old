@@ -12,6 +12,8 @@
 
 @implementation DockViewController
 
+@synthesize currentSliderPositionX;
+
 @synthesize refreshButton = _refreshButton;
 @synthesize postButton = _newTweetButton;
 @synthesize playButton = _playButton;
@@ -27,6 +29,10 @@
 @synthesize controlContainerView = _controlContainerView;
 @synthesize postingRoundImageView = _postingRoundImageView;
 @synthesize postingCircleImageView = _postingCircleImageView;
+
+@synthesize sliderPopoverView = _sliderPopoverView;
+@synthesize sliderUserImageView = _sliderUserImageView;
+@synthesize sliderUserScreenNameLabel = _sliderUserScreenNameLabel;
 
 @synthesize refreshNotiImageShown;
 
@@ -133,6 +139,8 @@
     self.refreshNotiImageView.hidden = YES;
 	refreshNotiImageShown = YES;
     self.commandCenterNotiImageView.hidden = YES;
+	
+	self.sliderPopoverView.hidden = YES;
     
 	self.ccUserInfoCardViewController = [[[CCUserInfoCardViewController alloc] init] autorelease];
 	self.ccUserInfoCardViewController.currentUser = self.currentUser;
@@ -302,6 +310,11 @@
 
 - (IBAction)commandCenterButtonClicked:(id)sender {
     self.commandCenterNotiImageView.hidden = YES;
+}
+
+- (IBAction)sliderValueChanged:(id)sender
+{
+	
 }
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController

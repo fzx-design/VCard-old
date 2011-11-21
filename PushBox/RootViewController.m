@@ -783,6 +783,19 @@
     [self setPlayTimerEnabled:NO];
 }
 
+- (void)sliderTouchedIn:(UISlider *)slider
+{
+	self.dockViewController.sliderPopoverView.hidden = NO;
+	self.dockViewController.sliderPopoverView.layer.anchorPoint = CGPointMake(0.5, 1);
+	
+	[self.dockViewController.sliderPopoverView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
+	CGFloat originX = slider.value / slider.maximumValue * slider.frame.size.width + slider.frame.origin.x;
+	CGPoint origin = CGPointMake(originX, self.dockViewController.sliderPopoverView.frame.origin.y);
+	CGRect frame = self.dockViewController.sliderPopoverView.frame;
+	frame.origin = origin;
+	self.dockViewController.sliderPopoverView.frame = frame;
+}
+
 - (void)sliderValueChanged:(UISlider *)slider
 {
     int index = slider.value;
@@ -793,7 +806,6 @@
 {
 	int index = slider.value;
 	[self.castViewController.castViewManager moveCardsToIndex:index];
-	NSLog(@"___ index is %d ", index);
 }
 
 - (void)showDockView
@@ -1235,6 +1247,10 @@
 		[self.dockViewController.slider addTarget:self
 										   action:@selector(sliderDidEndDragging:)
 								 forControlEvents:UIControlEventTouchUpOutside];
+		
+		[self.dockViewController.slider addTarget:self
+										   action:@selector(sliderTouchedIn:)
+								 forControlEvents:UIControlEventTouchDown];
 		
         [self.dockViewController.showFavoritesButton addTarget:self
                                                         action:@selector(showFavorites:)
