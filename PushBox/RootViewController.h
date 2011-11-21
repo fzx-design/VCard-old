@@ -61,12 +61,15 @@
 	NSInteger preNewFollowerCount;
 	NSInteger preNewCommentCount;
 	NSInteger preNewMentionCount;
+    
+    UIImageView* _bottomSearchBG;
 	
 	UIImage *_tmpImage;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView* backgroundImageView;
 @property(nonatomic, retain) IBOutlet UIImageView* pushBoxHDImageView;
+@property(nonatomic, retain) IBOutlet UIImageView* bottomSearchBG;
 @property(nonatomic, retain) IBOutlet UIView* bottomStateFrameView;
 @property(nonatomic, retain) IBOutlet UIView* bottomStateView;
 @property(nonatomic, retain) IBOutlet UIImageView* bottomStateInvisibleView;
@@ -97,6 +100,9 @@
 - (IBAction)showFriendsTimeline:(id)sender;
 - (IBAction)refreshAndShowCommentCenter:(id)sender;
 - (IBAction)closeNotificationPop:(id)sender;
+- (IBAction)searchTextFieldClicked:(id)sender;
+
+- (void)showSearchTimeline:(NSString *)searchString;
 
 - (void)showSearchView;
 - (void)hideSearchView;

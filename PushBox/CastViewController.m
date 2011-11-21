@@ -221,6 +221,7 @@
 	[[UIApplication sharedApplication] showLoadingView];
 	
 	[self recordCurrentState];
+		
 	
     //	[self clearData];
 	
@@ -379,29 +380,22 @@
 		if (self.dataSource == CastViewDataSourceFriendsTimeline) {
 			
 			newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-			
 			[self.currentUser addFriendsStatusesObject:newStatus];
 			
 		} else if(self.dataSource == CastViewDataSourceUserTimeline){
 			
 			newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
 			
-		} else {
-			
+		} else if(self.dataSource == CastViewDataSourceMentions){
+            
 			newStatus = [Status insertMentionedStatus:dict inManagedObjectContext:self.managedObjectContext];
+            
+		} else if(self.dataSource == CastViewDataSourceSearch){
+            
+			newStatus = [Status insertTrendsStatus:dict withString:self.searchString inManagedObjectContext:self.managedObjectContext];
 		}
 	}
 
-	[self.managedObjectContext processPendingChanges];
-	[self.fetchedResultsController performFetch:nil];
-}
-
-- (void)insertTrendsStatusFromClient:(WeiboClient *)client
-{
-	NSArray *dictArray = client.responseJSONObject;
-	for (NSDictionary *dict in dictArray) {
-		[Status insertTrendsStatus:dict inManagedObjectContext:self.managedObjectContext];
-	}
 	[self.managedObjectContext processPendingChanges];
 	[self.fetchedResultsController performFetch:nil];
 }
@@ -445,10 +439,13 @@
 			
 			[self insertStatusFromClient:client];
 			
-            //			[self reloadCards];
-			
-			_lastStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
-            
+			if (self.fetchedResultsController.fetchedObjects.count != 0) {
+				
+				Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
+				
+				_lastStatusID = [status.statusID longLongValue];
+			}
+					
 		}
 		if (completion) {
 			completion();
@@ -526,8 +523,8 @@
 					
 					[self clearData];
 					
-					[self insertFriendStatusFromClient:client];
-                    
+					[self insertStatusFromClient:client];
+					
 					[self.castViewManager refreshCards];
 					
 				} else {
@@ -542,9 +539,7 @@
 			
 		} else {
 			
-			[self insertUserStatusFromClient:client];
-            
-			[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
+			_currentNextPage = _oldNextPage;
 			
 			[ErrorNotification showLoadingError];
 		}
@@ -556,69 +551,12 @@
 	
 	
 	
-	[client getMentionsSinceID:nil 
-						 maxID:[NSString stringWithFormat:@""] 
-						  page:_nextPage++ 
-						 count:20];
-    
-}
-
-- (void)loadTrendsStatuses:(void (^)())completion
-{
-	
-	WeiboClient *client = [WeiboClient client];
-	
-	[client setCompletionBlock:^(WeiboClient *client) {
-		
-		_loading = NO;
-		
-		if (!client.hasError) {
-			
-			[self insertTrendsStatusFromClient:client];
-			
-			[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
-			
-			[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
-			
-		} else {
-			[ErrorNotification showLoadingError];
-		}
-		
-		if (completion) {
-			completion();
-		}
-	}];
-	
-    [client getTrendsStatuses:self.searchString];    
-}
-
-- (void)loadMoreDataCompletion:(void (^)())completion
-{
-    if (_loading) {
-        return;
-    }
-    _loading = YES;
-    
-	//
-    if (self.dataSource == CardTableViewDataSourceFavorites) {
-        [self loadAllFavoritesWithCompletion:^(void) {
-            [self.managedObjectContext processPendingChanges];
-            [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
-			
-			[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
-			
-            if (completion) {
-                completion();
-            }
-			[[UIApplication sharedApplication] hideLoadingView];
-			_loading = NO;
-        }];
-        
-        return;
-    }
-    
-    if (self.dataSource == CastViewDataSourceFriendsTimeline) {
-        [self loadMoreFriendTimeline:completion];
+	if (self.dataSource == CastViewDataSourceFriendsTimeline) {
+		[client getFriendsTimelineSinceID:nil
+									maxID:(long long)0
+						   startingAtPage:_currentNextPage++
+									count:kStatusCountPerRequest
+								  feature:0];
     }
     
     if (self.dataSource == CastViewDataSourceUserTimeline) {
@@ -636,64 +574,9 @@
 							  page:_currentNextPage++ 
 							 count:20];
 	}
-	if (self.dataSource == CastViewDataSourceSearchStatues) {
-		[self loadTrendsStatuses:completion];
+	if (self.dataSource == CastViewDataSourceSearch) {
+		[client getTrendsStatuses:self.searchString];
 	}
-    //    //
-    //    if (self.dataSource == CastViewDataSourceSearchStatues) {
-    //        [[UIApplication sharedApplication] showLoadingView];
-    //		[client setCompletionBlock:^(WeiboClient *client) {
-    //            if (!client.hasError) {
-    //				
-    //                NSArray *dictArray = client.responseJSONObject;
-    //				for (NSDictionary *dict in dictArray) {
-    //                    Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-    //                    [self.currentUser addFriendsStatusesObject:newStatus];
-    //                }
-    //				[self.managedObjectContext processPendingChanges];
-    //				
-    //				if (_refreshFlag) {
-    //					_refreshFlag = NO;
-    //					
-    //					Status *newStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
-    //					
-    //					if (_lastStatus == nil || ![newStatus.statusID isEqualToString:_lastStatus.statusID]){
-    //						_lastStatus = newStatus;
-    //						[self scrollToRow:0];
-    //						
-    //					} else if ([newStatus.statusID isEqualToString:_lastStatus.statusID]) {
-    //						if (completion) {
-    //							completion();
-    //						}
-    //						[[UIApplication sharedApplication] hideLoadingView];
-    //						_loading = NO;
-    //						return;
-    //					} 
-    //				}
-    //                
-    //                [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
-    //                [self.delegate castViewController:self 
-    //                                        didScrollToRow:self.currentIndex
-    //                                      withNumberOfRows:[self numberOfRows]];
-    //                
-    //                if (completion) {
-    //                    completion();
-    //                }
-    //				
-    //            } else {
-    //				if (completion) {
-    //                    completion();
-    //                }
-    //				[ErrorNotification showLoadingError];
-    //			}
-    //			[[UIApplication sharedApplication] hideLoadingView];
-    //			_loading = NO;
-    //        }];
-    //        
-    //        [client getTrendsStatuses:self.searchString];
-    //    }
-    //	
-    //	//
     
 }
 
@@ -738,6 +621,13 @@
 			
 			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.managedObjectContext];
             request.predicate = [NSPredicate predicateWithFormat:@"isMentioned == %@", [NSNumber numberWithBool:YES]];
+			break;
+		case CardTableViewDataSourceSearch:
+			sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:NO];
+			request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+			
+			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.managedObjectContext];
+            request.predicate = [NSPredicate predicateWithFormat:@"searchString == %@", self.searchString];
 			break;
 		default:
 			break;

@@ -31,6 +31,11 @@
 #define kMessagesViewCenter CGPointMake(512.0 - 1024.0, 350.0)
 #define kMessagesViewOffsetx 1024.0
 
+#define kSearchTextFieldFrame CGRectMake(341, 6, 343, 31)
+#define kSearchTextFieldInputEnglish CGRectMake(341, 360, 343, 31)
+#define kSearchTextFieldInputChinese CGRectMake(341, 360, 343, 31)
+#define kSearchTextFieldInputWait CGRectMake(341, 632, 343, 31)
+
 #define kUserDefaultKeyFirstTime @"kUserDefaultKeyFirstTime"
 
 
@@ -70,6 +75,7 @@
 @synthesize dockViewController = _dockViewController;
 @synthesize messagesViewController = _messagesViewController;
 
+@synthesize bottomSearchBG = _bottomSearchBG;
 @synthesize castViewController = _castViewController;
 
 @synthesize bottomSearchView = _bottomSearchView;
@@ -96,9 +102,7 @@
     [_bottomStateView release];
     [_bottomStateLabel release];
     [_loginViewController release];
-    [_dockViewController release];
-    //     [_cardTableViewController release];
-	
+    [_dockViewController release];	
 	[_castViewController release];
 	
 	[_tmpImage release];
@@ -160,15 +164,6 @@
 		[self updateBackgroundImageAnimated:YES];
 		
 		[[UIApplication sharedApplication] showLoadingView];
-		
-        //		self.cardTableViewController.dataSource = CardTableViewDataSourceFriendsTimeline;
-        //		[self.cardTableViewController firstLoad:^(void) {
-        //			[self.cardTableViewController loadAllFavoritesWithCompletion:nil];
-        //			[self showCardTableView];
-        //			[self showDockView];
-        //			[self showMessagesView];
-        //			[self.dockViewController hideLoadingView];
-        //		}];
         
 		self.castViewController.dataSource = CastViewDataSourceFriendsTimeline;
 		self.castViewController.prevDataSource = self.castViewController.dataSource;
@@ -324,7 +319,7 @@
 		_statusTypeStack = nil;
 		
 		self.bottomStateInvisibleView.image = nil;
-			
+        
 		self.bottomStateFrameView.hidden = YES;
 		self.notificationView.hidden = YES;
 		self.currentUser = nil;
@@ -370,6 +365,41 @@
     
     [self.bottomStateFrameView bringSubviewToFront:self.bottomStateView];
     self.bottomBackButton.enabled = YES;
+}
+
+- (void)showBottomStateViewForSearch
+{
+    self.dockViewController.searchButton.selected = YES;
+    
+    [UIView animateWithDuration:0.28 animations:^(void) {
+		self.bottomStateView.hidden = NO;
+        CGRect frame = self.bottomStateView.frame;
+        frame.origin.y = 768 - 352 - 46 - 18;
+        [self.bottomStateView setFrame:frame];
+    }];
+    
+    self.bottomStateTextField.text = @"";
+    self.bottomStateLabel.text = @"";
+    self.bottomStateTextField.hidden = NO;
+    self.bottomStateLabel.hidden = YES;
+}
+
+- (void)hideBottomStateViewForSearch
+{
+    self.dockViewController.searchButton.selected = NO;
+    [self.bottomStateTextField resignFirstResponder];
+    
+    [UIView animateWithDuration:0.28 animations:^(void) {
+		self.bottomStateView.hidden = YES;
+        CGRect frame = self.bottomStateView.frame;
+        frame.origin.y = 618;
+        [self.bottomStateView setFrame:frame];
+    }];
+    
+    self.bottomStateTextField.text = @"";
+    self.bottomStateLabel.text = @"";
+    self.bottomStateTextField.hidden = YES;
+    self.bottomStateLabel.hidden = NO;
 }
 
 - (void)hideBottomStateView
@@ -435,7 +465,7 @@
 
 - (void)showSearchTimeline:(NSString *)searchString
 {
-    self.castViewController.dataSource = CastViewDataSourceSearchStatues;
+    self.castViewController.dataSource = CastViewDataSourceSearch;
     
     NSString* string = [[[NSString alloc] initWithFormat:@"包含%@的微博", searchString] autorelease];
 	[_statusTypeStack addObject:self.bottomStateLabel.text];
@@ -478,7 +508,7 @@
     [self.castViewController pushCardWithCompletion:^{
         [self moveCardIntoView];
     }];
-
+    
 	self.dockViewController.refreshNotiImageView.hidden = YES;
 }
 
@@ -777,8 +807,21 @@
 - (void)sliderValueChanged:(UISlider *)slider
 {
     int index = slider.value;
-    //    [self.cardTableViewController scrollToRow:index];
-	[self.castViewController scrollToRow:index];
+	if (_trackingIndex == index) {
+		return;
+	}
+	_trackingIndex = index;
+	GYTrackingSlider *trackingSlider = (GYTrackingSlider*)slider;
+	[self.castViewController.castViewManager configureTrackingPopover:trackingSlider.trackPopoverView AtIndex:index];
+}
+
+- (void)sliderDidEndDragging:(UISlider *)slider
+{
+	int index = slider.value;
+	if (index == self.castViewController.castViewManager.currentIndex) {
+		return;
+	}
+	[self.castViewController.castViewManager moveCardsToIndex:index];
 }
 
 - (void)showDockView
@@ -914,7 +957,7 @@
 
 - (void)hideMessagesCenter
 {
-
+    
     [self.messagesViewController viewWillDisappear:YES];
     [UIView animateWithDuration:kDockAnimationInterval
                           delay:0 
@@ -929,10 +972,7 @@
 						 frame = self.castViewController.view.frame;
                          frame.origin.x -= kMessagesViewOffsetx;
                          self.castViewController.view.frame = frame;
-						 
-                         //                         frame = self.cardTableViewController.view.frame;
-                         //                         frame.origin.x -= kMessagesViewOffsetx;
-                         //                         self.cardTableViewController.view.frame = frame;
+                         
                      }
                      completion:^(BOOL finished) {
                          if (finished) {
@@ -961,23 +1001,33 @@
     }
 }
 
-- (void)showSearchView
+- (void)showSearchView 
 {
-    self.bottomSearchView.hidden = NO;
+    self.bottomSearchTextField.hidden = NO;
+    self.bottomSearchTextField.frame = kSearchTextFieldFrame;
     self.dockViewController.searchButton.selected = YES;
-    self.bottomSearchTextField.inputAccessoryView = self.bottomSearchView;
+        
     [self.bottomSearchTextField becomeFirstResponder];
+
+    [self.bottomSearchView addSubview:self.bottomSearchTextField]; 
 }
 
-- (void)hideSearchView
+- (void)hideSearchView 
 {
+    //    self.bottomSearchTextField.hidden = YES;
     self.dockViewController.searchButton.selected = NO;
-    //    self.bottomSearchTextField.inputAccessoryView = nil;
+    
+    [self.bottomSearchTextField removeFromSuperview];
+    [self.view addSubview:self.bottomSearchTextField];
+    
     [self.bottomSearchTextField resignFirstResponder];
 }
 
-- (void)searchButtonClicked:(UIButton *)button
-{    
+- (void)searchButtonClicked:(UIButton*) button
+{
+	self.bottomSearchView.hidden = NO;
+    [self.bottomSearchTextField setInputAccessoryView:self.bottomSearchView];
+    
     if (button.selected) {
         [self hideSearchView];
     }
@@ -1000,14 +1050,6 @@
     [self.dockViewController viewWillAppear:YES];
 	[self.dockViewController.ccCommentTableViewController returnToCommandCenter];
     
-	
-    //	if (self.castViewController.dataSource != CastViewDataSourceFriendsTimeline) {
-    //        [self hideBottomStateView];
-    //    }
-	
-    //    if (self.cardTableViewController.dataSource != CardTableViewDataSourceFriendsTimeline) {
-    //        [self hideBottomStateView];
-    //    }
     [UIView animateWithDuration:kDockAnimationInterval
                           delay:0 
                         options:UIViewAnimationCurveEaseInOut 
@@ -1046,14 +1088,7 @@
 - (void)hideCommandCenter
 {	
     _commandCenterFlag = NO;
-	
-    //	if (self.castViewController.dataSource != CastViewDataSourceFriendsTimeline) {
-    //        [self showBottomStateView];
-    //    }
-	
-    //    if (self.cardTableViewController.dataSource != CardTableViewDataSourceFriendsTimeline) {
-    //        [self showBottomStateView];
-    //    }
+    
     [self.dockViewController viewWillDisappear:YES];
     [UIView animateWithDuration:kDockAnimationInterval
                           delay:0 
@@ -1358,7 +1393,18 @@
     
     [self showSearchTimeline:textField.text];
     
+    //
+    [self.bottomSearchTextField removeFromSuperview];
+    [self.view addSubview: self.bottomSearchTextField];
+    [self.bottomSearchTextField setFrame:kSearchTextFieldInputWait];
+    [self.bottomSearchBG setHidden:NO];
+    [self.bottomStateLabel setHidden:YES];
+    
     return NO;
+}
+
+- (IBAction)searchTextFieldClicked:(id)sender {
+    [self showSearchView];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {

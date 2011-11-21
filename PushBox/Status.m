@@ -101,7 +101,7 @@
     return result;
 }
 
-+ (Status *)insertTrendsStatus:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context
++ (Status *)insertTrendsStatus:(NSDictionary *)dict withString:(NSString*)searchString inManagedObjectContext:(NSManagedObjectContext *)context
 {
 	NSString *statusID = [[dict objectForKey:@"id"] stringValue];
     
@@ -127,6 +127,7 @@
     
     result.favorited = [NSNumber numberWithBool:[[dict objectForKey:@"favorited"] boolValue]];
 	result.isMentioned = [NSNumber numberWithBool:NO];
+	result.searchString = [NSString stringWithString:searchString];
     
     result.commentsCount = [dict objectForKey:@"comment_count"];
     result.repostsCount = [dict objectForKey:@"repost_count"];
@@ -143,6 +144,8 @@
     if (repostedStatusDict) {
         result.repostStatus = [Status insertStatus:repostedStatusDict inManagedObjectContext:context];
     }
+    
+    NSLog(@"----------------------%@", result.text);
     
     return result;
 }

@@ -23,7 +23,7 @@ typedef enum {
     CardTableViewDataSourceFriendsTimeline,
     CardTableViewDataSourceUserTimeline,
     CardTableViewDataSourceFavorites,
-    CardTableViewDataSourceSearchStatues,
+    CardTableViewDataSourceSearch,
 	CardTableViewDataSourceMentions,
 } CardTableViewDataSource;
 

@@ -551,7 +551,7 @@
     }
     
     NSString* htmlText = [[[NSString alloc] initWithFormat:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" /><link href=\"smartcard.css\" rel=\"stylesheet\" type=\"text/css\" /><script type='text/javascript' src='smartcard.js'></script></head><body><div id=\"post\">%@</div></body></html>", phasedStatus] autorelease];
-
+    
     NSString *path = [[NSBundle mainBundle] pathForResource:@"smartcard" ofType:@"html"]; 
     [self.postWebView loadHTMLString:htmlText baseURL:[NSURL fileURLWithPath: path]];    
     
@@ -953,7 +953,7 @@
     _status = [status retain];
     
     [self prepare];
-//	[self performSelector:@selector(prepare) withObject:nil afterDelay:0.1];
+    //	[self performSelector:@selector(prepare) withObject:nil afterDelay:0.1];
     [self performSelector:@selector(update) withObject:nil afterDelay:0.2];
 }
 
@@ -1108,8 +1108,8 @@
                 //				
                 //				[self performSelector:@selector(deleteCardFromCoreData) withObject:nil afterDelay:5.0];
 				[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameCardShouldDeleteCard object:self];
-//				
-//				[self performSelector:@selector(deleteCardFromCoreData) withObject:nil afterDelay:5.0];
+                //				
+                //				[self performSelector:@selector(deleteCardFromCoreData) withObject:nil afterDelay:5.0];
 				
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameCardDeleted object:self];
             } else {
@@ -1292,20 +1292,18 @@
     NSString* para = [s substringFromIndex:4];
     
     if ([type compare:@"/at/"] == NSOrderedSame) {
-        //        NSLog(@"at %@", para);
-        //        NSString* content = [[NSString alloc] initWithFormat:@"@%@ ", para];
-        //        [self postWithContent:content];
         [self atUserClicked:para];
     }
     else if ([type compare:@"/sp/"] == NSOrderedSame) {
-        //        NSLog(@"sp %@", para);
-		
-		//REMAIN_TO
-        NSString* content = [[[NSString alloc] initWithFormat:@"#%@# ", para] autorelease];
-        [self postWithContent:content];
+        //        NSString* content = [[[NSString alloc] initWithFormat:@"#%@# ", para] autorelease];
+        //        [self postWithContent:content];
+        
+        //
+        [((RootViewController*)[[UIApplication sharedApplication]rootViewController]).castViewController setSearchString:para];
+        [((RootViewController*)[[UIApplication sharedApplication]rootViewController]) showSearchTimeline:para];
+        
     }
     else if ([type compare:@"/lk/"] == NSOrderedSame) {
-        //        NSLog(@"lk %@", para);
         [self openLinkInInnerBroswer:para];
     }
     

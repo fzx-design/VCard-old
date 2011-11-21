@@ -674,7 +674,7 @@
     }
     
     //
-    if (self.dataSource == CardTableViewDataSourceSearchStatues) {
+    if (self.dataSource == CardTableViewDataSourceSearch) {
         [[UIApplication sharedApplication] showLoadingView];
 		[client setCompletionBlock:^(WeiboClient *client) {
             if (!client.hasError) {
