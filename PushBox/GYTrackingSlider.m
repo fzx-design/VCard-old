@@ -9,6 +9,8 @@
 #import "GYTrackingSlider.h"
 #import "AnimationProvider.h"
 
+#define kPopoverHeight -108
+
 @implementation GYTrackingSlider
 
 @synthesize trackPopoverView;
@@ -20,16 +22,29 @@
 	
 	trackPopoverView = [[SliderTrackPopoverView alloc] init];
 	
+	[self addSubview:trackPopoverView.view];
+		
 	trackPopoverView.view.hidden = YES;
 	
-	[self addSubview:trackPopoverView.view];
+	trackPopoverView.view.layer.anchorPoint = CGPointMake(0.5, 1);
+	
 }
 
 - (void)_fadePopupViewInAndOut:(BOOL)aFadeIn {
 	
 	if (aFadeIn) {
+		
+		CGRect _thumbRect = self.thumbRect;
+		
+		CGRect popupRect = CGRectOffset(_thumbRect, 0, -_thumbRect.size.height);
+		
+		CGRect frame = trackPopoverView.view.frame;
+		frame.origin.x = popupRect.origin.x - 8;
+		frame.origin.y = kPopoverHeight;
+		
+		trackPopoverView.view.frame = frame;
+		
 		trackPopoverView.view.hidden = NO;
-		trackPopoverView.view.layer.anchorPoint = CGPointMake(0, 0.5);
 		[trackPopoverView.view.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
 	} else {
 		[UIView animateWithDuration:0.3 animations:^{
@@ -40,6 +55,8 @@
 		}];
 	}
 	
+	NSLog(@"current y : %f", trackPopoverView.view.frame.origin.y);
+	
 }
 
 - (void)_positionAndUpdatePopupView {
@@ -49,7 +66,9 @@
 	
 	CGRect frame = trackPopoverView.view.frame;
 	frame.origin.x = popupRect.origin.x - 8;
-	frame.origin.y = popupRect.origin.y - 20;
+	frame.origin.y = kPopoverHeight;
+	
+	NSLog(@" moving %f", frame.origin.y);
 	
 	trackPopoverView.view.frame = frame;
 }

@@ -13,29 +13,17 @@
 @synthesize proFileImage;
 @synthesize screenNameLabel;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
 
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+	
+    screenNameLabel.backgroundColor = [UIColor clearColor];
+    screenNameLabel.shadowColor = [UIColor colorWithWhite:0.0f alpha:1.0f];
+    screenNameLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    screenNameLabel.shadowBlur = 8.0f;
 }
 
 - (void)viewDidUnload

@@ -777,8 +777,6 @@
 		9B2153AD14626C3800942EBE /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				9B494D04147A15A7001C1050 /* SliderTrackPopoverView.h */,
-				9B494D05147A15A7001C1050 /* SliderTrackPopoverView.m */,
 				9B2153AE14626CB200942EBE /* RCSwitch.h */,
 				9B2153AF14626CB200942EBE /* RCSwitch.m */,
 				9B2153B014626CB200942EBE /* RCSwitchClone.h */,
@@ -787,6 +785,10 @@
 				9B5F867514540190004B01D6 /* AnimationProvider.m */,
 				9B39EAA2144DCDB900F234D6 /* ErrorNotification.h */,
 				9B39EAA3144DCDB900F234D6 /* ErrorNotification.m */,
+				9B494D14147A40F6001C1050 /* FXLabel.h */,
+				9B494D15147A40F6001C1050 /* FXLabel.m */,
+				9B494D04147A15A7001C1050 /* SliderTrackPopoverView.h */,
+				9B494D05147A15A7001C1050 /* SliderTrackPopoverView.m */,
 				9B494D09147A23F6001C1050 /* GYTrackingSlider.h */,
 				9B494D0A147A23F6001C1050 /* GYTrackingSlider.m */,
 			);

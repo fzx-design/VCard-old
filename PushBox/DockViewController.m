@@ -312,9 +312,9 @@
     self.commandCenterNotiImageView.hidden = YES;
 }
 
-- (IBAction)sliderValueChanged:(id)sender
+- (IBAction)hideCommandCenterButtonClicked:(id)sender
 {
-	
+	[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameHideCommandCenter object:nil];
 }
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController

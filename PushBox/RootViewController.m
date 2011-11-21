@@ -258,6 +258,11 @@
 			   selector:@selector(notificationRefreshed:) 
 				   name:kNotificationNameNotificationRefreshed 
 				 object:nil];
+	[center addObserver:self
+			   selector:@selector(hideCommandCenter) 
+				   name:kNotificationNameHideCommandCenter 
+				 object:nil];
+	
     
     
 	self.bottomStateView.hidden = YES;
@@ -799,7 +804,9 @@
 - (void)sliderTouchedIn:(UISlider *)slider
 {
 	GYTrackingSlider *trackingSlider = (GYTrackingSlider*)slider;
-	[self.castViewController.castViewManager configureTrackingPopover:trackingSlider.trackPopoverView AtIndex:self.castViewController.castViewManager.currentIndex];
+	[self.castViewController.castViewManager configureTrackingPopover:trackingSlider.trackPopoverView 
+															  AtIndex:self.castViewController.castViewManager.currentIndex 
+														andDataSource:self.castViewController.dataSource];
 	
 	_trackingIndex = self.castViewController.castViewManager.currentIndex;
 }
@@ -812,7 +819,9 @@
 	}
 	_trackingIndex = index;
 	GYTrackingSlider *trackingSlider = (GYTrackingSlider*)slider;
-	[self.castViewController.castViewManager configureTrackingPopover:trackingSlider.trackPopoverView AtIndex:index];
+	[self.castViewController.castViewManager configureTrackingPopover:trackingSlider.trackPopoverView 
+															  AtIndex:index 
+														andDataSource:self.castViewController.dataSource];
 }
 
 - (void)sliderDidEndDragging:(UISlider *)slider
