@@ -190,6 +190,9 @@
 
 - (void)moveCardsToIndex:(int)index
 {
+	if (index >= self.castView.pageNum) {
+		return;
+	}
 	int diff = index - self.currentIndex;
 	if (abs(diff) < 3) {
 		[self.castView moveViewsWithPageOffset:diff andCurrentPage:index];
@@ -218,7 +221,6 @@
 		} else {
 			vc3 = nil;
 		}
-		
 		
 		[self.castView moveViewsWithPageOffset:diff andCurrentPage:index withFirstPage:vc1.view secondPage:vc2.view thirdPage:vc3.view];
 	}

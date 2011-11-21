@@ -248,6 +248,11 @@
 			   selector:@selector(notificationRefreshed:) 
 				   name:kNotificationNameNotificationRefreshed 
 				 object:nil];
+	[center addObserver:self
+			   selector:@selector(hideCommandCenter) 
+				   name:kNotificationNameHideCommandCenter 
+				 object:nil];
+	
     
     
 	self.bottomStateView.hidden = YES;

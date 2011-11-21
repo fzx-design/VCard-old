@@ -14,6 +14,8 @@
 #import "UserCardNaviViewController.h"
 #import "CCUserInfoCardViewController.h"
 
+#define kNotificationNameHideCommandCenter @"kNotificationNameHideCommandCenter"
+
 @interface DockViewController : CoreDataViewController<UIPopoverControllerDelegate> {
     UIButton *_refreshButton;
     UIButton *_newTweetButton;
@@ -86,7 +88,7 @@
 - (IBAction)refreshButtonClicked:(id)sender;
 - (IBAction)commandCenterButtonClicked:(id)sender;
 
-- (IBAction)sliderValueChanged:(id)sender;
+- (IBAction)hideCommandCenterButtonClicked:(id)sender;
 
 - (void)showLoadingView;
 - (void)hideLoadingView;

@@ -334,7 +334,8 @@
 
 - (void)showNextCard
 {
-    [self swipeRight];
+//    [self swipeRight];
+	[self.castViewManager moveCardsToIndex:self.castViewManager.currentIndex + 1];
 }
 
 - (void)deleteCurrentCard
