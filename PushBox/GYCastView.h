@@ -48,6 +48,7 @@
 
 @property (nonatomic, assign) NSInteger pageSection;
 
+- (void)removeAllSubviews;
 - (void)changeViews;
 - (void)reloadViews;
 - (void)deleteView;

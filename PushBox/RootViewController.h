@@ -44,7 +44,7 @@
     LoginViewController *_loginViewController;
     DockViewController *_dockViewController;
     MessagesViewController *_messagesViewController;
-    //    CardTableViewController *_cardTableViewController;
+//    CardTableViewController *_cardTableViewController;
 	
 	NSMutableArray *_statusTypeStack;
 	

@@ -30,16 +30,14 @@
 @synthesize postingRoundImageView = _postingRoundImageView;
 @synthesize postingCircleImageView = _postingCircleImageView;
 
-@synthesize sliderPopoverView = _sliderPopoverView;
-@synthesize sliderUserImageView = _sliderUserImageView;
-@synthesize sliderUserScreenNameLabel = _sliderUserScreenNameLabel;
-
 @synthesize refreshNotiImageShown;
 
 @synthesize userCardNaviViewController = _userCardNaviViewController;
 @synthesize ccUserInfoCardViewController = _ccUserInfoCardViewController;
 @synthesize commentNaviViewController = _commentNaviViewController;
 @synthesize ccCommentTableViewController = _ccCommentTableViewController;
+
+@synthesize hideCommandCenterButton = _hideCommandCenterButton;
 
 #pragma mark - View lifecycle
 
@@ -66,6 +64,8 @@
 	[_commentNaviViewController release];
 	[_ccCommentTableViewController release];
 	
+	[_hideCommandCenterButton release];
+	
     [super dealloc];
 }
 
@@ -89,6 +89,8 @@
 	
 	self.commentNaviViewController = nil;
 	self.ccCommentTableViewController = nil;
+	
+	self.hideCommandCenterButton = nil;
 }
 
 - (void)viewDidLoad
@@ -140,8 +142,8 @@
 	refreshNotiImageShown = YES;
     self.commandCenterNotiImageView.hidden = YES;
 	
-	self.sliderPopoverView.hidden = YES;
-    
+    self.hideCommandCenterButton.enabled = NO;
+	
 	self.ccUserInfoCardViewController = [[[CCUserInfoCardViewController alloc] init] autorelease];
 	self.ccUserInfoCardViewController.currentUser = self.currentUser;
 	self.ccUserInfoCardViewController.managedObjectContext = self.managedObjectContext;

@@ -264,7 +264,10 @@
 
 - (void)pushNewViews
 {
+	[self.castView removeAllSubviews]; 
+	
 	[self.castView resetWithCurrentIndex:0 numberOfPages:[self itemCount:nil]];
+	
 	[self reloadCards];
 }
 

@@ -430,6 +430,20 @@
     [self performSelector:@selector(showUserTimeline:) withObject:[sender object] afterDelay:1.0];
 }
 
+- (void)hideSearchBottomView
+{
+	[self.bottomSearchBG setHidden:YES];
+	[self.bottomSearchTextField setHidden:YES];
+    [self.bottomStateLabel setHidden:NO];
+}
+
+- (void)showSearchBottomView
+{
+	[self.bottomSearchBG setHidden:NO];
+	[self.bottomSearchTextField setHidden:NO];
+    [self.bottomStateLabel setHidden:YES];
+}
+
 - (void)showFriendsTimeline:(id)sender
 {
     if (self.dockViewController.searchButton.selected)
@@ -440,10 +454,18 @@
         self.dockViewController.showFavoritesButton.selected = NO;
         self.dockViewController.showFavoritesButton.userInteractionEnabled = YES;
     }];
+	
+	[self hideSearchBottomView];
+	
 	if (needHideBottomStateView) {
 		[self hideBottomStateView];
 		self.dockViewController.refreshNotiImageView.hidden = self.dockViewController.refreshNotiImageShown;
 	} else {
+		
+		if (self.castViewController.dataSource == CastViewDataSourceSearch) {
+			[self showSearchBottomView];
+		}
+		
 		[self popBottomStateView];
 		[_statusTypeStack removeLastObject];
 		self.bottomStateLabel.text = [_statusTypeStack lastObject];
@@ -461,6 +483,8 @@
     
     self.dockViewController.showFavoritesButton.selected = NO;
     [self showBottomStateView];
+	
+	[self hideSearchBottomView];
     
     [self.castViewController pushCardWithCompletion:^{
         [self moveCardIntoView];
@@ -495,6 +519,8 @@
 	[_statusTypeStack addObject:string];
     [self showBottomStateView];
     
+	[self hideSearchBottomView];
+	
     [self.castViewController pushCardWithCompletion:^{
         self.dockViewController.showFavoritesButton.userInteractionEnabled = YES;
         [self moveCardIntoView];
@@ -509,6 +535,8 @@
     self.bottomStateLabel.text = string;
 	[_statusTypeStack addObject:string];
     [self showBottomStateView];
+	
+	[self hideSearchBottomView];
     
     [self.castViewController pushCardWithCompletion:^{
         [self moveCardIntoView];
@@ -1015,6 +1043,9 @@
     self.bottomSearchTextField.hidden = NO;
     self.bottomSearchTextField.frame = kSearchTextFieldFrame;
     self.dockViewController.searchButton.selected = YES;
+	
+	[self.bottomSearchBG setHidden:YES];
+    [self.bottomStateLabel setHidden:NO];
         
     [self.bottomSearchTextField becomeFirstResponder];
 
@@ -1025,6 +1056,11 @@
 {
     //    self.bottomSearchTextField.hidden = YES;
     self.dockViewController.searchButton.selected = NO;
+	
+	if (self.castViewController.dataSource == CastViewDataSourceSearch) {
+		[self.bottomSearchBG setHidden:NO];
+		[self.bottomStateLabel setHidden:YES];	
+	}
     
     [self.bottomSearchTextField removeFromSuperview];
     [self.view addSubview:self.bottomSearchTextField];
@@ -1034,6 +1070,21 @@
 
 - (void)searchButtonClicked:(UIButton*) button
 {
+	if (self.castViewController.dataSource != CastViewDataSourceFriendsTimeline) {
+		while (self.castViewController.infoStack.count > 1) {
+			[self.castViewController.infoStack removeLastObject];
+		}
+		[_statusTypeStack removeAllObjects];
+		[self hideBottomStateView];
+		[self.castViewController popCardWithCompletion:nil];
+	}
+	
+	if (self.dockViewController.commandCenterButton.selected) {
+		[self hideCommandCenter];
+	}
+	
+	self.dockViewController.showFavoritesButton.selected = NO;
+	
 	self.bottomSearchView.hidden = NO;
     [self.bottomSearchTextField setInputAccessoryView:self.bottomSearchView];
     
@@ -1050,6 +1101,8 @@
 {
 	_commandCenterFlag = YES;
 	self.notificationView.hidden = YES;
+	
+	self.dockViewController.hideCommandCenterButton.enabled = YES;
 	
 	if (_refreshFlag) {
 		_refreshFlag = NO;
@@ -1097,6 +1150,8 @@
 - (void)hideCommandCenter
 {	
     _commandCenterFlag = NO;
+	
+	self.dockViewController.hideCommandCenterButton.enabled = NO;
     
     [self.dockViewController viewWillDisappear:YES];
     [UIView animateWithDuration:kDockAnimationInterval
@@ -1413,11 +1468,12 @@
 }
 
 - (IBAction)searchTextFieldClicked:(id)sender {
-    [self showSearchView];
+	[self showSearchView];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     [self hideSearchView];
+	[self.bottomSearchTextField setFrame:kSearchTextFieldInputWait];
 }
 
 @end

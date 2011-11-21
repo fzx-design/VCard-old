@@ -491,7 +491,7 @@
 					<object class="IBUITextField" id="976898574">
 						<reference key="NSNextResponder" ref="420341332"/>
 						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{341, 542}, {343, 31}}</string>
+						<string key="NSFrame">{{342, 543}, {382, 31}}</string>
 						<reference key="NSSuperview" ref="420341332"/>
 						<reference key="NSNextKeyView" ref="855380163"/>
 						<string key="NSReuseIdentifierKey">_NS:320</string>
@@ -502,7 +502,6 @@
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<string key="IBUIText"/>
 						<reference key="IBUITextColor" ref="280735513"/>
-						<bool key="IBUIClearsOnBeginEditing">YES</bool>
 						<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
 						<float key="IBUIMinimumFontSize">17</float>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
@@ -762,15 +761,6 @@
 					</object>
 					<int key="connectionID">106</int>
 				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">showFriendsTimeline:</string>
-						<reference key="source" ref="1045940748"/>
-						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">98</int>
-				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -800,7 +790,6 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="928190392"/>
-							<reference ref="855380163"/>
 							<reference ref="390614649"/>
 							<reference ref="407417022"/>
 							<reference ref="112184777"/>
@@ -925,7 +914,6 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="196173532"/>
-							<reference ref="1045940748"/>
 							<reference ref="366191884"/>
 						</object>
 						<reference key="parent" ref="420341332"/>
@@ -934,11 +922,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">92</int>
 						<reference key="object" ref="196173532"/>
-						<reference key="parent" ref="407417022"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">97</int>
-						<reference key="object" ref="1045940748"/>
 						<reference key="parent" ref="407417022"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -992,8 +975,6 @@
 					<string>88.IBPluginDependency</string>
 					<string>89.IBPluginDependency</string>
 					<string>92.IBPluginDependency</string>
-					<string>97.IBPluginDependency</string>
-					<string>97.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1026,8 +1007,6 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<real value="0.0"/>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">

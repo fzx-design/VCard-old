@@ -137,7 +137,7 @@
 	self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
 	
 	self.scrollView.contentOffset = CGPointMake(index * self.scrollView.frame.size.width, 0.0);
-		
+	
 	[self.delegate resetViewsAroundCurrentIndex:index];
 	
 	[self.delegate didScrollToIndex:index];
@@ -187,6 +187,13 @@
 }
 
 #pragma mark - Adjust Views in Castview
+
+- (void)removeAllSubviews
+{
+	for (UIView* view in self.scrollView.subviews) {
+		[view removeFromSuperview];
+	}
+}
 
 - (void)changeViews
 {

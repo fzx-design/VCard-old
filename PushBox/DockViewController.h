@@ -32,11 +32,6 @@
 	
 	UIImageView *_postingCircleImageView;
 	UIImageView *_postingRoundImageView;
-	
-	
-	UIView *_sliderPopoverView;
-	UIView *_sliderUserImageView;
-	UILabel *_sliderUserScreenNameLabel;
 
     UIPopoverController *_optionsPopoverController;
 	
@@ -45,6 +40,8 @@
 	
 	UserCardNaviViewController *_commentNaviViewController;
 	CCCommentsTableViewController *_ccCommentTableViewController;
+	
+	UIButton *_hideCommandCenterButton;
 	
 	BOOL refreshFlag;
 	NSInteger refreshTime;
@@ -69,16 +66,14 @@
 @property(nonatomic, retain) IBOutlet UIImageView* postingCircleImageView;
 @property(nonatomic, retain) IBOutlet UIImageView* postingRoundImageView;
 
-@property(nonatomic, retain) IBOutlet UIView* sliderPopoverView;
-@property(nonatomic, retain) IBOutlet UIView* sliderUserImageView;
-@property(nonatomic, retain) IBOutlet UILabel* sliderUserScreenNameLabel;
-
 @property(nonatomic, assign) BOOL refreshNotiImageShown;
 
 @property(nonatomic, retain) UserCardNaviViewController* commentNaviViewController;
 @property(nonatomic, retain) CCCommentsTableViewController* ccCommentTableViewController;
 @property(nonatomic, retain) UserCardNaviViewController* userCardNaviViewController;
 @property(nonatomic, retain) CCUserInfoCardViewController* ccUserInfoCardViewController;
+
+@property(nonatomic, retain) IBOutlet UIButton* hideCommandCenterButton;
 
 - (void)showControlsAnimated:(BOOL)animated;
 - (void)hideControlsAnimated:(BOOL)animated;

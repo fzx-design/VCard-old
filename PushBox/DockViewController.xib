@@ -589,6 +589,22 @@
 					<int key="connectionID">137</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">searchButton</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="142004818"/>
+					</object>
+					<int key="connectionID">151</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">hideCommandCenterButton</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="352620342"/>
+					</object>
+					<int key="connectionID">152</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">refreshButtonClicked:</string>
 						<reference key="source" ref="755675950"/>
@@ -877,7 +893,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">150</int>
+			<int key="maxID">152</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -946,6 +962,7 @@
 							<string>commandCenterButton</string>
 							<string>commandCenterNotiImageView</string>
 							<string>controlContainerView</string>
+							<string>hideCommandCenterButton</string>
 							<string>messagesCenterButton</string>
 							<string>optionsButton</string>
 							<string>playButton</string>
@@ -957,15 +974,13 @@
 							<string>searchButton</string>
 							<string>showFavoritesButton</string>
 							<string>slider</string>
-							<string>sliderPopoverView</string>
-							<string>sliderUserImageView</string>
-							<string>sliderUserScreenNameLabel</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIButton</string>
 							<string>UIImageView</string>
 							<string>UIView</string>
+							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
@@ -977,9 +992,6 @@
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UISlider</string>
-							<string>UIView</string>
-							<string>UIView</string>
-							<string>UILabel</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -989,6 +1001,7 @@
 							<string>commandCenterButton</string>
 							<string>commandCenterNotiImageView</string>
 							<string>controlContainerView</string>
+							<string>hideCommandCenterButton</string>
 							<string>messagesCenterButton</string>
 							<string>optionsButton</string>
 							<string>playButton</string>
@@ -1000,9 +1013,6 @@
 							<string>searchButton</string>
 							<string>showFavoritesButton</string>
 							<string>slider</string>
-							<string>sliderPopoverView</string>
-							<string>sliderUserImageView</string>
-							<string>sliderUserScreenNameLabel</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1017,6 +1027,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">controlContainerView</string>
 								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">hideCommandCenterButton</string>
+								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">messagesCenterButton</string>
@@ -1061,18 +1075,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">slider</string>
 								<string key="candidateClassName">UISlider</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">sliderPopoverView</string>
-								<string key="candidateClassName">UIView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">sliderUserImageView</string>
-								<string key="candidateClassName">UIView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">sliderUserScreenNameLabel</string>
-								<string key="candidateClassName">UILabel</string>
 							</object>
 						</object>
 					</object>
