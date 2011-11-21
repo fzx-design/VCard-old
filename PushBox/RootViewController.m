@@ -1051,6 +1051,8 @@
 	_commandCenterFlag = YES;
 	self.notificationView.hidden = YES;
 	
+	self.dockViewController.hideCommandCenterButton.enabled = YES;
+	
 	if (_refreshFlag) {
 		_refreshFlag = NO;
 		[self.dockViewController.ccCommentTableViewController refresh];
@@ -1097,6 +1099,8 @@
 - (void)hideCommandCenter
 {	
     _commandCenterFlag = NO;
+	
+	self.dockViewController.hideCommandCenterButton.enabled = NO;
     
     [self.dockViewController viewWillDisappear:YES];
     [UIView animateWithDuration:kDockAnimationInterval

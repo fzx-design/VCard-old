@@ -43,4 +43,15 @@
 	[alert release];
 }
 
++ (void)showNoResultsError
+{
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"无结果", nil)
+													message:NSLocalizedString(@"请检查关键字并重试", nil)
+												   delegate:self
+										  cancelButtonTitle:NSLocalizedString(@"好", nil)
+										  otherButtonTitles:nil];
+	[alert show];
+	[alert release];
+}
+
 @end

@@ -187,6 +187,14 @@
 
 #pragma mark - Push And Pop Cards methods
 
+- (void)checkSearchResults
+{
+	int numberOfPages = self.fetchedResultsController.fetchedObjects.count;
+	if (numberOfPages == 0 && self.dataSource == CastViewDataSourceSearch) {
+		[ErrorNotification showNoResultsError];
+	}
+}
+
 - (void)recordCurrentState
 {
 	CastViewInfo *castViewInfo = [[[CastViewInfo alloc] init] autorelease];
@@ -221,11 +229,6 @@
 	[[UIApplication sharedApplication] showLoadingView];
 	
 	[self recordCurrentState];
-		
-	
-    //	[self clearData];
-	
-	[self loadMoreDataCompletion:nil];
 	
 	BOOL firstPush = (self.infoStack.count == 1);
 	
@@ -241,15 +244,20 @@
         self.castView.alpha = 0.0;
         self.castView.transform = CGAffineTransformScale(self.castView.transform, 1/kCastViewScale, 1/kCastViewScale);
     } completion:^(BOOL fin) {
-		[self.castViewManager pushNewViews];
+		
 		self.rootShadowLeft.alpha = 1.0;
 		self.castView.transform = CGAffineTransformScale(self.castView.transform, kCastViewScale, kCastViewScale);
         self.castView.alpha = 0.0;
 		
-		if (completion) {
-			completion();
-		}
-		[[UIApplication sharedApplication] hideLoadingView];
+		[self loadMoreDataCompletion:^(){
+			[self.castViewManager pushNewViews];
+			if (completion) {
+				completion();
+			}
+			[self checkSearchResults];
+			
+			[[UIApplication sharedApplication] hideLoadingView];
+		}];
     }];
 }
 
