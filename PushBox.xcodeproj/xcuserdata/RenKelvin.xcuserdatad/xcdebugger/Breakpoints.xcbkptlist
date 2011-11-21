@@ -123,9 +123,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "579"
-         endingLineNumber = "579"
-         landmarkName = "-loadMoreDataCompletion:"
-         landmarkType = "5">
+         endingLineNumber = "579">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
