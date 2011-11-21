@@ -132,7 +132,7 @@
 		9B494D08147A15A8001C1050 /* SliderTrackPopoverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B494D06147A15A8001C1050 /* SliderTrackPopoverView.xib */; };
 		9B494D0B147A23F7001C1050 /* GYTrackingSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B494D0A147A23F6001C1050 /* GYTrackingSlider.m */; };
 		9B494D16147A40F7001C1050 /* FXLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B494D15147A40F6001C1050 /* FXLabel.m */; };
-		9B4B49F814582FCF00C9B542 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4B49F714582FCF00C9B542 /* Status.m */; };
+		9B494D23147A7C5C001C1050 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2D7257147A35D90063318C /* Status.m */; };
 		9B4B49FB14586C1000C9B542 /* RefreshingIntervalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4B49FA14586C1000C9B542 /* RefreshingIntervalViewController.m */; };
 		9B5F2E2014497374008AC0B8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F2E1F14497373008AC0B8 /* Default-Landscape~ipad.png */; };
 		9B5F2E3814498FDA008AC0B8 /* UserCardNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F2E3614498FB8008AC0B8 /* UserCardNaviViewController.m */; };
@@ -301,7 +301,6 @@
 		FEC6D1DD14555F9800576EF3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEC6D1DC14555F9800576EF3 /* AudioToolbox.framework */; };
 		FEC6D1E314555FF900576EF3 /* UIAudioAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = FEC6D1E214555FF900576EF3 /* UIAudioAddition.m */; };
 		FEDC9F101477DBA300D6A2CD /* Emotion.m in Sources */ = {isa = PBXBuildFile; fileRef = FEDC9F0F1477DBA300D6A2CD /* Emotion.m */; };
-		FEF51110147A3AF600F17B26 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2D7257147A35D90063318C /* Status.m */; };
 		FEF51112147A44CD00F17B26 /* search_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FEF51111147A44CD00F17B26 /* search_bg.png */; };
 		FEFB3120144311D600440DD5 /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEFB311E144311D600440DD5 /* MessagesViewController.m */; };
 		FEFB3121144311D600440DD5 /* MessagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEFB311F144311D600440DD5 /* MessagesViewController.xib */; };
@@ -447,8 +446,6 @@
 		9B494D0A147A23F6001C1050 /* GYTrackingSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYTrackingSlider.m; sourceTree = "<group>"; };
 		9B494D14147A40F6001C1050 /* FXLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXLabel.h; sourceTree = "<group>"; };
 		9B494D15147A40F6001C1050 /* FXLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXLabel.m; sourceTree = "<group>"; };
-		9B4B49F614582FCF00C9B542 /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
-		9B4B49F714582FCF00C9B542 /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
 		9B4B49F914586C1000C9B542 /* RefreshingIntervalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshingIntervalViewController.h; sourceTree = "<group>"; };
 		9B4B49FA14586C1000C9B542 /* RefreshingIntervalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshingIntervalViewController.m; sourceTree = "<group>"; };
 		9B5F2E1F14497373008AC0B8 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
@@ -1759,6 +1756,7 @@
 				9B494D07147A15A8001C1050 /* SliderTrackPopoverView.m in Sources */,
 				9B494D0B147A23F7001C1050 /* GYTrackingSlider.m in Sources */,
 				9B494D16147A40F7001C1050 /* FXLabel.m in Sources */,
+				9B494D23147A7C5C001C1050 /* Status.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
