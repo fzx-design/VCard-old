@@ -75,10 +75,6 @@
 @property(nonatomic, assign) CastViewDataSource prevDataSource;
 @property(nonatomic, retain) CastViewManager *castViewManager;
 
-//@property(nonatomic, retain) NSMutableArray *nextPageStack;
-//@property(nonatomic, retain) NSMutableArray *rowIndexStack;
-//@property(nonatomic, retain) NSMutableArray *fetchedResultsControllerStack;
-
 @property(nonatomic, assign) id<CastViewControllerDelegate> delegate;
 
 @property(nonatomic, retain) NSMutableArray *infoStack;
