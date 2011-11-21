@@ -8,6 +8,8 @@
 
 #import "GYCastView.h"
 
+#import "UIApplicationAddition.h"
+
 @implementation GYCastView
 
 #define SHADOW_HEIGHT 20.0
@@ -62,6 +64,9 @@
     if (page < 0) return;
     if (page >= pageNum) {
 		[self.delegate loadMoreViews];
+		if ([self currentPage] == pageNum - 1) {
+			[[UIApplication sharedApplication] showLoadingView];
+		}
 		return;
 	}
 	
@@ -114,7 +119,9 @@
 	
 	[self.delegate resetViewsAroundCurrentIndex:0];
 	
-	for (int i = 0; i < pageNum; ++i) {
+	[self.delegate didScrollToIndex:0];
+	
+	for (int i = 0; i < 7 ; ++i) {
 		[self loadPage:i];
 	}
 	
@@ -132,6 +139,8 @@
 	self.scrollView.contentOffset = CGPointMake(index * self.scrollView.frame.size.width, 0.0);
 		
 	[self.delegate resetViewsAroundCurrentIndex:index];
+	
+	[self.delegate didScrollToIndex:index];
 	
 	for (int i = index - 3; i <= index + 3; ++i) {
 		[self loadPage:i];
@@ -243,6 +252,7 @@
 		[self loadPage:[self currentPage] + 1];
 		[self loadPage:[self currentPage] + 2];
 		
+		[[UIApplication sharedApplication] hideLoadingView];
 	}
 }
 

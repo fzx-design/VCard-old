@@ -534,6 +534,8 @@
 			
 			_currentNextPage = _oldNextPage;
 			
+			[[UIApplication sharedApplication] hideLoadingView];
+			
 			[ErrorNotification showLoadingError];
 		}
 		if (completion) {
