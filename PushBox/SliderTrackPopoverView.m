@@ -23,7 +23,7 @@
     screenNameLabel.backgroundColor = [UIColor clearColor];
     screenNameLabel.shadowColor = [UIColor colorWithWhite:0.0f alpha:1.0f];
     screenNameLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    screenNameLabel.shadowBlur = 10.0f;
+    screenNameLabel.shadowBlur = 8.0f;
 }
 
 - (void)viewDidUnload
