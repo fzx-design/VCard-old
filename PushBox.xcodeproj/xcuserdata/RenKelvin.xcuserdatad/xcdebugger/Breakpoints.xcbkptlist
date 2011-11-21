@@ -86,6 +86,32 @@
          endingLineNumber = "747"
          landmarkName = "-loadRepostMusicVideo:"
          landmarkType = "5">
+         <Locations>
+            <Location
+               shouldBeEnabled = "Yes"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[SmartCardViewController loadRepostMusicVideo:]"
+               urlString = "file://localhost/Users/RenKelvin/Documents/Code/vcardev/PushBox/SmartCardViewController.m"
+               timestampString = "343580497.56007"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "747"
+               endingLineNumber = "747">
+            </Location>
+            <Location
+               shouldBeEnabled = "Yes"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "__48-[SmartCardViewController loadRepostMusicVideo:]_block_invoke_0"
+               urlString = "file://localhost/Users/RenKelvin/Documents/Code/vcardev/PushBox/SmartCardViewController.m"
+               timestampString = "343580497.560607"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "747"
+               endingLineNumber = "747">
+            </Location>
+         </Locations>
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -136,7 +162,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "468"
          endingLineNumber = "468"
-         landmarkName = "-showSearchTimeline:"
+         landmarkName = "-showUserTimeline:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -150,7 +176,35 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1407"
          endingLineNumber = "1407"
-         landmarkName = "-searchTextFieldClicked:"
+         landmarkName = "-textFieldShouldReturn:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "PushBox/DetailImageViewController.m"
+         timestampString = "343581378.917966"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "140"
+         endingLineNumber = "140"
+         landmarkName = "-imageViewClicked:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "PushBox/DetailImageViewController.m"
+         timestampString = "343581378.917966"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "191"
+         endingLineNumber = "191"
+         landmarkName = "-dismiss:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

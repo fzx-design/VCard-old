@@ -26,6 +26,7 @@
 @synthesize image = _image;
 @synthesize gifUrl = _gifUrl;
 @synthesize url = _url;
+@synthesize webViewCoverButton = _webViewCoverButton;
 
 - (id)initWithImage:(UIImage *)image
 {   
@@ -64,6 +65,19 @@
     tapGesture.numberOfTouchesRequired = 1;
     [self.scrollView addGestureRecognizer:tapGesture];
     [tapGesture release];
+//    //
+//    UITapGestureRecognizer *tapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClicked:)];
+//    tapGesture2.numberOfTapsRequired = 1;
+//    tapGesture2.numberOfTouchesRequired = 1;
+//    [self.webView addGestureRecognizer:tapGesture2];
+//    [tapGesture2 release];
+//
+//    //
+//    for (id subview in self.webView.subviews){
+//        if ([[subview class] isSubclassOfClass: [UIScrollView class]])
+//            ((UIScrollView *)subview).scrollEnabled = NO;
+//        ((UIScrollView *)subview).bounces = NO;
+//    }
     
     if (self.gifUrl) {
         [self.imageView setHidden:YES];
@@ -73,12 +87,11 @@
     }
     else {
         [self.webView setHidden:YES];
+        [self.webViewCoverButton setHidden:YES];
         
-        //        self.imageView.image = _image;
         [self.imageView loadImageFromURL:_url 
                               completion:^(void)
          {
-             //             CGSize size = _image.size;
              CGRect frame = self.imageView.frame;
              CGSize size = self.imageView.image.size;
              frame.size = size;
@@ -180,39 +193,76 @@
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
-    return self.imageView;
+    if (self.gifUrl) {
+        return self.webView;
+    }
+    else {
+        return self.imageView;
+    }
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView
 {
-    CGSize size = _imageView.frame.size;
-    CGRect frame = self.imageView.frame;
-    // <
-    if (size.height <= 748) {
-        if (size.width <= 1024) {
-            frame.origin.x = 1024/2 - size.width/2;
-            frame.origin.y = 748/2 - size.height/2;
-        }
-        else {
-            frame.origin.x = 0;
-            frame.origin.y = 748/2 - size.height/2;
-        }
+    if (self.gifUrl) {
+//        CGSize size = _webView.frame.size;
+//        CGRect frame = self.webView.frame;
+//        // <
+//        if (size.height <= 748) {
+//            if (size.width <= 1024) {
+//                frame.origin.x = 1024/2 - size.width/2;
+//                frame.origin.y = 748/2 - size.height/2;
+//            }
+//            else {
+//                frame.origin.x = 0;
+//                frame.origin.y = 748/2 - size.height/2;
+//            }
+//        }
+//        
+//        // >
+//        else {
+//            frame.origin.y = 0;
+//            if (size.width <= 1024) {
+//                frame.origin.x = 1024/2 - size.width/2;
+//            }
+//            else {
+//                frame.origin.x = 0;
+//            }
+//        }
+//        
+//        self.imageView.frame = frame;
+//        self.scrollView.contentSize = size;
+        
     }
-    
-    // >
     else {
-        frame.origin.y = 0;
-        if (size.width <= 1024) {
-            frame.origin.x = 1024/2 - size.width/2;
+        CGSize size = _imageView.frame.size;
+        CGRect frame = self.imageView.frame;
+        // <
+        if (size.height <= 748) {
+            if (size.width <= 1024) {
+                frame.origin.x = 1024/2 - size.width/2;
+                frame.origin.y = 748/2 - size.height/2;
+            }
+            else {
+                frame.origin.x = 0;
+                frame.origin.y = 748/2 - size.height/2;
+            }
         }
+        
+        // >
         else {
-            frame.origin.x = 0;
+            frame.origin.y = 0;
+            if (size.width <= 1024) {
+                frame.origin.x = 1024/2 - size.width/2;
+            }
+            else {
+                frame.origin.x = 0;
+            }
         }
+        
+        self.imageView.frame = frame;
+        self.scrollView.contentSize = size;
     }
     
-    self.imageView.frame = frame;
-    
-    self.scrollView.contentSize = size;
 }
 
 #pragma - UIWebViewDelegate

@@ -14,7 +14,7 @@
 @end
 
 
-@interface DetailImageViewController : UIViewController <UIScrollViewDelegate, UIWebViewDelegate> {
+@interface DetailImageViewController : UIViewController <UIScrollViewDelegate, UIWebViewDelegate, UIGestureRecognizerDelegate> {
 	UIImageView *_imageView;
     UIWebView *_webView;
 	UIScrollView *_scrollView;
@@ -24,11 +24,13 @@
 	UIImage *_image;
     NSString *_gifUrl;
     NSString *_url;
+    UIButton *_webViewCoverButton;
 }
 
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
 @property (nonatomic, retain) IBOutlet UIWebView *webView;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, retain) IBOutlet UIButton    *webViewCoverButton;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activityView;
 @property (nonatomic, assign) IBOutlet id <DetailImageViewControllerDelegate> delegate;
 @property (nonatomic, retain) UIImage *image;
