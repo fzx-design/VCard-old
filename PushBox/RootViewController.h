@@ -22,9 +22,12 @@
     UIView *_bottomStateView;
 	UIImageView *_bottomStateInvisibleView;
 	UIButton *_bottomBackButton;
-    
 	UILabel *_bottomStateLabel;
     UITextField *_bottomStateTextField;
+    
+    UIView *_bottomSearchView;
+	UILabel *_bottomSearchLabel;
+    UITextField *_bottomSearchTextField;
     
     UIImageView *_holeImageView;
 	
@@ -41,7 +44,7 @@
     LoginViewController *_loginViewController;
     DockViewController *_dockViewController;
     MessagesViewController *_messagesViewController;
-//    CardTableViewController *_cardTableViewController;
+    //    CardTableViewController *_cardTableViewController;
 	
 	NSMutableArray *_statusTypeStack;
 	
@@ -67,6 +70,10 @@
 @property(nonatomic, retain) IBOutlet UILabel* bottomStateLabel;
 @property(nonatomic, retain) IBOutlet UITextField* bottomStateTextField;
 
+@property(nonatomic, retain) IBOutlet UIView* bottomSearchView;
+@property(nonatomic, retain) IBOutlet UILabel* bottomSearchLabel;
+@property(nonatomic, retain) IBOutlet UITextField* bottomSearchTextField;
+
 @property(nonatomic, retain) IBOutlet UIView *notificationView;
 @property(nonatomic, retain) IBOutlet UILabel *notiNewCommentLabel;
 @property(nonatomic, retain) IBOutlet UILabel *notiNewFollowerLabel;
@@ -87,5 +94,8 @@
 - (IBAction)showFriendsTimeline:(id)sender;
 - (IBAction)refreshAndShowCommentCenter:(id)sender;
 - (IBAction)closeNotificationPop:(id)sender;
+
+- (void)showSearchView;
+- (void)hideSearchView;
 
 @end

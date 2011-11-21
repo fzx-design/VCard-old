@@ -2,8 +2,8 @@
 //  Status.m
 //  PushBox
 //
-//  Created by Gabriel Yeah on 11-10-26.
-//  Copyright (c) 2011年 同济大学. All rights reserved.
+//  Created by Kelvin Ren on 11/21/11.
+//  Copyright (c) 2011 同济大学. All rights reserved.
 //
 
 #import "Status.h"
@@ -19,6 +19,7 @@
 @dynamic commentsCount;
 @dynamic createdAt;
 @dynamic favorited;
+@dynamic isMentioned;
 @dynamic originalPicURL;
 @dynamic repostsCount;
 @dynamic source;
@@ -26,13 +27,14 @@
 @dynamic text;
 @dynamic thumbnailPicURL;
 @dynamic updateDate;
-@dynamic isMentioned;
+@dynamic searchString;
 @dynamic author;
 @dynamic comments;
 @dynamic favoritedBy;
 @dynamic isFriendsStatusOf;
 @dynamic repostedBy;
 @dynamic repostStatus;
+
 
 - (BOOL)isEqualToStatus:(Status *)status
 {
@@ -65,8 +67,8 @@
     if (!result) {
         result = [NSEntityDescription insertNewObjectForEntityForName:@"Status" inManagedObjectContext:context];
     }
-	
-//    result.updateDate = [NSDate date];
+    
+    //    result.updateDate = [NSDate date];
     result.statusID = statusID;
     
     NSString *dateString = [dict objectForKey:@"created_at"];
@@ -82,7 +84,53 @@
     
     result.commentsCount = [dict objectForKey:@"comment_count"];
     result.repostsCount = [dict objectForKey:@"repost_count"];
-	
+    
+    result.thumbnailPicURL = [dict objectForKey:@"thumbnail_pic"];
+    result.bmiddlePicURL = [dict objectForKey:@"bmiddle_pic"];
+    result.originalPicURL = [dict objectForKey:@"original_pic"];
+    
+    NSDictionary *userDict = [dict objectForKey:@"user"];
+    
+    result.author = [User insertUser:userDict inManagedObjectContext:context];
+    
+    NSDictionary* repostedStatusDict = [dict objectForKey:@"retweeted_status"];
+    if (repostedStatusDict) {
+        result.repostStatus = [Status insertStatus:repostedStatusDict inManagedObjectContext:context];
+    }
+    
+    return result;
+}
+
++ (Status *)insertTrendsStatus:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context
+{
+	NSString *statusID = [[dict objectForKey:@"id"] stringValue];
+    
+    if (!statusID || [statusID isEqualToString:@""]) {
+        return nil;
+    }
+    
+    Status *result = [Status statusWithID:statusID inManagedObjectContext:context];
+    if (!result) {
+        result = [NSEntityDescription insertNewObjectForEntityForName:@"Status" inManagedObjectContext:context];
+    }
+    
+    //    result.updateDate = [NSDate date];
+    result.statusID = statusID;
+    
+    NSString *dateString = [dict objectForKey:@"created_at"];
+	result.updateDate = [NSDate dateFromStringRepresentation:dateString];
+    result.createdAt = [NSDate dateFromStringRepresentation:dateString];
+    
+    result.text = [dict objectForKey:@"text"];
+    
+    result.source = [dict objectForKey:@"source"];
+    
+    result.favorited = [NSNumber numberWithBool:[[dict objectForKey:@"favorited"] boolValue]];
+	result.isMentioned = [NSNumber numberWithBool:NO];
+    
+    result.commentsCount = [dict objectForKey:@"comment_count"];
+    result.repostsCount = [dict objectForKey:@"repost_count"];
+    
     result.thumbnailPicURL = [dict objectForKey:@"thumbnail_pic"];
     result.bmiddlePicURL = [dict objectForKey:@"bmiddle_pic"];
     result.originalPicURL = [dict objectForKey:@"original_pic"];
@@ -120,8 +168,8 @@
 
 + (Status *)insertStatus:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context
 {
-//    int n = [self countOfStatuseInContext:context];
-//    NSLog(@"----------------------%d", n);
+    //    int n = [self countOfStatuseInContext:context];
+    //    NSLog(@"----------------------%d", n);
     
     NSString *statusID = [[dict objectForKey:@"id"] stringValue];
     
@@ -133,7 +181,7 @@
     if (!result) {
         result = [NSEntityDescription insertNewObjectForEntityForName:@"Status" inManagedObjectContext:context];
     }
-	
+    
     result.updateDate = [NSDate date];
     
     result.statusID = statusID;
@@ -149,7 +197,7 @@
     
     result.commentsCount = [dict objectForKey:@"comment_count"];
     result.repostsCount = [dict objectForKey:@"repost_count"];
-	
+    
     result.thumbnailPicURL = [dict objectForKey:@"thumbnail_pic"];
     result.bmiddlePicURL = [dict objectForKey:@"bmiddle_pic"];
     result.originalPicURL = [dict objectForKey:@"original_pic"];

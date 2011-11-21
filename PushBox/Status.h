@@ -2,8 +2,8 @@
 //  Status.h
 //  PushBox
 //
-//  Created by Gabriel Yeah on 11-10-26.
-//  Copyright (c) 2011年 同济大学. All rights reserved.
+//  Created by Kelvin Ren on 11/21/11.
+//  Copyright (c) 2011 同济大学. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSString * commentsCount;
 @property (nonatomic, retain) NSDate * createdAt;
 @property (nonatomic, retain) NSNumber * favorited;
+@property (nonatomic, retain) NSNumber * isMentioned;
 @property (nonatomic, retain) NSString * originalPicURL;
 @property (nonatomic, retain) NSString * repostsCount;
 @property (nonatomic, retain) NSString * source;
@@ -24,7 +25,7 @@
 @property (nonatomic, retain) NSString * text;
 @property (nonatomic, retain) NSString * thumbnailPicURL;
 @property (nonatomic, retain) NSDate * updateDate;
-@property (nonatomic, retain) NSNumber * isMentioned;
+@property (nonatomic, retain) NSString * searchString;
 @property (nonatomic, retain) User *author;
 @property (nonatomic, retain) NSSet *comments;
 @property (nonatomic, retain) User *favoritedBy;
@@ -35,6 +36,7 @@
 - (BOOL)isEqualToStatus:(Status *)status;
 + (Status *)insertStatus:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context;
 + (Status *)insertMentionedStatus:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context;
++ (Status *)insertTrendsStatus:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context;
 + (Status *)statusWithID:(NSString *)statudID inManagedObjectContext:(NSManagedObjectContext *)context;
 + (void)deleteAllObjectsInManagedObjectContext:(NSManagedObjectContext *)context;
 + (int)countOfStatuseInContext:(NSManagedObjectContext *)context;

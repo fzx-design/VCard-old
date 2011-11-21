@@ -72,6 +72,10 @@
 
 @synthesize castViewController = _castViewController;
 
+@synthesize bottomSearchView = _bottomSearchView;
+@synthesize bottomSearchLabel = _bottomSearchLabel;
+@synthesize bottomSearchTextField = _bottomSearchTextField;
+
 @synthesize notificationView = _notificationView;
 @synthesize notiNewCommentLabel = _notiNewCommentLabel;
 @synthesize notiNewFollowerLabel = _notiNewFollowerLabel;
@@ -93,7 +97,7 @@
     [_bottomStateLabel release];
     [_loginViewController release];
     [_dockViewController release];
-//     [_cardTableViewController release];
+    //     [_cardTableViewController release];
 	
 	[_castViewController release];
 	
@@ -156,15 +160,15 @@
 		
 		[[UIApplication sharedApplication] showLoadingView];
 		
-//		self.cardTableViewController.dataSource = CardTableViewDataSourceFriendsTimeline;
-//		[self.cardTableViewController firstLoad:^(void) {
-//			[self.cardTableViewController loadAllFavoritesWithCompletion:nil];
-//			[self showCardTableView];
-//			[self showDockView];
-//			[self showMessagesView];
-//			[self.dockViewController hideLoadingView];
-//		}];
-
+        //		self.cardTableViewController.dataSource = CardTableViewDataSourceFriendsTimeline;
+        //		[self.cardTableViewController firstLoad:^(void) {
+        //			[self.cardTableViewController loadAllFavoritesWithCompletion:nil];
+        //			[self showCardTableView];
+        //			[self showDockView];
+        //			[self showMessagesView];
+        //			[self.dockViewController hideLoadingView];
+        //		}];
+        
 		self.castViewController.dataSource = CastViewDataSourceFriendsTimeline;
 		self.castViewController.prevDataSource = self.castViewController.dataSource;
 		[self.castViewController firstLoad:^(void) {
@@ -387,43 +391,6 @@
     self.bottomBackButton.enabled = YES;
 }
 
-- (void)showBottomStateViewForSearch
-{
-    self.dockViewController.searchButton.selected = YES;
-    
-    [UIView animateWithDuration:0.28 animations:^(void) {
-        //        self.bottomStateView.alpha = 1.0;
-		self.bottomStateView.hidden = NO;
-        CGRect frame = self.bottomStateView.frame;
-        frame.origin.y = 768 - 352 - 46 - 18;
-        [self.bottomStateView setFrame:frame];
-    }];
-    
-    self.bottomStateTextField.text = @"";
-    self.bottomStateLabel.text = @"";
-    self.bottomStateTextField.hidden = NO;
-    self.bottomStateLabel.hidden = YES;
-}
-
-- (void)hideBottomStateViewForSearch
-{
-    self.dockViewController.searchButton.selected = NO;
-    [self.bottomStateTextField resignFirstResponder];
-    
-    [UIView animateWithDuration:0.28 animations:^(void) {
-        //        self.bottomStateView.alpha = 0.0;
-		self.bottomStateView.hidden = YES;
-        CGRect frame = self.bottomStateView.frame;
-        frame.origin.y = 618;
-        [self.bottomStateView setFrame:frame];
-    }];
-    
-    self.bottomStateTextField.text = @"";
-    self.bottomStateLabel.text = @"";
-    self.bottomStateTextField.hidden = YES;
-    self.bottomStateLabel.hidden = NO;
-}
-
 - (void)hideBottomStateView
 {
     [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimationUp] forKey:@"animation"];
@@ -524,7 +491,7 @@
 - (void)showFriendsTimeline:(id)sender
 {
     if (self.dockViewController.searchButton.selected)
-        [self hideBottomStateViewForSearch];
+        [self hideSearchView];
     
     self.castViewController.dataSource = CastViewDataSourceFriendsTimeline;
 	BOOL needHideBottomStateView = [self.castViewController popCardWithCompletion:^{
@@ -548,7 +515,7 @@
 	NSString* string = [NSString stringWithFormat:NSLocalizedString(@"%@的微博", nil), user.screenName];
     self.bottomStateLabel.text = string;
 	[_statusTypeStack addObject:string];
-
+    
     self.dockViewController.showFavoritesButton.selected = NO;
     [self showBottomStateView];
     
@@ -876,7 +843,7 @@
 {
     if (self.dockViewController.refreshButton.enabled) {
         [self.dockViewController showLoadingView];
-//        [self.cardTableViewController refresh];
+        //        [self.cardTableViewController refresh];
 		[self.castViewController refresh];
     }
 }
@@ -909,7 +876,7 @@
 
 - (void)timerFired:(NSTimer *)timer
 {
-//    [self.cardTableViewController showNextCard];
+    //    [self.cardTableViewController showNextCard];
 	[self.castViewController showNextCard];
 }
 
@@ -934,7 +901,7 @@
 - (void)sliderValueChanged:(UISlider *)slider
 {
     int index = slider.value;
-//    [self.cardTableViewController scrollToRow:index];
+    //    [self.cardTableViewController scrollToRow:index];
 	[self.castViewController scrollToRow:index];
 }
 
@@ -1050,13 +1017,13 @@
                          CGRect frame = self.messagesViewController.view.frame;
                          frame.origin.x += kMessagesViewOffsetx;
                          self.messagesViewController.view.frame = frame;
-
+                         
 						 frame = self.castViewController.view.frame;
                          frame.origin.x += kMessagesViewOffsetx;
                          self.castViewController.view.frame = frame;
-//                         frame = self.cardTableViewController.view.frame;
-//                         frame.origin.x += kMessagesViewOffsetx;
-//                         self.cardTableViewController.view.frame = frame;
+                         //                         frame = self.cardTableViewController.view.frame;
+                         //                         frame.origin.x += kMessagesViewOffsetx;
+                         //                         self.cardTableViewController.view.frame = frame;
                      }
                      completion:^(BOOL finished) {
                          if (finished) {
@@ -1087,14 +1054,14 @@
                          CGRect frame = self.messagesViewController.view.frame;
                          frame.origin.x -= kMessagesViewOffsetx;
                          self.messagesViewController.view.frame = frame;
-
+                         
 						 frame = self.castViewController.view.frame;
                          frame.origin.x -= kMessagesViewOffsetx;
                          self.castViewController.view.frame = frame;
 						 
-//                         frame = self.cardTableViewController.view.frame;
-//                         frame.origin.x -= kMessagesViewOffsetx;
-//                         self.cardTableViewController.view.frame = frame;
+                         //                         frame = self.cardTableViewController.view.frame;
+                         //                         frame.origin.x -= kMessagesViewOffsetx;
+                         //                         self.cardTableViewController.view.frame = frame;
                      }
                      completion:^(BOOL finished) {
                          if (finished) {
@@ -1123,17 +1090,29 @@
     }
 }
 
-- (void)searchButtonClicked:(UIButton *)button
+- (void)showSearchView
 {
-    //    self.bottomStateView.alpha = 1.0;
-	self.bottomStateView.hidden = NO;
-    [self.bottomStateTextField becomeFirstResponder];
-    
+    self.bottomSearchView.hidden = NO;
+    self.dockViewController.searchButton.selected = YES;
+    self.bottomSearchTextField.inputAccessoryView = self.bottomSearchView;
+    [self.bottomSearchTextField becomeFirstResponder];
+}
+
+- (void)hideSearchView
+{
+    self.dockViewController.searchButton.selected = NO;
+    //    self.bottomSearchTextField.inputAccessoryView = nil;
+    [self.bottomSearchTextField resignFirstResponder];
+}
+
+- (void)searchButtonClicked:(UIButton *)button
+{    
     if (button.selected) {
-        [self hideBottomStateViewForSearch];
+        [self hideSearchView];
     }
+    
     else {
-        [self showBottomStateViewForSearch];
+        [self showSearchView];
     }
 }
 
@@ -1149,15 +1128,15 @@
 	
     [self.dockViewController viewWillAppear:YES];
 	[self.dockViewController.ccCommentTableViewController returnToCommandCenter];
-
+    
 	
-//	if (self.castViewController.dataSource != CastViewDataSourceFriendsTimeline) {
-//        [self hideBottomStateView];
-//    }
+    //	if (self.castViewController.dataSource != CastViewDataSourceFriendsTimeline) {
+    //        [self hideBottomStateView];
+    //    }
 	
-//    if (self.cardTableViewController.dataSource != CardTableViewDataSourceFriendsTimeline) {
-//        [self hideBottomStateView];
-//    }
+    //    if (self.cardTableViewController.dataSource != CardTableViewDataSourceFriendsTimeline) {
+    //        [self hideBottomStateView];
+    //    }
     [UIView animateWithDuration:kDockAnimationInterval
                           delay:0 
                         options:UIViewAnimationCurveEaseInOut 
@@ -1167,14 +1146,14 @@
                          CGRect frame = self.dockViewController.view.frame;
                          frame.origin.y -= kDockViewOffsetY;
                          self.dockViewController.view.frame = frame;
-
+                         
 						 frame = self.castViewController.view.frame;
                          frame.origin.y -= kCardTableViewOffsetY;
                          self.castViewController.view.frame = frame;
 						 
-//                         frame = self.cardTableViewController.view.frame;
-//                         frame.origin.y -= kCardTableViewOffsetY;
-//                         self.cardTableViewController.view.frame = frame;
+                         //                         frame = self.cardTableViewController.view.frame;
+                         //                         frame.origin.y -= kCardTableViewOffsetY;
+                         //                         self.cardTableViewController.view.frame = frame;
                          
                          frame = self.bottomStateView.frame;
                          frame.origin.y -= kDockViewOffsetY;
@@ -1197,13 +1176,13 @@
 {	
     _commandCenterFlag = NO;
 	
-//	if (self.castViewController.dataSource != CastViewDataSourceFriendsTimeline) {
-//        [self showBottomStateView];
-//    }
+    //	if (self.castViewController.dataSource != CastViewDataSourceFriendsTimeline) {
+    //        [self showBottomStateView];
+    //    }
 	
-//    if (self.cardTableViewController.dataSource != CardTableViewDataSourceFriendsTimeline) {
-//        [self showBottomStateView];
-//    }
+    //    if (self.cardTableViewController.dataSource != CardTableViewDataSourceFriendsTimeline) {
+    //        [self showBottomStateView];
+    //    }
     [self.dockViewController viewWillDisappear:YES];
     [UIView animateWithDuration:kDockAnimationInterval
                           delay:0 
@@ -1219,9 +1198,9 @@
                          frame.origin.y += kCardTableViewOffsetY;
                          self.castViewController.view.frame = frame;
 						 
-//                         frame = self.cardTableViewController.view.frame;
-//                         frame.origin.y += kCardTableViewOffsetY;
-//                         self.cardTableViewController.view.frame = frame;
+                         //                         frame = self.cardTableViewController.view.frame;
+                         //                         frame.origin.y += kCardTableViewOffsetY;
+                         //                         self.cardTableViewController.view.frame = frame;
                          
                          frame = self.bottomStateView.frame;
                          frame.origin.y += kDockViewOffsetY; 
@@ -1265,7 +1244,7 @@
 
 - (void)showCardTableView
 {    
-//    [self.view insertSubview:self.cardTableViewController.view belowSubview:self.bottomBackButton];
+    //    [self.view insertSubview:self.cardTableViewController.view belowSubview:self.bottomBackButton];
 	[self.view insertSubview:self.castViewController.view belowSubview:self.bottomBackButton];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -1306,7 +1285,7 @@
     }
     
     //self.cardTableViewController.tableview.tableHeaderView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 1024)] autorelease];
-
+    
 	CGRect frame = self.castViewController.view.frame;
     frame.origin.x += 782;
     self.castViewController.view.frame = frame;
@@ -1333,30 +1312,30 @@
     }];
 	
 	
-//    CGRect frame = self.cardTableViewController.view.frame;
-//    frame.origin.x += 782;
-//    self.cardTableViewController.view.frame = frame;
-//    frame = self.cardTableViewController.rootShadowLeft.frame;
-//    frame.origin.x -= 782;
-//    self.cardTableViewController.rootShadowLeft.frame = frame;
-//    
-//    self.cardTableViewController.view.alpha = 0.0;
-//    self.cardTableViewController.rootShadowLeft.alpha = 0.0;
-//    
-//    [UIView animateWithDuration:1.0 animations:^{
-//        
-//        CGRect frame = self.cardTableViewController.view.frame;
-//        frame.origin.x -= 782;
-//        self.cardTableViewController.view.frame = frame;
-//        frame = self.cardTableViewController.rootShadowLeft.frame;
-//        frame.origin.x += 782;
-//        self.cardTableViewController.rootShadowLeft.frame = frame;
-//        
-//        self.cardTableViewController.view.alpha = 1.0;
-//        self.cardTableViewController.rootShadowLeft.alpha = 1.0;
-//        
-//        button.alpha = 1.0;
-//    }];
+    //    CGRect frame = self.cardTableViewController.view.frame;
+    //    frame.origin.x += 782;
+    //    self.cardTableViewController.view.frame = frame;
+    //    frame = self.cardTableViewController.rootShadowLeft.frame;
+    //    frame.origin.x -= 782;
+    //    self.cardTableViewController.rootShadowLeft.frame = frame;
+    //    
+    //    self.cardTableViewController.view.alpha = 0.0;
+    //    self.cardTableViewController.rootShadowLeft.alpha = 0.0;
+    //    
+    //    [UIView animateWithDuration:1.0 animations:^{
+    //        
+    //        CGRect frame = self.cardTableViewController.view.frame;
+    //        frame.origin.x -= 782;
+    //        self.cardTableViewController.view.frame = frame;
+    //        frame = self.cardTableViewController.rootShadowLeft.frame;
+    //        frame.origin.x += 782;
+    //        self.cardTableViewController.rootShadowLeft.frame = frame;
+    //        
+    //        self.cardTableViewController.view.alpha = 1.0;
+    //        self.cardTableViewController.rootShadowLeft.alpha = 1.0;
+    //        
+    //        button.alpha = 1.0;
+    //    }];
 }
 
 - (void)helpButtonClicked:(UIButton *)button
@@ -1520,16 +1499,15 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     
-//    self.cardTableViewController.searchString = textField.text;
-
+    self.castViewController.searchString = textField.text;
+    
     [self showSearchTimeline:textField.text];
-    [self hideBottomStateViewForSearch];
     
     return NO;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    [self hideBottomStateViewForSearch];
+    [self hideSearchView];
 }
 
 @end

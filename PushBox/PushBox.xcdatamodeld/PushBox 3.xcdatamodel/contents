@@ -45,6 +45,7 @@
         <attribute name="isMentioned" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="originalPicURL" optional="YES" attributeType="String"/>
         <attribute name="repostsCount" optional="YES" attributeType="String"/>
+        <attribute name="searchString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="source" optional="YES" attributeType="String"/>
         <attribute name="statusID" attributeType="String"/>
         <attribute name="text" attributeType="String"/>
@@ -86,10 +87,10 @@
     </entity>
     <elements>
         <element name="Comment" positionX="-11" positionY="207" width="128" height="195"/>
+        <element name="Emotion" positionX="160" positionY="192" width="128" height="150"/>
         <element name="Image" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Message" positionX="160" positionY="192" width="128" height="45"/>
         <element name="Status" positionX="223" positionY="81" width="128" height="315"/>
         <element name="User" positionX="-18" positionY="414" width="128" height="390"/>
-        <element name="Emotion" positionX="160" positionY="192" width="128" height="150"/>
     </elements>
 </model>

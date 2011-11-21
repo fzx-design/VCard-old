@@ -128,7 +128,6 @@
 		9B2D8D6A1470BABD005B2D8E /* CastViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B2D8D681470BABD005B2D8E /* CastViewController.xib */; };
 		9B2D8D731470E672005B2D8E /* CardFrameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2D8D711470E672005B2D8E /* CardFrameViewController.m */; };
 		9B2D8D741470E672005B2D8E /* CardFrameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B2D8D721470E672005B2D8E /* CardFrameViewController.xib */; };
-		9B4B49F814582FCF00C9B542 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4B49F714582FCF00C9B542 /* Status.m */; };
 		9B4B49FB14586C1000C9B542 /* RefreshingIntervalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4B49FA14586C1000C9B542 /* RefreshingIntervalViewController.m */; };
 		9B5F2E2014497374008AC0B8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F2E1F14497373008AC0B8 /* Default-Landscape~ipad.png */; };
 		9B5F2E3814498FDA008AC0B8 /* UserCardNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F2E3614498FB8008AC0B8 /* UserCardNaviViewController.m */; };
@@ -270,6 +269,7 @@
 		CBDA5B7613DC25FA00FAE221 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDA5B7513DC25FA00FAE221 /* CoreDataTableViewController.m */; };
 		FE1E629914441E2600A48CF9 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1E629814441E2600A48CF9 /* Message.m */; };
 		FE1E629C14441E3F00A48CF9 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1E629B14441E3F00A48CF9 /* User.m */; };
+		FE2D7258147A35D90063318C /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2D7257147A35D90063318C /* Status.m */; };
 		FE72B4CB144FFD3000C3EE5B /* repost_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4C7144FFD3000C3EE5B /* repost_bg.jpg */; };
 		FE72B4CC144FFD3000C3EE5B /* smartcard.css in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4C8144FFD3000C3EE5B /* smartcard.css */; };
 		FE72B4CD144FFD3000C3EE5B /* smartcard.html in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4C9144FFD3000C3EE5B /* smartcard.html */; };
@@ -434,8 +434,6 @@
 		9B2D8D721470E672005B2D8E /* CardFrameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardFrameViewController.xib; sourceTree = "<group>"; };
 		9B39EAA2144DCDB900F234D6 /* ErrorNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorNotification.h; sourceTree = "<group>"; };
 		9B39EAA3144DCDB900F234D6 /* ErrorNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorNotification.m; sourceTree = "<group>"; };
-		9B4B49F614582FCF00C9B542 /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
-		9B4B49F714582FCF00C9B542 /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
 		9B4B49F914586C1000C9B542 /* RefreshingIntervalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshingIntervalViewController.h; sourceTree = "<group>"; };
 		9B4B49FA14586C1000C9B542 /* RefreshingIntervalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshingIntervalViewController.m; sourceTree = "<group>"; };
 		9B5F2E1F14497373008AC0B8 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
@@ -646,6 +644,8 @@
 		FE1E629814441E2600A48CF9 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		FE1E629A14441E3F00A48CF9 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		FE1E629B14441E3F00A48CF9 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		FE2D7256147A35D90063318C /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
+		FE2D7257147A35D90063318C /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
 		FE72B4C7144FFD3000C3EE5B /* repost_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = repost_bg.jpg; sourceTree = "<group>"; };
 		FE72B4C8144FFD3000C3EE5B /* smartcard.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = smartcard.css; sourceTree = "<group>"; };
 		FE72B4C9144FFD3000C3EE5B /* smartcard.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = smartcard.html; sourceTree = "<group>"; };
@@ -1331,10 +1331,10 @@
 				9BFD85CE14617A2600E16A79 /* Comment.m */,
 				FE1E629A14441E3F00A48CF9 /* User.h */,
 				FE1E629B14441E3F00A48CF9 /* User.m */,
+				FE2D7256147A35D90063318C /* Status.h */,
+				FE2D7257147A35D90063318C /* Status.m */,
 				FEDC9F0E1477DBA300D6A2CD /* Emotion.h */,
 				FEDC9F0F1477DBA300D6A2CD /* Emotion.m */,
-				9B4B49F614582FCF00C9B542 /* Status.h */,
-				9B4B49F714582FCF00C9B542 /* Status.m */,
 				FE1E629714441E2500A48CF9 /* Message.h */,
 				FE1E629814441E2600A48CF9 /* Message.m */,
 			);
@@ -1717,7 +1717,6 @@
 				FE8E1753145433A5004F6A7C /* InnerBroswerViewController.m in Sources */,
 				9B5F867F1454124B004B01D6 /* CCCommentsTableViewController.m in Sources */,
 				FEC6D1E314555FF900576EF3 /* UIAudioAddition.m in Sources */,
-				9B4B49F814582FCF00C9B542 /* Status.m in Sources */,
 				9B4B49FB14586C1000C9B542 /* RefreshingIntervalViewController.m in Sources */,
 				9BF36CFF14593B7700A60A0F /* LegacyViewController.m in Sources */,
 				FE831552145E803700909CF0 /* PostViewAtTableViewCell.m in Sources */,
@@ -1731,6 +1730,7 @@
 				9B2D8D731470E672005B2D8E /* CardFrameViewController.m in Sources */,
 				9BD2BB6D1476358D0064169B /* CastViewManager.m in Sources */,
 				9BBC487314778878000A69AC /* CastViewInfo.m in Sources */,
+				FE2D7258147A35D90063318C /* Status.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

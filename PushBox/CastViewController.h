@@ -51,6 +51,8 @@
 	Status *_lastStatus;
 	BOOL _loading;
 	BOOL _refreshFlag;
+    
+    NSString* _searchString;
 	
 }
 
@@ -70,6 +72,8 @@
 //@property(nonatomic, retain) NSMutableArray *fetchedResultsControllerStack;
 
 @property(nonatomic, retain) NSMutableArray *infoStack;
+
+@property (nonatomic, retain) NSString* searchString;
 
 @property(nonatomic, retain) NSFetchedResultsController* prevFetchedResultsController;
 

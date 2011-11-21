@@ -31,6 +31,7 @@
 @synthesize dataSource = _dataSource;
 @synthesize prevDataSource = _prevDataSource;
 @synthesize castViewManager = _castViewManager;
+@synthesize searchString = _searchString;
 
 //@synthesize nextPageStack = _nextPageStack;
 //@synthesize rowIndexStack = _rowIndexStack;
@@ -167,7 +168,7 @@
     if (self.dataSource == CastViewDataSourceFriendsTimeline) {
         if (self.fetchedResultsController.fetchedObjects.count) {
             Status *newest = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
-
+            
             sinceID = newest.statusID;
             NSLog(@"%@", newest.text);
         }
@@ -214,7 +215,7 @@
 	
 	[self recordCurrentState];
 	
-//	[self clearData];
+    //	[self clearData];
 	
 	[self loadMoreDataCompletion:nil];
 	
@@ -255,7 +256,7 @@
 	self.prevDataSource = self.dataSource;
 	
 	[self.castView moveOutViews:^() {
-
+        
 		self.fetchedResultsController = castViewInfo.fetchedResultsController;
         self.fetchedResultsController.delegate = nil;
 		
@@ -365,7 +366,7 @@
             [self.currentUser removeFavorites:self.currentUser.favorites];
             break;
 		case CastViewDataSourceMentions:
-//			[self.currentUser removestatuses::<#(Status *)#>]
+            //			[self.currentUser removestatuses::<#(Status *)#>]
 			break;
 		default:
 			break;
@@ -404,6 +405,16 @@
 	[self.fetchedResultsController performFetch:nil];
 }
 
+- (void)insertTrendsStatusFromClient:(WeiboClient *)client
+{
+	NSArray *dictArray = client.responseJSONObject;
+	for (NSDictionary *dict in dictArray) {
+		[Status insertTrendsStatus:dict inManagedObjectContext:self.managedObjectContext];
+	}
+	[self.managedObjectContext processPendingChanges];
+	[self.fetchedResultsController performFetch:nil];
+}
+
 - (void)loadAllFavoritesWithCompletion:(void (^)())completion
 {
     WeiboClient *client = [WeiboClient client];
@@ -435,7 +446,7 @@
 - (void)firstLoad:(void (^)())completion
 {
 	WeiboClient *client = [WeiboClient client];
-    	
+    
 	[client setCompletionBlock:^(WeiboClient *client) {
 		if (!client.hasError) {
             
@@ -443,10 +454,10 @@
 			
 			[self insertFriendStatusFromClient:client];
 			
-//			[self reloadCards];
+            //			[self reloadCards];
 			
 			_lastStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
-		
+            
 		}
 		if (completion) {
 			completion();
@@ -486,7 +497,7 @@
 					[self clearData];
 					
 					[self insertFriendStatusFromClient:client];
-										
+                    
 					[self.castViewManager refreshCards];
 				}
 			}
@@ -522,7 +533,7 @@
 		if (!client.hasError) {
 			
 			[self insertUserStatusFromClient:client];
-						
+            
 			[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
 			
 			[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
@@ -574,7 +585,36 @@
 						 maxID:[NSString stringWithFormat:@""] 
 						  page:_nextPage++ 
 						 count:20];
+    
+}
 
+- (void)loadTrendsStatuses:(void (^)())completion
+{
+	
+	WeiboClient *client = [WeiboClient client];
+	
+	[client setCompletionBlock:^(WeiboClient *client) {
+		
+		_loading = NO;
+		
+		if (!client.hasError) {
+			
+			[self insertTrendsStatusFromClient:client];
+			
+			[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
+			
+			[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
+			
+		} else {
+			[ErrorNotification showLoadingError];
+		}
+		
+		if (completion) {
+			completion();
+		}
+	}];
+	
+    [client getTrendsStatuses:self.searchString];    
 }
 
 - (void)loadMoreDataCompletion:(void (^)())completion
@@ -614,62 +654,65 @@
 	if (self.dataSource == CastViewDataSourceMentions) {
 		[self loadMoreMention:completion];
 	}
-//    //
-//    if (self.dataSource == CastViewDataSourceSearchStatues) {
-//        [[UIApplication sharedApplication] showLoadingView];
-//		[client setCompletionBlock:^(WeiboClient *client) {
-//            if (!client.hasError) {
-//				
-//                NSArray *dictArray = client.responseJSONObject;
-//				for (NSDictionary *dict in dictArray) {
-//                    Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-//                    [self.currentUser addFriendsStatusesObject:newStatus];
-//                }
-//				[self.managedObjectContext processPendingChanges];
-//				
-//				if (_refreshFlag) {
-//					_refreshFlag = NO;
-//					
-//					Status *newStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
-//					
-//					if (_lastStatus == nil || ![newStatus.statusID isEqualToString:_lastStatus.statusID]){
-//						_lastStatus = newStatus;
-//						[self scrollToRow:0];
-//						
-//					} else if ([newStatus.statusID isEqualToString:_lastStatus.statusID]) {
-//						if (completion) {
-//							completion();
-//						}
-//						[[UIApplication sharedApplication] hideLoadingView];
-//						_loading = NO;
-//						return;
-//					} 
-//				}
-//                
-//                [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
-//                [self.delegate castViewController:self 
-//                                        didScrollToRow:self.currentIndex
-//                                      withNumberOfRows:[self numberOfRows]];
-//                
-//                if (completion) {
-//                    completion();
-//                }
-//				
-//            } else {
-//				if (completion) {
-//                    completion();
-//                }
-//				[ErrorNotification showLoadingError];
-//			}
-//			[[UIApplication sharedApplication] hideLoadingView];
-//			_loading = NO;
-//        }];
-//        
-//        [client getTrendsStatuses:self.searchString];
-//    }
-//	
-//	//
-
+	if (self.dataSource == CastViewDataSourceSearchStatues) {
+		[self loadTrendsStatuses:completion];
+	}
+    //    //
+    //    if (self.dataSource == CastViewDataSourceSearchStatues) {
+    //        [[UIApplication sharedApplication] showLoadingView];
+    //		[client setCompletionBlock:^(WeiboClient *client) {
+    //            if (!client.hasError) {
+    //				
+    //                NSArray *dictArray = client.responseJSONObject;
+    //				for (NSDictionary *dict in dictArray) {
+    //                    Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+    //                    [self.currentUser addFriendsStatusesObject:newStatus];
+    //                }
+    //				[self.managedObjectContext processPendingChanges];
+    //				
+    //				if (_refreshFlag) {
+    //					_refreshFlag = NO;
+    //					
+    //					Status *newStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
+    //					
+    //					if (_lastStatus == nil || ![newStatus.statusID isEqualToString:_lastStatus.statusID]){
+    //						_lastStatus = newStatus;
+    //						[self scrollToRow:0];
+    //						
+    //					} else if ([newStatus.statusID isEqualToString:_lastStatus.statusID]) {
+    //						if (completion) {
+    //							completion();
+    //						}
+    //						[[UIApplication sharedApplication] hideLoadingView];
+    //						_loading = NO;
+    //						return;
+    //					} 
+    //				}
+    //                
+    //                [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
+    //                [self.delegate castViewController:self 
+    //                                        didScrollToRow:self.currentIndex
+    //                                      withNumberOfRows:[self numberOfRows]];
+    //                
+    //                if (completion) {
+    //                    completion();
+    //                }
+    //				
+    //            } else {
+    //				if (completion) {
+    //                    completion();
+    //                }
+    //				[ErrorNotification showLoadingError];
+    //			}
+    //			[[UIApplication sharedApplication] hideLoadingView];
+    //			_loading = NO;
+    //        }];
+    //        
+    //        [client getTrendsStatuses:self.searchString];
+    //    }
+    //	
+    //	//
+    
 }
 
 - (void)refresh
