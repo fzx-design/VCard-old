@@ -126,7 +126,7 @@
 						<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
 						<bool key="IBUIBouncesZoom">NO</bool>
 						<int key="IBUISectionIndexMinimumDisplayRowCount">0</int>
-						<float key="IBUIRowHeight">65</float>
+						<float key="IBUIRowHeight">67</float>
 						<float key="IBUISectionHeaderHeight">22</float>
 						<float key="IBUISectionFooterHeight">22</float>
 					</object>
@@ -583,7 +583,6 @@
 							<string>authorImageView</string>
 							<string>authorNameLabel</string>
 							<string>authorPreviewLabel</string>
-							<string>newCommentsImageView</string>
 							<string>titleLabel</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -591,7 +590,6 @@
 							<string>UIImageView</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
-							<string>UIImageView</string>
 							<string>UILabel</string>
 						</object>
 					</object>
@@ -602,7 +600,6 @@
 							<string>authorImageView</string>
 							<string>authorNameLabel</string>
 							<string>authorPreviewLabel</string>
-							<string>newCommentsImageView</string>
 							<string>titleLabel</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -618,10 +615,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">authorPreviewLabel</string>
 								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">newCommentsImageView</string>
-								<string key="candidateClassName">UIImageView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">titleLabel</string>

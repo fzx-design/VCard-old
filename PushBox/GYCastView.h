@@ -10,6 +10,7 @@
 
 #define FirstPageIndex 0
 #define SecondPageIndex 1
+#define ThirdPageIndex 2
 #define InitialIndex 100
 
 @class GYCastView;
@@ -54,6 +55,15 @@
 - (void)addMoreViews;
 - (void)refreshViewsWithFirstPage:(UIView*)firstView 
 					andSecondPage:(UIView*)secondView;
+
+- (void)moveViewsWithPageOffset:(int)offset 
+				 andCurrentPage:(int)currentPage;
+
+- (void)moveViewsWithPageOffset:(int)diff 
+				 andCurrentPage:(int)index 
+				  withFirstPage:(UIView*)view1 
+					 secondPage:(UIView*)view2 
+					  thirdPage:(UIView*)view3;
 
 - (void)resetWithCurrentIndex:(int)index numberOfPages:(int)page;
 

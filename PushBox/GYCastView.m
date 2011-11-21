@@ -18,7 +18,6 @@
 
 @synthesize scrollView, pageSize, dropShadow, delegate, pageNum, pageSection;
 
-
 - (void)awakeFromNib
 {
 	firstLayout = YES;
@@ -69,6 +68,7 @@
 	UIView *view = [delegate viewForItemAtIndex:self index:page];
 	
 	// Position the view in our scrollview
+	
 	CGRect viewFrame = view.frame;
 	viewFrame.origin.x = viewFrame.size.width * page;
 	viewFrame.origin.y = 0;
@@ -81,7 +81,7 @@
 
 - (void)setDistantPage:(int)page WithView:(UIView*)view
 {
-	int index = [self currentPage] + page + MoveCardsOffsetPage;
+	int index = [self currentPage] + page;
 	
 	CGRect viewFrame = view.frame;
 	viewFrame.origin.x = viewFrame.size.width * index;
@@ -95,13 +95,15 @@
 
 - (void)setRefreshPage:(int)page WithView:(UIView*)view
 {
-	[self setDistantPage:(page + RefreshCardsOffsetPage) WithView:view];
+	[self setDistantPage:(page + RefreshCardsOffsetPage + MoveCardsOffsetPage) WithView:view];
 }
 
 #pragma mark - Set Up methods
 
 - (void)reset
 {
+	animating = YES;
+	
 	pageSection = 1;
 	
 	pageNum = [delegate itemCount:self];
@@ -121,13 +123,15 @@
 
 - (void)resetWithCurrentIndex:(int)index numberOfPages:(int)page
 {
+	animating = YES;
+	
 	pageNum = page;
 	
 	self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
 	
 	self.scrollView.contentOffset = CGPointMake(index * self.scrollView.frame.size.width, 0.0);
 		
-	[self.delegate resetViewsAroundCurrentIndex:InitialIndex];
+	[self.delegate resetViewsAroundCurrentIndex:index];
 	
 	for (int i = index - 3; i <= index + 3; ++i) {
 		[self loadPage:i];
@@ -194,6 +198,8 @@
 {
 	animating = YES;
 	
+	self.scrollView.userInteractionEnabled = NO;
+	
 	int page = (int)[self currentPage];
 	
 	[self.delegate resetViewsAroundCurrentIndex:page];
@@ -206,6 +212,7 @@
 		if (finished && completion) {
 			completion();
 		}
+		self.scrollView.userInteractionEnabled = YES;
 	}];
 }
 
@@ -232,6 +239,8 @@
 		pageSection--;
 	} else {
 		self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
+		[self.delegate didScrollToIndex:[self currentPage]];
+		
 	}
 }
 
@@ -240,11 +249,15 @@
 {
 	animating = YES;
 	
+	self.scrollView.userInteractionEnabled = NO;
+	
 	int page = (int)[self currentPage];
 		
 	self.scrollView.contentSize = CGSizeMake((pageNum + 3) * self.scrollView.frame.size.width, scrollView.frame.size.height);
 	[self setRefreshPage:FirstPageIndex WithView:firstView];
 	[self setRefreshPage:SecondPageIndex WithView:secondView];
+	
+	self.pageNum = [self.delegate itemCount:self];
 	
 	[UIView animateWithDuration:1.25 animations:^(){
 		[self.delegate didScrollToIndex:0];
@@ -252,9 +265,64 @@
 	} completion:^(BOOL finished) {
 		if (finished) {
 			[self reset];
+			self.scrollView.userInteractionEnabled = YES;
 		}
 	}];
 
+}
+
+- (void)moveViewsWithPageOffset:(int)offset andCurrentPage:(int)currentPage
+{
+	animating = YES;
+	
+	self.scrollView.userInteractionEnabled = NO;
+	
+	int page = (int)[self currentPage];
+	
+	self.scrollView.contentSize = CGSizeMake((pageNum + 3) * self.scrollView.frame.size.width, scrollView.frame.size.height);
+//	[self setRefreshPage:FirstPageIndex WithView:firstView];
+//	[self setRefreshPage:SecondPageIndex WithView:secondView];
+	
+	[UIView animateWithDuration:0.75 animations:^(){
+		[self.delegate didScrollToIndex:currentPage];
+		[self.scrollView setContentOffset:CGPointMake((page + offset) * self.scrollView.frame.size.width, 0)];
+	} completion:^(BOOL finished) {
+		if (finished) {
+//			[self resetViewsAroundCurrentViewWithCurrentIndex:currentPage numberOfPages:self.pageNum];
+			[self resetWithCurrentIndex:currentPage numberOfPages:self.pageNum];
+			self.scrollView.userInteractionEnabled = YES;
+		}
+	}];
+}
+
+- (void)moveViewsWithPageOffset:(int)offset 
+				 andCurrentPage:(int)currentPage 
+				  withFirstPage:(UIView*)view1 
+					 secondPage:(UIView*)view2 
+					  thirdPage:(UIView*)view3
+{
+	animating = YES;
+	
+	self.scrollView.userInteractionEnabled = NO;
+	
+	int page = (int)[self currentPage];
+		
+	self.scrollView.contentSize = CGSizeMake((pageNum + 3) * self.scrollView.frame.size.width, scrollView.frame.size.height);
+	
+	[self setDistantPage:offset - 1 WithView:view1];
+	[self setDistantPage:offset		WithView:view2];
+	[self setDistantPage:offset + 1 WithView:view3];
+	
+	[UIView animateWithDuration:0.75 animations:^(){
+		[self.delegate didScrollToIndex:currentPage];
+		[self.scrollView setContentOffset:CGPointMake((page + offset) * self.scrollView.frame.size.width, 0)];
+	} completion:^(BOOL finished) {
+		if (finished) {
+//			[self resetViewsAroundCurrentViewWithCurrentIndex:currentPage numberOfPages:self.pageNum];
+			[self resetWithCurrentIndex:currentPage numberOfPages:self.pageNum];
+			self.scrollView.userInteractionEnabled = YES;
+		}
+	}];
 }
 
 #pragma mark - UIScrollViewDelegate methods
@@ -267,14 +335,22 @@
 	int page = [self currentPage];
 	
 	if (prePage != page) {
+		
+		if (prePage > page) {
+			[self loadPage:(page - 3)];
+		} else {
+			[self loadPage:(page + 3)];
+		}
+		
 		prePage = page;
 		
 		[self.delegate didScrollToIndex:page];
-		
-		page -= 3;
-		for (int i = 0; i < 7; ++i) {
-			[self loadPage:page + i];
-		}
+		[self reloadViews];
+//		
+//		page -= 3;
+//		for (int i = 0; i < 7; ++i) {
+//			[self loadPage:page + i];
+//		}
 	}
 }
 

@@ -12,6 +12,8 @@
 
 @implementation DockViewController
 
+@synthesize currentSliderPositionX;
+
 @synthesize refreshButton = _refreshButton;
 @synthesize postButton = _newTweetButton;
 @synthesize playButton = _playButton;
@@ -27,6 +29,12 @@
 @synthesize controlContainerView = _controlContainerView;
 @synthesize postingRoundImageView = _postingRoundImageView;
 @synthesize postingCircleImageView = _postingCircleImageView;
+
+@synthesize sliderPopoverView = _sliderPopoverView;
+@synthesize sliderUserImageView = _sliderUserImageView;
+@synthesize sliderUserScreenNameLabel = _sliderUserScreenNameLabel;
+
+@synthesize refreshNotiImageShown;
 
 @synthesize userCardNaviViewController = _userCardNaviViewController;
 @synthesize ccUserInfoCardViewController = _ccUserInfoCardViewController;
@@ -49,7 +57,6 @@
     [_refreshNotiImageView release];
     [_commandCenterNotiImageView release];
     [_optionsPopoverController release];
-    //    [_commentsTableViewController release];
 	[_userCardNaviViewController release];
 	[_ccUserInfoCardViewController release];
 	
@@ -130,7 +137,10 @@
 				 object:nil];
     
     self.refreshNotiImageView.hidden = YES;
+	refreshNotiImageShown = YES;
     self.commandCenterNotiImageView.hidden = YES;
+	
+	self.sliderPopoverView.hidden = YES;
     
 	self.ccUserInfoCardViewController = [[[CCUserInfoCardViewController alloc] init] autorelease];
 	self.ccUserInfoCardViewController.currentUser = self.currentUser;
@@ -225,6 +235,7 @@
 - (void)newStatusesNotification:(id)sender
 {
     self.refreshNotiImageView.hidden = NO;
+	self.refreshNotiImageShown = NO;
 }
 
 - (void)newFollowersNotification:(id)sender
@@ -294,10 +305,16 @@
 
 - (IBAction)refreshButtonClicked:(id)sender {
     self.refreshNotiImageView.hidden = YES;
+	self.refreshNotiImageShown = YES;
 }
 
 - (IBAction)commandCenterButtonClicked:(id)sender {
     self.commandCenterNotiImageView.hidden = YES;
+}
+
+- (IBAction)sliderValueChanged:(id)sender
+{
+	
 }
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController

@@ -30,9 +30,13 @@
 	
 	UIImageView *_postingCircleImageView;
 	UIImageView *_postingRoundImageView;
+	
+	
+	UIView *_sliderPopoverView;
+	UIView *_sliderUserImageView;
+	UILabel *_sliderUserScreenNameLabel;
 
     UIPopoverController *_optionsPopoverController;
-//    CommentsTableViewController *_commentsTableViewController;
 	
 	UserCardNaviViewController *_userCardNaviViewController;
 	CCUserInfoCardViewController *_ccUserInfoCardViewController;
@@ -42,8 +46,9 @@
 	
 	BOOL refreshFlag;
 	NSInteger refreshTime;
-	
 }
+
+@property(nonatomic, assign) CGFloat currentSliderPositionX;
 
 @property(nonatomic, retain) IBOutlet UIButton* refreshButton;
 @property(nonatomic, retain) IBOutlet UIButton* postButton;
@@ -62,6 +67,12 @@
 @property(nonatomic, retain) IBOutlet UIImageView* postingCircleImageView;
 @property(nonatomic, retain) IBOutlet UIImageView* postingRoundImageView;
 
+@property(nonatomic, retain) IBOutlet UIView* sliderPopoverView;
+@property(nonatomic, retain) IBOutlet UIView* sliderUserImageView;
+@property(nonatomic, retain) IBOutlet UILabel* sliderUserScreenNameLabel;
+
+@property(nonatomic, assign) BOOL refreshNotiImageShown;
+
 @property(nonatomic, retain) UserCardNaviViewController* commentNaviViewController;
 @property(nonatomic, retain) CCCommentsTableViewController* ccCommentTableViewController;
 @property(nonatomic, retain) UserCardNaviViewController* userCardNaviViewController;
@@ -74,6 +85,8 @@
 
 - (IBAction)refreshButtonClicked:(id)sender;
 - (IBAction)commandCenterButtonClicked:(id)sender;
+
+- (IBAction)sliderValueChanged:(id)sender;
 
 - (void)showLoadingView;
 - (void)hideLoadingView;

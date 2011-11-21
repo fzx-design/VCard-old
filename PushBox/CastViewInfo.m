@@ -15,6 +15,7 @@
 @synthesize currentIndex;
 @synthesize indexCount;
 @synthesize indexSection;
+@synthesize statusID;
 @synthesize dataSource;
 
 - (void)dealloc

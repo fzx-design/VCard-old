@@ -37,6 +37,8 @@
 //@synthesize rowIndexStack = _rowIndexStack;
 //@synthesize fetchedResultsControllerStack = _fetchedResultsControllerStack;
 
+@synthesize delegate = _delegate;
+
 @synthesize infoStack = _infoStack;
 
 @synthesize prevFetchedResultsController = _prevFetchedResultsController;
@@ -60,8 +62,10 @@
 - (void)setUpArguments
 {
 	_nextPage = 1;
+	_currentNextPage = 1;
 	_loading = NO;
 	_refreshFlag = NO;
+	_lastStatusID = 0;
 }
 
 - (void)setUpRefreshSettings
@@ -188,11 +192,12 @@
 	CastViewInfo *castViewInfo = [[[CastViewInfo alloc] init] autorelease];
 	
 	castViewInfo.fetchedResultsController = self.fetchedResultsController;
-	castViewInfo.nextPage = _nextPage;
+	castViewInfo.nextPage = _currentNextPage;
 	castViewInfo.currentIndex = self.castViewManager.currentIndex;
 	castViewInfo.dataSource = self.prevDataSource;
 	castViewInfo.indexCount = [self.castViewManager numberOfRows];
 	castViewInfo.indexSection = self.castView.pageSection;
+	castViewInfo.statusID = _lastStatusID;
 	
 	self.prevDataSource = self.dataSource;
 	
@@ -206,7 +211,9 @@
 	self.castViewManager.currentIndex = 0;
 	self.castView.pageSection = 1;
 	
-	_nextPage = 1;
+	_currentNextPage = 1;
+	_oldNextPage = 1;
+	_lastStatusID = 0;
 }
 
 - (void)pushCardWithCompletion:(void (^)())completion
@@ -266,7 +273,9 @@
 		self.castView.pageSection = castViewInfo.indexSection;
 		self.dataSource = castViewInfo.dataSource;
 		
-		_nextPage = 1;
+		_lastStatusID = castViewInfo.statusID;
+		
+		_currentNextPage = castViewInfo.nextPage;
 		
         [self.castViewManager popNewViews:castViewInfo];
 		
@@ -290,7 +299,7 @@
 				self.blurImageView.transform = CGAffineTransformMakeScale(1, 1);
 			}
 			
-            [self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
+            [self didScrollToIndex:self.castViewManager.currentIndex];
 			
 			[self.infoStack removeLastObject];
 			
@@ -336,22 +345,7 @@
 	[self.castViewManager deleteCurrentView];
 }
 
-
 #pragma mark - Load Cards methods
-
-- (long long)getMaxID
-{
-	long long maxID = 0;
-    Status *lastStatus = [self.fetchedResultsController.fetchedObjects lastObject];
-    
-    if (lastStatus && _lastStatus && !_refreshFlag) {
-        NSString *statusID = lastStatus.statusID;
-        maxID = [statusID longLongValue] - 1;
-		_refreshFlag = NO;
-    }
-	
-	return maxID;
-}
 
 - (void)clearData
 {
@@ -374,33 +368,30 @@
     [self.managedObjectContext processPendingChanges];
 }
 
-- (void)insertFriendStatusFromClient:(WeiboClient *)client
+- (void)insertStatusFromClient:(WeiboClient *)client
 {
 	NSArray *dictArray = client.responseJSONObject;
+	
 	for (NSDictionary *dict in dictArray) {
-		Status *newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-		[self.currentUser addFriendsStatusesObject:newStatus];
+		
+		Status *newStatus = nil;
+		
+		if (self.dataSource == CastViewDataSourceFriendsTimeline) {
+			
+			newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+			
+			[self.currentUser addFriendsStatusesObject:newStatus];
+			
+		} else if(self.dataSource == CastViewDataSourceUserTimeline){
+			
+			newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+			
+		} else {
+			
+			newStatus = [Status insertMentionedStatus:dict inManagedObjectContext:self.managedObjectContext];
+		}
 	}
-	[self.managedObjectContext processPendingChanges];
-	[self.fetchedResultsController performFetch:nil];
-}
 
-- (void)insertUserStatusFromClient:(WeiboClient *)client
-{
-	NSArray *dictArray = client.responseJSONObject;
-	for (NSDictionary *dict in dictArray) {
-		[Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
-	}
-	[self.managedObjectContext processPendingChanges];
-	[self.fetchedResultsController performFetch:nil];
-}
-
-- (void)insertMentionsStatusFromClient:(WeiboClient *)client
-{
-	NSArray *dictArray = client.responseJSONObject;
-	for (NSDictionary *dict in dictArray) {
-		[Status insertMentionedStatus:dict inManagedObjectContext:self.managedObjectContext];
-	}
 	[self.managedObjectContext processPendingChanges];
 	[self.fetchedResultsController performFetch:nil];
 }
@@ -452,7 +443,7 @@
             
 			[self clearData];
 			
-			[self insertFriendStatusFromClient:client];
+			[self insertStatusFromClient:client];
 			
             //			[self reloadCards];
 			
@@ -462,6 +453,13 @@
 		if (completion) {
 			completion();
 		}
+		
+		int count = self.fetchedResultsController.fetchedObjects.count;
+		
+		int numberOfRow = count > kStatusCountPerRequest ? kStatusCountPerRequest : count;
+		
+		[self.delegate castViewControllerdidScrollToRow:0 withNumberOfRows:numberOfRow];
+						
 		[[UIApplication sharedApplication] hideLoadingView];
 	}];
 	
@@ -472,9 +470,32 @@
 							  feature:0];
 }
 
-- (void)loadMoreFriendTimeline:(void (^)())completion
+- (void)loadMoreDataCompletion:(void (^)())completion
 {
-	
+    if (_loading) {
+        return;
+    }
+    _loading = YES;
+    
+	//
+    if (self.dataSource == CardTableViewDataSourceFavorites) {
+        [self loadAllFavoritesWithCompletion:^(void) {
+            [self.managedObjectContext processPendingChanges];
+            [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
+			
+			[self didScrollToIndex:self.castViewManager.currentIndex];
+			
+            if (completion) {
+                completion();
+            }
+			[[UIApplication sharedApplication] hideLoadingView];
+			_loading = NO;
+        }];
+        
+        return;
+    }
+    
+
 	WeiboClient *client = [WeiboClient client];
 	
 	[client setCompletionBlock:^(WeiboClient *client) {
@@ -483,103 +504,57 @@
 		
 		if (!client.hasError) {
 			
-			[self insertFriendStatusFromClient:client];
+			[self insertStatusFromClient:client];
 			
 			if (_refreshFlag) {
 				_refreshFlag = NO;
 				
-				Status *newStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
+				long long statusID = 0;
 				
-				if (_lastStatus == nil || ![newStatus.statusID isEqualToString:_lastStatus.statusID]){
+				if (self.fetchedResultsController.fetchedObjects.count) {
 					
-					_lastStatus = newStatus;
+					Status *newStatus = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
+					
+					statusID = [newStatus.statusID longLongValue];
+				}
+				
+				if (_lastStatusID < statusID){
+					
+					_oldNextPage = _currentNextPage;
+					
+					_lastStatusID = statusID;
 					
 					[self clearData];
 					
 					[self insertFriendStatusFromClient:client];
                     
 					[self.castViewManager refreshCards];
+					
+				} else {
+					
+					_currentNextPage = _oldNextPage;
 				}
 			}
 			
 			[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
 			
-			[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
+			[self didScrollToIndex:self.castViewManager.currentIndex];
 			
 		} else {
-			[ErrorNotification showLoadingError];
-		}
-		if (completion) {
-			completion();
-		}
-	}];
-	
-	[client getFriendsTimelineSinceID:nil
-								maxID:[NSString stringWithFormat:@"%lld", [self getMaxID]]
-					   startingAtPage:0 
-								count:kStatusCountPerRequest
-							  feature:0];
-}
-
-- (void)loadMoreUserTimeline:(void (^)())completion
-{
-	
-	WeiboClient *client = [WeiboClient client];
-	
-	[client setCompletionBlock:^(WeiboClient *client) {
-		
-		_loading = NO;
-		
-		if (!client.hasError) {
 			
 			[self insertUserStatusFromClient:client];
             
 			[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
 			
-			[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
-			
-		} else {
 			[ErrorNotification showLoadingError];
 		}
-		
 		if (completion) {
 			completion();
 		}
 	}];
-	
-	[client getUserTimeline:self.user.userID
-					SinceID:nil
-					  maxID:[NSString stringWithFormat:@"%lld", [self getMaxID]]
-			 startingAtPage:0
-					  count:kStatusCountPerRequest
-					feature:0];
-}
 
-- (void)loadMoreMention:(void (^)())completion
-{
 	
-	WeiboClient *client = [WeiboClient client];
 	
-	[client setCompletionBlock:^(WeiboClient *client) {
-		
-		_loading = NO;
-		
-		if (!client.hasError) {
-			
-			[self insertMentionsStatusFromClient:client];
-			
-			[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
-			
-			[self.castViewManager didScrollToIndex:self.castViewManager.currentIndex];
-			
-		} else {
-			[ErrorNotification showLoadingError];
-		}
-		
-		if (completion) {
-			completion();
-		}
-	}];
 	
 	[client getMentionsSinceID:nil 
 						 maxID:[NSString stringWithFormat:@""] 
@@ -646,13 +621,20 @@
         [self loadMoreFriendTimeline:completion];
     }
     
-    //
     if (self.dataSource == CastViewDataSourceUserTimeline) {
-		[self loadMoreUserTimeline:completion];
+		[client getUserTimeline:self.user.userID
+						SinceID:nil
+						  maxID:(long long)0
+				 startingAtPage:_currentNextPage++
+						  count:kStatusCountPerRequest
+						feature:0];
     }
 	
 	if (self.dataSource == CastViewDataSourceMentions) {
-		[self loadMoreMention:completion];
+		[client getMentionsSinceID:nil 
+							 maxID:[NSString stringWithFormat:@""] 
+							  page:_currentNextPage++ 
+							 count:20];
 	}
 	if (self.dataSource == CastViewDataSourceSearchStatues) {
 		[self loadTrendsStatuses:completion];
@@ -718,6 +700,7 @@
 - (void)refresh
 {
 	_refreshFlag = YES;
+	_currentNextPage = 1;
     [self loadMoreDataCompletion:NULL];
 }
 
@@ -790,7 +773,8 @@
 
 - (void)didScrollToIndex:(int)index
 {
-	[self.castViewManager didScrollToIndex:index];
+	self.castViewManager.currentIndex = index;
+	[self.delegate castViewControllerdidScrollToRow:index withNumberOfRows:[self.castViewManager numberOfRows]];
 }
 
 - (UIView*)viewForItemAtIndex:(GYCastView *)scrollView index:(int)index
@@ -807,7 +791,6 @@
 {
 	[self loadMoreDataCompletion:^(){
 		[self.castView addMoreViews];
-		NSLog(@"The number of fetched results is %d", self.fetchedResultsController.fetchedObjects.count);
 	}];
 }
 
@@ -815,8 +798,6 @@
 {
 	[self.castViewManager resetViewsAroundCurrentIndex:index];
 }
-
-
 
 #pragma mark - Property
 - (CastViewManager*)castViewManager

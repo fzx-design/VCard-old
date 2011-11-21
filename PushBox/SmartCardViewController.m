@@ -1252,6 +1252,7 @@
         [client setCompletionBlock:^(WeiboClient *client) {
             if (!client.hasError) {
                 [self.currentUser removeFavoritesObject:self.status];
+				[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameCardShouldDeleteCard object:self];
                 sender.selected = NO;
             } else {
                 [ErrorNotification showOperationError];

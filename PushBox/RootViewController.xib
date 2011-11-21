@@ -255,7 +255,7 @@
 								<reference key="IBUIFont" ref="1055088903"/>
 							</object>
 						</object>
-						<string key="NSFrame">{{710, 637}, {215, 69}}</string>
+						<string key="NSFrame">{{698, 637}, {215, 69}}</string>
 						<reference key="NSSuperview" ref="420341332"/>
 						<reference key="NSNextKeyView" ref="174625979"/>
 						<string key="NSReuseIdentifierKey">_NS:212</string>

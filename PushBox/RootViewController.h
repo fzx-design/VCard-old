@@ -14,7 +14,7 @@
 #import "MessagesViewController.h"
 #import "CastViewController.h"
 
-@interface RootViewController : CoreDataViewController<LoginViewControllerDelegate, CardTableViewControllerDelegate, CastViewControllerDelegate, UIAlertViewDelegate> {
+@interface RootViewController : CoreDataViewController<LoginViewControllerDelegate, CastViewControllerDelegate, UIAlertViewDelegate> {
     UIImageView *_backgroundImageView;
     UIImageView *_pushBoxHDImageView;
     
@@ -54,6 +54,10 @@
 	
 	BOOL _commandCenterFlag;
 	BOOL _refreshFlag;
+	BOOL _newStatusFlag;
+	
+	int _trackingIndex;
+	
 	NSInteger preNewFollowerCount;
 	NSInteger preNewCommentCount;
 	NSInteger preNewMentionCount;
@@ -87,7 +91,6 @@
 @property(nonatomic, retain) LoginViewController* loginViewController;
 @property(nonatomic, retain) DockViewController *dockViewController;
 @property(nonatomic, retain) MessagesViewController *messagesViewController;
-//@property(nonatomic, retain) CardTableViewController* cardTableViewController;
 
 @property(nonatomic, retain) CastViewController* castViewController;
 
