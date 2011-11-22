@@ -40,6 +40,8 @@
     result.order_number = [NSNumber numberWithInt:[[dict objectForKey:@"order_number"] intValue]];
     result.category = [dict objectForKey:@"category"];
     
+    NSLog(@"---------------%@", result.category);
+    
     return result;
 }
 

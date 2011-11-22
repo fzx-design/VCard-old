@@ -291,6 +291,8 @@
 		FE8F6D42144327B4001A62FD /* MessagesContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE8F6D40144327B3001A62FD /* MessagesContactsTableViewController.m */; };
 		FE8F6D43144327B4001A62FD /* MessagesContactsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE8F6D41144327B4001A62FD /* MessagesContactsTableViewController.xib */; };
 		FE94DEFA1453379800D8A12E /* smartcard.js in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4E5145084D500C3EE5B /* smartcard.js */; };
+		FE9EE170147BE559009A4E23 /* EmotionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE9EE16E147BE559009A4E23 /* EmotionsViewController.m */; };
+		FE9EE171147BE559009A4E23 /* EmotionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE9EE16F147BE559009A4E23 /* EmotionsViewController.xib */; };
 		FEA42654144320E7002E80B3 /* MessagesContactsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA42653144320E7002E80B3 /* MessagesContactsTableViewCell.m */; };
 		FEA4265614432103002E80B3 /* MessagesContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEA4265514432103002E80B3 /* MessagesContactsTableViewCell.xib */; };
 		FEB5EA521455CF0500453B09 /* gif_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FEB5EA511455CF0500453B09 /* gif_icon.png */; };
@@ -677,6 +679,9 @@
 		FE8F6D41144327B4001A62FD /* MessagesContactsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesContactsTableViewController.xib; sourceTree = "<group>"; };
 		FE92BEDE144EC0BF00CA0306 /* SmartCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartCardViewController.h; sourceTree = "<group>"; };
 		FE92BEDF144EC0BF00CA0306 /* SmartCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartCardViewController.m; sourceTree = "<group>"; };
+		FE9EE16D147BE559009A4E23 /* EmotionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionsViewController.h; sourceTree = "<group>"; };
+		FE9EE16E147BE559009A4E23 /* EmotionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionsViewController.m; sourceTree = "<group>"; };
+		FE9EE16F147BE559009A4E23 /* EmotionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmotionsViewController.xib; sourceTree = "<group>"; };
 		FEA42652144320E7002E80B3 /* MessagesContactsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesContactsTableViewCell.h; sourceTree = "<group>"; };
 		FEA42653144320E7002E80B3 /* MessagesContactsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesContactsTableViewCell.m; sourceTree = "<group>"; };
 		FEA4265514432103002E80B3 /* MessagesContactsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesContactsTableViewCell.xib; sourceTree = "<group>"; };
@@ -909,6 +914,9 @@
 				9B5F867D14541249004B01D6 /* CCCommentsTableViewController.m */,
 				CBBA01C713E3463100641923 /* PostViewController.h */,
 				CBBA01C813E3463200641923 /* PostViewController.m */,
+				FE9EE16D147BE559009A4E23 /* EmotionsViewController.h */,
+				FE9EE16E147BE559009A4E23 /* EmotionsViewController.m */,
+				FE9EE16F147BE559009A4E23 /* EmotionsViewController.xib */,
 				CB26224D13DF06780062EDE7 /* StatusCardViewController.h */,
 				CB26224E13DF06780062EDE7 /* StatusCardViewController.m */,
 				FE92BEDE144EC0BF00CA0306 /* SmartCardViewController.h */,
@@ -1655,6 +1663,7 @@
 				9B2D8D741470E672005B2D8E /* CardFrameViewController.xib in Resources */,
 				9B494D08147A15A8001C1050 /* SliderTrackPopoverView.xib in Resources */,
 				FEF51112147A44CD00F17B26 /* search_bg.png in Resources */,
+				FE9EE171147BE559009A4E23 /* EmotionsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1747,6 +1756,7 @@
 				9B494D0B147A23F7001C1050 /* GYTrackingSlider.m in Sources */,
 				9B494D16147A40F7001C1050 /* FXLabel.m in Sources */,
 				9B494D23147A7C5C001C1050 /* Status.m in Sources */,
+				FE9EE170147BE559009A4E23 /* EmotionsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

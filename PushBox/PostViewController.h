@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ErrorNotification.h"
 #import "PostViewAtTableViewCell.h"
+#import "EmotionsViewController.h"
 
 typedef enum {
     PostViewTypePost,
@@ -17,7 +18,7 @@ typedef enum {
 
 @class Status;
 
-@interface PostViewController : UIViewController<UITextViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UIPopoverControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate> {
+@interface PostViewController : UIViewController<UITextViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UIPopoverControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, EmotionsViewControllerDelegate> {
     UILabel *_titleLabel;
     UILabel *_wordsCountLabel;
     UIButton *_cancelButton;
@@ -36,12 +37,19 @@ typedef enum {
     UIView *_atView;
     UITableView *_atTableView;
     UITextField *_atTextField;
+    
+    EmotionsViewController *_emotionsViewController;
+    UIView *_emotionsView;
+//    UIView *_emotionsView;
+//    UIScrollView *_emotionsScrollView;
+//    UIPageControl *_emotionsPageControl;
 
-     UIPopoverController *_pc;
+    UIPopoverController *_pc;
     
     PostViewType _type;
     
     UIButton* _atBgButton;
+    UIButton* _emotionBgButton;
     
     NSMutableArray *_atScreenNames;
     
@@ -62,8 +70,13 @@ typedef enum {
 @property(nonatomic, retain) IBOutlet UITextView* textView;
 @property(nonatomic, retain) IBOutlet UIView* rightView;
 @property(nonatomic, retain) IBOutlet UIView* atView;
+@property(nonatomic, retain) IBOutlet UIView* emotionsView;
 @property(nonatomic, retain) IBOutlet UITableView* atTableView;
 @property(nonatomic, retain) IBOutlet UITextField* atTextField;
+
+//@property(nonatomic, retain) IBOutlet UIView* emotionsView;
+//@property(nonatomic, retain) IBOutlet UIScrollView* emotionsScrollView;
+//@property(nonatomic, retain) IBOutlet UIPageControl* emotionsPageControl;
 
 @property(nonatomic, retain) IBOutlet UIImageView* postingCircleImageView;
 @property(nonatomic, retain) IBOutlet UIImageView* postingRoundImageView;
@@ -82,6 +95,7 @@ typedef enum {
 - (IBAction)topicButtonClicked:(id)sender;
 - (IBAction)camaraButtonClicked:(id)sender;
 - (IBAction)atButtonClicked:(id)sender;
+- (IBAction)emotionsButtonClicked:(id)sender;    
 - (IBAction)removeImageButtonClicked:(id)sender;
 - (IBAction)atTextFieldEditingChanged:(NSString*)text;
 - (IBAction)atTextFieldEditingEnd;

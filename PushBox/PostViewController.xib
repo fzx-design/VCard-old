@@ -130,7 +130,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{79, 104}, {432, 345}}</string>
 						<reference key="NSSuperview" ref="789785206"/>
-						<reference key="NSNextKeyView" ref="738472267"/>
+						<reference key="NSNextKeyView"/>
 						<reference key="IBUIBackgroundColor" ref="836735456"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -303,7 +303,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{240, 56}, {37, 37}}</string>
 						<reference key="NSSuperview" ref="789785206"/>
-						<reference key="NSNextKeyView" ref="349437318"/>
+						<reference key="NSNextKeyView" ref="738472267"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -401,6 +401,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{276, 63}, {148, 18}}</string>
 						<reference key="NSSuperview" ref="789785206"/>
+						<reference key="NSNextKeyView" ref="349437318"/>
 						<string key="NSReuseIdentifierKey">_NS:328</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -467,6 +468,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{127, 168}, {88, 35}}</string>
 						<reference key="NSSuperview" ref="291272755"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -599,6 +601,7 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{17, 54}, {199, 159}}</string>
 						<reference key="NSSuperview" ref="724371754"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:408</string>
 						<reference key="IBUIBackgroundColor" ref="836735456"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -845,6 +848,15 @@
 						<reference key="destination" ref="841351856"/>
 					</object>
 					<int key="connectionID">59</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">emotionsButtonClicked:</string>
+						<reference key="source" ref="571220730"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">86</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1119,7 +1131,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">73</int>
+			<int key="maxID">86</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
