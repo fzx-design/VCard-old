@@ -511,6 +511,25 @@
 	self.dockViewController.refreshNotiImageView.hidden = YES;
 }
 
+- (void)showTrendsTimeline:(NSString *)searchString
+{
+    self.castViewController.dataSource = CastViewDataSourceTrends;
+    
+    NSString* string = [[[NSString alloc] initWithFormat:@"包含%@的微博", searchString] autorelease];
+	[_statusTypeStack addObject:self.bottomStateLabel.text];
+	[_statusTypeStack addObject:string];
+	
+    self.bottomStateLabel.text = NSLocalizedString(string, nil); 
+    self.bottomStateTextField.text = @"";
+    self.bottomStateTextField.hidden = YES;
+    [self showBottomStateView];
+    
+    [self.castViewController pushCardWithCompletion:^{
+        [self moveCardIntoView];
+    }];
+	self.dockViewController.refreshNotiImageView.hidden = YES;
+}
+
 - (void)showFavorites
 {
     self.castViewController.dataSource = CastViewDataSourceFavorites;

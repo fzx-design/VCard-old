@@ -13,6 +13,7 @@ typedef enum {
     CastViewDataSourceUserTimeline,
     CastViewDataSourceFavorites,
     CastViewDataSourceSearch,
+    CastViewDataSourceTrends,
 	CastViewDataSourceMentions,
 } CastViewDataSource;
 
