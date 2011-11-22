@@ -32,9 +32,9 @@
 #define kMessagesViewOffsetx 1024.0
 
 #define kSearchTextFieldFrame CGRectMake(341, 6, 343, 31)
-#define kSearchTextFieldInputEnglish CGRectMake(341, 360, 343, 31)
-#define kSearchTextFieldInputChinese CGRectMake(341, 360, 343, 31)
 #define kSearchTextFieldInputWait CGRectMake(341, 632, 343, 31)
+#define kSearchBGFrame CGRectMake(0, 0, 1024, 42)
+#define kSearchBGInputWait CGRectMake(0, 2, 1024, 42)
 
 #define kUserDefaultKeyFirstTime @"kUserDefaultKeyFirstTime"
 
@@ -432,16 +432,16 @@
 
 - (void)hideSearchBottomView
 {
-	[self.bottomSearchBG setHidden:YES];
-	[self.bottomSearchTextField setHidden:YES];
-    [self.bottomStateLabel setHidden:NO];
+//	[self.bottomSearchBG setHidden:YES];
+//	[self.bottomSearchTextField setHidden:YES];
+//    [self.bottomStateLabel setHidden:NO];
 }
 
 - (void)showSearchBottomView
 {
-	[self.bottomSearchBG setHidden:NO];
-	[self.bottomSearchTextField setHidden:NO];
-    [self.bottomStateLabel setHidden:YES];
+//	[self.bottomSearchBG setHidden:NO];
+//	[self.bottomSearchTextField setHidden:NO];
+//    [self.bottomStateLabel setHidden:YES];
 }
 
 - (void)showFriendsTimeline:(id)sender
@@ -484,7 +484,7 @@
     self.dockViewController.showFavoritesButton.selected = NO;
     [self showBottomStateView];
 	
-	[self hideSearchBottomView];
+//	[self hideSearchBottomView];
     
     [self.castViewController pushCardWithCompletion:^{
         [self moveCardIntoView];
@@ -1059,29 +1059,59 @@
 
 - (void)showSearchView 
 {
+    self.dockViewController.searchButton.selected = YES;
+ 
+	self.bottomSearchView.hidden = NO;
+   
+    isSearchReturn = NO;
+    
     self.bottomSearchTextField.hidden = NO;
     self.bottomSearchTextField.frame = kSearchTextFieldFrame;
-    self.dockViewController.searchButton.selected = YES;
-	
-	[self.bottomSearchBG setHidden:YES];
-    [self.bottomStateLabel setHidden:NO];
-        
-    [self.bottomSearchTextField becomeFirstResponder];
+    self.bottomSearchBG.hidden = NO;
+    self.bottomSearchBG.frame = kSearchBGFrame;
+	    
+    [self.view addSubview:self.bottomSearchBG];
+    [self.view addSubview:self.bottomSearchTextField];
 
+    [self.bottomSearchTextField becomeFirstResponder];
+    
+    [self.bottomSearchView addSubview:self.bottomSearchBG]; 
     [self.bottomSearchView addSubview:self.bottomSearchTextField]; 
+}
+
+- (void)showSearchWaitingView 
+{
+    self.dockViewController.searchButton.selected = YES;
+
+	self.bottomSearchView.hidden = NO;
+    
+    self.bottomSearchTextField.hidden = NO;
+    self.bottomSearchTextField.frame = kSearchTextFieldInputWait;
+    self.bottomSearchBG.hidden = NO;
+    self.bottomSearchBG.frame = kSearchBGInputWait;
+
+    [self.bottomSearchBG removeFromSuperview];
+    [self.bottomSearchTextField removeFromSuperview];
+    [self.bottomStateView addSubview:self.bottomSearchBG]; 
+    [self.view addSubview:self.bottomSearchTextField]; 
+
+    [self.bottomSearchTextField resignFirstResponder];
 }
 
 - (void)hideSearchView 
 {
-    //    self.bottomSearchTextField.hidden = YES;
     self.dockViewController.searchButton.selected = NO;
-	
-	if (self.castViewController.dataSource == CastViewDataSourceSearch) {
-		[self.bottomSearchBG setHidden:NO];
-		[self.bottomStateLabel setHidden:YES];	
-	}
-    
+
+	self.bottomSearchView.hidden = YES;
+
+    self.bottomSearchTextField.hidden = YES;
+    self.bottomSearchTextField.frame = kSearchTextFieldFrame;
+    self.bottomSearchBG.hidden = YES;
+    self.bottomSearchBG.frame = kSearchBGFrame;
+
+    [self.bottomSearchBG removeFromSuperview];
     [self.bottomSearchTextField removeFromSuperview];
+    [self.view addSubview:self.bottomSearchBG];
     [self.view addSubview:self.bottomSearchTextField];
     
     [self.bottomSearchTextField resignFirstResponder];
@@ -1089,14 +1119,14 @@
 
 - (void)searchButtonClicked:(UIButton*) button
 {
-	if (self.castViewController.dataSource != CastViewDataSourceFriendsTimeline) {
-		while (self.castViewController.infoStack.count > 1) {
-			[self.castViewController.infoStack removeLastObject];
-		}
-		[_statusTypeStack removeAllObjects];
-		[self hideBottomStateView];
-		[self.castViewController popCardWithCompletion:nil];
-	}
+//	if (self.castViewController.dataSource != CastViewDataSourceFriendsTimeline) {
+//		while (self.castViewController.infoStack.count > 1) {
+//			[self.castViewController.infoStack removeLastObject];
+//		}
+//		[_statusTypeStack removeAllObjects];
+//		[self hideBottomStateView];
+//		[self.castViewController popCardWithCompletion:nil];
+//	}
 	
 	if (self.dockViewController.commandCenterButton.selected) {
 		[self hideCommandCenter];
@@ -1104,13 +1134,12 @@
 	
 	self.dockViewController.showFavoritesButton.selected = NO;
 	
-	self.bottomSearchView.hidden = NO;
+    //
     [self.bottomSearchTextField setInputAccessoryView:self.bottomSearchView];
     
     if (button.selected) {
         [self hideSearchView];
     }
-    
     else {
         [self showSearchView];
     }
@@ -1477,11 +1506,8 @@
     [self showSearchTimeline:textField.text];
     
     //
-    [self.bottomSearchTextField removeFromSuperview];
-    [self.view addSubview: self.bottomSearchTextField];
-    [self.bottomSearchTextField setFrame:kSearchTextFieldInputWait];
-    [self.bottomSearchBG setHidden:NO];
-    [self.bottomStateLabel setHidden:YES];
+    [self showSearchWaitingView];
+    isSearchReturn = YES;
     
     return NO;
 }
@@ -1491,8 +1517,9 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    [self hideSearchView];
-	[self.bottomSearchTextField setFrame:kSearchTextFieldInputWait];
+    if(!isSearchReturn) {
+        [self hideSearchView];
+    }
 }
 
 @end

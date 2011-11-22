@@ -9,7 +9,7 @@
 #import "CoreDataViewController.h"
 #import "LoginViewController.h"
 #import "DockViewController.h"
-#import "CardTableViewController.h"
+#import "CastViewController.h"
 #import "PostViewController.h"
 #import "MessagesViewController.h"
 #import "CastViewController.h"
@@ -65,6 +65,8 @@
     UIImageView* _bottomSearchBG;
 	
 	UIImage *_tmpImage;
+    
+    Boolean isSearchReturn;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView* backgroundImageView;
@@ -103,6 +105,7 @@
 - (IBAction)searchTextFieldClicked:(id)sender;
 
 - (void)showSearchTimeline:(NSString *)searchString;
+- (void)showTrendsTimeline:(NSString *)searchString;
 
 - (void)showSearchView;
 - (void)hideSearchView;

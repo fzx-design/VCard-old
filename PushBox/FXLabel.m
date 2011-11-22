@@ -192,7 +192,7 @@
     
     //set font
     UIFont *font = [self.font fontWithSize:fontSize];
-
+    
     //set position
     switch (self.textAlignment)
     {
@@ -204,6 +204,10 @@
         case UITextAlignmentRight:
         {
             textRect.origin.x = rect.size.width - textRect.size.width;
+            break;
+        }
+        default:
+        {
             break;
         }
     }
@@ -231,15 +235,15 @@
     }
     
     BOOL hasShadow = self.shadowColor &&
-        ![self.shadowColor isEqual:[UIColor clearColor]] &&
-        (shadowBlur > 0.0f || !CGSizeEqualToSize(self.shadowOffset, CGSizeZero));
+    ![self.shadowColor isEqual:[UIColor clearColor]] &&
+    (shadowBlur > 0.0f || !CGSizeEqualToSize(self.shadowOffset, CGSizeZero));
     
     BOOL hasInnerShadow = innerShadowColor &&
-        ![self.innerShadowColor isEqual:[UIColor clearColor]] &&
-        !CGSizeEqualToSize(innerShadowOffset, CGSizeZero);
+    ![self.innerShadowColor isEqual:[UIColor clearColor]] &&
+    !CGSizeEqualToSize(innerShadowOffset, CGSizeZero);
     
     BOOL hasGradient = gradientStartColor && gradientEndColor;
-
+    
     BOOL needsMask = hasInnerShadow || hasGradient;
     
     CGImageRef alphaMask = NULL;
@@ -267,7 +271,7 @@
         [self.text drawInRect:textRect withFont:font lineBreakMode:self.lineBreakMode alignment:self.textAlignment];
         CGContextRestoreGState(context);
     }
-
+    
     if (needsMask)
     {
         //clip the context
@@ -312,7 +316,7 @@
             [self.textColor setFill];
             CGContextFillRect(context, textRect);
         }
-
+        
         //end clipping
         CGContextRestoreGState(context);
         CGImageRelease(alphaMask);

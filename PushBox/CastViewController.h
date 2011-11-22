@@ -8,6 +8,7 @@
 
 #import "CoreDataTableViewController.h"
 #import "UserCardNaviViewController.h"
+#import "SmartCardViewController.h"
 #import "ErrorNotification.h"
 #import "GYCastView.h"
 #import "CastViewInfo.h"

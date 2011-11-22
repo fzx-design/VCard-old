@@ -1295,12 +1295,8 @@
         [self atUserClicked:para];
     }
     else if ([type compare:@"/sp/"] == NSOrderedSame) {
-        //        NSString* content = [[[NSString alloc] initWithFormat:@"#%@# ", para] autorelease];
-        //        [self postWithContent:content];
-        
-        //
         [((RootViewController*)[[UIApplication sharedApplication]rootViewController]).castViewController setSearchString:para];
-        [((RootViewController*)[[UIApplication sharedApplication]rootViewController]) showSearchTimeline:para];
+        [((RootViewController*)[[UIApplication sharedApplication]rootViewController]) showTrendsTimeline:para];
         
     }
     else if ([type compare:@"/lk/"] == NSOrderedSame) {

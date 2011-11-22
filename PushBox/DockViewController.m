@@ -8,7 +8,7 @@
 
 #import "DockViewController.h"
 #import "User.h"
-#import "CardTableViewController.h" //to get notification defines
+#import "CastViewController.h" //to get notification defines
 
 @implementation DockViewController
 

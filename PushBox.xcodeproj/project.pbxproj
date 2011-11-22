@@ -181,8 +181,6 @@
 		CB018E0113DDE4E8004217E0 /* about_button_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CB018E0013DDE4E8004217E0 /* about_button_bg.png */; };
 		CB018E0313DDE524004217E0 /* about_pb_title.png in Resources */ = {isa = PBXBuildFile; fileRef = CB018E0213DDE523004217E0 /* about_pb_title.png */; };
 		CB018E0B13DDEFEE004217E0 /* UIApplicationAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = CB018E0A13DDEFEB004217E0 /* UIApplicationAddition.m */; };
-		CB018E0E13DE0066004217E0 /* CardTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB018E0D13DE0064004217E0 /* CardTableViewController.m */; };
-		CB018E1013DE00F0004217E0 /* CardTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB018E0F13DE00F0004217E0 /* CardTableViewController.xib */; };
 		CB26225013DF06780062EDE7 /* StatusCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB26224E13DF06780062EDE7 /* StatusCardViewController.m */; };
 		CB26225113DF06780062EDE7 /* StatusCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB26224F13DF06780062EDE7 /* StatusCardViewController.xib */; };
 		CB26225313DF07820062EDE7 /* CardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB26225213DF07820062EDE7 /* CardTableViewCell.xib */; };
@@ -284,7 +282,6 @@
 		FE7ADDC6145D554F00C403DF /* weibopop_repost_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FE7ADDC4145D554F00C403DF /* weibopop_repost_bg.png */; };
 		FE831552145E803700909CF0 /* PostViewAtTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE831550145E803600909CF0 /* PostViewAtTableViewCell.m */; };
 		FE831553145E803700909CF0 /* PostViewAtTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE831551145E803600909CF0 /* PostViewAtTableViewCell.xib */; };
-		FE886855147A7C8E00D2438E /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2D7257147A35D90063318C /* Status.m */; };
 		FE8E1753145433A5004F6A7C /* InnerBroswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE8E1751145433A5004F6A7C /* InnerBroswerViewController.m */; };
 		FE8E1754145433A5004F6A7C /* InnerBroswerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE8E1752145433A5004F6A7C /* InnerBroswerViewController.xib */; };
 		FE8E175D14544255004F6A7C /* webview_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = FE8E175A14544255004F6A7C /* webview_bottom.png */; };
@@ -505,9 +502,6 @@
 		CB018E0413DDEAA5004217E0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CB018E0913DDEFEA004217E0 /* UIApplicationAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIApplicationAddition.h; sourceTree = "<group>"; };
 		CB018E0A13DDEFEB004217E0 /* UIApplicationAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIApplicationAddition.m; sourceTree = "<group>"; };
-		CB018E0C13DE0063004217E0 /* CardTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTableViewController.h; sourceTree = "<group>"; };
-		CB018E0D13DE0064004217E0 /* CardTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardTableViewController.m; sourceTree = "<group>"; };
-		CB018E0F13DE00F0004217E0 /* CardTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardTableViewController.xib; sourceTree = "<group>"; };
 		CB26224D13DF06780062EDE7 /* StatusCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusCardViewController.h; sourceTree = "<group>"; };
 		CB26224E13DF06780062EDE7 /* StatusCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusCardViewController.m; sourceTree = "<group>"; };
 		CB26224F13DF06780062EDE7 /* StatusCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusCardViewController.xib; sourceTree = "<group>"; };
@@ -1225,8 +1219,6 @@
 				CBDA5B7213DC25C500FAE221 /* CoreDataViewController.m */,
 				CBDA5B7413DC25FA00FAE221 /* CoreDataTableViewController.h */,
 				CBDA5B7513DC25FA00FAE221 /* CoreDataTableViewController.m */,
-				CB018E0C13DE0063004217E0 /* CardTableViewController.h */,
-				CB018E0D13DE0064004217E0 /* CardTableViewController.m */,
 				CBDA5B0313DBEC1300FAE221 /* PushBoxAppDelegate.h */,
 				CBDA5B0413DBEC1300FAE221 /* PushBoxAppDelegate.m */,
 				CBDA5AFB13DBEC1300FAE221 /* Supporting Files */,
@@ -1318,7 +1310,6 @@
 				CB018DD513DD3CC8004217E0 /* DockViewController.xib */,
 				9B494D06147A15A8001C1050 /* SliderTrackPopoverView.xib */,
 				9B1129EE14514374001CE64E /* RootViewController.xib */,
-				CB018E0F13DE00F0004217E0 /* CardTableViewController.xib */,
 				9B2D8D681470BABD005B2D8E /* CastViewController.xib */,
 				9B2D8D721470E672005B2D8E /* CardFrameViewController.xib */,
 				CB26225213DF07820062EDE7 /* CardTableViewCell.xib */,
@@ -1496,7 +1487,6 @@
 				CB018DFF13DDE468004217E0 /* AboutViewController.xib in Resources */,
 				CB018E0113DDE4E8004217E0 /* about_button_bg.png in Resources */,
 				CB018E0313DDE524004217E0 /* about_pb_title.png in Resources */,
-				CB018E1013DE00F0004217E0 /* CardTableViewController.xib in Resources */,
 				CB26225113DF06780062EDE7 /* StatusCardViewController.xib in Resources */,
 				CB26225313DF07820062EDE7 /* CardTableViewCell.xib in Resources */,
 				CB9DCACE13E1E54700DA3D3D /* DetailImageViewController.xib in Resources */,
@@ -1706,7 +1696,6 @@
 				CB018DEA13DDD028004217E0 /* IntervalManViewController.m in Sources */,
 				CB018DEB13DDD028004217E0 /* OptionsTableViewController.m in Sources */,
 				CB018E0B13DDEFEE004217E0 /* UIApplicationAddition.m in Sources */,
-				CB018E0E13DE0066004217E0 /* CardTableViewController.m in Sources */,
 				CB26225013DF06780062EDE7 /* StatusCardViewController.m in Sources */,
 				CB9DCAC613E171A100DA3D3D /* UIImageViewAddition.m in Sources */,
 				CB9DCAC913E1C36200DA3D3D /* NSDateAddition.m in Sources */,

@@ -402,6 +402,9 @@
 		} else if(self.dataSource == CastViewDataSourceSearch){
             
 			newStatus = [Status insertTrendsStatus:dict withString:self.searchString inManagedObjectContext:self.managedObjectContext];
+		} else if(self.dataSource == CastViewDataSourceTrends){
+            
+			newStatus = [Status insertTrendsStatus:dict withString:self.searchString inManagedObjectContext:self.managedObjectContext];
 		}
 	}
 
@@ -484,7 +487,7 @@
     _loading = YES;
     
 	//
-    if (self.dataSource == CardTableViewDataSourceFavorites) {
+    if (self.dataSource == CastViewDataSourceFavorites) {
         [self loadAllFavoritesWithCompletion:^(void) {
             [self.managedObjectContext processPendingChanges];
             [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
@@ -588,6 +591,9 @@
 	if (self.dataSource == CastViewDataSourceSearch) {
 		[client getTrendsStatuses:self.searchString];
 	}
+	if (self.dataSource == CastViewDataSourceTrends) {
+		[client getTrendsStatuses:self.searchString];
+	}
     
 }
 
@@ -605,35 +611,42 @@
     NSSortDescriptor *sortDescriptor;
 	
     switch (self.dataSource) {
-        case CardTableViewDataSourceFriendsTimeline:
+        case CastViewDataSourceFriendsTimeline:
 			sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"statusID" ascending:NO];
 			request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
 			
 			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.managedObjectContext];
             request.predicate = [NSPredicate predicateWithFormat:@"isFriendsStatusOf == %@", self.currentUser];
             break;
-        case CardTableViewDataSourceUserTimeline:
+        case CastViewDataSourceUserTimeline:
 			sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"statusID" ascending:NO];
 			request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
 			
 			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.managedObjectContext];
             request.predicate = [NSPredicate predicateWithFormat:@"author == %@", self.user];
             break;
-        case CardTableViewDataSourceFavorites:
+        case CastViewDataSourceFavorites:
 			sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:NO];
 			request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
 			
 			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.managedObjectContext];
             request.predicate = [NSPredicate predicateWithFormat:@"favoritedBy == %@", self.currentUser];
 			break;
-		case CardTableViewDataSourceMentions:
+		case CastViewDataSourceMentions:
 			sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:NO];
 			request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
 			
 			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.managedObjectContext];
             request.predicate = [NSPredicate predicateWithFormat:@"isMentioned == %@", [NSNumber numberWithBool:YES]];
 			break;
-		case CardTableViewDataSourceSearch:
+		case CastViewDataSourceSearch:
+			sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:NO];
+			request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+			
+			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.managedObjectContext];
+            request.predicate = [NSPredicate predicateWithFormat:@"searchString == %@", self.searchString];
+			break;
+		case CastViewDataSourceTrends:
 			sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:NO];
 			request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
 			
