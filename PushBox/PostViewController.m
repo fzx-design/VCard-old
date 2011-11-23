@@ -121,6 +121,7 @@
 	
     _emotionsViewController = [[EmotionsViewController alloc] init];
     self.emotionsView = _emotionsViewController.view;
+    self.emotionsView.layer.anchorPoint = CGPointMake(0.5, 0);
     _emotionsViewController.delegate = self;
     
 	self.rightView.layer.anchorPoint = CGPointMake(0, 0.4);
@@ -210,8 +211,9 @@
     
 	[superView addSubview:self.emotionsView];
     CGRect frame = self.emotionsView.frame;
-    frame.origin = CGPointMake(323, 105);
+    frame.origin = CGPointMake(321, 106);
     self.emotionsView.frame = frame;
+    [_emotionsViewController.scrollView scrollsToTop];
     
 	[self.emotionsView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
 	

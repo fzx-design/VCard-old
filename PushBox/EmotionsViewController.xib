@@ -40,8 +40,9 @@
 					<object class="IBUIImageView" id="882063306">
 						<reference key="NSNextResponder" ref="468139996"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrameSize">{235, 212}</string>
+						<string key="NSFrameSize">{238, 212}</string>
 						<reference key="NSSuperview" ref="468139996"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="757578888"/>
 						<string key="NSReuseIdentifierKey">_NS:569</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="703663476">
@@ -62,6 +63,7 @@
 						<object class="NSPSMatrix" key="NSFrameMatrix"/>
 						<string key="NSFrame">{{98, 153}, {38, 36}}</string>
 						<reference key="NSSuperview" ref="468139996"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:661</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -73,8 +75,9 @@
 					<object class="IBUIScrollView" id="757578888">
 						<reference key="NSNextResponder" ref="468139996"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{15, 13}, {204, 144}}</string>
+						<string key="NSFrame">{{17, 13}, {204, 144}}</string>
 						<reference key="NSSuperview" ref="468139996"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="719382581"/>
 						<string key="NSReuseIdentifierKey">_NS:206</string>
 						<bool key="IBUIAutoresizesSubviews">NO</bool>
@@ -85,8 +88,9 @@
 						<bool key="IBUIPagingEnabled">YES</bool>
 					</object>
 				</array>
-				<string key="NSFrameSize">{235, 212}</string>
+				<string key="NSFrameSize">{238, 212}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="882063306"/>
 				<string key="NSReuseIdentifierKey">_NS:212</string>
 				<reference key="IBUIBackgroundColor" ref="703663476"/>
@@ -191,14 +195,39 @@
 			<nil key="sourceID"/>
 			<int key="maxID">11</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">EmotionsViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="pageControl">UIPageControl</string>
+						<string key="scrollView">UIScrollView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="pageControl">
+							<string key="name">pageControl</string>
+							<string key="candidateClassName">UIPageControl</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="scrollView">
+							<string key="name">scrollView</string>
+							<string key="candidateClassName">UIScrollView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/EmotionsViewController.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NS.key.0">emoticons_bg.png</string>
-			<string key="NS.object.0">{235, 212}</string>
+			<string key="NS.object.0">{238, 212}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>

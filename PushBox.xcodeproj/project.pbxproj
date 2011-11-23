@@ -23,7 +23,6 @@
 		203DBEFC146FE9AD00F43D5A /* thumb_info_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 203DBEFB146FE9AD00F43D5A /* thumb_info_bg.png */; };
 		203DBEFF146FEAA200F43D5A /* dock_button_group_HL.png in Resources */ = {isa = PBXBuildFile; fileRef = 203DBEFD146FEAA200F43D5A /* dock_button_group_HL.png */; };
 		203DBF00146FEAA200F43D5A /* dock_button_group.png in Resources */ = {isa = PBXBuildFile; fileRef = 203DBEFE146FEAA200F43D5A /* dock_button_group.png */; };
-		203DBF02146FECC200F43D5A /* emoticons_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 203DBF01146FECC200F43D5A /* emoticons_bg.png */; };
 		203DBF04146FECC900F43D5A /* post_button_emoticons.png in Resources */ = {isa = PBXBuildFile; fileRef = 203DBF03146FECC900F43D5A /* post_button_emoticons.png */; };
 		203DBF07146FECCF00F43D5A /* post_button_locate.png in Resources */ = {isa = PBXBuildFile; fileRef = 203DBF05146FECCF00F43D5A /* post_button_locate.png */; };
 		203DBF08146FECCF00F43D5A /* post_button_located.png in Resources */ = {isa = PBXBuildFile; fileRef = 203DBF06146FECCF00F43D5A /* post_button_located.png */; };
@@ -300,6 +299,7 @@
 		FEC6D1DB14555F8B00576EF3 /* vc_noti_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEC6D1D914555F8B00576EF3 /* vc_noti_sound.wav */; };
 		FEC6D1DD14555F9800576EF3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEC6D1DC14555F9800576EF3 /* AudioToolbox.framework */; };
 		FEC6D1E314555FF900576EF3 /* UIAudioAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = FEC6D1E214555FF900576EF3 /* UIAudioAddition.m */; };
+		FECFB9B8147CD7BA0008B747 /* emoticons_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FECFB9B7147CD7BA0008B747 /* emoticons_bg.png */; };
 		FEDC9F101477DBA300D6A2CD /* Emotion.m in Sources */ = {isa = PBXBuildFile; fileRef = FEDC9F0F1477DBA300D6A2CD /* Emotion.m */; };
 		FEF51112147A44CD00F17B26 /* search_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FEF51111147A44CD00F17B26 /* search_bg.png */; };
 		FEFB3120144311D600440DD5 /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEFB311E144311D600440DD5 /* MessagesViewController.m */; };
@@ -329,7 +329,6 @@
 		203DBEFB146FE9AD00F43D5A /* thumb_info_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_info_bg.png; sourceTree = "<group>"; };
 		203DBEFD146FEAA200F43D5A /* dock_button_group_HL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dock_button_group_HL.png; sourceTree = "<group>"; };
 		203DBEFE146FEAA200F43D5A /* dock_button_group.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dock_button_group.png; sourceTree = "<group>"; };
-		203DBF01146FECC200F43D5A /* emoticons_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticons_bg.png; sourceTree = "<group>"; };
 		203DBF03146FECC900F43D5A /* post_button_emoticons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = post_button_emoticons.png; sourceTree = "<group>"; };
 		203DBF05146FECCF00F43D5A /* post_button_locate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = post_button_locate.png; sourceTree = "<group>"; };
 		203DBF06146FECCF00F43D5A /* post_button_located.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = post_button_located.png; sourceTree = "<group>"; };
@@ -691,6 +690,7 @@
 		FEC6D1DC14555F9800576EF3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		FEC6D1E114555FF900576EF3 /* UIAudioAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAudioAddition.h; sourceTree = "<group>"; };
 		FEC6D1E214555FF900576EF3 /* UIAudioAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAudioAddition.m; sourceTree = "<group>"; };
+		FECFB9B7147CD7BA0008B747 /* emoticons_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticons_bg.png; sourceTree = "<group>"; };
 		FEDC9F0D1477DB0100D6A2CD /* PushBox 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PushBox 3.xcdatamodel"; sourceTree = "<group>"; };
 		FEDC9F0E1477DBA300D6A2CD /* Emotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Emotion.h; sourceTree = "<group>"; };
 		FEDC9F0F1477DBA300D6A2CD /* Emotion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Emotion.m; sourceTree = "<group>"; };
@@ -1111,9 +1111,9 @@
 		CBBA01F013E451D700641923 /* post */ = {
 			isa = PBXGroup;
 			children = (
+				FECFB9B7147CD7BA0008B747 /* emoticons_bg.png */,
 				9B11294C145109BB001CE64E /* atpop_bg.png */,
 				9B11295F145109BB001CE64E /* post_button_@.png */,
-				203DBF01146FECC200F43D5A /* emoticons_bg.png */,
 				203DBF03146FECC900F43D5A /* post_button_emoticons.png */,
 				203DBF05146FECCF00F43D5A /* post_button_locate.png */,
 				203DBF06146FECCF00F43D5A /* post_button_located.png */,
@@ -1655,7 +1655,6 @@
 				203DBEFC146FE9AD00F43D5A /* thumb_info_bg.png in Resources */,
 				203DBEFF146FEAA200F43D5A /* dock_button_group_HL.png in Resources */,
 				203DBF00146FEAA200F43D5A /* dock_button_group.png in Resources */,
-				203DBF02146FECC200F43D5A /* emoticons_bg.png in Resources */,
 				203DBF04146FECC900F43D5A /* post_button_emoticons.png in Resources */,
 				203DBF07146FECCF00F43D5A /* post_button_locate.png in Resources */,
 				203DBF08146FECCF00F43D5A /* post_button_located.png in Resources */,
@@ -1664,6 +1663,7 @@
 				9B494D08147A15A8001C1050 /* SliderTrackPopoverView.xib in Resources */,
 				FEF51112147A44CD00F17B26 /* search_bg.png in Resources */,
 				FE9EE171147BE559009A4E23 /* EmotionsViewController.xib in Resources */,
+				FECFB9B8147CD7BA0008B747 /* emoticons_bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

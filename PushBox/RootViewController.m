@@ -194,6 +194,7 @@
     
     [client2 getFriendsOfUser:self.currentUser.userID cursor:cursor count:200];
     
+    
     // getEmotions
     WeiboClient *client3 = [WeiboClient client];
     [client3 setCompletionBlock:^(WeiboClient *client3) {
@@ -204,8 +205,8 @@
             }
         }
     }];
+
     [client3 getEmotionsWithType:nil language:nil];
-    
 }
 
 - (void)viewDidLoad
@@ -432,16 +433,16 @@
 
 - (void)hideSearchBottomView
 {
-//	[self.bottomSearchBG setHidden:YES];
-//	[self.bottomSearchTextField setHidden:YES];
-//    [self.bottomStateLabel setHidden:NO];
+    //	[self.bottomSearchBG setHidden:YES];
+    //	[self.bottomSearchTextField setHidden:YES];
+    //    [self.bottomStateLabel setHidden:NO];
 }
 
 - (void)showSearchBottomView
 {
-//	[self.bottomSearchBG setHidden:NO];
-//	[self.bottomSearchTextField setHidden:NO];
-//    [self.bottomStateLabel setHidden:YES];
+    //	[self.bottomSearchBG setHidden:NO];
+    //	[self.bottomSearchTextField setHidden:NO];
+    //    [self.bottomStateLabel setHidden:YES];
 }
 
 - (void)showFriendsTimeline:(id)sender
@@ -484,7 +485,7 @@
     self.dockViewController.showFavoritesButton.selected = NO;
     [self showBottomStateView];
 	
-//	[self hideSearchBottomView];
+    //	[self hideSearchBottomView];
     
     [self.castViewController pushCardWithCompletion:^{
         [self moveCardIntoView];
@@ -1060,19 +1061,19 @@
 - (void)showSearchView 
 {
     self.dockViewController.searchButton.selected = YES;
- 
+    
 	self.bottomSearchView.hidden = NO;
-   
+    
     isSearchReturn = NO;
     
     self.bottomSearchTextField.hidden = NO;
     self.bottomSearchTextField.frame = kSearchTextFieldFrame;
     self.bottomSearchBG.hidden = NO;
     self.bottomSearchBG.frame = kSearchBGFrame;
-	    
+    
     [self.view addSubview:self.bottomSearchBG];
     [self.view addSubview:self.bottomSearchTextField];
-
+    
     [self.bottomSearchTextField becomeFirstResponder];
     
     [self.bottomSearchView addSubview:self.bottomSearchBG]; 
@@ -1082,33 +1083,33 @@
 - (void)showSearchWaitingView 
 {
     self.dockViewController.searchButton.selected = YES;
-
+    
 	self.bottomSearchView.hidden = NO;
     
     self.bottomSearchTextField.hidden = NO;
     self.bottomSearchTextField.frame = kSearchTextFieldInputWait;
     self.bottomSearchBG.hidden = NO;
     self.bottomSearchBG.frame = kSearchBGInputWait;
-
+    
     [self.bottomSearchBG removeFromSuperview];
     [self.bottomSearchTextField removeFromSuperview];
     [self.bottomStateView addSubview:self.bottomSearchBG]; 
     [self.view addSubview:self.bottomSearchTextField]; 
-
+    
     [self.bottomSearchTextField resignFirstResponder];
 }
 
 - (void)hideSearchView 
 {
     self.dockViewController.searchButton.selected = NO;
-
+    
 	self.bottomSearchView.hidden = YES;
-
+    
     self.bottomSearchTextField.hidden = YES;
     self.bottomSearchTextField.frame = kSearchTextFieldFrame;
     self.bottomSearchBG.hidden = YES;
     self.bottomSearchBG.frame = kSearchBGFrame;
-
+    
     [self.bottomSearchBG removeFromSuperview];
     [self.bottomSearchTextField removeFromSuperview];
     [self.view addSubview:self.bottomSearchBG];
@@ -1119,14 +1120,14 @@
 
 - (void)searchButtonClicked:(UIButton*) button
 {
-//	if (self.castViewController.dataSource != CastViewDataSourceFriendsTimeline) {
-//		while (self.castViewController.infoStack.count > 1) {
-//			[self.castViewController.infoStack removeLastObject];
-//		}
-//		[_statusTypeStack removeAllObjects];
-//		[self hideBottomStateView];
-//		[self.castViewController popCardWithCompletion:nil];
-//	}
+    //	if (self.castViewController.dataSource != CastViewDataSourceFriendsTimeline) {
+    //		while (self.castViewController.infoStack.count > 1) {
+    //			[self.castViewController.infoStack removeLastObject];
+    //		}
+    //		[_statusTypeStack removeAllObjects];
+    //		[self hideBottomStateView];
+    //		[self.castViewController popCardWithCompletion:nil];
+    //	}
 	
 	if (self.dockViewController.commandCenterButton.selected) {
 		[self hideCommandCenter];
