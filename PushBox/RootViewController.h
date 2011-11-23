@@ -100,6 +100,8 @@
 @property(nonatomic, retain) CastViewController* castViewController;
 
 - (IBAction)showFriendsTimeline:(id)sender;
+- (IBAction)showPrevTimeline:(id)sender;
+
 - (IBAction)refreshAndShowCommentCenter:(id)sender;
 - (IBAction)closeNotificationPop:(id)sender;
 - (IBAction)searchTextFieldClicked:(id)sender;

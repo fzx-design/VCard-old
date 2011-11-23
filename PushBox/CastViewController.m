@@ -261,7 +261,7 @@
     }];
 }
 
-- (BOOL)popCardWithCompletion:(void (^)())completion
+- (void)popCardWithCompletion:(void (^)())completion
 {
 	[[UIApplication sharedApplication] showLoadingView];
 	CastViewInfo *castViewInfo = [self.infoStack lastObject];
@@ -318,8 +318,18 @@
 			[[UIApplication sharedApplication] hideLoadingView];
         }];
 	}];
-	
-	return needPopAnimation;
+}
+
+- (void)clearCardStack
+{
+	while (self.infoStack.count > 1) {
+		[self.infoStack removeLastObject];
+	}
+}
+
+- (BOOL)inSearchMode
+{
+	return _prevDataSource == CastViewDataSourceSearch;
 }
 
 #pragma mark - Card Movement Settings methods
@@ -402,6 +412,8 @@
 		} else if(self.dataSource == CastViewDataSourceSearch){
             
 			newStatus = [Status insertTrendsStatus:dict withString:self.searchString inManagedObjectContext:self.managedObjectContext];
+			
+			NSLog(@"%@", newStatus.text);
 		} else if(self.dataSource == CastViewDataSourceTrends){
             
 			newStatus = [Status insertTrendsStatus:dict withString:self.searchString inManagedObjectContext:self.managedObjectContext];
@@ -553,18 +565,17 @@
 			
 			_currentNextPage = _oldNextPage;
 			
-			[[UIApplication sharedApplication] hideLoadingView];
-			
 			[ErrorNotification showLoadingError];
 		}
+		
 		if (completion) {
 			completion();
 		}
+		
+		[[UIApplication sharedApplication] hideLoadingView];
+		
 	}];
 
-	
-	
-	
 	if (self.dataSource == CastViewDataSourceFriendsTimeline) {
 		[client getFriendsTimelineSinceID:nil
 									maxID:(long long)0
@@ -602,6 +613,21 @@
 	_refreshFlag = YES;
 	_currentNextPage = 1;
     [self loadMoreDataCompletion:NULL];
+}
+
+- (void)switchToSearchCards:(void (^)())completion
+{
+	if ([self inSearchMode]) {
+		[[UIApplication sharedApplication] showLoadingView];
+		_lastStatusID = 0;
+		self.fetchedResultsController = nil;
+		self.fetchedResultsController.delegate = nil;
+		self.castViewManager.fetchedResultsController = nil;
+		self.castViewManager.fetchedResultsController = self.fetchedResultsController;
+		[self refresh];
+	} else {
+		[self pushCardWithCompletion:completion];
+	}
 }
 
 #pragma mark - CoreDataTableViewController methods

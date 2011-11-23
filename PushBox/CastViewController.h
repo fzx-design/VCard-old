@@ -86,7 +86,10 @@
 
 
 - (void)pushCardWithCompletion:(void (^)())completion;
-- (BOOL)popCardWithCompletion:(void (^)())completion;
+- (void)popCardWithCompletion:(void (^)())completion;
+- (void)switchToSearchCards:(void (^)())completion;
+- (void)clearCardStack;
+- (BOOL)inSearchMode;
 
 - (void)getUnread;
 

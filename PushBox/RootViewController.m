@@ -1,3 +1,4 @@
+
 //
 //  RootViewController.m
 //  PushBox
@@ -37,7 +38,6 @@
 #define kSearchBGInputWait CGRectMake(0, 2, 1024, 42)
 
 #define kUserDefaultKeyFirstTime @"kUserDefaultKeyFirstTime"
-
 
 @interface RootViewController(private)
 - (void)showBottomStateView;
@@ -280,6 +280,9 @@
     }
 }
 
+#pragma mark - Show & Hide Views
+
+
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
 	if (buttonIndex == alertView.cancelButtonIndex) {
@@ -438,12 +441,8 @@
     //    [self.bottomStateLabel setHidden:NO];
 }
 
-- (void)showSearchBottomView
-{
-    //	[self.bottomSearchBG setHidden:NO];
-    //	[self.bottomSearchTextField setHidden:NO];
-    //    [self.bottomStateLabel setHidden:YES];
-}
+#pragma mark - Show Timeline
+
 
 - (void)showFriendsTimeline:(id)sender
 {
@@ -451,25 +450,29 @@
         [self hideSearchView];
     
     self.castViewController.dataSource = CastViewDataSourceFriendsTimeline;
-	BOOL needHideBottomStateView = [self.castViewController popCardWithCompletion:^{
+	[self.castViewController popCardWithCompletion:^{
         self.dockViewController.showFavoritesButton.selected = NO;
         self.dockViewController.showFavoritesButton.userInteractionEnabled = YES;
     }];
 	
 	[self hideSearchBottomView];
-	
-	if (needHideBottomStateView) {
-		[self hideBottomStateView];
-		self.dockViewController.refreshNotiImageView.hidden = self.dockViewController.refreshNotiImageShown;
-	} else {
-		
-		if (self.castViewController.dataSource == CastViewDataSourceSearch) {
-			[self showSearchBottomView];
-		}
-		
+}
+
+- (void)showPrevTimeline:(id)sender
+{
+	if (self.castViewController.infoStack.count > 1) {
+		[self.castViewController popCardWithCompletion:^{
+			
+			//TODO operation that should be finished when back
+			
+		}];
 		[self popBottomStateView];
 		[_statusTypeStack removeLastObject];
 		self.bottomStateLabel.text = [_statusTypeStack lastObject];
+	} else {
+		[self showFriendsTimeline:nil];
+		[self hideBottomStateView];
+		self.dockViewController.refreshNotiImageView.hidden = self.dockViewController.refreshNotiImageShown;
 	}
 }
 
@@ -478,7 +481,7 @@
     self.castViewController.dataSource = CastViewDataSourceUserTimeline;
     self.castViewController.user = user;
     
-	NSString* string = [NSString stringWithFormat:NSLocalizedString(@"%@的微博", nil), user.screenName];
+	NSString* string = [NSString stringWithFormat:NSLocalizedString(@"%@ 的微博", nil), user.screenName];
     self.bottomStateLabel.text = string;
 	[_statusTypeStack addObject:string];
     
@@ -497,18 +500,22 @@
 {
     self.castViewController.dataSource = CastViewDataSourceSearch;
     
-    NSString* string = [[[NSString alloc] initWithFormat:@"包含%@的微博", searchString] autorelease];
-	[_statusTypeStack addObject:self.bottomStateLabel.text];
+    NSString* string = [[[NSString alloc] initWithFormat:@"包含 %@ 的微博", searchString] autorelease];
 	[_statusTypeStack addObject:string];
 	
     self.bottomStateLabel.text = NSLocalizedString(string, nil); 
     self.bottomStateTextField.text = @"";
     self.bottomStateTextField.hidden = YES;
-    [self showBottomStateView];
+	
+	if (![self.castViewController inSearchMode]) {
+		[self showBottomStateView];
+	}
     
-    [self.castViewController pushCardWithCompletion:^{
-        [self moveCardIntoView];
-    }];
+	[self.castViewController switchToSearchCards:^{
+		
+		[self moveCardIntoView];
+	}];
+	
 	self.dockViewController.refreshNotiImageView.hidden = YES;
 }
 
@@ -516,8 +523,7 @@
 {
     self.castViewController.dataSource = CastViewDataSourceTrends;
     
-    NSString* string = [[[NSString alloc] initWithFormat:@"包含%@的微博", searchString] autorelease];
-	[_statusTypeStack addObject:self.bottomStateLabel.text];
+    NSString* string = [[[NSString alloc] initWithFormat:@"包含 %@ 的微博", searchString] autorelease];
 	[_statusTypeStack addObject:string];
 	
     self.bottomStateLabel.text = NSLocalizedString(string, nil); 
@@ -905,7 +911,7 @@
         [self hideCommandCenter];
     }
     if (button.selected) {
-        [self performSelector:@selector(showFriendsTimeline:) withObject:nil afterDelay:1.0];
+        [self performSelector:@selector(showPrevTimeline:) withObject:nil afterDelay:1.0];
         button.selected = NO;
     }
     else {
@@ -1120,26 +1126,19 @@
 
 - (void)searchButtonClicked:(UIButton*) button
 {
-    //	if (self.castViewController.dataSource != CastViewDataSourceFriendsTimeline) {
-    //		while (self.castViewController.infoStack.count > 1) {
-    //			[self.castViewController.infoStack removeLastObject];
-    //		}
-    //		[_statusTypeStack removeAllObjects];
-    //		[self hideBottomStateView];
-    //		[self.castViewController popCardWithCompletion:nil];
-    //	}
+
+	[self.castViewController clearCardStack];
 	
 	if (self.dockViewController.commandCenterButton.selected) {
 		[self hideCommandCenter];
 	}
-	
-	self.dockViewController.showFavoritesButton.selected = NO;
-	
+		
     //
     [self.bottomSearchTextField setInputAccessoryView:self.bottomSearchView];
     
     if (button.selected) {
         [self hideSearchView];
+		[self showPrevTimeline:nil];
     }
     else {
         [self showSearchView];
