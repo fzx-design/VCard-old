@@ -55,6 +55,7 @@
 	BOOL _commandCenterFlag;
 	BOOL _refreshFlag;
 	BOOL _newStatusFlag;
+	BOOL _inSearchMode;
 	
 	int _trackingIndex;
 	
@@ -65,6 +66,7 @@
     UIImageView* _bottomSearchBG;
 	
 	UIImage *_tmpImage;
+	UIImageView *_searchCoverImageView;
     
     Boolean isSearchReturn;
 }

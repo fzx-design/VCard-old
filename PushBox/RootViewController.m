@@ -134,7 +134,8 @@
     self.notiDisplayNewCommentsButton = nil;
 }
 
-+ (void)initialize {
++ (void)initialize 
+{
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
 	NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:30];
 	[dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultKeyFirstTime];
@@ -146,6 +147,8 @@
 	[[UIApplication sharedApplication] showLoadingView];
 	_refreshFlag = NO;
 	_newStatusFlag = NO;
+	_inSearchMode = NO;
+	
 	preNewCommentCount = 0;
 	preNewFollowerCount = 0;
 	preNewMentionCount = 0;
@@ -176,6 +179,18 @@
 		}];
 		
     }];
+	
+	_searchCoverImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail_bg.png"]];
+	UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(searchCoverImageViewClicked:)];
+    tapGesture.numberOfTapsRequired = 1;
+    tapGesture.numberOfTouchesRequired = 1;
+	[_searchCoverImageView addGestureRecognizer:tapGesture];
+	_searchCoverImageView.frame = CGRectMake(0, 0, 1024, 748);
+	_searchCoverImageView.alpha = 0.0;
+	_searchCoverImageView.userInteractionEnabled = YES;
+	[self.view addSubview:_searchCoverImageView];
+	[tapGesture release];
+	
     
     [client getUser:[WeiboClient currentUserID]];
     
@@ -280,6 +295,13 @@
     }
 }
 
+#pragma mark - Tools
+
+- (BOOL)shouldShowBottomSearchOrNot
+{
+	return  _inSearchMode && self.castViewController.infoStack.count == 1;
+}
+
 #pragma mark - Show & Hide Views
 
 
@@ -325,6 +347,12 @@
 			[_tmpImage release];
 		}
 		_tmpImage = nil;
+		
+		if (_searchCoverImageView != nil) {
+			[_searchCoverImageView release];
+		}
+		_searchCoverImageView = nil;
+		
 		_statusTypeStack = nil;
 		
 		self.bottomStateInvisibleView.image = nil;
@@ -361,6 +389,112 @@
         frame.origin.x -= 782;
         self.castViewController.castView.frame = frame;
     }];
+;}
+
+- (void)showSearchView 
+{
+
+	[UIView animateWithDuration:0.3 animations:^{
+		_searchCoverImageView.alpha = 1.0;
+	}];
+	
+    self.dockViewController.searchButton.selected = YES;
+    
+	self.bottomSearchView.hidden = NO;
+    
+    isSearchReturn = NO;
+    
+    self.bottomSearchTextField.hidden = NO;
+    self.bottomSearchTextField.frame = kSearchTextFieldFrame;
+    self.bottomSearchBG.hidden = NO;
+    self.bottomSearchBG.frame = kSearchBGFrame;
+    
+    [self.view addSubview:self.bottomSearchBG];
+    [self.view addSubview:self.bottomSearchTextField];
+    
+    [self.bottomSearchTextField becomeFirstResponder];
+    
+    [self.bottomSearchView addSubview:self.bottomSearchBG]; 
+    [self.bottomSearchView addSubview:self.bottomSearchTextField]; 
+}
+
+- (void)showSearchWaitingView 
+{
+	[UIView animateWithDuration:0.3 animations:^{
+		_searchCoverImageView.alpha = 0.0;
+	}];
+	
+    self.dockViewController.searchButton.selected = YES;
+    
+	self.bottomStateLabel.hidden = YES;
+	
+	self.bottomSearchView.hidden = NO;
+    
+    self.bottomSearchTextField.hidden = NO;
+    self.bottomSearchTextField.frame = kSearchTextFieldInputWait;
+    self.bottomSearchBG.hidden = NO;
+    self.bottomSearchBG.frame = kSearchBGInputWait;
+    
+    [self.bottomSearchBG removeFromSuperview];
+    [self.bottomSearchTextField removeFromSuperview];
+    [self.bottomStateView addSubview:self.bottomSearchBG]; 
+    [self.view addSubview:self.bottomSearchTextField];
+	
+	self.bottomSearchTextField.alpha = 0.0;
+	[UIView animateWithDuration:1.0 animations:^{
+		self.bottomSearchTextField.alpha = 1.0;
+	}];
+    
+    [self.bottomSearchTextField resignFirstResponder];
+}
+
+- (void)hideSearchView
+{	
+	[UIView animateWithDuration:0.3 animations:^{
+		_searchCoverImageView.alpha = 0.0;
+	}];
+		
+    self.dockViewController.searchButton.selected = NO;
+    
+	self.bottomStateLabel.hidden = NO;
+	
+	self.bottomSearchView.hidden = YES;
+    
+    self.bottomSearchTextField.hidden = YES;
+    self.bottomSearchTextField.frame = kSearchTextFieldFrame;
+    self.bottomSearchBG.hidden = YES;
+    self.bottomSearchBG.frame = kSearchBGFrame;
+    
+    [self.bottomSearchBG removeFromSuperview];
+    [self.bottomSearchTextField removeFromSuperview];
+    [self.view addSubview:self.bottomSearchBG];
+    [self.view addSubview:self.bottomSearchTextField];
+    
+    [self.bottomSearchTextField resignFirstResponder];
+}
+
+- (void)searchButtonClicked:(UIButton*) button
+{
+	
+	[self.castViewController clearCardStack];
+	
+	if (self.dockViewController.commandCenterButton.selected) {
+		[self hideCommandCenter];
+	}
+	
+    //
+    [self.bottomSearchTextField setInputAccessoryView:self.bottomSearchView];
+    
+    if (button.selected) {
+        [self hideSearchView];
+		[self showPrevTimeline:nil];
+    }
+    else {
+		if (self.castViewController.infoStack.count != 0) {
+			[self showPrevTimeline:nil];
+		}
+        [self showSearchView];
+    }
 }
 
 - (void)showBottomStateView
@@ -374,41 +508,15 @@
     
     [self.bottomStateFrameView bringSubviewToFront:self.bottomStateView];
     self.bottomBackButton.enabled = YES;
-}
-
-- (void)showBottomStateViewForSearch
-{
-    self.dockViewController.searchButton.selected = YES;
-    
-    [UIView animateWithDuration:0.28 animations:^(void) {
-		self.bottomStateView.hidden = NO;
-        CGRect frame = self.bottomStateView.frame;
-        frame.origin.y = 768 - 352 - 46 - 18;
-        [self.bottomStateView setFrame:frame];
-    }];
-    
-    self.bottomStateTextField.text = @"";
-    self.bottomStateLabel.text = @"";
-    self.bottomStateTextField.hidden = NO;
-    self.bottomStateLabel.hidden = YES;
-}
-
-- (void)hideBottomStateViewForSearch
-{
-    self.dockViewController.searchButton.selected = NO;
-    [self.bottomStateTextField resignFirstResponder];
-    
-    [UIView animateWithDuration:0.28 animations:^(void) {
-		self.bottomStateView.hidden = YES;
-        CGRect frame = self.bottomStateView.frame;
-        frame.origin.y = 618;
-        [self.bottomStateView setFrame:frame];
-    }];
-    
-    self.bottomStateTextField.text = @"";
-    self.bottomStateLabel.text = @"";
-    self.bottomStateTextField.hidden = YES;
-    self.bottomStateLabel.hidden = NO;
+	
+	if (self.castViewController.dataSource == CastViewDataSourceSearch) {
+		[self showSearchWaitingView];
+	} else {
+		[self hideSearchView];
+		if (_inSearchMode) {
+			self.dockViewController.searchButton.selected = YES;
+		}
+	}
 }
 
 - (void)hideBottomStateView
@@ -424,6 +532,9 @@
 {
 	[self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimationUp] forKey:@"animation"];
     [self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
+	if (_inSearchMode && self.castViewController.infoStack.count == 2) {
+		[self showSearchWaitingView];
+	}
 }
 
 - (void)shouldShowUserTimelineNotification:(id)sender
@@ -434,18 +545,14 @@
     [self performSelector:@selector(showUserTimeline:) withObject:[sender object] afterDelay:1.0];
 }
 
-- (void)hideSearchBottomView
-{
-    //	[self.bottomSearchBG setHidden:YES];
-    //	[self.bottomSearchTextField setHidden:YES];
-    //    [self.bottomStateLabel setHidden:NO];
-}
 
 #pragma mark - Show Timeline
 
 
 - (void)showFriendsTimeline:(id)sender
 {
+	_inSearchMode = NO;
+	
     if (self.dockViewController.searchButton.selected)
         [self hideSearchView];
     
@@ -454,8 +561,6 @@
         self.dockViewController.showFavoritesButton.selected = NO;
         self.dockViewController.showFavoritesButton.userInteractionEnabled = YES;
     }];
-	
-	[self hideSearchBottomView];
 }
 
 - (void)showPrevTimeline:(id)sender
@@ -466,12 +571,20 @@
 			//TODO operation that should be finished when back
 			
 		}];
+		
 		[self popBottomStateView];
 		[_statusTypeStack removeLastObject];
-		self.bottomStateLabel.text = [_statusTypeStack lastObject];
+		NSString *string =  [_statusTypeStack lastObject];
+		self.bottomStateLabel.text = string;
+		if ([string isEqualToString:[NSString stringWithString:NSLocalizedString(@"收藏", nil)]]) {
+			self.dockViewController.showFavoritesButton.selected = YES;
+		} else {
+			self.dockViewController.showFavoritesButton.selected = NO;
+		}
 	} else {
-		[self showFriendsTimeline:nil];
+		
 		[self hideBottomStateView];
+		[self showFriendsTimeline:nil];
 		self.dockViewController.refreshNotiImageView.hidden = self.dockViewController.refreshNotiImageShown;
 	}
 }
@@ -486,10 +599,10 @@
 	[_statusTypeStack addObject:string];
     
     self.dockViewController.showFavoritesButton.selected = NO;
+		
     [self showBottomStateView];
-	
-    //	[self hideSearchBottomView];
-    
+	self.dockViewController.showFavoritesButton.selected = NO;
+	    
     [self.castViewController pushCardWithCompletion:^{
         [self moveCardIntoView];
     }];
@@ -498,6 +611,8 @@
 
 - (void)showSearchTimeline:(NSString *)searchString
 {
+	_inSearchMode = YES;
+	
     self.castViewController.dataSource = CastViewDataSourceSearch;
     
     NSString* string = [[[NSString alloc] initWithFormat:@"包含 %@ 的微博", searchString] autorelease];
@@ -507,12 +622,12 @@
     self.bottomStateTextField.text = @"";
     self.bottomStateTextField.hidden = YES;
 	
-	if (![self.castViewController inSearchMode]) {
+	if (!self.castViewController.inSearchMode) {
 		[self showBottomStateView];
+		self.dockViewController.showFavoritesButton.selected = NO;
 	}
     
 	[self.castViewController switchToSearchCards:^{
-		
 		[self moveCardIntoView];
 	}];
 	
@@ -529,7 +644,9 @@
     self.bottomStateLabel.text = NSLocalizedString(string, nil); 
     self.bottomStateTextField.text = @"";
     self.bottomStateTextField.hidden = YES;
+		
     [self showBottomStateView];
+	self.dockViewController.showFavoritesButton.selected = NO;
     
     [self.castViewController pushCardWithCompletion:^{
         [self moveCardIntoView];
@@ -543,10 +660,10 @@
 	NSString *string = [NSString stringWithString:NSLocalizedString(@"收藏", nil)];
     self.bottomStateLabel.text = string;
 	[_statusTypeStack addObject:string];
+		
     [self showBottomStateView];
-    
-	[self hideSearchBottomView];
-	
+	self.dockViewController.showFavoritesButton.selected = NO;
+    	
     [self.castViewController pushCardWithCompletion:^{
         self.dockViewController.showFavoritesButton.userInteractionEnabled = YES;
         [self moveCardIntoView];
@@ -560,10 +677,10 @@
 	NSString *string = [NSString stringWithString:NSLocalizedString(@"@我的微博", nil)];
     self.bottomStateLabel.text = string;
 	[_statusTypeStack addObject:string];
+		
     [self showBottomStateView];
-	
-	[self hideSearchBottomView];
-    
+	self.dockViewController.showFavoritesButton.selected = NO;
+	    
     [self.castViewController pushCardWithCompletion:^{
         [self moveCardIntoView];
     }];
@@ -1064,87 +1181,6 @@
     }
 }
 
-- (void)showSearchView 
-{
-    self.dockViewController.searchButton.selected = YES;
-    
-	self.bottomSearchView.hidden = NO;
-    
-    isSearchReturn = NO;
-    
-    self.bottomSearchTextField.hidden = NO;
-    self.bottomSearchTextField.frame = kSearchTextFieldFrame;
-    self.bottomSearchBG.hidden = NO;
-    self.bottomSearchBG.frame = kSearchBGFrame;
-    
-    [self.view addSubview:self.bottomSearchBG];
-    [self.view addSubview:self.bottomSearchTextField];
-    
-    [self.bottomSearchTextField becomeFirstResponder];
-    
-    [self.bottomSearchView addSubview:self.bottomSearchBG]; 
-    [self.bottomSearchView addSubview:self.bottomSearchTextField]; 
-}
-
-- (void)showSearchWaitingView 
-{
-    self.dockViewController.searchButton.selected = YES;
-    
-	self.bottomSearchView.hidden = NO;
-    
-    self.bottomSearchTextField.hidden = NO;
-    self.bottomSearchTextField.frame = kSearchTextFieldInputWait;
-    self.bottomSearchBG.hidden = NO;
-    self.bottomSearchBG.frame = kSearchBGInputWait;
-    
-    [self.bottomSearchBG removeFromSuperview];
-    [self.bottomSearchTextField removeFromSuperview];
-    [self.bottomStateView addSubview:self.bottomSearchBG]; 
-    [self.view addSubview:self.bottomSearchTextField]; 
-    
-    [self.bottomSearchTextField resignFirstResponder];
-}
-
-- (void)hideSearchView 
-{
-    self.dockViewController.searchButton.selected = NO;
-    
-	self.bottomSearchView.hidden = YES;
-    
-    self.bottomSearchTextField.hidden = YES;
-    self.bottomSearchTextField.frame = kSearchTextFieldFrame;
-    self.bottomSearchBG.hidden = YES;
-    self.bottomSearchBG.frame = kSearchBGFrame;
-    
-    [self.bottomSearchBG removeFromSuperview];
-    [self.bottomSearchTextField removeFromSuperview];
-    [self.view addSubview:self.bottomSearchBG];
-    [self.view addSubview:self.bottomSearchTextField];
-    
-    [self.bottomSearchTextField resignFirstResponder];
-}
-
-- (void)searchButtonClicked:(UIButton*) button
-{
-
-	[self.castViewController clearCardStack];
-	
-	if (self.dockViewController.commandCenterButton.selected) {
-		[self hideCommandCenter];
-	}
-		
-    //
-    [self.bottomSearchTextField setInputAccessoryView:self.bottomSearchView];
-    
-    if (button.selected) {
-        [self hideSearchView];
-		[self showPrevTimeline:nil];
-    }
-    else {
-        [self showSearchView];
-    }
-}
-
 - (void)showCommandCenter
 {
 	_commandCenterFlag = YES;
@@ -1518,8 +1554,17 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if(!isSearchReturn) {
+		isSearchReturn = YES;
         [self hideSearchView];
-    }
+		if (_inSearchMode) {
+			[self showSearchWaitingView];
+		}
+     }
+}
+
+- (void)searchCoverImageViewClicked:(id)sender
+{
+	[self textFieldDidEndEditing:self.bottomSearchTextField];
 }
 
 @end
