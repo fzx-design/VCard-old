@@ -65,11 +65,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "PushBox/RootViewController.m"
-         timestampString = "343823508.979049"
+         timestampString = "343856279.388482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1583"
-         endingLineNumber = "1583">
+         startingLineNumber = "1593"
+         endingLineNumber = "1593">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -77,11 +77,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "PushBox/RootViewController.m"
-         timestampString = "343568618.936197"
+         timestampString = "343856279.388482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "468"
-         endingLineNumber = "468"
+         startingLineNumber = "478"
+         endingLineNumber = "478"
          landmarkName = "-showSearchWaitingView"
          landmarkType = "5">
       </FileBreakpoint>
@@ -91,11 +91,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "PushBox/RootViewController.m"
-         timestampString = "343655406.023576"
+         timestampString = "343856279.388482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1438"
-         endingLineNumber = "1438"
+         startingLineNumber = "1448"
+         endingLineNumber = "1448"
          landmarkName = "-dockViewController"
          landmarkType = "5">
       </FileBreakpoint>
@@ -105,11 +105,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "PushBox/RootViewController.m"
-         timestampString = "343655406.023576"
+         timestampString = "343856279.388482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1132"
-         endingLineNumber = "1132"
+         startingLineNumber = "1142"
+         endingLineNumber = "1142"
          landmarkName = "-showMessagesCenter"
          landmarkType = "5">
       </FileBreakpoint>
@@ -119,11 +119,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "PushBox/RootViewController.m"
-         timestampString = "343655406.023576"
+         timestampString = "343856279.388482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1522"
-         endingLineNumber = "1522"
+         startingLineNumber = "1532"
+         endingLineNumber = "1532"
          landmarkName = "-messagesViewController"
          landmarkType = "5">
       </FileBreakpoint>
@@ -133,11 +133,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "PushBox/RootViewController.m"
-         timestampString = "343655406.023576"
+         timestampString = "343856279.388482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1063"
-         endingLineNumber = "1063"
+         startingLineNumber = "1073"
+         endingLineNumber = "1073"
          landmarkName = "-hideDockView"
          landmarkType = "5">
       </FileBreakpoint>
@@ -147,11 +147,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "PushBox/RootViewController.m"
-         timestampString = "343655406.023576"
+         timestampString = "343856279.388482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1516"
-         endingLineNumber = "1516"
+         startingLineNumber = "1526"
+         endingLineNumber = "1526"
          landmarkName = "-messagesViewController"
          landmarkType = "5">
       </FileBreakpoint>
@@ -301,11 +301,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "PushBox/RootViewController.m"
-         timestampString = "343823367.102595"
+         timestampString = "343856279.388482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1543"
-         endingLineNumber = "1543"
+         startingLineNumber = "1553"
+         endingLineNumber = "1553"
          landmarkName = "-textFieldShouldReturn:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -315,11 +315,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "PushBox/RootViewController.m"
-         timestampString = "343823396.152094"
+         timestampString = "343856279.388482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1538"
-         endingLineNumber = "1538"
+         startingLineNumber = "1548"
+         endingLineNumber = "1548"
          landmarkName = "-textFieldShouldReturn:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -329,11 +329,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "PushBox/RootViewController.m"
-         timestampString = "343823714.455431"
+         timestampString = "343856279.388482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1554"
-         endingLineNumber = "1554"
+         startingLineNumber = "1564"
+         endingLineNumber = "1564"
          landmarkName = "-textFieldShouldReturn:"
          landmarkType = "5">
       </FileBreakpoint>

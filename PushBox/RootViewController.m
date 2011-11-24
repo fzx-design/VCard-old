@@ -38,6 +38,7 @@
 #define kSearchBGInputWait CGRectMake(0, 2, 1024, 42)
 
 #define kUserDefaultKeyFirstTime @"kUserDefaultKeyFirstTime"
+#define kUserDefaultKeyEmoticonNumber @"kUserDefaultKeyEmoticonNumber"
 
 @interface RootViewController(private)
 - (void)showBottomStateView;
@@ -139,6 +140,7 @@
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
 	NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:30];
 	[dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultKeyFirstTime];
+	[dict setObject:[NSNumber numberWithInt:0] forKey:kUserDefaultKeyEmoticonNumber];
 	[userDefault registerDefaults:dict];
 }
 
@@ -190,17 +192,25 @@
 
 - (void)getEmotions
 {
-    WeiboClient *client = [WeiboClient client];
-    [client setCompletionBlock:^(WeiboClient *client) {
-        if (!client.hasError) {
-            NSArray *dictArray = client.responseJSONObject;
-            for (NSDictionary *dict in dictArray) {
-                [Emotion insertEmotion:dict inManagedObjectContext:self.managedObjectContext];
+    // TODO
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeyFirstTime]) {
+        
+        WeiboClient *client = [WeiboClient client];
+        [client setCompletionBlock:^(WeiboClient *client) {
+            if (!client.hasError) {
+                int sum = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeyFirstTime];
+                NSArray *dictArray = client.responseJSONObject;
+                if (sum < [dictArray count]) {
+                    for (NSDictionary *dict in dictArray) {
+                        [Emotion insertEmotion:dict inManagedObjectContext:self.managedObjectContext];
+                    }
+                }
             }
-        }
-    }];
-	
-    [client getEmotionsWithType:nil language:nil];
+        }];
+        
+        [client getEmotionsWithType:nil language:nil];
+    }
 }
 
 - (void)initCastView
