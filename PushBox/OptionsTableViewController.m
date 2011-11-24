@@ -8,6 +8,7 @@
 
 #import "OptionsTableViewController.h"
 #import "WeiboClient.h"
+#import "PostViewController.h"
 
 @implementation OptionsTableViewController
 
@@ -72,7 +73,7 @@
         case 1:
             return 1;
         case 2:
-            return 3;
+            return 4;
 		case 3:
 			return 2;
 		case 4:
@@ -176,7 +177,22 @@
 					cell.textLabel.text = NSLocalizedString(@"音效", nil);
                     cell.imageView.image = [UIImage imageNamed:@"options_icon_sound.png"];
                     break;
+
+                case 3:
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
 					
+					UISwitch *aSwitch3 = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 94, 27)];
+					aSwitch3.on = [userDefault boolForKey:kUserDefaultKeyAutoLocate];
+					[aSwitch3 addTarget:self 
+                                 action:@selector(autoLocateOn:)
+                       forControlEvents:UIControlEventTouchUpInside];
+                    cell.accessoryView = aSwitch3;
+					[aSwitch3 release];
+					
+					cell.textLabel.text = NSLocalizedString(@"自动定位", nil);
+                    cell.imageView.image = [UIImage imageNamed:@"options_icon_sound.png"];
+                    break;
+
             }
             break;
 		case 3:
@@ -246,6 +262,13 @@
 {
 	BOOL on = sender.on;
 	[[NSUserDefaults standardUserDefaults] setBool:on forKey:kUserDefaultKeySoundEnabled];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)autoLocateOn:(UISwitch *)sender
+{
+	BOOL on = sender.on;
+	[[NSUserDefaults standardUserDefaults] setBool:on forKey:kUserDefaultKeyAutoLocate];
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 

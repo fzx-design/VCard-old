@@ -234,7 +234,7 @@
 - (void)start
 {
 	[[UIApplication sharedApplication] showLoadingView];
-
+    
 	[self initVariables];
 	
 	[self initCastView];
@@ -412,11 +412,11 @@
         frame.origin.x -= 782;
         self.castViewController.castView.frame = frame;
     }];
-;}
+    ;}
 
 - (void)showSearchView 
 {
-
+    
 	[UIView animateWithDuration:0.3 animations:^{
 		_searchCoverImageView.alpha = 1.0;
 	}];
@@ -476,7 +476,7 @@
 	[UIView animateWithDuration:0.3 animations:^{
 		_searchCoverImageView.alpha = 0.0;
 	}];
-		
+    
     self.dockViewController.searchButton.selected = NO;
     
 	self.bottomStateLabel.hidden = NO;
@@ -622,10 +622,10 @@
 	[_statusTypeStack addObject:string];
     
     self.dockViewController.showFavoritesButton.selected = NO;
-		
+    
     [self showBottomStateView];
 	self.dockViewController.showFavoritesButton.selected = NO;
-	    
+    
     [self.castViewController pushCardWithCompletion:^{
         [self moveCardIntoView];
     }];
@@ -667,7 +667,7 @@
     self.bottomStateLabel.text = NSLocalizedString(string, nil); 
     self.bottomStateTextField.text = @"";
     self.bottomStateTextField.hidden = YES;
-		
+    
     [self showBottomStateView];
 	self.dockViewController.showFavoritesButton.selected = NO;
     
@@ -683,10 +683,10 @@
 	NSString *string = [NSString stringWithString:NSLocalizedString(@"收藏", nil)];
     self.bottomStateLabel.text = string;
 	[_statusTypeStack addObject:string];
-		
+    
     [self showBottomStateView];
 	self.dockViewController.showFavoritesButton.selected = NO;
-    	
+    
     [self.castViewController pushCardWithCompletion:^{
         self.dockViewController.showFavoritesButton.userInteractionEnabled = YES;
         [self moveCardIntoView];
@@ -700,10 +700,10 @@
 	NSString *string = [NSString stringWithString:NSLocalizedString(@"@我的微博", nil)];
     self.bottomStateLabel.text = string;
 	[_statusTypeStack addObject:string];
-		
+    
     [self showBottomStateView];
 	self.dockViewController.showFavoritesButton.selected = NO;
-	    
+    
     [self.castViewController pushCardWithCompletion:^{
         [self moveCardIntoView];
     }];
@@ -1359,7 +1359,7 @@
         
         [client getRelationshipWithUser:@"2478499604"];
     }
-        
+    
 	CGRect frame = self.castViewController.view.frame;
     frame.origin.x += 782;
     self.castViewController.view.frame = frame;
@@ -1534,18 +1534,23 @@
 		
 		[ErrorNotification showSearchStringNullError];
 		
+        [self.bottomSearchTextField becomeFirstResponder];
+        
 		return NO;
 	}
-	
-    [textField resignFirstResponder];
-    
-    self.castViewController.searchString = textField.text;
-    
-    [self showSearchTimeline:textField.text];
-    
-    [self showSearchWaitingView];
-	
-    isSearchReturn = YES;
+	else {
+        [textField resignFirstResponder];
+        
+        self.castViewController.searchString = textField.text;
+        
+        [self showSearchTimeline:textField.text];
+        
+        [self showSearchWaitingView];
+        
+        isSearchReturn = YES;
+        
+        return NO;
+    }
     
     return NO;
 }
@@ -1563,7 +1568,7 @@
 		if (_inSearchMode) {
 			[self showSearchWaitingView];
 		}
-     }
+    }
 }
 
 - (void)searchCoverImageViewClicked:(id)sender

@@ -425,6 +425,18 @@ report_completion:
     
 }
 
+- (void)getAddressFromGeoWithCoordinate:(NSString*)coordinate
+{
+    self.path = @"location/geocode/geo_to_address.json";
+    self.httpMethod = HTTPMethodGet;
+    
+    if (coordinate) {
+        [self.params setObject:coordinate forKey:@"coordinate"];
+    }
+    
+    [self sendRequest];
+}
+
 - (void)getFriendsTimelineSinceID:(NSString *)sinceID 
                             maxID:(NSString *)maxID 
                    startingAtPage:(int)page 
@@ -725,6 +737,16 @@ report_completion:
     self.httpMethod = HTTPMethodPost;
     self.path = @"statuses/update.json";
     [self.params setObject:[text URLEncodedString] forKey:@"status"];
+	[self sendRequest];
+}
+
+- (void)post:(NSString *)text cor:(CLLocationCoordinate2D)cor
+{
+    self.httpMethod = HTTPMethodPost;
+    self.path = @"statuses/update.json";
+    [self.params setObject:[text URLEncodedString] forKey:@"status"];
+    [self.params setObject:[[[NSString alloc] initWithFormat:@"%f", cor.latitude] URLEncodedString] forKey:@"lat"];
+    [self.params setObject:[[[NSString alloc] initWithFormat:@"%f", cor.longitude] URLEncodedString] forKey:@"long"];
 	[self sendRequest];
 }
 

@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 #import "ErrorNotification.h"
 #import "PostViewAtTableViewCell.h"
 #import "EmotionsViewController.h"
+
+#define kUserDefaultKeyAutoLocate @"kUserDefaultKeyAutoLocate"
 
 typedef enum {
     PostViewTypePost,
@@ -18,7 +21,7 @@ typedef enum {
 
 @class Status;
 
-@interface PostViewController : UIViewController<UITextViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UIPopoverControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, EmotionsViewControllerDelegate> {
+@interface PostViewController : UIViewController<UITextViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UIPopoverControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, EmotionsViewControllerDelegate, CLLocationManagerDelegate> {
     UILabel *_titleLabel;
     UILabel *_wordsCountLabel;
     UIButton *_cancelButton;
@@ -26,6 +29,10 @@ typedef enum {
     UIButton *_referButton;
     UIButton *_topicButton;
     UIButton *_camaraButton;
+    
+    UIButton *_locationButton;
+    UILabel *_lacationLabel;
+    
     UITextView *_textView;
 	
 	UIImageView *_postingCircleImageView;
@@ -58,6 +65,8 @@ typedef enum {
     int textViewWordsCount;
     
     NSString* _lastChar;
+
+    CLLocationManager* man;
 }
 
 @property(nonatomic, retain) IBOutlet UILabel* titleLabel;
@@ -67,6 +76,8 @@ typedef enum {
 @property(nonatomic, retain) IBOutlet UIButton* referButton;
 @property(nonatomic, retain) IBOutlet UIButton* topicButton;
 @property(nonatomic, retain) IBOutlet UIButton* camaraButton;
+@property(nonatomic, retain) IBOutlet UIButton* locationButton;
+@property(nonatomic, retain) IBOutlet UILabel* locationLabel;
 @property(nonatomic, retain) IBOutlet UITextView* textView;
 @property(nonatomic, retain) IBOutlet UIView* rightView;
 @property(nonatomic, retain) IBOutlet UIView* atView;

@@ -48,6 +48,8 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
     UIImageView *_gifIcon;
     UIButton *_playButton;
     UILabel *_recentActNotifyLabel;
+    UILabel *_locationLabel;
+    UIImageView *_locationIconImageView;
     
     Boolean isTrack;
     
@@ -74,6 +76,8 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
 @property(nonatomic, retain) IBOutlet UITextView* repostTextView;
 @property(nonatomic, retain) IBOutlet UIImageView* repostView;
 @property(nonatomic, retain) IBOutlet UILabel* trackLabel;
+@property(nonatomic, retain) IBOutlet UIImageView* locationIconImageView;
+@property(nonatomic, retain) IBOutlet UILabel* locationLabel;
 @property(nonatomic, retain) IBOutlet UIView* trackView;
 @property(nonatomic, retain) IBOutlet UIImageView* imageCoverImageView;
 @property(nonatomic, retain) IBOutlet UIImageView* musicBackgroundImageView;

@@ -18,7 +18,6 @@
 
 #define LabelRedColor [UIColor colorWithRed:143/255.0 green:63/255.0 blue:63/255.0 alpha:1.0]
 #define LabelBlackColor [UIColor colorWithRed:100/255.0 green:100/255.0 blue:100/255.0 alpha:1.0]
-
 @implementation PostViewController
 
 @synthesize titleLabel = _titleLabel;
@@ -27,6 +26,7 @@
 @synthesize doneButton = _doneButton;
 @synthesize referButton = _referButton;
 @synthesize topicButton = _topicButton;
+@synthesize locationLabel = _lacationLabel;
 @synthesize camaraButton = _camaraButton;
 @synthesize textView = _textView;
 @synthesize postingRoundImageView = _postingRoundImageView;
@@ -40,6 +40,7 @@
 @synthesize atTableView = _atTableView;
 @synthesize atTextField = _atTextField;
 @synthesize emotionsView = _emotionsView;
+@synthesize locationButton = _locationButton;
 //@synthesize emotionsView = _emotionsView;
 //@synthesize emotionsScrollView = _emotionsScrollView;
 //@synthesize emotionsPageControl = _emotionsPageControl;
@@ -92,6 +93,28 @@
     return self;
 }
 
+- (void)getLoacationInfo 
+{
+    [self.locationLabel setHidden:NO];
+    // TODO    
+    // 如果可以利用本地服务时
+    if([CLLocationManager locationServicesEnabled]){
+        
+        man = [[CLLocationManager alloc] init];
+        
+        man.delegate = self;
+        
+        //        // 发生事件的的最小距离间隔（缺省是不指定）
+        //        man.distanceFilter = kCLDistanceFilterNone;
+        //        
+        //        // 精度 (缺省是Best)
+        //        man.desiredAccuracy = kCLLocationAccuracyBest;
+        
+        // 开始测量
+        [man startUpdatingLocation];
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -99,10 +122,11 @@
     [self.textView becomeFirstResponder];
     
     if (_type == PostViewTypeRepost) {
-        [self.camaraButton removeFromSuperview];
-        self.titleLabel.text = NSLocalizedString(@"转发微博", nil);
-        self.camaraButton = nil;
+        //        [self.camaraButton removeFromSuperview];
+        //        self.camaraButton = nil;
+        [self.camaraButton setEnabled:NO];
         
+        self.titleLabel.text = NSLocalizedString(@"转发微博", nil);
         if (self.targetStatus.repostStatus) {
 			self.textView.text = [NSString stringWithFormat:NSLocalizedString(@" //@%@:%@", nil), 
                                   self.targetStatus.author.screenName,
@@ -115,6 +139,9 @@
 		range.location = 0;
 		range.length = 0;
 		self.textView.selectedRange = range;
+        
+        [self.locationLabel setHidden:YES];
+        [self.locationButton setHidden:YES];
     }
 	
 	[self textViewDidChange:self.textView];
@@ -127,6 +154,19 @@
 	self.rightView.layer.anchorPoint = CGPointMake(0, 0.4);
 	self.atView.layer.anchorPoint = CGPointMake(0.5, 0);
     self.textView.delegate = self;
+    
+    // Location
+    if (_type != PostViewTypeRepost) {
+        NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+        Boolean isAutoLocate = [[userDefault objectForKey:kUserDefaultKeyAutoLocate] boolValue];
+        if (isAutoLocate) {
+            self.locationButton.selected = YES;
+            [self getLoacationInfo];
+        }
+        else {
+            self.locationButton.selected = NO;
+        }
+    }
 }
 
 - (void)textViewDidChange:(UITextView *)textView
@@ -148,18 +188,30 @@
     self.wordsCountLabel.text = [NSString stringWithFormat:@"%d", words];
     self.doneButton.enabled = words >= 0;
     
-	if (words >= 0) {
-		self.wordsCountLabel.text = [NSString stringWithFormat:@"%d", words];
-		self.wordsCountLabel.textColor = LabelBlackColor;
-	} else {
-		self.wordsCountLabel.text = [NSString stringWithFormat:@"超出 %d", -words];
-		self.wordsCountLabel.textColor = LabelRedColor;
-	}
-	
+    if (words >= 0) {
+        self.wordsCountLabel.text = [NSString stringWithFormat:@"%d", words];
+        self.wordsCountLabel.textColor = LabelBlackColor;
+    } else {
+        self.wordsCountLabel.text = [NSString stringWithFormat:@"超出 %d", -words];
+        self.wordsCountLabel.textColor = LabelRedColor;
+    }
+    
     //
     if ((NSString*)_lastChar && [(NSString*)_lastChar compare:@"@"] == NSOrderedSame) {
         NSLog(@"!!!!!!!!!!!!%@", _lastChar);
         [self atButtonClicked:nil];
+    }
+}
+
+- (IBAction)locationButtonClicked:(UIButton*)sender {    
+    if (sender.selected) {
+        sender.selected = NO;
+        [self.locationLabel setHidden:YES];
+    }
+    else {
+        sender.selected = YES;
+        [self.locationLabel setHidden:NO];
+        [self getLoacationInfo];
     }
 }
 
@@ -183,19 +235,19 @@
     [_atBgButton addTarget:self action:@selector(dismissAtView) forControlEvents:UIControlEventTouchUpInside];
     [superView addSubview:_atBgButton];
     
-	[superView addSubview:self.atView];
+    [superView addSubview:self.atView];
     CGRect frame = self.atView.frame;
     frame.origin = CGPointMake(200, 105);
     self.atView.frame = frame;
     
-	[self.atView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
-	
+    [self.atView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
+    
     self.atTextField.text = @"";
     [self.atTextField becomeFirstResponder];
     
-	[UIView animateWithDuration:1.0 animations:^{
-		self.atView.alpha = 1.0;
-	}];
+    [UIView animateWithDuration:1.0 animations:^{
+        self.atView.alpha = 1.0;
+    }];
     
     [self atTextFieldEditingBegan];
 }
@@ -209,28 +261,28 @@
     [_emotionBgButton addTarget:self action:@selector(dismissEmotionsView) forControlEvents:UIControlEventTouchUpInside];
     [superView addSubview:_emotionBgButton];
     
-	[superView addSubview:self.emotionsView];
+    [superView addSubview:self.emotionsView];
     CGRect frame = self.emotionsView.frame;
     frame.origin = CGPointMake(321, 106);
     self.emotionsView.frame = frame;
     [_emotionsViewController.scrollView scrollsToTop];
     
-	[self.emotionsView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
-	
-	[UIView animateWithDuration:1.0 animations:^{
-		self.emotionsView.alpha = 1.0;
-	}];
+    [self.emotionsView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
+    
+    [UIView animateWithDuration:1.0 animations:^{
+        self.emotionsView.alpha = 1.0;
+    }];
 }
 
 - (void)dismissView
 {
-	if (self.rightView.superview) {
-		[self.rightView removeFromSuperview];
-	}
-	if (self.atView.superview) {
-		[self.atView removeFromSuperview];
-	}
-	[self.textView resignFirstResponder];
+    if (self.rightView.superview) {
+        [self.rightView removeFromSuperview];
+    }
+    if (self.atView.superview) {
+        [self.atView removeFromSuperview];
+    }
+    [self.textView resignFirstResponder];
     [[UIApplication sharedApplication] dismissModalViewController];
 }
 
@@ -251,95 +303,95 @@
 
 - (void)dismissAtView
 {
-	if (self.atView.superview) {
-		[UIView animateWithDuration:0.3 
-						 animations:^(){
+    if (self.atView.superview) {
+        [UIView animateWithDuration:0.3 
+                         animations:^(){
                              self.atView.alpha = 0.0;
                          } 
-						 completion:^(BOOL finished) {
+                         completion:^(BOOL finished) {
                              [self.atView removeFromSuperview];
                              self.atView.alpha = 1.0;
                          }];
-	}
+    }
     
     [_atBgButton removeFromSuperview];
     
-	[self.textView becomeFirstResponder];
+    [self.textView becomeFirstResponder];
 }
 
 - (void)dismissEmotionsView
 {
-	if (self.emotionsView.superview) {
-		[UIView animateWithDuration:0.3 
-						 animations:^(){
+    if (self.emotionsView.superview) {
+        [UIView animateWithDuration:0.3 
+                         animations:^(){
                              self.emotionsView.alpha = 0.0;
                          } 
-						 completion:^(BOOL finished) {
+                         completion:^(BOOL finished) {
                              [self.emotionsView removeFromSuperview];
                              self.emotionsView.alpha = 1.0;
                          }];
-	}
+    }
     
     [_emotionBgButton removeFromSuperview];
     
-	[self.textView becomeFirstResponder];
+    [self.textView becomeFirstResponder];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-	if (buttonIndex == actionSheet.destructiveButtonIndex) {
+    if (buttonIndex == actionSheet.destructiveButtonIndex) {
         [self dismissView];
-	}
+    }
 }
 
 - (void)showPostingView
 {
-	_postingCircleImageView.alpha = 1.0;
-	_postingRoundImageView.alpha = 1.0;
-	
-	CABasicAnimation *rotationAnimation =[CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-	rotationAnimation.duration = 1.0;
-	rotationAnimation.fromValue = [NSNumber numberWithFloat:0.0];
-	rotationAnimation.toValue = [NSNumber numberWithFloat:-2.0 * M_PI];
-	rotationAnimation.repeatCount = 65535;
-	[_postingCircleImageView.layer addAnimation:rotationAnimation forKey:@"kAnimationLoad"];
+    _postingCircleImageView.alpha = 1.0;
+    _postingRoundImageView.alpha = 1.0;
+    
+    CABasicAnimation *rotationAnimation =[CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+    rotationAnimation.duration = 1.0;
+    rotationAnimation.fromValue = [NSNumber numberWithFloat:0.0];
+    rotationAnimation.toValue = [NSNumber numberWithFloat:-2.0 * M_PI];
+    rotationAnimation.repeatCount = 65535;
+    [_postingCircleImageView.layer addAnimation:rotationAnimation forKey:@"kAnimationLoad"];
 }
 
 - (void)hidePostingView
 {
-	[UIView animateWithDuration:1.0 animations:^{
-		_postingRoundImageView.alpha = 0.0;
-		_postingCircleImageView.alpha = 0.0;
+    [UIView animateWithDuration:1.0 animations:^{
+        _postingRoundImageView.alpha = 0.0;
+        _postingCircleImageView.alpha = 0.0;
     } completion:^(BOOL finished) {
-		[_postingCircleImageView.layer removeAnimationForKey:@"kAnimationLoad"];
-	}];
+        [_postingCircleImageView.layer removeAnimationForKey:@"kAnimationLoad"];
+    }];
 }
 
 - (IBAction)doneButtonClicked:(id)sender {
     NSString *status = self.textView.text;
     
-	if (!status.length) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"错误", nil)
+    if (!status.length) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"错误", nil)
                                                         message:NSLocalizedString(@"微博内容不能为空", nil)
                                                        delegate:self
                                               cancelButtonTitle:NSLocalizedString(@"确定", nil)
                                               otherButtonTitles:nil];
-		[alert show];
+        [alert show];
         [alert release];
-		return;
-	}
+        return;
+    }
     
-	WeiboClient *client = [WeiboClient client];
-	
-	[self showPostingView];
+    WeiboClient *client = [WeiboClient client];
+    
+    [self showPostingView];
     [client setCompletionBlock:^(WeiboClient *client) {
-		[self hidePostingView];
+        [self hidePostingView];
         if (!client.hasError) {
-			[self dismissView];
-			[[UIApplication sharedApplication] showOperationDoneView];
+            [self dismissView];
+            [[UIApplication sharedApplication] showOperationDoneView];
         } else {
-			[ErrorNotification showPostError];
-		}
+            [ErrorNotification showPostError];
+        }
     }];
     
     if (_type == PostViewTypeRepost) {
@@ -353,7 +405,12 @@
             [client post:status withImage:self.rightImageView.image];
         }
         else {
-            [client post:status];
+            if (self.locationButton.selected) {
+                [client post:status cor:man.location.coordinate];
+            }
+            else {
+                [client post:status];
+            }
         }
     }
     
@@ -504,53 +561,53 @@
 
 - (IBAction)topicButtonClicked:(id)sender {
     NSString *text = self.textView.text;
-	text = [text stringByAppendingString:@"##"];
-	self.textView.text = text;
-	int length = text.length;
-	NSRange range;
-	range.location = length-1;
-	range.length = 0;
-	self.textView.selectedRange = range;
+    text = [text stringByAppendingString:@"##"];
+    self.textView.text = text;
+    int length = text.length;
+    NSRange range;
+    range.location = length-1;
+    range.length = 0;
+    self.textView.selectedRange = range;
 }
 
 - (IBAction)camaraButtonClicked:(id)sender {
     UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
-	ipc.delegate = self;
-	ipc.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
+    ipc.delegate = self;
+    ipc.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
     
-	_pc = [[UIPopoverController alloc] initWithContentViewController:ipc];
-	[ipc release];
-	
-	self.pc.delegate = self;
-	
-	[self.textView resignFirstResponder];
-	[self.pc presentPopoverFromRect:self.camaraButton.bounds inView:self.camaraButton
+    _pc = [[UIPopoverController alloc] initWithContentViewController:ipc];
+    [ipc release];
+    
+    self.pc.delegate = self;
+    
+    [self.textView resignFirstResponder];
+    [self.pc presentPopoverFromRect:self.camaraButton.bounds inView:self.camaraButton
            permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (IBAction)removeImageButtonClicked:(id)sender {
     self.camaraButton.hidden = NO;
-	[UIView animateWithDuration:0.3 animations:^{
-		self.rightView.alpha = 0.0;
-	} completion:^(BOOL fin) {
-		if (fin) {
+    [UIView animateWithDuration:0.3 animations:^{
+        self.rightView.alpha = 0.0;
+    } completion:^(BOOL fin) {
+        if (fin) {
             [self.rightView removeFromSuperview];
         }
-	}];
+    }];
 }
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
     self.pc = nil;
-	[self.textView becomeFirstResponder];
+    [self.textView becomeFirstResponder];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-	UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
-	[self.pc dismissPopoverAnimated:YES];
-	self.pc = nil;
-	
+    UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
+    [self.pc dismissPopoverAnimated:YES];
+    self.pc = nil;
+    
     CGRect frame = self.rightView.frame;
     frame.origin = CGPointMake(737, 42);
     self.rightView.frame = frame;
@@ -560,12 +617,12 @@
     
     self.camaraButton.hidden = YES;
     
-	UIView *superView = [self.view superview];
-	[superView addSubview:self.rightView];
-	self.rightView.alpha = 1.0;
-	[self.rightView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
-	
-	[self.textView becomeFirstResponder];
+    UIView *superView = [self.view superview];
+    [superView addSubview:self.rightView];
+    self.rightView.alpha = 1.0;
+    [self.rightView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
+    
+    [self.textView becomeFirstResponder];
 }
 
 #pragma - UITableViewDataSource
@@ -615,7 +672,7 @@
     self.textView.selectedRange = range;
     
     [self dismissEmotionsView];
-
+    
 }
 
 #pragma - UITextFieldDelegate
@@ -641,6 +698,86 @@
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     _lastChar = [text retain];
     return YES;
+}
+
+#pragma - CoreLoction
+// 如果GPS测量成果以下的函数被调用
+- (void)locationManager:(CLLocationManager *)manager
+    didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation{
+    
+    //    // 取得经纬度
+    //    CLLocationCoordinate2D coordinate = newLocation.coordinate;
+    //    CLLocationDegrees latitude = coordinate.latitude;
+    //    CLLocationDegrees longitude = coordinate.longitude;
+    //    // 取得精度
+    //    CLLocationAccuracy horizontal = newLocation.horizontalAccuracy;
+    //    CLLocationAccuracy vertical = newLocation.verticalAccuracy;
+    //    // 取得高度
+    //    CLLocationDistance altitude = newLocation.altitude;
+    //    // 取得时刻
+    //    NSDate *timestamp = [newLocation timestamp];
+    //    // 以下面的格式输出 format: <latitude>, <longitude>> +/- <accuracy>m @ <date-time>
+    //    NSLog([newLocation description]);
+    //    // 与上次测量地点的间隔距离
+    //    if(oldLocation != nil){
+    //        CLLocationDistance d = [newLocation getDistanceFrom:oldLocation];
+    //        NSLog([NSString stringWithFormat:@"%f", d]);
+    //    }
+    
+    //    CLGeocoder* glcoder = [[CLGeocoder alloc] init];
+    //    [glcoder reverseGeocodeLocation:manager.location completionHandler:^(NSArray* placemarks, NSError* error) {
+    //        CLPlacemark* pm = [placemarks lastObject];
+    //        NSLog(@"%@", [pm administrativeArea]);
+    //        NSLog(@"%@", [pm country]);
+    //        NSLog(@"%@", [pm inlandWater]);
+    //        NSLog(@"%@", [pm ISOcountryCode]);
+    //        NSLog(@"%@", [pm locality]);
+    //        NSLog(@"%@", [pm name]);
+    //        NSLog(@"%@", [pm ocean]);
+    //        NSLog(@"%@", [pm postalCode]);
+    //        NSLog(@"%@", [pm subAdministrativeArea]);
+    //        NSLog(@"%@", [pm subLocality]);
+    //        NSLog(@"%@", [pm subThoroughfare]);
+    //        NSLog(@"%@", [pm thoroughfare]);
+    //    }];
+    
+    WeiboClient *client = [WeiboClient client];
+    [client setCompletionBlock:^(WeiboClient *client) {
+		[self hidePostingView];
+        if (!client.hasError) {
+            NSDictionary* dic = (NSDictionary*)client.responseJSONObject;
+            dic = (NSDictionary*)[dic objectForKey:@"address"];
+            self.locationLabel.text = [[NSString alloc] initWithFormat:@"%@%@%@", [dic objectForKey:@"city_name"], [dic objectForKey:@"district_name"], [dic objectForKey:@"poi_name"]];
+        } else {
+            // ERROR
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"定位失败" 
+                                                                message:nil
+                                                               delegate:nil
+                                                      cancelButtonTitle:NSLocalizedString(@"确定", nil)
+                                                      otherButtonTitles:nil];
+            [alertView show];
+            [alertView release];
+            
+		}
+    }];
+    float lat = (float)newLocation.coordinate.latitude;
+    float lon = (float)newLocation.coordinate.longitude;
+    [client getAddressFromGeoWithCoordinate:[[NSString alloc] initWithFormat:@"%f,%f", lon, lat]];
+    
+    [manager stopUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+       didFailWithError:(NSError *)error{
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"定位失败" 
+                                                        message:nil
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"确定", nil)
+                                              otherButtonTitles:nil];
+    [alertView show];
+    [alertView release];
 }
 
 @end

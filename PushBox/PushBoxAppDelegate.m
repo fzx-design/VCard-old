@@ -9,6 +9,7 @@
 #import "PushBoxAppDelegate.h"
 #import "RootViewController.h"
 #import "WeiboClient.h"
+#import "PostViewController.h"
 
 #define kUserDefaultKeyLoginCount @"kUserDefaultKeyLoginCount"
 
@@ -31,6 +32,7 @@
     [dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultKeySoundEnabled];
 	[dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultKeyImageDownloadingEnabled];    
 	[dict setObject:[NSNumber numberWithInt:0] forKey:kUserDefaultKeyLoginCount];
+	[dict setObject:[NSNumber numberWithInt:1] forKey:kUserDefaultKeyAutoLocate];
 	
 	[userDefault registerDefaults:dict];
 }
@@ -200,7 +202,7 @@
         return __persistentStoreCoordinator;
     }
     
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"VCardHD.sqlite"];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"VCard31.sqlite"];
     
     //
     NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];

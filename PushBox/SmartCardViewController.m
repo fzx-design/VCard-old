@@ -50,6 +50,8 @@
 @synthesize musicCoverImageView = _musicCoverImageView;
 @synthesize playButton = _playButton;
 @synthesize recentActNotifyLabel = _recentActNotifyLabel;
+@synthesize locationIconImageView = _locationIconImageView;
+@synthesize locationLabel = _locationLabel;
 
 @synthesize status = _status;
 @synthesize musicLink = _musicLink;
@@ -868,6 +870,28 @@
     }
 }
 
+- (void)loadLocation
+{
+    if (self.status.lat && self.status.lon && [self.status.lat floatValue] != 0 && [self.status.lon floatValue] != 0) {
+        [self.locationIconImageView setHidden:NO];
+        [self.locationLabel setHidden:NO];
+        
+        WeiboClient *client = [WeiboClient client];
+        [client setCompletionBlock:^(WeiboClient *client) {
+            if (!client.hasError) {
+                NSDictionary* dic = (NSDictionary*)client.responseJSONObject;
+                dic = (NSDictionary*)[dic objectForKey:@"address"];
+                self.locationLabel.text = [[NSString alloc] initWithFormat:@"%@%@%@", [dic objectForKey:@"city_name"], [dic objectForKey:@"district_name"], [dic objectForKey:@"poi_name"]];
+            } else {
+                // ERROR
+            }
+        }];
+        float lat = [self.status.lat floatValue];
+        float lon = [self.status.lon floatValue];
+        [client getAddressFromGeoWithCoordinate:[[NSString alloc] initWithFormat:@"%f,%f", lon, lat]];
+    }
+}
+
 - (void)update
 {	
 	BOOL imageLoadingEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeyImageDownloadingEnabled];
@@ -884,6 +908,9 @@
                                      } completion:^(BOOL fin) {
                                      }];
                                  }                                                                           cacheInContext:self.managedObjectContext];
+    
+    // post location
+    [self loadLocation];
     
     // post text
     [self loadPostWebView];

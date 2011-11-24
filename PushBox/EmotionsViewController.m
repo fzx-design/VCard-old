@@ -44,7 +44,7 @@
     NSEntityDescription *entityDescription = [NSEntityDescription                                                  entityForName:@"Emotion" inManagedObjectContext:context];
     NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
     [request setEntity:entityDescription];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:[[[NSString alloc] initWithFormat:@"category == \"心情\" or category == \"休闲\" or category == \"搞怪\""] autorelease]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:[[[NSString alloc] initWithFormat:@"category == \"心情\" or category == \"搞怪\""] autorelease]];
     [request setPredicate:predicate];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]                                                                      initWithKey:@"category" ascending:YES];
     NSSortDescriptor *sortDescriptorP = [[NSSortDescriptor alloc]                                                                      initWithKey:@"phrase" ascending:YES];

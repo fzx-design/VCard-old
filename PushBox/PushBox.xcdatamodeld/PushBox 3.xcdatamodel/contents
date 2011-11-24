@@ -43,6 +43,8 @@
         <attribute name="createdAt" attributeType="Date"/>
         <attribute name="favorited" optional="YES" attributeType="Boolean"/>
         <attribute name="isMentioned" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="lat" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="lon" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="originalPicURL" optional="YES" attributeType="String"/>
         <attribute name="repostsCount" optional="YES" attributeType="String"/>
         <attribute name="searchString" optional="YES" attributeType="String" syncable="YES"/>
@@ -90,7 +92,7 @@
         <element name="Emotion" positionX="160" positionY="192" width="128" height="150"/>
         <element name="Image" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Message" positionX="160" positionY="192" width="128" height="45"/>
-        <element name="Status" positionX="223" positionY="81" width="128" height="315"/>
+        <element name="Status" positionX="223" positionY="81" width="128" height="360"/>
         <element name="User" positionX="-18" positionY="414" width="128" height="390"/>
     </elements>
 </model>

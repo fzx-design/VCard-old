@@ -7,6 +7,7 @@
 //
 
 #import "OAuthHTTPRequest.h"
+#import <CoreLocation/CoreLocation.h>
 
 @class WeiboClient;
 
@@ -126,6 +127,8 @@ withOutMention:(BOOL)withOutMention;
 
 - (void)resetUnreadCount:(int)type;
 
+- (void)getAddressFromGeoWithCoordinate:(NSString*)coordinate;
+
 - (void)getSearchStatuses:(NSString *)q
                filter_ori:(int)filter_ori 
                filter_pic:(int)filter_pic
@@ -138,6 +141,7 @@ withOutMention:(BOOL)withOutMention;
                      page:(int)page 
                 needcount:(Boolean)needcount
                  base_app:(int)base_app;
+- (void)post:(NSString *)text cor:(CLLocationCoordinate2D)cor;
 
 - (void)getTrendsStatuses:(NSString *)trend_name;
 

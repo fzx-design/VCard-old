@@ -2,7 +2,7 @@
 //  Status.m
 //  PushBox
 //
-//  Created by Kelvin Ren on 11/21/11.
+//  Created by Kelvin Ren on 11/24/11.
 //  Copyright (c) 2011 同济大学. All rights reserved.
 //
 
@@ -22,12 +22,14 @@
 @dynamic isMentioned;
 @dynamic originalPicURL;
 @dynamic repostsCount;
+@dynamic searchString;
 @dynamic source;
 @dynamic statusID;
 @dynamic text;
 @dynamic thumbnailPicURL;
 @dynamic updateDate;
-@dynamic searchString;
+@dynamic lat;
+@dynamic lon;
 @dynamic author;
 @dynamic comments;
 @dynamic favoritedBy;
@@ -89,6 +91,16 @@
     result.bmiddlePicURL = [dict objectForKey:@"bmiddle_pic"];
     result.originalPicURL = [dict objectForKey:@"original_pic"];
     
+    NSDictionary* geoDic = (NSDictionary*)[dict objectForKey:@"geo"];
+    if (geoDic && ![[geoDic class] isSubclassOfClass:[NSNull class]]) {
+        result.lat = [[NSNumber alloc] initWithFloat:[[(NSArray*)([geoDic objectForKey:@"coordinates"]) objectAtIndex:0] floatValue]];
+        result.lon = [[NSNumber alloc] initWithFloat:[[(NSArray*)([geoDic objectForKey:@"coordinates"]) objectAtIndex:1] floatValue]];
+    }
+    else {
+        result.lat = 0;
+        result.lon = 0;
+    }
+    
     NSDictionary *userDict = [dict objectForKey:@"user"];
     
     result.author = [User insertUser:userDict inManagedObjectContext:context];
@@ -136,6 +148,16 @@
     result.bmiddlePicURL = [dict objectForKey:@"bmiddle_pic"];
     result.originalPicURL = [dict objectForKey:@"original_pic"];
     
+    NSDictionary* geoDic = (NSDictionary*)[dict objectForKey:@"geo"];
+    if (geoDic && ![[geoDic class] isSubclassOfClass:[NSNull class]]) {
+        result.lat = [[NSNumber alloc] initWithFloat:[[(NSArray*)([geoDic objectForKey:@"coordinates"]) objectAtIndex:0] floatValue]];
+        result.lon = [[NSNumber alloc] initWithFloat:[[(NSArray*)([geoDic objectForKey:@"coordinates"]) objectAtIndex:1] floatValue]];
+    }
+    else {
+        result.lat = 0;
+        result.lon = 0;
+    }
+    
     NSDictionary *userDict = [dict objectForKey:@"user"];
     
     result.author = [User insertUser:userDict inManagedObjectContext:context];
@@ -171,9 +193,6 @@
 
 + (Status *)insertStatus:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context
 {
-    //    int n = [self countOfStatuseInContext:context];
-    //    NSLog(@"----------------------%d", n);
-    
     NSString *statusID = [[dict objectForKey:@"id"] stringValue];
     
     if (!statusID || [statusID isEqualToString:@""]) {
@@ -204,6 +223,16 @@
     result.thumbnailPicURL = [dict objectForKey:@"thumbnail_pic"];
     result.bmiddlePicURL = [dict objectForKey:@"bmiddle_pic"];
     result.originalPicURL = [dict objectForKey:@"original_pic"];
+    
+    NSDictionary* geoDic = (NSDictionary*)[dict objectForKey:@"geo"];
+    if (geoDic && ![[geoDic class] isSubclassOfClass:[NSNull class]]) {
+        result.lat = [[NSNumber alloc] initWithFloat:[[(NSArray*)([geoDic objectForKey:@"coordinates"]) objectAtIndex:0] floatValue]];
+        result.lon = [[NSNumber alloc] initWithFloat:[[(NSArray*)([geoDic objectForKey:@"coordinates"]) objectAtIndex:1] floatValue]];
+    }
+    else {
+        result.lat = 0;
+        result.lon = 0;
+    }
     
     NSDictionary *userDict = [dict objectForKey:@"user"];
     
