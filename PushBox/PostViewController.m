@@ -587,6 +587,8 @@
 
 - (IBAction)removeImageButtonClicked:(id)sender {
     self.camaraButton.hidden = NO;
+    [self.camaraButton setEnabled:YES];
+    
     [UIView animateWithDuration:0.3 animations:^{
         self.rightView.alpha = 0.0;
     } completion:^(BOOL fin) {
@@ -615,7 +617,8 @@
     self.rightImageView.image = img;
     self.rightView.alpha = 0;
     
-    self.camaraButton.hidden = YES;
+//    self.camaraButton.hidden = YES;
+    [self.camaraButton setEnabled:NO];
     
     UIView *superView = [self.view superview];
     [superView addSubview:self.rightView];
