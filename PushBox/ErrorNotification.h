@@ -14,4 +14,5 @@
 + (void)showPostError;
 + (void)showOperationError;
 + (void)showNoResultsError;
++ (void)showSearchStringNullError;
 @end

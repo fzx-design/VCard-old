@@ -54,4 +54,15 @@
 	[alert release];
 }
 
++ (void)showSearchStringNullError
+{
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"关键字为空", nil)
+													message:NSLocalizedString(@"请检查关键字并重试", nil)
+												   delegate:self
+										  cancelButtonTitle:NSLocalizedString(@"好", nil)
+										  otherButtonTitles:nil];
+	[alert show];
+	[alert release];
+}
+
 @end

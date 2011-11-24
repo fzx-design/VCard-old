@@ -142,9 +142,22 @@
 	[userDefault registerDefaults:dict];
 }
 
-- (void)start
+- (void)initSearchCoverImageView
 {
-	[[UIApplication sharedApplication] showLoadingView];
+	_searchCoverImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail_bg.png"]];
+	UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(searchCoverImageViewClicked:)];
+    tapGesture.numberOfTapsRequired = 1;
+    tapGesture.numberOfTouchesRequired = 1;
+	[_searchCoverImageView addGestureRecognizer:tapGesture];
+	_searchCoverImageView.frame = CGRectMake(0, 0, 1024, 748);
+	_searchCoverImageView.alpha = 0.0;
+	_searchCoverImageView.userInteractionEnabled = YES;
+	[self.view addSubview:_searchCoverImageView];
+	[tapGesture release];
+}
+
+- (void)initVariables
+{
 	_refreshFlag = NO;
 	_newStatusFlag = NO;
 	_inSearchMode = NO;
@@ -156,8 +169,43 @@
 	self.bottomStateFrameView.hidden = NO;
 	
 	_statusTypeStack = [[NSMutableArray alloc] init];
+}
+
+- (void)getFriends
+{
+	int cursor = -1;
 	
     WeiboClient *client = [WeiboClient client];
+    [client setCompletionBlock:^(WeiboClient *client) {
+        if (!client.hasError) {
+            NSArray *dictArray = [client.responseJSONObject objectForKey:@"users"];
+            for (NSDictionary *dict in dictArray) {
+                [User insertUser:dict inManagedObjectContext:self.managedObjectContext];
+            }
+        }
+    }];
+    
+    [client getFriendsOfUser:self.currentUser.userID cursor:cursor count:200];
+}
+
+- (void)getEmotions
+{
+    WeiboClient *client = [WeiboClient client];
+    [client setCompletionBlock:^(WeiboClient *client) {
+        if (!client.hasError) {
+            NSArray *dictArray = client.responseJSONObject;
+            for (NSDictionary *dict in dictArray) {
+                [Emotion insertEmotion:dict inManagedObjectContext:self.managedObjectContext];
+            }
+        }
+    }];
+	
+    [client getEmotionsWithType:nil language:nil];
+}
+
+- (void)initCastView
+{
+	WeiboClient *client = [WeiboClient client];
     [client setCompletionBlock:^(WeiboClient *client) {
         if (!client.hasError) {
             NSDictionary *userDict = client.responseJSONObject;
@@ -180,48 +228,23 @@
 		
     }];
 	
-	_searchCoverImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail_bg.png"]];
-	UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(searchCoverImageViewClicked:)];
-    tapGesture.numberOfTapsRequired = 1;
-    tapGesture.numberOfTouchesRequired = 1;
-	[_searchCoverImageView addGestureRecognizer:tapGesture];
-	_searchCoverImageView.frame = CGRectMake(0, 0, 1024, 748);
-	_searchCoverImageView.alpha = 0.0;
-	_searchCoverImageView.userInteractionEnabled = YES;
-	[self.view addSubview:_searchCoverImageView];
-	[tapGesture release];
-	
-    
     [client getUser:[WeiboClient currentUserID]];
-    
-    int cursor = -1;
-	
-    // getFriends
-    WeiboClient *client2 = [WeiboClient client];
-    [client2 setCompletionBlock:^(WeiboClient *client2) {
-        if (!client2.hasError) {
-            NSArray *dictArray = [client2.responseJSONObject objectForKey:@"users"];
-            for (NSDictionary *dict in dictArray) {
-                [User insertUser:dict inManagedObjectContext:self.managedObjectContext];
-            }
-        }
-    }];
-    
-    [client2 getFriendsOfUser:self.currentUser.userID cursor:cursor count:200];
-    
-    
-    // getEmotions
-    WeiboClient *client3 = [WeiboClient client];
-    [client3 setCompletionBlock:^(WeiboClient *client3) {
-        if (!client3.hasError) {
-            NSArray *dictArray = client3.responseJSONObject;
-            for (NSDictionary *dict in dictArray) {
-                [Emotion insertEmotion:dict inManagedObjectContext:self.managedObjectContext];
-            }
-        }
-    }];
+}
 
-    [client3 getEmotionsWithType:nil language:nil];
+- (void)start
+{
+	[[UIApplication sharedApplication] showLoadingView];
+
+	[self initVariables];
+	
+	[self initCastView];
+	
+	[self initSearchCoverImageView];
+	
+	[self getFriends];
+	
+	[self getEmotions];
+    
 }
 
 - (void)viewDidLoad
@@ -1298,7 +1321,6 @@
 
 - (void)showCardTableView
 {    
-    //    [self.view insertSubview:self.cardTableViewController.view belowSubview:self.bottomBackButton];
 	[self.view insertSubview:self.castViewController.view belowSubview:self.bottomBackButton];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -1337,9 +1359,7 @@
         
         [client getRelationshipWithUser:@"2478499604"];
     }
-    
-    //self.cardTableViewController.tableview.tableHeaderView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 1024)] autorelease];
-    
+        
 	CGRect frame = self.castViewController.view.frame;
     frame.origin.x += 782;
     self.castViewController.view.frame = frame;
@@ -1364,32 +1384,6 @@
         
         button.alpha = 1.0;
     }];
-	
-	
-    //    CGRect frame = self.cardTableViewController.view.frame;
-    //    frame.origin.x += 782;
-    //    self.cardTableViewController.view.frame = frame;
-    //    frame = self.cardTableViewController.rootShadowLeft.frame;
-    //    frame.origin.x -= 782;
-    //    self.cardTableViewController.rootShadowLeft.frame = frame;
-    //    
-    //    self.cardTableViewController.view.alpha = 0.0;
-    //    self.cardTableViewController.rootShadowLeft.alpha = 0.0;
-    //    
-    //    [UIView animateWithDuration:1.0 animations:^{
-    //        
-    //        CGRect frame = self.cardTableViewController.view.frame;
-    //        frame.origin.x -= 782;
-    //        self.cardTableViewController.view.frame = frame;
-    //        frame = self.cardTableViewController.rootShadowLeft.frame;
-    //        frame.origin.x += 782;
-    //        self.cardTableViewController.rootShadowLeft.frame = frame;
-    //        
-    //        self.cardTableViewController.view.alpha = 1.0;
-    //        self.cardTableViewController.rootShadowLeft.alpha = 1.0;
-    //        
-    //        button.alpha = 1.0;
-    //    }];
 }
 
 - (void)helpButtonClicked:(UIButton *)button
@@ -1534,25 +1528,35 @@
 
 # pragma - UITextFieldDelegate
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+- (BOOL)textFieldShouldReturn:(UITextField *)textField 
+{
+	if ([textField.text isEqualToString:@""]) {
+		
+		[ErrorNotification showSearchStringNullError];
+		
+		return NO;
+	}
+	
     [textField resignFirstResponder];
     
     self.castViewController.searchString = textField.text;
     
     [self showSearchTimeline:textField.text];
     
-    //
     [self showSearchWaitingView];
+	
     isSearchReturn = YES;
     
     return NO;
 }
 
-- (IBAction)searchTextFieldClicked:(id)sender {
+- (IBAction)searchTextFieldClicked:(id)sender 
+{
 	[self showSearchView];
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField {
+- (void)textFieldDidEndEditing:(UITextField *)textField 
+{
     if(!isSearchReturn) {
 		isSearchReturn = YES;
         [self hideSearchView];
