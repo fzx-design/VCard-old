@@ -15,6 +15,9 @@ enum PBBackgroundImage {
 	PBBackgroundImageMist,
 	PBBackgroundImageChampagne,
 	PBBackgroundImageTwilight,
+	PBBackgroundImageKelp,
+	PBBackgroundImageWater,
+	PBBackgroundImageBlossom,
 };
 
 #define kUserDefaultKeyBackground @"kUserDefaultKeyBackground"

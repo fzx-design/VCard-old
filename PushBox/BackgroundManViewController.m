@@ -40,6 +40,15 @@
             case PBBackgroundImageTwilight:
                 imageName = NSLocalizedString(@"暮色", nil);
                 break;
+            case PBBackgroundImageKelp:
+                imageName = NSLocalizedString(@"海藻", nil);
+                break;
+            case PBBackgroundImageWater:
+                imageName = NSLocalizedString(@"水域", nil);
+                break;
+            case PBBackgroundImageBlossom:
+                imageName = NSLocalizedString(@"桃花", nil);
+                break;
         }
         return imageName;
     }
@@ -68,6 +77,15 @@
 		case PBBackgroundImageTwilight:
 			imageName = @"bg_twilight";
 			break;
+        case PBBackgroundImageKelp:
+			imageName = @"bg_kelp";
+            break;
+        case PBBackgroundImageWater:
+			imageName = @"bg_water";
+            break;
+        case PBBackgroundImageBlossom:
+			imageName = @"bg_blossom";
+            break;
 	}
 	return imageName;
 }
@@ -94,6 +112,15 @@
 		case PBBackgroundImageTwilight:
 			imageName = @"bg_icon_twilight";
 			break;
+        case PBBackgroundImageKelp:
+			imageName = @"bg_icon_kelp";
+            break;
+        case PBBackgroundImageWater:
+			imageName = @"bg_icon_water";
+            break;
+        case PBBackgroundImageBlossom:
+			imageName = @"bg_icon_blossom";
+            break;
 	}
 	return imageName;
 }
@@ -119,7 +146,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 6;
+    return 9;
 }
 
 
