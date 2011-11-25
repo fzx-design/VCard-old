@@ -191,9 +191,7 @@
 }
 
 - (void)getEmotions
-{
-    // TODO
-    
+{    
     WeiboClient *client = [WeiboClient client];
     [client setCompletionBlock:^(WeiboClient *client) {
         if (!client.hasError) {
@@ -203,7 +201,7 @@
                 for (NSDictionary *dict in dictArray) {
                     [Emotion insertEmotion:dict inManagedObjectContext:self.managedObjectContext];
                 }
-                [[NSUserDefaults standardUserDefaults] setInteger:[[[NSNumber alloc] initWithInt:sum] integerValue] forKey:kUserDefaultKeyEmoticonNumber];
+                [[NSUserDefaults standardUserDefaults] setInteger:[[[NSNumber alloc] initWithInt:[dictArray count]] integerValue] forKey:kUserDefaultKeyEmoticonNumber];
             }
         }
     }];

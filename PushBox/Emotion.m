@@ -30,6 +30,7 @@
     Emotion *result = [Emotion emotionWithPhrase:phrase inManagedObjectContext:context];
     if (!result) {
         result = [NSEntityDescription insertNewObjectForEntityForName:@"Emotion" inManagedObjectContext:context];
+        NSLog(@"-------");
     }
     
     result.phrase = [dict objectForKey:@"phrase"];
@@ -39,7 +40,7 @@
     result.is_common = [NSNumber numberWithBool:[[dict objectForKey:@"is_common"] boolValue]];
     result.order_number = [NSNumber numberWithInt:[[dict objectForKey:@"order_number"] intValue]];
     result.category = [dict objectForKey:@"category"];
-    
+
     NSLog(@"---------------%@ %@", result.category, result.order_number);
     
     return result;
