@@ -11,6 +11,11 @@
 #import "RCSwitchClone.h"
 #import "EmotionsViewController.h"
 
+#define LabelNormalColor2 [UIColor colorWithRed:66.0/255 green:66.0/255 blue:66.0/255 alpha:1.0]
+#define LabelHilightColor2 [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0]
+#define LabelHilightShadowColor2 [UIColor colorWithRed:66.0/255 green:66.0/255 blue:66.0/255 alpha:0.5]
+#define LabelNormalShadowColor2 [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.5]
+
 @class Status;
 @class Comment;
 
@@ -32,6 +37,8 @@
     UIView *_atView;
     UITableView *_atTableView;
     UITextField *_atTextField;
+    
+    UILabel *_alsoRepostLabel;
  
     EmotionsViewController *_emotionsViewController;
     UIView *_emotionsView;
@@ -56,6 +63,7 @@
 @property(nonatomic, retain) IBOutlet UITextView* textView;
 @property(nonatomic, retain) IBOutlet UIView* emotionsView;
 @property(nonatomic, retain) IBOutlet UILabel* titleLabel;
+@property(nonatomic, retain) IBOutlet UILabel* alsoRepostLabel;
 @property(nonatomic, retain) IBOutlet UILabel* wordsCountLabel;
 @property(nonatomic, retain) IBOutlet UIImageView* postingCircleImageView;
 @property(nonatomic, retain) IBOutlet UIImageView* postingRoundImageView;

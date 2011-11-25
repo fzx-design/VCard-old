@@ -35,7 +35,7 @@
 @synthesize atTableView = _atTableView;
 @synthesize atTextField = _atTextField;
 @synthesize emotionsView = _emotionsView;
-
+@synthesize alsoRepostLabel = _alsoRepostLabel;
 @synthesize repostSwitchView = _repostSwitchView;
 
 - (void)dealloc
@@ -502,11 +502,15 @@
 - (void)switchedOn
 {
 	_repostFlag = YES;
+	self.alsoRepostLabel.textColor = LabelHilightColor2;
+	self.alsoRepostLabel.shadowColor = LabelHilightShadowColor2;
 }
 
 - (void)switchedOff
 {
 	_repostFlag = NO;
+	self.alsoRepostLabel.textColor = LabelNormalColor2;
+	self.alsoRepostLabel.shadowColor = LabelNormalShadowColor2;
 }
 
 #pragma - UITableViewDataSource
