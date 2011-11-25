@@ -34,6 +34,7 @@
 @synthesize atScreenNames = _atScreenNames;
 @synthesize atTableView = _atTableView;
 @synthesize atTextField = _atTextField;
+@synthesize emotionsView = _emotionsView;
 
 @synthesize repostSwitchView = _repostSwitchView;
 
@@ -50,6 +51,24 @@
 	[_postingRoundImageView release];
 	[_postingCircleImageView release];
     [super dealloc];
+}
+
+- (void)dismissEmotionsView
+{
+    if (self.emotionsView.superview) {
+        [UIView animateWithDuration:0.3 
+                         animations:^(){
+                             self.emotionsView.alpha = 0.0;
+                         } 
+                         completion:^(BOOL finished) {
+                             [self.emotionsView removeFromSuperview];
+                             self.emotionsView.alpha = 1.0;
+                         }];
+    }
+    
+    [_emotionBgButton removeFromSuperview];
+    
+    [self.textView becomeFirstResponder];
 }
 
 - (void)viewDidUnload
@@ -83,6 +102,11 @@
 	
 	[self textViewDidChange:self.textView];
 	
+    _emotionsViewController = [[EmotionsViewController alloc] init];
+    self.emotionsView = _emotionsViewController.view;
+    self.emotionsView.layer.anchorPoint = CGPointMake(0.5, 0);
+    _emotionsViewController.delegate = self;
+
 	self.textView.delegate = self;
 	self.atView.layer.anchorPoint = CGPointMake(0.5, 0);
 }
@@ -91,6 +115,28 @@
 {
 	[self.textView resignFirstResponder];
     [[UIApplication sharedApplication] dismissModalViewController];
+}
+
+- (IBAction)emotionsButtonClicked:(id)sender {    
+    UIView *superView = [self.view superview];
+    
+    if (!_emotionBgButton)
+        _emotionBgButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 1024, 748)];
+    
+    [_emotionBgButton addTarget:self action:@selector(dismissEmotionsView) forControlEvents:UIControlEventTouchUpInside];
+    [superView addSubview:_emotionBgButton];
+    
+    [superView addSubview:self.emotionsView];
+    CGRect frame = self.emotionsView.frame;
+    frame.origin = CGPointMake(228, 103);
+    self.emotionsView.frame = frame;
+    [_emotionsViewController.scrollView scrollRectToVisible:CGRectMake(0, 0, 204, 144) animated:NO];
+    
+    [self.emotionsView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
+    
+    [UIView animateWithDuration:1.0 animations:^{
+        self.emotionsView.alpha = 1.0;
+    }];
 }
 
 - (void)showPostingView
@@ -368,6 +414,21 @@
     [_atBgButton removeFromSuperview];
     
 	[self.textView becomeFirstResponder];
+}
+
+- (void)didSelectEmotion:(NSString*)phrase
+{
+    int location = self.textView.selectedRange.location;
+    NSString *content = self.textView.text;
+    NSString *result = [NSString stringWithFormat:@"%@%@%@",[content substringToIndex:location], phrase, [content substringFromIndex:location]];
+    self.textView.text = result;
+    
+    NSRange range = self.textView.selectedRange;
+    range.location = location + [phrase length];
+    self.textView.selectedRange = range;
+    
+    [self dismissEmotionsView];
+    
 }
 
 - (IBAction)repostButtonClicked:(id)sender

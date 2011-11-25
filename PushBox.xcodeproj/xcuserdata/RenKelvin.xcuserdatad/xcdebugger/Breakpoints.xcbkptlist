@@ -455,11 +455,39 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "PushBox/PostViewController.m"
-         timestampString = "343916935.468314"
+         timestampString = "343919810.386435"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "754"
-         endingLineNumber = "754"
+         startingLineNumber = "755"
+         endingLineNumber = "755"
+         landmarkName = "-locationManager:didUpdateToLocation:fromLocation:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "PushBox/PostViewController.m"
+         timestampString = "343919810.386435"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "780"
+         endingLineNumber = "780"
+         landmarkName = "-locationManager:didFailWithError:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "PushBox/PostViewController.m"
+         timestampString = "343919810.386435"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "757"
+         endingLineNumber = "757"
          landmarkName = "-locationManager:didUpdateToLocation:fromLocation:"
          landmarkType = "5">
       </FileBreakpoint>

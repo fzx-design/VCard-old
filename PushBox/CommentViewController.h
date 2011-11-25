@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ErrorNotification.h"
 #import "RCSwitchClone.h"
+#import "EmotionsViewController.h"
 
 @class Status;
 @class Comment;
@@ -17,7 +18,7 @@
 - (void)commentFinished;
 @end
 
-@interface CommentViewController : UIViewController<UITextViewDelegate,UIActionSheetDelegate, UIAlertViewDelegate, SwitchValueChanged> {
+@interface CommentViewController : UIViewController<UITextViewDelegate,UIActionSheetDelegate, UIAlertViewDelegate, SwitchValueChanged, EmotionsViewControllerDelegate> {
     UITextView *_textView;
     UILabel *_titleLabel;
 	UILabel *_wordsCountLabel;
@@ -32,8 +33,12 @@
     UITableView *_atTableView;
     UITextField *_atTextField;
  
+    EmotionsViewController *_emotionsViewController;
+    UIView *_emotionsView;
+
     UIButton* _atBgButton;
-    
+    UIButton* _emotionBgButton;
+  
     NSMutableArray *_atScreenNames;
 
     Status *_targetStatus;
@@ -49,6 +54,7 @@
 }
 
 @property(nonatomic, retain) IBOutlet UITextView* textView;
+@property(nonatomic, retain) IBOutlet UIView* emotionsView;
 @property(nonatomic, retain) IBOutlet UILabel* titleLabel;
 @property(nonatomic, retain) IBOutlet UILabel* wordsCountLabel;
 @property(nonatomic, retain) IBOutlet UIImageView* postingCircleImageView;
