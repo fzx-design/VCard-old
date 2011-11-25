@@ -26,7 +26,6 @@
 @synthesize doneButton = _doneButton;
 @synthesize referButton = _referButton;
 @synthesize topicButton = _topicButton;
-@synthesize locationLabel = _lacationLabel;
 @synthesize camaraButton = _camaraButton;
 @synthesize textView = _textView;
 @synthesize postingRoundImageView = _postingRoundImageView;
@@ -41,6 +40,7 @@
 @synthesize atTextField = _atTextField;
 @synthesize emotionsView = _emotionsView;
 @synthesize locationButton = _locationButton;
+@synthesize locationLabel = _lacationLabel;
 //@synthesize emotionsView = _emotionsView;
 //@synthesize emotionsScrollView = _emotionsScrollView;
 //@synthesize emotionsPageControl = _emotionsPageControl;
@@ -265,7 +265,7 @@
     CGRect frame = self.emotionsView.frame;
     frame.origin = CGPointMake(321, 106);
     self.emotionsView.frame = frame;
-    [_emotionsViewController.scrollView scrollsToTop];
+    [_emotionsViewController.scrollView scrollRectToVisible:CGRectMake(0, 0, 204, 144) animated:NO];
     
     [self.emotionsView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
     
@@ -704,6 +704,7 @@
 }
 
 #pragma - CoreLoction
+
 // 如果GPS测量成果以下的函数被调用
 - (void)locationManager:(CLLocationManager *)manager
     didUpdateToLocation:(CLLocation *)newLocation
@@ -755,13 +756,16 @@
         } else {
             // ERROR
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"定位失败" 
-                                                                message:nil
+                                                                message:@"请检查网络和定位设置并重试"
                                                                delegate:nil
                                                       cancelButtonTitle:NSLocalizedString(@"确定", nil)
                                                       otherButtonTitles:nil];
             [alertView show];
             [alertView release];
             
+            [self.locationLabel setHidden:YES];
+            [self.locationLabel setText:@"正在定位..."];
+            [self.locationButton setSelected:NO];
 		}
     }];
     float lat = (float)newLocation.coordinate.latitude;
@@ -775,12 +779,18 @@
        didFailWithError:(NSError *)error{
     
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"定位失败" 
-                                                        message:nil
+                                                        message:@"请检查网络和定位设置并重试"
                                                        delegate:nil
                                               cancelButtonTitle:NSLocalizedString(@"确定", nil)
                                               otherButtonTitles:nil];
     [alertView show];
     [alertView release];
+    
+    [self.locationLabel setHidden:YES];
+    [self.locationLabel setText:@"正在定位..."];
+    [self.locationButton setSelected:NO];
+
+    [manager stopUpdatingLocation];
 }
 
 @end

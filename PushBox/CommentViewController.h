@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "ErrorNotification.h"
 #import "RCSwitchClone.h"
+#import "EmotionsViewController.h"
+
+#define LabelNormalColor2 [UIColor colorWithRed:66.0/255 green:66.0/255 blue:66.0/255 alpha:1.0]
+#define LabelHilightColor2 [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0]
+#define LabelHilightShadowColor2 [UIColor colorWithRed:66.0/255 green:66.0/255 blue:66.0/255 alpha:0.5]
+#define LabelNormalShadowColor2 [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.5]
 
 @class Status;
 @class Comment;
@@ -17,7 +23,7 @@
 - (void)commentFinished;
 @end
 
-@interface CommentViewController : UIViewController<UITextViewDelegate,UIActionSheetDelegate, UIAlertViewDelegate, SwitchValueChanged> {
+@interface CommentViewController : UIViewController<UITextViewDelegate,UIActionSheetDelegate, UIAlertViewDelegate, SwitchValueChanged, EmotionsViewControllerDelegate> {
     UITextView *_textView;
     UILabel *_titleLabel;
 	UILabel *_wordsCountLabel;
@@ -31,9 +37,15 @@
     UIView *_atView;
     UITableView *_atTableView;
     UITextField *_atTextField;
- 
-    UIButton* _atBgButton;
     
+    UILabel *_alsoRepostLabel;
+ 
+    EmotionsViewController *_emotionsViewController;
+    UIView *_emotionsView;
+
+    UIButton* _atBgButton;
+    UIButton* _emotionBgButton;
+  
     NSMutableArray *_atScreenNames;
 
     Status *_targetStatus;
@@ -49,7 +61,9 @@
 }
 
 @property(nonatomic, retain) IBOutlet UITextView* textView;
+@property(nonatomic, retain) IBOutlet UIView* emotionsView;
 @property(nonatomic, retain) IBOutlet UILabel* titleLabel;
+@property(nonatomic, retain) IBOutlet UILabel* alsoRepostLabel;
 @property(nonatomic, retain) IBOutlet UILabel* wordsCountLabel;
 @property(nonatomic, retain) IBOutlet UIImageView* postingCircleImageView;
 @property(nonatomic, retain) IBOutlet UIImageView* postingRoundImageView;
