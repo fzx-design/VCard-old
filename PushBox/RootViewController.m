@@ -194,23 +194,21 @@
 {
     // TODO
     
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeyFirstTime]) {
-        
-        WeiboClient *client = [WeiboClient client];
-        [client setCompletionBlock:^(WeiboClient *client) {
-            if (!client.hasError) {
-                int sum = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeyFirstTime];
-                NSArray *dictArray = client.responseJSONObject;
-                if (sum < [dictArray count]) {
-                    for (NSDictionary *dict in dictArray) {
-                        [Emotion insertEmotion:dict inManagedObjectContext:self.managedObjectContext];
-                    }
+    WeiboClient *client = [WeiboClient client];
+    [client setCompletionBlock:^(WeiboClient *client) {
+        if (!client.hasError) {
+            int sum = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeyEmoticonNumber];
+            NSArray *dictArray = client.responseJSONObject;
+            if (sum < [dictArray count]) {
+                for (NSDictionary *dict in dictArray) {
+                    [Emotion insertEmotion:dict inManagedObjectContext:self.managedObjectContext];
                 }
+                [[NSUserDefaults standardUserDefaults] setInteger:[[[NSNumber alloc] initWithInt:sum] integerValue] forKey:kUserDefaultKeyEmoticonNumber];
             }
-        }];
-        
-        [client getEmotionsWithType:nil language:nil];
-    }
+        }
+    }];
+    
+    [client getEmotionsWithType:nil language:nil];
 }
 
 - (void)initCastView
