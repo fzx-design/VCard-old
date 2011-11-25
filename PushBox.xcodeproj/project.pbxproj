@@ -27,6 +27,7 @@
 		203DBF07146FECCF00F43D5A /* post_button_locate.png in Resources */ = {isa = PBXBuildFile; fileRef = 203DBF05146FECCF00F43D5A /* post_button_locate.png */; };
 		203DBF08146FECCF00F43D5A /* post_button_located.png in Resources */ = {isa = PBXBuildFile; fileRef = 203DBF06146FECCF00F43D5A /* post_button_located.png */; };
 		206902DA144AD44D00BA9EC3 /* head_cover_card_light.png in Resources */ = {isa = PBXBuildFile; fileRef = 206902D9144AD44D00BA9EC3 /* head_cover_card_light.png */; };
+		209422BA147F7F3700EA4B47 /* sc_locate.png in Resources */ = {isa = PBXBuildFile; fileRef = 209422B9147F7F3700EA4B47 /* sc_locate.png */; };
 		20C831051468FDA800C1886B /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20C831021468FDA800C1886B /* MainWindow.xib */; };
 		20C831081468FDEB00C1886B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 20C831061468FDEB00C1886B /* InfoPlist.strings */; };
 		20D54764142ADC35006A79A1 /* autologin_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D54762142ADC35006A79A1 /* autologin_on.png */; };
@@ -295,7 +296,6 @@
 		FEA4265614432103002E80B3 /* MessagesContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEA4265514432103002E80B3 /* MessagesContactsTableViewCell.xib */; };
 		FEA77F27147E5A6300A0558E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEA77F26147E5A6300A0558E /* CoreLocation.framework */; };
 		FEA77F2E147E81BF00A0558E /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA77F2D147E81BF00A0558E /* Status.m */; };
-		FEA77F32147EB92A00A0558E /* sc_locate.png in Resources */ = {isa = PBXBuildFile; fileRef = FEA77F31147EB92A00A0558E /* sc_locate.png */; };
 		FEB5EA521455CF0500453B09 /* gif_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FEB5EA511455CF0500453B09 /* gif_icon.png */; };
 		FEC6D1DA14555F8B00576EF3 /* vc_new_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEC6D1D814555F8B00576EF3 /* vc_new_sound.wav */; };
 		FEC6D1DB14555F8B00576EF3 /* vc_noti_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEC6D1D914555F8B00576EF3 /* vc_noti_sound.wav */; };
@@ -335,6 +335,7 @@
 		203DBF05146FECCF00F43D5A /* post_button_locate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = post_button_locate.png; sourceTree = "<group>"; };
 		203DBF06146FECCF00F43D5A /* post_button_located.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = post_button_located.png; sourceTree = "<group>"; };
 		206902D9144AD44D00BA9EC3 /* head_cover_card_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = head_cover_card_light.png; sourceTree = "<group>"; };
+		209422B9147F7F3700EA4B47 /* sc_locate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc_locate.png; sourceTree = "<group>"; };
 		20C831031468FDA800C1886B /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/MainWindow.xib"; sourceTree = "<group>"; };
 		20C831071468FDEB00C1886B /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		20C8D90F1429FE9C00C94B86 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -687,7 +688,6 @@
 		FEA77F26147E5A6300A0558E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		FEA77F2C147E81BF00A0558E /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
 		FEA77F2D147E81BF00A0558E /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
-		FEA77F31147EB92A00A0558E /* sc_locate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc_locate.png; sourceTree = "<group>"; };
 		FEB5EA511455CF0500453B09 /* gif_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gif_icon.png; sourceTree = "<group>"; };
 		FEC6D1D814555F8B00576EF3 /* vc_new_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = vc_new_sound.wav; sourceTree = "<group>"; };
 		FEC6D1D914555F8B00576EF3 /* vc_noti_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = vc_noti_sound.wav; sourceTree = "<group>"; };
@@ -1134,8 +1134,8 @@
 		CBBA01F113E4530700641923 /* statuscard */ = {
 			isa = PBXGroup;
 			children = (
-				FEA77F31147EB92A00A0558E /* sc_locate.png */,
 				203DBEF7146FE91500F43D5A /* stack_bounder.png */,
+				209422B9147F7F3700EA4B47 /* sc_locate.png */,
 				FEB5EA511455CF0500453B09 /* gif_icon.png */,
 				9B1128E214510978001CE64E /* card_profile_cover_large.png */,
 				9B1128E314510978001CE64E /* card_profile_cover.png */,
@@ -1671,7 +1671,7 @@
 				FEF51112147A44CD00F17B26 /* search_bg.png in Resources */,
 				FE9EE171147BE559009A4E23 /* EmotionsViewController.xib in Resources */,
 				FECFB9B8147CD7BA0008B747 /* emoticons_bg.png in Resources */,
-				FEA77F32147EB92A00A0558E /* sc_locate.png in Resources */,
+				209422BA147F7F3700EA4B47 /* sc_locate.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
