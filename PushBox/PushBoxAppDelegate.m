@@ -32,7 +32,7 @@
     [dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultKeySoundEnabled];
 	[dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultKeyImageDownloadingEnabled];    
 	[dict setObject:[NSNumber numberWithInt:0] forKey:kUserDefaultKeyLoginCount];
-	[dict setObject:[NSNumber numberWithInt:1] forKey:kUserDefaultKeyAutoLocate];
+	[dict setObject:[NSNumber numberWithInt:0] forKey:kUserDefaultKeyAutoLocate];
 	
 	[userDefault registerDefaults:dict];
 }

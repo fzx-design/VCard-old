@@ -755,13 +755,16 @@
         } else {
             // ERROR
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"定位失败" 
-                                                                message:nil
+                                                                message:@"请检查网络和定位设置并重试"
                                                                delegate:nil
                                                       cancelButtonTitle:NSLocalizedString(@"确定", nil)
                                                       otherButtonTitles:nil];
             [alertView show];
             [alertView release];
             
+            [self.locationLabel setHidden:YES];
+            [self.locationLabel setText:@"正在定位..."];
+            [self.locationButton setSelected:NO];
 		}
     }];
     float lat = (float)newLocation.coordinate.latitude;
@@ -775,12 +778,16 @@
        didFailWithError:(NSError *)error{
     
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"定位失败" 
-                                                        message:nil
+                                                        message:@"请检查网络和定位设置并重试"
                                                        delegate:nil
                                               cancelButtonTitle:NSLocalizedString(@"确定", nil)
                                               otherButtonTitles:nil];
     [alertView show];
     [alertView release];
+    
+    [self.locationLabel setHidden:YES];
+    [self.locationLabel setText:@"正在定位..."];
+    [self.locationButton setSelected:NO];
 }
 
 @end

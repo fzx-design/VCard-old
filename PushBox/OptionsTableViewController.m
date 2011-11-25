@@ -27,10 +27,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"关于", nil)
-//																			 style:UIBarButtonItemStylePlain
-//																			target:self
-//																			action:@selector(showAbout)];
+    //	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"关于", nil)
+    //																			 style:UIBarButtonItemStylePlain
+    //																			target:self
+    //																			action:@selector(showAbout)];
 	
     self.title = NSLocalizedString(@"VCard HD", nil);
     self.contentSizeForViewInPopover = kContentSizeForViewInPopover;
@@ -62,7 +62,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 5;
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -73,10 +73,12 @@
         case 1:
             return 1;
         case 2:
-            return 4;
-		case 3:
-			return 2;
+            return 3;
+        case 3:
+            return 1;
 		case 4:
+			return 2;
+		case 5:
 			return 2;
     }
     return 0;
@@ -98,6 +100,8 @@
 		case 3:
 			header = NSLocalizedString(@"",nil);
 		case 4:
+			header = NSLocalizedString(@"",nil);
+		case 5:
 			header = NSLocalizedString(@"",nil);
     }
     return header;
@@ -139,7 +143,7 @@
         case 2:
             switch (indexPath.row) {
                 case 0:
-                        //cell.selectionStyle = UITableViewCellSelectionStyleGray; //to consider
+                    //cell.selectionStyle = UITableViewCellSelectionStyleGray; //to consider
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     cell.textLabel.text = NSLocalizedString(@"SlidePlay 时间间隔", nil);
 					int interval = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeySiidePlayTimeInterval];
@@ -162,7 +166,7 @@
                     cell.textLabel.text = NSLocalizedString(@"加载微博图片", nil);
                     cell.imageView.image = [UIImage imageNamed:@"options_icon_image.png"];
                     break;
-
+                    
                 case 2:
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 					
@@ -177,8 +181,12 @@
 					cell.textLabel.text = NSLocalizedString(@"音效", nil);
                     cell.imageView.image = [UIImage imageNamed:@"options_icon_sound.png"];
                     break;
-
-                case 3:
+                    
+            }
+            break;
+        case 3:
+            switch (indexPath.row) {
+                case 0:
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 					
 					UISwitch *aSwitch3 = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 94, 27)];
@@ -190,12 +198,14 @@
 					[aSwitch3 release];
 					
 					cell.textLabel.text = NSLocalizedString(@"自动定位", nil);
-                    cell.imageView.image = [UIImage imageNamed:@"options_icon_sound.png"];
+                    cell.imageView.image = [UIImage imageNamed:@"options_icon_locate.png"];
                     break;
-
+                    
+                default:
+                    break;
             }
             break;
-		case 3:
+		case 4:
 			switch (indexPath.row) {
 				case 0:
 					cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -231,7 +241,7 @@
 					break;
 			}
 			break;
-		case 4:
+		case 5:
 			switch (indexPath.row) {
 				case 0:
 					cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -313,7 +323,7 @@
                 [ivc release];
             }
 			break;
-		case 3:
+		case 4:
 			if (indexPath.row == 0) {
 				RefreshingIntervalViewController *ivc = [[RefreshingIntervalViewController alloc] initWithStyle:UITableViewStyleGrouped];
                 ivc.contentSizeForViewInPopover = kContentSizeForViewInPopover;
@@ -321,19 +331,22 @@
                 [ivc release];
 			}
             break;
-		case 4:
+		case 5:
 			if (indexPath.row == 0) {
 				[self showAbout];
 			} else {
 				[self showLegacy];
 			}
-		}
+    }
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
 	if (section == 1) {
 		return @"选择浏览卡片时最舒适的背景色彩";
+	}
+	else if (section == 3) {
+		return @"意外怀孕怎么办，夫妻双双把家还";
 	}
 	return nil;
 }
