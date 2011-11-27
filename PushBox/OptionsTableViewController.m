@@ -343,10 +343,10 @@
 - (NSString*)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
 	if (section == 1) {
-		return @"选择浏览卡片时最舒适的背景色彩";
+		return @"选择浏览卡片时最舒适的背景色彩。";
 	}
 	else if (section == 3) {
-		return @"意外怀孕怎么办，夫妻双双把家还";
+		return @"新建卡片时自动附带您的位置信息。";
 	}
 	return nil;
 }
