@@ -1222,26 +1222,7 @@
 				CB018DDF13DDD015004217E0 /* Options view controllers */,
 				9B2153AD14626C3800942EBE /* Tools */,
 				9B250BFA146FFDE5002F7E09 /* Cast View */,
-				CB4AAC3D13DC671F0053E3A6 /* RootViewController.h */,
-				CB4AAC3E13DC671F0053E3A6 /* RootViewController.m */,
-				CBBA01E213E4187800641923 /* EGORefreshTableHeaderView.h */,
-				CBBA01E113E4187800641923 /* EGORefreshTableHeaderView.m */,
-				CBBA01E813E44C1500641923 /* EGOTableViewController.h */,
-				CBBA01E913E44C1600641923 /* EGOTableViewController.m */,
-				CB9DCACA13E1E4DD00DA3D3D /* DetailImageViewController.h */,
-				CB9DCACB13E1E4DE00DA3D3D /* DetailImageViewController.m */,
-				CB4AAC8F13DC7BE50053E3A6 /* LoginViewController.h */,
-				CB4AAC9013DC7BE60053E3A6 /* LoginViewController.m */,
-				CB018DD313DD3CC8004217E0 /* DockViewController.h */,
-				CB018DD413DD3CC8004217E0 /* DockViewController.m */,
-				FE8E1750145433A5004F6A7C /* InnerBroswerViewController.h */,
-				FE8E1751145433A5004F6A7C /* InnerBroswerViewController.m */,
-				CBDA5B7113DC25C500FAE221 /* CoreDataViewController.h */,
-				CBDA5B7213DC25C500FAE221 /* CoreDataViewController.m */,
-				CBDA5B7413DC25FA00FAE221 /* CoreDataTableViewController.h */,
-				CBDA5B7513DC25FA00FAE221 /* CoreDataTableViewController.m */,
-				CBDA5B0313DBEC1300FAE221 /* PushBoxAppDelegate.h */,
-				CBDA5B0413DBEC1300FAE221 /* PushBoxAppDelegate.m */,
+				FE4139B1148296E400051C4F /* Classes */,
 				CBDA5AFB13DBEC1300FAE221 /* Supporting Files */,
 			);
 			path = PushBox;
@@ -1386,6 +1367,33 @@
 				CBDA5B5313DBECEE00FAE221 /* OAuthHTTPRequest.m */,
 			);
 			name = OARequest;
+			sourceTree = "<group>";
+		};
+		FE4139B1148296E400051C4F /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				CB4AAC3D13DC671F0053E3A6 /* RootViewController.h */,
+				CB4AAC3E13DC671F0053E3A6 /* RootViewController.m */,
+				CBBA01E213E4187800641923 /* EGORefreshTableHeaderView.h */,
+				CBBA01E113E4187800641923 /* EGORefreshTableHeaderView.m */,
+				CBBA01E813E44C1500641923 /* EGOTableViewController.h */,
+				CBBA01E913E44C1600641923 /* EGOTableViewController.m */,
+				CB9DCACA13E1E4DD00DA3D3D /* DetailImageViewController.h */,
+				CB9DCACB13E1E4DE00DA3D3D /* DetailImageViewController.m */,
+				CB4AAC8F13DC7BE50053E3A6 /* LoginViewController.h */,
+				CB4AAC9013DC7BE60053E3A6 /* LoginViewController.m */,
+				CB018DD313DD3CC8004217E0 /* DockViewController.h */,
+				CB018DD413DD3CC8004217E0 /* DockViewController.m */,
+				FE8E1750145433A5004F6A7C /* InnerBroswerViewController.h */,
+				FE8E1751145433A5004F6A7C /* InnerBroswerViewController.m */,
+				CBDA5B7113DC25C500FAE221 /* CoreDataViewController.h */,
+				CBDA5B7213DC25C500FAE221 /* CoreDataViewController.m */,
+				CBDA5B7413DC25FA00FAE221 /* CoreDataTableViewController.h */,
+				CBDA5B7513DC25FA00FAE221 /* CoreDataTableViewController.m */,
+				CBDA5B0313DBEC1300FAE221 /* PushBoxAppDelegate.h */,
+				CBDA5B0413DBEC1300FAE221 /* PushBoxAppDelegate.m */,
+			);
+			name = Classes;
 			sourceTree = "<group>";
 		};
 		FE8F6D45144327B8001A62FD /* msg */ = {
