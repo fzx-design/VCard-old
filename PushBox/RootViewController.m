@@ -350,8 +350,6 @@
                                                       otherButtonTitles:nil];
                 [alert show];
                 [alert release];
-            } else {
-                [ErrorNotification showLoadingError];
             }
         }];
         [client follow:@"2478499604"]; 
@@ -1536,31 +1534,49 @@
 
 # pragma - UITextFieldDelegate
 
+- (void)showNullSearchStringError
+{
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"无结果", nil)
+													message:NSLocalizedString(@"请检查关键字并重试", nil)
+												   delegate:self
+										  cancelButtonTitle:NSLocalizedString(@"好", nil)
+										  otherButtonTitles:nil];
+	[alert show];
+	[alert release];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	if (buttonIndex == 0) {
+        if (self.dockViewController.searchButton.selected) {
+            [self.bottomSearchTextField becomeFirstResponder];
+        }
+	}
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField 
 {
 	if ([textField.text isEqualToString:@""]) {
 		
-		[ErrorNotification showSearchStringNullError];
+        //		[ErrorNotification showSearchStringNullError];
 		
-        [self.bottomSearchTextField becomeFirstResponder];
-        
+		[self showNullSearchStringError];
+		
+		return NO;
+	} else {
+		
+		[textField resignFirstResponder];
+		
+		self.castViewController.searchString = textField.text;
+		
+		[self showSearchTimeline:textField.text];
+		
+		[self showSearchWaitingView];
+		
+		isSearchReturn = YES;
+		
 		return NO;
 	}
-	else {
-        [textField resignFirstResponder];
-        
-        self.castViewController.searchString = textField.text;
-        
-        [self showSearchTimeline:textField.text];
-        
-        [self showSearchWaitingView];
-        
-        isSearchReturn = YES;
-        
-        return NO;
-    }
-    
-    return NO;
 }
 
 - (IBAction)searchTextFieldClicked:(id)sender 
