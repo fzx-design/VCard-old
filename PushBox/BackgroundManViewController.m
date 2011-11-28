@@ -84,7 +84,7 @@
 			imageName = @"bg_water";
             break;
         case PBBackgroundImageBlossom:
-			imageName = @"bg_blossom";
+			imageName = @"bg_flower";
             break;
 	}
 	return imageName;
@@ -119,7 +119,7 @@
 			imageName = @"bg_icon_water";
             break;
         case PBBackgroundImageBlossom:
-			imageName = @"bg_icon_blossom";
+			imageName = @"bg_icon_flower";
             break;
 	}
 	return imageName;
