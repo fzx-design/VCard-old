@@ -13,6 +13,7 @@
 #import "GYCastView.h"
 #import "CastViewInfo.h"
 #import "CastViewManager.h"
+#import "CastViewPileUpController.h"
 #import "Status.h"
 
 #define kNotificationNameNewCommentsToMe @"kNotificationNameNewCommentsToMe"
@@ -41,20 +42,15 @@
 	
 	NSTimer *_timer;
 	
-//	NSMutableArray *_nextPageStack;
-//	NSMutableArray *_rowIndexStack;
-//	NSMutableArray *_fetchedResultsControllerStack;
-	
 	NSMutableArray *_infoStack;
 	
 	CastViewManager *_castViewManager;
+	CastViewPileUpController *_castViewPileUpController;
 	
 	int _nextPage;
 	int _currentNextPage;
 	int _oldNextPage;
-	
-	NSFetchedResultsController *_prevFetchedResultsController;
-	
+		
 	long long _lastStatusID;
 	
 	BOOL _loading;
@@ -75,15 +71,13 @@
 @property(nonatomic, assign) CastViewDataSource dataSource;
 @property(nonatomic, assign) CastViewDataSource prevDataSource;
 @property(nonatomic, retain) CastViewManager *castViewManager;
+@property(nonatomic, retain) CastViewPileUpController *castViewPileUpController;
 
 @property(nonatomic, assign) id<CastViewControllerDelegate> delegate;
 
 @property(nonatomic, retain) NSMutableArray *infoStack;
 
 @property (nonatomic, retain) NSString* searchString;
-
-@property(nonatomic, retain) NSFetchedResultsController* prevFetchedResultsController;
-
 
 - (void)pushCardWithCompletion:(void (^)())completion;
 - (void)popCardWithCompletion:(void (^)())completion;

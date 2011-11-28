@@ -31,17 +31,12 @@
 @synthesize dataSource = _dataSource;
 @synthesize prevDataSource = _prevDataSource;
 @synthesize castViewManager = _castViewManager;
+@synthesize castViewPileUpController = _castViewPileUpController;
 @synthesize searchString = _searchString;
-
-//@synthesize nextPageStack = _nextPageStack;
-//@synthesize rowIndexStack = _rowIndexStack;
-//@synthesize fetchedResultsControllerStack = _fetchedResultsControllerStack;
 
 @synthesize delegate = _delegate;
 
 @synthesize infoStack = _infoStack;
-
-@synthesize prevFetchedResultsController = _prevFetchedResultsController;
 
 - (void)didReceiveMemoryWarning
 {
@@ -56,6 +51,7 @@
 	self.castViewManager.castView = self.castView;
 	self.castViewManager.fetchedResultsController = self.fetchedResultsController;
 	self.castViewManager.currentUser = self.currentUser;
+    self.castViewManager.dataSource = self.dataSource;
 	[self.castViewManager initialSetUp];
 }
 
@@ -217,6 +213,7 @@
 	self.castViewManager.fetchedResultsController = nil;
 	self.castViewManager.fetchedResultsController = self.fetchedResultsController;
 	self.castViewManager.currentIndex = 0;
+    self.castViewManager.dataSource = self.dataSource;
 	self.castView.pageSection = 1;
 	
 	_currentNextPage = 1;
@@ -275,12 +272,13 @@
         
 		self.fetchedResultsController = castViewInfo.fetchedResultsController;
         self.fetchedResultsController.delegate = nil;
+		self.dataSource = castViewInfo.dataSource;
 		
 		self.castViewManager.fetchedResultsController = nil;
 		self.castViewManager.fetchedResultsController = self.fetchedResultsController;
         self.castViewManager.currentIndex = castViewInfo.currentIndex;
+        self.castViewManager.dataSource = self.dataSource;
 		self.castView.pageSection = castViewInfo.indexSection;
-		self.dataSource = castViewInfo.dataSource;
 		
 		_lastStatusID = castViewInfo.statusID;
 		
@@ -363,6 +361,7 @@
 - (void)deleteCurrentCard
 {
 	[self.castViewManager deleteCurrentView];
+    [self.delegate castViewControllerdidScrollToRow:self.castViewManager.currentIndex withNumberOfRows:[self.castViewManager numberOfRows]];
 }
 
 #pragma mark - Load Cards methods
@@ -388,6 +387,30 @@
     [self.managedObjectContext processPendingChanges];
 }
 
+
+- (void)checkPiles
+{
+	[self.castViewPileUpController print];
+	if (![self.castViewManager gotEnoughViewsToShow]) {
+		[self loadMoreDataCompletion:nil];
+	}
+}
+
+- (void)setPiles
+{
+	for (int i = self.castViewPileUpController.lastIndexFR; i < self.fetchedResultsController.fetchedObjects.count; ++i) {
+        Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:i];
+        NSLog(@"content : %@", status.text);
+        [self.castViewPileUpController insertCardwithID:[status.statusID longLongValue] andIndexInFR:i];
+    }
+    
+    if (self.castViewPileUpController.lastIndexFR != self.fetchedResultsController.fetchedObjects.count) {
+        [self checkPiles];
+    }
+    
+    self.castViewPileUpController.lastIndexFR = self.fetchedResultsController.fetchedObjects.count;
+}
+
 - (void)insertStatusFromClient:(WeiboClient *)client
 {
 	NSArray *dictArray = client.responseJSONObject;
@@ -403,23 +426,22 @@
 			
 		} else if(self.dataSource == CastViewDataSourceUserTimeline){
 			
-			newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+			[Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
 			
 		} else if(self.dataSource == CastViewDataSourceMentions){
             
-			newStatus = [Status insertMentionedStatus:dict inManagedObjectContext:self.managedObjectContext];
+			[Status insertMentionedStatus:dict inManagedObjectContext:self.managedObjectContext];
             
 		} else if(self.dataSource == CastViewDataSourceSearch){
             
-			newStatus = [Status insertTrendsStatus:dict withString:self.searchString inManagedObjectContext:self.managedObjectContext];
+			[Status insertTrendsStatus:dict withString:self.searchString inManagedObjectContext:self.managedObjectContext];
 			
-			NSLog(@"%@", newStatus.text);
 		} else if(self.dataSource == CastViewDataSourceTrends){
             
-			newStatus = [Status insertTrendsStatus:dict withString:self.searchString inManagedObjectContext:self.managedObjectContext];
+			[Status insertTrendsStatus:dict withString:self.searchString inManagedObjectContext:self.managedObjectContext];
 		}
 	}
-
+	
 	[self.managedObjectContext processPendingChanges];
 	[self.fetchedResultsController performFetch:nil];
 }
@@ -486,7 +508,7 @@
 	
 	[client getFriendsTimelineSinceID:nil
 								maxID:[NSString stringWithFormat:@"%lld", (long long)0]
-					   startingAtPage:0
+					   startingAtPage:_currentNextPage++
 								count:kStatusCountPerRequest
 							  feature:0];
 }
@@ -526,6 +548,10 @@
 		if (!client.hasError) {
 			
 			[self insertStatusFromClient:client];
+            
+            if (self.dataSource == CastViewDataSourceFriendsTimeline) {
+                [self setPiles];
+            }
 			
 			if (_refreshFlag) {
 				_refreshFlag = NO;
@@ -545,9 +571,9 @@
 					
 					_lastStatusID = statusID;
 					
-					[self clearData];
-					
-					[self insertStatusFromClient:client];
+//					[self clearData];
+//					
+//					[self insertStatusFromClient:client];
 					
 					[self.castViewManager refreshCards];
 					
@@ -565,7 +591,7 @@
 			
 			_currentNextPage = _oldNextPage;
 			
-			[ErrorNotification showLoadingError];
+//			[ErrorNotification showLoadingError];
 		}
 		
 		if (completion) {
@@ -612,6 +638,11 @@
 {
 	_refreshFlag = YES;
 	_currentNextPage = 1;
+	
+	if (self.dataSource == CastViewDataSourceFriendsTimeline) {
+		[self.castViewPileUpController clearPiles];
+	}
+	
     [self loadMoreDataCompletion:NULL];
 }
 
@@ -624,6 +655,7 @@
 		self.fetchedResultsController.delegate = nil;
 		self.castViewManager.fetchedResultsController = nil;
 		self.castViewManager.fetchedResultsController = self.fetchedResultsController;
+        self.castViewManager.dataSource = self.dataSource;
 		[self refresh];
 	} else {
 		[self pushCardWithCompletion:completion];
@@ -715,6 +747,16 @@
 {
 	self.castViewManager.currentIndex = index;
 	[self.delegate castViewControllerdidScrollToRow:index withNumberOfRows:[self.castViewManager numberOfRows]];
+	
+    int indexInFR = index;
+    if (self.dataSource == CastViewDataSourceFriendsTimeline) {
+        indexInFR = [self.castViewPileUpController indexInFRForViewIndex:index];
+    }
+    
+    if (indexInFR >= 0 && indexInFR < self.fetchedResultsController.fetchedObjects.count) {
+        Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:indexInFR];
+        [self.castViewPileUpController addNewReadID:[status.statusID longLongValue]];
+    }
 }
 
 - (UIView*)viewForItemAtIndex:(GYCastView *)scrollView index:(int)index
@@ -747,6 +789,15 @@
 	}
 	
 	return _castViewManager;
+}
+
+- (CastViewPileUpController*)castViewPileUpController
+{
+	if (_castViewPileUpController == nil) {
+		_castViewPileUpController = [CastViewPileUpController sharedCastViewPileUpController];
+	}
+	
+	return _castViewPileUpController;
 }
 
 - (NSMutableArray*)infoStack

@@ -8,13 +8,29 @@
 
 #import <UIKit/UIKit.h>
 #import "SmartCardViewController.h"
+#import "CastViewPile.h"
+
+#define kNotificationNameExpandPile @"kNotificationNameExpandPile"
 
 @interface CardFrameViewController : UIViewController {
 	int _index;
 	SmartCardViewController *_contentViewController;
+    
+    UIView *_pileInfoView;
+    UILabel *_dateRangeLabel;
+    UILabel *_cardNumberLabel;
+    UIButton *_pileCoverButton;
 }
 
 @property (nonatomic, assign) int index;
 @property (nonatomic, retain) SmartCardViewController* contentViewController;
+
+@property (nonatomic, retain) IBOutlet UIView* pileInfoView;
+@property (nonatomic, retain) IBOutlet UILabel* dateRangeLabel;
+@property (nonatomic, retain) IBOutlet UILabel* cardNumberLabel;
+@property (nonatomic, retain) IBOutlet UIButton* pileCoverButton;
+
+- (void)configureCardFrameWithStatus:(Status*)status;
+- (void)configureCardFrameWithStatus:(Status*)status AndPile:(CastViewPile*)pile;
 
 @end

@@ -12,6 +12,7 @@
 #import "Status.h"
 #import "UIImageViewAddition.h"
 #import "NSDateAddition.h"
+#import "CastViewPileUpController.h"
 
 #define CastViewPageSize CGSizeMake(560, 640)
 #define CastViewFrame CGRectMake(0.0f, 0.0f, 560, 640)
@@ -25,12 +26,18 @@
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize currentIndex = _currentIndex;
 @synthesize currentUser = _currentUser;
+@synthesize dataSource = _dataSource;
 
 - (void)initialSetUp
 {
 	self.castView.pageSize = CastViewPageSize;
 	[self.castView setScrollsToTop:NO];
 	self.currentIndex = 0;
+    
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(expandCurrentPile) 
+                   name:kNotificationNameExpandPile 
+                 object:nil];
 }
 
 #pragma mark - Tools
@@ -38,6 +45,48 @@
 - (int)numberOfRows
 {
 	return self.castView.pageNum;
+}
+
+- (BOOL)gotEnoughViewsToShow
+{
+	BOOL result = YES;
+	CastViewPileUpController *pileUpController = [CastViewPileUpController sharedCastViewPileUpController];
+	if (self.castView.pageSection * 10 > [pileUpController itemCount]) {
+		result = NO;
+	}
+	return result;
+}
+
+- (Status *)statusForViewIndex:(int)index
+{
+    
+    Status* status = nil;
+    int indexInFR = 0;
+    
+    if (self.dataSource == CastViewDataSourceFriendsTimeline) {
+        CastViewPileUpController *pileUpController = [CastViewPileUpController sharedCastViewPileUpController];
+        indexInFR = [pileUpController indexInFRForViewIndex:index];
+
+    } else {
+        indexInFR = index;
+    }
+    
+    if (self.fetchedResultsController.fetchedObjects.count > indexInFR && indexInFR >= 0) {
+        status = [self.fetchedResultsController.fetchedObjects objectAtIndex:indexInFR];
+    }
+    
+    return status;
+}
+
+- (void)configureCardFrameController:(CardFrameViewController*)vc atIndex:(int)index
+{    
+    if (self.dataSource == CastViewDataSourceFriendsTimeline) {
+        CastViewPileUpController *pc = [CastViewPileUpController sharedCastViewPileUpController];
+        [vc configureCardFrameWithStatus:[self statusForViewIndex:index] AndPile:[pc pileAtIndex:index]];
+    } else {
+        [vc configureCardFrameWithStatus:[self statusForViewIndex:index]];
+    }
+    vc.index = index;
 }
 
 #pragma mark - Card Frames methods
@@ -103,15 +152,11 @@
 			[cardFrameViewController.contentViewController clear];
 		}
 	}
+    
+    [self configureCardFrameController:cardFrameViewController atIndex:index];
 	
-	cardFrameViewController.index = index;
 	cardFrameViewController.contentViewController.currentUser = self.currentUser;
-	if (self.fetchedResultsController.fetchedObjects.count > index) {
-		cardFrameViewController.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:index];
-	} else {
-		NSLog(@"_________________Error1");
-	}
-	cardFrameViewController.contentViewController.view.frame = CastViewFrame;
+    cardFrameViewController.contentViewController.view.frame = CastViewFrame;
 	
 	return cardFrameViewController;	
 }
@@ -128,6 +173,16 @@
 	}
 }
 
+- (void)prepareForExpandingPile
+{
+    for (CardFrameViewController* cardFrameViewController in self.cardFrames) {
+        if (cardFrameViewController.index - self.currentIndex > 0) {
+            cardFrameViewController.index = InitialIndex;
+            [cardFrameViewController.view removeFromSuperview];
+        }
+    }
+}
+
 - (void)resetCardFrameIndex
 {
 	for (CardFrameViewController *vc in self.cardFrames) {
@@ -140,11 +195,7 @@
 	[self.fetchedResultsController performFetch:nil];
 	for (CardFrameViewController *cardFrameViewController in self.cardFrames) {
 		if (abs(cardFrameViewController.index - self.currentIndex) <= 3) {
-			if (self.fetchedResultsController.fetchedObjects.count > cardFrameViewController.index) {
-				cardFrameViewController.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:cardFrameViewController.index];
-			} else {
-				NSLog(@"_________________Error2");
-			}
+            [self configureCardFrameController:cardFrameViewController atIndex:cardFrameViewController.index];
 		}
 	}
 	
@@ -167,16 +218,8 @@
 	CardFrameViewController* vc1 = [self getNeighborCardFrameViewControllerWithIndex];
 	CardFrameViewController* vc2 = [self getNeighborCardFrameViewControllerWithIndex];
 	
-	if (self.fetchedResultsController.fetchedObjects.count > 0) {
-		vc1.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:FirstPageIndex];
-	} else {
-		vc1 = nil;
-	}
-	if (self.fetchedResultsController.fetchedObjects.count > 1) {
-		vc2.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:SecondPageIndex];
-	} else {
-		vc2 = nil;
-	}
+    [self configureCardFrameController:vc1 atIndex:FirstPageIndex];
+    [self configureCardFrameController:vc2 atIndex:SecondPageIndex];
 	
 	[self resetCardFrameIndex];
 	
@@ -204,23 +247,18 @@
 		CardFrameViewController* vc1 = [self getNeighborCardFrameViewControllerWithIndex];
 		CardFrameViewController* vc2 = [self getNeighborCardFrameViewControllerWithIndex];
 		CardFrameViewController* vc3 = [self getNeighborCardFrameViewControllerWithIndex];
+
+        [self configureCardFrameController:vc1 atIndex:index - 1];
 		
-		if (index - 1 >= 0) {
-			vc1.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:index - 1];
-			vc1.index = index - 1;
-		} else {
-			vc1 = nil;
-		}
-		
-		vc2.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:index];
-		vc2.index = index;
-		
-		if (index + 1 < [self numberOfRows]) {
-			vc3.contentViewController.status = [self.fetchedResultsController.fetchedObjects objectAtIndex:index + 1];
-			vc3.index = index + 1;
-		} else {
-			vc3 = nil;
-		}
+        [self configureCardFrameController:vc2 atIndex:index];
+        
+        [self configureCardFrameController:vc3 atIndex:index + 1];
+        
+        if (index == 0) {
+            vc1 = nil;
+        } else if(index == self.castView.pageNum - 1){
+            vc3 = nil;
+        }
 		
 		[self.castView moveViewsWithPageOffset:diff andCurrentPage:index withFirstPage:vc1.view secondPage:vc2.view thirdPage:vc3.view];
 	}
@@ -229,10 +267,11 @@
 
 - (void)deleteCurrentView
 {
-	CardFrameViewController *toDelete;
+	CardFrameViewController *toDelete = nil;
 	for (CardFrameViewController *cardFrameViewController in self.cardFrames) {
 		if (cardFrameViewController.index - self.currentIndex == 0) {
 			toDelete = cardFrameViewController;
+            break;
 		}
 	}
 	
@@ -256,9 +295,46 @@
 			self.castView.pageNum--;
 			[toDelete.view removeFromSuperview];
 			toDelete.index = InitialIndex;
+            
+            CastViewPileUpController *pileController = [CastViewPileUpController sharedCastViewPileUpController];
+            [pileController deletePileAtIndex:self.currentIndex];
+            
 			[self.castView deleteView];
 			[self reloadCards];
 		}
+	}];
+}
+
+- (void)expandCurrentPile
+{
+    CardFrameViewController *toExpand = nil;
+	for (CardFrameViewController *cardFrameViewController in self.cardFrames) {
+		if (cardFrameViewController.index - self.currentIndex == 0) {
+			toExpand = cardFrameViewController;
+            break;
+		}
+	}
+	
+	[UIView animateWithDuration:0.3 animations:^{
+		for (CardFrameViewController *cardFrameViewController in self.cardFrames) {
+			UIView* view = cardFrameViewController.view;
+			if (cardFrameViewController.index - self.currentIndex > 0) {
+				CGRect frame = view.frame;
+				frame.origin.x += 560;
+				view.frame = frame;				
+			} 
+		}
+	} completion:^(BOOL finished) {
+
+            [self prepareForExpandingPile];
+            
+            CastViewPileUpController *pileController = [CastViewPileUpController sharedCastViewPileUpController];
+            [pileController deletePileAtIndex:self.currentIndex];
+            
+            NSLog(@"expand pile at index : %d", self.currentIndex);
+            
+            [self.castView resetWithCurrentIndex:self.currentIndex numberOfPages:[self itemCount:nil]];
+//			[self reloadCards];
 	}];
 }
 
@@ -286,7 +362,9 @@
 		return;
 	}
 	
-	Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:index];
+//	Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:index];
+    Status *status = [self statusForViewIndex:index];
+    
 	NSString *profileImageString = status.author.profileImageURL;
 	[popover.proFileImage loadImageFromURL:profileImageString
 								completion:nil
@@ -313,11 +391,19 @@
 
 - (int)itemCount:(GYCastView *)scrollView
 {
-	int count = self.fetchedResultsController.fetchedObjects.count;
-	if (count > 10 * self.castView.pageSection) {
-		count = 10 * self.castView.pageSection;
-	}
-	return count;
+    int count = 0;
+
+    if (self.dataSource == CastViewDataSourceFriendsTimeline) {
+        CastViewPileUpController *controller = [CastViewPileUpController sharedCastViewPileUpController];
+        count = [controller itemCount];
+    } else {
+        count = self.fetchedResultsController.fetchedObjects.count;
+        if (count > 10 * self.castView.pageSection) {
+            count = 10 * self.castView.pageSection;
+        }
+    }
+
+    return count;
 }
 
 - (void)resetViewsAroundCurrentIndex:(int)index

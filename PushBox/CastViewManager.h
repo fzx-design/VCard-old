@@ -20,7 +20,7 @@
 	NSMutableArray *_cardFrames;
 	NSFetchedResultsController *_fetchedResultsController;
 	User *_currentUser;
-	
+	CastViewDataSource _dataSource;
 }
 
 @property(nonatomic, retain) GYCastView *castView;
@@ -31,6 +31,7 @@
 @property(nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property(nonatomic, retain) User *currentUser;
 
+@property(nonatomic, assign) CastViewDataSource dataSource;
 
 
 - (void)initialSetUp;
@@ -46,6 +47,7 @@
 - (void)deleteCurrentView;
 
 - (int)numberOfRows;
+- (BOOL)gotEnoughViewsToShow;
 
 
 - (UIView*)viewForItemAtIndex:(GYCastView*)scrollView index:(int)index;
