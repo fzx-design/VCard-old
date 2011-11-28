@@ -1214,6 +1214,7 @@
 {
 	_commandCenterFlag = YES;
 	self.notificationView.hidden = YES;
+    self.bottomSearchTextField.hidden = YES;
 	
 	self.dockViewController.hideCommandCenterButton.enabled = YES;
 	
@@ -1265,6 +1266,7 @@
     _commandCenterFlag = NO;
 	
 	self.dockViewController.hideCommandCenterButton.enabled = NO;
+    self.bottomSearchTextField.hidden = self.bottomSearchBG.hidden;
     
     [self.dockViewController viewWillDisappear:YES];
     [UIView animateWithDuration:kDockAnimationInterval
