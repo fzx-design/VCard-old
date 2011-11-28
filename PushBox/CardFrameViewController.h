@@ -20,6 +20,8 @@
     UILabel *_dateRangeLabel;
     UILabel *_cardNumberLabel;
     UIButton *_pileCoverButton;
+    
+    UIImageView *_pileImageView;
 }
 
 @property (nonatomic, assign) int index;
@@ -29,6 +31,8 @@
 @property (nonatomic, retain) IBOutlet UILabel* dateRangeLabel;
 @property (nonatomic, retain) IBOutlet UILabel* cardNumberLabel;
 @property (nonatomic, retain) IBOutlet UIButton* pileCoverButton;
+
+@property (nonatomic, retain) IBOutlet UIImageView* pileImageView;
 
 - (void)configureCardFrameWithStatus:(Status*)status;
 - (void)configureCardFrameWithStatus:(Status*)status AndPile:(CastViewPile*)pile;

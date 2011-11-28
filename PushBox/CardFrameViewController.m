@@ -20,6 +20,8 @@
 @synthesize cardNumberLabel = _cardNumberLabel;
 @synthesize pileCoverButton = _pileCoverButton;
 
+@synthesize pileImageView = _pileImageView;
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -40,6 +42,7 @@
 {
     self.pileInfoView.hidden = YES;
     self.pileCoverButton.hidden = YES;
+    self.pileImageView.hidden = YES;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameExpandPile object:nil];
 }
@@ -58,6 +61,7 @@
     
     self.pileInfoView.hidden = YES;
     self.pileCoverButton.hidden = YES;
+    self.pileImageView.hidden = YES;
 }
 
 - (void)configureCardFrameWithStatus:(Status*)status AndPile:(CastViewPile*)pile
@@ -75,6 +79,7 @@
     BOOL result = [pile isMultipleCardPile];
     self.pileInfoView.hidden = !result;
     self.pileCoverButton.hidden = !result;
+    self.pileImageView.hidden = !result;
     
     self.dateRangeLabel.text = [status.createdAt customString];
     self.cardNumberLabel.text = [NSString stringWithFormat:@"%d 张卡片", [pile numberOfCardsInPile]];

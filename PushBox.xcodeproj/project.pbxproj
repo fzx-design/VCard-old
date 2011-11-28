@@ -161,6 +161,7 @@
 		9BD2BB6D1476358D0064169B /* CastViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD2BB6C1476358D0064169B /* CastViewManager.m */; };
 		9BF167BE1483E6F7007E5A13 /* CastViewPile.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF167BB1483E6F7007E5A13 /* CastViewPile.m */; };
 		9BF167BF1483E6F7007E5A13 /* CastViewPileUpController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF167BD1483E6F7007E5A13 /* CastViewPileUpController.m */; };
+		9BF167C61483ED81007E5A13 /* sc_stack_cards.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF167C51483ED81007E5A13 /* sc_stack_cards.png */; };
 		9BF36CF614592DDC00A60A0F /* options_icon_news.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF36CF414592DDB00A60A0F /* options_icon_news.png */; };
 		9BF36CF714592DDC00A60A0F /* options_icon_timer.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF36CF514592DDB00A60A0F /* options_icon_timer.png */; };
 		9BF36CFA14592F6900A60A0F /* options_icon_about.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF36CF914592F6900A60A0F /* options_icon_about.png */; };
@@ -483,6 +484,7 @@
 		9BF167BB1483E6F7007E5A13 /* CastViewPile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CastViewPile.m; sourceTree = "<group>"; };
 		9BF167BC1483E6F7007E5A13 /* CastViewPileUpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CastViewPileUpController.h; sourceTree = "<group>"; };
 		9BF167BD1483E6F7007E5A13 /* CastViewPileUpController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CastViewPileUpController.m; sourceTree = "<group>"; };
+		9BF167C51483ED81007E5A13 /* sc_stack_cards.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sc_stack_cards.png; path = ../../../../../../Desktop/sc_stack_cards.png; sourceTree = "<group>"; };
 		9BF36CF414592DDB00A60A0F /* options_icon_news.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = options_icon_news.png; sourceTree = "<group>"; };
 		9BF36CF514592DDB00A60A0F /* options_icon_timer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = options_icon_timer.png; sourceTree = "<group>"; };
 		9BF36CF914592F6900A60A0F /* options_icon_about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = options_icon_about.png; sourceTree = "<group>"; };
@@ -1150,6 +1152,7 @@
 		CBBA01F113E4530700641923 /* statuscard */ = {
 			isa = PBXGroup;
 			children = (
+				9BF167C51483ED81007E5A13 /* sc_stack_cards.png */,
 				203DBEF7146FE91500F43D5A /* stack_bounder.png */,
 				209422B9147F7F3700EA4B47 /* sc_locate.png */,
 				FEB5EA511455CF0500453B09 /* gif_icon.png */,
@@ -1698,6 +1701,7 @@
 				209422BA147F7F3700EA4B47 /* sc_locate.png in Resources */,
 				2030BBC3148216B5002D8B46 /* options_icon_locate.png in Resources */,
 				2030BBC614821809002D8B46 /* options_icon_stack.png in Resources */,
+				9BF167C61483ED81007E5A13 /* sc_stack_cards.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

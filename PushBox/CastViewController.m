@@ -485,6 +485,8 @@
 			
 			[self insertStatusFromClient:client];
 			
+            [self setPiles];
+            
 			if (self.fetchedResultsController.fetchedObjects.count != 0) {
 				
 				Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
