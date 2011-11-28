@@ -25,6 +25,10 @@
 #define kRepostWebViewFrameTop CGRectMake(57, 275, 451, 134)
 #define kRepostViewFrameBottom CGRectMake(57, 275+125, 451, 134)
 #define kRepostWebViewFrameBottom CGRectMake(57, 275+125, 451, 134)
+#define kLocationImageViewFrameNomal CGRectMake(65, 247, 15, 16)
+#define kLocationLabelFrameNomal CGRectMake(86, 243, 217, 21)
+#define kLocationImageViewFrameRight CGRectMake(132, 247, 15, 16)
+#define kLocationLabelFrameRight CGRectMake(153, 247, 15, 16)
 
 @implementation SmartCardViewController
 
@@ -337,6 +341,11 @@
     self.tweetImageView.hidden = YES;
     
     self.imageCoverImageView.alpha = 0.0;
+    
+    self.locationLabel.hidden = YES;
+    self.locationIconImageView.hidden = YES;
+    [self.locationLabel setFrame:kLocationLabelFrameNomal];
+    [self.locationIconImageView setFrame:kLocationImageViewFrameNomal];
     
     self.gifIcon.hidden = YES;
     
@@ -734,6 +743,10 @@
             self.playButton.alpha = 1.0;
         } completion:^(BOOL fin) {
         }];
+        
+        // locationLabel & imageView
+        [self.locationLabel setFrame:kLocationLabelFrameRight];
+        [self.locationIconImageView setFrame:kLocationImageViewFrameRight];
     }
 }
 
@@ -753,6 +766,10 @@
     } completion:^(BOOL fin) {
     }];
     
+    // locationLabel & imageView
+    [self.locationLabel setFrame:kLocationLabelFrameRight];
+    [self.locationIconImageView setFrame:kLocationImageViewFrameRight];
+
     [self loadMusicCoverImage];
 }
 
@@ -761,6 +778,10 @@
     self.playButton.hidden = NO;
     self.musicLink = repostMusicVideoLink;
     //    self.playButton.frame = kPlayButtonFrameBottom;
+    
+    // locationLabel & imageView
+    [self.locationLabel setFrame:kLocationLabelFrameRight];
+    [self.locationIconImageView setFrame:kLocationImageViewFrameRight];
 }
 
 - (void)getPostMusicVideoLink:(NSString*)statusText
