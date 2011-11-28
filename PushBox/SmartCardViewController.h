@@ -15,6 +15,7 @@
 #import "PostViewController.h"
 #import "InnerBroswerViewController.h"
 #import "UIAudioAddition.h"
+#import "FXLabel.h"
 #import <MessageUI/MessageUI.h>
 
 #define kNotificationNameModalCardPresented @"kNotificationNameModalCardPresented"
@@ -42,6 +43,14 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
 	UIImageView *_repostView;
     UILabel *_trackLabel;
     UIView *_trackView;
+    FXLabel *_trackLabel2;
+    UIView *_trackView2;
+    FXLabel *_trackLabel1;
+    UIView *_trackView1;
+    FXLabel *_trackLabel3;
+    UIView *_trackView3;
+    FXLabel *_trackLabel4;
+    UIView *_trackView4;
     UIImageView *_imageCoverImageView;
     UIImageView *_musicBackgroundImageView;
     UIImageView *_musicCoverImageView;
@@ -75,10 +84,18 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
 @property(nonatomic, retain) IBOutlet UIWebView* repostWebView;
 @property(nonatomic, retain) IBOutlet UITextView* repostTextView;
 @property(nonatomic, retain) IBOutlet UIImageView* repostView;
-@property(nonatomic, retain) IBOutlet UILabel* trackLabel;
 @property(nonatomic, retain) IBOutlet UIImageView* locationIconImageView;
 @property(nonatomic, retain) IBOutlet UILabel* locationLabel;
 @property(nonatomic, retain) IBOutlet UIView* trackView;
+@property(nonatomic, retain) IBOutlet UILabel* trackLabel;
+@property(nonatomic, retain) IBOutlet UIView* trackView1;
+@property(nonatomic, retain) IBOutlet FXLabel* trackLabel1;
+@property(nonatomic, retain) IBOutlet UIView* trackView2;
+@property(nonatomic, retain) IBOutlet FXLabel* trackLabel2;
+@property(nonatomic, retain) IBOutlet UIView* trackView3;
+@property(nonatomic, retain) IBOutlet FXLabel* trackLabel3;
+@property(nonatomic, retain) IBOutlet UIView* trackView4;
+@property(nonatomic, retain) IBOutlet FXLabel* trackLabel4;
 @property(nonatomic, retain) IBOutlet UIImageView* imageCoverImageView;
 @property(nonatomic, retain) IBOutlet UIImageView* musicBackgroundImageView;
 @property(nonatomic, retain) IBOutlet UIImageView* musicCoverImageView;

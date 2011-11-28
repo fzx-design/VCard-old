@@ -173,10 +173,12 @@
 	_statusTypeStack = [[NSMutableArray alloc] init];
 }
 
-- (void)getFriends
-{
-	int cursor = -1;
-	
+- (void)getFriendsDelta:(int)cursor {
+    
+    if (cursor == 0) {
+        return;
+    }
+    
     WeiboClient *client = [WeiboClient client];
     [client setCompletionBlock:^(WeiboClient *client) {
         if (!client.hasError) {
@@ -184,10 +186,25 @@
             for (NSDictionary *dict in dictArray) {
                 [User insertUser:dict inManagedObjectContext:self.managedObjectContext];
             }
+            
+            int next_cursor = [[client.responseJSONObject objectForKey:@"next_cursor"] intValue];
+            NSLog(@"~_~_~_~_~_~_~_~%d", next_cursor);
+            [self getFriendsDelta:next_cursor];
+        } 
+        else {
+            NSLog(@"Get friends!");
         }
     }];
     
     [client getFriendsOfUser:self.currentUser.userID cursor:cursor count:200];
+
+}
+
+- (void)getFriends
+{
+    int cursor = -1;
+    [self getFriendsDelta:cursor];
+    
 }
 
 - (void)getEmotions
@@ -1212,7 +1229,12 @@
 {
 	_commandCenterFlag = YES;
 	self.notificationView.hidden = YES;
+    
     self.bottomSearchTextField.hidden = YES;
+    [self.bottomSearchTextField setAlpha:0.0];
+    [UIView animateWithDuration:0.3 animations:^(void){
+        [self.bottomSearchTextField setAlpha:1.0];
+    }];
 	
 	self.dockViewController.hideCommandCenterButton.enabled = YES;
 	
