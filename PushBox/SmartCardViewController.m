@@ -68,6 +68,7 @@
 @synthesize status = _status;
 @synthesize musicLink = _musicLink;
 
+@synthesize readImageView = _readImageView;
 
 - (void)dealloc
 {    
@@ -86,6 +87,7 @@
     [_repostTextView release];
     [_repostView release];
     [_status release];
+    [_readImageView release];
     [super dealloc];
 }
 
@@ -104,7 +106,7 @@
     self.tweetTextView = nil;
     self.repostTextView = nil;
     self.repostView = nil;
-    
+    self.readImageView = nil;
 }
 
 - (void)viewDidLoad

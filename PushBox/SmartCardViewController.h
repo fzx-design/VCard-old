@@ -66,6 +66,8 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
     
     Status *_status;
 	
+    UIImageView *_readImageView;
+    
     int b;
 }
 
@@ -101,6 +103,9 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
 @property(nonatomic, retain) IBOutlet UIImageView* musicCoverImageView;
 @property(nonatomic, retain) IBOutlet UIButton* playButton;
 @property(nonatomic, retain) IBOutlet UILabel* recentActNotifyLabel;
+
+
+@property (nonatomic, retain) IBOutlet UIImageView* readImageView;
 
 @property(nonatomic, retain) NSString* musicLink;
 

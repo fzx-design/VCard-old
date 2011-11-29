@@ -23,6 +23,8 @@ typedef enum {
 	int _startIndexInFR;
 	int _endIndexInFR;
     BOOL _isRead;
+    
+    NSString* _endDate;
 }
 
 @property (nonatomic, assign) CastViewCellType type;
@@ -33,6 +35,8 @@ typedef enum {
 @property (nonatomic, assign) int endIndexInFR;
 
 @property (nonatomic, assign) BOOL isRead;
+
+@property (nonatomic, retain) NSString *endDate;
 
 - (id)initWithStartIndexInFR:(int)start;
 

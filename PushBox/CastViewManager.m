@@ -82,7 +82,11 @@
 {    
     if (self.dataSource == CastViewDataSourceFriendsTimeline) {
         CastViewPileUpController *pc = [CastViewPileUpController sharedCastViewPileUpController];
-        [vc configureCardFrameWithStatus:[self statusForViewIndex:index] AndPile:[pc pileAtIndex:index]];
+        
+        CastViewPile *pile = [pc pileAtIndex:index];
+        Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:pile.endIndexInFR];
+        
+        [vc configureCardFrameWithStatus:[self statusForViewIndex:index] AndPile:pile withEndDateString:status.createdAt];
     } else {
         [vc configureCardFrameWithStatus:[self statusForViewIndex:index]];
     }
@@ -353,7 +357,7 @@
     
     NSLog(@"toRemove's test is %@", toRemove.contentViewController.status.text);
     
-	[UIView animateWithDuration:1.5 animations:^{
+	[UIView animateWithDuration:1 animations:^{
         
         CGRect frame1 = toExpand.view.frame;
         frame1.origin.x += 560;

@@ -25,7 +25,6 @@
     
     UIImageView *_pileImageView;
     
-    UIImageView *_readImageView;
 }
 
 @property (nonatomic, assign) int index;
@@ -40,9 +39,8 @@
 
 @property (nonatomic, retain) IBOutlet UIImageView* pileImageView;
 
-@property (nonatomic, retain) IBOutlet UIImageView* readImageView;
 
 - (void)configureCardFrameWithStatus:(Status*)status;
-- (void)configureCardFrameWithStatus:(Status*)status AndPile:(CastViewPile*)pile;
+- (void)configureCardFrameWithStatus:(Status*)status AndPile:(CastViewPile*)pile withEndDateString:(NSDate*)endDate;
 
 @end

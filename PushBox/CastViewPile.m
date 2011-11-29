@@ -20,6 +20,8 @@
 
 @synthesize isRead = _isRead;
 
+@synthesize endDate = _endDate;
+
 - (void)dealloc
 {
 	[super dealloc];

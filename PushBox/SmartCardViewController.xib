@@ -64,6 +64,22 @@
 							<string key="NSResourceName">sc_bg.png</string>
 						</object>
 					</object>
+					<object class="IBUIImageView" id="853107865">
+						<reference key="NSNextResponder" ref="931374233"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{434, 24}, {30, 19}}</string>
+						<reference key="NSSuperview" ref="931374233"/>
+						<reference key="NSWindow"/>
+						<string key="NSReuseIdentifierKey">_NS:569</string>
+						<reference key="IBUIBackgroundColor" ref="392801989"/>
+						<int key="IBUIContentMode">4</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">sc_read.png</string>
+						</object>
+					</object>
 					<object class="IBUIImageView" id="1017421927">
 						<reference key="NSNextResponder" ref="931374233"/>
 						<int key="NSvFlags">292</int>
@@ -1175,6 +1191,14 @@
 					<int key="connectionID">126</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">readImageView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="853107865"/>
+					</object>
+					<int key="connectionID">128</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">actionsButtonClicked:</string>
 						<reference key="source" ref="726699579"/>
@@ -1334,6 +1358,7 @@
 							<reference ref="37565796"/>
 							<reference ref="412021719"/>
 							<reference ref="133438369"/>
+							<reference ref="853107865"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">StatusView</string>
@@ -1587,6 +1612,11 @@
 						<reference key="object" ref="403241000"/>
 						<reference key="parent" ref="133438369"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">127</int>
+						<reference key="object" ref="853107865"/>
+						<reference key="parent" ref="931374233"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1610,6 +1640,7 @@
 					<string>118.CustomClassName</string>
 					<string>118.IBPluginDependency</string>
 					<string>12.IBPluginDependency</string>
+					<string>127.IBPluginDependency</string>
 					<string>13.IBPluginDependency</string>
 					<string>14.IBPluginDependency</string>
 					<string>15.IBPluginDependency</string>
@@ -1682,6 +1713,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<real value="1"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1710,7 +1742,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">126</int>
+			<int key="maxID">128</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1811,6 +1843,7 @@
 							<string>playButton</string>
 							<string>postWebView</string>
 							<string>profileImageView</string>
+							<string>readImageView</string>
 							<string>recentActNotifyLabel</string>
 							<string>repostCountLabel</string>
 							<string>repostTextView</string>
@@ -1845,6 +1878,7 @@
 							<string>UIImageView</string>
 							<string>UIButton</string>
 							<string>UIWebView</string>
+							<string>UIImageView</string>
 							<string>UIImageView</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
@@ -1884,6 +1918,7 @@
 							<string>playButton</string>
 							<string>postWebView</string>
 							<string>profileImageView</string>
+							<string>readImageView</string>
 							<string>recentActNotifyLabel</string>
 							<string>repostCountLabel</string>
 							<string>repostTextView</string>
@@ -1956,6 +1991,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">profileImageView</string>
+								<string key="candidateClassName">UIImageView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">readImageView</string>
 								<string key="candidateClassName">UIImageView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
@@ -2065,6 +2104,7 @@
 				<string>sc_image_cover.png</string>
 				<string>sc_locate.png</string>
 				<string>sc_music_bg.png</string>
+				<string>sc_read.png</string>
 				<string>sc_track_button_comment.png</string>
 				<string>sc_track_button_default.png</string>
 			</object>
@@ -2080,6 +2120,7 @@
 				<string>{467, 321}</string>
 				<string>{15, 16}</string>
 				<string>{443, 139}</string>
+				<string>{30, 19}</string>
 				<string>{431, 42}</string>
 				<string>{431, 42}</string>
 			</object>

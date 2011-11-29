@@ -25,7 +25,6 @@
 
 @synthesize pileImageView = _pileImageView;
 
-@synthesize readImageView = _readImageView;
 
 #pragma mark - View lifecycle
 
@@ -41,7 +40,6 @@
     [super viewDidUnload];
     self.pileBounderShadow = nil;
 	self.pileInfoView = nil;
-    self.readImageView = nil;
 }
 #pragma mark - Set ContentViewController methods
 
@@ -52,7 +50,7 @@
     self.pileInfoView.hidden = YES;
     self.pileCoverButton.hidden = YES;
     self.pileImageView.hidden = YES;
-    [UIView animateWithDuration:0.3 animations:^{
+    [UIView animateWithDuration:0.7 animations:^{
         self.pileBounderShadow.alpha = 0.0;
     } completion:^(BOOL finished) {
         self.pileBounderShadow.hidden = YES;
@@ -78,10 +76,10 @@
     self.pileCoverButton.hidden = YES;
     self.pileImageView.hidden = YES;
     self.pileBounderShadow.hidden = YES;
-    self.readImageView.hidden = YES;
+    self.contentViewController.readImageView.hidden = YES;
 }
 
-- (void)configureCardFrameWithStatus:(Status*)status AndPile:(CastViewPile*)pile
+- (void)configureCardFrameWithStatus:(Status*)status AndPile:(CastViewPile*)pile withEndDateString:(NSDate*)endDate
 {
     if (status == nil || self.contentViewController == nil) {
         self.contentViewController.status = status;
@@ -98,11 +96,11 @@
     self.pileCoverButton.hidden = !result;
     self.pileImageView.hidden = !result;
     self.pileBounderShadow.hidden = !result;
-    self.readImageView.hidden = ![pile isRead];
+    self.contentViewController.readImageView.hidden = ![pile isRead];
     
+    NSString *string = @"从 ";
+    self.dateRangeLabel.text = [string stringByAppendingString:[endDate customString]];
     
-    
-    self.dateRangeLabel.text = [status.createdAt customString];
     self.cardNumberLabel.text = [NSString stringWithFormat:@"%d 张卡片", [pile numberOfCardsInPile]];
 }
 
