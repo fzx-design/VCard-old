@@ -10,6 +10,7 @@
 #import "AnimationProvider.h"
 
 #define kPopoverHeight -108
+#define kXOffset -65
 
 @implementation GYTrackingSlider
 
@@ -39,7 +40,7 @@
 		CGRect popupRect = CGRectOffset(_thumbRect, 0, -_thumbRect.size.height);
 		
 		CGRect frame = trackPopoverView.view.frame;
-		frame.origin.x = popupRect.origin.x - 8;
+		frame.origin.x = popupRect.origin.x + kXOffset;
 		frame.origin.y = kPopoverHeight;
 		
 		trackPopoverView.view.frame = frame;
@@ -65,7 +66,7 @@
 	CGRect popupRect = CGRectOffset(_thumbRect, 0, -_thumbRect.size.height);
 	
 	CGRect frame = trackPopoverView.view.frame;
-	frame.origin.x = popupRect.origin.x - 8;
+	frame.origin.x = popupRect.origin.x + kXOffset;
 	frame.origin.y = kPopoverHeight;
 	
 	NSLog(@" moving %f", frame.origin.y);

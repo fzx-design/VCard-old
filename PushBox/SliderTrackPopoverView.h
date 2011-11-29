@@ -14,4 +14,11 @@
 @property (nonatomic, retain) IBOutlet UIImageView *proFileImage;
 @property (nonatomic, retain) IBOutlet FXLabel *screenNameLabel;
 
+@property (nonatomic, retain) IBOutlet FXLabel *stackLabel;
+@property (nonatomic, retain) IBOutlet FXLabel *stackDateLabel;
+
+@property (nonatomic, retain) IBOutlet UIView *userInfoView;
+@property (nonatomic, retain) IBOutlet UIView *stackInfoView;
+
+
 @end
