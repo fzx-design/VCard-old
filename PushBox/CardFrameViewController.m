@@ -43,6 +43,12 @@
     self.pileInfoView.hidden = YES;
     self.pileCoverButton.hidden = YES;
     self.pileImageView.hidden = YES;
+//    [UIView animateWithDuration:0.3 animations:^{
+//        self.pileImageView.alpha = 0.0;
+//    } completion:^(BOOL finished) {
+//        self.pileImageView.hidden = YES;
+//        self.pileImageView.alpha = 1.0;
+//    }];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameExpandPile object:nil];
 }

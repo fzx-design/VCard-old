@@ -156,6 +156,7 @@
 		SmartCardViewController *smartCardViewController = [[[SmartCardViewController alloc] init] autorelease];
 		cardFrameViewController = [[[CardFrameViewController alloc] init] autorelease];
 		cardFrameViewController.contentViewController = smartCardViewController;
+        cardFrameViewController.view.layer.anchorPoint = CGPointMake(0.5, 0.5);
 		
 		[self.cardFrames addObject:cardFrameViewController];
 	} else {
@@ -187,7 +188,7 @@
 - (void)prepareForExpandingPile
 {
     for (CardFrameViewController* cardFrameViewController in self.cardFrames) {
-        if (cardFrameViewController.index - self.currentIndex > 0) {
+        if (cardFrameViewController.index - self.currentIndex > 2) {
             cardFrameViewController.index = InitialIndex;
             [cardFrameViewController.view removeFromSuperview];
         }
@@ -317,35 +318,69 @@
 - (void)expandCurrentPile
 {
     CardFrameViewController *toExpand = nil;
+    CardFrameViewController *toRemove = nil;
+    
 	for (CardFrameViewController *cardFrameViewController in self.cardFrames) {
 		if (cardFrameViewController.index - self.currentIndex == 0) {
 			toExpand = cardFrameViewController;
-            break;
-		}
+		} else if (cardFrameViewController.index - self.currentIndex == 1) {
+            toRemove = cardFrameViewController;
+        }
 	}
+    
+    CastViewPileUpController *pileController = [CastViewPileUpController sharedCastViewPileUpController];
+    [pileController deletePileAtIndex:self.currentIndex];
     
     CardFrameViewController *vc1 = [self getRightNeighborCardFrameViewController];
     CardFrameViewController *vc2 = [self getRightNeighborCardFrameViewController];
-	
+
+    toRemove.index = InitialIndex;
+    
+    [self configureCardFrameController:vc1 atIndex:self.currentIndex + 1];
+    [self configureCardFrameController:vc2 atIndex:self.currentIndex + 2];    
+    
+    [self.castView.scrollView insertSubview:vc2.view belowSubview:toExpand.view];
+    [self.castView.scrollView insertSubview:vc1.view belowSubview:toExpand.view];
+    
+    vc1.view.frame = toExpand.view.frame;
+    vc2.view.frame = toExpand.view.frame;
+    
+//    vc1.view.transform = CGAffineTransformMakeScale(0.95, 0.95);
+//    vc2.view.transform = CGAffineTransformMakeScale(0.9, 0.9);
+        
+    NSLog(@"vc1's frame x: %f  y: %f", vc1.view.frame.origin.x, vc1.view.frame.origin.y);
+    NSLog(@"vc2's frame x: %f  y: %f", vc2.view.frame.origin.x, vc2.view.frame.origin.y);
+    
+    NSLog(@"toRemove's test is %@", toRemove.contentViewController.status.text);
+    
 	[UIView animateWithDuration:1.0 animations:^{
-		for (CardFrameViewController *cardFrameViewController in self.cardFrames) {
-			UIView* view = cardFrameViewController.view;
-			if (cardFrameViewController.index - self.currentIndex > 0) {
-				CGRect frame = view.frame;
-				frame.origin.x += 560;
-				view.frame = frame;				
-			} 
-		}
+        
+        CGRect frame1 = toExpand.view.frame;
+        frame1.origin.x += 560;
+        vc1.view.frame = frame1;
+//        vc1.view.transform = CGAffineTransformMakeScale(1, 1);
+        
+        CGRect frame2 = toExpand.view.frame;
+        frame2.origin.x += 1120;
+        vc2.view.frame = frame2;
+//        vc2.view.transform = CGAffineTransformMakeScale(1, 1);
+        
+        
+        CGRect frame3 = toRemove.view.frame;
+        frame3.origin.x += 1120;
+        toRemove.view.frame = frame3;
+        
+        
 	} completion:^(BOOL finished) {
 
-            [self prepareForExpandingPile];
+        NSLog(@"vc1's frame x: %f  y: %f", vc1.view.frame.origin.x, vc1.view.frame.origin.y);
+        NSLog(@"vc2's frame x: %f  y: %f", vc2.view.frame.origin.x, vc2.view.frame.origin.y);
+        
+        [self prepareForExpandingPile];
             
-            CastViewPileUpController *pileController = [CastViewPileUpController sharedCastViewPileUpController];
-            [pileController deletePileAtIndex:self.currentIndex];
+        NSLog(@"expand pile at index : %d", self.currentIndex);
             
-            NSLog(@"expand pile at index : %d", self.currentIndex);
-            
-            [self.castView resetWithCurrentIndex:self.currentIndex numberOfPages:[self itemCount:nil]];
+        [self.castView resetWithCurrentIndex:self.currentIndex numberOfPages:[self itemCount:nil]];
 //			[self reloadCards];
 	}];
 }

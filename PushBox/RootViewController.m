@@ -32,8 +32,8 @@
 #define kMessagesViewCenter CGPointMake(512.0 - 1024.0, 350.0)
 #define kMessagesViewOffsetx 1024.0
 
-#define kSearchTextFieldFrame CGRectMake(381, 6, 343, 31)
-#define kSearchTextFieldInputWait CGRectMake(381, 632, 343, 31)
+#define kSearchTextFieldFrame CGRectMake(341, 6, 383, 31)
+#define kSearchTextFieldInputWait CGRectMake(341, 632, 383, 31)
 #define kSearchBGFrame CGRectMake(0, 0, 1024, 42)
 #define kSearchBGInputWait CGRectMake(0, 2, 1024, 42)
 

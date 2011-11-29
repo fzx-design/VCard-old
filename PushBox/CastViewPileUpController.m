@@ -183,6 +183,9 @@ static CastViewPileUpController *_sharedCastViewPileUpController = nil;
     }
     
     [_castViewPiles removeObject:pile];
+    
+    
+    [self print];
 }
 
 - (void)clearPiles
