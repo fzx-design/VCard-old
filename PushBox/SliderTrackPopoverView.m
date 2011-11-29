@@ -13,10 +13,6 @@
 @synthesize proFileImage;
 @synthesize screenNameLabel;
 
-@synthesize stackLabel;
-@synthesize stackDateLabel;
-@synthesize stackInfoView;
-@synthesize userInfoView;
 
 #pragma mark - View lifecycle
 

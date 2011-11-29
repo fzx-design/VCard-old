@@ -47,12 +47,6 @@
 	return self.castView.pageNum;
 }
 
-- (NSDate*)getPileEndDateForPile:(CastViewPile*)pile
-{
-    Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:pile.endIndexInFR];
-    return status.createdAt;
-}
-
 - (BOOL)gotEnoughViewsToShow
 {
 	BOOL result = YES;
@@ -87,12 +81,12 @@
 - (void)configureCardFrameController:(CardFrameViewController*)vc atIndex:(int)index
 {    
     if (self.dataSource == CastViewDataSourceFriendsTimeline) {
-        
         CastViewPileUpController *pc = [CastViewPileUpController sharedCastViewPileUpController];
-        CastViewPile *pile = [pc pileAtIndex:index];
-        NSDate *date = [self getPileEndDateForPile:pile];
         
-        [vc configureCardFrameWithStatus:[self statusForViewIndex:index] AndPile:pile withEndDateString:date];
+        CastViewPile *pile = [pc pileAtIndex:index];
+        Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:pile.endIndexInFR];
+        
+        [vc configureCardFrameWithStatus:[self statusForViewIndex:index] AndPile:pile withEndDateString:status.createdAt];
     } else {
         [vc configureCardFrameWithStatus:[self statusForViewIndex:index]];
     }
@@ -420,37 +414,19 @@
 	}
 	
 //	Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:index];
+    Status *status = [self statusForViewIndex:index];
     
-    CastViewPileUpController *pc = [CastViewPileUpController sharedCastViewPileUpController];
-    CastViewPile *pile = [pc pileAtIndex:index];
-    
-    if (pile.type == CastViewCellTypeMutipleCardPile) {
-        
-        popover.userInfoView.hidden = YES;
-        popover.stackInfoView.hidden = NO;
-        
-        popover.stackLabel.text = [NSString stringWithFormat:@"%d 张卡片", [pile numberOfCardsInPile]];
-
-        NSDate *date = [self getPileEndDateForPile:pile];
-        popover.stackDateLabel.text = [date customString];
-        
-    } else {
-        Status *status = [self statusForViewIndex:index];
-        
-        popover.userInfoView.hidden = NO;
-        popover.stackInfoView.hidden = YES;
-        
-        NSString *profileImageString = status.author.profileImageURL;
-        [popover.proFileImage loadImageFromURL:profileImageString
-                                    completion:nil
-                                cacheInContext:self.fetchedResultsController.managedObjectContext];
-        
-        if (dataSource == CastViewDataSourceUserTimeline) {
-            popover.screenNameLabel.text = [status.createdAt customString];
-        } else {
-            popover.screenNameLabel.text = status.author.screenName;
-        }
-    }
+	NSString *profileImageString = status.author.profileImageURL;
+	[popover.proFileImage loadImageFromURL:profileImageString
+								completion:nil
+							cacheInContext:self.fetchedResultsController.managedObjectContext];
+	
+	if (dataSource == CastViewDataSourceUserTimeline) {
+		popover.screenNameLabel.text = [status.createdAt customString];
+	} else {
+		popover.screenNameLabel.text = status.author.screenName;
+	}
+	
 
 }
 
