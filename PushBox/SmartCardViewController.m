@@ -56,6 +56,14 @@
 @synthesize recentActNotifyLabel = _recentActNotifyLabel;
 @synthesize locationIconImageView = _locationIconImageView;
 @synthesize locationLabel = _locationLabel;
+@synthesize trackView1 = _trackView1;
+@synthesize trackLabel1 = _trackLabel1;
+@synthesize trackView2 = _trackView2;
+@synthesize trackLabel2 = _trackLabel2;
+@synthesize trackView3 = _trackView3;
+@synthesize trackLabel3 = _trackLabel3;
+@synthesize trackView4 = _trackView4;
+@synthesize trackLabel4 = _trackLabel4;
 
 @synthesize status = _status;
 @synthesize musicLink = _musicLink;
@@ -387,6 +395,28 @@
     
 	self.tweetTextView.text = @"";
     self.repostTextView.text = @"";
+    
+    self.trackView1.hidden = YES;
+    self.trackView2.hidden = YES;
+    self.trackView3.hidden = YES;
+    self.trackView4.hidden = YES;
+    
+    self.trackLabel1.backgroundColor = [UIColor clearColor];
+    self.trackLabel1.shadowColor = [UIColor colorWithWhite:0.0f alpha:1.0f];
+    self.trackLabel1.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    self.trackLabel1.shadowBlur = 8.0f;
+    self.trackLabel2.backgroundColor = [UIColor clearColor];
+    self.trackLabel2.shadowColor = [UIColor colorWithWhite:0.0f alpha:1.0f];
+    self.trackLabel2.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    self.trackLabel2.shadowBlur = 8.0f;
+    self.trackLabel3.backgroundColor = [UIColor clearColor];
+    self.trackLabel3.shadowColor = [UIColor colorWithWhite:0.0f alpha:1.0f];
+    self.trackLabel3.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    self.trackLabel3.shadowBlur = 8.0f;
+    self.trackLabel4.backgroundColor = [UIColor clearColor];
+    self.trackLabel4.shadowColor = [UIColor colorWithWhite:0.0f alpha:1.0f];
+    self.trackLabel4.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    self.trackLabel4.shadowBlur = 8.0f;
     
     //
     [[self.tweetImageView layer] setCornerRadius:20.0];
@@ -769,7 +799,7 @@
     // locationLabel & imageView
     [self.locationLabel setFrame:kLocationLabelFrameRight];
     [self.locationIconImageView setFrame:kLocationImageViewFrameRight];
-
+    
     [self loadMusicCoverImage];
 }
 
@@ -913,6 +943,124 @@
     }
 }
 
+- (void)loadTrackDelta:(NSMutableArray*)trackArray page:(int)page {
+    
+    if (page == 10) {
+        return;
+    }
+    WeiboClient *client = [WeiboClient client];
+    
+    [client setCompletionBlock:^(WeiboClient *client) {
+        [[UIApplication sharedApplication] hideLoadingView];
+        if (!client.hasError) {
+            NSArray *dictArray = client.responseJSONObject;
+            
+            NSString* userId = [[NSString alloc] initWithString:self.status.author.userID];
+            for (NSDictionary* dict in dictArray) {
+                //
+                NSDictionary* dictUser = (NSDictionary*)[dict objectForKey:@"user"];
+                NSString* commentUserId = [[dictUser objectForKey:@"id"] stringValue];
+                if ( [userId compare:commentUserId] == NSOrderedSame) {
+                    [trackArray addObject:[[NSString alloc] initWithString:[dict objectForKey:@"text"]]];
+                }
+                if ([trackArray count] >= 4) {
+                    break;
+                }
+            }
+            
+            [self loadTrackDelta:trackArray page:page + 1];
+            
+            NSLog(@"~~~~~~~~~~~~~~~~~~~~~~%d", page);
+            
+        } else {
+            [ErrorNotification showLoadingError];
+        }
+        
+    }];
+    
+    [client getCommentsOfStatus:self.status.statusID page:page count:200];
+    
+}
+
+- (void)loadTrack
+{
+    NSMutableArray* trackArray = [[NSMutableArray alloc] initWithCapacity:4];
+    
+    __block int nextPage = 1;
+    
+    WeiboClient *client = [WeiboClient client];
+    
+    [client setCompletionBlock:^(WeiboClient *client) {
+        [[UIApplication sharedApplication] hideLoadingView];
+        if (!client.hasError) {
+            NSArray *dictArray = client.responseJSONObject;
+            nextPage++;
+            
+            NSString* userId = [[NSString alloc] initWithString:self.status.author.userID];
+            for (NSDictionary* dict in dictArray) {
+                //
+                NSDictionary* dictUser = (NSDictionary*)[dict objectForKey:@"user"];
+                NSString* commentUserId = [[dictUser objectForKey:@"id"] stringValue];
+                if ( [userId compare:commentUserId] == NSOrderedSame) {
+                    [trackArray addObject:[[NSString alloc] initWithString:[dict objectForKey:@"text"]]];
+                }
+                if ([trackArray count] >= 4) {
+                    break;
+                }
+            }
+            
+            NSLog(@"~~~~~~~~~~~~~~~~~~~~~~%d", nextPage);
+            
+            if ([trackArray count] == 0) {
+                NSString* actNotiString = [[[NSString alloc] initWithFormat:@"%@ 关于此微博的最新进展", self.status.author.screenName] autorelease];
+                self.recentActNotifyLabel.text = actNotiString;
+                
+                // 
+                NSString* trackString = [[[NSString alloc] initWithFormat:@"询问 %@", self.status.author.screenName] autorelease];
+                self.trackLabel.text = trackString;
+                
+                self.trackLabel.alpha = 0.0;
+                self.trackView.alpha = 0.0;
+                self.recentActNotifyLabel.alpha = 0.0;
+                
+                [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+                    self.trackLabel.alpha = 1.0;
+                    self.trackView.alpha = 1.0;
+                    //            self.recentActNotifyLabel.alpha = 1.0;
+                } completion:^(BOOL fin) {
+                    
+                }];
+            }
+            else {
+                switch ([trackArray count]) {
+                    case 4:
+                        self.trackView4.hidden = NO;
+                        self.trackLabel4.text = [trackArray objectAtIndex:3];
+                    case 3:
+                        self.trackView3.hidden = NO;
+                        self.trackLabel3.text = [trackArray objectAtIndex:2];
+                    case 2:
+                        self.trackView2.hidden = NO;
+                        self.trackLabel2.text = [trackArray objectAtIndex:1];
+                    case 1:
+                        self.trackView1.hidden = NO;
+                        self.trackLabel1.text = [trackArray objectAtIndex:0];
+                        break;                
+                    default:
+                        break;
+                }
+            }
+            
+        } else {
+            [ErrorNotification showLoadingError];
+        }
+        
+    }];
+    
+    [client getCommentsOfStatus:self.status.statusID page:nextPage count:200];
+    
+}
+
 - (void)update
 {	
 	BOOL imageLoadingEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeyImageDownloadingEnabled];
@@ -968,25 +1116,7 @@
     
     // Track
     if (isTrack) {
-        NSString* actNotiString = [[[NSString alloc] initWithFormat:@"%@ 关于此微博的最新进展", status.author.screenName] autorelease];
-        self.recentActNotifyLabel.text = actNotiString;
-        
-        // 
-        NSString* trackString = [[[NSString alloc] initWithFormat:@"询问 %@", status.author.screenName] autorelease];
-        self.trackLabel.text = trackString;
-        
-        self.trackLabel.alpha = 0.0;
-        self.trackView.alpha = 0.0;
-        self.recentActNotifyLabel.alpha = 0.0;
-        
-        [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
-            self.trackLabel.alpha = 1.0;
-            self.trackView.alpha = 1.0;
-            //            self.recentActNotifyLabel.alpha = 1.0;
-        } completion:^(BOOL fin) {
-            
-        }];
-        
+        [self loadTrack];
     }
     
 }
