@@ -55,4 +55,17 @@
 	return animation;
 }
 
++ (CATransition*)flyAnimation
+{
+    CATransition *animation = [CATransition animation];
+    animation.duration = 0.5f;
+    animation.timingFunction = UIViewAnimationCurveEaseInOut;
+	animation.fillMode = kCAFillModeForwards;
+	animation.removedOnCompletion = NO;
+	animation.type = @"pageCurl";
+	animation.subtype = kCATransitionFromRight;
+	
+	return animation;
+}
+
 @end

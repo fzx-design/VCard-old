@@ -18,6 +18,8 @@
 
 @synthesize endIndexInFR = _endIndexInFR;
 
+@synthesize isRead = _isRead;
+
 - (void)dealloc
 {
 	[super dealloc];
@@ -61,6 +63,11 @@
 - (BOOL)isMultipleCardPile
 {
     return _type == CastViewCellTypeMutipleCardPile;
+}
+
+- (BOOL)isRead
+{
+    return _isRead;
 }
 
 - (void)resetAfterDeleting

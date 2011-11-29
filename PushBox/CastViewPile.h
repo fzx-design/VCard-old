@@ -22,6 +22,7 @@ typedef enum {
 	
 	int _startIndexInFR;
 	int _endIndexInFR;
+    BOOL _isRead;
 }
 
 @property (nonatomic, assign) CastViewCellType type;
@@ -30,6 +31,8 @@ typedef enum {
 
 @property (nonatomic, assign) int startIndexInFR;
 @property (nonatomic, assign) int endIndexInFR;
+
+@property (nonatomic, assign) BOOL isRead;
 
 - (id)initWithStartIndexInFR:(int)start;
 
@@ -41,5 +44,6 @@ typedef enum {
 - (void)resetAfterDeleting;
 
 - (BOOL)isMultipleCardPile;
+- (BOOL)isRead;
 
 @end

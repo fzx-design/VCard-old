@@ -21,7 +21,11 @@
     UILabel *_cardNumberLabel;
     UIButton *_pileCoverButton;
     
+    UIImageView *_pileBounderShadow;
+    
     UIImageView *_pileImageView;
+    
+    UIImageView *_readImageView;
 }
 
 @property (nonatomic, assign) int index;
@@ -32,7 +36,11 @@
 @property (nonatomic, retain) IBOutlet UILabel* cardNumberLabel;
 @property (nonatomic, retain) IBOutlet UIButton* pileCoverButton;
 
+@property (nonatomic, retain) IBOutlet UIImageView* pileBounderShadow;
+
 @property (nonatomic, retain) IBOutlet UIImageView* pileImageView;
+
+@property (nonatomic, retain) IBOutlet UIImageView* readImageView;
 
 - (void)configureCardFrameWithStatus:(Status*)status;
 - (void)configureCardFrameWithStatus:(Status*)status AndPile:(CastViewPile*)pile;

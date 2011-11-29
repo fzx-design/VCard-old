@@ -111,6 +111,7 @@ static CastViewPileUpController *_sharedCastViewPileUpController = nil;
         if (!pileFound) {
             CastViewPile *newPile = [[[CastViewPile alloc] initWithStartIndexInFR:index] autorelease];
             newPile.type = CastViewCellTypeSingleCardPile;
+            newPile.isRead = YES;
             
 			[_castViewPiles addObject:newPile];
 			_currentViewIndex++;
@@ -122,6 +123,7 @@ static CastViewPileUpController *_sharedCastViewPileUpController = nil;
         
         CastViewPile *newPile = [[[CastViewPile alloc] initWithStartIndexInFR:index] autorelease];
         newPile.type = CastViewCellTypeCard;
+        newPile.isRead = NO;
         
         [_castViewPiles addObject:newPile];
 		_currentViewIndex++;
@@ -172,6 +174,7 @@ static CastViewPileUpController *_sharedCastViewPileUpController = nil;
         for (int i = pile.endIndexInFR; i >= pile.startIndexInFR ; --i) {
             CastViewPile *newPile = [[[CastViewPile alloc] initWithStartIndexInFR:i] autorelease];
             newPile.type = CastViewCellTypeCard;
+            newPile.isRead = YES;
             
             [_castViewPiles insertObject:newPile atIndex:index];
         }

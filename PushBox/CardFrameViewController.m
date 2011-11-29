@@ -8,6 +8,7 @@
 
 #import "CardFrameViewController.h"
 #import "NSDateAddition.h"
+#import "AnimationProvider.h"
 #import "Status.h"
 
 @implementation CardFrameViewController
@@ -20,7 +21,11 @@
 @synthesize cardNumberLabel = _cardNumberLabel;
 @synthesize pileCoverButton = _pileCoverButton;
 
+@synthesize pileBounderShadow = _pileBounderShadow;
+
 @synthesize pileImageView = _pileImageView;
+
+@synthesize readImageView = _readImageView;
 
 #pragma mark - View lifecycle
 
@@ -34,21 +39,25 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    self.pileBounderShadow = nil;
 	self.pileInfoView = nil;
+    self.readImageView = nil;
 }
 #pragma mark - Set ContentViewController methods
 
 - (IBAction)pileCoverButtonClicked:(id)sender
 {
+    [self.pileInfoView.layer addAnimation:[AnimationProvider flyAnimation] forKey:@"animation"];
+        
     self.pileInfoView.hidden = YES;
     self.pileCoverButton.hidden = YES;
     self.pileImageView.hidden = YES;
-//    [UIView animateWithDuration:0.3 animations:^{
-//        self.pileImageView.alpha = 0.0;
-//    } completion:^(BOOL finished) {
-//        self.pileImageView.hidden = YES;
-//        self.pileImageView.alpha = 1.0;
-//    }];
+    [UIView animateWithDuration:0.3 animations:^{
+        self.pileBounderShadow.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        self.pileBounderShadow.hidden = YES;
+        self.pileBounderShadow.alpha = 1.0;
+    }];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameExpandPile object:nil];
 }
@@ -68,6 +77,8 @@
     self.pileInfoView.hidden = YES;
     self.pileCoverButton.hidden = YES;
     self.pileImageView.hidden = YES;
+    self.pileBounderShadow.hidden = YES;
+    self.readImageView.hidden = YES;
 }
 
 - (void)configureCardFrameWithStatus:(Status*)status AndPile:(CastViewPile*)pile
@@ -86,6 +97,10 @@
     self.pileInfoView.hidden = !result;
     self.pileCoverButton.hidden = !result;
     self.pileImageView.hidden = !result;
+    self.pileBounderShadow.hidden = !result;
+    self.readImageView.hidden = ![pile isRead];
+    
+    
     
     self.dateRangeLabel.text = [status.createdAt customString];
     self.cardNumberLabel.text = [NSString stringWithFormat:@"%d 张卡片", [pile numberOfCardsInPile]];
@@ -101,7 +116,7 @@
 	_contentViewController = [contentViewController retain];
 	
 	if (self.contentViewController.view.superview == nil) {
-		[self.view insertSubview:self.contentViewController.view belowSubview:self.pileInfoView];
+		[self.view insertSubview:self.contentViewController.view belowSubview:self.pileBounderShadow];
 	}
 }
 

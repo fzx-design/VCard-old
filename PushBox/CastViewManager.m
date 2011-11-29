@@ -353,7 +353,7 @@
     
     NSLog(@"toRemove's test is %@", toRemove.contentViewController.status.text);
     
-	[UIView animateWithDuration:1.0 animations:^{
+	[UIView animateWithDuration:1.5 animations:^{
         
         CGRect frame1 = toExpand.view.frame;
         frame1.origin.x += 560;

@@ -14,5 +14,6 @@
 + (CAKeyframeAnimation*)popoverAnimation;
 + (CATransition*)cubeAnimationDown;
 + (CATransition*)cubeAnimationUp;
++ (CATransition*)flyAnimation;
 
 @end
