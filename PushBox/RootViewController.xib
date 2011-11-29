@@ -623,16 +623,22 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1056312775"/>
 								<string key="NSReuseIdentifierKey">_NS:241</string>
+								<reference key="IBUIBackgroundColor" ref="266418242"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
+								<string key="IBUITitleShadowOffset">{0, 1}</string>
 								<string key="IBUINormalTitle">            全部卡片</string>
-								<reference key="IBUIHighlightedTitleColor" ref="90466321"/>
+								<object class="NSColor" key="IBUIHighlightedTitleColor" id="168411081">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MC4zMzMzMzMzMzMzAA</bytes>
+								</object>
 								<object class="NSColor" key="IBUINormalTitleColor">
 									<int key="NSColorSpace">2</int>
 									<bytes key="NSRGB">MC41NDUwOTgwNjYzIDAuNTQ1MDk4MDY2MyAwLjU0NTA5ODA2NjMAA</bytes>
 								</object>
-								<reference key="IBUINormalTitleShadowColor" ref="35519944"/>
+								<reference key="IBUIHighlightedTitleShadowColor" ref="90466321"/>
+								<reference key="IBUINormalTitleShadowColor" ref="90466321"/>
 								<reference key="IBUIFontDescription" ref="770592281"/>
 								<reference key="IBUIFont" ref="396121513"/>
 							</object>
@@ -644,16 +650,19 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="773975210"/>
 								<string key="NSReuseIdentifierKey">_NS:241</string>
+								<reference key="IBUIBackgroundColor" ref="266418242"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
+								<string key="IBUITitleShadowOffset">{0, 1}</string>
 								<string key="IBUINormalTitle">            原创</string>
-								<reference key="IBUIHighlightedTitleColor" ref="90466321"/>
-								<object class="NSColor" key="IBUINormalTitleColor" id="162245367">
+								<reference key="IBUIHighlightedTitleColor" ref="168411081"/>
+								<object class="NSColor" key="IBUINormalTitleColor" id="555000433">
 									<int key="NSColorSpace">2</int>
 									<bytes key="NSRGB">MC4xMDU4ODIzNjE1IDAuNTg4MjM1MzE4NyAwLjY3NDUwOTgyMzMAA</bytes>
 								</object>
-								<reference key="IBUINormalTitleShadowColor" ref="35519944"/>
+								<reference key="IBUIHighlightedTitleShadowColor" ref="90466321"/>
+								<reference key="IBUINormalTitleShadowColor" ref="90466321"/>
 								<reference key="IBUIFontDescription" ref="770592281"/>
 								<reference key="IBUIFont" ref="396121513"/>
 							</object>
@@ -665,13 +674,16 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="276459716"/>
 								<string key="NSReuseIdentifierKey">_NS:241</string>
+								<reference key="IBUIBackgroundColor" ref="266418242"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
+								<string key="IBUITitleShadowOffset">{0, 1}</string>
 								<string key="IBUINormalTitle">            图览</string>
-								<reference key="IBUIHighlightedTitleColor" ref="90466321"/>
-								<reference key="IBUINormalTitleColor" ref="162245367"/>
-								<reference key="IBUINormalTitleShadowColor" ref="35519944"/>
+								<reference key="IBUIHighlightedTitleColor" ref="168411081"/>
+								<reference key="IBUINormalTitleColor" ref="555000433"/>
+								<reference key="IBUIHighlightedTitleShadowColor" ref="90466321"/>
+								<reference key="IBUINormalTitleShadowColor" ref="90466321"/>
 								<reference key="IBUIFontDescription" ref="770592281"/>
 								<reference key="IBUIFont" ref="396121513"/>
 							</object>
@@ -683,13 +695,16 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="987845678"/>
 								<string key="NSReuseIdentifierKey">_NS:241</string>
+								<reference key="IBUIBackgroundColor" ref="266418242"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
+								<string key="IBUITitleShadowOffset">{0, 1}</string>
 								<string key="IBUINormalTitle">            电影和视频</string>
-								<reference key="IBUIHighlightedTitleColor" ref="90466321"/>
-								<reference key="IBUINormalTitleColor" ref="162245367"/>
-								<reference key="IBUINormalTitleShadowColor" ref="35519944"/>
+								<reference key="IBUIHighlightedTitleColor" ref="168411081"/>
+								<reference key="IBUINormalTitleColor" ref="555000433"/>
+								<reference key="IBUIHighlightedTitleShadowColor" ref="90466321"/>
+								<reference key="IBUINormalTitleShadowColor" ref="90466321"/>
 								<reference key="IBUIFontDescription" ref="770592281"/>
 								<reference key="IBUIFont" ref="396121513"/>
 							</object>
@@ -701,13 +716,16 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="112184777"/>
 								<string key="NSReuseIdentifierKey">_NS:241</string>
+								<reference key="IBUIBackgroundColor" ref="266418242"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
+								<string key="IBUITitleShadowOffset">{0, 1}</string>
 								<string key="IBUINormalTitle">            音乐</string>
-								<reference key="IBUIHighlightedTitleColor" ref="90466321"/>
-								<reference key="IBUINormalTitleColor" ref="162245367"/>
-								<reference key="IBUINormalTitleShadowColor" ref="35519944"/>
+								<reference key="IBUIHighlightedTitleColor" ref="168411081"/>
+								<reference key="IBUINormalTitleColor" ref="555000433"/>
+								<reference key="IBUIHighlightedTitleShadowColor" ref="90466321"/>
+								<reference key="IBUINormalTitleShadowColor" ref="90466321"/>
 								<reference key="IBUIFontDescription" ref="770592281"/>
 								<reference key="IBUIFont" ref="396121513"/>
 							</object>
@@ -1221,11 +1239,15 @@
 					<string>117.IBPluginDependency</string>
 					<string>118.IBPluginDependency</string>
 					<string>119.IBPluginDependency</string>
+					<string>119.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>120.IBPluginDependency</string>
+					<string>120.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>123.IBPluginDependency</string>
 					<string>123.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>124.IBPluginDependency</string>
+					<string>124.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>125.IBPluginDependency</string>
+					<string>125.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>15.IBPluginDependency</string>
 					<string>30.IBPluginDependency</string>
 					<string>30.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
@@ -1265,11 +1287,15 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<real value="1"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<real value="1"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<real value="0.0"/>
+					<real value="1"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<real value="1"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<real value="1"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<real value="0.0"/>
