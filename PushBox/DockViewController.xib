@@ -604,6 +604,14 @@
 					<int key="connectionID">156</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">groupButton</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="933513262"/>
+					</object>
+					<int key="connectionID">157</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">refreshButtonClicked:</string>
 						<reference key="source" ref="755675950"/>
@@ -638,6 +646,15 @@
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">150</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">groupButtonClicked:</string>
+						<reference key="source" ref="933513262"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">158</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -892,7 +909,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">156</int>
+			<int key="maxID">158</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -913,12 +930,14 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>commandCenterButtonClicked:</string>
+							<string>groupButtonClicked:</string>
 							<string>hideCommandCenterButtonClicked:</string>
 							<string>optionsButtonClicked:</string>
 							<string>refreshButtonClicked:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -930,6 +949,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>commandCenterButtonClicked:</string>
+							<string>groupButtonClicked:</string>
 							<string>hideCommandCenterButtonClicked:</string>
 							<string>optionsButtonClicked:</string>
 							<string>refreshButtonClicked:</string>
@@ -938,6 +958,10 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBActionInfo">
 								<string key="name">commandCenterButtonClicked:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">groupButtonClicked:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -961,6 +985,7 @@
 							<string>commandCenterButton</string>
 							<string>commandCenterNotiImageView</string>
 							<string>controlContainerView</string>
+							<string>groupButton</string>
 							<string>hideCommandCenterButton</string>
 							<string>messagesCenterButton</string>
 							<string>optionsButton</string>
@@ -984,6 +1009,7 @@
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
+							<string>UIButton</string>
 							<string>UIImageView</string>
 							<string>UIImageView</string>
 							<string>UIButton</string>
@@ -1000,6 +1026,7 @@
 							<string>commandCenterButton</string>
 							<string>commandCenterNotiImageView</string>
 							<string>controlContainerView</string>
+							<string>groupButton</string>
 							<string>hideCommandCenterButton</string>
 							<string>messagesCenterButton</string>
 							<string>optionsButton</string>
@@ -1026,6 +1053,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">controlContainerView</string>
 								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">groupButton</string>
+								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">hideCommandCenterButton</string>

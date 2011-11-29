@@ -22,6 +22,9 @@
 @synthesize showFavoritesButton = _showFavoritesButton;
 @synthesize optionsButton = _optionsButton;
 @synthesize searchButton = _searchButton;
+
+@synthesize groupButton = _groupButton;
+
 @synthesize slider = _slider;
 @synthesize refreshNotiImageView = _refreshNotiImageView;
 @synthesize commandCenterNotiImageView = _commandCenterNotiImageView;
@@ -50,6 +53,9 @@
     [_messagesCenterButton release];
     [_showFavoritesButton release];
     [_optionsButton release];
+    
+    [_groupButton release];
+    
     [_slider release];
     [_controlContainerView release];
     [_refreshNotiImageView release];
@@ -79,6 +85,9 @@
     self.messagesCenterButton = nil;
     self.showFavoritesButton = nil;
     self.optionsButton = nil;
+    
+    self.groupButton = nil;
+    
     self.slider = nil;
     self.refreshNotiImageView = nil;
     self.commandCenterNotiImageView = nil;
@@ -317,6 +326,12 @@
 - (IBAction)hideCommandCenterButtonClicked:(id)sender
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameHideCommandCenter object:nil];
+}
+
+- (IBAction)groupButtonClicked:(id)sender
+{
+    self.groupButton.selected = YES;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameShowGroupChoice object:nil];
 }
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController

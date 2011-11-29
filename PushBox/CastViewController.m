@@ -34,6 +34,8 @@
 @synthesize castViewPileUpController = _castViewPileUpController;
 @synthesize searchString = _searchString;
 
+@synthesize statusTypeID = _statusTypeID;
+
 @synthesize delegate = _delegate;
 
 @synthesize infoStack = _infoStack;
@@ -61,7 +63,9 @@
 	_currentNextPage = 1;
 	_loading = NO;
 	_refreshFlag = NO;
+    _shouldRefreshCardView = NO;
 	_lastStatusID = 0;
+    _statusTypeID = 0;
 }
 
 - (void)setUpRefreshSettings
@@ -202,6 +206,7 @@
 	castViewInfo.indexCount = [self.castViewManager numberOfRows];
 	castViewInfo.indexSection = self.castView.pageSection;
 	castViewInfo.statusID = _lastStatusID;
+    castViewInfo.statusType = _statusTypeID;
 	
 	self.prevDataSource = self.dataSource;
 	
@@ -219,6 +224,7 @@
 	_currentNextPage = 1;
 	_oldNextPage = 1;
 	_lastStatusID = 0;
+    _statusTypeID = 0;
 }
 
 - (void)pushCardWithCompletion:(void (^)())completion
@@ -279,7 +285,8 @@
         self.castViewManager.currentIndex = castViewInfo.currentIndex;
         self.castViewManager.dataSource = self.dataSource;
 		self.castView.pageSection = castViewInfo.indexSection;
-		
+        
+		_statusTypeID = castViewInfo.statusType;
 		_lastStatusID = castViewInfo.statusID;
 		
 		_currentNextPage = castViewInfo.nextPage;
@@ -557,7 +564,7 @@
 			
 			if (_refreshFlag) {
 				_refreshFlag = NO;
-				
+//				
 				long long statusID = 0;
 				
 				if (self.fetchedResultsController.fetchedObjects.count) {
@@ -566,18 +573,21 @@
 					
 					statusID = [newStatus.statusID longLongValue];
 				}
-				
-				if (_lastStatusID < statusID){
+            
+				if (_lastStatusID < statusID || self.dataSource == CastViewDataSourceFriendsTimeline || _shouldRefreshCardView){
+                    
+                    _shouldRefreshCardView = NO;
 					
 					_oldNextPage = _currentNextPage;
 					
 					_lastStatusID = statusID;
 					
+                    [self.castViewManager refreshCards];
+                    
 //					[self clearData];
 //					
 //					[self insertStatusFromClient:client];
 					
-					[self.castViewManager refreshCards];
 					
 				} else {
 					
@@ -609,7 +619,7 @@
 									maxID:(long long)0
 						   startingAtPage:_currentNextPage++
 									count:kStatusCountPerRequest
-								  feature:0];
+								  feature:_statusTypeID];
     }
     
     if (self.dataSource == CastViewDataSourceUserTimeline) {
@@ -618,7 +628,7 @@
 						  maxID:(long long)0
 				 startingAtPage:_currentNextPage++
 						  count:kStatusCountPerRequest
-						feature:0];
+						feature:_statusTypeID];
     }
 	
 	if (self.dataSource == CastViewDataSourceMentions) {
@@ -634,6 +644,12 @@
 		[client getTrendsStatuses:self.searchString];
 	}
     
+}
+
+- (void)reload
+{
+    _shouldRefreshCardView = YES;
+    [self refresh];
 }
 
 - (void)refresh

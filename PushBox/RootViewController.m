@@ -93,6 +93,8 @@
 @synthesize notiDisplayNewMentionsButton = _notiDisplayNewMentionsButton;
 @synthesize notiDisplayNewCommentsButton = _notiDisplayNewCommentsButton;
 
+@synthesize groupView = _groupView;
+
 
 #pragma mark - View lifecycle
 
@@ -115,6 +117,9 @@
     [_notiDisplayNewFollowersButton release];
     [_notiDisplayNewMentionsButton release];
     [_notiDisplayNewCommentsButton release];
+    
+    [_groupView release];
+    
     [super dealloc];
 }
 
@@ -133,6 +138,8 @@
     self.notiDisplayNewFollowersButton = nil;
     self.notiDisplayNewMentionsButton = nil;
     self.notiDisplayNewCommentsButton = nil;
+    
+    self.groupView = nil;
 }
 
 + (void)initialize 
@@ -169,11 +176,18 @@
 	preNewMentionCount = 0;
 	self.notificationView.hidden = YES;
 	self.bottomStateFrameView.hidden = NO;
-	
+	self.groupView.hidden = YES;
+    self.groupView.layer.anchorPoint = CGPointMake(0.5, 1.0);
+
+    CGRect frame = self.groupView.frame;
+    frame.origin.y += frame.size.height / 2;
+    self.groupView.frame = frame;
+    
 	_statusTypeStack = [[NSMutableArray alloc] init];
 }
 
-- (void)getFriendsDelta:(int)cursor {
+- (void)getFriendsDelta:(int)cursor 
+{
     
     if (cursor == 0) {
         return;
@@ -324,11 +338,17 @@
 			   selector:@selector(hideCommandCenter) 
 				   name:kNotificationNameHideCommandCenter 
 				 object:nil];
+    [center addObserver:self
+               selector:@selector(showGroupView) 
+                   name:kNotificationNameShowGroupChoice 
+                 object:nil];
 	
     
     
 	self.bottomStateView.hidden = YES;
 	self.notificationView.hidden = YES;
+    self.groupView.hidden = YES;
+    
 	_commandCenterFlag = NO;
 	
     if ([WeiboClient authorized]) {
@@ -539,6 +559,29 @@
 		}
         [self showSearchView];
     }
+}
+
+- (void)showGroupView
+{
+    self.groupView.hidden = NO;
+    [self.groupView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
+    
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 1024, 748)];
+    [button addTarget:self action:@selector(hideGroupView:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view insertSubview:button belowSubview:self.groupView];
+    [button release];
+}
+
+- (void)hideGroupView:(UIButton*)sender
+{
+    self.dockViewController.groupButton.selected = NO;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.groupView.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        self.groupView.hidden = YES;
+        self.groupView.alpha = 1.0;
+        [sender removeFromSuperview];
+    }];
 }
 
 - (void)showBottomStateView
@@ -1620,6 +1663,47 @@
 - (void)searchCoverImageViewClicked:(id)sender
 {
 	[self textFieldDidEndEditing:self.bottomSearchTextField];
+}
+
+- (IBAction)groupChoosed:(UIButton*)sender
+{
+    [self.castViewController clearCardStack];
+    
+//    if (self.castViewController.infoStack.count != 0) {
+//        [self showPrevTimeline:nil];
+//    }
+    
+    int statusType = 0;
+    UIImage *image = nil;
+    
+    if ([sender.titleLabel.text isEqualToString:@"            全部卡片"]) {
+        statusType = 0;
+        image = [UIImage imageNamed:@"dock_button_group.png"];
+    } else if([sender.titleLabel.text isEqualToString:@"            原创"]) {
+        statusType = 1;
+        image = [UIImage imageNamed:@"icon_orginal.png"];
+    } else if([sender.titleLabel.text isEqualToString:@"            图览"]) {
+        statusType = 2;
+        image = [UIImage imageNamed:@"icon_image.png"];
+    } else if([sender.titleLabel.text isEqualToString:@"            电影和视频"]) {
+        statusType = 3;
+        image = [UIImage imageNamed:@"icon_video.png"];
+    } else {
+        statusType = 4;
+        image = [UIImage imageNamed:@"icon_music.png"];
+    }
+    
+    self.dockViewController.groupButton.imageView.image = nil;
+    self.dockViewController.groupButton.imageView.image = image;
+    
+    self.castViewController.statusTypeID = statusType;
+    
+    [[UIApplication sharedApplication] showLoadingView];
+    
+    [self.castViewController clearData];
+    [self.castViewController reload];
+    
+    [self hideGroupView:nil];
 }
 
 @end

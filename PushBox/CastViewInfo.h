@@ -24,6 +24,7 @@ typedef enum {
 @property (nonatomic, assign) int currentIndex;
 @property (nonatomic, assign) int indexCount;
 @property (nonatomic, assign) int indexSection;
+@property (nonatomic, assign) int statusType;
 @property (nonatomic, assign) long long statusID;
 @property (nonatomic, assign) CastViewDataSource dataSource;
 

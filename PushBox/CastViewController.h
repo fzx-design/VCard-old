@@ -55,8 +55,10 @@
 	
 	BOOL _loading;
 	BOOL _refreshFlag;
+	BOOL _shouldRefreshCardView;
     
     NSString* _searchString;
+    int _statusTypeID;
 	
 	id _delegate;
 }
@@ -78,6 +80,7 @@
 @property(nonatomic, retain) NSMutableArray *infoStack;
 
 @property (nonatomic, retain) NSString* searchString;
+@property (nonatomic, assign) int statusTypeID;
 
 - (void)pushCardWithCompletion:(void (^)())completion;
 - (void)popCardWithCompletion:(void (^)())completion;
@@ -90,6 +93,7 @@
 - (void)loadAllFavoritesWithCompletion:(void (^)())completion;
 - (void)loadMoreDataCompletion:(void (^)())completion;
 - (void)clearData;
+- (void)reload;
 - (void)refresh;
 - (void)firstLoad:(void (^)())completion;
 
