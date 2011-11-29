@@ -1154,6 +1154,7 @@
 		CBBA01F113E4530700641923 /* statuscard */ = {
 			isa = PBXGroup;
 			children = (
+				FE9C97581483BA9C000B50D4 /* sc_track_button_comment.png */,
 				9BE5CDA314847EFB0052ACAB /* sc_stack_cards.png */,
 				203DBEF7146FE91500F43D5A /* stack_bounder.png */,
 				209422B9147F7F3700EA4B47 /* sc_locate.png */,
@@ -1703,6 +1704,7 @@
 				209422BA147F7F3700EA4B47 /* sc_locate.png in Resources */,
 				2030BBC3148216B5002D8B46 /* options_icon_locate.png in Resources */,
 				2030BBC614821809002D8B46 /* options_icon_stack.png in Resources */,
+				FE9C97591483BA9C000B50D4 /* sc_track_button_comment.png in Resources */,
 				9BE5CDA414847EFB0052ACAB /* sc_stack_cards.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

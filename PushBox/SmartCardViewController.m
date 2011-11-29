@@ -402,21 +402,21 @@
     self.trackView4.hidden = YES;
     
     self.trackLabel1.backgroundColor = [UIColor clearColor];
-    self.trackLabel1.shadowColor = [UIColor colorWithWhite:0.0f alpha:1.0f];
+    self.trackLabel1.shadowColor = [UIColor colorWithWhite:0.0f alpha:0.75f];
     self.trackLabel1.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    self.trackLabel1.shadowBlur = 8.0f;
+    self.trackLabel1.shadowBlur = 2.0f;
     self.trackLabel2.backgroundColor = [UIColor clearColor];
-    self.trackLabel2.shadowColor = [UIColor colorWithWhite:0.0f alpha:1.0f];
+    self.trackLabel2.shadowColor = [UIColor colorWithWhite:0.0f alpha:0.75f];
     self.trackLabel2.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    self.trackLabel2.shadowBlur = 8.0f;
+    self.trackLabel2.shadowBlur = 2.0f;
     self.trackLabel3.backgroundColor = [UIColor clearColor];
-    self.trackLabel3.shadowColor = [UIColor colorWithWhite:0.0f alpha:1.0f];
+    self.trackLabel3.shadowColor = [UIColor colorWithWhite:0.0f alpha:0.75f];
     self.trackLabel3.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    self.trackLabel3.shadowBlur = 8.0f;
+    self.trackLabel3.shadowBlur = 2.0f;
     self.trackLabel4.backgroundColor = [UIColor clearColor];
-    self.trackLabel4.shadowColor = [UIColor colorWithWhite:0.0f alpha:1.0f];
+    self.trackLabel4.shadowColor = [UIColor colorWithWhite:0.0f alpha:0.75f];
     self.trackLabel4.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    self.trackLabel4.shadowBlur = 8.0f;
+    self.trackLabel4.shadowBlur = 2.0f;
     
     //
     [[self.tweetImageView layer] setCornerRadius:20.0];
