@@ -28,7 +28,7 @@
 #define kLocationImageViewFrameNomal CGRectMake(65, 247, 15, 16)
 #define kLocationLabelFrameNomal CGRectMake(86, 243, 217, 21)
 #define kLocationImageViewFrameRight CGRectMake(132, 247, 15, 16)
-#define kLocationLabelFrameRight CGRectMake(153, 247, 15, 16)
+#define kLocationLabelFrameRight CGRectMake(153, 243, 217, 21)
 
 @implementation SmartCardViewController
 
