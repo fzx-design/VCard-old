@@ -101,7 +101,7 @@
 	return nil;
 }
 
-- (CardFrameViewController*)getNeighborCardFrameViewControllerWithIndex
+- (CardFrameViewController*)getNeighborCardFrameViewController
 {
 	for (CardFrameViewController* cardFrameViewController in self.cardFrames) {
 		if (abs(cardFrameViewController.index - self.currentIndex) > 1) {
@@ -110,6 +110,17 @@
 		}
 	}
 	return nil;
+}
+
+- (CardFrameViewController*)getRightNeighborCardFrameViewController
+{
+    for (CardFrameViewController* cardFrameViewController in self.cardFrames) {
+        if (cardFrameViewController.index - self.currentIndex > 1) {
+            cardFrameViewController.index = self.currentIndex;
+            return cardFrameViewController;
+        }
+    }
+    return nil;
 }
 
 - (CardFrameViewController*)getReusableFrameViewController
@@ -215,8 +226,8 @@
 {
 	[self prepareForMovingCards];
 	
-	CardFrameViewController* vc1 = [self getNeighborCardFrameViewControllerWithIndex];
-	CardFrameViewController* vc2 = [self getNeighborCardFrameViewControllerWithIndex];
+	CardFrameViewController* vc1 = [self getNeighborCardFrameViewController];
+	CardFrameViewController* vc2 = [self getNeighborCardFrameViewController];
 	
     [self configureCardFrameController:vc1 atIndex:FirstPageIndex];
     [self configureCardFrameController:vc2 atIndex:SecondPageIndex];
@@ -244,14 +255,12 @@
 		
 		diff = diff > 0 ? 3 : -3;
 		
-		CardFrameViewController* vc1 = [self getNeighborCardFrameViewControllerWithIndex];
-		CardFrameViewController* vc2 = [self getNeighborCardFrameViewControllerWithIndex];
-		CardFrameViewController* vc3 = [self getNeighborCardFrameViewControllerWithIndex];
+		CardFrameViewController* vc1 = [self getNeighborCardFrameViewController];
+		CardFrameViewController* vc2 = [self getNeighborCardFrameViewController];
+		CardFrameViewController* vc3 = [self getNeighborCardFrameViewController];
 
         [self configureCardFrameController:vc1 atIndex:index - 1];
-		
         [self configureCardFrameController:vc2 atIndex:index];
-        
         [self configureCardFrameController:vc3 atIndex:index + 1];
         
         if (index == 0) {
@@ -314,8 +323,11 @@
             break;
 		}
 	}
+    
+    CardFrameViewController *vc1 = [self getRightNeighborCardFrameViewController];
+    CardFrameViewController *vc2 = [self getRightNeighborCardFrameViewController];
 	
-	[UIView animateWithDuration:0.3 animations:^{
+	[UIView animateWithDuration:1.0 animations:^{
 		for (CardFrameViewController *cardFrameViewController in self.cardFrames) {
 			UIView* view = cardFrameViewController.view;
 			if (cardFrameViewController.index - self.currentIndex > 0) {
