@@ -20,7 +20,6 @@
     [super viewDidLoad];
 	
     self.title = NSLocalizedString(@"消息更新速度", nil);
-//	self.tableView t
 }
 
 

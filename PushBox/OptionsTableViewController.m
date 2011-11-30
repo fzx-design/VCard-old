@@ -73,7 +73,7 @@
         case 1:
             return 1;
         case 2:
-            return 3;
+            return 4;
         case 3:
             return 1;
 		case 4:
@@ -143,6 +143,13 @@
         case 2:
             switch (indexPath.row) {
                 case 0:
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    cell.textLabel.text = NSLocalizedString(@"堆叠", nil);
+                    cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"秒", nil)];
+                    cell.imageView.image = [UIImage imageNamed:@"options_icon_stack.png"];
+                    break;
+                    
+                case 1:
                     //cell.selectionStyle = UITableViewCellSelectionStyleGray; //to consider
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     cell.textLabel.text = NSLocalizedString(@"SlidePlay 时间间隔", nil);
@@ -151,8 +158,7 @@
                     cell.imageView.image = [UIImage imageNamed:@"options_icon_time.png"];
                     break;
 					
-					
-                case 1:
+                case 2:
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 					
 					UISwitch *aSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 94, 27)];
@@ -167,7 +173,7 @@
                     cell.imageView.image = [UIImage imageNamed:@"options_icon_image.png"];
                     break;
                     
-                case 2:
+                case 3:
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 					
 					UISwitch *aSwitch2 = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 94, 27)];
@@ -317,6 +323,11 @@
         }
         case 2:
             if (indexPath.row == 0) {
+                PileOptionViewController *ivc = [[PileOptionViewController alloc] initWithStyle:UITableViewStyleGrouped];
+                ivc.contentSizeForViewInPopover = kContentSizeForViewInPopover;
+                [self.navigationController pushViewController:ivc animated:YES];
+                [ivc release];
+            } else if (indexPath.row == 1) {
                 IntervalManViewController *ivc = [[IntervalManViewController alloc] initWithStyle:UITableViewStyleGrouped];
                 ivc.contentSizeForViewInPopover = kContentSizeForViewInPopover;
                 [self.navigationController pushViewController:ivc animated:YES];
