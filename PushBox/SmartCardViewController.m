@@ -945,17 +945,63 @@
     }
 }
 
-- (void)loadTrackDelta:(NSMutableArray*)trackArray page:(int)page {
-    
-    if (page == 10) {
+- (void)setTrack:(NSMutableArray*)trackArray {
+    if ([trackArray count] == 0) {
+        NSString* actNotiString = [[[NSString alloc] initWithFormat:@"%@ 关于此微博的最新进展", self.status.author.screenName] autorelease];
+        self.recentActNotifyLabel.text = actNotiString;
+        
+        // 
+        NSString* trackString = [[[NSString alloc] initWithFormat:@"询问 %@", self.status.author.screenName] autorelease];
+        self.trackLabel.text = trackString;
+        
+        self.trackLabel.alpha = 0.0;
+        self.trackView.alpha = 0.0;
+        self.recentActNotifyLabel.alpha = 0.0;
+        
+        [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+            self.trackLabel.alpha = 1.0;
+            self.trackView.alpha = 1.0;
+            //            self.recentActNotifyLabel.alpha = 1.0;
+        } completion:^(BOOL fin) {
+            
+        }];
+    }
+    else {
+        switch ([trackArray count]) {
+            case 4:
+                self.trackView4.hidden = NO;
+                self.trackLabel4.text = [trackArray objectAtIndex:3];
+            case 3:
+                self.trackView3.hidden = NO;
+                self.trackLabel3.text = [trackArray objectAtIndex:2];
+            case 2:
+                self.trackView2.hidden = NO;
+                self.trackLabel2.text = [trackArray objectAtIndex:1];
+            case 1:
+                self.trackView1.hidden = NO;
+                self.trackLabel1.text = [trackArray objectAtIndex:0];
+                break;                
+            default:
+                break;
+        }
+    }
+}
+
+- (void)loadTrackDelta:(NSMutableArray*)trackArray page:(int)page {    
+    if (page >= 2) {
         return;
     }
+    
     WeiboClient *client = [WeiboClient client];
     
     [client setCompletionBlock:^(WeiboClient *client) {
-        [[UIApplication sharedApplication] hideLoadingView];
         if (!client.hasError) {
             NSArray *dictArray = client.responseJSONObject;
+            
+            // no more comment
+            if ([dictArray count] < 200) {
+                isLoadTrackEnd = YES;
+            }
             
             NSString* userId = [[NSString alloc] initWithString:self.status.author.userID];
             for (NSDictionary* dict in dictArray) {
@@ -965,17 +1011,23 @@
                 if ( [userId compare:commentUserId] == NSOrderedSame) {
                     [trackArray addObject:[[NSString alloc] initWithString:[dict objectForKey:@"text"]]];
                 }
+                
+                // enough comments
                 if ([trackArray count] >= 4) {
+                    isLoadTrackEnd = YES;
                     break;
                 }
             }
             
-            [self loadTrackDelta:trackArray page:page + 1];
-            
-            NSLog(@"~~~~~~~~~~~~~~~~~~~~~~%d", page);
+            if (isLoadTrackEnd) {
+                [self setTrack:trackArray];
+            }
+            else {
+                [self loadTrackDelta:trackArray page:page + 1];
+            }                        
             
         } else {
-            [ErrorNotification showLoadingError];
+            isLoadTrackEnd = YES;
         }
         
     }];
@@ -986,6 +1038,15 @@
 
 - (void)loadTrack
 {
+    /////////
+//    NSMutableArray* trackArray = [[NSMutableArray alloc] initWithCapacity:4];
+//
+//    isLoadTrackEnd = NO;
+//    
+//    int page = 1;
+//    [self loadTrackDelta:trackArray page:page];
+        
+    /////////
     NSMutableArray* trackArray = [[NSMutableArray alloc] initWithCapacity:4];
     
     __block int nextPage = 1;
@@ -1010,9 +1071,7 @@
                     break;
                 }
             }
-            
-            NSLog(@"~~~~~~~~~~~~~~~~~~~~~~%d", nextPage);
-            
+                        
             if ([trackArray count] == 0) {
                 NSString* actNotiString = [[[NSString alloc] initWithFormat:@"%@ 关于此微博的最新进展", self.status.author.screenName] autorelease];
                 self.recentActNotifyLabel.text = actNotiString;
