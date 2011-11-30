@@ -11,6 +11,8 @@
 #define kUserDefaultKeyPileUpEnabled @"kUserDefaultKeyPileUpEnabled"
 #define kUserDefaultKeyReadTagEnabled @"kUserDefaultKeyReadTagEnabled"
 
+#define kNotificationNamePileUpEnabledChanged @"kNotificationNamePileUpEnabledChanged"
+
 @interface PileOptionViewController : UITableViewController
 
 @end

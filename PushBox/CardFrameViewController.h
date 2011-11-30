@@ -24,7 +24,6 @@
     UIImageView *_pileBounderShadow;
     
     UIImageView *_pileImageView;
-    
 }
 
 @property (nonatomic, assign) int index;

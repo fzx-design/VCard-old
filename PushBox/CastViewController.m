@@ -14,6 +14,9 @@
 #import "CastViewInfo.h"
 #import "UIApplicationAddition.h"
 #import "CardFrameViewController.h"
+#import "OptionsTableViewController.h"
+
+#import "SystemDefault.h"
 
 #define kStatusCountPerRequest 10
 #define kBlurImageViewScale 2.0
@@ -44,6 +47,13 @@
 {
     [super didReceiveMemoryWarning];
     
+}
+
+#pragma mark - Tools
+
+- (BOOL)pileUpEnabled
+{
+    return [[SystemDefault systemDefault] pileUpEnabled];
 }
 
 #pragma mark - Initialization
@@ -405,6 +415,10 @@
 
 - (void)setPiles
 {
+    if ([self pileUpEnabled]) {
+        return;
+    }
+    
 	for (int i = self.castViewPileUpController.lastIndexFR; i < self.fetchedResultsController.fetchedObjects.count; ++i) {
         Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:i];
         NSLog(@"content : %@", status.text);

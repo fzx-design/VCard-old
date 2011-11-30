@@ -13,6 +13,7 @@
 #import "UIImageViewAddition.h"
 #import "NSDateAddition.h"
 #import "CastViewPileUpController.h"
+#import "SystemDefault.h"
 
 #define CastViewPageSize CGSizeMake(560, 640)
 #define CastViewFrame CGRectMake(0.0f, 0.0f, 560, 640)
@@ -42,6 +43,11 @@
 
 #pragma mark - Tools
 
+- (BOOL)pileEnabled
+{
+    return [[SystemDefault systemDefault] pileUpEnabled];
+}
+
 - (int)numberOfRows
 {
 	return self.castView.pageNum;
@@ -52,7 +58,6 @@
     Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:pile.endIndexInFR];
     return status.createdAt;
 }
-
 
 - (BOOL)gotEnoughViewsToShow
 {
@@ -87,7 +92,7 @@
 
 - (void)configureCardFrameController:(CardFrameViewController*)vc atIndex:(int)index
 {    
-    if (self.dataSource == CastViewDataSourceFriendsTimeline) {
+    if (self.dataSource == CastViewDataSourceFriendsTimeline && [self pileEnabled]) {
         
         CastViewPileUpController *pc = [CastViewPileUpController sharedCastViewPileUpController];
         CastViewPile *pile = [pc pileAtIndex:index];
