@@ -16,7 +16,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = NSLocalizedString(@"堆叠", nil);
+    self.title = NSLocalizedString(@"卡片堆叠", nil);
 }
 
 - (void)viewDidUnload
@@ -59,7 +59,7 @@
             cell.accessoryView = aSwitch1;
             [aSwitch1 release];
             
-            cell.textLabel.text = NSLocalizedString(@"堆叠", nil);
+            cell.textLabel.text = NSLocalizedString(@"启用卡片堆叠", nil);
             break;
             
         case 1:
@@ -73,7 +73,8 @@
             cell.accessoryView = aSwitch2;
             [aSwitch2 release];
             
-            cell.textLabel.text = NSLocalizedString(@"显示已读标志", nil);
+            cell.imageView.image = [UIImage imageNamed:@"sc_read.png"];
+            cell.textLabel.text = NSLocalizedString(@"显示\"已读\"标记", nil);
             
             break;
         default:
@@ -83,11 +84,27 @@
     return cell;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section{
+    
+    if (section == 0) {
+        return @"每次刷新后 VCard 会自动将您读过的卡片        整理成一个\"堆叠\"";
+    }
+    return nil;
+}
+
 - (void)pileUpOn:(UISwitch *)sender
 {
 	BOOL on = sender.on;
 	[[NSUserDefaults standardUserDefaults] setBool:on forKey:kUserDefaultKeyPileUpEnabled];
 	[[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNamePileUpEnabledChanged object:nil];
+    
+    NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:1];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
+    
+    cell.userInteractionEnabled = on;
+    cell.contentView.userInteractionEnabled = on;
 }
 
 - (void)readTagOn:(UISwitch *)sender
@@ -95,6 +112,8 @@
 	BOOL on = sender.on;
 	[[NSUserDefaults standardUserDefaults] setBool:on forKey:kUserDefaultKeyReadTagEnabled];
 	[[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameReadTagEnabledChanged object:nil];
 }
 
 @end

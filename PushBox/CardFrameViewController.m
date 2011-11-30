@@ -32,7 +32,7 @@
 
 - (BOOL)readTagEnabled
 {
-    return [[SystemDefault systemDefault] readTagEnabled];
+    return [[SystemDefault systemDefault] readTagEnabled] && [[SystemDefault systemDefault] pileUpEnabled];
 }
 
 #pragma mark - View lifecycle
@@ -108,6 +108,8 @@
     
     if ([self readTagEnabled]) {
         self.contentViewController.readImageView.hidden = ![pile isRead];
+    } else {
+        self.contentViewController.readImageView.hidden = YES;
     }
     
     NSString *string = @"从 ";

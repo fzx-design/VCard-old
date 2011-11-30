@@ -144,8 +144,16 @@
             switch (indexPath.row) {
                 case 0:
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                    cell.textLabel.text = NSLocalizedString(@"堆叠", nil);
-                    cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"秒", nil)];
+                    cell.textLabel.text = NSLocalizedString(@"卡片堆叠", nil);
+                    
+                    NSString *string = nil;
+                    if ([userDefault boolForKey:kUserDefaultKeyPileUpEnabled]) {
+                        string = @"打开";
+                    } else {
+                        string = @"关闭";
+                    }
+                    
+                    cell.detailTextLabel.text = [NSString stringWithFormat:string];
                     cell.imageView.image = [UIImage imageNamed:@"options_icon_stack.png"];
                     break;
                     

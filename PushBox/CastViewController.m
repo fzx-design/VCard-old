@@ -53,7 +53,7 @@
 
 - (BOOL)pileUpEnabled
 {
-    return [[SystemDefault systemDefault] pileUpEnabled];
+    return [[SystemDefault systemDefault] pileUpEnabled] && self.dataSource == CastViewDataSourceFriendsTimeline;
 }
 
 #pragma mark - Initialization
@@ -415,7 +415,7 @@
 
 - (void)setPiles
 {
-    if ([self pileUpEnabled]) {
+    if (![self pileUpEnabled]) {
         return;
     }
     
@@ -425,9 +425,13 @@
         [self.castViewPileUpController insertCardwithID:[status.statusID longLongValue] andIndexInFR:i];
     }
     
-    if (self.castViewPileUpController.lastIndexFR != self.fetchedResultsController.fetchedObjects.count) {
-        [self checkPiles];
-    }
+    NSLog(@"last : %d  now : %d", self.castViewPileUpController.lastIndexFR, self.fetchedResultsController.fetchedObjects.count);
+    
+//    if (self.castViewPileUpController.lastIndexFR != self.fetchedResultsController.fetchedObjects.count) {
+//        [self checkPiles];
+//    }
+    
+    [self checkPiles];
     
     self.castViewPileUpController.lastIndexFR = self.fetchedResultsController.fetchedObjects.count;
 }
@@ -573,10 +577,17 @@
 			[self insertStatusFromClient:client];
             
             if (self.dataSource == CastViewDataSourceFriendsTimeline) {
+                
+                if (_refreshFlag) {
+                    
+                    [self.castViewPileUpController clearPiles];
+                }
+                
                 [self setPiles];
             }
 			
 			if (_refreshFlag) {
+                
 				_refreshFlag = NO;
 //				
 				long long statusID = 0;
@@ -588,7 +599,9 @@
 					statusID = [newStatus.statusID longLongValue];
 				}
             
-				if (_lastStatusID < statusID || self.dataSource == CastViewDataSourceFriendsTimeline || _shouldRefreshCardView){
+                NSLog(@"_last : %lld, current : %lld", _lastStatusID, statusID);
+                
+				if (_lastStatusID < statusID || [self pileUpEnabled] || _shouldRefreshCardView){
                     
                     _shouldRefreshCardView = NO;
 					
@@ -670,11 +683,7 @@
 {
 	_refreshFlag = YES;
 	_currentNextPage = 1;
-	
-	if (self.dataSource == CastViewDataSourceFriendsTimeline) {
-		[self.castViewPileUpController clearPiles];
-	}
-	
+
     [self loadMoreDataCompletion:NULL];
 }
 

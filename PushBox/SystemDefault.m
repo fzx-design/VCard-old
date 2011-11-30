@@ -35,6 +35,11 @@ static SystemDefault* systemDefault = nil;
                    selector:@selector(resetPileUpEnabled) 
                        name:kNotificationNamePileUpEnabledChanged
                      object:nil];
+        [center addObserver:self
+                   selector:@selector(resetReadTagEnabled) 
+                       name:kNotificationNameReadTagEnabledChanged
+                     object:nil];
+        
     }
     return self;
 }
@@ -42,6 +47,10 @@ static SystemDefault* systemDefault = nil;
 - (void)resetPileUpEnabled
 {
     _pileUpEnabled = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeyPileUpEnabled];
+}
+
+- (void)resetReadTagEnabled
+{
     _readTagEnabled = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeyReadTagEnabled];
 }
 

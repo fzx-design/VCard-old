@@ -45,7 +45,7 @@
 
 - (BOOL)pileEnabled
 {
-    return [[SystemDefault systemDefault] pileUpEnabled];
+    return [[SystemDefault systemDefault] pileUpEnabled] && self.dataSource == CastViewDataSourceFriendsTimeline;
 }
 
 - (int)numberOfRows
@@ -75,7 +75,7 @@
     Status* status = nil;
     int indexInFR = 0;
     
-    if (self.dataSource == CastViewDataSourceFriendsTimeline) {
+    if ([self pileEnabled]) {
         CastViewPileUpController *pileUpController = [CastViewPileUpController sharedCastViewPileUpController];
         indexInFR = [pileUpController indexInFRForViewIndex:index];
 
@@ -92,7 +92,7 @@
 
 - (void)configureCardFrameController:(CardFrameViewController*)vc atIndex:(int)index
 {    
-    if (self.dataSource == CastViewDataSourceFriendsTimeline && [self pileEnabled]) {
+    if ([self pileEnabled]) {
         
         CastViewPileUpController *pc = [CastViewPileUpController sharedCastViewPileUpController];
         CastViewPile *pile = [pc pileAtIndex:index];
@@ -346,6 +346,9 @@
 	}
     
     CastViewPileUpController *pileController = [CastViewPileUpController sharedCastViewPileUpController];
+    
+    int pileSize = [[pileController pileAtIndex:self.currentIndex] numberOfCardsInPile];
+    
     [pileController deletePileAtIndex:self.currentIndex];
     
     CardFrameViewController *vc1 = [self getRightNeighborCardFrameViewController];
@@ -396,7 +399,8 @@
         [self prepareForExpandingPile];
             
         NSLog(@"expand pile at index : %d", self.currentIndex);
-            
+        self.castView.pageSection += pileSize / 10;
+                    
         [self.castView resetWithCurrentIndex:self.currentIndex numberOfPages:[self itemCount:nil]];
 //			[self reloadCards];
 	}];
@@ -476,7 +480,7 @@
 {
     int count = 0;
 
-    if (self.dataSource == CastViewDataSourceFriendsTimeline) {
+    if ([self pileEnabled]) {
         CastViewPileUpController *controller = [CastViewPileUpController sharedCastViewPileUpController];
         count = [controller itemCount];
     } else {
