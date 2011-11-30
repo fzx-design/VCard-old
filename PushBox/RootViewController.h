@@ -71,6 +71,8 @@
 	UIImageView *_searchCoverImageView;
     
     Boolean isSearchReturn;
+    
+    int getFriendsRequestCount;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView* backgroundImageView;
