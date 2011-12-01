@@ -63,7 +63,10 @@
 {
 	BOOL result = YES;
 	CastViewPileUpController *pileUpController = [CastViewPileUpController sharedCastViewPileUpController];
-	if (self.castView.pageSection * 10 > [pileUpController itemCount]) {
+    
+    NSLog(@"pageSection * 10 : %d and itemCount : %d", self.castView.pageSection * kNumberOfCardsInSection, [pileUpController itemCount]);
+    
+	if ((self.castView.pageSection + 1) * kNumberOfCardsInSection > [pileUpController itemCount]) {
 		result = NO;
 	}
 	return result;
@@ -483,13 +486,20 @@
     if ([self pileEnabled]) {
         CastViewPileUpController *controller = [CastViewPileUpController sharedCastViewPileUpController];
         count = [controller itemCount];
+
+        
+        NSLog(@"the pageSection is %d", self.castView.pageSection);
     } else {
         count = self.fetchedResultsController.fetchedObjects.count;
-        if (count > 10 * self.castView.pageSection) {
-            count = 10 * self.castView.pageSection;
-        }
+//        if (count > 10 * self.castView.pageSection) {
+//            count = 10 * self.castView.pageSection;
+//        }
     }
 
+    if (count > 10 * self.castView.pageSection) {
+        count = 10 * self.castView.pageSection;
+    }
+    
     return count;
 }
 

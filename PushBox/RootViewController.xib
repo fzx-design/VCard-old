@@ -257,7 +257,6 @@
 						<string key="NSFrame">{{945, 625}, {78, 46}}</string>
 						<reference key="NSSuperview" ref="420341332"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -500,7 +499,7 @@
 								<reference key="IBUIFont" ref="298692856"/>
 							</object>
 						</object>
-						<string key="NSFrame">{{696, 637}, {215, 69}}</string>
+						<string key="NSFrame">{{695, 637}, {215, 69}}</string>
 						<reference key="NSSuperview" ref="420341332"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="174625979"/>

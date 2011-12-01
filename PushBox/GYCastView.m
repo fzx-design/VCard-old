@@ -63,6 +63,7 @@
 	// Sanity checks
     if (page < 0) return;
     if (page >= pageNum) {
+        
 		[self.delegate loadMoreViews];
 		if ([self currentPage] == pageNum - 1) {
 			[[UIApplication sharedApplication] showLoadingView];
@@ -108,11 +109,11 @@
 - (void)reset
 {
 	animating = YES;
-	
+    
 	pageSection = 1;
 	
 	pageNum = [delegate itemCount:self];
-
+    
 	self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
 	
 	self.scrollView.contentOffset = CGPointMake(0.0, 0.0);
@@ -246,8 +247,8 @@
 
 - (void)addMoreViews
 {
-	pageSection++;
-	
+    pageSection++;
+    
 	int pre = pageNum;
 	pageNum = [self.delegate itemCount:self];
 	
@@ -308,7 +309,7 @@
 	} completion:^(BOOL finished) {
 		if (finished) {
 //			[self resetViewsAroundCurrentViewWithCurrentIndex:currentPage numberOfPages:self.pageNum];
-			[self resetWithCurrentIndex:currentPage numberOfPages:self.pageNum];
+			[self resetWithCurrentIndex:currentPage numberOfPages:[self.delegate itemCount:self]];
 			self.scrollView.userInteractionEnabled = YES;
 		}
 	}];
@@ -338,7 +339,7 @@
 	} completion:^(BOOL finished) {
 		if (finished) {
 //			[self resetViewsAroundCurrentViewWithCurrentIndex:currentPage numberOfPages:self.pageNum];
-			[self resetWithCurrentIndex:currentPage numberOfPages:self.pageNum];
+			[self resetWithCurrentIndex:currentPage numberOfPages:[self.delegate itemCount:self]];
 			self.scrollView.userInteractionEnabled = YES;
 		}
 	}];

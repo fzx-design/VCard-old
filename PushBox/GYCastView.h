@@ -13,6 +13,8 @@
 #define ThirdPageIndex 2
 #define InitialIndex 100
 
+#define kNumberOfCardsInSection 10
+
 @class GYCastView;
 
 @protocol GYCastViewDelegate

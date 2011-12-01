@@ -407,7 +407,6 @@
 
 - (void)checkPiles
 {
-	[self.castViewPileUpController print];
 	if (![self.castViewManager gotEnoughViewsToShow]) {
 		[self loadMoreDataCompletion:nil];
 	}
@@ -419,8 +418,10 @@
         return;
     }
     
+    
 	for (int i = self.castViewPileUpController.lastIndexFR; i < self.fetchedResultsController.fetchedObjects.count; ++i) {
         Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:i];
+        
         NSLog(@"content : %@", status.text);
         [self.castViewPileUpController insertCardwithID:[status.statusID longLongValue] andIndexInFR:i];
     }
@@ -433,6 +434,7 @@
     
     [self checkPiles];
     
+//    self.castViewPileUpController.lastIndexFR = bound;
     self.castViewPileUpController.lastIndexFR = self.fetchedResultsController.fetchedObjects.count;
 }
 
@@ -583,6 +585,8 @@
                     [self.castViewPileUpController clearPiles];
                 }
                 
+                NSLog(@"the pageSection is : %d", self.castView.pageSection);
+                
                 [self setPiles];
             }
 			
@@ -598,16 +602,19 @@
 					
 					statusID = [newStatus.statusID longLongValue];
 				}
-            
-                NSLog(@"_last : %lld, current : %lld", _lastStatusID, statusID);
                 
 				if (_lastStatusID < statusID || [self pileUpEnabled] || _shouldRefreshCardView){
                     
                     _shouldRefreshCardView = NO;
 					
-					_oldNextPage = _currentNextPage;
-					
-					_lastStatusID = statusID;
+                    if (_lastStatusID < statusID) {
+                        
+                        _oldNextPage = _currentNextPage;
+                        
+                        _lastStatusID = statusID;
+                    } else {
+                        _currentNextPage = _oldNextPage;
+                    }
 					
                     [self.castViewManager refreshCards];
                     
@@ -648,6 +655,8 @@
 									count:kStatusCountPerRequest
 								  feature:_statusTypeID];
     }
+    
+    NSLog(@"the current next page is %d", _currentNextPage);
     
     if (self.dataSource == CastViewDataSourceUserTimeline) {
 		[client getUserTimeline:self.user.userID
@@ -812,9 +821,13 @@
 
 - (void)loadMoreViews
 {
-	[self loadMoreDataCompletion:^(){
-		[self.castView addMoreViews];
-	}];
+    if ([self.castViewManager gotEnoughViewsToShow]) {
+        [self.castView addMoreViews];
+    } else {
+        [self loadMoreDataCompletion:^(){
+            [self.castView addMoreViews];
+        }];
+    }
 }
 
 - (void)resetViewsAroundCurrentIndex:(int)index

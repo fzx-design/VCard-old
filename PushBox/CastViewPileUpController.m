@@ -100,7 +100,7 @@ static CastViewPileUpController *_sharedCastViewPileUpController = nil;
                 
                 pileFound = YES;
                 break;
-            } else if ([pile isPileTail:index]) {
+            } else if ([pile isPileTail:index] && [pile numberOfCardsInPile] < 50) {
                 
                 [pile enlargePileVolume];
                 pileFound = YES;
@@ -118,9 +118,7 @@ static CastViewPileUpController *_sharedCastViewPileUpController = nil;
         }
 
 	} else {
-        
-        NSLog(@"%lld is not in readSet", statusID);
-        
+                
         CastViewPile *newPile = [[[CastViewPile alloc] initWithStartIndexInFR:index] autorelease];
         newPile.type = CastViewCellTypeCard;
         newPile.isRead = NO;
@@ -137,25 +135,12 @@ static CastViewPileUpController *_sharedCastViewPileUpController = nil;
         return 0;
     }
     CastViewPile *pile = [_castViewPiles objectAtIndex:index];
-    NSLog(@"indexInFR : %d ______ index : %d", pile.startIndexInFR , index);
     return pile.startIndexInFR;
 }
 
 - (int)itemCount
 {
     return _castViewPiles.count;
-}
-
-- (void)print
-{
-    NSLog(@"pile num is %d", _castViewPiles.count);
-	for (int i = 0; i < _castViewPiles.count; ++i) {
-		CastViewPile *pile = [_castViewPiles objectAtIndex:i];
-		for (int j = pile.startIndexInFR; j <= pile.endIndexInFR; ++j) {
-			NSLog(@"___%d  ", j);
-		}
-		NSLog(@"\n");
-	}
 }
 
 #pragma mark - Destruction
@@ -186,9 +171,7 @@ static CastViewPileUpController *_sharedCastViewPileUpController = nil;
     }
     
     [_castViewPiles removeObject:pile];
-    
-    
-    [self print];
+
 }
 
 - (void)clearPiles
