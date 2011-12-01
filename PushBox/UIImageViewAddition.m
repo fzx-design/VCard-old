@@ -47,10 +47,12 @@
 //            NSLog(@"cache image url:%@", urlString);
 			self.image = nil;
             self.image = img;
+            
             if (completion) {
                 completion();
             }				
         });
+        
     });
     
     dispatch_release(downloadQueue);

@@ -421,7 +421,7 @@
     self.trackLabel4.shadowBlur = 2.0f;
     
     //
-    [[self.tweetImageView layer] setCornerRadius:20.0];
+//    [[self.tweetImageView layer] setCornerRadius:20.0];
 }
 
 - (void)loadStatusImage

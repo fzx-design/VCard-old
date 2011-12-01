@@ -41,6 +41,8 @@
 	NSInteger prePage;
 	
 	NSInteger pageSection;
+    
+    BOOL _test;
 }
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, assign) id<GYCastViewDelegate, NSObject> delegate;
