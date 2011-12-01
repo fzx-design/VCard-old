@@ -179,6 +179,11 @@
         return;
     }
     
+    getFriendsRequestCount++;
+    if (getFriendsRequestCount > 10) {
+        return;
+    }
+    
     WeiboClient *client = [WeiboClient client];
     [client setCompletionBlock:^(WeiboClient *client) {
         if (!client.hasError) {
@@ -188,11 +193,10 @@
             }
             
             int next_cursor = [[client.responseJSONObject objectForKey:@"next_cursor"] intValue];
-            NSLog(@"~_~_~_~_~_~_~_~%d", next_cursor);
             [self getFriendsDelta:next_cursor];
         } 
         else {
-            NSLog(@"Get friends!");
+            NSLog(@"Get friends error!");
         }
     }];
     
@@ -202,6 +206,8 @@
 
 - (void)getFriends
 {
+    getFriendsRequestCount = 0;
+    
     int cursor = -1;
     [self getFriendsDelta:cursor];
     

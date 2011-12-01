@@ -69,6 +69,8 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
     UIImageView *_readImageView;
     
     int b;
+    
+    Boolean isLoadTrackEnd;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView* profileImageView;
