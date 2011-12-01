@@ -41,6 +41,8 @@
 	UIButton *_notiDisplayNewMentionsButton;
 	UIButton *_notiDisplayNewCommentsButton;
 	
+    UIView *_groupView;
+    
     LoginViewController *_loginViewController;
     DockViewController *_dockViewController;
     MessagesViewController *_messagesViewController;
@@ -56,7 +58,7 @@
 	BOOL _refreshFlag;
 	BOOL _newStatusFlag;
 	BOOL _inSearchMode;
-	
+    
 	int _trackingIndex;
 	
 	NSInteger preNewFollowerCount;
@@ -97,6 +99,8 @@
 @property(nonatomic, retain) IBOutlet UIButton *notiDisplayNewMentionsButton;
 @property(nonatomic, retain) IBOutlet UIButton *notiDisplayNewCommentsButton;
 
+@property(nonatomic, retain) IBOutlet UIView *groupView;
+
 @property(nonatomic, retain) LoginViewController* loginViewController;
 @property(nonatomic, retain) DockViewController *dockViewController;
 @property(nonatomic, retain) MessagesViewController *messagesViewController;
@@ -109,6 +113,8 @@
 - (IBAction)refreshAndShowCommentCenter:(id)sender;
 - (IBAction)closeNotificationPop:(id)sender;
 - (IBAction)searchTextFieldClicked:(id)sender;
+
+- (IBAction)groupChoosed:(UIButton*)sender;
 
 - (void)showSearchTimeline:(NSString *)searchString;
 - (void)showTrendsTimeline:(NSString *)searchString;

@@ -58,27 +58,46 @@
 
 #pragma mark - Load Page methods
 
+- (void)setFrameOfPage:(int)page
+{
+    UIView *view = [delegate viewForItemAtIndex:self index:page];
+    
+    CGRect viewFrame = view.frame;
+	viewFrame.origin.x = viewFrame.size.width * page;
+	viewFrame.origin.y = 0;
+	view.frame = viewFrame;
+    
+    if (view.superview == nil) {
+		[self.scrollView addSubview:view];
+	}
+}
+
 - (void)loadPage:(int)page
 {
 	// Sanity checks
     if (page < 0) return;
     if (page >= pageNum) {
+        
 		[self.delegate loadMoreViews];
 		if ([self currentPage] == pageNum - 1) {
 			[[UIApplication sharedApplication] showLoadingView];
 		}
 		return;
 	}
-	
+
+//	[self performSelector:@selector(setFrameOfPage:) withObject:[NSNumber numberWithInt:page] afterDelay:0.5];
+    
 	UIView *view = [delegate viewForItemAtIndex:self index:page];
 	
-	// Position the view in our scrollview
-	
 	CGRect viewFrame = view.frame;
-	viewFrame.origin.x = viewFrame.size.width * page;
-	viewFrame.origin.y = 0;
-	view.frame = viewFrame;
-	
+    
+    int x = viewFrame.size.width * page;
+    
+	if (view.frame.origin.x != x) {
+        viewFrame.origin.x = x;
+        view.frame = viewFrame;
+    }
+    
 	if (view.superview == nil) {
 		[self.scrollView addSubview:view];
 	}
@@ -107,12 +126,14 @@
 
 - (void)reset
 {
+    _test = YES;
+    
 	animating = YES;
-	
+    
 	pageSection = 1;
 	
 	pageNum = [delegate itemCount:self];
-
+    
 	self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
 	
 	self.scrollView.contentOffset = CGPointMake(0.0, 0.0);
@@ -246,8 +267,8 @@
 
 - (void)addMoreViews
 {
-	pageSection++;
-	
+    pageSection++;
+    
 	int pre = pageNum;
 	pageNum = [self.delegate itemCount:self];
 	
@@ -308,7 +329,7 @@
 	} completion:^(BOOL finished) {
 		if (finished) {
 //			[self resetViewsAroundCurrentViewWithCurrentIndex:currentPage numberOfPages:self.pageNum];
-			[self resetWithCurrentIndex:currentPage numberOfPages:self.pageNum];
+			[self resetWithCurrentIndex:currentPage numberOfPages:[self.delegate itemCount:self]];
 			self.scrollView.userInteractionEnabled = YES;
 		}
 	}];
@@ -338,7 +359,7 @@
 	} completion:^(BOOL finished) {
 		if (finished) {
 //			[self resetViewsAroundCurrentViewWithCurrentIndex:currentPage numberOfPages:self.pageNum];
-			[self resetWithCurrentIndex:currentPage numberOfPages:self.pageNum];
+			[self resetWithCurrentIndex:currentPage numberOfPages:[self.delegate itemCount:self]];
 			self.scrollView.userInteractionEnabled = YES;
 		}
 	}];
@@ -346,15 +367,14 @@
 
 #pragma mark - UIScrollViewDelegate methods
 
--(void)scrollViewDidScroll:(UIScrollView *)sv
+- (void)checkLoad
 {
-	if (animating) {
-		return;
-	}
-	int page = [self currentPage];
+    int page = [self currentPage];
 	
+    _test = YES;
+    
 	if (prePage != page) {
-		
+        
 		if (prePage > page) {
 			[self loadPage:(page - 3)];
 		} else {
@@ -365,12 +385,41 @@
 		
 		[self.delegate didScrollToIndex:page];
 		[self reloadViews];
-//		
-//		page -= 3;
-//		for (int i = 0; i < 7; ++i) {
-//			[self loadPage:page + i];
-//		}
+        
 	}
+    
+//    self.scrollView.userInteractionEnabled = YES;
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)sv
+{
+	if (animating) {
+		return;
+	}
+//	int page = [self currentPage];
+//	
+//    _test = YES;
+//    
+//	if (prePage != page) {
+//        
+//		if (prePage > page) {
+//			[self loadPage:(page - 3)];
+//		} else {
+//			[self loadPage:(page + 3)];
+//		}
+//		
+//		prePage = page;
+//		
+//		[self.delegate didScrollToIndex:page];
+//		[self reloadViews];
+//
+//	}
+    
+    if (_test) {
+        _test = NO;
+//        self.scrollView.userInteractionEnabled = NO;
+        [self performSelector:@selector(checkLoad) withObject:nil afterDelay:0];
+    }
 }
 
 - (void)setScrollsToTop:(BOOL)scrollsToTop
@@ -378,24 +427,6 @@
 	[self.scrollView setScrollsToTop:scrollsToTop];
 }
 
-#pragma mark -
-#pragma mark Memory management
-
-- (void)didReceiveMemoryWarning 
-{
-    int currentPage = [self currentPage];
-	
-	for (int i = 0; i < [scrollViewPages count]; i++) {
-		UIView *viewController = [scrollViewPages objectAtIndex:i];
-        if((NSNull *)viewController != [NSNull null]){
-			if(i < currentPage - 1 || i > currentPage+1){
-				[viewController removeFromSuperview];
-				[scrollViewPages replaceObjectAtIndex:i withObject:[NSNull null]];
-			}
-		}
-	}
-	
-}
 
 - (void)dealloc 
 {

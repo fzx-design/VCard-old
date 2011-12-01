@@ -32,7 +32,6 @@
 
 - (int)indexInFRForViewIndex:(int)index;
 - (int)itemCount;
-- (void)print;
 
 - (void)deletePileAtIndex:(int)index;
 - (void)clearPiles;

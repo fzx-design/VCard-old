@@ -421,7 +421,7 @@
     self.trackLabel4.shadowBlur = 2.0f;
     
     //
-    [[self.tweetImageView layer] setCornerRadius:20.0];
+//    [[self.tweetImageView layer] setCornerRadius:20.0];
 }
 
 - (void)loadStatusImage
@@ -568,7 +568,7 @@
                 }
                 endIndex = j;
                 
-                NSRange range = NSMakeRange(startIndex, endIndex-startIndex+1);
+                NSRange range = NSMakeRange(startIndex, endIndex-startIndex);
                 NSString* subStr = [originStatus substringWithRange:range];                
                 
                 NSManagedObjectContext* context = [(PushBoxAppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
@@ -688,7 +688,7 @@
                 }
                 endIndex = j;
                 
-                NSRange range = NSMakeRange(startIndex, endIndex-startIndex+1);
+                NSRange range = NSMakeRange(startIndex, endIndex-startIndex);
                 NSString* subStr = [originStatus substringWithRange:range];                
                 
                 NSManagedObjectContext* context = [(PushBoxAppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];

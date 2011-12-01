@@ -15,6 +15,7 @@
 @synthesize currentIndex;
 @synthesize indexCount;
 @synthesize indexSection;
+@synthesize statusType;
 @synthesize statusID;
 @synthesize dataSource;
 

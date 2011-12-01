@@ -30,7 +30,9 @@
 	[dict setObject:[NSNumber numberWithInt:10] forKey:kUserDefaultKeyRefreshingInterval];
 	[dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultKeyNotiPopoverEnabled];
     [dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultKeySoundEnabled];
-	[dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultKeyImageDownloadingEnabled];    
+	[dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultKeyImageDownloadingEnabled];
+    [dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultKeyPileUpEnabled];
+    [dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultKeyReadTagEnabled];
 	[dict setObject:[NSNumber numberWithInt:0] forKey:kUserDefaultKeyLoginCount];
 	[dict setObject:[NSNumber numberWithInt:0] forKey:kUserDefaultKeyAutoLocate];
 	

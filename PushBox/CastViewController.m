@@ -14,6 +14,9 @@
 #import "CastViewInfo.h"
 #import "UIApplicationAddition.h"
 #import "CardFrameViewController.h"
+#import "OptionsTableViewController.h"
+
+#import "SystemDefault.h"
 
 #define kStatusCountPerRequest 10
 #define kBlurImageViewScale 2.0
@@ -34,6 +37,8 @@
 @synthesize castViewPileUpController = _castViewPileUpController;
 @synthesize searchString = _searchString;
 
+@synthesize statusTypeID = _statusTypeID;
+
 @synthesize delegate = _delegate;
 
 @synthesize infoStack = _infoStack;
@@ -42,6 +47,13 @@
 {
     [super didReceiveMemoryWarning];
     
+}
+
+#pragma mark - Tools
+
+- (BOOL)pileUpEnabled
+{
+    return [[SystemDefault systemDefault] pileUpEnabled] && self.dataSource == CastViewDataSourceFriendsTimeline;
 }
 
 #pragma mark - Initialization
@@ -61,7 +73,9 @@
 	_currentNextPage = 1;
 	_loading = NO;
 	_refreshFlag = NO;
+    _shouldRefreshCardView = NO;
 	_lastStatusID = 0;
+    _statusTypeID = 0;
 }
 
 - (void)setUpRefreshSettings
@@ -202,6 +216,7 @@
 	castViewInfo.indexCount = [self.castViewManager numberOfRows];
 	castViewInfo.indexSection = self.castView.pageSection;
 	castViewInfo.statusID = _lastStatusID;
+    castViewInfo.statusType = _statusTypeID;
 	
 	self.prevDataSource = self.dataSource;
 	
@@ -219,6 +234,7 @@
 	_currentNextPage = 1;
 	_oldNextPage = 1;
 	_lastStatusID = 0;
+    _statusTypeID = 0;
 }
 
 - (void)pushCardWithCompletion:(void (^)())completion
@@ -279,7 +295,8 @@
         self.castViewManager.currentIndex = castViewInfo.currentIndex;
         self.castViewManager.dataSource = self.dataSource;
 		self.castView.pageSection = castViewInfo.indexSection;
-		
+        
+		_statusTypeID = castViewInfo.statusType;
 		_lastStatusID = castViewInfo.statusID;
 		
 		_currentNextPage = castViewInfo.nextPage;
@@ -390,7 +407,6 @@
 
 - (void)checkPiles
 {
-	[self.castViewPileUpController print];
 	if (![self.castViewManager gotEnoughViewsToShow]) {
 		[self loadMoreDataCompletion:nil];
 	}
@@ -398,16 +414,27 @@
 
 - (void)setPiles
 {
+    if (![self pileUpEnabled]) {
+        return;
+    }
+    
+    
 	for (int i = self.castViewPileUpController.lastIndexFR; i < self.fetchedResultsController.fetchedObjects.count; ++i) {
         Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:i];
+        
         NSLog(@"content : %@", status.text);
         [self.castViewPileUpController insertCardwithID:[status.statusID longLongValue] andIndexInFR:i];
     }
     
-    if (self.castViewPileUpController.lastIndexFR != self.fetchedResultsController.fetchedObjects.count) {
-        [self checkPiles];
-    }
+    NSLog(@"last : %d  now : %d", self.castViewPileUpController.lastIndexFR, self.fetchedResultsController.fetchedObjects.count);
     
+//    if (self.castViewPileUpController.lastIndexFR != self.fetchedResultsController.fetchedObjects.count) {
+//        [self checkPiles];
+//    }
+    
+    [self checkPiles];
+    
+//    self.castViewPileUpController.lastIndexFR = bound;
     self.castViewPileUpController.lastIndexFR = self.fetchedResultsController.fetchedObjects.count;
 }
 
@@ -552,12 +579,21 @@
 			[self insertStatusFromClient:client];
             
             if (self.dataSource == CastViewDataSourceFriendsTimeline) {
+                
+                if (_refreshFlag) {
+                    
+                    [self.castViewPileUpController clearPiles];
+                }
+                
+                NSLog(@"the pageSection is : %d", self.castView.pageSection);
+                
                 [self setPiles];
             }
 			
 			if (_refreshFlag) {
+                
 				_refreshFlag = NO;
-				
+//				
 				long long statusID = 0;
 				
 				if (self.fetchedResultsController.fetchedObjects.count) {
@@ -566,18 +602,26 @@
 					
 					statusID = [newStatus.statusID longLongValue];
 				}
-				
-				if (_lastStatusID < statusID){
+                
+				if (_lastStatusID < statusID || [self pileUpEnabled] || _shouldRefreshCardView){
+                    
+                    _shouldRefreshCardView = NO;
 					
-					_oldNextPage = _currentNextPage;
+                    if (_lastStatusID < statusID) {
+                        
+                        _oldNextPage = _currentNextPage;
+                        
+                        _lastStatusID = statusID;
+                    } else {
+                        _currentNextPage = _oldNextPage;
+                    }
 					
-					_lastStatusID = statusID;
-					
+                    [self.castViewManager refreshCards];
+                    
 //					[self clearData];
 //					
 //					[self insertStatusFromClient:client];
 					
-					[self.castViewManager refreshCards];
 					
 				} else {
 					
@@ -609,8 +653,10 @@
 									maxID:(long long)0
 						   startingAtPage:_currentNextPage++
 									count:kStatusCountPerRequest
-								  feature:0];
+								  feature:_statusTypeID];
     }
+    
+    NSLog(@"the current next page is %d", _currentNextPage);
     
     if (self.dataSource == CastViewDataSourceUserTimeline) {
 		[client getUserTimeline:self.user.userID
@@ -618,7 +664,7 @@
 						  maxID:(long long)0
 				 startingAtPage:_currentNextPage++
 						  count:kStatusCountPerRequest
-						feature:0];
+						feature:_statusTypeID];
     }
 	
 	if (self.dataSource == CastViewDataSourceMentions) {
@@ -636,15 +682,17 @@
     
 }
 
+- (void)reload
+{
+    _shouldRefreshCardView = YES;
+    [self refresh];
+}
+
 - (void)refresh
 {
 	_refreshFlag = YES;
 	_currentNextPage = 1;
-	
-	if (self.dataSource == CastViewDataSourceFriendsTimeline) {
-		[self.castViewPileUpController clearPiles];
-	}
-	
+
     [self loadMoreDataCompletion:NULL];
 }
 
@@ -773,9 +821,13 @@
 
 - (void)loadMoreViews
 {
-	[self loadMoreDataCompletion:^(){
-		[self.castView addMoreViews];
-	}];
+    if ([self.castViewManager gotEnoughViewsToShow]) {
+        [self.castView addMoreViews];
+    } else {
+        [self loadMoreDataCompletion:^(){
+            [self.castView addMoreViews];
+        }];
+    }
 }
 
 - (void)resetViewsAroundCurrentIndex:(int)index

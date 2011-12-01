@@ -14,6 +14,8 @@
 #import "AboutViewController.h"
 #import "LegacyViewController.h"
 
+#import "PileOptionViewController.h"
+
 #define kUserDefaultKeyImageDownloadingEnabled @"kUserDefaultKeyImageDownloadingEnabled"
 #define kUserDefaultKeySoundEnabled @"kUserDefaultKeySoundEnabled"
 #define kUserDefaultKeyNotiPopoverEnabled @"kUserDefaultKeyNotiPopoverEnabled"

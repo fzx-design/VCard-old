@@ -15,6 +15,7 @@
 #import "CCUserInfoCardViewController.h"
 
 #define kNotificationNameHideCommandCenter @"kNotificationNameHideCommandCenter"
+#define kNotificationNameShowGroupChoice @"kNotificationNameShowGroupChoice"
 
 @interface DockViewController : CoreDataViewController<UIPopoverControllerDelegate> {
     UIButton *_refreshButton;
@@ -25,6 +26,9 @@
     UIButton *_showFavoritesButton;
     UIButton *_optionsButton;
     UIButton *_searchButton;
+    
+    UIButton *_groupButton;
+    
     UISlider *_slider;
     UIView *_controlContainerView;
     UIImageView *_refreshNotiImageView;
@@ -57,6 +61,9 @@
 @property(nonatomic, retain) IBOutlet UIButton* searchButton;
 @property(nonatomic, retain) IBOutlet UIButton* showFavoritesButton;
 @property(nonatomic, retain) IBOutlet UIButton* optionsButton;
+
+@property(nonatomic, retain) IBOutlet UIButton* groupButton;
+
 @property(nonatomic, retain) IBOutlet UISlider* slider;
 @property(nonatomic, retain) IBOutlet UIView* controlContainerView;
 @property(nonatomic, retain) IBOutlet UIImageView* refreshNotiImageView;
@@ -84,6 +91,7 @@
 - (IBAction)commandCenterButtonClicked:(id)sender;
 
 - (IBAction)hideCommandCenterButtonClicked:(id)sender;
+- (IBAction)groupButtonClicked:(id)sender;
 
 - (void)showLoadingView;
 - (void)hideLoadingView;

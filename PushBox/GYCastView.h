@@ -13,6 +13,8 @@
 #define ThirdPageIndex 2
 #define InitialIndex 100
 
+#define kNumberOfCardsInSection 10
+
 @class GYCastView;
 
 @protocol GYCastViewDelegate
@@ -39,6 +41,8 @@
 	NSInteger prePage;
 	
 	NSInteger pageSection;
+    
+    BOOL _test;
 }
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, assign) id<GYCastViewDelegate, NSObject> delegate;

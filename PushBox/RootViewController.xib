@@ -257,7 +257,6 @@
 						<string key="NSFrame">{{945, 625}, {78, 46}}</string>
 						<reference key="NSSuperview" ref="420341332"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -500,7 +499,7 @@
 								<reference key="IBUIFont" ref="298692856"/>
 							</object>
 						</object>
-						<string key="NSFrame">{{696, 637}, {215, 69}}</string>
+						<string key="NSFrame">{{695, 637}, {215, 69}}</string>
 						<reference key="NSSuperview" ref="420341332"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="174625979"/>
@@ -510,7 +509,7 @@
 					</object>
 					<object class="IBUIView" id="338110412">
 						<reference key="NSNextResponder" ref="420341332"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">269</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUIImageView" id="592865598">
@@ -550,7 +549,7 @@
 							<object class="IBUIImageView" id="1056312775">
 								<reference key="NSNextResponder" ref="338110412"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{22, 58}, {43, 41}}</string>
+								<string key="NSFrame">{{23, 58}, {42, 41}}</string>
 								<reference key="NSSuperview" ref="338110412"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="959699550"/>
@@ -629,7 +628,7 @@
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUITitleShadowOffset">{0, 1}</string>
 								<string key="IBUINormalTitle">            全部卡片</string>
-								<object class="NSColor" key="IBUIHighlightedTitleColor" id="168411081">
+								<object class="NSColor" key="IBUIHighlightedTitleColor" id="360388135">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MC4zMzMzMzMzMzMzAA</bytes>
 								</object>
@@ -656,8 +655,8 @@
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUITitleShadowOffset">{0, 1}</string>
 								<string key="IBUINormalTitle">            原创</string>
-								<reference key="IBUIHighlightedTitleColor" ref="168411081"/>
-								<object class="NSColor" key="IBUINormalTitleColor" id="555000433">
+								<reference key="IBUIHighlightedTitleColor" ref="360388135"/>
+								<object class="NSColor" key="IBUINormalTitleColor" id="217798882">
 									<int key="NSColorSpace">2</int>
 									<bytes key="NSRGB">MC4xMDU4ODIzNjE1IDAuNTg4MjM1MzE4NyAwLjY3NDUwOTgyMzMAA</bytes>
 								</object>
@@ -680,8 +679,8 @@
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUITitleShadowOffset">{0, 1}</string>
 								<string key="IBUINormalTitle">            图览</string>
-								<reference key="IBUIHighlightedTitleColor" ref="168411081"/>
-								<reference key="IBUINormalTitleColor" ref="555000433"/>
+								<reference key="IBUIHighlightedTitleColor" ref="360388135"/>
+								<reference key="IBUINormalTitleColor" ref="217798882"/>
 								<reference key="IBUIHighlightedTitleShadowColor" ref="90466321"/>
 								<reference key="IBUINormalTitleShadowColor" ref="90466321"/>
 								<reference key="IBUIFontDescription" ref="770592281"/>
@@ -701,8 +700,8 @@
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUITitleShadowOffset">{0, 1}</string>
 								<string key="IBUINormalTitle">            电影和视频</string>
-								<reference key="IBUIHighlightedTitleColor" ref="168411081"/>
-								<reference key="IBUINormalTitleColor" ref="555000433"/>
+								<reference key="IBUIHighlightedTitleColor" ref="360388135"/>
+								<reference key="IBUINormalTitleColor" ref="217798882"/>
 								<reference key="IBUIHighlightedTitleShadowColor" ref="90466321"/>
 								<reference key="IBUINormalTitleShadowColor" ref="90466321"/>
 								<reference key="IBUIFontDescription" ref="770592281"/>
@@ -722,8 +721,8 @@
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUITitleShadowOffset">{0, 1}</string>
 								<string key="IBUINormalTitle">            音乐</string>
-								<reference key="IBUIHighlightedTitleColor" ref="168411081"/>
-								<reference key="IBUINormalTitleColor" ref="555000433"/>
+								<reference key="IBUIHighlightedTitleColor" ref="360388135"/>
+								<reference key="IBUINormalTitleColor" ref="217798882"/>
 								<reference key="IBUIHighlightedTitleShadowColor" ref="90466321"/>
 								<reference key="IBUINormalTitleShadowColor" ref="90466321"/>
 								<reference key="IBUIFontDescription" ref="770592281"/>
@@ -902,6 +901,14 @@
 					<int key="connectionID">105</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">groupView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="338110412"/>
+					</object>
+					<int key="connectionID">127</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">showFriendsTimeline:</string>
 						<reference key="source" ref="902454433"/>
@@ -971,6 +978,51 @@
 						<int key="IBEventType">1</int>
 					</object>
 					<int key="connectionID">106</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">groupChoosed:</string>
+						<reference key="source" ref="315848876"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">128</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">groupChoosed:</string>
+						<reference key="source" ref="959699550"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">129</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">groupChoosed:</string>
+						<reference key="source" ref="972554427"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">130</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">groupChoosed:</string>
+						<reference key="source" ref="569905027"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">131</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">groupChoosed:</string>
+						<reference key="source" ref="375948486"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">132</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1160,9 +1212,9 @@
 							<reference ref="1056312775"/>
 							<reference ref="315848876"/>
 							<reference ref="959699550"/>
-							<reference ref="972554427"/>
 							<reference ref="569905027"/>
 							<reference ref="375948486"/>
+							<reference ref="972554427"/>
 						</object>
 						<reference key="parent" ref="420341332"/>
 					</object>
@@ -1287,13 +1339,13 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<real value="1"/>
+					<real value="0.0"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<real value="1"/>
+					<real value="0.0"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<real value="1"/>
+					<real value="0.0"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<real value="1"/>
+					<real value="0.0"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<real value="1"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1334,7 +1386,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">126</int>
+			<int key="maxID">132</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1355,6 +1407,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>closeNotificationPop:</string>
+							<string>groupChoosed:</string>
 							<string>refreshAndShowCommentCenter:</string>
 							<string>searchTextFieldClicked:</string>
 							<string>showFriendsTimeline:</string>
@@ -1363,6 +1416,7 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>id</string>
+							<string>UIButton</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -1374,6 +1428,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>closeNotificationPop:</string>
+							<string>groupChoosed:</string>
 							<string>refreshAndShowCommentCenter:</string>
 							<string>searchTextFieldClicked:</string>
 							<string>showFriendsTimeline:</string>
@@ -1384,6 +1439,10 @@
 							<object class="IBActionInfo">
 								<string key="name">closeNotificationPop:</string>
 								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">groupChoosed:</string>
+								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">refreshAndShowCommentCenter:</string>
@@ -1418,6 +1477,7 @@
 							<string>bottomStateLabel</string>
 							<string>bottomStateTextField</string>
 							<string>bottomStateView</string>
+							<string>groupView</string>
 							<string>notiCloseButton</string>
 							<string>notiDisplayNewCommentsButton</string>
 							<string>notiDisplayNewFollowersButton</string>
@@ -1440,6 +1500,7 @@
 							<string>UIImageView</string>
 							<string>UILabel</string>
 							<string>UITextField</string>
+							<string>UIView</string>
 							<string>UIView</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
@@ -1467,6 +1528,7 @@
 							<string>bottomStateLabel</string>
 							<string>bottomStateTextField</string>
 							<string>bottomStateView</string>
+							<string>groupView</string>
 							<string>notiCloseButton</string>
 							<string>notiDisplayNewCommentsButton</string>
 							<string>notiDisplayNewFollowersButton</string>
@@ -1521,6 +1583,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">bottomStateView</string>
+								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">groupView</string>
 								<string key="candidateClassName">UIView</string>
 							</object>
 							<object class="IBToOneOutletInfo">

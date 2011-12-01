@@ -10,6 +10,8 @@
 #import "NSDateAddition.h"
 #import "AnimationProvider.h"
 #import "Status.h"
+#import "SystemDefault.h"
+
 
 @implementation CardFrameViewController
 
@@ -25,6 +27,13 @@
 
 @synthesize pileImageView = _pileImageView;
 
+
+#pragma mark - Tools
+
+- (BOOL)readTagEnabled
+{
+    return [[SystemDefault systemDefault] readTagEnabled] && [[SystemDefault systemDefault] pileUpEnabled];
+}
 
 #pragma mark - View lifecycle
 
@@ -96,7 +105,12 @@
     self.pileCoverButton.hidden = !result;
     self.pileImageView.hidden = !result;
     self.pileBounderShadow.hidden = !result;
-    self.contentViewController.readImageView.hidden = ![pile isRead];
+    
+    if ([self readTagEnabled]) {
+        self.contentViewController.readImageView.hidden = ![pile isRead];
+    } else {
+        self.contentViewController.readImageView.hidden = YES;
+    }
     
     NSString *string = @"从 ";
     self.dateRangeLabel.text = [string stringByAppendingString:[endDate customString]];
