@@ -1200,14 +1200,6 @@
 					<int key="connectionID">128</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">tweetImageBoundView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="978562341"/>
-					</object>
-					<int key="connectionID">129</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">actionsButtonClicked:</string>
 						<reference key="source" ref="726699579"/>
@@ -1869,7 +1861,6 @@
 							<string>trackView2</string>
 							<string>trackView3</string>
 							<string>trackView4</string>
-							<string>tweetImageBoundView</string>
 							<string>tweetImageView</string>
 							<string>tweetScrollView</string>
 							<string>tweetTextView</string>
@@ -1901,7 +1892,6 @@
 							<string>FXLabel</string>
 							<string>FXLabel</string>
 							<string>FXLabel</string>
-							<string>UIView</string>
 							<string>UIView</string>
 							<string>UIView</string>
 							<string>UIView</string>
@@ -1946,7 +1936,6 @@
 							<string>trackView2</string>
 							<string>trackView3</string>
 							<string>trackView4</string>
-							<string>tweetImageBoundView</string>
 							<string>tweetImageView</string>
 							<string>tweetScrollView</string>
 							<string>tweetTextView</string>
@@ -2071,10 +2060,6 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">trackView4</string>
-								<string key="candidateClassName">UIView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">tweetImageBoundView</string>
 								<string key="candidateClassName">UIView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
