@@ -568,7 +568,7 @@
                 }
                 endIndex = j;
                 
-                NSRange range = NSMakeRange(startIndex, endIndex-startIndex+1);
+                NSRange range = NSMakeRange(startIndex, endIndex-startIndex);
                 NSString* subStr = [originStatus substringWithRange:range];                
                 
                 NSManagedObjectContext* context = [(PushBoxAppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
@@ -688,7 +688,7 @@
                 }
                 endIndex = j;
                 
-                NSRange range = NSMakeRange(startIndex, endIndex-startIndex+1);
+                NSRange range = NSMakeRange(startIndex, endIndex-startIndex);
                 NSString* subStr = [originStatus substringWithRange:range];                
                 
                 NSManagedObjectContext* context = [(PushBoxAppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
