@@ -656,15 +656,13 @@
 
 	if (self.dataSource == CastViewDataSourceFriendsTimeline) {
         
-        if (_refreshFlag && ![self pileUpEnabled]) {
+        if (_refreshFlag || ![self pileUpEnabled]) {
             [client getFriendsTimelineSinceID:nil
                                         maxID:(long long)0
                                startingAtPage:_currentNextPage++
                                         count:kStatusCountPerRequest
                                       feature:_statusTypeID];
         } else {
-            
-            NSLog(@"%@", [self pileLastID]);
             [client getFriendsTimelineSinceID:nil
                                         maxID:[self pileLastID]
                                startingAtPage:0
@@ -836,7 +834,7 @@
 
 - (void)loadMoreViews
 {
-    if ([self.castViewManager gotEnoughViewsToShow]) {
+    if ([self.castViewManager gotEnoughViewsToShow] && [self pileUpEnabled]) {
         [self.castView addMoreViews];
     } else {
         [self loadMoreDataCompletion:^(){
