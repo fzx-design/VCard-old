@@ -573,6 +573,7 @@
     [self.groupView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
     
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 1024, 748)];
+    _tmpButton = button;
     [button addTarget:self action:@selector(hideGroupView:) forControlEvents:UIControlEventTouchUpInside];
     [self.view insertSubview:button belowSubview:self.groupView];
     [button release];
@@ -1673,34 +1674,35 @@
 
 - (IBAction)groupChoosed:(UIButton*)sender
 {
-    [self.castViewController clearCardStack];
-    
-//    if (self.castViewController.infoStack.count != 0) {
-//        [self showPrevTimeline:nil];
-//    }
-    
     int statusType = 0;
     UIImage *image = nil;
+    UIImage *imageHL = nil;
     
     if ([sender.titleLabel.text isEqualToString:@"            全部卡片"]) {
         statusType = 0;
         image = [UIImage imageNamed:@"dock_button_group.png"];
+        imageHL = [UIImage imageNamed:@"dock_button_group_HL.png"];
     } else if([sender.titleLabel.text isEqualToString:@"            原创"]) {
         statusType = 1;
         image = [UIImage imageNamed:@"icon_orginal.png"];
+        imageHL = [UIImage imageNamed:@"icon_orginal.png"];
     } else if([sender.titleLabel.text isEqualToString:@"            图览"]) {
         statusType = 2;
         image = [UIImage imageNamed:@"icon_image.png"];
+        imageHL = [UIImage imageNamed:@"icon_image.png"];
     } else if([sender.titleLabel.text isEqualToString:@"            电影和视频"]) {
         statusType = 3;
         image = [UIImage imageNamed:@"icon_video.png"];
+        imageHL = [UIImage imageNamed:@"icon_video.png"];
     } else {
         statusType = 4;
         image = [UIImage imageNamed:@"icon_music.png"];
+        imageHL = [UIImage imageNamed:@"icon_music.png"];
     }
     
-    self.dockViewController.groupButton.imageView.image = nil;
-    self.dockViewController.groupButton.imageView.image = image;
+    [self.dockViewController.groupButton setImage:image forState:UIControlStateNormal];
+    [self.dockViewController.groupButton setImage:imageHL forState:UIControlStateSelected];
+    [self.dockViewController.groupButton setImage:imageHL forState:UIControlStateHighlighted];
     
     self.castViewController.statusTypeID = statusType;
     
@@ -1709,7 +1711,7 @@
     [self.castViewController clearData];
     [self.castViewController reload];
     
-    [self hideGroupView:nil];
+    [self hideGroupView:_tmpButton];
 }
 
 @end

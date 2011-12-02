@@ -70,6 +70,8 @@
 	UIImage *_tmpImage;
 	UIImageView *_searchCoverImageView;
     
+    UIButton *_tmpButton;
+    
     Boolean isSearchReturn;
     
     int getFriendsRequestCount;
