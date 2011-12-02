@@ -404,7 +404,6 @@
     [self.managedObjectContext processPendingChanges];
 }
 
-
 - (void)checkPiles
 {
 	if (![self.castViewManager gotEnoughViewsToShow]) {

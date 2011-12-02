@@ -431,7 +431,7 @@
     [self.tweetImageView loadImageFromURL:self.status.bmiddlePicURL
                                completion:^(void) 
      {
-         [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+         [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionAllowUserInteraction animations:^{
              self.tweetImageView.alpha = 1.0;
              self.imageCoverImageView.alpha = 1.0;
          } completion:^(BOOL fin) {
@@ -453,7 +453,7 @@
     [self.tweetImageView loadImageFromURL:repostStatus.bmiddlePicURL 
                                completion:^(void) 
      {
-         [UIView animateWithDuration:0.5 delay:1.0 options:0 animations:^{
+         [UIView animateWithDuration:0.5 delay:1.0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
              if (b) {
                  self.tweetImageView.alpha = 1.0;
                  self.imageCoverImageView.alpha = 1.0;
@@ -476,7 +476,7 @@
     [self.tweetImageView loadImageFromURL:repostStatus.bmiddlePicURL 
                                completion:^(void) 
      {
-         [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+         [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionAllowUserInteraction animations:^{
              self.tweetImageView.alpha = 1.0;
              self.imageCoverImageView.alpha = 1.0;
          } completion:^(BOOL fin) {
@@ -598,7 +598,7 @@
     NSString *path = [[NSBundle mainBundle] pathForResource:@"smartcard" ofType:@"html"]; 
     [self.postWebView loadHTMLString:htmlText baseURL:[NSURL fileURLWithPath: path]];    
     
-    [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+    [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         self.postWebView.alpha = 1.0;
         self.imageCoverImageView.alpha = 1.0;
     } completion:^(BOOL fin) {
@@ -719,7 +719,7 @@
     NSString *path = [[NSBundle mainBundle] pathForResource:@"smartcard" ofType:@"html"]; 
     [self.repostWebView loadHTMLString:htmlText baseURL:[NSURL fileURLWithPath: path]];
     
-    [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+    [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         self.repostView.alpha = 1.0;
         self.repostWebView.alpha = 1.0;
         self.imageCoverImageView.alpha = 1.0;
@@ -734,7 +734,7 @@
     [self.musicCoverImageView loadImageFromURL:self.status.repostStatus.thumbnailPicURL 
                                     completion:^(void) 
      {
-         [UIView animateWithDuration:0.5 delay:0.1 options:0 animations:^{
+         [UIView animateWithDuration:0.5 delay:0.1 options:UIViewAnimationOptionAllowUserInteraction animations:^{
              self.musicCoverImageView.alpha = 1.0;
          } completion:^(BOOL fin) {
          }];
@@ -771,7 +771,7 @@
         self.playButton.hidden = NO;
         //        self.playButton.frame = kPlayButtonFrameCenter;
         self.musicLink = postMusicVideoLink;
-        [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+        [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionAllowUserInteraction animations:^{
             self.playButton.alpha = 1.0;
         } completion:^(BOOL fin) {
         }];
@@ -791,7 +791,7 @@
     self.musicLink = repostMusicVideoLink;
     self.tweetImageView.hidden = YES;
     self.musicBackgroundImageView.hidden = NO;
-    [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+    [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         self.musicBackgroundImageView.alpha = 1.0;
         self.tweetImageView.alpha = 0.0;
         self.imageCoverImageView.alpha = 1.0;
@@ -958,7 +958,7 @@
         self.trackView.alpha = 0.0;
         self.recentActNotifyLabel.alpha = 0.0;
         
-        [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+        [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionAllowUserInteraction animations:^{
             self.trackLabel.alpha = 1.0;
             self.trackView.alpha = 1.0;
             //            self.recentActNotifyLabel.alpha = 1.0;
@@ -1084,7 +1084,7 @@
                 self.trackView.alpha = 0.0;
                 self.recentActNotifyLabel.alpha = 0.0;
                 
-                [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+                [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionAllowUserInteraction animations:^{
                     self.trackLabel.alpha = 1.0;
                     self.trackView.alpha = 1.0;
                     //            self.recentActNotifyLabel.alpha = 1.0;
@@ -1133,7 +1133,7 @@
     NSString *profileImageString = self.status.author.profileImageURL;
     [self.profileImageView loadImageFromURL:profileImageString 
                                  completion:   ^(void)     {
-                                     [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+                                     [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionAllowUserInteraction animations:^{
                                          self.profileImageView.alpha = 1.0;
                                      } completion:^(BOOL fin) {
                                      }];
