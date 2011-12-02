@@ -18,6 +18,7 @@
 #import "Comment.h"
 #import "PushBoxAppDelegate.h"
 #import "GYTrackingSlider.h"
+#import "SystemDefault.h"
 
 #define kLoginViewCenter CGPointMake(512.0, 370.0)
 
@@ -94,6 +95,61 @@
 @synthesize notiDisplayNewCommentsButton = _notiDisplayNewCommentsButton;
 
 @synthesize groupView = _groupView;
+
+
+
+#pragma mark - Tools
+
+- (void)setRefreshButton
+{
+    BOOL result = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeyPileUpEnabled];
+    
+    UIImage *image = nil;
+    UIImage *imageHL = nil;
+    
+    if (!result) {
+        image = [UIImage imageNamed:@"dock_button_refresh.png"];
+        imageHL = [UIImage imageNamed:@"dock_button_refresh_HL.png"];
+    } else {
+        image = [UIImage imageNamed:@"dock_button_refresh_stack.png"];
+        imageHL = [UIImage imageNamed:@"dock_button_refresh_stack.png"];
+    }
+    
+    [self.dockViewController.refreshButton setImage:image forState:UIControlStateNormal];
+    [self.dockViewController.refreshButton setImage:imageHL forState:UIControlStateHighlighted];
+}
+
+- (BOOL)shouldShowBottomSearchOrNot
+{
+	return  _inSearchMode && self.castViewController.infoStack.count == 1;
+}
+
+- (void)setGroupButtonImage:(int)number
+{
+    UIImage *image = nil;
+    UIImage *imageHL = nil;
+    
+    if (number == 0) {
+        image = [UIImage imageNamed:@"dock_button_group.png"];
+        imageHL = [UIImage imageNamed:@"dock_button_group_HL.png"];
+    } else if(number == 1) {
+        image = [UIImage imageNamed:@"icon_orginal.png"];
+        imageHL = [UIImage imageNamed:@"icon_orginal.png"];
+    } else if(number == 2) {
+        image = [UIImage imageNamed:@"icon_image.png"];
+        imageHL = [UIImage imageNamed:@"icon_image.png"];
+    } else if(number == 3) {
+        image = [UIImage imageNamed:@"icon_video.png"];
+        imageHL = [UIImage imageNamed:@"icon_video.png"];
+    } else {
+        image = [UIImage imageNamed:@"icon_music.png"];
+        imageHL = [UIImage imageNamed:@"icon_music.png"];
+    }
+    
+    [self.dockViewController.groupButton setImage:image forState:UIControlStateNormal];
+    [self.dockViewController.groupButton setImage:imageHL forState:UIControlStateSelected];
+    [self.dockViewController.groupButton setImage:imageHL forState:UIControlStateHighlighted];
+}
 
 
 #pragma mark - View lifecycle
@@ -288,6 +344,7 @@
 	
 	[self getEmotions];
     
+    [self setRefreshButton];
 }
 
 - (void)viewDidLoad
@@ -348,7 +405,10 @@
                selector:@selector(showGroupView) 
                    name:kNotificationNameShowGroupChoice 
                  object:nil];
-	
+	[center addObserver:self
+               selector:@selector(setRefreshButton) 
+                   name:kNotificationNamePileUpEnabledChanged 
+                 object:nil];
     
     
 	self.bottomStateView.hidden = YES;
@@ -365,40 +425,6 @@
     else {
         [self showLoginView];
     }
-}
-
-#pragma mark - Tools
-
-- (BOOL)shouldShowBottomSearchOrNot
-{
-	return  _inSearchMode && self.castViewController.infoStack.count == 1;
-}
-
-- (void)setGroupButtonImage:(int)number
-{
-    UIImage *image = nil;
-    UIImage *imageHL = nil;
-    
-    if (number == 0) {
-        image = [UIImage imageNamed:@"dock_button_group.png"];
-        imageHL = [UIImage imageNamed:@"dock_button_group_HL.png"];
-    } else if(number == 1) {
-        image = [UIImage imageNamed:@"icon_orginal.png"];
-        imageHL = [UIImage imageNamed:@"icon_orginal.png"];
-    } else if(number == 2) {
-        image = [UIImage imageNamed:@"icon_image.png"];
-        imageHL = [UIImage imageNamed:@"icon_image.png"];
-    } else if(number == 3) {
-        image = [UIImage imageNamed:@"icon_video.png"];
-        imageHL = [UIImage imageNamed:@"icon_video.png"];
-    } else {
-        image = [UIImage imageNamed:@"icon_music.png"];
-        imageHL = [UIImage imageNamed:@"icon_music.png"];
-    }
-    
-    [self.dockViewController.groupButton setImage:image forState:UIControlStateNormal];
-    [self.dockViewController.groupButton setImage:imageHL forState:UIControlStateSelected];
-    [self.dockViewController.groupButton setImage:imageHL forState:UIControlStateHighlighted];
 }
 
 #pragma mark - Show & Hide Views
