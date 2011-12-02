@@ -404,6 +404,13 @@
     [self.managedObjectContext processPendingChanges];
 }
 
+- (NSString*)pileLastID
+{
+    Status* status = [self.fetchedResultsController.fetchedObjects objectAtIndex:[self.castViewPileUpController lastIndex]];
+    
+    return [NSString stringWithFormat:@"%lld", [status.statusID longLongValue] - 1];
+}
+
 - (void)checkPiles
 {
 	if (![self.castViewManager gotEnoughViewsToShow]) {
@@ -648,14 +655,23 @@
 	}];
 
 	if (self.dataSource == CastViewDataSourceFriendsTimeline) {
-		[client getFriendsTimelineSinceID:nil
-									maxID:(long long)0
-						   startingAtPage:_currentNextPage++
-									count:kStatusCountPerRequest
-								  feature:_statusTypeID];
+        
+        if (_refreshFlag && ![self pileUpEnabled]) {
+            [client getFriendsTimelineSinceID:nil
+                                        maxID:(long long)0
+                               startingAtPage:_currentNextPage++
+                                        count:kStatusCountPerRequest
+                                      feature:_statusTypeID];
+        } else {
+            
+            NSLog(@"%@", [self pileLastID]);
+            [client getFriendsTimelineSinceID:nil
+                                        maxID:[self pileLastID]
+                               startingAtPage:0
+                                        count:kStatusCountPerRequest
+                                      feature:_statusTypeID];
+        }
     }
-    
-    NSLog(@"the current next page is %d", _currentNextPage);
     
     if (self.dataSource == CastViewDataSourceUserTimeline) {
 		[client getUserTimeline:self.user.userID

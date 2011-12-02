@@ -62,6 +62,11 @@ static CastViewPileUpController *_sharedCastViewPileUpController = nil;
     return pile;
 }
 
+- (long long)lastIndex
+{
+    CastViewPile* pile = [_castViewPiles lastObject];
+    return pile.endIndexInFR;
+}
 
 - (BOOL)pile:(CastViewPile *)pile shouldContainIndexInFR:(int)index
 {

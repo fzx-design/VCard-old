@@ -26,6 +26,7 @@
 + (CastViewPileUpController*)sharedCastViewPileUpController;
 
 - (CastViewPile*)pileAtIndex:(int)index;
+- (long long)lastIndex;
 
 - (void)addNewReadID:(long long)readStatusID;
 - (void)insertCardwithID:(long long)statusID  andIndexInFR:(int)index;
