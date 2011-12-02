@@ -444,6 +444,10 @@
 	
 	for (NSDictionary *dict in dictArray) {
 		
+        if (!dict) {
+            break;
+        }
+        
 		Status *newStatus = nil;
 		
 		if (self.dataSource == CastViewDataSourceFriendsTimeline) {

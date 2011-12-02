@@ -70,7 +70,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1621"
          endingLineNumber = "1621"
-         landmarkName = "-textFieldDidEndEditing:"
+         landmarkName = "-alertView:clickedButtonAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -98,7 +98,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1476"
          endingLineNumber = "1476"
-         landmarkName = "-dockViewController"
+         landmarkName = "-helpButtonClicked:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -112,7 +112,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1163"
          endingLineNumber = "1163"
-         landmarkName = "-showMessagesCenter"
+         landmarkName = "-messagesCenterButtonClicked:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -126,7 +126,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1560"
          endingLineNumber = "1560"
-         landmarkName = "-messagesViewController"
+         landmarkName = "-loginViewController"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -140,7 +140,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1094"
          endingLineNumber = "1094"
-         landmarkName = "-hideDockView"
+         landmarkName = "-sliderDidEndDragging:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -154,7 +154,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1554"
          endingLineNumber = "1554"
-         landmarkName = "-messagesViewController"
+         landmarkName = "-dockViewController"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -186,7 +186,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
@@ -196,11 +196,11 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1581"
          endingLineNumber = "1581"
-         landmarkName = "-alertView:clickedButtonAtIndex:"
+         landmarkName = "-castViewController"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
@@ -210,11 +210,11 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1576"
          endingLineNumber = "1576"
-         landmarkName = "-alertView:clickedButtonAtIndex:"
+         landmarkName = "-castViewController"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
@@ -224,7 +224,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1592"
          endingLineNumber = "1592"
-         landmarkName = "-textFieldShouldReturn:"
+         landmarkName = "-messagesViewController"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -280,7 +280,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "227"
          endingLineNumber = "227"
-         landmarkName = "-getEmotions"
+         landmarkName = "-getFriends"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -312,7 +312,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
@@ -354,7 +354,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
@@ -368,7 +368,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
@@ -424,7 +424,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
@@ -494,7 +494,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
@@ -505,6 +505,48 @@
          startingLineNumber = "563"
          endingLineNumber = "563"
          landmarkName = "-loadPostWebView"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "PushBox/RootViewController.m"
+         timestampString = "344494886.691564"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1642"
+         endingLineNumber = "1642"
+         landmarkName = "-textFieldShouldReturn:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "PushBox/CastViewController.m"
+         timestampString = "344495745.992055"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "681"
+         endingLineNumber = "681"
+         landmarkName = "-loadMoreDataCompletion:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "PushBox/CastViewController.m"
+         timestampString = "344496210.887472"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "443"
+         endingLineNumber = "443"
+         landmarkName = "-insertStatusFromClient:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
