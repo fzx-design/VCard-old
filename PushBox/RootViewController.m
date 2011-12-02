@@ -374,6 +374,33 @@
 	return  _inSearchMode && self.castViewController.infoStack.count == 1;
 }
 
+- (void)setGroupButtonImage:(int)number
+{
+    UIImage *image = nil;
+    UIImage *imageHL = nil;
+    
+    if (number == 0) {
+        image = [UIImage imageNamed:@"dock_button_group.png"];
+        imageHL = [UIImage imageNamed:@"dock_button_group_HL.png"];
+    } else if(number == 1) {
+        image = [UIImage imageNamed:@"icon_orginal.png"];
+        imageHL = [UIImage imageNamed:@"icon_orginal.png"];
+    } else if(number == 2) {
+        image = [UIImage imageNamed:@"icon_image.png"];
+        imageHL = [UIImage imageNamed:@"icon_image.png"];
+    } else if(number == 3) {
+        image = [UIImage imageNamed:@"icon_video.png"];
+        imageHL = [UIImage imageNamed:@"icon_video.png"];
+    } else {
+        image = [UIImage imageNamed:@"icon_music.png"];
+        imageHL = [UIImage imageNamed:@"icon_music.png"];
+    }
+    
+    [self.dockViewController.groupButton setImage:image forState:UIControlStateNormal];
+    [self.dockViewController.groupButton setImage:imageHL forState:UIControlStateSelected];
+    [self.dockViewController.groupButton setImage:imageHL forState:UIControlStateHighlighted];
+}
+
 #pragma mark - Show & Hide Views
 
 
@@ -654,6 +681,8 @@
 	[self.castViewController popCardWithCompletion:^{
         self.dockViewController.showFavoritesButton.selected = NO;
         self.dockViewController.showFavoritesButton.userInteractionEnabled = YES;
+        self.dockViewController.groupButton.enabled = YES;
+        [self setGroupButtonImage:self.castViewController.statusTypeID];
     }];
 }
 
@@ -661,9 +690,9 @@
 {
 	if (self.castViewController.infoStack.count > 1) {
 		[self.castViewController popCardWithCompletion:^{
-			
-			//TODO operation that should be finished when back
-			
+            BOOL result = self.castViewController.dataSource == CastViewDataSourceFriendsTimeline || self.castViewController.dataSource == CastViewDataSourceUserTimeline;
+            self.dockViewController.groupButton.enabled = result;
+			[self setGroupButtonImage:self.castViewController.statusTypeID];
 		}];
 		
 		[self popBottomStateView];
@@ -701,6 +730,9 @@
         [self moveCardIntoView];
     }];
 	self.dockViewController.refreshNotiImageView.hidden = YES;
+    
+    self.dockViewController.groupButton.enabled = YES;
+    [self setGroupButtonImage:0];
 }
 
 - (void)showSearchTimeline:(NSString *)searchString
@@ -724,8 +756,11 @@
 	[self.castViewController switchToSearchCards:^{
 		[self moveCardIntoView];
 	}];
-	
+    
 	self.dockViewController.refreshNotiImageView.hidden = YES;
+    
+    self.dockViewController.groupButton.enabled = NO;
+    [self setGroupButtonImage:0];
 }
 
 - (void)showTrendsTimeline:(NSString *)searchString
@@ -746,6 +781,9 @@
         [self moveCardIntoView];
     }];
 	self.dockViewController.refreshNotiImageView.hidden = YES;
+    
+    self.dockViewController.groupButton.enabled = NO;
+    [self setGroupButtonImage:0];
 }
 
 - (void)showFavorites
@@ -763,6 +801,9 @@
         [self moveCardIntoView];
     }];
 	self.dockViewController.refreshNotiImageView.hidden = YES;
+    
+    self.dockViewController.groupButton.enabled = NO;
+    [self setGroupButtonImage:0];
 }
 
 - (void)showMentions
@@ -780,6 +821,9 @@
     }];
     
 	self.dockViewController.refreshNotiImageView.hidden = YES;
+    
+    self.dockViewController.groupButton.enabled = NO;
+    [self setGroupButtonImage:0];
 }
 
 - (void)showMentionsNotification:(id)sender
@@ -1279,6 +1323,8 @@
 {
 	_commandCenterFlag = YES;
 	self.notificationView.hidden = YES;
+    _groupButtonEnabled = self.dockViewController.groupButton.enabled;
+    self.dockViewController.groupButton.enabled = NO;
     
     self.bottomSearchTextField.hidden = YES;
     [self.bottomSearchTextField setAlpha:0.0];
@@ -1336,6 +1382,7 @@
     _commandCenterFlag = NO;
 	
 	self.dockViewController.hideCommandCenterButton.enabled = NO;
+    self.dockViewController.groupButton.enabled = _groupButtonEnabled;
     self.bottomSearchTextField.hidden = self.bottomSearchBG.hidden;
     
     [self.dockViewController viewWillDisappear:YES];
