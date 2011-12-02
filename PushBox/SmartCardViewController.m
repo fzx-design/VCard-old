@@ -563,6 +563,7 @@
                 int j = i + 1;
                 for (j = i + 1; j < originStatus.length; j++) {
                     if ([originStatus characterAtIndex:j] == ']') {
+                        j++;
                         break;
                     }
                 }
@@ -683,6 +684,7 @@
                 int j = i + 1;
                 for (j = i + 1; j < originStatus.length; j++) {
                     if ([originStatus characterAtIndex:j] == ']') {
+                        j++;
                         break;
                     }
                 }

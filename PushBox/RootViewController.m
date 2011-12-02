@@ -178,7 +178,7 @@
 	self.bottomStateFrameView.hidden = NO;
 	self.groupView.hidden = YES;
     self.groupView.layer.anchorPoint = CGPointMake(0.5, 1.0);
-
+    
     CGRect frame = self.groupView.frame;
     frame.origin.y += frame.size.height / 2;
     self.groupView.frame = frame;
@@ -215,7 +215,7 @@
     }];
     
     [client getFriendsOfUser:self.currentUser.userID cursor:cursor count:200];
-
+    
 }
 
 - (void)getFriends
@@ -1675,9 +1675,9 @@
 {
     [self.castViewController clearCardStack];
     
-//    if (self.castViewController.infoStack.count != 0) {
-//        [self showPrevTimeline:nil];
-//    }
+    //    if (self.castViewController.infoStack.count != 0) {
+    //        [self showPrevTimeline:nil];
+    //    }
     
     int statusType = 0;
     UIImage *image = nil;
