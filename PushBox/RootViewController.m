@@ -19,6 +19,7 @@
 #import "PushBoxAppDelegate.h"
 #import "GYTrackingSlider.h"
 #import "SystemDefault.h"
+#import "ReadStatusID.h"
 
 #define kLoginViewCenter CGPointMake(512.0, 370.0)
 
@@ -352,6 +353,8 @@
 			[self showDockView];
 			[self showMessagesView];
 			[self.dockViewController hideLoadingView];
+            
+            [self setRefreshButton];
 		}];
 		
     }];
@@ -372,8 +375,6 @@
 	[self getFriends];
 	
 	[self getEmotions];
-    
-    [self setRefreshButton];
 }
 
 - (void)viewDidLoad
@@ -489,6 +490,8 @@
 	[self hideDockView];
 	[self hideCardTableView];
 	[self hideBottomStateView];
+    [[CastViewPileUpController sharedCastViewPileUpController] release];
+    [ReadStatusID deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
 	
 	[self.castViewController.castView moveOutViews:^(){
 		preNewCommentCount = 0;

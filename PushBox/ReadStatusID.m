@@ -41,6 +41,20 @@
     return result;
 }
 
++ (void)deleteAllObjectsInManagedObjectContext:(NSManagedObjectContext *)context
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ReadStatusID" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    NSArray *items = [context executeFetchRequest:fetchRequest error:NULL];
+    [fetchRequest release];
+    
+    for (NSManagedObject *managedObject in items) {
+        [context deleteObject:managedObject];
+    }
+}
+
 
 
 @end

@@ -16,4 +16,6 @@
 
 + (ReadStatusID *)insertStatusID:(long long)statusID inManagedObjectContext:(NSManagedObjectContext *)context;
 
++ (void)deleteAllObjectsInManagedObjectContext:(NSManagedObjectContext *)context;
+
 @end
