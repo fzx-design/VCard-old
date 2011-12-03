@@ -15,6 +15,7 @@
 #import "CastViewManager.h"
 #import "CastViewPileUpController.h"
 #import "Status.h"
+#import "NSDateAddition.h"
 
 #define kNotificationNameNewCommentsToMe @"kNotificationNameNewCommentsToMe"
 #define kNotificationNameNewStatuses @"kNotificationNameNewStatuses"
@@ -59,6 +60,9 @@
     
     NSString* _searchString;
     int _statusTypeID;
+    
+    NSDate *_startDate;
+    long long _prevReadID;
 	
 	id _delegate;
 }

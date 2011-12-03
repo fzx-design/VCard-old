@@ -56,7 +56,7 @@ static CastViewPileUpController *_sharedCastViewPileUpController = nil;
 {
     if (index >= _castViewPiles.count || index < 0) {
         NSLog(@"Pile over range when getting pile at index: %d", index);
-        return CastViewCellTypeCard;
+        return nil;
     }
     CastViewPile *pile = [_castViewPiles objectAtIndex:index];
     return pile;
@@ -190,12 +190,21 @@ static CastViewPileUpController *_sharedCastViewPileUpController = nil;
 
 - (void)addNewReadID:(long long)readStatusID
 {
-    if (![_newReadIDSet containsObject:[NSNumber numberWithLongLong:readStatusID]]) {
+//    if (![_newReadIDSet containsObject:[NSNumber numberWithLongLong:readStatusID]]) {
         [_newReadIDSet addObject:[NSNumber numberWithLongLong:readStatusID]];
         NSLog(@"%lld already in readSet", readStatusID);
         
-    }
+//    }
     NSLog(@"readSet size is %d", _newReadIDSet.count);
+}
+
+- (void)print
+{
+    NSLog(@"_______count:%d", _castViewPiles.count);
+    for (int i = 0; i < _castViewPiles.count; ++i) {
+        CastViewPile *pile = [_castViewPiles objectAtIndex:i];
+        NSLog(@"_____%d", pile.startIndexInFR);
+    }
 }
 
 @end

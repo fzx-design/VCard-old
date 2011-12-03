@@ -37,4 +37,6 @@
 - (void)deletePileAtIndex:(int)index;
 - (void)clearPiles;
 
+- (void)print;
+
 @end

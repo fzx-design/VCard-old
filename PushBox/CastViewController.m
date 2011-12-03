@@ -21,6 +21,7 @@
 #define kStatusCountPerRequest 10
 #define kBlurImageViewScale 2.0
 #define kCastViewScale 2.5
+#define kReadingInterval 0.7
 
 @implementation CastViewController
 
@@ -76,6 +77,8 @@
     _shouldRefreshCardView = NO;
 	_lastStatusID = 0;
     _statusTypeID = 0;
+    
+    _startDate = [[NSDate date] retain];
 }
 
 - (void)setUpRefreshSettings
@@ -425,24 +428,24 @@
         return;
     }
     
-    
 	for (int i = self.castViewPileUpController.lastIndexFR; i < self.fetchedResultsController.fetchedObjects.count; ++i) {
         Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:i];
         
-        NSLog(@"content : %@", status.text);
         [self.castViewPileUpController insertCardwithID:[status.statusID longLongValue] andIndexInFR:i];
+        
+//        if ([self.castViewManager gotEnoughViewsToShow]) {
+//            self.castViewPileUpController.lastIndexFR = i;
+//            break;
+//        }
     }
-    
-    NSLog(@"last : %d  now : %d", self.castViewPileUpController.lastIndexFR, self.fetchedResultsController.fetchedObjects.count);
-    
-//    if (self.castViewPileUpController.lastIndexFR != self.fetchedResultsController.fetchedObjects.count) {
-//        [self checkPiles];
-//    }
     
     [self checkPiles];
     
+//    NSLog(@"last : %d  now : %d", self.castViewPileUpController.lastIndexFR, self.fetchedResultsController.fetchedObjects.count);
+
+    
 //    self.castViewPileUpController.lastIndexFR = bound;
-    self.castViewPileUpController.lastIndexFR = self.fetchedResultsController.fetchedObjects.count;
+//    self.castViewPileUpController.lastIndexFR = self.fetchedResultsController.fetchedObjects.count;
 }
 
 - (void)insertStatusFromClient:(WeiboClient *)client
@@ -833,11 +836,20 @@
     if (self.dataSource == CastViewDataSourceFriendsTimeline) {
         indexInFR = [self.castViewPileUpController indexInFRForViewIndex:index];
     }
+
+    NSTimeInterval secondsElapsed = abs([_startDate timeIntervalSinceNow]);
+    
+    if (secondsElapsed > kReadingInterval) {
+        [self.castViewPileUpController addNewReadID:_prevReadID];
+    }
     
     if (indexInFR >= 0 && indexInFR < self.fetchedResultsController.fetchedObjects.count) {
         Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:indexInFR];
-        [self.castViewPileUpController addNewReadID:[status.statusID longLongValue]];
+        _prevReadID = [status.statusID longLongValue];
     }
+
+    [_startDate release];
+    _startDate = [[NSDate date] retain];
 }
 
 - (UIView*)viewForItemAtIndex:(GYCastView *)scrollView index:(int)index

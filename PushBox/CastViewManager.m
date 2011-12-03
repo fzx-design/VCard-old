@@ -72,7 +72,7 @@
 	BOOL result = YES;
 	CastViewPileUpController *pileUpController = [CastViewPileUpController sharedCastViewPileUpController];
     
-    NSLog(@"pageSection * 10 : %d and itemCount : %d", self.castView.pageSection * kNumberOfCardsInSection, [pileUpController itemCount]);
+    NSLog(@"%d : %d", (self.castView.pageSection + 1) * kNumberOfCardsInSection, [pileUpController itemCount]);
     
 	if ((self.castView.pageSection + 1) * kNumberOfCardsInSection > [pileUpController itemCount]) {
 		result = NO;
@@ -108,6 +108,9 @@
         
         CastViewPileUpController *pc = [CastViewPileUpController sharedCastViewPileUpController];
         CastViewPile *pile = [pc pileAtIndex:index];
+        
+        [pc print];
+        
         NSDate *date = [self getPileEndDateForPile:pile];
         
         configSucceeded = [vc configureCardFrameWithStatus:[self statusForViewIndex:index] AndPile:pile withEndDateString:date];
@@ -341,6 +344,10 @@
 	} completion:^(BOOL finished) {
 		if (finished) {
 			self.castView.pageNum--;
+            CGRect frame = toDelete.view.frame;
+            frame.origin.y += 640;
+            toDelete.view.frame = frame;
+            
 			[toDelete.view removeFromSuperview];
 			toDelete.index = InitialIndex;
             

@@ -263,6 +263,7 @@
 	for (int i = page - 3; i <= page + 3; ++i) {
 		[self loadPage:i];
 	}
+    [self.delegate didScrollToIndex:[self currentPage]];
 }
 
 - (void)addMoreViews
