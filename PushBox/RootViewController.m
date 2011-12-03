@@ -106,7 +106,9 @@
     UIImage *image = nil;
     UIImage *imageHL = nil;
     
-    if (!result) {
+    BOOL datasourceEnabled = self.castViewController.dataSource == CastViewDataSourceFriendsTimeline;
+    
+    if (!result || !datasourceEnabled) {
         image = [UIImage imageNamed:@"dock_button_refresh.png"];
         imageHL = [UIImage imageNamed:@"dock_button_refresh_HL.png"];
     } else {
@@ -738,6 +740,7 @@
         self.dockViewController.showFavoritesButton.userInteractionEnabled = YES;
         self.dockViewController.groupButton.enabled = YES;
         [self setGroupButtonImage:self.castViewController.statusTypeID];
+        [self setRefreshButton];
     }];
 }
 
@@ -749,6 +752,7 @@
             BOOL result = self.castViewController.dataSource == CastViewDataSourceFriendsTimeline || self.castViewController.dataSource == CastViewDataSourceUserTimeline;
             self.dockViewController.groupButton.enabled = result;
 			[self setGroupButtonImage:self.castViewController.statusTypeID];
+            [self setRefreshButton];
 		}];
 		
 		[self popBottomStateView];
@@ -785,6 +789,7 @@
     
     [self.castViewController pushCardWithCompletion:^{
         [self moveCardIntoView];
+        [self setRefreshButton];
     }];
 	self.dockViewController.refreshNotiImageView.hidden = YES;
     
@@ -812,6 +817,7 @@
 	[self.castViewController switchToSearchCards:^{
         if (!_inSearchMode) {
             [self moveCardIntoView];
+            [self setRefreshButton];
         }
         _inSearchMode = YES;
 	}];
@@ -839,6 +845,7 @@
     
     [self.castViewController pushCardWithCompletion:^{
         [self moveCardIntoView];
+        [self setRefreshButton];
     }];
 	self.dockViewController.refreshNotiImageView.hidden = YES;
     
@@ -860,6 +867,7 @@
     [self.castViewController pushCardWithCompletion:^{
         self.dockViewController.showFavoritesButton.userInteractionEnabled = YES;
         [self moveCardIntoView];
+        [self setRefreshButton];
     }];
 	self.dockViewController.refreshNotiImageView.hidden = YES;
     
@@ -880,6 +888,7 @@
     
     [self.castViewController pushCardWithCompletion:^{
         [self moveCardIntoView];
+        [self setRefreshButton];
     }];
     
 	self.dockViewController.refreshNotiImageView.hidden = YES;
