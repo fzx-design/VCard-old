@@ -444,12 +444,7 @@
     [self.castViewPileUpController print];
     
     [self checkPiles];
-    
-//    NSLog(@"last : %d  now : %d", self.castViewPileUpController.lastIndexFR, self.fetchedResultsController.fetchedObjects.count);
 
-    
-//    self.castViewPileUpController.lastIndexFR = bound;
-//    self.castViewPileUpController.lastIndexFR = self.fetchedResultsController.fetchedObjects.count;
 }
 
 - (void)insertStatusFromClient:(WeiboClient *)client
