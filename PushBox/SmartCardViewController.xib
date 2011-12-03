@@ -437,7 +437,7 @@
 								<string key="NSFrame">{{0, -2}, {467, 321}}</string>
 								<reference key="NSSuperview" ref="978562341"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="944684392"/>
+								<reference key="NSNextKeyView" ref="266971380"/>
 								<reference key="IBUIBackgroundColor" ref="392801989"/>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">2</int>
@@ -446,6 +446,23 @@
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">sc_image_cover.png</string>
+								</object>
+							</object>
+							<object class="IBUIImageView" id="266971380">
+								<reference key="NSNextResponder" ref="978562341"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{2, 224}, {463, 128}}</string>
+								<reference key="NSSuperview" ref="978562341"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="944684392"/>
+								<string key="NSReuseIdentifierKey">_NS:569</string>
+								<reference key="IBUIBackgroundColor" ref="392801989"/>
+								<int key="IBUIContentMode">4</int>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">sc_ipad_1_cover.png</string>
 								</object>
 							</object>
 							<object class="IBUIImageView" id="944684392">
@@ -1373,6 +1390,7 @@
 							<reference ref="252177055"/>
 							<reference ref="470756897"/>
 							<reference ref="944684392"/>
+							<reference ref="266971380"/>
 						</object>
 						<reference key="parent" ref="931374233"/>
 					</object>
@@ -1619,6 +1637,11 @@
 						<reference key="object" ref="853107865"/>
 						<reference key="parent" ref="931374233"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">130</int>
+						<reference key="object" ref="266971380"/>
+						<reference key="parent" ref="978562341"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1644,6 +1667,7 @@
 					<string>12.IBPluginDependency</string>
 					<string>127.IBPluginDependency</string>
 					<string>13.IBPluginDependency</string>
+					<string>130.IBPluginDependency</string>
 					<string>14.IBPluginDependency</string>
 					<string>15.IBPluginDependency</string>
 					<string>19.IBPluginDependency</string>
@@ -1716,6 +1740,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<real value="1"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1744,7 +1769,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">129</int>
+			<int key="maxID">130</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2104,6 +2129,7 @@
 				<string>sc_button_play.png</string>
 				<string>sc_button_repost.png</string>
 				<string>sc_image_cover.png</string>
+				<string>sc_ipad_1_cover.png</string>
 				<string>sc_locate.png</string>
 				<string>sc_music_bg.png</string>
 				<string>sc_read.png</string>
@@ -2120,6 +2146,7 @@
 				<string>{73, 30}</string>
 				<string>{18, 13}</string>
 				<string>{467, 321}</string>
+				<string>{467, 32}</string>
 				<string>{15, 16}</string>
 				<string>{443, 139}</string>
 				<string>{30, 19}</string>

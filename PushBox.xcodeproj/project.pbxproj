@@ -141,6 +141,7 @@
 		9B5F86801454124B004B01D6 /* CCCommentsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F867E1454124A004B01D6 /* CCCommentsTableViewController.xib */; };
 		9B8147411486073C0004C892 /* SystemDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B8147401486073C0004C892 /* SystemDefault.m */; };
 		9BA452321488E912009E9E72 /* dock_button_refresh_stack.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BA452311488E912009E9E72 /* dock_button_refresh_stack.png */; };
+		9BA45234148910C7009E9E72 /* sc_ipad_1_cover.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BA45233148910C7009E9E72 /* sc_ipad_1_cover.png */; };
 		9BB11CAC14503E8A005B43AC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C8D90F1429FE9C00C94B86 /* libz.dylib */; };
 		9BB11CAD14503E94005B43AC /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9DCAD913E1ED6800DA3D3D /* MessageUI.framework */; };
 		9BB11CAE14503E9C005B43AC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB018E0413DDEAA5004217E0 /* QuartzCore.framework */; };
@@ -473,6 +474,7 @@
 		9B81473F1486073C0004C892 /* SystemDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemDefault.h; sourceTree = "<group>"; };
 		9B8147401486073C0004C892 /* SystemDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemDefault.m; sourceTree = "<group>"; };
 		9BA452311488E912009E9E72 /* dock_button_refresh_stack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dock_button_refresh_stack.png; sourceTree = "<group>"; };
+		9BA45233148910C7009E9E72 /* sc_ipad_1_cover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc_ipad_1_cover.png; sourceTree = "<group>"; };
 		9BB5B8B31449A8B100352FF7 /* UserCardContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCardContentViewController.h; sourceTree = "<group>"; };
 		9BB5B8B41449A8B100352FF7 /* UserCardContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCardContentViewController.m; sourceTree = "<group>"; };
 		9BB5B8B51449A8B100352FF7 /* UserCardContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCardContentViewController.xib; sourceTree = "<group>"; };
@@ -1171,6 +1173,7 @@
 		CBBA01F113E4530700641923 /* statuscard */ = {
 			isa = PBXGroup;
 			children = (
+				9BA45233148910C7009E9E72 /* sc_ipad_1_cover.png */,
 				9BE5CDBA1484B9BA0052ACAB /* sc_stack_shadow.png */,
 				9BE5CDBB1484B9BA0052ACAB /* stack_bounder.png */,
 				9BE5CDB81484B8E90052ACAB /* sc_read.png */,
@@ -1728,6 +1731,7 @@
 				9BE5CDBD1484B9BA0052ACAB /* stack_bounder.png in Resources */,
 				9BBEB8D91485158C00EE5F80 /* RootViewController.xib in Resources */,
 				9BA452321488E912009E9E72 /* dock_button_refresh_stack.png in Resources */,
+				9BA45234148910C7009E9E72 /* sc_ipad_1_cover.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
