@@ -428,16 +428,20 @@
         return;
     }
     
-	for (int i = self.castViewPileUpController.lastIndexFR; i < self.fetchedResultsController.fetchedObjects.count; ++i) {
+    int i = 0;
+	for (i = self.castViewPileUpController.lastIndexFR; i < self.fetchedResultsController.fetchedObjects.count; ++i) {
         Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:i];
         
         [self.castViewPileUpController insertCardwithID:[status.statusID longLongValue] andIndexInFR:i];
         
-//        if ([self.castViewManager gotEnoughViewsToShow]) {
-//            self.castViewPileUpController.lastIndexFR = i;
-//            break;
-//        }
+        if ([self.castViewManager gotEnoughViewsToShow]) {
+            break;
+        }
     }
+    
+    self.castViewPileUpController.lastIndexFR = i + 1;
+    
+    [self.castViewPileUpController print];
     
     [self checkPiles];
     
@@ -525,6 +529,8 @@
 			[self clearData];
 			
 			[self insertStatusFromClient:client];
+            
+            self.castView.pageSection = 1;
 			
             [self setPiles];
             
@@ -597,9 +603,10 @@
                 if (_refreshFlag) {
                     
                     [self.castViewPileUpController clearPiles];
+                    
+                    self.castView.pageSection = 1;
+                    
                 }
-                
-                NSLog(@"the pageSection is : %d", self.castView.pageSection);
                 
                 [self setPiles];
             }
@@ -864,13 +871,9 @@
 
 - (void)loadMoreViews
 {
-    if ([self.castViewManager gotEnoughViewsToShow] && [self pileUpEnabled]) {
+    [self loadMoreDataCompletion:^(){
         [self.castView addMoreViews];
-    } else {
-        [self loadMoreDataCompletion:^(){
-            [self.castView addMoreViews];
-        }];
-    }
+    }];
 }
 
 - (void)resetViewsAroundCurrentIndex:(int)index

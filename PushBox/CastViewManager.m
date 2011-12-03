@@ -72,9 +72,8 @@
 	BOOL result = YES;
 	CastViewPileUpController *pileUpController = [CastViewPileUpController sharedCastViewPileUpController];
     
-    NSLog(@"%d : %d", (self.castView.pageSection + 1) * kNumberOfCardsInSection, [pileUpController itemCount]);
-    
-	if ((self.castView.pageSection + 1) * kNumberOfCardsInSection > [pileUpController itemCount]) {
+    NSLog(@"%d : %d", (self.castView.pageSection) * kNumberOfCardsInSection, [pileUpController itemCount]);
+	if ((self.castView.pageSection) * kNumberOfCardsInSection > [pileUpController itemCount]) {
 		result = NO;
 	}
 	return result;
@@ -487,6 +486,8 @@
 {
 	
 	CardFrameViewController *cardFrameViewController = [self getCardFrameViewControllerForIndex:index];
+    
+    NSLog(@"______the text for index: %d is :%@", cardFrameViewController.index, cardFrameViewController.contentViewController.status.text);
 	
 	return cardFrameViewController.view;
 }
@@ -498,14 +499,10 @@
     if ([self pileEnabled]) {
         CastViewPileUpController *controller = [CastViewPileUpController sharedCastViewPileUpController];
         count = [controller itemCount];
-
         
         NSLog(@"the pageSection is %d", self.castView.pageSection);
     } else {
         count = self.fetchedResultsController.fetchedObjects.count;
-//        if (count > 10 * self.castView.pageSection) {
-//            count = 10 * self.castView.pageSection;
-//        }
     }
 
     if (count > 10 * self.castView.pageSection) {

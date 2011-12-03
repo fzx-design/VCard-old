@@ -69,7 +69,7 @@
     
     UIImageView* _bottomSearchBG;
 	
-	UIImage *_tmpImage;
+//	UIImage *_tmpImage;
 	UIImageView *_searchCoverImageView;
     
     UIButton *_tmpButton;

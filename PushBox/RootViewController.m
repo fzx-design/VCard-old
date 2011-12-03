@@ -191,7 +191,7 @@
     [_dockViewController release];	
 	[_castViewController release];
 	
-	[_tmpImage release];
+//	[_tmpImage release];
 	[_notificationView release];
 	[_notiNewCommentLabel release];
     [_notiNewFollowerLabel release];
@@ -500,10 +500,10 @@
 		
 		[WeiboClient signout];
 		
-		if (_tmpImage != nil) {
-			[_tmpImage release];
-		}
-		_tmpImage = nil;
+//		if (_tmpImage != nil) {
+//			[_tmpImage release];
+//		}
+//		_tmpImage = nil;
 		
 		if (_searchCoverImageView != nil) {
 			[_searchCoverImageView release];
@@ -681,9 +681,9 @@
 
 - (void)showBottomStateView
 {
-    if (self.bottomStateInvisibleView.image == nil) {
-        self.bottomStateInvisibleView.image = _tmpImage;
-    }
+//    if (self.bottomStateInvisibleView.image == nil) {
+//        self.bottomStateInvisibleView.image = _tmpImage;
+//    }
 	self.bottomStateView.hidden = NO;
     [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimationDown] forKey:@"animation"];
     [self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
@@ -1111,11 +1111,13 @@
     UIImage* cutImage = [UIImage imageWithCGImage:subImageRef];
     UIGraphicsEndImageContext();
     
-    if (_tmpImage == nil) {
-        _tmpImage = [cutImage retain];
-    } else {
-        self.bottomStateInvisibleView.image = cutImage;
-    }
+//    if (_tmpImage == nil) {
+//        _tmpImage = [cutImage retain];
+//    } else {
+//        self.bottomStateInvisibleView.image = cutImage;
+//    }
+    
+    self.bottomStateInvisibleView.image = cutImage;
     
     if (animated) {
         CATransition *transition = [CATransition animation];

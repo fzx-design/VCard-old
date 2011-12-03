@@ -121,6 +121,8 @@
     }
     
     NSString *string = @"从 ";
+    
+#warning this may crash
     self.dateRangeLabel.text = [string stringByAppendingString:[endDate customString]];
     
     self.cardNumberLabel.text = [NSString stringWithFormat:@"%d 张卡片", [pile numberOfCardsInPile]];

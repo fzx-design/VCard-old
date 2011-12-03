@@ -83,8 +83,6 @@ static CastViewPileUpController *_sharedCastViewPileUpController = nil;
 {
 	BOOL result = NO;
     
-    NSLog(@"end index : %d and index : %d", pile.endIndexInFR , index);
-    
 	if (pile != nil) {
 		if (pile.endIndexInFR == index - 1) {
 			[pile enlargePileVolume];
@@ -103,8 +101,6 @@ static CastViewPileUpController *_sharedCastViewPileUpController = nil;
     
 	NSNumber *number = [NSNumber numberWithLongLong:statusID];
     
-    NSLog(@"adding %d with id %lld", index, statusID);
-
 	if ([_oldReadIDSet containsObject:number] || [_newReadIDSet containsObject:number]) {
 	
         BOOL pileFound = NO;
