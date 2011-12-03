@@ -195,14 +195,6 @@ static CastViewPileUpController *_sharedCastViewPileUpController = nil;
 
 #pragma mark - Operations on Piles
 
-- (void)addNewReadID:(long long)readStatusID
-{
-    [_newReadIDSet addObject:[NSNumber numberWithLongLong:readStatusID]];
-    
-    NSLog(@"%lld already in readSet", readStatusID);
-    NSLog(@"readSet size is %d", _newReadIDSet.count);
-}
-
 - (void)saveReadID
 {
     NSEnumerator* enumerator = [_newReadIDSet objectEnumerator];
@@ -212,6 +204,27 @@ static CastViewPileUpController *_sharedCastViewPileUpController = nil;
         number = [enumerator nextObject];
     }
 }
+
+- (void)addNewReadID:(long long)readStatusID
+{
+    [_newReadIDSet addObject:[NSNumber numberWithLongLong:readStatusID]];
+    
+    if (_newReadIDSet.count > 20) {
+        NSEnumerator* enumerator = [_newReadIDSet objectEnumerator];
+        NSNumber* number = [enumerator nextObject];
+        while (number) {
+            [ReadStatusID insertStatusID:[number longLongValue] inManagedObjectContext:self.managedObjectContext];
+            [_oldReadIDSet addObject:number];
+            number = [enumerator nextObject];
+        }
+        
+        [_newReadIDSet removeAllObjects];
+    }
+
+    NSLog(@"%lld already in readSet", readStatusID);
+    NSLog(@"readSet size is %d", _newReadIDSet.count);
+}
+
 
 - (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {

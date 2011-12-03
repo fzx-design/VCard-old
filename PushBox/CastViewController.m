@@ -423,7 +423,9 @@
 {
 	if (![self.castViewManager gotEnoughViewsToShow]) {
 		[self loadMoreDataCompletion:^{
-            [self.castView addMoreViews];
+            if ([self.castViewPileUpController itemCount] < 10) {
+                [self.castView addMoreViews];
+            }
         }];
 	}
 }
