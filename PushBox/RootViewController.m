@@ -95,8 +95,7 @@
 @synthesize notiDisplayNewCommentsButton = _notiDisplayNewCommentsButton;
 
 @synthesize groupView = _groupView;
-
-
+@synthesize meImageView = _meImageView;
 
 #pragma mark - Tools
 
@@ -117,6 +116,31 @@
     
     [self.dockViewController.refreshButton setImage:image forState:UIControlStateNormal];
     [self.dockViewController.refreshButton setImage:imageHL forState:UIControlStateHighlighted];
+}
+
+- (void)showMEImageView
+{
+    if (self.meImageView.hidden == NO) {
+        return;
+    }
+    self.meImageView.hidden = NO;
+    self.meImageView.alpha = 0.0;
+    [UIView animateWithDuration:0.7 animations:^{
+        self.meImageView.alpha = 1.0;
+    }];
+}
+
+- (void)hideMEImageView
+{
+    if (self.meImageView.hidden == YES) {
+        return;
+    }
+    [UIView animateWithDuration:0.3 animations:^{
+        self.meImageView.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        self.meImageView.hidden = YES;
+        self.meImageView.alpha = 1.0;
+    }];
 }
 
 - (BOOL)shouldShowBottomSearchOrNot
@@ -175,6 +199,7 @@
     [_notiDisplayNewCommentsButton release];
     
     [_groupView release];
+    [_meImageView release];
     
     [super dealloc];
 }
@@ -196,6 +221,7 @@
     self.notiDisplayNewCommentsButton = nil;
     
     self.groupView = nil;
+    self.meImageView = nil;
 }
 
 + (void)initialize 
@@ -234,6 +260,8 @@
 	self.bottomStateFrameView.hidden = NO;
 	self.groupView.hidden = YES;
     self.groupView.layer.anchorPoint = CGPointMake(0.5, 1.0);
+    
+    self.meImageView.hidden = YES;
     
     CGRect frame = self.groupView.frame;
     frame.origin.y += frame.size.height / 2;
@@ -482,6 +510,7 @@
         
 		self.bottomStateFrameView.hidden = YES;
 		self.notificationView.hidden = YES;
+        self.meImageView.hidden = YES;
 		self.currentUser = nil;
 		[self setDefaultBackgroundImage:YES];
 		[User deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
@@ -698,8 +727,8 @@
 
 - (void)showFriendsTimeline:(id)sender
 {
+	[self hideMEImageView];
 	_inSearchMode = NO;
-	
     if (self.dockViewController.searchButton.selected)
         [self hideSearchView];
     
@@ -714,6 +743,7 @@
 
 - (void)showPrevTimeline:(id)sender
 {
+    [self hideMEImageView];
 	if (self.castViewController.infoStack.count > 1) {
 		[self.castViewController popCardWithCompletion:^{
             BOOL result = self.castViewController.dataSource == CastViewDataSourceFriendsTimeline || self.castViewController.dataSource == CastViewDataSourceUserTimeline;
@@ -740,6 +770,7 @@
 
 - (void)showUserTimeline:(User *)user
 {
+	[self hideMEImageView];
     self.castViewController.dataSource = CastViewDataSourceUserTimeline;
     self.castViewController.user = user;
     
@@ -763,7 +794,7 @@
 
 - (void)showSearchTimeline:(NSString *)searchString
 {
-	
+	[self hideMEImageView];
     self.castViewController.dataSource = CastViewDataSourceSearch;
     
     NSString* string = [[[NSString alloc] initWithFormat:@"包含 %@ 的微博", searchString] autorelease];
@@ -793,6 +824,7 @@
 
 - (void)showTrendsTimeline:(NSString *)searchString
 {
+	[self hideMEImageView];
     self.castViewController.dataSource = CastViewDataSourceTrends;
     
     NSString* string = [[[NSString alloc] initWithFormat:@"包含 %@ 的微博", searchString] autorelease];
@@ -816,13 +848,14 @@
 
 - (void)showFavorites
 {
+	[self hideMEImageView];
     self.castViewController.dataSource = CastViewDataSourceFavorites;
 	NSString *string = [NSString stringWithString:NSLocalizedString(@"收藏", nil)];
     self.bottomStateLabel.text = string;
 	[_statusTypeStack addObject:string];
     
     [self showBottomStateView];
-	self.dockViewController.showFavoritesButton.selected = NO;
+	self.dockViewController.showFavoritesButton.selected = YES;
     
     [self.castViewController pushCardWithCompletion:^{
         self.dockViewController.showFavoritesButton.userInteractionEnabled = YES;
@@ -836,6 +869,7 @@
 
 - (void)showMentions
 {	
+	[self hideMEImageView];
     self.castViewController.dataSource = CastViewDataSourceMentions;
 	NSString *string = [NSString stringWithString:NSLocalizedString(@"@我的微博", nil)];
     self.bottomStateLabel.text = string;
@@ -1018,6 +1052,12 @@
     }
     
     slider.enabled = numberOfRows != 0;
+    if (numberOfRows != 0) {
+        [self hideMEImageView];
+    } else {
+        [self showMEImageView];
+    }
+    
 }
 
 - (void)setDefaultBackgroundImage:(BOOL)animated
