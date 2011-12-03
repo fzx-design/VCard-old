@@ -386,25 +386,17 @@
     vc1.view.frame = toExpand.view.frame;
     vc2.view.frame = toExpand.view.frame;
     
-//    vc1.view.transform = CGAffineTransformMakeScale(0.95, 0.95);
-//    vc2.view.transform = CGAffineTransformMakeScale(0.9, 0.9);
-        
-    NSLog(@"vc1's frame x: %f  y: %f", vc1.view.frame.origin.x, vc1.view.frame.origin.y);
-    NSLog(@"vc2's frame x: %f  y: %f", vc2.view.frame.origin.x, vc2.view.frame.origin.y);
-    
-    NSLog(@"toRemove's test is %@", toRemove.contentViewController.status.text);
+    [self.castView setScrollEnabled:NO];
     
 	[UIView animateWithDuration:1 animations:^{
         
         CGRect frame1 = toExpand.view.frame;
         frame1.origin.x += 560;
         vc1.view.frame = frame1;
-//        vc1.view.transform = CGAffineTransformMakeScale(1, 1);
         
         CGRect frame2 = toExpand.view.frame;
         frame2.origin.x += 1120;
         vc2.view.frame = frame2;
-//        vc2.view.transform = CGAffineTransformMakeScale(1, 1);
         
         
         CGRect frame3 = toRemove.view.frame;
@@ -413,13 +405,11 @@
         
         
 	} completion:^(BOOL finished) {
-
-        NSLog(@"vc1's frame x: %f  y: %f", vc1.view.frame.origin.x, vc1.view.frame.origin.y);
-        NSLog(@"vc2's frame x: %f  y: %f", vc2.view.frame.origin.x, vc2.view.frame.origin.y);
+        
+        [self.castView setScrollEnabled:YES];
         
         [self prepareForExpandingPile];
-            
-        NSLog(@"expand pile at index : %d", self.currentIndex);
+        
         self.castView.pageSection += pileSize / 10;
                     
         [self.castView resetWithCurrentIndex:self.currentIndex numberOfPages:[self itemCount:nil]];

@@ -289,7 +289,7 @@
 {
 	animating = YES;
 	
-	self.scrollView.userInteractionEnabled = NO;
+	[self setScrollEnabled:NO];
 	
 	int page = (int)[self currentPage];
 		
@@ -305,7 +305,7 @@
 	} completion:^(BOOL finished) {
 		if (finished) {
 			[self reset];
-			self.scrollView.userInteractionEnabled = YES;
+			[self setScrollEnabled:YES];
 		}
 	}];
 
