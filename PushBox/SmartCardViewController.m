@@ -421,7 +421,7 @@
     self.trackLabel4.shadowBlur = 2.0f;
     
     //
-//    [[self.tweetImageView layer] setCornerRadius:20.0];
+    //    [[self.tweetImageView layer] setCornerRadius:20.0];
 }
 
 - (void)loadStatusImage
@@ -563,6 +563,7 @@
                 int j = i + 1;
                 for (j = i + 1; j < originStatus.length; j++) {
                     if ([originStatus characterAtIndex:j] == ']') {
+                        j++;
                         break;
                     }
                 }
@@ -683,6 +684,7 @@
                 int j = i + 1;
                 for (j = i + 1; j < originStatus.length; j++) {
                     if ([originStatus characterAtIndex:j] == ']') {
+                        j++;
                         break;
                     }
                 }
@@ -1039,13 +1041,13 @@
 - (void)loadTrack
 {
     /////////
-//    NSMutableArray* trackArray = [[NSMutableArray alloc] initWithCapacity:4];
-//
-//    isLoadTrackEnd = NO;
-//    
-//    int page = 1;
-//    [self loadTrackDelta:trackArray page:page];
-        
+    //    NSMutableArray* trackArray = [[NSMutableArray alloc] initWithCapacity:4];
+    //
+    //    isLoadTrackEnd = NO;
+    //    
+    //    int page = 1;
+    //    [self loadTrackDelta:trackArray page:page];
+    
     /////////
     NSMutableArray* trackArray = [[NSMutableArray alloc] initWithCapacity:4];
     
@@ -1071,7 +1073,7 @@
                     break;
                 }
             }
-                        
+            
             if ([trackArray count] == 0) {
                 NSString* actNotiString = [[[NSString alloc] initWithFormat:@"%@ 关于此微博的最新进展", self.status.author.screenName] autorelease];
                 self.recentActNotifyLabel.text = actNotiString;
@@ -1237,7 +1239,6 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     UIAlertView *alert = nil;
-    MFMailComposeViewController *picker = nil;
     switch (buttonIndex) {
         case 0:
             [self repostButtonClicked:nil];
@@ -1252,30 +1253,44 @@
             [self addFavButtonClicked:self.addFavourateButton];
             break;
         case 4:
+        {
+            MFMailComposeViewController *picker = nil;
             picker = [[MFMailComposeViewController alloc] init];
-            picker.mailComposeDelegate = self;
-            picker.modalPresentationStyle = UIModalPresentationPageSheet;
-            
-            NSString *subject = [NSString stringWithFormat:@"分享一条来自新浪的微博，作者：%@", self.status.author.screenName];
-            
-            [picker setSubject:subject];
-            NSString *emailBody = [NSString stringWithFormat:@"%@ %@", self.status.text, self.status.repostStatus.text];
-            [picker setMessageBody:emailBody isHTML:NO];
-            
-            UIImage *img = nil;
-            if (self.tweetImageView.image) {
-                img = self.tweetImageView.image;
+            if (!picker) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"未设置邮件帐户", nil)
+                                                                message:NSLocalizedString(@"可以在Mail中添加您的邮件帐户", nil)
+                                                               delegate:self
+                                                      cancelButtonTitle:NSLocalizedString(@"好", nil)
+                                                      otherButtonTitles:nil];
+                [alert show];
+                [alert release];
             }
-            
-            if (img) {
-                NSData *imageData = UIImageJPEGRepresentation(img, 0.8);
-                [picker addAttachmentData:imageData mimeType:@"image/jpeg" fileName:NSLocalizedString(@"微博图片", nil)];
+            else {
+                picker = [[MFMailComposeViewController alloc] init];
+                picker.mailComposeDelegate = self;
+                picker.modalPresentationStyle = UIModalPresentationPageSheet;
+                
+                NSString *subject = [NSString stringWithFormat:@"分享一条来自新浪的微博，作者：%@", self.status.author.screenName];
+                
+                [picker setSubject:subject];
+                NSString *emailBody = [NSString stringWithFormat:@"%@ %@", self.status.text, self.status.repostStatus.text];
+                [picker setMessageBody:emailBody isHTML:NO];
+                
+                UIImage *img = nil;
+                if (self.tweetImageView.image) {
+                    img = self.tweetImageView.image;
+                }
+                
+                if (img) {
+                    NSData *imageData = UIImageJPEGRepresentation(img, 0.8);
+                    [picker addAttachmentData:imageData mimeType:@"image/jpeg" fileName:NSLocalizedString(@"微博图片", nil)];
+                }
+                
+                [[[UIApplication sharedApplication] rootViewController] presentModalViewController:picker animated:YES];
+                [picker release];
             }
-            
-            [[[UIApplication sharedApplication] rootViewController] presentModalViewController:picker animated:YES];
-            [picker release];
-            
             break;
+        }
         case 5:
             alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"删除此条微博", nil)
                                                message:nil

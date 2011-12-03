@@ -91,13 +91,13 @@
     MFMailComposeViewController *picker = nil;
     picker = [[MFMailComposeViewController alloc] init];
     if (!picker) {
-        //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"未设置邮件帐户", nil)
-        //                                                        message:NSLocalizedString(@"可以在Mail中添加您的邮件帐户", nil)
-        //                                                       delegate:self
-        //                                              cancelButtonTitle:NSLocalizedString(@"好", nil)
-        //                                              otherButtonTitles:nil];
-        //        [alert show];
-        //        [alert release];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"未设置邮件帐户", nil)
+                                                        message:NSLocalizedString(@"可以在Mail中添加您的邮件帐户", nil)
+                                                       delegate:self
+                                              cancelButtonTitle:NSLocalizedString(@"好", nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];
     }
     else {
         picker.mailComposeDelegate = self;

@@ -234,7 +234,7 @@
 	self.bottomStateFrameView.hidden = NO;
 	self.groupView.hidden = YES;
     self.groupView.layer.anchorPoint = CGPointMake(0.5, 1.0);
-
+    
     CGRect frame = self.groupView.frame;
     frame.origin.y += frame.size.height / 2;
     self.groupView.frame = frame;
@@ -271,7 +271,7 @@
     }];
     
     [client getFriendsOfUser:self.currentUser.userID cursor:cursor count:200];
-
+    
 }
 
 - (void)getFriends
