@@ -48,7 +48,7 @@
 						<string key="NSFrameSize">{1024, 748}</string>
 						<reference key="NSSuperview" ref="420341332"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="920567038"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
@@ -257,7 +257,6 @@
 						<string key="NSFrame">{{945, 625}, {78, 46}}</string>
 						<reference key="NSSuperview" ref="420341332"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -270,22 +269,6 @@
 						<reference key="IBUINormalTitleShadowColor" ref="35519944"/>
 						<reference key="IBUIFontDescription" ref="380091331"/>
 						<reference key="IBUIFont" ref="298692856"/>
-					</object>
-					<object class="IBUIImageView" id="920567038">
-						<reference key="NSNextResponder" ref="420341332"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrameSize">{1024, 741}</string>
-						<reference key="NSSuperview" ref="420341332"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="496898477"/>
-						<string key="NSReuseIdentifierKey">_NS:569</string>
-						<int key="IBUIContentMode">4</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<object class="NSCustomResource" key="IBUIImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">missing_elephant.png</string>
-						</object>
 					</object>
 					<object class="IBUITextField" id="617140794">
 						<reference key="NSNextResponder" ref="420341332"/>
@@ -926,14 +909,6 @@
 					<int key="connectionID">127</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">meImageView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="920567038"/>
-					</object>
-					<int key="connectionID">134</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">showFriendsTimeline:</string>
 						<reference key="source" ref="902454433"/>
@@ -1084,7 +1059,6 @@
 							<reference ref="112184777"/>
 							<reference ref="617140794"/>
 							<reference ref="338110412"/>
-							<reference ref="920567038"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -1299,11 +1273,6 @@
 						<reference key="object" ref="569905027"/>
 						<reference key="parent" ref="338110412"/>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">133</int>
-						<reference key="object" ref="920567038"/>
-						<reference key="parent" ref="420341332"/>
-					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1331,7 +1300,6 @@
 					<string>124.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>125.IBPluginDependency</string>
 					<string>125.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
-					<string>133.IBPluginDependency</string>
 					<string>15.IBPluginDependency</string>
 					<string>30.IBPluginDependency</string>
 					<string>30.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
@@ -1380,7 +1348,6 @@
 					<real value="0.0"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<real value="1"/>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<real value="0.0"/>
@@ -1694,7 +1661,6 @@
 				<string>icon_music.png</string>
 				<string>icon_orginal.png</string>
 				<string>icon_video.png</string>
-				<string>missing_elephant.png</string>
 				<string>news_bg.png</string>
 				<string>news_button_close.png</string>
 				<string>root_bottom_bar_bg.png</string>
@@ -1710,7 +1676,6 @@
 				<string>{24, 27}</string>
 				<string>{26, 33}</string>
 				<string>{31, 25}</string>
-				<string>{764, 577}</string>
 				<string>{215, 69}</string>
 				<string>{33, 34}</string>
 				<string>{1022, 42}</string>

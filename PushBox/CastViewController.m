@@ -30,6 +30,7 @@
 @synthesize blurImageView = _blurImageView;
 @synthesize rootShadowLeft = _rootShadowLeft;
 @synthesize castView = _castView;
+@synthesize meImageView = _meImageView;
 
 @synthesize user = _user;
 @synthesize dataSource = _dataSource;
@@ -77,6 +78,8 @@
     _shouldRefreshCardView = NO;
 	_lastStatusID = 0;
     _statusTypeID = 0;
+    _meImageView.hidden = YES;
+    
     
     _startDate = [[NSDate date] retain];
 }
@@ -116,6 +119,7 @@
     self.blurImageView = nil;
 	self.castView = nil;
 	self.rootShadowLeft = nil;
+    self.meImageView = nil;
 }
 
 - (void)viewDidLoad
@@ -418,7 +422,9 @@
 - (void)checkPiles
 {
 	if (![self.castViewManager gotEnoughViewsToShow]) {
-		[self loadMoreDataCompletion:nil];
+		[self loadMoreDataCompletion:^{
+            [self.castView addMoreViews];
+        }];
 	}
 }
 

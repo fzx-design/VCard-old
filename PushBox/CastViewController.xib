@@ -53,6 +53,21 @@
 							<string key="NSResourceName">root_cards_blur_bg.png</string>
 						</object>
 					</object>
+					<object class="IBUIImageView" id="33624107">
+						<reference key="NSNextResponder" ref="119409457"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{0, -50}, {1024, 741}}</string>
+						<reference key="NSSuperview" ref="119409457"/>
+						<reference key="NSWindow"/>
+						<string key="NSReuseIdentifierKey">_NS:569</string>
+						<int key="IBUIContentMode">4</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">missing_elephant.png</string>
+						</object>
+					</object>
 					<object class="IBUIView" id="1068946155">
 						<reference key="NSNextResponder" ref="119409457"/>
 						<int key="NSvFlags">292</int>
@@ -227,6 +242,14 @@
 					<int key="connectionID">16</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">meImageView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="33624107"/>
+					</object>
+					<int key="connectionID">20</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">dismissRegionTouched:</string>
 						<reference key="source" ref="149210971"/>
@@ -274,6 +297,7 @@
 							<reference ref="948189936"/>
 							<reference ref="879759305"/>
 							<reference ref="730418474"/>
+							<reference ref="33624107"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -308,6 +332,11 @@
 						<reference key="object" ref="730418474"/>
 						<reference key="parent" ref="119409457"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">19</int>
+						<reference key="object" ref="33624107"/>
+						<reference key="parent" ref="119409457"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -316,6 +345,7 @@
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="10.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="19.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="6.CustomClassName">GYCastView</string>
@@ -328,7 +358,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">18</int>
+			<int key="maxID">20</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -349,6 +379,7 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="blurImageView">UIImageView</string>
 						<string key="castView">GYCastView</string>
+						<string key="meImageView">UIImageView</string>
 						<string key="regionLeftDetectButton">UIButton</string>
 						<string key="regionRightDetectButton">UIButton</string>
 						<string key="rootShadowLeft">UIImageView</string>
@@ -361,6 +392,10 @@
 						<object class="IBToOneOutletInfo" key="castView">
 							<string key="name">castView</string>
 							<string key="candidateClassName">GYCastView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="meImageView">
+							<string key="name">meImageView</string>
+							<string key="candidateClassName">UIImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="regionLeftDetectButton">
 							<string key="name">regionLeftDetectButton</string>
@@ -422,6 +457,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="missing_elephant.png">{764, 577}</string>
 			<string key="root_cards_blur_bg.png">{1024, 748}</string>
 			<string key="root_shadow_left.png">{78, 653}</string>
 			<string key="root_shadow_right.png">{78, 653}</string>

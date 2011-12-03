@@ -30,7 +30,6 @@
     UITextField *_bottomSearchTextField;
     
     UIImageView *_holeImageView;
-    UIImageView *_meImageView;
 	
 	UIView *_notificationView;
 	UILabel *_notiNewCommentLabel;
@@ -60,6 +59,7 @@
 	BOOL _newStatusFlag;
 	BOOL _inSearchMode;
     BOOL _groupButtonEnabled;
+    BOOL _sliderEnabled;
     
 	int _trackingIndex;
 	
@@ -104,8 +104,6 @@
 @property(nonatomic, retain) IBOutlet UIButton *notiDisplayNewCommentsButton;
 
 @property(nonatomic, retain) IBOutlet UIView *groupView;
-
-@property(nonatomic, retain) IBOutlet UIImageView *meImageView;
 
 @property(nonatomic, retain) LoginViewController* loginViewController;
 @property(nonatomic, retain) DockViewController *dockViewController;

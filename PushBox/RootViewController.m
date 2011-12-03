@@ -96,7 +96,6 @@
 @synthesize notiDisplayNewCommentsButton = _notiDisplayNewCommentsButton;
 
 @synthesize groupView = _groupView;
-@synthesize meImageView = _meImageView;
 
 #pragma mark - Tools
 
@@ -123,26 +122,28 @@
 
 - (void)showMEImageView
 {
-    if (self.meImageView.hidden == NO) {
+    UIImageView *view = self.castViewController.meImageView;
+    if (view.hidden == NO) {
         return;
     }
-    self.meImageView.hidden = NO;
-    self.meImageView.alpha = 0.0;
+    view.hidden = NO;
+    view.alpha = 0.0;
     [UIView animateWithDuration:0.7 animations:^{
-        self.meImageView.alpha = 1.0;
+        view.alpha = 1.0;
     }];
 }
 
 - (void)hideMEImageView
 {
-    if (self.meImageView.hidden == YES) {
+    UIImageView *view = self.castViewController.meImageView;
+    if (view.hidden == YES) {
         return;
     }
     [UIView animateWithDuration:0.3 animations:^{
-        self.meImageView.alpha = 0.0;
+        view.alpha = 0.0;
     } completion:^(BOOL finished) {
-        self.meImageView.hidden = YES;
-        self.meImageView.alpha = 1.0;
+        view.hidden = YES;
+        view.alpha = 1.0;
     }];
 }
 
@@ -202,7 +203,6 @@
     [_notiDisplayNewCommentsButton release];
     
     [_groupView release];
-    [_meImageView release];
     
     [super dealloc];
 }
@@ -224,7 +224,6 @@
     self.notiDisplayNewCommentsButton = nil;
     
     self.groupView = nil;
-    self.meImageView = nil;
 }
 
 + (void)initialize 
@@ -255,6 +254,7 @@
 	_refreshFlag = NO;
 	_newStatusFlag = NO;
 	_inSearchMode = NO;
+    _sliderEnabled = YES;
 	
 	preNewCommentCount = 0;
 	preNewFollowerCount = 0;
@@ -444,9 +444,7 @@
 	self.bottomStateView.hidden = YES;
 	self.notificationView.hidden = YES;
     self.groupView.hidden = YES;
-    
-    self.meImageView.hidden = YES;
-    
+        
 	_commandCenterFlag = NO;
 	
     if ([WeiboClient authorized]) {
@@ -516,7 +514,6 @@
         
 		self.bottomStateFrameView.hidden = YES;
 		self.notificationView.hidden = YES;
-        self.meImageView.hidden = YES;
 		self.currentUser = nil;
 		[self setDefaultBackgroundImage:YES];
 		[User deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
@@ -1407,6 +1404,9 @@
 
 - (void)showCommandCenter
 {
+    [self hideMEImageView];
+    _sliderEnabled = self.dockViewController.slider.enabled;
+    
 	_commandCenterFlag = YES;
 	self.notificationView.hidden = YES;
     _groupButtonEnabled = self.dockViewController.groupButton.enabled;
@@ -1466,6 +1466,10 @@
 - (void)hideCommandCenter
 {	
     _commandCenterFlag = NO;
+    
+    if (!_sliderEnabled) {
+        [self showMEImageView];
+    }
 	
 	self.dockViewController.hideCommandCenterButton.enabled = NO;
     self.dockViewController.groupButton.enabled = _groupButtonEnabled;
@@ -1500,7 +1504,7 @@
                          }
                      }];
     self.dockViewController.playButton.enabled = YES;
-    self.dockViewController.slider.enabled = YES;
+    self.dockViewController.slider.enabled = _sliderEnabled;
     self.dockViewController.refreshButton.enabled = YES;
     self.dockViewController.messagesCenterButton.enabled = YES;
 }

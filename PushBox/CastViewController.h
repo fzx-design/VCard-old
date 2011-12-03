@@ -72,6 +72,7 @@
 @property(nonatomic, retain) IBOutlet UIImageView *blurImageView;
 @property(nonatomic, retain) IBOutlet UIImageView *rootShadowLeft;
 @property(nonatomic, retain) IBOutlet GYCastView *castView;
+@property(nonatomic, retain) IBOutlet UIImageView *meImageView;
 
 @property(nonatomic, retain) User *user;
 @property(nonatomic, assign) CastViewDataSource dataSource;
