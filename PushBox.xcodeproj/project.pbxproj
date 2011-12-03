@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2030BBC3148216B5002D8B46 /* options_icon_locate.png in Resources */ = {isa = PBXBuildFile; fileRef = 2030BBC2148216B5002D8B46 /* options_icon_locate.png */; };
 		2030BBC614821809002D8B46 /* options_icon_stack.png in Resources */ = {isa = PBXBuildFile; fileRef = 2030BBC514821809002D8B46 /* options_icon_stack.png */; };
+		20310FFA148A113900475B3D /* missing_elephant.png in Resources */ = {isa = PBXBuildFile; fileRef = 20310FF9148A113900475B3D /* missing_elephant.png */; };
 		203DBEE3146FE46D00F43D5A /* bg_flower.png in Resources */ = {isa = PBXBuildFile; fileRef = 203DBEE0146FE46D00F43D5A /* bg_flower.png */; };
 		203DBEE4146FE46D00F43D5A /* bg_kelp.png in Resources */ = {isa = PBXBuildFile; fileRef = 203DBEE1146FE46D00F43D5A /* bg_kelp.png */; };
 		203DBEE5146FE46D00F43D5A /* bg_water.png in Resources */ = {isa = PBXBuildFile; fileRef = 203DBEE2146FE46D00F43D5A /* bg_water.png */; };
@@ -329,6 +330,7 @@
 /* Begin PBXFileReference section */
 		2030BBC2148216B5002D8B46 /* options_icon_locate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = options_icon_locate.png; sourceTree = "<group>"; };
 		2030BBC514821809002D8B46 /* options_icon_stack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = options_icon_stack.png; sourceTree = "<group>"; };
+		20310FF9148A113900475B3D /* missing_elephant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = missing_elephant.png; sourceTree = "<group>"; };
 		203DBEE0146FE46D00F43D5A /* bg_flower.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_flower.png; sourceTree = "<group>"; };
 		203DBEE1146FE46D00F43D5A /* bg_kelp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_kelp.png; sourceTree = "<group>"; };
 		203DBEE2146FE46D00F43D5A /* bg_water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_water.png; sourceTree = "<group>"; };
@@ -1018,6 +1020,7 @@
 				20DC1AEC1428BE8E00213358 /* title_small.png */,
 				FEF51111147A44CD00F17B26 /* search_bg.png */,
 				9BC26BB214604F4700724DAC /* cell_highlight.png */,
+				20310FF9148A113900475B3D /* missing_elephant.png */,
 				9B11290414510978001CE64E /* sc_repost_bg.png */,
 				203DBEED146FE8E000F43D5A /* icon_image.png */,
 				203DBEEE146FE8E000F43D5A /* icon_video.png */,
@@ -1732,6 +1735,7 @@
 				9BBEB8D91485158C00EE5F80 /* RootViewController.xib in Resources */,
 				9BA452321488E912009E9E72 /* dock_button_refresh_stack.png in Resources */,
 				9BA45234148910C7009E9E72 /* sc_ipad_1_cover.png in Resources */,
+				20310FFA148A113900475B3D /* missing_elephant.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
