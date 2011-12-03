@@ -206,6 +206,7 @@
 {
 	refreshFlag = YES;
 	self.refreshButton.enabled = NO;
+    self.refreshButton.alpha = 0.0;
 	
 	_postingCircleImageView.alpha = 1.0;
 	_postingRoundImageView.alpha = 1.0;
@@ -226,6 +227,7 @@
 	[UIView animateWithDuration:1.0 animations:^{
 		_postingRoundImageView.alpha = 0.0;
 		_postingCircleImageView.alpha = 0.0;
+        self.refreshButton.alpha = 1.0;
     } completion:^(BOOL finished) {
 		[_postingCircleImageView.layer removeAnimationForKey:@"kAnimationLoad"];
 	}];

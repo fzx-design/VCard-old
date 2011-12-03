@@ -1081,7 +1081,7 @@
 {
     if (self.dockViewController.refreshButton.enabled) {
         [self.dockViewController showLoadingView];
-        //        [self.cardTableViewController refresh];
+//        [self.cardTableViewController refresh];
 		[self.castViewController refresh];
     }
 }
