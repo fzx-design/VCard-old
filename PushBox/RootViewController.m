@@ -984,7 +984,7 @@
     }
     self.dockViewController.view.userInteractionEnabled = NO;
     self.bottomStateView.userInteractionEnabled = NO;
-    self.castViewController.tableView.scrollEnabled = NO;
+    self.castViewController.castView.scrollEnabled = NO;
     [self.castViewController enableDismissRegion];
     [UIView animateWithDuration:0.5 animations:^{
         _holeImageView.alpha = 1.0;
@@ -998,6 +998,7 @@
     }];
     self.bottomStateView.userInteractionEnabled = YES;
     self.dockViewController.view.userInteractionEnabled = YES;
+    self.castViewController.castView.scrollEnabled = YES;
     [self.castViewController disableDismissRegion];
 }
 
