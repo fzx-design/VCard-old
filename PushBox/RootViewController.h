@@ -58,6 +58,7 @@
 	BOOL _refreshFlag;
 	BOOL _newStatusFlag;
 	BOOL _inSearchMode;
+    BOOL _groupButtonEnabled;
     
 	int _trackingIndex;
 	
@@ -69,6 +70,8 @@
 	
 	UIImage *_tmpImage;
 	UIImageView *_searchCoverImageView;
+    
+    UIButton *_tmpButton;
     
     Boolean isSearchReturn;
     

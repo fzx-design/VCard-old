@@ -18,6 +18,7 @@
 #import "Comment.h"
 #import "PushBoxAppDelegate.h"
 #import "GYTrackingSlider.h"
+#import "SystemDefault.h"
 
 #define kLoginViewCenter CGPointMake(512.0, 370.0)
 
@@ -94,6 +95,61 @@
 @synthesize notiDisplayNewCommentsButton = _notiDisplayNewCommentsButton;
 
 @synthesize groupView = _groupView;
+
+
+
+#pragma mark - Tools
+
+- (void)setRefreshButton
+{
+    BOOL result = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeyPileUpEnabled];
+    
+    UIImage *image = nil;
+    UIImage *imageHL = nil;
+    
+    if (!result) {
+        image = [UIImage imageNamed:@"dock_button_refresh.png"];
+        imageHL = [UIImage imageNamed:@"dock_button_refresh_HL.png"];
+    } else {
+        image = [UIImage imageNamed:@"dock_button_refresh_stack.png"];
+        imageHL = [UIImage imageNamed:@"dock_button_refresh_stack.png"];
+    }
+    
+    [self.dockViewController.refreshButton setImage:image forState:UIControlStateNormal];
+    [self.dockViewController.refreshButton setImage:imageHL forState:UIControlStateHighlighted];
+}
+
+- (BOOL)shouldShowBottomSearchOrNot
+{
+	return  _inSearchMode && self.castViewController.infoStack.count == 1;
+}
+
+- (void)setGroupButtonImage:(int)number
+{
+    UIImage *image = nil;
+    UIImage *imageHL = nil;
+    
+    if (number == 0) {
+        image = [UIImage imageNamed:@"dock_button_group.png"];
+        imageHL = [UIImage imageNamed:@"dock_button_group_HL.png"];
+    } else if(number == 1) {
+        image = [UIImage imageNamed:@"icon_orginal.png"];
+        imageHL = [UIImage imageNamed:@"icon_orginal.png"];
+    } else if(number == 2) {
+        image = [UIImage imageNamed:@"icon_image.png"];
+        imageHL = [UIImage imageNamed:@"icon_image.png"];
+    } else if(number == 3) {
+        image = [UIImage imageNamed:@"icon_video.png"];
+        imageHL = [UIImage imageNamed:@"icon_video.png"];
+    } else {
+        image = [UIImage imageNamed:@"icon_music.png"];
+        imageHL = [UIImage imageNamed:@"icon_music.png"];
+    }
+    
+    [self.dockViewController.groupButton setImage:image forState:UIControlStateNormal];
+    [self.dockViewController.groupButton setImage:imageHL forState:UIControlStateSelected];
+    [self.dockViewController.groupButton setImage:imageHL forState:UIControlStateHighlighted];
+}
 
 
 #pragma mark - View lifecycle
@@ -178,7 +234,7 @@
 	self.bottomStateFrameView.hidden = NO;
 	self.groupView.hidden = YES;
     self.groupView.layer.anchorPoint = CGPointMake(0.5, 1.0);
-
+    
     CGRect frame = self.groupView.frame;
     frame.origin.y += frame.size.height / 2;
     self.groupView.frame = frame;
@@ -215,7 +271,7 @@
     }];
     
     [client getFriendsOfUser:self.currentUser.userID cursor:cursor count:200];
-
+    
 }
 
 - (void)getFriends
@@ -288,6 +344,7 @@
 	
 	[self getEmotions];
     
+    [self setRefreshButton];
 }
 
 - (void)viewDidLoad
@@ -348,7 +405,10 @@
                selector:@selector(showGroupView) 
                    name:kNotificationNameShowGroupChoice 
                  object:nil];
-	
+	[center addObserver:self
+               selector:@selector(setRefreshButton) 
+                   name:kNotificationNamePileUpEnabledChanged 
+                 object:nil];
     
     
 	self.bottomStateView.hidden = YES;
@@ -365,13 +425,6 @@
     else {
         [self showLoginView];
     }
-}
-
-#pragma mark - Tools
-
-- (BOOL)shouldShowBottomSearchOrNot
-{
-	return  _inSearchMode && self.castViewController.infoStack.count == 1;
 }
 
 #pragma mark - Show & Hide Views
@@ -573,6 +626,7 @@
     [self.groupView.layer addAnimation:[AnimationProvider popoverAnimation] forKey:nil];
     
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 1024, 748)];
+    _tmpButton = button;
     [button addTarget:self action:@selector(hideGroupView:) forControlEvents:UIControlEventTouchUpInside];
     [self.view insertSubview:button belowSubview:self.groupView];
     [button release];
@@ -653,6 +707,8 @@
 	[self.castViewController popCardWithCompletion:^{
         self.dockViewController.showFavoritesButton.selected = NO;
         self.dockViewController.showFavoritesButton.userInteractionEnabled = YES;
+        self.dockViewController.groupButton.enabled = YES;
+        [self setGroupButtonImage:self.castViewController.statusTypeID];
     }];
 }
 
@@ -660,9 +716,9 @@
 {
 	if (self.castViewController.infoStack.count > 1) {
 		[self.castViewController popCardWithCompletion:^{
-			
-			//TODO operation that should be finished when back
-			
+            BOOL result = self.castViewController.dataSource == CastViewDataSourceFriendsTimeline || self.castViewController.dataSource == CastViewDataSourceUserTimeline;
+            self.dockViewController.groupButton.enabled = result;
+			[self setGroupButtonImage:self.castViewController.statusTypeID];
 		}];
 		
 		[self popBottomStateView];
@@ -700,11 +756,13 @@
         [self moveCardIntoView];
     }];
 	self.dockViewController.refreshNotiImageView.hidden = YES;
+    
+    self.dockViewController.groupButton.enabled = YES;
+    [self setGroupButtonImage:0];
 }
 
 - (void)showSearchTimeline:(NSString *)searchString
 {
-	_inSearchMode = YES;
 	
     self.castViewController.dataSource = CastViewDataSourceSearch;
     
@@ -721,10 +779,16 @@
 	}
     
 	[self.castViewController switchToSearchCards:^{
-		[self moveCardIntoView];
+        if (!_inSearchMode) {
+            [self moveCardIntoView];
+        }
+        _inSearchMode = YES;
 	}];
-	
+    
 	self.dockViewController.refreshNotiImageView.hidden = YES;
+    
+    self.dockViewController.groupButton.enabled = NO;
+    [self setGroupButtonImage:0];
 }
 
 - (void)showTrendsTimeline:(NSString *)searchString
@@ -745,6 +809,9 @@
         [self moveCardIntoView];
     }];
 	self.dockViewController.refreshNotiImageView.hidden = YES;
+    
+    self.dockViewController.groupButton.enabled = NO;
+    [self setGroupButtonImage:0];
 }
 
 - (void)showFavorites
@@ -762,6 +829,9 @@
         [self moveCardIntoView];
     }];
 	self.dockViewController.refreshNotiImageView.hidden = YES;
+    
+    self.dockViewController.groupButton.enabled = NO;
+    [self setGroupButtonImage:0];
 }
 
 - (void)showMentions
@@ -779,6 +849,9 @@
     }];
     
 	self.dockViewController.refreshNotiImageView.hidden = YES;
+    
+    self.dockViewController.groupButton.enabled = NO;
+    [self setGroupButtonImage:0];
 }
 
 - (void)showMentionsNotification:(id)sender
@@ -911,7 +984,7 @@
     }
     self.dockViewController.view.userInteractionEnabled = NO;
     self.bottomStateView.userInteractionEnabled = NO;
-    self.castViewController.tableView.scrollEnabled = NO;
+    self.castViewController.castView.scrollEnabled = NO;
     [self.castViewController enableDismissRegion];
     [UIView animateWithDuration:0.5 animations:^{
         _holeImageView.alpha = 1.0;
@@ -925,6 +998,7 @@
     }];
     self.bottomStateView.userInteractionEnabled = YES;
     self.dockViewController.view.userInteractionEnabled = YES;
+    self.castViewController.castView.scrollEnabled = YES;
     [self.castViewController disableDismissRegion];
 }
 
@@ -942,6 +1016,8 @@
     else {
         [slider setValue:row animated:YES];
     }
+    
+    slider.enabled = numberOfRows != 0;
 }
 
 - (void)setDefaultBackgroundImage:(BOOL)animated
@@ -1010,7 +1086,7 @@
 {
     if (self.dockViewController.refreshButton.enabled) {
         [self.dockViewController showLoadingView];
-        //        [self.cardTableViewController refresh];
+//        [self.cardTableViewController refresh];
 		[self.castViewController refresh];
     }
 }
@@ -1278,6 +1354,8 @@
 {
 	_commandCenterFlag = YES;
 	self.notificationView.hidden = YES;
+    _groupButtonEnabled = self.dockViewController.groupButton.enabled;
+    self.dockViewController.groupButton.enabled = NO;
     
     self.bottomSearchTextField.hidden = YES;
     [self.bottomSearchTextField setAlpha:0.0];
@@ -1335,6 +1413,7 @@
     _commandCenterFlag = NO;
 	
 	self.dockViewController.hideCommandCenterButton.enabled = NO;
+    self.dockViewController.groupButton.enabled = _groupButtonEnabled;
     self.bottomSearchTextField.hidden = self.bottomSearchBG.hidden;
     
     [self.dockViewController viewWillDisappear:YES];
@@ -1673,43 +1752,44 @@
 
 - (IBAction)groupChoosed:(UIButton*)sender
 {
-    [self.castViewController clearCardStack];
-    
-//    if (self.castViewController.infoStack.count != 0) {
-//        [self showPrevTimeline:nil];
-//    }
-    
     int statusType = 0;
     UIImage *image = nil;
+    UIImage *imageHL = nil;
     
     if ([sender.titleLabel.text isEqualToString:@"            全部卡片"]) {
         statusType = 0;
         image = [UIImage imageNamed:@"dock_button_group.png"];
+        imageHL = [UIImage imageNamed:@"dock_button_group_HL.png"];
     } else if([sender.titleLabel.text isEqualToString:@"            原创"]) {
         statusType = 1;
         image = [UIImage imageNamed:@"icon_orginal.png"];
+        imageHL = [UIImage imageNamed:@"icon_orginal.png"];
     } else if([sender.titleLabel.text isEqualToString:@"            图览"]) {
         statusType = 2;
         image = [UIImage imageNamed:@"icon_image.png"];
+        imageHL = [UIImage imageNamed:@"icon_image.png"];
     } else if([sender.titleLabel.text isEqualToString:@"            电影和视频"]) {
         statusType = 3;
         image = [UIImage imageNamed:@"icon_video.png"];
+        imageHL = [UIImage imageNamed:@"icon_video.png"];
     } else {
         statusType = 4;
         image = [UIImage imageNamed:@"icon_music.png"];
+        imageHL = [UIImage imageNamed:@"icon_music.png"];
     }
     
-    self.dockViewController.groupButton.imageView.image = nil;
-    self.dockViewController.groupButton.imageView.image = image;
+    [self.dockViewController.groupButton setImage:image forState:UIControlStateNormal];
+    [self.dockViewController.groupButton setImage:imageHL forState:UIControlStateSelected];
+    [self.dockViewController.groupButton setImage:imageHL forState:UIControlStateHighlighted];
     
     self.castViewController.statusTypeID = statusType;
     
     [[UIApplication sharedApplication] showLoadingView];
     
     [self.castViewController clearData];
-    [self.castViewController reload];
+    [self.castViewController reload:nil];
     
-    [self hideGroupView:nil];
+    [self hideGroupView:_tmpButton];
 }
 
 @end

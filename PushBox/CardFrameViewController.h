@@ -39,7 +39,7 @@
 @property (nonatomic, retain) IBOutlet UIImageView* pileImageView;
 
 
-- (void)configureCardFrameWithStatus:(Status*)status;
-- (void)configureCardFrameWithStatus:(Status*)status AndPile:(CastViewPile*)pile withEndDateString:(NSDate*)endDate;
+- (BOOL)configureCardFrameWithStatus:(Status*)status;
+- (BOOL)configureCardFrameWithStatus:(Status*)status AndPile:(CastViewPile*)pile withEndDateString:(NSDate*)endDate;
 
 @end

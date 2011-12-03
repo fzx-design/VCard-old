@@ -62,7 +62,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 6;
+    return 7;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -73,12 +73,14 @@
         case 1:
             return 1;
         case 2:
-            return 4;
+            return 3;
         case 3:
             return 1;
-		case 4:
-			return 2;
+        case 4:
+            return 1;
 		case 5:
+			return 2;
+		case 6:
 			return 2;
     }
     return 0;
@@ -115,6 +117,9 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+    } else {
+        cell.detailTextLabel.text = @"";
+        cell.accessoryView = nil;
     }
     
 	NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
@@ -148,7 +153,7 @@
                     
                     NSString *string = nil;
                     if ([userDefault boolForKey:kUserDefaultKeyPileUpEnabled]) {
-                        string = @"打开";
+                        string = @"启用";
                     } else {
                         string = @"关闭";
                     }
@@ -181,24 +186,23 @@
                     cell.imageView.image = [UIImage imageNamed:@"options_icon_image.png"];
                     break;
                     
-                case 3:
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-					
-					UISwitch *aSwitch2 = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 94, 27)];
-					aSwitch2.on = [userDefault boolForKey:kUserDefaultKeySoundEnabled];
-					[aSwitch2 addTarget:self 
-                                 action:@selector(soundOn:)
-                       forControlEvents:UIControlEventTouchUpInside];
-                    cell.accessoryView = aSwitch2;
-					[aSwitch2 release];
-					
-					cell.textLabel.text = NSLocalizedString(@"音效", nil);
-                    cell.imageView.image = [UIImage imageNamed:@"options_icon_sound.png"];
-                    break;
-                    
             }
             break;
         case 3:
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            UISwitch *aSwitch2 = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 94, 27)];
+            aSwitch2.on = [userDefault boolForKey:kUserDefaultKeySoundEnabled];
+            [aSwitch2 addTarget:self 
+                         action:@selector(soundOn:)
+               forControlEvents:UIControlEventTouchUpInside];
+            cell.accessoryView = aSwitch2;
+            [aSwitch2 release];
+            
+            cell.textLabel.text = NSLocalizedString(@"音效", nil);
+            cell.imageView.image = [UIImage imageNamed:@"options_icon_sound.png"];
+            break;
+        case 4:
             switch (indexPath.row) {
                 case 0:
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -219,7 +223,7 @@
                     break;
             }
             break;
-		case 4:
+		case 5:
 			switch (indexPath.row) {
 				case 0:
 					cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -255,7 +259,7 @@
 					break;
 			}
 			break;
-		case 5:
+		case 6:
 			switch (indexPath.row) {
 				case 0:
 					cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -342,7 +346,7 @@
                 [ivc release];
             }
 			break;
-		case 4:
+		case 5:
 			if (indexPath.row == 0) {
 				RefreshingIntervalViewController *ivc = [[RefreshingIntervalViewController alloc] initWithStyle:UITableViewStyleGrouped];
                 ivc.contentSizeForViewInPopover = kContentSizeForViewInPopover;
@@ -350,7 +354,7 @@
                 [ivc release];
 			}
             break;
-		case 5:
+		case 6:
 			if (indexPath.row == 0) {
 				[self showAbout];
 			} else {
@@ -364,7 +368,7 @@
 	if (section == 1) {
 		return @"选择浏览卡片时最舒适的背景色彩。";
 	}
-	else if (section == 3) {
+	else if (section == 4) {
 		return @"新建卡片时自动附带您的位置信息。";
 	}
 	return nil;

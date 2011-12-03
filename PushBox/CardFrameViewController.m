@@ -69,9 +69,12 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameExpandPile object:nil];
 }
 
-- (void)configureCardFrameWithStatus:(Status*)status
+- (BOOL)configureCardFrameWithStatus:(Status*)status
 {
-    if (status == nil || self.contentViewController == nil) {
+    if (status == nil) {
+        return NO;
+    }
+    if (self.contentViewController == nil) {
         self.contentViewController.status = status;
     } else {
         long long aID = [self.contentViewController.status.statusID longLongValue];
@@ -86,10 +89,15 @@
     self.pileImageView.hidden = YES;
     self.pileBounderShadow.hidden = YES;
     self.contentViewController.readImageView.hidden = YES;
+    
+    return YES;
 }
 
-- (void)configureCardFrameWithStatus:(Status*)status AndPile:(CastViewPile*)pile withEndDateString:(NSDate*)endDate
+- (BOOL)configureCardFrameWithStatus:(Status*)status AndPile:(CastViewPile*)pile withEndDateString:(NSDate*)endDate
 {
+    if (status == nil) {
+        return NO;
+    }
     if (status == nil || self.contentViewController == nil) {
         self.contentViewController.status = status;
     } else {
@@ -116,6 +124,7 @@
     self.dateRangeLabel.text = [string stringByAppendingString:[endDate customString]];
     
     self.cardNumberLabel.text = [NSString stringWithFormat:@"%d 张卡片", [pile numberOfCardsInPile]];
+    return YES;
 }
 
 

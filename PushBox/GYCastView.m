@@ -18,7 +18,7 @@
 #define RefreshCardsOffsetPage 3
 #define MoveCardsOffsetPage 2
 
-@synthesize scrollView, pageSize, dropShadow, delegate, pageNum, pageSection;
+@synthesize scrollView, pageSize, dropShadow, delegate, pageNum, pageSection, scrollEnabled;
 
 - (void)awakeFromNib
 {
@@ -289,7 +289,7 @@
 {
 	animating = YES;
 	
-	self.scrollView.userInteractionEnabled = NO;
+	[self setScrollEnabled:NO];
 	
 	int page = (int)[self currentPage];
 		
@@ -305,7 +305,7 @@
 	} completion:^(BOOL finished) {
 		if (finished) {
 			[self reset];
-			self.scrollView.userInteractionEnabled = YES;
+			[self setScrollEnabled:YES];
 		}
 	}];
 
@@ -427,6 +427,10 @@
 	[self.scrollView setScrollsToTop:scrollsToTop];
 }
 
+- (void)setScrollEnabled:(BOOL)enabled
+{
+    self.scrollView.scrollEnabled = enabled;
+}
 
 - (void)dealloc 
 {

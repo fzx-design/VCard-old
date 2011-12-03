@@ -421,7 +421,7 @@
     self.trackLabel4.shadowBlur = 2.0f;
     
     //
-//    [[self.tweetImageView layer] setCornerRadius:20.0];
+    //    [[self.tweetImageView layer] setCornerRadius:20.0];
 }
 
 - (void)loadStatusImage
@@ -431,7 +431,7 @@
     [self.tweetImageView loadImageFromURL:self.status.bmiddlePicURL
                                completion:^(void) 
      {
-         [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+         [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionAllowUserInteraction animations:^{
              self.tweetImageView.alpha = 1.0;
              self.imageCoverImageView.alpha = 1.0;
          } completion:^(BOOL fin) {
@@ -453,7 +453,7 @@
     [self.tweetImageView loadImageFromURL:repostStatus.bmiddlePicURL 
                                completion:^(void) 
      {
-         [UIView animateWithDuration:0.5 delay:1.0 options:0 animations:^{
+         [UIView animateWithDuration:0.5 delay:1.0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
              if (b) {
                  self.tweetImageView.alpha = 1.0;
                  self.imageCoverImageView.alpha = 1.0;
@@ -476,7 +476,7 @@
     [self.tweetImageView loadImageFromURL:repostStatus.bmiddlePicURL 
                                completion:^(void) 
      {
-         [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+         [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionAllowUserInteraction animations:^{
              self.tweetImageView.alpha = 1.0;
              self.imageCoverImageView.alpha = 1.0;
          } completion:^(BOOL fin) {
@@ -563,6 +563,7 @@
                 int j = i + 1;
                 for (j = i + 1; j < originStatus.length; j++) {
                     if ([originStatus characterAtIndex:j] == ']') {
+                        j++;
                         break;
                     }
                 }
@@ -598,7 +599,7 @@
     NSString *path = [[NSBundle mainBundle] pathForResource:@"smartcard" ofType:@"html"]; 
     [self.postWebView loadHTMLString:htmlText baseURL:[NSURL fileURLWithPath: path]];    
     
-    [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+    [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         self.postWebView.alpha = 1.0;
         self.imageCoverImageView.alpha = 1.0;
     } completion:^(BOOL fin) {
@@ -683,6 +684,7 @@
                 int j = i + 1;
                 for (j = i + 1; j < originStatus.length; j++) {
                     if ([originStatus characterAtIndex:j] == ']') {
+                        j++;
                         break;
                     }
                 }
@@ -719,7 +721,7 @@
     NSString *path = [[NSBundle mainBundle] pathForResource:@"smartcard" ofType:@"html"]; 
     [self.repostWebView loadHTMLString:htmlText baseURL:[NSURL fileURLWithPath: path]];
     
-    [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+    [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         self.repostView.alpha = 1.0;
         self.repostWebView.alpha = 1.0;
         self.imageCoverImageView.alpha = 1.0;
@@ -734,7 +736,7 @@
     [self.musicCoverImageView loadImageFromURL:self.status.repostStatus.thumbnailPicURL 
                                     completion:^(void) 
      {
-         [UIView animateWithDuration:0.5 delay:0.1 options:0 animations:^{
+         [UIView animateWithDuration:0.5 delay:0.1 options:UIViewAnimationOptionAllowUserInteraction animations:^{
              self.musicCoverImageView.alpha = 1.0;
          } completion:^(BOOL fin) {
          }];
@@ -771,7 +773,7 @@
         self.playButton.hidden = NO;
         //        self.playButton.frame = kPlayButtonFrameCenter;
         self.musicLink = postMusicVideoLink;
-        [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+        [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionAllowUserInteraction animations:^{
             self.playButton.alpha = 1.0;
         } completion:^(BOOL fin) {
         }];
@@ -791,7 +793,7 @@
     self.musicLink = repostMusicVideoLink;
     self.tweetImageView.hidden = YES;
     self.musicBackgroundImageView.hidden = NO;
-    [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+    [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         self.musicBackgroundImageView.alpha = 1.0;
         self.tweetImageView.alpha = 0.0;
         self.imageCoverImageView.alpha = 1.0;
@@ -958,7 +960,7 @@
         self.trackView.alpha = 0.0;
         self.recentActNotifyLabel.alpha = 0.0;
         
-        [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+        [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionAllowUserInteraction animations:^{
             self.trackLabel.alpha = 1.0;
             self.trackView.alpha = 1.0;
             //            self.recentActNotifyLabel.alpha = 1.0;
@@ -1039,13 +1041,13 @@
 - (void)loadTrack
 {
     /////////
-//    NSMutableArray* trackArray = [[NSMutableArray alloc] initWithCapacity:4];
-//
-//    isLoadTrackEnd = NO;
-//    
-//    int page = 1;
-//    [self loadTrackDelta:trackArray page:page];
-        
+    //    NSMutableArray* trackArray = [[NSMutableArray alloc] initWithCapacity:4];
+    //
+    //    isLoadTrackEnd = NO;
+    //    
+    //    int page = 1;
+    //    [self loadTrackDelta:trackArray page:page];
+    
     /////////
     NSMutableArray* trackArray = [[NSMutableArray alloc] initWithCapacity:4];
     
@@ -1071,7 +1073,7 @@
                     break;
                 }
             }
-                        
+            
             if ([trackArray count] == 0) {
                 NSString* actNotiString = [[[NSString alloc] initWithFormat:@"%@ 关于此微博的最新进展", self.status.author.screenName] autorelease];
                 self.recentActNotifyLabel.text = actNotiString;
@@ -1084,7 +1086,7 @@
                 self.trackView.alpha = 0.0;
                 self.recentActNotifyLabel.alpha = 0.0;
                 
-                [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+                [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionAllowUserInteraction animations:^{
                     self.trackLabel.alpha = 1.0;
                     self.trackView.alpha = 1.0;
                     //            self.recentActNotifyLabel.alpha = 1.0;
@@ -1128,12 +1130,16 @@
     
     Status *status = self.status;
     
+    if (status == nil) {
+        return;
+    }
+    
     isTrack = YES;
     
     NSString *profileImageString = self.status.author.profileImageURL;
     [self.profileImageView loadImageFromURL:profileImageString 
                                  completion:   ^(void)     {
-                                     [UIView animateWithDuration:0.5 delay:0.3 options:0 animations:^{
+                                     [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionAllowUserInteraction animations:^{
                                          self.profileImageView.alpha = 1.0;
                                      } completion:^(BOOL fin) {
                                      }];
@@ -1237,7 +1243,6 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     UIAlertView *alert = nil;
-    MFMailComposeViewController *picker = nil;
     switch (buttonIndex) {
         case 0:
             [self repostButtonClicked:nil];
@@ -1252,30 +1257,44 @@
             [self addFavButtonClicked:self.addFavourateButton];
             break;
         case 4:
+        {
+            MFMailComposeViewController *picker = nil;
             picker = [[MFMailComposeViewController alloc] init];
-            picker.mailComposeDelegate = self;
-            picker.modalPresentationStyle = UIModalPresentationPageSheet;
-            
-            NSString *subject = [NSString stringWithFormat:@"分享一条来自新浪的微博，作者：%@", self.status.author.screenName];
-            
-            [picker setSubject:subject];
-            NSString *emailBody = [NSString stringWithFormat:@"%@ %@", self.status.text, self.status.repostStatus.text];
-            [picker setMessageBody:emailBody isHTML:NO];
-            
-            UIImage *img = nil;
-            if (self.tweetImageView.image) {
-                img = self.tweetImageView.image;
+            if (!picker) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"未设置邮件帐户", nil)
+                                                                message:NSLocalizedString(@"可以在Mail中添加您的邮件帐户", nil)
+                                                               delegate:self
+                                                      cancelButtonTitle:NSLocalizedString(@"好", nil)
+                                                      otherButtonTitles:nil];
+                [alert show];
+                [alert release];
             }
-            
-            if (img) {
-                NSData *imageData = UIImageJPEGRepresentation(img, 0.8);
-                [picker addAttachmentData:imageData mimeType:@"image/jpeg" fileName:NSLocalizedString(@"微博图片", nil)];
+            else {
+                picker = [[MFMailComposeViewController alloc] init];
+                picker.mailComposeDelegate = self;
+                picker.modalPresentationStyle = UIModalPresentationPageSheet;
+                
+                NSString *subject = [NSString stringWithFormat:@"分享一条来自新浪的微博，作者：%@", self.status.author.screenName];
+                
+                [picker setSubject:subject];
+                NSString *emailBody = [NSString stringWithFormat:@"%@ %@", self.status.text, self.status.repostStatus.text];
+                [picker setMessageBody:emailBody isHTML:NO];
+                
+                UIImage *img = nil;
+                if (self.tweetImageView.image) {
+                    img = self.tweetImageView.image;
+                }
+                
+                if (img) {
+                    NSData *imageData = UIImageJPEGRepresentation(img, 0.8);
+                    [picker addAttachmentData:imageData mimeType:@"image/jpeg" fileName:NSLocalizedString(@"微博图片", nil)];
+                }
+                
+                [[[UIApplication sharedApplication] rootViewController] presentModalViewController:picker animated:YES];
+                [picker release];
             }
-            
-            [[[UIApplication sharedApplication] rootViewController] presentModalViewController:picker animated:YES];
-            [picker release];
-            
             break;
+        }
         case 5:
             alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"删除此条微博", nil)
                                                message:nil

@@ -17,6 +17,8 @@
 {
     [super viewDidLoad];
     self.title = NSLocalizedString(@"卡片堆叠", nil);
+    _pileEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeyPileUpEnabled];
+    _action = NO;
 }
 
 - (void)viewDidUnload
@@ -28,7 +30,11 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    if (_pileEnabled) {
+        return 2;
+    } else {
+        return 1;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -55,7 +61,7 @@
             aSwitch1.on = [userDefault boolForKey:kUserDefaultKeyPileUpEnabled];
             [aSwitch1 addTarget:self 
                          action:@selector(pileUpOn:)
-               forControlEvents:UIControlEventTouchUpInside];
+               forControlEvents:UIControlEventValueChanged];
             cell.accessoryView = aSwitch1;
             [aSwitch1 release];
             
@@ -63,17 +69,21 @@
             break;
             
         case 1:
+            
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             UISwitch *aSwitch2 = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 94, 27)];
             aSwitch2.on = [userDefault boolForKey:kUserDefaultKeyReadTagEnabled];
             [aSwitch2 addTarget:self 
                          action:@selector(readTagOn:)
-               forControlEvents:UIControlEventTouchUpInside];
+               forControlEvents:UIControlEventValueChanged];
+            
+            aSwitch2.userInteractionEnabled = [userDefault boolForKey:kUserDefaultKeyPileUpEnabled];
+            
             cell.accessoryView = aSwitch2;
             [aSwitch2 release];
             
-            cell.imageView.image = [UIImage imageNamed:@"sc_read.png"];
+            
             cell.textLabel.text = NSLocalizedString(@"显示\"已读\"标记", nil);
             
             break;
@@ -87,24 +97,77 @@
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section{
     
     if (section == 0) {
-        return @"每次刷新后 VCard 会自动将您读过的卡片        整理成一个\"堆叠\"";
+        return @"每次刷新后 VCard 会自动将您读过的卡片        整理成一个\"堆叠\"。";
     }
     return nil;
 }
 
-- (void)pileUpOn:(UISwitch *)sender
+- (void)delay
 {
+    _action = NO;
+}
+
+- (void)setSection
+{
+//    if (_preEnabled == _pileEnabled) {
+//        return;
+//    }
+    if (_pileEnabled) {
+        NSIndexSet* set = [NSIndexSet indexSetWithIndex: 1];
+        [self.tableView beginUpdates];
+        if ([self.tableView numberOfSections] == 2) {
+            return;
+        }
+        [self.tableView insertSections:set withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView endUpdates];
+    } else {
+        NSIndexSet* set = [NSIndexSet indexSetWithIndex: 1];
+        [self.tableView beginUpdates];
+        if ([self.tableView numberOfSections] == 1) {
+            return;
+        }
+        [self.tableView deleteSections:set withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView endUpdates];
+    }
+    _action = NO;
+//    [self performSelector:@selector(delay) withObject:nil afterDelay:0.5];
+}
+
+- (void)pileUpOn:(UISwitch *)sender
+{    
+//    _action = YES;
+    
 	BOOL on = sender.on;
+    _pileEnabled = on;
 	[[NSUserDefaults standardUserDefaults] setBool:on forKey:kUserDefaultKeyPileUpEnabled];
 	[[NSUserDefaults standardUserDefaults] synchronize];
+
+    if (_pileEnabled) {
+        NSIndexSet* set = [NSIndexSet indexSetWithIndex: 1];        
+        if ([self.tableView numberOfSections] == 2) {
+            return;
+        }
+        [self.tableView beginUpdates];
+        [self.tableView insertSections:set withRowAnimation:UITableViewRowAnimationFade];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNamePileUpEnabledChanged object:nil];
+        [self.tableView endUpdates];
+    } else {
+        NSIndexSet* set = [NSIndexSet indexSetWithIndex: 1];
+        if ([self.tableView numberOfSections] == 1) {
+            return;
+        }
+        [self.tableView beginUpdates];
+        [self.tableView deleteSections:set withRowAnimation:UITableViewRowAnimationFade];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNamePileUpEnabledChanged object:nil];
+        [self.tableView endUpdates];
+    }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNamePileUpEnabledChanged object:nil];
-    
-    NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:1];
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
-    
-    cell.userInteractionEnabled = on;
-    cell.contentView.userInteractionEnabled = on;
+//    if (_action) {
+//        return;
+//    }
+//    _action = YES;
+//    _preEnabled = !_pileEnabled;
+//    [self performSelector:@selector(setSection) withObject:nil afterDelay:0.5];
 }
 
 - (void)readTagOn:(UISwitch *)sender

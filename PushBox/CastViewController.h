@@ -93,7 +93,7 @@
 - (void)loadAllFavoritesWithCompletion:(void (^)())completion;
 - (void)loadMoreDataCompletion:(void (^)())completion;
 - (void)clearData;
-- (void)reload;
+- (void)reload:(void (^)())completion;
 - (void)refresh;
 - (void)firstLoad:(void (^)())completion;
 

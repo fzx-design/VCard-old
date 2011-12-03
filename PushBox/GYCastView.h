@@ -51,6 +51,7 @@
 @property (nonatomic) NSInteger pageNum;
 
 @property (nonatomic, assign) NSInteger pageSection;
+@property (nonatomic, assign) BOOL scrollEnabled;
 
 - (void)removeAllSubviews;
 - (void)changeViews;
@@ -72,7 +73,6 @@
 
 - (void)resetWithCurrentIndex:(int)index numberOfPages:(int)page;
 
-- (void)didReceiveMemoryWarning;
 - (id)initWithFrameAndPageSize:(CGRect)frame pageSize:(CGSize)size;
 - (void)setScrollsToTop:(BOOL)scrollsToTop;
 

@@ -43,6 +43,14 @@
 
 #pragma mark - Tools
 
+- (void)resetAllViews
+{
+    for (CardFrameViewController* cardFrameViewController in self.cardFrames) {
+		cardFrameViewController.index = InitialIndex;
+        [cardFrameViewController.view removeFromSuperview];
+	}
+}
+
 - (BOOL)pileEnabled
 {
     return [[SystemDefault systemDefault] pileUpEnabled] && self.dataSource == CastViewDataSourceFriendsTimeline;
@@ -93,20 +101,21 @@
     return status;
 }
 
-- (void)configureCardFrameController:(CardFrameViewController*)vc atIndex:(int)index
+- (BOOL)configureCardFrameController:(CardFrameViewController*)vc atIndex:(int)index
 {    
+    BOOL configSucceeded = NO;
     if ([self pileEnabled]) {
         
         CastViewPileUpController *pc = [CastViewPileUpController sharedCastViewPileUpController];
         CastViewPile *pile = [pc pileAtIndex:index];
         NSDate *date = [self getPileEndDateForPile:pile];
         
-        [vc configureCardFrameWithStatus:[self statusForViewIndex:index] AndPile:pile withEndDateString:date];
+        configSucceeded = [vc configureCardFrameWithStatus:[self statusForViewIndex:index] AndPile:pile withEndDateString:date];
     } else {
-        [vc configureCardFrameWithStatus:[self statusForViewIndex:index]];
+        configSucceeded = [vc configureCardFrameWithStatus:[self statusForViewIndex:index]];
     }
     vc.index = index;
-    
+    return configSucceeded;
 }
 
 #pragma mark - Card Frames methods
@@ -250,14 +259,23 @@
 	CardFrameViewController* vc1 = [self getNeighborCardFrameViewController];
 	CardFrameViewController* vc2 = [self getNeighborCardFrameViewController];
 	
-    [self configureCardFrameController:vc1 atIndex:FirstPageIndex];
-    [self configureCardFrameController:vc2 atIndex:SecondPageIndex];
+    BOOL result1 = [self configureCardFrameController:vc1 atIndex:FirstPageIndex];
+    BOOL result2 = [self configureCardFrameController:vc2 atIndex:SecondPageIndex];
 	
 	[self resetCardFrameIndex];
 	
-	vc1.index = 0;
-	vc2.index = 1;
-	
+    if (result1) {
+        vc1.index = 0;
+    } else {
+        vc1 = nil;
+    }
+    
+    if (result2) {
+        vc2.index = 1;
+    } else {
+        vc2 = nil;
+    }
+    
 	[self.castView refreshViewsWithFirstPage:vc1.view andSecondPage:vc2.view];
 	
 	[self performSelector:@selector(playSoundEffect) withObject:nil afterDelay:1];
@@ -368,25 +386,17 @@
     vc1.view.frame = toExpand.view.frame;
     vc2.view.frame = toExpand.view.frame;
     
-//    vc1.view.transform = CGAffineTransformMakeScale(0.95, 0.95);
-//    vc2.view.transform = CGAffineTransformMakeScale(0.9, 0.9);
-        
-    NSLog(@"vc1's frame x: %f  y: %f", vc1.view.frame.origin.x, vc1.view.frame.origin.y);
-    NSLog(@"vc2's frame x: %f  y: %f", vc2.view.frame.origin.x, vc2.view.frame.origin.y);
-    
-    NSLog(@"toRemove's test is %@", toRemove.contentViewController.status.text);
+    [self.castView setScrollEnabled:NO];
     
 	[UIView animateWithDuration:1 animations:^{
         
         CGRect frame1 = toExpand.view.frame;
         frame1.origin.x += 560;
         vc1.view.frame = frame1;
-//        vc1.view.transform = CGAffineTransformMakeScale(1, 1);
         
         CGRect frame2 = toExpand.view.frame;
         frame2.origin.x += 1120;
         vc2.view.frame = frame2;
-//        vc2.view.transform = CGAffineTransformMakeScale(1, 1);
         
         
         CGRect frame3 = toRemove.view.frame;
@@ -395,13 +405,11 @@
         
         
 	} completion:^(BOOL finished) {
-
-        NSLog(@"vc1's frame x: %f  y: %f", vc1.view.frame.origin.x, vc1.view.frame.origin.y);
-        NSLog(@"vc2's frame x: %f  y: %f", vc2.view.frame.origin.x, vc2.view.frame.origin.y);
+        
+        [self.castView setScrollEnabled:YES];
         
         [self prepareForExpandingPile];
-            
-        NSLog(@"expand pile at index : %d", self.currentIndex);
+        
         self.castView.pageSection += pileSize / 10;
                     
         [self.castView resetWithCurrentIndex:self.currentIndex numberOfPages:[self itemCount:nil]];
@@ -433,7 +441,7 @@
 		return;
 	}
 	
-//	Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:index];
+    //	Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:index];
     CastViewPileUpController *pc = [CastViewPileUpController sharedCastViewPileUpController];
     CastViewPile *pile = [pc pileAtIndex:index];
     
@@ -443,30 +451,27 @@
         popover.stackInfoView.hidden = NO;
         
         popover.stackLabel.text = [NSString stringWithFormat:@"%d 张卡片", [pile numberOfCardsInPile]];
-
+        
         NSDate *date = [self getPileEndDateForPile:pile];
         popover.stackDateLabel.text = [date customString];
         
     } else {
-            Status *status = [self statusForViewIndex:index];
-            
-            popover.userInfoView.hidden = NO;
-            popover.stackInfoView.hidden = YES;
-            
-            NSString *profileImageString = status.author.profileImageURL;
-            [popover.proFileImage loadImageFromURL:profileImageString
-                                                  completion:nil
-                                              cacheInContext:self.fetchedResultsController.managedObjectContext];
-            
-            if (dataSource == CastViewDataSourceUserTimeline) {
-                    popover.screenNameLabel.text = [status.createdAt customString];
-                } else {
-                        popover.screenNameLabel.text = status.author.screenName;
-                    }
+        Status *status = [self statusForViewIndex:index];
+        
+        popover.userInfoView.hidden = NO;
+        popover.stackInfoView.hidden = YES;
+        
+        NSString *profileImageString = status.author.profileImageURL;
+        [popover.proFileImage loadImageFromURL:profileImageString
+                                    completion:nil
+                                cacheInContext:self.fetchedResultsController.managedObjectContext];
+        
+        if (dataSource == CastViewDataSourceUserTimeline) {
+            popover.screenNameLabel.text = [status.createdAt customString];
+        } else {
+            popover.screenNameLabel.text = status.author.screenName;
         }
-
-	
-
+    }
 }
 
 #pragma mark - GYCastViewDelegate methods

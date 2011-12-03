@@ -15,5 +15,11 @@
 #define kNotificationNameReadTagEnabledChanged @"kNotificationNameReadTagEnabledChanged"
 
 @interface PileOptionViewController : UITableViewController
-
+{
+    BOOL _pileEnabled;
+    BOOL _preEnabled;
+    BOOL _action;
+    
+    UISwitch *_uiSwitch;
+}
 @end

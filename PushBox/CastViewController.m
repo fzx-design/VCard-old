@@ -267,7 +267,6 @@
 			if (completion) {
 				completion();
 			}
-			[self checkSearchResults];
 			
 			[[UIApplication sharedApplication] hideLoadingView];
 		}];
@@ -285,6 +284,8 @@
 	self.prevDataSource = self.dataSource;
 	
 	[self.castView moveOutViews:^() {
+        
+        [self.castViewManager resetAllViews];
         
 		self.fetchedResultsController = castViewInfo.fetchedResultsController;
         self.fetchedResultsController.delegate = nil;
@@ -404,6 +405,12 @@
     [self.managedObjectContext processPendingChanges];
 }
 
+- (NSString*)pileLastID
+{
+    Status* status = [self.fetchedResultsController.fetchedObjects objectAtIndex:[self.castViewPileUpController lastIndex]];
+    
+    return [NSString stringWithFormat:@"%lld", [status.statusID longLongValue] - 1];
+}
 
 - (void)checkPiles
 {
@@ -444,6 +451,10 @@
 	
 	for (NSDictionary *dict in dictArray) {
 		
+        if (!dict) {
+            break;
+        }
+        
 		Status *newStatus = nil;
 		
 		if (self.dataSource == CastViewDataSourceFriendsTimeline) {
@@ -649,14 +660,21 @@
 	}];
 
 	if (self.dataSource == CastViewDataSourceFriendsTimeline) {
-		[client getFriendsTimelineSinceID:nil
-									maxID:(long long)0
-						   startingAtPage:_currentNextPage++
-									count:kStatusCountPerRequest
-								  feature:_statusTypeID];
+        
+        if (_refreshFlag || ![self pileUpEnabled]) {
+            [client getFriendsTimelineSinceID:nil
+                                        maxID:(long long)0
+                               startingAtPage:_currentNextPage++
+                                        count:kStatusCountPerRequest
+                                      feature:_statusTypeID];
+        } else {
+            [client getFriendsTimelineSinceID:nil
+                                        maxID:[self pileLastID]
+                               startingAtPage:0
+                                        count:kStatusCountPerRequest
+                                      feature:_statusTypeID];
+        }
     }
-    
-    NSLog(@"the current next page is %d", _currentNextPage);
     
     if (self.dataSource == CastViewDataSourceUserTimeline) {
 		[client getUserTimeline:self.user.userID
@@ -682,10 +700,13 @@
     
 }
 
-- (void)reload
+- (void)reload:(void (^)())completion
 {
     _shouldRefreshCardView = YES;
-    [self refresh];
+    _refreshFlag = YES;
+	_currentNextPage = 1;
+    
+    [self loadMoreDataCompletion:completion];
 }
 
 - (void)refresh
@@ -706,9 +727,19 @@
 		self.castViewManager.fetchedResultsController = nil;
 		self.castViewManager.fetchedResultsController = self.fetchedResultsController;
         self.castViewManager.dataSource = self.dataSource;
-		[self refresh];
+		[self reload:^{
+			[self checkSearchResults];
+            if (completion) {
+                completion();
+            }
+        }];
 	} else {
-		[self pushCardWithCompletion:completion];
+		[self pushCardWithCompletion:^{
+			[self checkSearchResults];
+            if (completion) {
+                completion();
+            }
+        }];
 	}
 }
 
@@ -821,7 +852,7 @@
 
 - (void)loadMoreViews
 {
-    if ([self.castViewManager gotEnoughViewsToShow]) {
+    if ([self.castViewManager gotEnoughViewsToShow] && [self pileUpEnabled]) {
         [self.castView addMoreViews];
     } else {
         [self loadMoreDataCompletion:^(){
