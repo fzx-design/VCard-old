@@ -7,6 +7,7 @@
 //
 
 #import "CastViewPileUpController.h"
+#import "ReadStatusID.h"
 
 #define kCastViewPageNumberInSection 10
 
@@ -17,6 +18,8 @@ static CastViewPileUpController *_sharedCastViewPileUpController = nil;
 @synthesize castViewPiles = _castViewPiles;
 @synthesize currentViewIndex = _currentViewIndex;
 @synthesize lastIndexFR = _lastIndexInFR;
+
+@synthesize managedObjectContext = _managedObjectContext;
 
 + (CastViewPileUpController*)sharedCastViewPileUpController
 {
@@ -94,7 +97,7 @@ static CastViewPileUpController *_sharedCastViewPileUpController = nil;
     
     NSLog(@"adding %d with id %lld", index, statusID);
 
-	if (/*[_oldReadIDSet containsObject:number] || */ [_newReadIDSet containsObject:number]) {
+	if ([_oldReadIDSet containsObject:number] || [_newReadIDSet containsObject:number]) {
 	
         BOOL pileFound = NO;
         
@@ -190,12 +193,37 @@ static CastViewPileUpController *_sharedCastViewPileUpController = nil;
 
 - (void)addNewReadID:(long long)readStatusID
 {
-//    if (![_newReadIDSet containsObject:[NSNumber numberWithLongLong:readStatusID]]) {
-        [_newReadIDSet addObject:[NSNumber numberWithLongLong:readStatusID]];
-        NSLog(@"%lld already in readSet", readStatusID);
-        
-//    }
+    [_newReadIDSet addObject:[NSNumber numberWithLongLong:readStatusID]];
+    
+    NSLog(@"%lld already in readSet", readStatusID);
     NSLog(@"readSet size is %d", _newReadIDSet.count);
+}
+
+- (void)saveReadID
+{
+    NSEnumerator* enumerator = [_newReadIDSet objectEnumerator];
+    NSNumber* number = [enumerator nextObject];
+    while (number) {
+        [ReadStatusID insertStatusID:[number longLongValue] inManagedObjectContext:self.managedObjectContext];
+        number = [enumerator nextObject];
+    }
+}
+
+- (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
+{
+    _managedObjectContext = managedObjectContext;
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    
+    [request setEntity:[NSEntityDescription entityForName:@"ReadStatusID" inManagedObjectContext:self.managedObjectContext]];
+    
+    NSArray *res = [self.managedObjectContext executeFetchRequest:request error:NULL];
+    
+    for (ReadStatusID* statusID in res) {
+        NSNumber* number = [NSNumber numberWithLongLong:[[statusID statusID] longLongValue]];
+        [_oldReadIDSet addObject:number];
+    }
+    
+    [request release];
 }
 
 - (void)print

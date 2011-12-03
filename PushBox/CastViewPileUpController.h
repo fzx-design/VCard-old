@@ -22,6 +22,7 @@
 @property (nonatomic, retain) NSMutableArray* castViewPiles;
 @property (nonatomic, assign) int currentViewIndex;
 @property (nonatomic, assign) int lastIndexFR;
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
 + (CastViewPileUpController*)sharedCastViewPileUpController;
 
@@ -36,6 +37,8 @@
 
 - (void)deletePileAtIndex:(int)index;
 - (void)clearPiles;
+
+- (void)saveReadID;
 
 - (void)print;
 

@@ -892,6 +892,7 @@
 {
 	if (_castViewPileUpController == nil) {
 		_castViewPileUpController = [CastViewPileUpController sharedCastViewPileUpController];
+        _castViewPileUpController.managedObjectContext = self.managedObjectContext;
 	}
 	
 	return _castViewPileUpController;

@@ -39,6 +39,11 @@
 	[userDefault registerDefaults:dict];
 }
 
+- (void)saveUnsavedReadID
+{
+    [[CastViewPileUpController sharedCastViewPileUpController] saveReadID];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
@@ -143,6 +148,8 @@
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     if (managedObjectContext != nil)
     {
+        [self saveUnsavedReadID];
+        
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error])
         {
             /*

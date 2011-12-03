@@ -263,7 +263,6 @@
 	self.groupView.hidden = YES;
     self.groupView.layer.anchorPoint = CGPointMake(0.5, 1.0);
     
-    self.meImageView.hidden = YES;
     
     CGRect frame = self.groupView.frame;
     frame.origin.y += frame.size.height / 2;
@@ -444,6 +443,8 @@
 	self.bottomStateView.hidden = YES;
 	self.notificationView.hidden = YES;
     self.groupView.hidden = YES;
+    
+    self.meImageView.hidden = YES;
     
 	_commandCenterFlag = NO;
 	
