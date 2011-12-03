@@ -285,6 +285,8 @@
 	
 	[self.castView moveOutViews:^() {
         
+        [self.castViewManager resetAllViews];
+        
 		self.fetchedResultsController = castViewInfo.fetchedResultsController;
         self.fetchedResultsController.delegate = nil;
 		self.dataSource = castViewInfo.dataSource;

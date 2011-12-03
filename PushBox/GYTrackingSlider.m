@@ -10,7 +10,7 @@
 #import "AnimationProvider.h"
 
 #define kPopoverHeight -108
-#define kXOffset -68
+#define kXOffset -73
 
 @implementation GYTrackingSlider
 

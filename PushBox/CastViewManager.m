@@ -43,6 +43,14 @@
 
 #pragma mark - Tools
 
+- (void)resetAllViews
+{
+    for (CardFrameViewController* cardFrameViewController in self.cardFrames) {
+		cardFrameViewController.index = InitialIndex;
+        [cardFrameViewController.view removeFromSuperview];
+	}
+}
+
 - (BOOL)pileEnabled
 {
     return [[SystemDefault systemDefault] pileUpEnabled] && self.dataSource == CastViewDataSourceFriendsTimeline;
@@ -443,7 +451,7 @@
 		return;
 	}
 	
-//	Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:index];
+    //	Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:index];
     CastViewPileUpController *pc = [CastViewPileUpController sharedCastViewPileUpController];
     CastViewPile *pile = [pc pileAtIndex:index];
     
@@ -453,30 +461,27 @@
         popover.stackInfoView.hidden = NO;
         
         popover.stackLabel.text = [NSString stringWithFormat:@"%d 张卡片", [pile numberOfCardsInPile]];
-
+        
         NSDate *date = [self getPileEndDateForPile:pile];
         popover.stackDateLabel.text = [date customString];
         
     } else {
-            Status *status = [self statusForViewIndex:index];
-            
-            popover.userInfoView.hidden = NO;
-            popover.stackInfoView.hidden = YES;
-            
-            NSString *profileImageString = status.author.profileImageURL;
-            [popover.proFileImage loadImageFromURL:profileImageString
-                                                  completion:nil
-                                              cacheInContext:self.fetchedResultsController.managedObjectContext];
-            
-            if (dataSource == CastViewDataSourceUserTimeline) {
-                    popover.screenNameLabel.text = [status.createdAt customString];
-                } else {
-                        popover.screenNameLabel.text = status.author.screenName;
-                    }
+        Status *status = [self statusForViewIndex:index];
+        
+        popover.userInfoView.hidden = NO;
+        popover.stackInfoView.hidden = YES;
+        
+        NSString *profileImageString = status.author.profileImageURL;
+        [popover.proFileImage loadImageFromURL:profileImageString
+                                    completion:nil
+                                cacheInContext:self.fetchedResultsController.managedObjectContext];
+        
+        if (dataSource == CastViewDataSourceUserTimeline) {
+            popover.screenNameLabel.text = [status.createdAt customString];
+        } else {
+            popover.screenNameLabel.text = status.author.screenName;
         }
-
-	
-
+    }
 }
 
 #pragma mark - GYCastViewDelegate methods

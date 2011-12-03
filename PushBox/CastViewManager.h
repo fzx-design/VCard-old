@@ -53,5 +53,6 @@
 - (UIView*)viewForItemAtIndex:(GYCastView*)scrollView index:(int)index;
 - (int)itemCount:(GYCastView*)scrollView;
 - (void)resetViewsAroundCurrentIndex:(int)index;
+- (void)resetAllViews;
 
 @end
