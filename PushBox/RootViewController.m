@@ -490,7 +490,7 @@
 	[self hideDockView];
 	[self hideCardTableView];
 	[self hideBottomStateView];
-    [[CastViewPileUpController sharedCastViewPileUpController] release];
+    [CastViewPileUpController releaseSharedCastViewPileUpController];
     [ReadStatusID deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
 	
 	[self.castViewController.castView moveOutViews:^(){

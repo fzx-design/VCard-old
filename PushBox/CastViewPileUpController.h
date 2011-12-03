@@ -25,6 +25,7 @@
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
 + (CastViewPileUpController*)sharedCastViewPileUpController;
++ (void)releaseSharedCastViewPileUpController;
 
 - (CastViewPile*)pileAtIndex:(int)index;
 - (long long)lastIndex;

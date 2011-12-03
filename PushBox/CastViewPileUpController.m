@@ -29,6 +29,14 @@ static CastViewPileUpController *_sharedCastViewPileUpController = nil;
 	return _sharedCastViewPileUpController;
 }
 
++ (void)releaseSharedCastViewPileUpController
+{
+    if (_sharedCastViewPileUpController) {
+        [_sharedCastViewPileUpController release];
+        _sharedCastViewPileUpController = nil;
+    }
+}
+
 
 #pragma mark - Life cycle
 
