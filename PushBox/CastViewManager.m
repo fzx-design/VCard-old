@@ -93,20 +93,21 @@
     return status;
 }
 
-- (void)configureCardFrameController:(CardFrameViewController*)vc atIndex:(int)index
+- (BOOL)configureCardFrameController:(CardFrameViewController*)vc atIndex:(int)index
 {    
+    BOOL configSucceeded = NO;
     if ([self pileEnabled]) {
         
         CastViewPileUpController *pc = [CastViewPileUpController sharedCastViewPileUpController];
         CastViewPile *pile = [pc pileAtIndex:index];
         NSDate *date = [self getPileEndDateForPile:pile];
         
-        [vc configureCardFrameWithStatus:[self statusForViewIndex:index] AndPile:pile withEndDateString:date];
+        configSucceeded = [vc configureCardFrameWithStatus:[self statusForViewIndex:index] AndPile:pile withEndDateString:date];
     } else {
-        [vc configureCardFrameWithStatus:[self statusForViewIndex:index]];
+        configSucceeded = [vc configureCardFrameWithStatus:[self statusForViewIndex:index]];
     }
     vc.index = index;
-    
+    return configSucceeded;
 }
 
 #pragma mark - Card Frames methods
@@ -250,14 +251,23 @@
 	CardFrameViewController* vc1 = [self getNeighborCardFrameViewController];
 	CardFrameViewController* vc2 = [self getNeighborCardFrameViewController];
 	
-    [self configureCardFrameController:vc1 atIndex:FirstPageIndex];
-    [self configureCardFrameController:vc2 atIndex:SecondPageIndex];
+    BOOL result1 = [self configureCardFrameController:vc1 atIndex:FirstPageIndex];
+    BOOL result2 = [self configureCardFrameController:vc2 atIndex:SecondPageIndex];
 	
 	[self resetCardFrameIndex];
 	
-	vc1.index = 0;
-	vc2.index = 1;
-	
+    if (result1) {
+        vc1.index = 0;
+    } else {
+        vc1 = nil;
+    }
+    
+    if (result2) {
+        vc2.index = 1;
+    } else {
+        vc2 = nil;
+    }
+    
 	[self.castView refreshViewsWithFirstPage:vc1.view andSecondPage:vc2.view];
 	
 	[self performSelector:@selector(playSoundEffect) withObject:nil afterDelay:1];

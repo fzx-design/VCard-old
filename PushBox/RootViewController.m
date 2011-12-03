@@ -763,7 +763,6 @@
 
 - (void)showSearchTimeline:(NSString *)searchString
 {
-	_inSearchMode = YES;
 	
     self.castViewController.dataSource = CastViewDataSourceSearch;
     
@@ -780,7 +779,10 @@
 	}
     
 	[self.castViewController switchToSearchCards:^{
-		[self moveCardIntoView];
+        if (!_inSearchMode) {
+            [self moveCardIntoView];
+        }
+        _inSearchMode = YES;
 	}];
     
 	self.dockViewController.refreshNotiImageView.hidden = YES;
@@ -1013,6 +1015,8 @@
     else {
         [slider setValue:row animated:YES];
     }
+    
+    slider.enabled = numberOfRows != 0;
 }
 
 - (void)setDefaultBackgroundImage:(BOOL)animated
@@ -1782,7 +1786,7 @@
     [[UIApplication sharedApplication] showLoadingView];
     
     [self.castViewController clearData];
-    [self.castViewController reload];
+    [self.castViewController reload:nil];
     
     [self hideGroupView:_tmpButton];
 }

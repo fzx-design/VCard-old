@@ -1130,6 +1130,10 @@
     
     Status *status = self.status;
     
+    if (status == nil) {
+        return;
+    }
+    
     isTrack = YES;
     
     NSString *profileImageString = self.status.author.profileImageURL;

@@ -267,7 +267,6 @@
 			if (completion) {
 				completion();
 			}
-			[self checkSearchResults];
 			
 			[[UIApplication sharedApplication] hideLoadingView];
 		}];
@@ -699,10 +698,13 @@
     
 }
 
-- (void)reload
+- (void)reload:(void (^)())completion
 {
     _shouldRefreshCardView = YES;
-    [self refresh];
+    _refreshFlag = YES;
+	_currentNextPage = 1;
+    
+    [self loadMoreDataCompletion:completion];
 }
 
 - (void)refresh
@@ -723,9 +725,19 @@
 		self.castViewManager.fetchedResultsController = nil;
 		self.castViewManager.fetchedResultsController = self.fetchedResultsController;
         self.castViewManager.dataSource = self.dataSource;
-		[self refresh];
+		[self reload:^{
+			[self checkSearchResults];
+            if (completion) {
+                completion();
+            }
+        }];
 	} else {
-		[self pushCardWithCompletion:completion];
+		[self pushCardWithCompletion:^{
+			[self checkSearchResults];
+            if (completion) {
+                completion();
+            }
+        }];
 	}
 }
 
