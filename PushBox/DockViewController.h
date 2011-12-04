@@ -82,6 +82,9 @@
 
 @property(nonatomic, retain) IBOutlet UIButton* hideCommandCenterButton;
 
+- (void)setCommandCenter;
+- (void)clearCommandCenter;
+
 - (void)showControlsAnimated:(BOOL)animated;
 - (void)hideControlsAnimated:(BOOL)animated;
 

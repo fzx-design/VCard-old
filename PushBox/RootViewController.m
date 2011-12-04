@@ -1406,6 +1406,9 @@
 
 - (void)showCommandCenter
 {
+//    [[UIApplication sharedApplication] showLoadingView];
+//    [self.dockViewController setCommandCenter];
+    
     [self hideMEImageView];
     _sliderEnabled = self.dockViewController.slider.enabled;
     
@@ -1455,6 +1458,7 @@
                      completion:^(BOOL finished) {
                          if (finished) {
                              [self.dockViewController viewDidAppear:YES];
+//                             [[UIApplication sharedApplication] hideLoadingView];
                          }
                      }];
     self.dockViewController.playButton.enabled = NO;
@@ -1503,6 +1507,7 @@
                      completion:^(BOOL finished) {
                          if (finished) {
                              [self.dockViewController viewDidDisappear:YES];
+//                             [self.dockViewController clearCommandCenter];
                          }
                      }];
     self.dockViewController.playButton.enabled = YES;

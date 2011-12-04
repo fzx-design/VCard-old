@@ -42,6 +42,53 @@
 
 @synthesize hideCommandCenterButton = _hideCommandCenterButton;
 
+
+#pragma mark - Tool
+
+- (void)setCommandCenter
+{
+    self.ccUserInfoCardViewController = [[[CCUserInfoCardViewController alloc] init] autorelease];
+	self.ccUserInfoCardViewController.currentUser = self.currentUser;
+	self.ccUserInfoCardViewController.managedObjectContext = self.managedObjectContext;
+	
+	self.userCardNaviViewController = [[[UserCardNaviViewController alloc] initWithRootViewController:self.ccUserInfoCardViewController] autorelease];
+	self.userCardNaviViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+	CGRect frame = CGRectMake(-16, 121, self.userCardNaviViewController.view.frame.size.width, self.userCardNaviViewController.view.frame.size.height);
+	self.userCardNaviViewController.view.frame = frame;
+	[self.view addSubview:self.userCardNaviViewController.view];
+	
+	self.ccCommentTableViewController = [[[CCCommentsTableViewController alloc] init] autorelease];
+	self.ccCommentTableViewController.dataSource = CommentsTableViewDataSourceCommentsToMe;
+	self.ccCommentTableViewController.currentUser = self.currentUser;
+	self.ccCommentTableViewController.managedObjectContext = self.managedObjectContext;
+	self.commentNaviViewController = [[[UserCardNaviViewController alloc] initWithRootViewController:self.ccCommentTableViewController] autorelease];
+	self.commentNaviViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+	
+	frame = CGRectMake(470, 121, self.commentNaviViewController.view.frame.size.width, self.commentNaviViewController.view.frame.size.height);
+	self.commentNaviViewController.view.frame = frame;
+	[self.view addSubview:self.commentNaviViewController.view];
+}
+
+- (void)clearCommandCenter
+{
+    
+    [_commentNaviViewController release];
+    [_userCardNaviViewController release];
+    [_ccCommentTableViewController release];
+    [_ccUserInfoCardViewController release];
+    
+    _ccUserInfoCardViewController = nil;
+    _userCardNaviViewController = nil;
+    _ccCommentTableViewController = nil;
+    _commentNaviViewController = nil;
+    
+//    self.ccUserInfoCardViewController = nil;
+//    self.ccCommentTableViewController = nil;
+//    self.userCardNaviViewController = nil;
+//    self.commentNaviViewController = nil;
+}
+
 #pragma mark - View lifecycle
 
 - (void)dealloc
@@ -152,28 +199,8 @@
     self.commandCenterNotiImageView.hidden = YES;
 	
     self.hideCommandCenterButton.enabled = NO;
-	
-	self.ccUserInfoCardViewController = [[[CCUserInfoCardViewController alloc] init] autorelease];
-	self.ccUserInfoCardViewController.currentUser = self.currentUser;
-	self.ccUserInfoCardViewController.managedObjectContext = self.managedObjectContext;
-	
-	self.userCardNaviViewController = [[[UserCardNaviViewController alloc] initWithRootViewController:self.ccUserInfoCardViewController] autorelease];
-	self.userCardNaviViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
-	CGRect frame = CGRectMake(-16, 121, self.userCardNaviViewController.view.frame.size.width, self.userCardNaviViewController.view.frame.size.height);
-	self.userCardNaviViewController.view.frame = frame;
-	[self.view addSubview:self.userCardNaviViewController.view];
-	
-	self.ccCommentTableViewController = [[[CCCommentsTableViewController alloc] init] autorelease];
-	self.ccCommentTableViewController.dataSource = CommentsTableViewDataSourceCommentsToMe;
-	self.ccCommentTableViewController.currentUser = self.currentUser;
-	self.ccCommentTableViewController.managedObjectContext = self.managedObjectContext;
-	self.commentNaviViewController = [[[UserCardNaviViewController alloc] initWithRootViewController:self.ccCommentTableViewController] autorelease];
-	self.commentNaviViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-	
-	frame = CGRectMake(470, 121, self.commentNaviViewController.view.frame.size.width, self.commentNaviViewController.view.frame.size.height);
-	self.commentNaviViewController.view.frame = frame;
-	[self.view addSubview:self.commentNaviViewController.view];
+    [self setCommandCenter];
 	
 	[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(calculateRefreshTime) userInfo:nil repeats:YES];
 	

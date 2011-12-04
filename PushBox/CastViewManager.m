@@ -178,6 +178,9 @@
 {
 	CardFrameViewController *cardFrameViewController = [self findCardFrameViewControllerForIndex:index];
 	if (cardFrameViewController != nil) {
+        
+        [self configureCardFrameController:cardFrameViewController atIndex:index];
+        
 		return cardFrameViewController;
 	}
 	

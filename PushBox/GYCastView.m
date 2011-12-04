@@ -400,23 +400,6 @@
 		return;
 	}
 	int page = [self currentPage];
-//	
-//    _test = YES;
-//    
-//	if (prePage != page) {
-//        
-//		if (prePage > page) {
-//			[self loadPage:(page - 3)];
-//		} else {
-//			[self loadPage:(page + 3)];
-//		}
-//		
-//		prePage = page;
-//		
-//		[self.delegate didScrollToIndex:page];
-//		[self reloadViews];
-//
-//	}
     
     if (prePage == page) {
         return;
