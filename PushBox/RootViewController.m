@@ -566,7 +566,7 @@
     
     [self.view addSubview:self.bottomSearchBG];
 //    [self.view addSubview:self.bottomSearchTextField];
-    [self.view insertSubview:self.bottomSearchTextField belowSubview:self.dockViewController.view];
+    [self.view insertSubview:self.bottomSearchTextField aboveSubview:self.bottomSearchBG];
     
     [self.bottomSearchTextField becomeFirstResponder];
     
@@ -594,7 +594,7 @@
     [self.bottomSearchBG removeFromSuperview];
     [self.bottomSearchTextField removeFromSuperview];
     [self.bottomStateView addSubview:self.bottomSearchBG]; 
-    [self.view insertSubview:self.bottomSearchTextField belowSubview:self.dockViewController.view];
+    [self.view insertSubview:self.bottomSearchTextField aboveSubview:self.bottomSearchBG];
 	
 	self.bottomSearchTextField.alpha = 0.0;
 	[UIView animateWithDuration:1.0 animations:^{
@@ -625,7 +625,7 @@
     [self.bottomSearchTextField removeFromSuperview];
     [self.view addSubview:self.bottomSearchBG];
 //    [self.view addSubview:self.bottomSearchTextField];
-    [self.view insertSubview:self.bottomSearchTextField belowSubview:self.dockViewController.view];
+    [self.view insertSubview:self.bottomSearchTextField aboveSubview:self.bottomSearchBG];
     
     [self.bottomSearchTextField resignFirstResponder];
 }
