@@ -262,12 +262,6 @@
 	self.notificationView.hidden = YES;
 	self.bottomStateFrameView.hidden = NO;
 	self.groupView.hidden = YES;
-    self.groupView.layer.anchorPoint = CGPointMake(0.5, 1.0);
-    
-    
-    CGRect frame = self.groupView.frame;
-    frame.origin.y += frame.size.height / 2;
-    self.groupView.frame = frame;
     
 	_statusTypeStack = [[NSMutableArray alloc] init];
 }
@@ -440,6 +434,10 @@
                    name:kNotificationNamePileUpEnabledChanged 
                  object:nil];
     
+    self.groupView.layer.anchorPoint = CGPointMake(0.5, 1.0);
+    CGRect frame = self.groupView.frame;
+    frame.origin.y += frame.size.height / 2;
+    self.groupView.frame = frame;
     
 	self.bottomStateView.hidden = YES;
 	self.notificationView.hidden = YES;
@@ -1406,8 +1404,8 @@
 
 - (void)showCommandCenter
 {
-//    [[UIApplication sharedApplication] showLoadingView];
-//    [self.dockViewController setCommandCenter];
+
+    [self.dockViewController setCommandCenter];
     
     [self hideMEImageView];
     _sliderEnabled = self.dockViewController.slider.enabled;
@@ -1431,7 +1429,7 @@
 	}
 	
     [self.dockViewController viewWillAppear:YES];
-	[self.dockViewController.ccCommentTableViewController returnToCommandCenter];
+//	[self.dockViewController.ccCommentTableViewController returnToCommandCenter];
     
     [UIView animateWithDuration:kDockAnimationInterval
                           delay:0 
@@ -1458,7 +1456,7 @@
                      completion:^(BOOL finished) {
                          if (finished) {
                              [self.dockViewController viewDidAppear:YES];
-//                             [[UIApplication sharedApplication] hideLoadingView];
+                             [[UIApplication sharedApplication] hideLoadingView];
                          }
                      }];
     self.dockViewController.playButton.enabled = NO;
@@ -1507,7 +1505,7 @@
                      completion:^(BOOL finished) {
                          if (finished) {
                              [self.dockViewController viewDidDisappear:YES];
-//                             [self.dockViewController clearCommandCenter];
+                             [self.dockViewController clearCommandCenter];
                          }
                      }];
     self.dockViewController.playButton.enabled = YES;

@@ -47,6 +47,8 @@
 
 - (void)setCommandCenter
 {
+        [[UIApplication sharedApplication] showLoadingView];
+    
     self.ccUserInfoCardViewController = [[[CCUserInfoCardViewController alloc] init] autorelease];
 	self.ccUserInfoCardViewController.currentUser = self.currentUser;
 	self.ccUserInfoCardViewController.managedObjectContext = self.managedObjectContext;
@@ -62,6 +64,8 @@
 	self.ccCommentTableViewController.dataSource = CommentsTableViewDataSourceCommentsToMe;
 	self.ccCommentTableViewController.currentUser = self.currentUser;
 	self.ccCommentTableViewController.managedObjectContext = self.managedObjectContext;
+    self.ccCommentTableViewController.fetchedResultsController.delegate = self.ccCommentTableViewController;
+    
 	self.commentNaviViewController = [[[UserCardNaviViewController alloc] initWithRootViewController:self.ccCommentTableViewController] autorelease];
 	self.commentNaviViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 	
@@ -72,6 +76,8 @@
 
 - (void)clearCommandCenter
 {
+    [_commentNaviViewController.view removeFromSuperview];
+    [_userCardNaviViewController.view removeFromSuperview];
     
     [_commentNaviViewController release];
     [_userCardNaviViewController release];
@@ -200,7 +206,7 @@
 	
     self.hideCommandCenterButton.enabled = NO;
     
-    [self setCommandCenter];
+//    [self setCommandCenter];
 	
 	[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(calculateRefreshTime) userInfo:nil repeats:YES];
 	
@@ -213,8 +219,8 @@
 {
     [super viewWillAppear:animated];
 	[self.ccUserInfoCardViewController viewWillAppear:YES];
-	[self.ccCommentTableViewController viewWillAppear:YES];
-    //    [self.commentsTableViewController viewWillAppear:YES];
+//	[self.ccCommentTableViewController viewWillAppear:YES];
+//    [self.commentsTableViewController viewWillAppear:YES];
 }
 
 - (void)calculateRefreshTime

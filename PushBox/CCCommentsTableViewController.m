@@ -42,6 +42,12 @@
 	[_switchView release];
 	[_tomeLabel release];
 	[_bymeLabel release];
+    if (_commentsToMeFetchedResultsController) {
+        [_commentsToMeFetchedResultsController release];
+    }
+    if (_commentsByMeFetchedResultsController) {
+        [_commentsByMeFetchedResultsController release];
+    }
     [super dealloc];
 }
 
