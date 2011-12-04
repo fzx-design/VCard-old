@@ -17,7 +17,9 @@ static UserCardNaviViewController *sharedUserCardNaviViewController = nil;
 
 + (void)setSharedUserCardNaviViewController:(UserCardNaviViewController*)vc
 {
-    sharedUserCardNaviViewController = [vc retain];
+    if (sharedUserCardNaviViewController == nil) {
+        sharedUserCardNaviViewController = [vc retain];
+    }
 }
 
 + (BOOL)sharedUserCardNaviViewControllerExisted
