@@ -98,15 +98,17 @@
     if (status == nil) {
         return NO;
     }
-    if (status == nil || self.contentViewController == nil) {
+
+    if (self.contentViewController.view.superview == nil) {
+		[self.view insertSubview:self.contentViewController.view belowSubview:self.pileBounderShadow];
+	}
+    
+    long long aID = [self.contentViewController.status.statusID longLongValue];
+    long long bID = [status.statusID longLongValue];
+    if (aID != bID) {
         self.contentViewController.status = status;
-    } else {
-        long long aID = [self.contentViewController.status.statusID longLongValue];
-        long long bID = [status.statusID longLongValue];
-        if (aID != bID) {
-            self.contentViewController.status = status;
-        }
     }
+//    }
     
     BOOL result = [pile isMultipleCardPile];
     self.pileInfoView.hidden = !result;
@@ -129,14 +131,13 @@
     return YES;
 }
 
-
-- (void)setContentViewController:(SmartCardViewController *)contentViewController
+- (void)setContentViewController:(SmartCardViewController *)content
 {
 	if (_contentViewController != nil) {
 		[_contentViewController release];
 	}
-	
-	_contentViewController = [contentViewController retain];
+    
+	_contentViewController = [content retain];
 	
 	if (self.contentViewController.view.superview == nil) {
 		[self.view insertSubview:self.contentViewController.view belowSubview:self.pileBounderShadow];
