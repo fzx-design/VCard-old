@@ -57,6 +57,7 @@
 	BOOL _loading;
 	BOOL _refreshFlag;
 	BOOL _shouldRefreshCardView;
+    BOOL _addMoreViewsFlag;
     
     NSString* _searchString;
     int _statusTypeID;

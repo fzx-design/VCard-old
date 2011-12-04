@@ -78,6 +78,13 @@
     if (page < 0) return;
     if (page >= pageNum) {
         
+        if (loadingMoreViewsFlag) {
+            return;
+        }
+        loadingMoreViewsFlag = YES;
+        
+        pageSection++;
+        
 		[self.delegate loadMoreViews];
 		if ([self currentPage] == pageNum - 1) {
 			[[UIApplication sharedApplication] showLoadingView];
@@ -130,6 +137,8 @@
     
 	animating = YES;
     
+    loadingMoreViewsFlag = NO;
+    
 	pageSection = 1;
 	
 	pageNum = [delegate itemCount:self];
@@ -152,6 +161,8 @@
 - (void)resetWithCurrentIndex:(int)index numberOfPages:(int)page
 {
 	animating = YES;
+    
+    loadingMoreViewsFlag = NO;
 	
 	pageNum = page;
 	
@@ -268,21 +279,37 @@
 
 - (void)addMoreViews
 {
-    pageSection++;
+//    pageSection++;
+//    
+//	int pre = pageNum;
     
-	int pre = pageNum;
 	pageNum = [self.delegate itemCount:self];
-	
-	if (pageNum <= pre) {
-		pageSection--;
-	} else {
-		self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
-		[self.delegate didScrollToIndex:[self currentPage]];
-		[self loadPage:[self currentPage] + 1];
-		[self loadPage:[self currentPage] + 2];
-		
-		[[UIApplication sharedApplication] hideLoadingView];
-	}
+    
+#warning 不应该判断是否是否增加，而应该判断又没有多余出来要显示的东西
+	int shouldNumber = (pageSection - 1) * kNumberOfCardsInSection;
+    
+//	if (pageNum <= pre) {
+    if (pageNum - shouldNumber < 10) {
+        pageSection--;
+    } 
+    
+    self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
+    [self.delegate didScrollToIndex:[self currentPage]];
+    [self loadPage:[self currentPage] + 1];
+    [self loadPage:[self currentPage] + 2];
+    
+//    if (!shouldAdd) {
+//		pageSection--;
+//	} else {
+//		self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
+//		[self.delegate didScrollToIndex:[self currentPage]];
+//		[self loadPage:[self currentPage] + 1];
+//		[self loadPage:[self currentPage] + 2];
+//		
+//		[[UIApplication sharedApplication] hideLoadingView];
+//	}
+    
+    loadingMoreViewsFlag = NO;
 }
 
 - (void)refreshViewsWithFirstPage:(UIView*)firstView 

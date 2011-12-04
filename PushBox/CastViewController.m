@@ -79,7 +79,7 @@
 	_lastStatusID = 0;
     _statusTypeID = 0;
     _meImageView.hidden = YES;
-    
+    _addMoreViewsFlag = NO;
     
     _startDate = [[NSDate date] retain];
 }
@@ -423,7 +423,8 @@
 {
 	if (![self.castViewManager gotEnoughViewsToShow]) {
 		[self loadMoreDataCompletion:^{
-            if ([self.castViewPileUpController itemCount] < 10) {
+            if (_addMoreViewsFlag) {
+                _addMoreViewsFlag = NO;
                 [self.castView addMoreViews];
             }
         }];
@@ -528,6 +529,8 @@
     
 	[client setCompletionBlock:^(WeiboClient *client) {
 		if (!client.hasError) {
+            
+            _addMoreViewsFlag = YES;
             
 			[self clearData];
 			
@@ -874,6 +877,7 @@
 
 - (void)loadMoreViews
 {
+    _addMoreViewsFlag = YES;
     [self loadMoreDataCompletion:^(){
         [self.castView addMoreViews];
     }];

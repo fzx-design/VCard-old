@@ -42,6 +42,8 @@
 	
 	NSInteger pageSection;
     
+    BOOL loadingMoreViewsFlag;
+    
     BOOL _test;
 }
 @property (nonatomic, retain) UIScrollView *scrollView;
