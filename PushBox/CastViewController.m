@@ -21,7 +21,7 @@
 #define kStatusCountPerRequest 10
 #define kBlurImageViewScale 2.0
 #define kCastViewScale 2.5
-#define kReadingInterval 0.7
+#define kReadingInterval 0.3
 
 @implementation CastViewController
 
