@@ -279,10 +279,7 @@
 
 - (void)addMoreViews
 {
-//    pageSection++;
-//    
-//	int pre = pageNum;
-    
+
 	pageNum = [self.delegate itemCount:self];
     
 	int shouldNumber = (pageSection - 1) * kNumberOfCardsInSection;
@@ -295,18 +292,8 @@
     [self.delegate didScrollToIndex:[self currentPage]];
     [self loadPage:[self currentPage] + 1];
     [self loadPage:[self currentPage] + 2];
-    
-//    if (!shouldAdd) {
-//		pageSection--;
-//	} else {
-//		self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
-//		[self.delegate didScrollToIndex:[self currentPage]];
-//		[self loadPage:[self currentPage] + 1];
-//		[self loadPage:[self currentPage] + 2];
-//		
-//		[[UIApplication sharedApplication] hideLoadingView];
-//	}
-    
+
+    [[UIApplication sharedApplication] hideLoadingView];
     loadingMoreViewsFlag = NO;
 }
 
