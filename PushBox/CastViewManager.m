@@ -102,6 +102,7 @@
 - (BOOL)configureCardFrameController:(CardFrameViewController*)vc atIndex:(int)index
 {    
     BOOL configSucceeded = NO;
+    
     if ([self pileEnabled]) {
         
         CastViewPileUpController *pc = [CastViewPileUpController sharedCastViewPileUpController];
@@ -114,6 +115,7 @@
         configSucceeded = [vc configureCardFrameWithStatus:[self statusForViewIndex:index]];
     }
     vc.index = index;
+    
     return configSucceeded;
 }
 

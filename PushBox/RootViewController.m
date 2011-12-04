@@ -738,7 +738,7 @@
 	_inSearchMode = NO;
     if (self.dockViewController.searchButton.selected)
         [self hideSearchView];
-    
+        
     self.castViewController.dataSource = CastViewDataSourceFriendsTimeline;
 	[self.castViewController popCardWithCompletion:^{
         self.dockViewController.showFavoritesButton.selected = NO;

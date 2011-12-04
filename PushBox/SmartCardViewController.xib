@@ -978,38 +978,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">locationLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="755523261"/>
-					</object>
-					<int key="connectionID">93</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">musicBackgroundImageView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="70486562"/>
-					</object>
-					<int key="connectionID">75</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">playButton</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="259776592"/>
-					</object>
-					<int key="connectionID">73</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">locationIconImageView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="1024879428"/>
-					</object>
-					<int key="connectionID">92</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">iPad1Cover</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="266971380"/>
@@ -1058,22 +1026,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">trackLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="995979114"/>
-					</object>
-					<int key="connectionID">62</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">trackView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="60335549"/>
-					</object>
-					<int key="connectionID">63</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">trackLabel1</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="403241000"/>
@@ -1087,6 +1039,78 @@
 						<reference key="destination" ref="133438369"/>
 					</object>
 					<int key="connectionID">126</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">locationLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="755523261"/>
+					</object>
+					<int key="connectionID">93</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">musicCoverImageView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="620621228"/>
+					</object>
+					<int key="connectionID">84</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">repostWebView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="738363382"/>
+					</object>
+					<int key="connectionID">70</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">postWebView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="822315524"/>
+					</object>
+					<int key="connectionID">68</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">musicBackgroundImageView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="70486562"/>
+					</object>
+					<int key="connectionID">75</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">playButton</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="259776592"/>
+					</object>
+					<int key="connectionID">73</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">locationIconImageView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="1024879428"/>
+					</object>
+					<int key="connectionID">92</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">trackLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="995979114"/>
+					</object>
+					<int key="connectionID">62</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">trackView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="60335549"/>
+					</object>
+					<int key="connectionID">63</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -1119,30 +1143,6 @@
 						<reference key="destination" ref="215588129"/>
 					</object>
 					<int key="connectionID">109</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">postWebView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="822315524"/>
-					</object>
-					<int key="connectionID">68</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">repostWebView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="738363382"/>
-					</object>
-					<int key="connectionID">70</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">musicCoverImageView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="620621228"/>
-					</object>
-					<int key="connectionID">84</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -1390,26 +1390,6 @@
 						<string key="objectName">StatusView</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">91</int>
-						<reference key="object" ref="755523261"/>
-						<reference key="parent" ref="931374233"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">74</int>
-						<reference key="object" ref="70486562"/>
-						<reference key="parent" ref="931374233"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">72</int>
-						<reference key="object" ref="259776592"/>
-						<reference key="parent" ref="931374233"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">90</int>
-						<reference key="object" ref="1024879428"/>
-						<reference key="parent" ref="931374233"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">52</int>
 						<reference key="object" ref="978562341"/>
 						<object class="NSMutableArray" key="children">
@@ -1444,6 +1424,11 @@
 						<string key="objectName">tweet image view</string>
 					</object>
 					<object class="IBObjectRecord">
+						<int key="objectID">11</int>
+						<reference key="object" ref="167232458"/>
+						<reference key="parent" ref="931374233"/>
+					</object>
+					<object class="IBObjectRecord">
 						<int key="objectID">100</int>
 						<reference key="object" ref="412021719"/>
 						<object class="NSMutableArray" key="children">
@@ -1463,6 +1448,62 @@
 						<int key="objectID">101</int>
 						<reference key="object" ref="20705232"/>
 						<reference key="parent" ref="412021719"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">115</int>
+						<reference key="object" ref="133438369"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="1000188384"/>
+							<reference ref="403241000"/>
+						</object>
+						<reference key="parent" ref="931374233"/>
+						<string key="objectName">Track view 1</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">118</int>
+						<reference key="object" ref="403241000"/>
+						<reference key="parent" ref="133438369"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">116</int>
+						<reference key="object" ref="1000188384"/>
+						<reference key="parent" ref="133438369"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">91</int>
+						<reference key="object" ref="755523261"/>
+						<reference key="parent" ref="931374233"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">83</int>
+						<reference key="object" ref="620621228"/>
+						<reference key="parent" ref="931374233"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">69</int>
+						<reference key="object" ref="738363382"/>
+						<reference key="parent" ref="931374233"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">67</int>
+						<reference key="object" ref="822315524"/>
+						<reference key="parent" ref="931374233"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">74</int>
+						<reference key="object" ref="70486562"/>
+						<reference key="parent" ref="931374233"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">72</int>
+						<reference key="object" ref="259776592"/>
+						<reference key="parent" ref="931374233"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">90</int>
+						<reference key="object" ref="1024879428"/>
+						<reference key="parent" ref="931374233"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">61</int>
@@ -1490,27 +1531,6 @@
 						<int key="objectID">60</int>
 						<reference key="object" ref="48488285"/>
 						<reference key="parent" ref="60335549"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">115</int>
-						<reference key="object" ref="133438369"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="1000188384"/>
-							<reference ref="403241000"/>
-						</object>
-						<reference key="parent" ref="931374233"/>
-						<string key="objectName">Track view 1</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">118</int>
-						<reference key="object" ref="403241000"/>
-						<reference key="parent" ref="133438369"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">116</int>
-						<reference key="object" ref="1000188384"/>
-						<reference key="parent" ref="133438369"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">99</int>
@@ -1553,26 +1573,6 @@
 						<int key="objectID">95</int>
 						<reference key="object" ref="878520220"/>
 						<reference key="parent" ref="215588129"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">67</int>
-						<reference key="object" ref="822315524"/>
-						<reference key="parent" ref="931374233"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">69</int>
-						<reference key="object" ref="738363382"/>
-						<reference key="parent" ref="931374233"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">83</int>
-						<reference key="object" ref="620621228"/>
-						<reference key="parent" ref="931374233"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">11</int>
-						<reference key="object" ref="167232458"/>
-						<reference key="parent" ref="931374233"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">12</int>
