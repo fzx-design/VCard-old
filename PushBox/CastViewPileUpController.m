@@ -223,9 +223,6 @@ static CastViewPileUpController *_sharedCastViewPileUpController = nil;
         
         [_newReadIDSet removeAllObjects];
     }
-
-    NSLog(@"%lld already in readSet", readStatusID);
-    NSLog(@"readSet size is %d", _newReadIDSet.count);
 }
 
 

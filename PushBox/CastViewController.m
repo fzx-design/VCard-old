@@ -458,9 +458,7 @@
     }
     
     self.castViewPileUpController.lastIndexFR = i;
-    
-    [self.castViewPileUpController print];
-    
+        
     [self checkPiles];
 
 }
@@ -540,9 +538,7 @@
 		if (!client.hasError) {
             
             _addMoreViewsFlag = YES;
-            
-//			[self clearData];
-			
+            			
 			[self insertStatusFromClient:client];
             
             self.castView.pageSection = 1;

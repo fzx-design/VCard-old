@@ -55,9 +55,7 @@
 			trackPopoverView.view.alpha = 1.0;
 		}];
 	}
-	
-	NSLog(@"current y : %f", trackPopoverView.view.frame.origin.y);
-	
+
 }
 
 - (void)_positionAndUpdatePopupView {

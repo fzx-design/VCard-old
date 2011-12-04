@@ -195,14 +195,6 @@
 			<array class="NSMutableArray" key="connectionRecords">
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">blurImageView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="730418474"/>
-					</object>
-					<int key="connectionID">11</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">castView</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="1068946155"/>
@@ -248,6 +240,14 @@
 						<reference key="destination" ref="33624107"/>
 					</object>
 					<int key="connectionID">20</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">blurImageView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="730418474"/>
+					</object>
+					<int key="connectionID">11</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -328,13 +328,13 @@
 						<reference key="parent" ref="119409457"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">10</int>
-						<reference key="object" ref="730418474"/>
+						<int key="objectID">19</int>
+						<reference key="object" ref="33624107"/>
 						<reference key="parent" ref="119409457"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">19</int>
-						<reference key="object" ref="33624107"/>
+						<int key="objectID">10</int>
+						<reference key="object" ref="730418474"/>
 						<reference key="parent" ref="119409457"/>
 					</object>
 				</array>

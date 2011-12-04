@@ -542,7 +542,7 @@
         frame.origin.x -= 782;
         self.castViewController.castView.frame = frame;
     }];
-    ;}
+}
 
 - (void)showSearchView 
 {
