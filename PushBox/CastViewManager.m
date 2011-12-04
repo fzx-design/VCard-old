@@ -157,9 +157,6 @@
 - (CardFrameViewController*)getReusableFrameViewController
 {
 	for (CardFrameViewController* cardFrameViewController in self.cardFrames) {
-        NSLog(@"difference_____%d", abs(cardFrameViewController.index - self.currentIndex));
-        NSLog(@"cardIndex_____:%d", cardFrameViewController.index);
-        NSLog(@"currentIndex_____:%d", self.currentIndex);
 		if (abs(cardFrameViewController.index - self.currentIndex) > 3) {
 			return cardFrameViewController;
 		}
@@ -248,15 +245,6 @@
 	[self.castView reloadViews];
 }
 
-- (void)playSoundEffect
-{
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeySoundEnabled]) {
-		UIAudioAddition* audioAddition = [[UIAudioAddition alloc] init];
-		[audioAddition playRefreshDoneSound];
-		[audioAddition release];
-	}
-}
-
 - (void)refreshCards
 {
 	[self prepareForMovingCards];
@@ -282,8 +270,6 @@
     }
     
 	[self.castView refreshViewsWithFirstPage:vc1.view andSecondPage:vc2.view];
-	
-	[self performSelector:@selector(playSoundEffect) withObject:nil afterDelay:1];
 }
 
 - (void)moveCardsToIndex:(int)index

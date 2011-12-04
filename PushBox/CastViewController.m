@@ -58,6 +58,15 @@
     return [[SystemDefault systemDefault] pileUpEnabled] && self.dataSource == CastViewDataSourceFriendsTimeline;
 }
 
+- (void)playSoundEffect
+{
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultKeySoundEnabled]) {
+		UIAudioAddition* audioAddition = [[UIAudioAddition alloc] init];
+		[audioAddition playRefreshDoneSound];
+		[audioAddition release];
+	}
+}
+
 #pragma mark - Initialization
 
 - (void)setUpCastViewManager
@@ -639,6 +648,9 @@
                         _oldNextPage = _currentNextPage;
                         
                         _lastStatusID = statusID;
+                        
+                        [self performSelector:@selector(playSoundEffect) withObject:nil afterDelay:1];
+                        
                     } else {
                         _currentNextPage = _oldNextPage;
                     }
