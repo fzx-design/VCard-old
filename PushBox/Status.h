@@ -40,6 +40,7 @@
 @property (nonatomic, retain) Status *repostStatus;
 
 - (BOOL)isEqualToStatus:(Status *)status;
++ (Status *)insertStatus:(NSDictionary *)dict withFeature:(int)feature inManagedObjectContext:(NSManagedObjectContext *)context;
 + (Status *)insertStatus:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context;
 + (Status *)insertMentionedStatus:(NSDictionary *)dict inManagedObjectContext:(NSManagedObjectContext *)context;
 + (Status *)insertTrendsStatus:(NSDictionary *)dict withString:(NSString*)searchString inManagedObjectContext:(NSManagedObjectContext *)context;
