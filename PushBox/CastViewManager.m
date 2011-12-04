@@ -440,7 +440,7 @@
     CastViewPileUpController *pc = [CastViewPileUpController sharedCastViewPileUpController];
     CastViewPile *pile = [pc pileAtIndex:index];
     
-    if (pile.type == CastViewCellTypeMutipleCardPile) {
+    if ([self pileEnabled] && pile.type == CastViewCellTypeMutipleCardPile) {
         
         popover.userInfoView.hidden = YES;
         popover.stackInfoView.hidden = NO;
