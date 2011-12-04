@@ -285,10 +285,8 @@
     
 	pageNum = [self.delegate itemCount:self];
     
-#warning 不应该判断是否是否增加，而应该判断又没有多余出来要显示的东西
 	int shouldNumber = (pageSection - 1) * kNumberOfCardsInSection;
     
-//	if (pageNum <= pre) {
     if (pageNum - shouldNumber < 10) {
         pageSection--;
     } 

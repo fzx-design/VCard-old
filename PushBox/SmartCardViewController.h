@@ -23,6 +23,8 @@
 #define kNotificationNameCardDeleted @"kNotificationNameCardDeleted"
 #define kNotificationNameCardShouldDeleteCard @"kNotificationNameCardShouldDeleteCard"
 
+#define kIPad1CoverOffset 20
+
 @class Status;
 
 @interface SmartCardViewController : CoreDataViewController<DetailImageViewControllerDelegate, 
@@ -67,6 +69,7 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
     Status *_status;
 	
     UIImageView *_readImageView;
+    UIImageView* _iPad1Cover;
     
     int b;
     
@@ -107,6 +110,7 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
 @property(nonatomic, retain) IBOutlet UILabel* recentActNotifyLabel;
 
 @property (nonatomic, retain) IBOutlet UIImageView* readImageView;
+@property (nonatomic, retain) IBOutlet UIImageView* iPad1Cover;
 
 @property(nonatomic, retain) NSString* musicLink;
 

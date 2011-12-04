@@ -16,6 +16,7 @@
 #import "UIApplicationAddition.h"
 #import "PushBoxAppDelegate.h"
 #import "WeiboClient.h"
+#import "SystemDefault.h"
 
 #define kLoadDelay 1.5
 #define kPlayButtonFrameTopRight CGRectMake(399, 306, 68, 68)
@@ -69,6 +70,7 @@
 @synthesize musicLink = _musicLink;
 
 @synthesize readImageView = _readImageView;
+@synthesize iPad1Cover = _iPad1Cover;
 
 - (void)dealloc
 {    
@@ -88,6 +90,7 @@
     [_repostView release];
     [_status release];
     [_readImageView release];
+    [_iPad1Cover release];
     [super dealloc];
 }
 
@@ -107,6 +110,7 @@
     self.repostTextView = nil;
     self.repostView = nil;
     self.readImageView = nil;
+    self.iPad1Cover = nil;
 }
 
 - (void)viewDidLoad
@@ -134,6 +138,14 @@
                                              selector:@selector(shouldDismissUserCardNotification:)
                                                  name:kNotificationNameShouldDismissUserCard
                                                object:nil];
+    
+    if ([[SystemDefault systemDefault] isIPad2]) {
+        CGRect frame = self.tweetImageView.frame;
+        frame.size.height += kIPad1CoverOffset;
+        self.tweetImageView.frame = frame;
+        [[self.tweetImageView layer] setCornerRadius:20.0];
+        self.iPad1Cover.hidden = YES;
+    }
 }
 
 - (void)clear
@@ -422,6 +434,7 @@
     
     //
     //    [[self.tweetImageView layer] setCornerRadius:20.0];
+    
 }
 
 - (void)loadStatusImage

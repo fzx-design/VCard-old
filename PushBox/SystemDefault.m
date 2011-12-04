@@ -15,6 +15,7 @@ static SystemDefault* systemDefault = nil;
 
 @synthesize pileUpEnabled = _pileUpEnabled;
 @synthesize readTagEnabled = _readTagEnabled;
+@synthesize isIPad2 = _isIPad2;
 
 + (SystemDefault*)systemDefault
 {
@@ -29,6 +30,8 @@ static SystemDefault* systemDefault = nil;
     if (self = [super init]) {
         _pileUpEnabled = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeyPileUpEnabled];
         _readTagEnabled = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeyReadTagEnabled];
+        _isIPad2 = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad &&
+                    [UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]);
         
         NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
         [center addObserver:self

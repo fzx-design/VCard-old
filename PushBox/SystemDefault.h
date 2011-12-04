@@ -12,6 +12,7 @@
 
 @property (nonatomic, readonly) BOOL pileUpEnabled;
 @property (nonatomic, readonly) BOOL readTagEnabled;
+@property (nonatomic, readonly) BOOL isIPad2;
 
 + (SystemDefault*)systemDefault;
 
