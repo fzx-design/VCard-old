@@ -479,12 +479,12 @@
 		
 		if (self.dataSource == CastViewDataSourceFriendsTimeline) {
 			
-			newStatus = [Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+			newStatus = [Status insertStatus:dict withFeature:self.statusTypeID inManagedObjectContext:self.managedObjectContext];
 			[self.currentUser addFriendsStatusesObject:newStatus];
 			
 		} else if(self.dataSource == CastViewDataSourceUserTimeline){
 			
-			[Status insertStatus:dict inManagedObjectContext:self.managedObjectContext];
+			[Status insertStatus:dict withFeature:self.statusTypeID inManagedObjectContext:self.managedObjectContext];
 			
 		} else if(self.dataSource == CastViewDataSourceMentions){
             
@@ -731,6 +731,11 @@
 
 - (void)reload:(void (^)())completion
 {
+    self.fetchedResultsController = nil;
+    self.fetchedResultsController.delegate = nil;
+    self.castViewManager.fetchedResultsController = nil;
+    self.castViewManager.fetchedResultsController = self.fetchedResultsController;
+    
     _shouldRefreshCardView = YES;
     _refreshFlag = YES;
 	_currentNextPage = 1;
@@ -784,14 +789,53 @@
 			request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
 			
 			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.managedObjectContext];
-            request.predicate = [NSPredicate predicateWithFormat:@"isFriendsStatusOf == %@", self.currentUser];
+            
+            NSNumber *config = [NSNumber numberWithBool:YES];
+            switch (self.statusTypeID) {
+                case 1:
+                    request.predicate = [NSPredicate predicateWithFormat:@"isFriendsStatusOf == %@ && featureOrigin == %@", self.currentUser, config];
+                    break;
+                case 2:
+                    request.predicate = [NSPredicate predicateWithFormat:@"isFriendsStatusOf == %@ && featurePic == %@", self.currentUser, config];
+                    break;
+                case 3:
+                    request.predicate = [NSPredicate predicateWithFormat:@"isFriendsStatusOf == %@ && featureVideo == %@", self.currentUser, config];
+                    break;
+                case 4:
+                    request.predicate = [NSPredicate predicateWithFormat:@"isFriendsStatusOf == %@ && featureMusic == %@", self.currentUser, config];
+                    break;
+                default:
+                    request.predicate = [NSPredicate predicateWithFormat:@"isFriendsStatusOf == %@", self.currentUser];
+                    break;
+            }
+
             break;
         case CastViewDataSourceUserTimeline:
 			sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"statusID" ascending:NO];
 			request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
 			
 			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.managedObjectContext];
-            request.predicate = [NSPredicate predicateWithFormat:@"author == %@", self.user];
+//            request.predicate = [NSPredicate predicateWithFormat:@"author == %@", self.user];
+            
+            NSNumber *config2 = [NSNumber numberWithBool:YES];
+            switch (self.statusTypeID) {
+                case 1:
+                    request.predicate = [NSPredicate predicateWithFormat:@"author == %@ && featureOrigin == %@", self.user, config2];
+                    break;
+                case 2:
+                    request.predicate = [NSPredicate predicateWithFormat:@"author == %@ && featurePic == %@", self.user, config2];
+                    break;
+                case 3:
+                    request.predicate = [NSPredicate predicateWithFormat:@"author == %@ && featureVideo == %@", self.user, config2];
+                    break;
+                case 4:
+                    request.predicate = [NSPredicate predicateWithFormat:@"author == %@ && featureMusic == %@", self.user, config2];
+                    break;
+                default:
+                    request.predicate = [NSPredicate predicateWithFormat:@"author == %@", self.user];
+                    break;
+            }
+            
             break;
         case CastViewDataSourceFavorites:
 			sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:NO];

@@ -1852,7 +1852,6 @@
     
     [[UIApplication sharedApplication] showLoadingView];
     
-    [self.castViewController clearData];
     [self.castViewController reload:nil];
     
     [self hideGroupView:_tmpButton];
