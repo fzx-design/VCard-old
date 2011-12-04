@@ -9,6 +9,7 @@
 #import "GYCastView.h"
 
 #import "UIApplicationAddition.h"
+#import "NSDateAddition.h"
 
 @implementation GYCastView
 
@@ -58,20 +59,6 @@
 
 #pragma mark - Load Page methods
 
-- (void)setFrameOfPage:(int)page
-{
-    UIView *view = [delegate viewForItemAtIndex:self index:page];
-    
-    CGRect viewFrame = view.frame;
-	viewFrame.origin.x = viewFrame.size.width * page;
-	viewFrame.origin.y = 0;
-	view.frame = viewFrame;
-    
-    if (view.superview == nil) {
-		[self.scrollView addSubview:view];
-	}
-}
-
 - (void)loadPage:(int)page
 {
 	// Sanity checks
@@ -91,8 +78,6 @@
 		}
 		return;
 	}
-
-//	[self performSelector:@selector(setFrameOfPage:) withObject:[NSNumber numberWithInt:page] afterDelay:0.5];
     
 	UIView *view = [delegate viewForItemAtIndex:self index:page];
 	
@@ -404,12 +389,17 @@
 //    self.scrollView.userInteractionEnabled = YES;
 }
 
+- (void)enableScroll
+{
+    self.scrollView.userInteractionEnabled = NO;
+}
+
 -(void)scrollViewDidScroll:(UIScrollView *)sv
 {
 	if (animating) {
 		return;
 	}
-//	int page = [self currentPage];
+	int page = [self currentPage];
 //	
 //    _test = YES;
 //    
@@ -428,10 +418,30 @@
 //
 //	}
     
+    if (prePage == page) {
+        return;
+    }
+    
     if (_test) {
+        
         _test = NO;
-//        self.scrollView.userInteractionEnabled = NO;
-        [self performSelector:@selector(checkLoad) withObject:nil afterDelay:0];
+        
+        dispatch_queue_t scrollQueue = dispatch_queue_create("scrollQueue", NULL);
+        
+        dispatch_async(scrollQueue, ^{
+            
+            NSDate *date = [NSDate date];
+            
+            while ([date timeIntervalSinceNow] > -0.41) {
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self checkLoad];
+            });
+//           [self performSelector:@selector(checkLoad) withObject:nil afterDelay:0.0];
+        });
+        
+        dispatch_release(scrollQueue);
     }
 }
 
