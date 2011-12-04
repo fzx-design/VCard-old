@@ -890,10 +890,14 @@
 
 - (void)loadMoreViews
 {
-    _addMoreViewsFlag = YES;
-    [self loadMoreDataCompletion:^(){
+    if (self.dataSource == CastViewDataSourceSearch || self.dataSource == CastViewDataSourceTrends) {
         [self.castView addMoreViews];
-    }];
+    } else {
+        _addMoreViewsFlag = YES;
+        [self loadMoreDataCompletion:^(){
+            [self.castView addMoreViews];
+        }];
+    }
 }
 
 - (void)resetViewsAroundCurrentIndex:(int)index
