@@ -2,8 +2,8 @@
 //  Status.h
 //  PushBox
 //
-//  Created by Kelvin Ren on 11/24/11.
-//  Copyright (c) 2011 同济大学. All rights reserved.
+//  Created by Gabriel Yeah on 11-12-4.
+//  Copyright (c) 2011年 同济大学. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -18,6 +18,8 @@
 @property (nonatomic, retain) NSDate * createdAt;
 @property (nonatomic, retain) NSNumber * favorited;
 @property (nonatomic, retain) NSNumber * isMentioned;
+@property (nonatomic, retain) NSNumber * lat;
+@property (nonatomic, retain) NSNumber * lon;
 @property (nonatomic, retain) NSString * originalPicURL;
 @property (nonatomic, retain) NSString * repostsCount;
 @property (nonatomic, retain) NSString * searchString;
@@ -26,8 +28,10 @@
 @property (nonatomic, retain) NSString * text;
 @property (nonatomic, retain) NSString * thumbnailPicURL;
 @property (nonatomic, retain) NSDate * updateDate;
-@property (nonatomic, retain) NSNumber * lat;
-@property (nonatomic, retain) NSNumber * lon;
+@property (nonatomic, retain) NSNumber * featureOrigin;
+@property (nonatomic, retain) NSNumber * featurePic;
+@property (nonatomic, retain) NSNumber * featureVideo;
+@property (nonatomic, retain) NSNumber * featureMusic;
 @property (nonatomic, retain) User *author;
 @property (nonatomic, retain) NSSet *comments;
 @property (nonatomic, retain) User *favoritedBy;

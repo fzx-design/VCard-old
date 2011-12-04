@@ -163,6 +163,7 @@
 		9BC6E652144A9B2400B28506 /* CCUserInfoCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BC6E650144A9B2400B28506 /* CCUserInfoCardViewController.xib */; };
 		9BC6FA1314572A2D001493D6 /* CommentReviewPopoverController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BC6FA1114572A2D001493D6 /* CommentReviewPopoverController.xib */; };
 		9BD2BB6D1476358D0064169B /* CastViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD2BB6C1476358D0064169B /* CastViewManager.m */; };
+		9BD5672D148B64F400672DB6 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD5672C148B64F400672DB6 /* Status.m */; };
 		9BD5EB681485FBE50062DB9F /* PileOptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD5EB671485FBE50062DB9F /* PileOptionViewController.m */; };
 		9BE5CDB71484B1FE0052ACAB /* sc_stack_cards.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE5CDB61484B1FE0052ACAB /* sc_stack_cards.png */; };
 		9BE5CDB91484B8E90052ACAB /* sc_read.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE5CDB81484B8E90052ACAB /* sc_read.png */; };
@@ -309,7 +310,6 @@
 		FEA42654144320E7002E80B3 /* MessagesContactsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA42653144320E7002E80B3 /* MessagesContactsTableViewCell.m */; };
 		FEA4265614432103002E80B3 /* MessagesContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEA4265514432103002E80B3 /* MessagesContactsTableViewCell.xib */; };
 		FEA77F27147E5A6300A0558E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEA77F26147E5A6300A0558E /* CoreLocation.framework */; };
-		FEA77F2E147E81BF00A0558E /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA77F2D147E81BF00A0558E /* Status.m */; };
 		FEB5EA521455CF0500453B09 /* gif_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FEB5EA511455CF0500453B09 /* gif_icon.png */; };
 		FEC6D1DA14555F8B00576EF3 /* vc_new_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEC6D1D814555F8B00576EF3 /* vc_new_sound.wav */; };
 		FEC6D1DB14555F8B00576EF3 /* vc_noti_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEC6D1D914555F8B00576EF3 /* vc_noti_sound.wav */; };
@@ -493,6 +493,8 @@
 		9BC6FA1114572A2D001493D6 /* CommentReviewPopoverController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentReviewPopoverController.xib; sourceTree = "<group>"; };
 		9BD2BB6B1476358D0064169B /* CastViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CastViewManager.h; sourceTree = "<group>"; };
 		9BD2BB6C1476358D0064169B /* CastViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CastViewManager.m; sourceTree = "<group>"; };
+		9BD5672B148B64F400672DB6 /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
+		9BD5672C148B64F400672DB6 /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
 		9BD5EB661485FBE50062DB9F /* PileOptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PileOptionViewController.h; sourceTree = "<group>"; };
 		9BD5EB671485FBE50062DB9F /* PileOptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PileOptionViewController.m; sourceTree = "<group>"; };
 		9BE01AE814504B8B00450EE2 /* CardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTableViewCell.h; sourceTree = "<group>"; };
@@ -719,8 +721,6 @@
 		FEA42653144320E7002E80B3 /* MessagesContactsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesContactsTableViewCell.m; sourceTree = "<group>"; };
 		FEA4265514432103002E80B3 /* MessagesContactsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesContactsTableViewCell.xib; sourceTree = "<group>"; };
 		FEA77F26147E5A6300A0558E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		FEA77F2C147E81BF00A0558E /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
-		FEA77F2D147E81BF00A0558E /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
 		FEB5EA511455CF0500453B09 /* gif_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gif_icon.png; sourceTree = "<group>"; };
 		FEC6D1D814555F8B00576EF3 /* vc_new_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = vc_new_sound.wav; sourceTree = "<group>"; };
 		FEC6D1D914555F8B00576EF3 /* vc_noti_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = vc_noti_sound.wav; sourceTree = "<group>"; };
@@ -1392,8 +1392,8 @@
 				9BFD85CE14617A2600E16A79 /* Comment.m */,
 				FE1E629A14441E3F00A48CF9 /* User.h */,
 				FE1E629B14441E3F00A48CF9 /* User.m */,
-				FEA77F2C147E81BF00A0558E /* Status.h */,
-				FEA77F2D147E81BF00A0558E /* Status.m */,
+				9BD5672B148B64F400672DB6 /* Status.h */,
+				9BD5672C148B64F400672DB6 /* Status.m */,
 				FEDC9F0E1477DBA300D6A2CD /* Emotion.h */,
 				FEDC9F0F1477DBA300D6A2CD /* Emotion.m */,
 				FE1E629714441E2500A48CF9 /* Message.h */,
@@ -1833,12 +1833,12 @@
 				9B494D0B147A23F7001C1050 /* GYTrackingSlider.m in Sources */,
 				9B494D16147A40F7001C1050 /* FXLabel.m in Sources */,
 				FE9EE170147BE559009A4E23 /* EmotionsViewController.m in Sources */,
-				FEA77F2E147E81BF00A0558E /* Status.m in Sources */,
 				9BF167BE1483E6F7007E5A13 /* CastViewPile.m in Sources */,
 				9BF167BF1483E6F7007E5A13 /* CastViewPileUpController.m in Sources */,
 				9BD5EB681485FBE50062DB9F /* PileOptionViewController.m in Sources */,
 				9B8147411486073C0004C892 /* SystemDefault.m in Sources */,
 				9B0713E6148A28890011D34E /* ReadStatusID.m in Sources */,
+				9BD5672D148B64F400672DB6 /* Status.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

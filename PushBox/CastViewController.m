@@ -423,10 +423,10 @@
 {
 	if (![self.castViewManager gotEnoughViewsToShow]) {
 		[self loadMoreDataCompletion:^{
-//            if (_addMoreViewsFlag) {
-//                _addMoreViewsFlag = NO;
-//                [self.castView addMoreViews];
-//            }
+            if (_addMoreViewsFlag) {
+                [self.castView addMoreViews];
+            }
+            _addMoreViewsFlag = NO;
         }];
 	}
 }
@@ -684,11 +684,6 @@
                                         count:kStatusCountPerRequest
                                       feature:_statusTypeID];
         } else {
-            int count = kStatusCountPerRequest;
-            if (_addMoreViewsFlag) {
-                _addMoreViewsFlag = NO;
-                count = 100;
-            }
             
             [client getFriendsTimelineSinceID:nil
                                         maxID:[self pileLastID]
@@ -727,7 +722,7 @@
     _shouldRefreshCardView = YES;
     _refreshFlag = YES;
 	_currentNextPage = 1;
-    
+    _addMoreViewsFlag = YES;
     [self loadMoreDataCompletion:completion];
 }
 
@@ -735,7 +730,7 @@
 {
 	_refreshFlag = YES;
 	_currentNextPage = 1;
-
+    _addMoreViewsFlag = YES;
     [self loadMoreDataCompletion:NULL];
 }
 
@@ -883,6 +878,7 @@
 
 - (void)loadMoreViews
 {
+    _addMoreViewsFlag = YES;
     [self loadMoreDataCompletion:^(){
         [self.castView addMoreViews];
     }];

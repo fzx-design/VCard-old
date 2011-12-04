@@ -157,6 +157,9 @@
 - (CardFrameViewController*)getReusableFrameViewController
 {
 	for (CardFrameViewController* cardFrameViewController in self.cardFrames) {
+        NSLog(@"difference_____%d", abs(cardFrameViewController.index - self.currentIndex));
+        NSLog(@"cardIndex_____:%d", cardFrameViewController.index);
+        NSLog(@"currentIndex_____:%d", self.currentIndex);
 		if (abs(cardFrameViewController.index - self.currentIndex) > 3) {
 			return cardFrameViewController;
 		}

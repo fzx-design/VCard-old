@@ -2,8 +2,8 @@
 //  Status.m
 //  PushBox
 //
-//  Created by Kelvin Ren on 11/24/11.
-//  Copyright (c) 2011 同济大学. All rights reserved.
+//  Created by Gabriel Yeah on 11-12-4.
+//  Copyright (c) 2011年 同济大学. All rights reserved.
 //
 
 #import "Status.h"
@@ -20,6 +20,8 @@
 @dynamic createdAt;
 @dynamic favorited;
 @dynamic isMentioned;
+@dynamic lat;
+@dynamic lon;
 @dynamic originalPicURL;
 @dynamic repostsCount;
 @dynamic searchString;
@@ -28,15 +30,16 @@
 @dynamic text;
 @dynamic thumbnailPicURL;
 @dynamic updateDate;
-@dynamic lat;
-@dynamic lon;
+@dynamic featureOrigin;
+@dynamic featurePic;
+@dynamic featureVideo;
+@dynamic featureMusic;
 @dynamic author;
 @dynamic comments;
 @dynamic favoritedBy;
 @dynamic isFriendsStatusOf;
 @dynamic repostedBy;
 @dynamic repostStatus;
-
 
 - (BOOL)isEqualToStatus:(Status *)status
 {
@@ -113,6 +116,8 @@
     return result;
 }
 
+//+ (Status *)in
+
 + (Status *)insertTrendsStatus:(NSDictionary *)dict withString:(NSString*)searchString inManagedObjectContext:(NSManagedObjectContext *)context
 {
 	NSString *statusID = [[dict objectForKey:@"id"] stringValue];
@@ -136,6 +141,11 @@
     result.text = [dict objectForKey:@"text"];
     
     result.source = [dict objectForKey:@"source"];
+    
+    result.featureOrigin = [NSNumber numberWithBool:NO];
+    result.featureMusic = [NSNumber numberWithBool:NO];
+    result.featurePic = [NSNumber numberWithBool:NO];
+    result.featureVideo = [NSNumber numberWithBool:NO];
     
     result.favorited = [NSNumber numberWithBool:[[dict objectForKey:@"favorited"] boolValue]];
 	result.isMentioned = [NSNumber numberWithBool:NO];

@@ -11,7 +11,7 @@
 #define FirstPageIndex 0
 #define SecondPageIndex 1
 #define ThirdPageIndex 2
-#define InitialIndex 100
+#define InitialIndex 10000000
 
 #define kNumberOfCardsInSection 10
 
