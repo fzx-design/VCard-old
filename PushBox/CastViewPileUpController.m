@@ -130,13 +130,16 @@ static CastViewPileUpController *_sharedCastViewPileUpController = nil;
         }
 
 	} else {
-                
-        CastViewPile *newPile = [[[CastViewPile alloc] initWithStartIndexInFR:index] autorelease];
-        newPile.type = CastViewCellTypeCard;
-        newPile.isRead = NO;
         
-        [_castViewPiles addObject:newPile];
-		_currentViewIndex++;
+        CastViewPile *pile = [_castViewPiles lastObject];
+        if (![pile containsIndexInFR:index]) {
+            CastViewPile *newPile = [[[CastViewPile alloc] initWithStartIndexInFR:index] autorelease];
+            newPile.type = CastViewCellTypeCard;
+            newPile.isRead = NO;
+            
+            [_castViewPiles addObject:newPile];
+            _currentViewIndex++;
+        }
 	}
 	
 }

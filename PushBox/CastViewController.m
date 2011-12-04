@@ -423,10 +423,10 @@
 {
 	if (![self.castViewManager gotEnoughViewsToShow]) {
 		[self loadMoreDataCompletion:^{
-            if (_addMoreViewsFlag) {
-                _addMoreViewsFlag = NO;
-                [self.castView addMoreViews];
-            }
+//            if (_addMoreViewsFlag) {
+//                _addMoreViewsFlag = NO;
+//                [self.castView addMoreViews];
+//            }
         }];
 	}
 }
@@ -448,7 +448,7 @@
         }
     }
     
-    self.castViewPileUpController.lastIndexFR = i + 1;
+    self.castViewPileUpController.lastIndexFR = i;
     
     [self.castViewPileUpController print];
     
@@ -532,7 +532,7 @@
             
             _addMoreViewsFlag = YES;
             
-			[self clearData];
+//			[self clearData];
 			
 			[self insertStatusFromClient:client];
             
@@ -684,6 +684,12 @@
                                         count:kStatusCountPerRequest
                                       feature:_statusTypeID];
         } else {
+            int count = kStatusCountPerRequest;
+            if (_addMoreViewsFlag) {
+                _addMoreViewsFlag = NO;
+                count = 100;
+            }
+            
             [client getFriendsTimelineSinceID:nil
                                         maxID:[self pileLastID]
                                startingAtPage:0
@@ -877,7 +883,6 @@
 
 - (void)loadMoreViews
 {
-    _addMoreViewsFlag = YES;
     [self loadMoreDataCompletion:^(){
         [self.castView addMoreViews];
     }];
