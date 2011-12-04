@@ -7,6 +7,7 @@
 //
 
 #import "UserCardNaviViewController.h"
+#import "PushBoxAppDelegate.h"
 
 @implementation UserCardNaviViewController
 
@@ -50,6 +51,9 @@ static UserCardNaviViewController *sharedUserCardNaviViewController = nil;
 		self.naviController.navigationBarHidden = YES;
 		[self.naviController.view setFrame:[self.contentViewController.view bounds]];
 		[self.contentViewController.view addSubview:self.naviController.view];
+        
+        
+        [self.contentViewController.view.layer setCornerRadius:25.0];
 	}
 	
 	return self;

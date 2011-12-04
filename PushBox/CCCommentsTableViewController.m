@@ -65,6 +65,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.titleLabel.text = NSLocalizedString(@"评论", nil);
     
     _nextPage = 1;

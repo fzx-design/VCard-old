@@ -486,6 +486,8 @@
 	[self hideDockView];
 	[self hideCardTableView];
 	[self hideBottomStateView];
+    self.bottomSearchTextField.hidden = YES;
+    self.bottomSearchTextField.text = @"";
     [CastViewPileUpController releaseSharedCastViewPileUpController];
     [ReadStatusID deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
 	
@@ -509,7 +511,6 @@
 		_statusTypeStack = nil;
 		
 		self.bottomStateInvisibleView.image = nil;
-        
 		self.bottomStateFrameView.hidden = YES;
 		self.notificationView.hidden = YES;
 		self.currentUser = nil;
@@ -681,6 +682,9 @@
 //    if (self.bottomStateInvisibleView.image == nil) {
 //        self.bottomStateInvisibleView.image = _tmpImage;
 //    }
+    
+    [self.bottomStateFrameView.layer removeAllAnimations];
+    
 	self.bottomStateView.hidden = NO;
     [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimationDown] forKey:@"animation"];
     [self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
