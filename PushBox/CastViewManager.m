@@ -486,9 +486,7 @@
 {
 	
 	CardFrameViewController *cardFrameViewController = [self getCardFrameViewControllerForIndex:index];
-    
-    NSLog(@"______the text for index: %d is :%@", cardFrameViewController.index, cardFrameViewController.contentViewController.status.text);
-	
+    	
 	return cardFrameViewController.view;
 }
 

@@ -404,7 +404,7 @@
             [self.currentUser removeFavorites:self.currentUser.favorites];
             break;
 		case CastViewDataSourceMentions:
-            //			[self.currentUser removestatuses::<#(Status *)#>]
+//			[self.currentUser removestatuses::<#(Status *)#>]
 			break;
 		default:
 			break;
