@@ -48,7 +48,6 @@
 						<string key="NSFrameSize">{1024, 748}</string>
 						<reference key="NSSuperview" ref="420341332"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
@@ -251,25 +250,6 @@
 						<reference key="IBUIBackgroundColor" ref="266418242"/>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
-					<object class="IBUIButton" id="390614649">
-						<reference key="NSNextResponder" ref="420341332"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{945, 625}, {78, 46}}</string>
-						<reference key="NSSuperview" ref="420341332"/>
-						<reference key="NSWindow"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<reference key="IBUIHighlightedTitleColor" ref="90466321"/>
-						<object class="NSColor" key="IBUINormalTitleColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-						</object>
-						<reference key="IBUINormalTitleShadowColor" ref="35519944"/>
-						<reference key="IBUIFontDescription" ref="380091331"/>
-						<reference key="IBUIFont" ref="298692856"/>
-					</object>
 					<object class="IBUITextField" id="617140794">
 						<reference key="NSNextResponder" ref="420341332"/>
 						<int key="NSvFlags">-2147483356</int>
@@ -300,6 +280,25 @@
 							<double key="NSSize">17</double>
 							<int key="NSfFlags">16</int>
 						</object>
+					</object>
+					<object class="IBUIButton" id="390614649">
+						<reference key="NSNextResponder" ref="420341332"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{945, 625}, {78, 46}}</string>
+						<reference key="NSSuperview" ref="420341332"/>
+						<reference key="NSWindow"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<reference key="IBUIHighlightedTitleColor" ref="90466321"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="35519944"/>
+						<reference key="IBUIFontDescription" ref="380091331"/>
+						<reference key="IBUIFont" ref="298692856"/>
 					</object>
 					<object class="IBUIView" id="112184777">
 						<reference key="NSNextResponder" ref="420341332"/>
@@ -1478,7 +1477,6 @@
 							<string>bottomStateTextField</string>
 							<string>bottomStateView</string>
 							<string>groupView</string>
-							<string>meImageView</string>
 							<string>notiCloseButton</string>
 							<string>notiDisplayNewCommentsButton</string>
 							<string>notiDisplayNewFollowersButton</string>
@@ -1503,7 +1501,6 @@
 							<string>UITextField</string>
 							<string>UIView</string>
 							<string>UIView</string>
-							<string>UIImageView</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
@@ -1531,7 +1528,6 @@
 							<string>bottomStateTextField</string>
 							<string>bottomStateView</string>
 							<string>groupView</string>
-							<string>meImageView</string>
 							<string>notiCloseButton</string>
 							<string>notiDisplayNewCommentsButton</string>
 							<string>notiDisplayNewFollowersButton</string>
@@ -1591,10 +1587,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">groupView</string>
 								<string key="candidateClassName">UIView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">meImageView</string>
-								<string key="candidateClassName">UIImageView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">notiCloseButton</string>
