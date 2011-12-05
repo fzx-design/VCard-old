@@ -75,6 +75,10 @@
 	if ((self.castView.pageSection) * kNumberOfCardsInSection > [pileUpController itemCount]) {
 		result = NO;
 	}
+    
+//    if ([pileUpController itemCount] - self.currentIndex < 5) {
+//        result = NO;
+//    }
 	return result;
 }
 

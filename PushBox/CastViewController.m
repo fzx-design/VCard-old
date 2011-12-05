@@ -436,7 +436,7 @@
 	if (![self.castViewManager gotEnoughViewsToShow]) {
 		[self loadMoreDataCompletion:^{
             if (_addMoreViewsFlag) {
-                [self.castView addMoreViews];
+                [self.castView addMoreViewsWithoutSection];
             }
             _addMoreViewsFlag = NO;
         }];

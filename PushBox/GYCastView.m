@@ -63,7 +63,11 @@
 {
 	// Sanity checks
     if (page < 0) return;
-    if (page >= pageNum) {
+    if (page >= pageNum) {		
+        
+        if ([self currentPage] == pageNum - 1) {
+            [[UIApplication sharedApplication] showLoadingView];
+        }
         
         if (loadingMoreViewsFlag) {
             return;
@@ -73,9 +77,7 @@
         pageSection++;
         
 		[self.delegate loadMoreViews];
-		if ([self currentPage] == pageNum - 1) {
-			[[UIApplication sharedApplication] showLoadingView];
-		}
+
 		return;
 	}
     
@@ -282,6 +284,23 @@
     loadingMoreViewsFlag = NO;
 }
 
+- (void)addMoreViewsWithoutSection
+{
+    pageNum = [self.delegate itemCount:self];
+    
+    if (pageNum > pageSection * kNumberOfCardsInSection ) {
+        pageSection++;
+    }
+    
+    self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
+    [self.delegate didScrollToIndex:[self currentPage]];
+    [self loadPage:[self currentPage] + 1];
+    [self loadPage:[self currentPage] + 2];
+    
+    [[UIApplication sharedApplication] hideLoadingView];
+    loadingMoreViewsFlag = NO;
+}
+
 - (void)refreshViewsWithFirstPage:(UIView*)firstView 
 					andSecondPage:(UIView*)secondView
 {
@@ -301,10 +320,8 @@
 		[self.delegate didScrollToIndex:0];
 		[self.scrollView setContentOffset:CGPointMake((page + MoveCardsOffsetPage + RefreshCardsOffsetPage) * self.scrollView.frame.size.width, 0)];
 	} completion:^(BOOL finished) {
-		if (finished) {
-			[self reset];
-			[self setScrollEnabled:YES];
-		}
+        [self reset];
+        [self setScrollEnabled:YES];
 	}];
 
 }
