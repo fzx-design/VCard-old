@@ -45,7 +45,6 @@
 
 @synthesize infoStack = _infoStack;
 
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -275,20 +274,18 @@
         self.castView.transform = CGAffineTransformScale(self.castView.transform, 1/kCastViewScale, 1/kCastViewScale);
     } completion:^(BOOL fin) {
 		
-        if (fin) {
-            self.rootShadowLeft.alpha = 1.0;
-            self.castView.transform = CGAffineTransformScale(self.castView.transform, kCastViewScale, kCastViewScale);
-            self.castView.alpha = 0.0;
-            
-            [self loadMoreDataCompletion:^(){
-                [self.castViewManager pushNewViews];
-                if (completion) {
-                    completion();
-                }
-                
-                [[UIApplication sharedApplication] hideLoadingView];
-            }];
-        }
+		self.rootShadowLeft.alpha = 1.0;
+		self.castView.transform = CGAffineTransformScale(self.castView.transform, kCastViewScale, kCastViewScale);
+        self.castView.alpha = 0.0;
+		
+		[self loadMoreDataCompletion:^(){
+			[self.castViewManager pushNewViews];
+			if (completion) {
+				completion();
+			}
+			
+			[[UIApplication sharedApplication] hideLoadingView];
+		}];
     }];
 }
 

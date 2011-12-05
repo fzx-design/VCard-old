@@ -55,9 +55,6 @@
 @property (nonatomic, assign) NSInteger pageSection;
 @property (nonatomic, assign) BOOL scrollEnabled;
 
-
-@property (nonatomic, assign) BOOL scrolling;
-
 - (void)removeAllSubviews;
 - (void)changeViews;
 - (void)reloadViews;

@@ -19,7 +19,7 @@
 #define RefreshCardsOffsetPage 3
 #define MoveCardsOffsetPage 2
 
-@synthesize scrollView, pageSize, dropShadow, delegate, pageNum, pageSection, scrollEnabled, scrolling;
+@synthesize scrollView, pageSize, dropShadow, delegate, pageNum, pageSection, scrollEnabled;
 
 - (void)awakeFromNib
 {
@@ -399,9 +399,6 @@
 	if (animating) {
 		return;
 	}
-    
-    scrolling = YES;
-    
 	int page = [self currentPage];
     
     if (prePage == page) {
@@ -429,11 +426,6 @@
         
         dispatch_release(scrollQueue);
     }
-}
-
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
-{
-    scrolling = NO;
 }
 
 - (void)setScrollsToTop:(BOOL)scrollsToTop
