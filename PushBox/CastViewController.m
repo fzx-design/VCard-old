@@ -672,7 +672,17 @@
 			
 			_currentNextPage = _oldNextPage;
 			
-            //			[ErrorNotification showLoadingError];
+            if ([self pileUpEnabled] && _refreshFlag){
+                
+                _refreshFlag = NO;
+                
+                [self.castViewPileUpController clearPiles];
+                
+                [self setPiles];
+                
+                [self.castViewManager refreshCards];
+            }
+//			[ErrorNotification showLoadingError];
 		}
 		
 		if (completion) {

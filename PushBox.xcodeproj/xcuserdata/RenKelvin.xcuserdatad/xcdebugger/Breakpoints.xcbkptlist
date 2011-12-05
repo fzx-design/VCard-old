@@ -517,9 +517,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "681"
-         endingLineNumber = "681"
-         landmarkName = "-loadMoreDataCompletion:"
-         landmarkType = "5">
+         endingLineNumber = "681">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -531,9 +529,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "443"
-         endingLineNumber = "443"
-         landmarkName = "-setPiles"
-         landmarkType = "5">
+         endingLineNumber = "443">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
