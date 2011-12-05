@@ -463,7 +463,6 @@
     self.castViewPileUpController.lastIndexFR = i;
         
     [self checkPiles];
-
 }
 
 - (void)insertStatusFromClient:(WeiboClient *)client
@@ -625,7 +624,7 @@
                 [self setPiles];
             }
 			
-			if (_refreshFlag) {
+			if (_refreshFlag || _shouldRefreshCardView) {
                 
 				_refreshFlag = NO;
 //				
@@ -675,6 +674,16 @@
 			
 			_currentNextPage = _oldNextPage;
 			
+            if ([self pileUpEnabled] && _refreshFlag){
+                
+                _refreshFlag = NO;
+                
+                [self.castViewPileUpController clearPiles];
+                
+                [self setPiles];
+                
+                [self.castViewManager refreshCards];
+            }
 //			[ErrorNotification showLoadingError];
 		}
 		
@@ -736,9 +745,9 @@
     self.castViewManager.fetchedResultsController = self.fetchedResultsController;
     
     _shouldRefreshCardView = YES;
-    _refreshFlag = YES;
 	_currentNextPage = 1;
     _addMoreViewsFlag = YES;
+    _refreshFlag = YES;
     [self loadMoreDataCompletion:completion];
 }
 

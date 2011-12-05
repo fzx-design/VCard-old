@@ -271,6 +271,8 @@
         vc2 = nil;
     }
     
+    NSLog(@"The result is first page %d, second page : %d", result1, result2);
+    
 	[self.castView refreshViewsWithFirstPage:vc1.view andSecondPage:vc2.view];
 }
 

@@ -74,14 +74,15 @@
     if (status == nil) {
         return NO;
     }
-    if (self.contentViewController == nil) {
+
+    if (self.contentViewController.view.superview == nil) {
+		[self.view insertSubview:self.contentViewController.view belowSubview:self.pileBounderShadow];
+	}
+    
+    long long aID = [self.contentViewController.status.statusID longLongValue];
+    long long bID = [status.statusID longLongValue];
+    if (aID != bID) {
         self.contentViewController.status = status;
-    } else {
-        long long aID = [self.contentViewController.status.statusID longLongValue];
-        long long bID = [status.statusID longLongValue];
-        if (aID != bID) {
-            self.contentViewController.status = status;
-        }
     }
     
     self.pileInfoView.hidden = YES;

@@ -269,7 +269,7 @@
     
 	int shouldNumber = (pageSection - 1) * kNumberOfCardsInSection;
     
-    if (pageNum - shouldNumber < 10) {
+    if (pageNum - shouldNumber < 10 && pageSection - 1 > 0) {
         pageSection--;
     } 
     
@@ -389,11 +389,6 @@
 //    self.scrollView.userInteractionEnabled = YES;
 }
 
-- (void)enableScroll
-{
-    self.scrollView.userInteractionEnabled = NO;
-}
-
 -(void)scrollViewDidScroll:(UIScrollView *)sv
 {
 	if (animating) {
@@ -421,10 +416,8 @@
             while ([date timeIntervalSinceNow] > -0.41) {
             }
             dispatch_async(dispatch_get_main_queue(), ^{
-                
                 [self checkLoad];
             });
-//           [self performSelector:@selector(checkLoad) withObject:nil afterDelay:0.0];
         });
         
         dispatch_release(scrollQueue);
