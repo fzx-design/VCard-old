@@ -70,7 +70,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1653"
          endingLineNumber = "1653"
-         landmarkName = "-helpButtonClicked:"
+         landmarkName = "-dockViewController"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -112,7 +112,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1195"
          endingLineNumber = "1195"
-         landmarkName = "-setPlayTimerEnabled:"
+         landmarkName = "-playCanceled:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -210,7 +210,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1624"
          endingLineNumber = "1624"
-         landmarkName = "-showCardTableView"
+         landmarkName = "-helpButtonClicked:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -266,7 +266,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "230"
          endingLineNumber = "230"
-         landmarkName = "-viewDidUnload"
+         landmarkName = "+initialize"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -504,7 +504,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1674"
          endingLineNumber = "1674"
-         landmarkName = "-loginViewControllerDidLogin:"
+         landmarkName = "-dockViewController"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -588,7 +588,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "369"
          endingLineNumber = "369"
-         landmarkName = "-initSpe"
+         landmarkName = "-start"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -616,7 +616,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "712"
          endingLineNumber = "712"
-         landmarkName = "-showBottomStateView"
+         landmarkName = "-hideBottomStateView"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
