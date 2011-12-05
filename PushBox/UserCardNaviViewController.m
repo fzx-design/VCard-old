@@ -35,9 +35,7 @@ static UserCardNaviViewController *sharedUserCardNaviViewController = nil;
 + (void)sharedUserCardDismiss
 {
 	if (sharedUserCardNaviViewController != nil) {
-		NSLog(@"Dismiss Start!!!!");
 		[sharedUserCardNaviViewController dismissModalViewControllerAnimated:YES];
-		NSLog(@"Dismiss End!!!!");
 		[sharedUserCardNaviViewController release];
 		sharedUserCardNaviViewController = nil;
 	}
@@ -57,11 +55,6 @@ static UserCardNaviViewController *sharedUserCardNaviViewController = nil;
 	}
 	
 	return self;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
 }
 
 - (UserCardContentViewController*)contentViewController
