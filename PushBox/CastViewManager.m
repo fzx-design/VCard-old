@@ -75,6 +75,10 @@
 	if ((self.castView.pageSection) * kNumberOfCardsInSection > [pileUpController itemCount]) {
 		result = NO;
 	}
+    
+//    if ([pileUpController itemCount] - self.currentIndex < 5) {
+//        result = NO;
+//    }
 	return result;
 }
 
@@ -268,6 +272,8 @@
     } else {
         vc2 = nil;
     }
+    
+    NSLog(@"The result is first page %d, second page : %d", result1, result2);
     
 	[self.castView refreshViewsWithFirstPage:vc1.view andSecondPage:vc2.view];
 }

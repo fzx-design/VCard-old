@@ -433,7 +433,7 @@
 	if (![self.castViewManager gotEnoughViewsToShow]) {
 		[self loadMoreDataCompletion:^{
             if (_addMoreViewsFlag) {
-                [self.castView addMoreViews];
+                [self.castView addMoreViewsWithoutSection];
             }
             _addMoreViewsFlag = NO;
         }];
@@ -622,7 +622,7 @@
                 [self setPiles];
             }
 			
-			if (_refreshFlag) {
+			if (_refreshFlag || _shouldRefreshCardView) {
                 
 				_refreshFlag = NO;
                 //				
@@ -733,9 +733,9 @@
     self.castViewManager.fetchedResultsController = self.fetchedResultsController;
     
     _shouldRefreshCardView = YES;
-    _refreshFlag = YES;
 	_currentNextPage = 1;
     _addMoreViewsFlag = YES;
+    _refreshFlag = YES;
     [self loadMoreDataCompletion:completion];
 }
 

@@ -63,7 +63,11 @@
 {
 	// Sanity checks
     if (page < 0) return;
-    if (page >= pageNum) {
+    if (page >= pageNum) {		
+        
+        if ([self currentPage] == pageNum - 1) {
+            [[UIApplication sharedApplication] showLoadingView];
+        }
         
         if (loadingMoreViewsFlag) {
             return;
@@ -73,9 +77,7 @@
         pageSection++;
         
 		[self.delegate loadMoreViews];
-		if ([self currentPage] == pageNum - 1) {
-			[[UIApplication sharedApplication] showLoadingView];
-		}
+
 		return;
 	}
     
@@ -269,7 +271,7 @@
     
 	int shouldNumber = (pageSection - 1) * kNumberOfCardsInSection;
     
-    if (pageNum - shouldNumber < 10) {
+    if (pageNum - shouldNumber < 10 && pageSection - 1 > 0) {
         pageSection--;
     } 
     
@@ -278,6 +280,23 @@
     [self loadPage:[self currentPage] + 1];
     [self loadPage:[self currentPage] + 2];
 
+    [[UIApplication sharedApplication] hideLoadingView];
+    loadingMoreViewsFlag = NO;
+}
+
+- (void)addMoreViewsWithoutSection
+{
+    pageNum = [self.delegate itemCount:self];
+    
+    if (pageNum > pageSection * kNumberOfCardsInSection ) {
+        pageSection++;
+    }
+    
+    self.scrollView.contentSize = CGSizeMake(pageNum * self.scrollView.frame.size.width, scrollView.frame.size.height);
+    [self.delegate didScrollToIndex:[self currentPage]];
+    [self loadPage:[self currentPage] + 1];
+    [self loadPage:[self currentPage] + 2];
+    
     [[UIApplication sharedApplication] hideLoadingView];
     loadingMoreViewsFlag = NO;
 }
@@ -301,10 +320,8 @@
 		[self.delegate didScrollToIndex:0];
 		[self.scrollView setContentOffset:CGPointMake((page + MoveCardsOffsetPage + RefreshCardsOffsetPage) * self.scrollView.frame.size.width, 0)];
 	} completion:^(BOOL finished) {
-		if (finished) {
-			[self reset];
-			[self setScrollEnabled:YES];
-		}
+        [self reset];
+        [self setScrollEnabled:YES];
 	}];
 
 }
@@ -389,11 +406,6 @@
 //    self.scrollView.userInteractionEnabled = YES;
 }
 
-- (void)enableScroll
-{
-    self.scrollView.userInteractionEnabled = NO;
-}
-
 -(void)scrollViewDidScroll:(UIScrollView *)sv
 {
 	if (animating) {
@@ -418,10 +430,8 @@
             while ([date timeIntervalSinceNow] > -0.41) {
             }
             dispatch_async(dispatch_get_main_queue(), ^{
-                
                 [self checkLoad];
             });
-//           [self performSelector:@selector(checkLoad) withObject:nil afterDelay:0.0];
         });
         
         dispatch_release(scrollQueue);
