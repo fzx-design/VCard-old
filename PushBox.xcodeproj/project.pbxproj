@@ -114,7 +114,6 @@
 		9B112A0D14514449001CE64E /* posting_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B112A0914514449001CE64E /* posting_bg.png */; };
 		9B112A0E14514449001CE64E /* posting_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B112A0A14514449001CE64E /* posting_circle.png */; };
 		9B112A0F14514449001CE64E /* refreshing_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B112A0B14514449001CE64E /* refreshing_bg.png */; };
-		9B112A111451459A001CE64E /* SmartCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B112A101451459A001CE64E /* SmartCardViewController.xib */; };
 		9B11DC0614553AAD001F75EF /* CCCommentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B11DC0514553AAC001F75EF /* CCCommentsTableViewCell.xib */; };
 		9B11DC0B14554EC7001F75EF /* cc_comments_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B11DC0814554EC7001F75EF /* cc_comments_selected.png */; };
 		9B11DC0C14554EC7001F75EF /* cc_reposts_button_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B11DC0914554EC7001F75EF /* cc_reposts_button_highlight.png */; };
@@ -144,6 +143,7 @@
 		9B8147411486073C0004C892 /* SystemDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B8147401486073C0004C892 /* SystemDefault.m */; };
 		9BA452321488E912009E9E72 /* dock_button_refresh_stack.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BA452311488E912009E9E72 /* dock_button_refresh_stack.png */; };
 		9BA45234148910C7009E9E72 /* sc_ipad_1_cover.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BA45233148910C7009E9E72 /* sc_ipad_1_cover.png */; };
+		9BB11911148D114200676CED /* SmartCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BB11910148D114200676CED /* SmartCardViewController.xib */; };
 		9BB11CAC14503E8A005B43AC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C8D90F1429FE9C00C94B86 /* libz.dylib */; };
 		9BB11CAD14503E94005B43AC /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9DCAD913E1ED6800DA3D3D /* MessageUI.framework */; };
 		9BB11CAE14503E9C005B43AC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB018E0413DDEAA5004217E0 /* QuartzCore.framework */; };
@@ -435,7 +435,6 @@
 		9B112A0914514449001CE64E /* posting_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = posting_bg.png; sourceTree = "<group>"; };
 		9B112A0A14514449001CE64E /* posting_circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = posting_circle.png; sourceTree = "<group>"; };
 		9B112A0B14514449001CE64E /* refreshing_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refreshing_bg.png; sourceTree = "<group>"; };
-		9B112A101451459A001CE64E /* SmartCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmartCardViewController.xib; sourceTree = "<group>"; };
 		9B11DC0514553AAC001F75EF /* CCCommentsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCCommentsTableViewCell.xib; sourceTree = "<group>"; };
 		9B11DC0814554EC7001F75EF /* cc_comments_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cc_comments_selected.png; sourceTree = "<group>"; };
 		9B11DC0914554EC7001F75EF /* cc_reposts_button_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cc_reposts_button_highlight.png; sourceTree = "<group>"; };
@@ -480,6 +479,7 @@
 		9B8147401486073C0004C892 /* SystemDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemDefault.m; sourceTree = "<group>"; };
 		9BA452311488E912009E9E72 /* dock_button_refresh_stack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dock_button_refresh_stack.png; sourceTree = "<group>"; };
 		9BA45233148910C7009E9E72 /* sc_ipad_1_cover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc_ipad_1_cover.png; sourceTree = "<group>"; };
+		9BB11910148D114200676CED /* SmartCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmartCardViewController.xib; sourceTree = "<group>"; };
 		9BB5B8B31449A8B100352FF7 /* UserCardContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCardContentViewController.h; sourceTree = "<group>"; };
 		9BB5B8B41449A8B100352FF7 /* UserCardContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCardContentViewController.m; sourceTree = "<group>"; };
 		9BB5B8B51449A8B100352FF7 /* UserCardContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCardContentViewController.xib; sourceTree = "<group>"; };
@@ -1372,7 +1372,7 @@
 				9B5F2E3714498FC5008AC0B8 /* UserCardNaviViewController.xib */,
 				9BB5B8B51449A8B100352FF7 /* UserCardContentViewController.xib */,
 				CB9DCADD13E2C15C00DA3D3D /* UserCardViewController.xib */,
-				9B112A101451459A001CE64E /* SmartCardViewController.xib */,
+				9BB11910148D114200676CED /* SmartCardViewController.xib */,
 				9BC6E650144A9B2400B28506 /* CCUserInfoCardViewController.xib */,
 				CBBA01C913E3463300641923 /* PostViewController.xib */,
 				FE831551145E803600909CF0 /* PostViewAtTableViewCell.xib */,
@@ -1674,7 +1674,6 @@
 				9B112A0D14514449001CE64E /* posting_bg.png in Resources */,
 				9B112A0E14514449001CE64E /* posting_circle.png in Resources */,
 				9B112A0F14514449001CE64E /* refreshing_bg.png in Resources */,
-				9B112A111451459A001CE64E /* SmartCardViewController.xib in Resources */,
 				20F893C21452BE7100AE44AA /* news_bg.png in Resources */,
 				20F893C31452BE7100AE44AA /* news_button_close.png in Resources */,
 				FE8E1754145433A5004F6A7C /* InnerBroswerViewController.xib in Resources */,
@@ -1741,6 +1740,7 @@
 				9BA452321488E912009E9E72 /* dock_button_refresh_stack.png in Resources */,
 				9BA45234148910C7009E9E72 /* sc_ipad_1_cover.png in Resources */,
 				20310FFA148A113900475B3D /* missing_elephant.png in Resources */,
+				9BB11911148D114200676CED /* SmartCardViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1885,8 +1885,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PROVISIONING_PROFILE = "9F56844F-1890-4BF0-A478-B0ACD947CB11";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9F56844F-1890-4BF0-A478-B0ACD947CB11";
 				PROVISIONING_PROFILE = "6A9F96B5-D499-4D0D-AED0-9CC495C706D5";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6A9F96B5-D499-4D0D-AED0-9CC495C706D5";
 				SDKROOT = iphoneos;
@@ -1910,8 +1908,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "9F56844F-1890-4BF0-A478-B0ACD947CB11";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9F56844F-1890-4BF0-A478-B0ACD947CB11";
 				PROVISIONING_PROFILE = "6A9F96B5-D499-4D0D-AED0-9CC495C706D5";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6A9F96B5-D499-4D0D-AED0-9CC495C706D5";
 				SDKROOT = iphoneos;
