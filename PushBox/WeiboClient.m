@@ -96,6 +96,11 @@ NSString *TWITTERFON_FORM_BOUNDARY = @"0194784892923";
     }
 }
 
+- (NSString*)getUserId
+{
+    return UserID;
+}
+
 + (void)fetchTokenFromUserDefault
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];

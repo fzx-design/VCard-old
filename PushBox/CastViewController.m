@@ -388,7 +388,7 @@
 
 - (void)showNextCard
 {
-//    [self swipeRight];
+    //    [self swipeRight];
 	[self.castViewManager moveCardsToIndex:self.castViewManager.currentIndex + 1];
 }
 
@@ -413,7 +413,7 @@
             [self.currentUser removeFavorites:self.currentUser.favorites];
             break;
 		case CastViewDataSourceMentions:
-//			[self.currentUser removestatuses::<#(Status *)#>]
+            //			[self.currentUser removestatuses::<#(Status *)#>]
 			break;
 		default:
 			break;
@@ -458,9 +458,9 @@
     }
     
     self.castViewPileUpController.lastIndexFR = i;
-        
+    
     [self checkPiles];
-
+    
 }
 
 - (void)insertStatusFromClient:(WeiboClient *)client
@@ -538,7 +538,7 @@
 		if (!client.hasError) {
             
             _addMoreViewsFlag = YES;
-            			
+            
 			[self insertStatusFromClient:client];
             
             self.castView.pageSection = 1;
@@ -551,7 +551,7 @@
 				
 				_lastStatusID = [status.statusID longLongValue];
 			}
-					
+            
 		}
 		if (completion) {
 			completion();
@@ -562,7 +562,7 @@
 		int numberOfRow = count > kStatusCountPerRequest ? kStatusCountPerRequest : count;
 		
 		[self.delegate castViewControllerdidScrollToRow:0 withNumberOfRows:numberOfRow];
-						
+        
 		[[UIApplication sharedApplication] hideLoadingView];
 	}];
 	
@@ -598,7 +598,7 @@
         return;
     }
     
-
+    
 	WeiboClient *client = [WeiboClient client];
 	
 	[client setCompletionBlock:^(WeiboClient *client) {
@@ -625,7 +625,7 @@
 			if (_refreshFlag) {
                 
 				_refreshFlag = NO;
-//				
+                //				
 				long long statusID = 0;
 				
 				if (self.fetchedResultsController.fetchedObjects.count) {
@@ -653,9 +653,9 @@
 					
                     [self.castViewManager refreshCards];
                     
-//					[self clearData];
-//					
-//					[self insertStatusFromClient:client];
+                    //					[self clearData];
+                    //					
+                    //					[self insertStatusFromClient:client];
 					
 					
 				} else {
@@ -672,7 +672,7 @@
 			
 			_currentNextPage = _oldNextPage;
 			
-//			[ErrorNotification showLoadingError];
+            //			[ErrorNotification showLoadingError];
 		}
 		
 		if (completion) {
@@ -682,7 +682,7 @@
 		[[UIApplication sharedApplication] hideLoadingView];
 		
 	}];
-
+    
 	if (self.dataSource == CastViewDataSourceFriendsTimeline) {
         
         if (_refreshFlag || ![self pileUpEnabled]) {
@@ -804,14 +804,14 @@
                     request.predicate = [NSPredicate predicateWithFormat:@"isFriendsStatusOf == %@", self.currentUser];
                     break;
             }
-
+            
             break;
         case CastViewDataSourceUserTimeline:
 			sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"statusID" ascending:NO];
 			request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
 			
 			request.entity = [NSEntityDescription entityForName:@"Status" inManagedObjectContext:self.managedObjectContext];
-//            request.predicate = [NSPredicate predicateWithFormat:@"author == %@", self.user];
+            //            request.predicate = [NSPredicate predicateWithFormat:@"author == %@", self.user];
             
             NSNumber *config2 = [NSNumber numberWithBool:YES];
             switch (self.statusTypeID) {
@@ -902,7 +902,7 @@
     if (self.dataSource == CastViewDataSourceFriendsTimeline) {
         indexInFR = [self.castViewPileUpController indexInFRForViewIndex:index];
     }
-
+    
     NSTimeInterval secondsElapsed = abs([_startDate timeIntervalSinceNow]);
     
     if (secondsElapsed > kReadingInterval) {
@@ -913,7 +913,7 @@
         Status *status = [self.fetchedResultsController.fetchedObjects objectAtIndex:indexInFR];
         _prevReadID = [status.statusID longLongValue];
     }
-
+    
     [_startDate release];
     _startDate = [[NSDate date] retain];
 }

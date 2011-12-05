@@ -13,6 +13,7 @@
 #import "RefreshingIntervalViewController.h"
 #import "AboutViewController.h"
 #import "LegacyViewController.h"
+#import "WeiboClient.h"
 
 #import "PileOptionViewController.h"
 

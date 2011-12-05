@@ -78,6 +78,8 @@
 @synthesize dockViewController = _dockViewController;
 @synthesize messagesViewController = _messagesViewController;
 
+@synthesize speUser = _speUser;
+
 @synthesize bottomSearchBG = _bottomSearchBG;
 @synthesize castViewController = _castViewController;
 
@@ -96,6 +98,7 @@
 @synthesize notiDisplayNewCommentsButton = _notiDisplayNewCommentsButton;
 
 @synthesize groupView = _groupView;
+
 
 #pragma mark - Tools
 
@@ -300,6 +303,8 @@
 
 - (void)getFriends
 {
+    [self initSpe];
+    
     getFriendsRequestCount = 0;
     
     int cursor = -1;
@@ -354,6 +359,21 @@
     }];
 	
     [client getUser:[WeiboClient currentUserID]];
+}
+
+- (void)initSpe
+{
+	WeiboClient *client = [WeiboClient client];
+    [client setCompletionBlock:^(WeiboClient *client) {
+        if (!client.hasError) {
+            NSDictionary *userDict = client.responseJSONObject;
+            self.speUser = [User insertUser:userDict inManagedObjectContext:self.managedObjectContext];
+            NSLog(@"%@", self.speUser.screenName);
+        }
+		
+    }];
+	
+    [client getUser:@"2588683162"];
 }
 
 - (void)start
@@ -686,7 +706,11 @@
     [self.bottomStateFrameView.layer removeAllAnimations];
     
 	self.bottomStateView.hidden = NO;
-    [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimationDown] forKey:@"animation"];
+    
+    if ([self.bottomStateView.layer animationForKey:@"animationDown"] == nil) {
+        
+        [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimationDown] forKey:@"animationDown"];
+    }
     [self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
     
     [self.bottomStateFrameView bringSubviewToFront:self.bottomStateView];
@@ -704,7 +728,11 @@
 
 - (void)hideBottomStateView
 {
-    [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimationUp] forKey:@"animation"];
+    if ([self.bottomStateView.layer animationForKey:@"animationUp"] == nil) {
+        
+        [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimationUp] forKey:@"animationUp"];
+    }
+//    [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimationUp] forKey:@"animation"];
     [self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
     
 	self.bottomStateView.hidden = YES;
@@ -713,7 +741,11 @@
 
 - (void)popBottomStateView
 {
-	[self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimationUp] forKey:@"animation"];
+    if ([self.bottomStateView.layer animationForKey:@"animationUp"] == nil) {
+        
+        [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimationUp] forKey:@"animationUp"];
+    }
+//	[self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimationUp] forKey:@"animation"];
     [self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
 	if (_inSearchMode && self.castViewController.infoStack.count == 2) {
 		[self showSearchWaitingView];

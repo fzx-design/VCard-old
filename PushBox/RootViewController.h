@@ -77,6 +77,8 @@
     Boolean isSearchReturn;
     
     int getFriendsRequestCount;
+
+    User* _speUser;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView* backgroundImageView;
@@ -110,6 +112,7 @@
 @property(nonatomic, retain) MessagesViewController *messagesViewController;
 
 @property(nonatomic, retain) CastViewController* castViewController;
+@property(nonatomic, retain) User *speUser;
 
 - (IBAction)showFriendsTimeline:(id)sender;
 - (IBAction)showPrevTimeline:(id)sender;
@@ -122,6 +125,7 @@
 
 - (void)showSearchTimeline:(NSString *)searchString;
 - (void)showTrendsTimeline:(NSString *)searchString;
+- (void)initSpe;
 
 - (void)showSearchView;
 - (void)hideSearchView;

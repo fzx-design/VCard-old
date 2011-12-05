@@ -97,7 +97,7 @@ typedef void (^WCCompletionBlock)(WeiboClient *client);
 
 - (void)favorite:(NSString *)statusID;
 - (void)unFavorite:(NSString *)statusID;
-
+- (NSString*)getUserId;
 - (void)post:(NSString *)text;
 - (void)post:(NSString *)text withImage:(UIImage *)image;
 - (void)repost:(NSString *)statusID 

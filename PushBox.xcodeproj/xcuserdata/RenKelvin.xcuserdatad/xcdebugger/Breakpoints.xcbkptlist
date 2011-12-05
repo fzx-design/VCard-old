@@ -14,7 +14,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "496"
          endingLineNumber = "496"
-         landmarkName = "-loadPostWebView"
+         landmarkName = "-loadRepostStautsImageV2"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -28,7 +28,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "768"
          endingLineNumber = "768"
-         landmarkName = "-playButtonClicked:"
+         landmarkName = "-openLinkInInnerBroswer:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -56,7 +56,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "776"
          endingLineNumber = "776"
-         landmarkName = "-loadPostMusicVideo:"
+         landmarkName = "-openLinkInInnerBroswer:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -65,39 +65,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "PushBox/RootViewController.m"
-         timestampString = "344332235.593462"
+         timestampString = "344775785.957403"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1621"
-         endingLineNumber = "1621"
-         landmarkName = "-alertView:clickedButtonAtIndex:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "PushBox/RootViewController.m"
-         timestampString = "344332235.593462"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "499"
-         endingLineNumber = "499"
-         landmarkName = "-showSearchWaitingView"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "PushBox/RootViewController.m"
-         timestampString = "344332235.593462"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1476"
-         endingLineNumber = "1476"
+         startingLineNumber = "1653"
+         endingLineNumber = "1653"
          landmarkName = "-helpButtonClicked:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -107,12 +79,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "PushBox/RootViewController.m"
-         timestampString = "344332235.593462"
+         timestampString = "344774757.258169"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1163"
-         endingLineNumber = "1163"
-         landmarkName = "-messagesCenterButtonClicked:"
+         startingLineNumber = "519"
+         endingLineNumber = "519"
+         landmarkName = "-userSignoutNotification:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -121,12 +93,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "PushBox/RootViewController.m"
-         timestampString = "344332235.593462"
+         timestampString = "344775785.957403"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1560"
-         endingLineNumber = "1560"
-         landmarkName = "-loginViewController"
+         startingLineNumber = "1508"
+         endingLineNumber = "1508"
+         landmarkName = "-hideCommandCenter"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -135,12 +107,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "PushBox/RootViewController.m"
-         timestampString = "344332235.593462"
+         timestampString = "344775785.957403"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1094"
-         endingLineNumber = "1094"
-         landmarkName = "-sliderDidEndDragging:"
+         startingLineNumber = "1195"
+         endingLineNumber = "1195"
+         landmarkName = "-setPlayTimerEnabled:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -149,12 +121,40 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "PushBox/RootViewController.m"
-         timestampString = "344332235.593462"
+         timestampString = "344775785.957403"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1554"
-         endingLineNumber = "1554"
-         landmarkName = "-dockViewController"
+         startingLineNumber = "1592"
+         endingLineNumber = "1592"
+         landmarkName = "-showCardTableView"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "PushBox/RootViewController.m"
+         timestampString = "344775785.957403"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1126"
+         endingLineNumber = "1126"
+         landmarkName = "-updateBackgroundImageAnimated:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "PushBox/RootViewController.m"
+         timestampString = "344775785.957403"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1586"
+         endingLineNumber = "1586"
+         landmarkName = "-showCardTableView"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -191,12 +191,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "PushBox/RootViewController.m"
-         timestampString = "344332235.593462"
+         timestampString = "344775785.957403"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1581"
-         endingLineNumber = "1581"
-         landmarkName = "-castViewController"
+         startingLineNumber = "1608"
+         endingLineNumber = "1608"
+         landmarkName = "-showCardTableView"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -205,26 +205,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "PushBox/RootViewController.m"
-         timestampString = "344332235.593462"
+         timestampString = "344775785.957403"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1576"
-         endingLineNumber = "1576"
-         landmarkName = "-castViewController"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "PushBox/RootViewController.m"
-         timestampString = "344332235.593462"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1592"
-         endingLineNumber = "1592"
-         landmarkName = "-messagesViewController"
+         startingLineNumber = "1624"
+         endingLineNumber = "1624"
+         landmarkName = "-showCardTableView"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -266,7 +252,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1552"
          endingLineNumber = "1552"
-         landmarkName = "-webView:shouldStartLoadWithRequest:navigationType:"
+         landmarkName = "-addFavButtonClicked:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -275,12 +261,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "PushBox/RootViewController.m"
-         timestampString = "344332235.593462"
+         timestampString = "344766126.432312"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "227"
-         endingLineNumber = "227"
-         landmarkName = "-getFriends"
+         startingLineNumber = "230"
+         endingLineNumber = "230"
+         landmarkName = "-viewDidUnload"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -294,7 +280,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "994"
          endingLineNumber = "994"
-         landmarkName = "-loadTrackDelta:page:"
+         landmarkName = "-setTrack:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -513,12 +499,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "PushBox/RootViewController.m"
-         timestampString = "344494886.691564"
+         timestampString = "344775785.957403"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1642"
-         endingLineNumber = "1642"
-         landmarkName = "-textFieldShouldReturn:"
+         startingLineNumber = "1674"
+         endingLineNumber = "1674"
+         landmarkName = "-loginViewControllerDidLogin:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -546,8 +532,101 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "443"
          endingLineNumber = "443"
-         landmarkName = "-insertStatusFromClient:"
+         landmarkName = "-setPiles"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "PushBox/OptionsTableViewController.m"
+         timestampString = "344763913.461818"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "274"
+         endingLineNumber = "274"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "PushBox/OptionsTableViewController.m"
+         timestampString = "344764184.722264"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "285"
+         endingLineNumber = "285"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "PushBox/UserCardBaseViewController.m"
+         timestampString = "344764808.416539"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "118"
+         endingLineNumber = "118"
+         landmarkName = "-showStatusesButtonClicked:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "PushBox/RootViewController.m"
+         timestampString = "344772993.942664"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "369"
+         endingLineNumber = "369"
+         landmarkName = "-initSpe"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "PushBox/WeiboClient.m"
+         timestampString = "344774618.212733"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "670"
+         endingLineNumber = "670"
+         landmarkName = "-getUser:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "PushBox/RootViewController.m"
+         timestampString = "344775680.878008"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "712"
+         endingLineNumber = "712"
+         landmarkName = "-showBottomStateView"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
+   <ExceptionBreakpoints>
+      <ExceptionBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         scope = "0"
+         stopOnStyle = "0">
+      </ExceptionBreakpoint>
+   </ExceptionBreakpoints>
 </Bucket>
