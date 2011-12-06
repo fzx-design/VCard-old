@@ -182,7 +182,6 @@
     [self.dockViewController.groupButton setImage:imageHL forState:UIControlStateHighlighted];
 }
 
-
 #pragma mark - View lifecycle
 
 - (void)dealloc
