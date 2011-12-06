@@ -1222,14 +1222,15 @@
                                                destructiveButtonTitle:nil 
                                                     otherButtonTitles:nil];
     
-    [actionSheet addButtonWithTitle:NSLocalizedString(@"转发", nil)];
-    [actionSheet addButtonWithTitle:NSLocalizedString(@"发表评论", nil)];
-    [actionSheet addButtonWithTitle:NSLocalizedString(@"查看评论", nil)];
     if (![self.currentUser.favorites containsObject:self.status]) {
         [actionSheet addButtonWithTitle:NSLocalizedString(@"收藏", nil)];
     } else {
         [actionSheet addButtonWithTitle:NSLocalizedString(@"取消收藏", nil)];
     }
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"转发", nil)];
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"发表评论", nil)];
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"查看评论", nil)];
+
     [actionSheet addButtonWithTitle:NSLocalizedString(@"邮件分享", nil)];
     if ([self.status.author.userID isEqualToString:self.currentUser.userID]) {
         [actionSheet addButtonWithTitle:NSLocalizedString(@"删除微博", nil)];
@@ -1258,16 +1259,16 @@
     UIAlertView *alert = nil;
     switch (buttonIndex) {
         case 0:
-            [self repostButtonClicked:nil];
+            [self addFavButtonClicked:self.addFavourateButton];
             break;
         case 1:
-            [self newComment];
+            [self repostButtonClicked:nil];
             break;
         case 2:
-            [self commentButtonClicked:nil];
+            [self newComment];
             break;
         case 3:
-            [self addFavButtonClicked:self.addFavourateButton];
+            [self commentButtonClicked:nil];
             break;
         case 4:
         {
@@ -1523,7 +1524,7 @@
         [client setCompletionBlock:^(WeiboClient *client) {
             if (!client.hasError) {
                 [self.currentUser removeFavoritesObject:self.status];
-				[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameCardShouldDeleteCard object:self];
+				[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameCardShouldUnfavorCard object:self];
                 sender.selected = NO;
             } else {
                 [ErrorNotification showOperationError];

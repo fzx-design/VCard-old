@@ -22,6 +22,7 @@
 #define kNotificationNameModalCardDismissed @"kNotificationNameModalCardDismissed"
 #define kNotificationNameCardDeleted @"kNotificationNameCardDeleted"
 #define kNotificationNameCardShouldDeleteCard @"kNotificationNameCardShouldDeleteCard"
+#define kNotificationNameCardShouldUnfavorCard @"kNotificationNameCardShouldUnfavorCard"
 
 #define kIPad1CoverOffset 20
 

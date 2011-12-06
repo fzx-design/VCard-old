@@ -21,7 +21,7 @@
 #define kStatusCountPerRequest 10
 #define kBlurImageViewScale 2.0
 #define kCastViewScale 2.5
-#define kReadingInterval 0.3
+#define kReadingInterval 0.1
 
 @implementation CastViewController
 
@@ -112,6 +112,10 @@
 	[center addObserver:self selector:@selector(deleteCurrentCard) 
 				   name:kNotificationNameCardShouldDeleteCard 
 				 object:nil];
+    [center addObserver:self selector:@selector(unfavorCurrentCard) 
+				   name:kNotificationNameCardShouldUnfavorCard 
+				 object:nil];
+    
 }
 
 - (void)setUpView
@@ -253,103 +257,171 @@
     _statusTypeID = 0;
 }
 
+- (BOOL)returnOldState
+{
+    CastViewInfo *castViewInfo = [self.infoStack lastObject];
+    
+    BOOL needPopAnimation = (self.infoStack.count == 1);
+    
+    self.dataSource = castViewInfo.dataSource;
+    self.prevDataSource = self.dataSource;
+    
+    [self.castViewManager resetAllViews];
+    
+    self.fetchedResultsController = castViewInfo.fetchedResultsController;
+    self.fetchedResultsController.delegate = nil;
+    self.dataSource = castViewInfo.dataSource;
+    
+    self.castViewManager.fetchedResultsController = nil;
+    self.castViewManager.fetchedResultsController = self.fetchedResultsController;
+    self.castViewManager.currentIndex = castViewInfo.currentIndex;
+    self.castViewManager.dataSource = self.dataSource;
+    self.castView.pageSection = castViewInfo.indexSection;
+    
+    _statusTypeID = castViewInfo.statusType;
+    _lastStatusID = castViewInfo.statusID;
+    
+    _currentNextPage = castViewInfo.nextPage;
+    
+    [self.castViewManager popNewViews:castViewInfo];
+    
+    return needPopAnimation;
+}
+
 - (void)pushCardWithCompletion:(void (^)())completion
 {
 	[[UIApplication sharedApplication] showLoadingView];
 	
 	[self recordCurrentState];
 	
-	BOOL firstPush = (self.infoStack.count == 1);
-	
-	if (firstPush) {
-		self.blurImageView.alpha = 0.0;
-	}
-	
-	self.blurImageView.transform = CGAffineTransformMakeScale(kBlurImageViewScale, kBlurImageViewScale);
-	
-	[UIView animateWithDuration:0.5 animations:^{
-		self.blurImageView.alpha = 1.0;
-		self.blurImageView.transform = CGAffineTransformMakeScale(1, 1);
-        self.castView.alpha = 0.0;
-        self.castView.transform = CGAffineTransformScale(self.castView.transform, 1/kCastViewScale, 1/kCastViewScale);
-    } completion:^(BOOL fin) {
-		
-		self.rootShadowLeft.alpha = 1.0;
-		self.castView.transform = CGAffineTransformScale(self.castView.transform, kCastViewScale, kCastViewScale);
-        self.castView.alpha = 0.0;
-		
-		[self loadMoreDataCompletion:^(){
-			[self.castViewManager pushNewViews];
-			if (completion) {
-				completion();
-			}
-			
-			[[UIApplication sharedApplication] hideLoadingView];
-		}];
-    }];
+    if ([[SystemDefault systemDefault] isIPad2]) {
+        
+        BOOL firstPush = (self.infoStack.count == 1);
+        
+        if (firstPush) {
+            self.blurImageView.alpha = 0.0;
+        }
+        
+        self.blurImageView.transform = CGAffineTransformMakeScale(kBlurImageViewScale, kBlurImageViewScale);
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            self.blurImageView.alpha = 1.0;
+            self.blurImageView.transform = CGAffineTransformMakeScale(1, 1);
+            self.castView.alpha = 0.0;
+            self.castView.transform = CGAffineTransformScale(self.castView.transform, 1/kCastViewScale, 1/kCastViewScale);
+        } completion:^(BOOL fin) {
+            
+            self.rootShadowLeft.alpha = 1.0;
+            self.castView.transform = CGAffineTransformScale(self.castView.transform, kCastViewScale, kCastViewScale);
+            self.castView.alpha = 0.0;
+            
+            [self loadMoreDataCompletion:^(){
+                [self.castViewManager pushNewViews];
+                if (completion) {
+                    completion();
+                }
+                
+                [[UIApplication sharedApplication] hideLoadingView];
+            }];
+        }];
+    } else {
+                
+//        [self.castViewManager resetViewsAroundCurrentIndex:self.castViewManager.currentIndex];
+        
+        [self.castView moveOutViews:^() {
+            
+            [self loadMoreDataCompletion:^(){
+                
+                [self.castViewManager pushNewViews];
+                if (completion) {
+                    completion();
+                }
+                
+                [[UIApplication sharedApplication] hideLoadingView];
+            }];
+        }];
+    }
+
 }
 
 - (void)popCardWithCompletion:(void (^)())completion
 {
 	[[UIApplication sharedApplication] showLoadingView];
-	CastViewInfo *castViewInfo = [self.infoStack lastObject];
-	
-	BOOL needPopAnimation = (self.infoStack.count == 1);
-	
-	self.dataSource = castViewInfo.dataSource;
-	self.prevDataSource = self.dataSource;
-	
-	[self.castView moveOutViews:^() {
-        
-        [self.castViewManager resetAllViews];
-        
-		self.fetchedResultsController = castViewInfo.fetchedResultsController;
-        self.fetchedResultsController.delegate = nil;
-		self.dataSource = castViewInfo.dataSource;
-		
-		self.castViewManager.fetchedResultsController = nil;
-		self.castViewManager.fetchedResultsController = self.fetchedResultsController;
-        self.castViewManager.currentIndex = castViewInfo.currentIndex;
-        self.castViewManager.dataSource = self.dataSource;
-		self.castView.pageSection = castViewInfo.indexSection;
-        
-		_statusTypeID = castViewInfo.statusType;
-		_lastStatusID = castViewInfo.statusID;
-		
-		_currentNextPage = castViewInfo.nextPage;
-		
-        [self.castViewManager popNewViews:castViewInfo];
-		
-        [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
-		
-        self.blurImageView.alpha = 1.0;
-        self.blurImageView.transform = CGAffineTransformMakeScale(1, 1);
-		
-		self.castView.transform = CGAffineTransformScale(self.castView.transform, 1/kCastViewScale, 1/kCastViewScale);
-		self.castView.alpha = 0.0;
-		[UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
-			if (needPopAnimation) {
-				self.blurImageView.alpha = 0.0;
-				self.blurImageView.transform = CGAffineTransformMakeScale(kBlurImageViewScale, kBlurImageViewScale);
-			}
-			self.castView.transform = CGAffineTransformScale(self.castView.transform, kCastViewScale, kCastViewScale);
-			self.castView.alpha = 1.0;
-		} completion:^(BOOL fin) {
-			if (!needPopAnimation) {
-				self.blurImageView.alpha = 1.0;
-				self.blurImageView.transform = CGAffineTransformMakeScale(1, 1);
-			}
-			
-            [self didScrollToIndex:self.castViewManager.currentIndex];
-			
-			[self.infoStack removeLastObject];
-			
-            if (completion) {
-                completion();
-            }
-			[[UIApplication sharedApplication] hideLoadingView];
+
+    if ([[SystemDefault systemDefault] isIPad2]) {
+        [self.castView moveOutViews:^() {
+            
+            BOOL needPopAnimation = [self returnOldState];
+            
+            [self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
+            
+            self.blurImageView.alpha = 1.0;
+            self.blurImageView.transform = CGAffineTransformMakeScale(1, 1);
+            
+            self.castView.transform = CGAffineTransformScale(self.castView.transform, 1/kCastViewScale, 1/kCastViewScale);
+            self.castView.alpha = 0.0;
+            [UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
+                if (needPopAnimation) {
+                    self.blurImageView.alpha = 0.0;
+                    self.blurImageView.transform = CGAffineTransformMakeScale(kBlurImageViewScale, kBlurImageViewScale);
+                }
+                self.castView.transform = CGAffineTransformScale(self.castView.transform, kCastViewScale, kCastViewScale);
+                self.castView.alpha = 1.0;
+            } completion:^(BOOL fin) {
+                if (!needPopAnimation) {
+                    self.blurImageView.alpha = 1.0;
+                    self.blurImageView.transform = CGAffineTransformMakeScale(1, 1);
+                }
+                
+                [self didScrollToIndex:self.castViewManager.currentIndex];
+                
+                [self.infoStack removeLastObject];
+                
+                if (completion) {
+                    completion();
+                }
+                [[UIApplication sharedApplication] hideLoadingView];
+            }];
         }];
-	}];
+    } else {
+        
+        [self.castViewManager resetViewsAroundCurrentIndex:self.castViewManager.currentIndex];
+        [UIView animateWithDuration:0.3 animations:^{
+            CGRect frame = self.castView.frame;
+            frame.origin.x += 1564;
+            self.castView.frame = frame;
+        } completion:^(BOOL finished) {
+            
+            CGRect frame = self.castView.frame;
+            frame.origin.x -= 3128;
+            self.castView.frame = frame;
+            
+            [self returnOldState];
+
+            [self.castViewManager resetViewsAroundCurrentIndex:self.castViewManager.currentIndex];
+            
+            [UIView animateWithDuration:0.7 animations:^{
+                
+                CGRect frame = self.castView.frame;
+                frame.origin.x += 1564;
+                self.castView.frame = frame;
+                                
+            } completion:^(BOOL finished) {
+                [self didScrollToIndex:self.castViewManager.currentIndex];
+                
+                [self.castViewManager reloadCards];
+                
+                [self.infoStack removeLastObject];
+                
+                if (completion) {
+                    completion();
+                }
+                [[UIApplication sharedApplication] hideLoadingView];
+            }];
+        }];
+    }
+	
+
 }
 
 - (void)clearCardStack
@@ -396,6 +468,14 @@
 {
 	[self.castViewManager deleteCurrentView];
     [self.delegate castViewControllerdidScrollToRow:self.castViewManager.currentIndex withNumberOfRows:[self.castViewManager numberOfRows]];
+}
+
+- (void)unfavorCurrentCard
+{
+    if (self.dataSource == CastViewDataSourceFavorites) {
+        [self deleteCurrentCard];
+    }
+    [[UIApplication sharedApplication] showOperationDoneView];
 }
 
 #pragma mark - Load Cards methods

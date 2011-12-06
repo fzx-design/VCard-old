@@ -698,57 +698,167 @@
 
 - (void)showBottomStateView
 {
-//    if (self.bottomStateInvisibleView.image == nil) {
-//        self.bottomStateInvisibleView.image = _tmpImage;
-//    }
     
-    [self.bottomStateFrameView.layer removeAllAnimations];
-    
-	self.bottomStateView.hidden = NO;
-    
-    if ([self.bottomStateView.layer animationForKey:@"animationDown"] == nil) {
+    if ([[SystemDefault systemDefault] isIPad2]) {
+        self.bottomStateView.hidden = NO;
         
-        [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimationDown] forKey:@"animationDown"];
+        if ([self.bottomStateView.layer animationForKey:@"animationDown"] == nil) {
+            
+            [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimationDown] forKey:@"animationDown"];
+        }
+        [self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
+        
+        [self.bottomStateFrameView bringSubviewToFront:self.bottomStateView];
+        self.bottomBackButton.enabled = YES;
+        
+        if (self.castViewController.dataSource == CastViewDataSourceSearch) {
+            [self showSearchWaitingView];
+        } else {
+            [self hideSearchView];
+            if (_inSearchMode) {
+                self.dockViewController.searchButton.selected = YES;
+            }
+        }
+    } else {
+        
+        self.bottomStateInvisibleView.hidden = YES;
+        self.bottomBackButton.enabled = YES;
+        
+        if (self.bottomStateView.hidden == YES) {
+            self.bottomStateView.hidden = NO;
+            
+            if (self.castViewController.dataSource == CastViewDataSourceSearch) {
+                self.bottomSearchBG.hidden = NO;
+                self.bottomStateLabel.hidden = YES;
+                self.bottomSearchTextField.hidden = NO;
+            } else {
+                self.bottomSearchBG.hidden = YES;
+                self.bottomStateLabel.hidden = NO;
+                self.bottomSearchTextField.hidden = YES;
+            }
+            
+            self.bottomStateView.alpha = 0.0;
+            self.bottomStateLabel.alpha = 0.0;
+            
+            [UIView animateWithDuration:0.7 animations:^{
+                self.bottomStateView.alpha = 1.0;
+                self.bottomStateLabel.alpha = 0.5;
+            }];
+        } else {
+            
+            if (self.castViewController.dataSource == CastViewDataSourceSearch) {
+
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.bottomStateLabel.alpha = 0.0;
+                    self.bottomSearchBG.alpha = 1.0;
+                    self.bottomSearchTextField.alpha = 1.0;
+                } completion:^(BOOL finished) {
+                    self.bottomStateLabel.alpha = 0.5;
+                    self.bottomStateLabel.hidden = YES;
+                    
+                    self.bottomSearchBG.hidden = NO;
+                    self.bottomSearchTextField.hidden = NO;
+                }];
+                
+            } else {
+                
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.bottomStateLabel.alpha = 0.5;
+                    self.bottomSearchBG.alpha = 0.0;
+                    self.bottomSearchTextField.alpha = 0.0;
+                } completion:^(BOOL finished) {
+                    
+                    self.bottomSearchBG.hidden = YES;
+                    self.bottomStateLabel.hidden = NO;
+                    self.bottomSearchTextField.hidden = YES;
+                    self.bottomSearchBG.alpha = 1.0;
+                }];
+                
+            }
+            
+            self.bottomStateLabel.alpha = 0.0;
+            [UIView animateWithDuration:0.7 animations:^{
+                self.bottomStateLabel.alpha = 0.5;
+            }];
+        }
     }
-    [self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
     
-    [self.bottomStateFrameView bringSubviewToFront:self.bottomStateView];
-    self.bottomBackButton.enabled = YES;
-	
-	if (self.castViewController.dataSource == CastViewDataSourceSearch) {
-		[self showSearchWaitingView];
-	} else {
-		[self hideSearchView];
-		if (_inSearchMode) {
-			self.dockViewController.searchButton.selected = YES;
-		}
-	}
+
 }
 
 - (void)hideBottomStateView
 {
-    if ([self.bottomStateView.layer animationForKey:@"animationUp"] == nil) {
+    if ([[SystemDefault systemDefault] isIPad2]) {
         
-        [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimationUp] forKey:@"animationUp"];
+        if ([self.bottomStateView.layer animationForKey:@"animationUp"] == nil) {
+            
+            [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimationUp] forKey:@"animationUp"];
+        }
+        [self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
+        
+        self.bottomStateView.hidden = YES;
+        self.bottomBackButton.enabled = NO;
+        
+    } else {
+        
+        [UIView animateWithDuration:0.7 animations:^{
+            self.bottomStateView.alpha = 0.0;
+            self.bottomStateLabel.alpha = 0.0;
+        } completion:^(BOOL finished) {
+            self.bottomStateView.hidden = YES;
+            self.bottomBackButton.enabled = NO;
+        }];
     }
-//    [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimationUp] forKey:@"animation"];
-    [self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
     
-	self.bottomStateView.hidden = YES;
-    self.bottomBackButton.enabled = NO;
+
 }
 
 - (void)popBottomStateView
 {
-    if ([self.bottomStateView.layer animationForKey:@"animationUp"] == nil) {
+    
+    if ([[SystemDefault systemDefault] isIPad2]) {
         
-        [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimationUp] forKey:@"animationUp"];
+        if ([self.bottomStateView.layer animationForKey:@"animationUp"] == nil) {
+            
+            [self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimationUp] forKey:@"animationUp"];
+        }
+        [self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
+        if (_inSearchMode && self.castViewController.infoStack.count == 2) {
+            [self showSearchWaitingView];
+        }
+        
+    } else {
+        self.bottomStateLabel.alpha = 0.0;
+        [UIView animateWithDuration:0.3 animations:^{
+            self.bottomStateLabel.alpha = 0.5;
+        }];
+        
+        if (self.castViewController.dataSource == CastViewDataSourceSearch) {
+            
+            self.bottomSearchBG.hidden = NO;
+            self.bottomSearchTextField.hidden = NO;
+            
+            self.bottomSearchBG.alpha = 0.0;
+            self.bottomSearchTextField.alpha = 0.0;
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                self.bottomStateLabel.alpha = 0.0;
+                self.bottomSearchBG.alpha = 1.0;
+                self.bottomSearchTextField.alpha = 1.0;
+            } completion:^(BOOL finished) {
+                self.bottomStateLabel.alpha = 0.5;
+                self.bottomStateLabel.hidden = YES;
+            }];
+            
+
+        } else {
+            self.bottomSearchBG.hidden = YES;
+            self.bottomStateLabel.hidden = NO;
+            self.bottomSearchTextField.hidden = YES;
+        }
+        
     }
-//	[self.bottomStateFrameView.layer addAnimation:[AnimationProvider cubeAnimationUp] forKey:@"animation"];
-    [self.bottomStateFrameView exchangeSubviewAtIndex:1 withSubviewAtIndex:2];
-	if (_inSearchMode && self.castViewController.infoStack.count == 2) {
-		[self showSearchWaitingView];
-	}
+
 }
 
 - (void)shouldShowUserTimelineNotification:(id)sender
@@ -789,9 +899,10 @@
             self.dockViewController.groupButton.enabled = result;
 			[self setGroupButtonImage:self.castViewController.statusTypeID];
             [self setRefreshButton];
+            
+            [self popBottomStateView];
 		}];
 		
-		[self popBottomStateView];
 		[_statusTypeStack removeLastObject];
 		NSString *string =  [_statusTypeStack lastObject];
 		self.bottomStateLabel.text = string;
