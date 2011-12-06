@@ -769,6 +769,7 @@
 {
     if (link) {
         InnerBroswerViewController* browser = [[InnerBroswerViewController alloc] init];
+        browser.targetURL = link;
         [[UIApplication sharedApplication] presentModalViewController:browser atHeight:0];
         [browser loadLink:link];
         [browser release];
@@ -1291,7 +1292,10 @@
                 NSString *subject = [NSString stringWithFormat:@"分享一条来自新浪的微博，作者：%@", self.status.author.screenName];
                 
                 [picker setSubject:subject];
-                NSString *emailBody = [NSString stringWithFormat:@"%@ %@", self.status.text, self.status.repostStatus.text];
+                NSString *emailBody = [NSString stringWithFormat:@"%@ ", self.status.text];
+                if (self.status.repostStatus) {
+                    [emailBody stringByAppendingFormat:self.status.repostStatus.text];
+                }
                 [picker setMessageBody:emailBody isHTML:NO];
                 
                 UIImage *img = nil;
