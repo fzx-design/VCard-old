@@ -10,7 +10,7 @@
 
 @protocol LoginViewControllerDelegate
 @required
-- (void)loginViewControllerDidLogin:(UIViewController *)vc;
+- (void)loginViewControllerDidLogin:(UIViewController *)vc shouldClearData:(BOOL)differentUser;
 @end
 
 @interface LoginViewController : UIViewController<UITextFieldDelegate> {

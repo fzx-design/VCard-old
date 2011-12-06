@@ -73,6 +73,9 @@
     NSString *username = self.usernameTextField.text;
     NSString *password = self.passwordTextField.text;
 	[[NSUserDefaults standardUserDefaults] setObject:username forKey:kUserDefaultName];
+    
+    [self.passwordTextField resignFirstResponder];
+    [self.usernameTextField resignFirstResponder];
 	
     WeiboClient *client = [WeiboClient client];
     
@@ -92,11 +95,19 @@
                                                    otherButtonTitles:nil];
             [alert show];
             [alert release];
+            
+            
+            [self.passwordTextField becomeFirstResponder];
         }
         else {
-            [self.passwordTextField resignFirstResponder];
-            [self.usernameTextField resignFirstResponder];
-            [self.delegate loginViewControllerDidLogin:self];
+            
+            NSString *preName = (NSString*)[[NSUserDefaults standardUserDefaults] objectForKey:@"kUserDefaultKeyUserName"];
+            BOOL differentUser = ![username isEqualToString:preName];
+            if (differentUser) {
+                [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"kUserDefaultKeyUserName"];
+            }
+            
+            [self.delegate loginViewControllerDidLogin:self shouldClearData:differentUser];
         }
     }];
 	[client authWithUsername:username password:password autosave:self.autoSaveButton.selected];

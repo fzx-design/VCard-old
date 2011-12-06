@@ -182,6 +182,15 @@
     [self.dockViewController.groupButton setImage:imageHL forState:UIControlStateHighlighted];
 }
 
+- (void)clearData
+{
+    [ReadStatusID deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
+    [User deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
+    [Status deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
+    [Comment deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:PBBackgroundImageDefault] forKey:kUserDefaultKeyBackground];
+}
+
 #pragma mark - View lifecycle
 
 - (void)dealloc
@@ -264,6 +273,8 @@
 	self.notificationView.hidden = YES;
 	self.bottomStateFrameView.hidden = NO;
 	self.groupView.hidden = YES;
+    
+    self.bottomBackButton.enabled = NO;
     
 	_statusTypeStack = [[NSMutableArray alloc] init];
 }
@@ -508,7 +519,6 @@
     self.bottomSearchTextField.hidden = YES;
     self.bottomSearchTextField.text = @"";
     [CastViewPileUpController releaseSharedCastViewPileUpController];
-    [ReadStatusID deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
 	
 	[self.castViewController.castView moveOutViews:^(){
 		preNewCommentCount = 0;
@@ -534,10 +544,9 @@
 		self.notificationView.hidden = YES;
 		self.currentUser = nil;
 		[self setDefaultBackgroundImage:YES];
-		[User deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
-		[Status deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
-		[Comment deleteAllObjectsInManagedObjectContext:self.managedObjectContext];
-		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:PBBackgroundImageDefault] forKey:kUserDefaultKeyBackground];
+        
+        [self clearData];
+        
 		[self performSelector:@selector(showLoginView) withObject:nil afterDelay:0.1];
 	}];
 }
@@ -899,9 +908,14 @@
             self.dockViewController.groupButton.enabled = result;
 			[self setGroupButtonImage:self.castViewController.statusTypeID];
             [self setRefreshButton];
-            
-            [self popBottomStateView];
+            if (![[SystemDefault systemDefault] isIPad2]) {
+                [self popBottomStateView];
+            }
 		}];
+        
+        if ([[SystemDefault systemDefault] isIPad2]) {
+            [self popBottomStateView];
+        }
 		
 		[_statusTypeStack removeLastObject];
 		NSString *string =  [_statusTypeStack lastObject];
@@ -1793,8 +1807,12 @@
     }];
 }
 
-- (void)loginViewControllerDidLogin:(UIViewController *)vc
+- (void)loginViewControllerDidLogin:(UIViewController *)vc shouldClearData:(BOOL)differentUser
 {
+    if (differentUser) {
+        [self clearData];
+    }
+    
     [self hideLoginView];
     [self start];
 }

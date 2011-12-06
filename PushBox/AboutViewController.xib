@@ -243,7 +243,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">3.1.1</string>
+						<string key="IBUIText">3.1</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4wMTU2OTA4NjUwNiAwLjM5Njk5MTIxNTMgMC41MzkzODEzNzc2AA</bytes>
