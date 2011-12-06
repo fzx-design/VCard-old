@@ -12,6 +12,7 @@
 
 @synthesize webView = _webView;
 @synthesize loadingIndicator = _loadingIndicator;
+@synthesize targetURL = _targetURL;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -90,7 +91,9 @@
 
 - (IBAction)goSafariButtonClicked:(id)sender
 {
-    [[UIApplication sharedApplication] openURL:[[self.webView request] URL]];
+    //    [[UIApplication sharedApplication] openURL:[[self.webView request] URL]];
+    NSURL* url = [[NSURL alloc] initWithString:self.targetURL];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 #pragma - UIWebViewDelegate

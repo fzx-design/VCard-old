@@ -17,6 +17,8 @@
     UIActivityIndicatorView *_loadingIndicator;
     
     BOOL isIpodPlaying;
+    
+    NSString* _targetURL;
 }
 
 - (void)loadLink:(NSString*)link;
@@ -26,5 +28,7 @@
 
 @property (nonatomic, retain) IBOutlet UIWebView* webView;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loadingIndicator;
+
+@property (nonatomic, retain) NSString* targetURL;
 
 @end

@@ -769,6 +769,7 @@
 {
     if (link) {
         InnerBroswerViewController* browser = [[InnerBroswerViewController alloc] init];
+        browser.targetURL = link;
         [[UIApplication sharedApplication] presentModalViewController:browser atHeight:0];
         [browser loadLink:link];
         [browser release];
