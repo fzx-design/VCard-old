@@ -1128,7 +1128,7 @@
 - (void)setDefaultBackgroundImage:(BOOL)animated
 {
     NSString *fileName = [BackgroundManViewController backgroundImageFilePathFromEnum:PBBackgroundImageDefault];
-    NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"png"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"jpg"];
     UIImage *img = [UIImage imageWithContentsOfFile:path];
     
     if (animated) {
@@ -1147,7 +1147,7 @@
     int enumValue = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeyBackground];
     
     NSString *fileName = [BackgroundManViewController backgroundImageFilePathFromEnum:enumValue];
-    NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"png"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"jpg"];
     UIImage *img = [UIImage imageWithContentsOfFile:path];
     
     CGRect myImageRect = CGRectMake(0.0, 642.0, img.size.width, 46);
