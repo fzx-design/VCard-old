@@ -946,6 +946,26 @@
 
 #pragma mark - 
 
+- (void)initDockViewController
+{
+    if (preNewCommentCount == 0) {
+        self.dockViewController.ccCommentTableViewController.theNewCommentCountLabel.text = @"";
+    } else {
+        self.dockViewController.ccCommentTableViewController.theNewCommentCountLabel.text = [NSString stringWithFormat:@"%d", preNewCommentCount];
+    }
+    
+    if (preNewFollowerCount == 0) {
+        self.dockViewController.ccUserInfoCardViewController.theNewFollowersCountLabel.text = @"";
+    } else {
+        self.dockViewController.ccUserInfoCardViewController.theNewFollowersCountLabel.text = [NSString stringWithFormat:@"%d", preNewFollowerCount];
+    }
+    
+    if (preNewMentionCount == 0) {
+        self.dockViewController.ccCommentTableViewController.theNewMentionsCountLabel.text = @"";
+    } else {
+        self.dockViewController.ccCommentTableViewController.theNewMentionsCountLabel.text = [NSString stringWithFormat:@"%d", preNewMentionCount];
+    }
+}
 
 - (void)notificationRefreshed:(id)sender
 {
@@ -1465,7 +1485,6 @@
 	}
 	
     [self.dockViewController viewWillAppear:YES];
-//	[self.dockViewController.ccCommentTableViewController returnToCommandCenter];
     
     [UIView animateWithDuration:kDockAnimationInterval
                           delay:0 
@@ -1480,10 +1499,6 @@
 						 frame = self.castViewController.view.frame;
                          frame.origin.y -= kCardTableViewOffsetY;
                          self.castViewController.view.frame = frame;
-						 
-                         //                         frame = self.cardTableViewController.view.frame;
-                         //                         frame.origin.y -= kCardTableViewOffsetY;
-                         //                         self.cardTableViewController.view.frame = frame;
                          
                          frame = self.bottomStateView.frame;
                          frame.origin.y -= kDockViewOffsetY;
@@ -1492,6 +1507,7 @@
                      completion:^(BOOL finished) {
                          if (finished) {
                              [self.dockViewController viewDidAppear:YES];
+                             [self initDockViewController];
                              [[UIApplication sharedApplication] hideLoadingView];
                          }
                      }];
