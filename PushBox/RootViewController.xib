@@ -48,11 +48,12 @@
 						<string key="NSFrameSize">{1024, 748}</string>
 						<reference key="NSSuperview" ref="420341332"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="496898477"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">bg_default.png</string>
+							<string key="NSResourceName">bg_default.jpg</string>
 						</object>
 					</object>
 					<object class="IBUIView" id="496898477">
@@ -287,6 +288,7 @@
 						<string key="NSFrame">{{945, 625}, {78, 46}}</string>
 						<reference key="NSSuperview" ref="420341332"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -1645,7 +1647,7 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>bg_default.png</string>
+				<string>bg_default.jpg</string>
 				<string>button_done.png</string>
 				<string>dock_button_group.png</string>
 				<string>group_bg.png</string>
