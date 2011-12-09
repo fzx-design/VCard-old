@@ -14,6 +14,8 @@
 @synthesize loadingIndicator = _loadingIndicator;
 @synthesize targetURL = _targetURL;
 
+static InnerBroswerViewController* sharedBrowser = nil;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -21,6 +23,16 @@
         // Custom initialization
     }
     return self;
+}
+
++ (InnerBroswerViewController*)browser
+{
+    @synchronized(self){
+        if (sharedBrowser == nil) {
+            sharedBrowser = [[[self alloc] init] autorelease];
+        }
+    }
+    return  sharedBrowser;
 }
 
 - (void)dealloc
@@ -45,13 +57,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    MPMusicPlayerController* ipodMusicPlayer = [MPMusicPlayerController iPodMusicPlayer];
-    if ([ipodMusicPlayer playbackState] == MPMusicPlaybackStatePlaying) {
-        isIpodPlaying = YES;
-    }
-    else {
-        isIpodPlaying = NO;
-    }
+//    MPMusicPlayerController* ipodMusicPlayer = [MPMusicPlayerController iPodMusicPlayer];
+//    if ([ipodMusicPlayer playbackState] == MPMusicPlaybackStatePlaying) {
+//        isIpodPlaying = YES;
+//    }
+//    else {
+//        isIpodPlaying = NO;
+//    }
 }
 
 - (void)viewDidUnload
@@ -81,11 +93,13 @@
     //
     [[UIApplication sharedApplication] dismissModalViewController];
     [self.webView loadRequest:[[[NSURLRequest alloc] initWithURL:[[[NSURL alloc] initWithString:@"about:blank"] autorelease]] autorelease]];
-    if (isIpodPlaying) {
-        MPMusicPlayerController* ipodMusicPlayer = [MPMusicPlayerController iPodMusicPlayer];
-        NSLog(@"%@", [[ipodMusicPlayer nowPlayingItem] description]);
-        [ipodMusicPlayer play];
-    }
+    
+//    if (isIpodPlaying) {
+//        MPMusicPlayerController* ipodMusicPlayer = [MPMusicPlayerController iPodMusicPlayer];
+//        NSLog(@"%@", [[ipodMusicPlayer nowPlayingItem] description]);
+//        [ipodMusicPlayer play];
+//    }
+
     [self release];
 }
 
