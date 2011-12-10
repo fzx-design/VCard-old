@@ -126,7 +126,7 @@
 
 
 - (IBAction)openRegisterURL:(id)sender {
-    NSString *urlString = @"http://t.sina.com.cn/reg.php?ps=u3&lang=zh";
+    NSString *urlString = @"http://weibo.com/signup/signup.php";
 	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
 }
 
