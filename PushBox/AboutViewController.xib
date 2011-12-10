@@ -174,7 +174,7 @@
 						<string key="NSFrame">{{30, 345}, {259, 48}}</string>
 						<reference key="NSSuperview" ref="353028653"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="175103232"/>
+						<reference key="NSNextKeyView" ref="1030506615"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4yMDAwMDAwMDMgMC4yMDAwMDAwMDMgMC4yMDAwMDAwMDMgMAA</bytes>
@@ -205,7 +205,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">© Mondev</string>
+						<string key="IBUIText">© Mondev, Tongji U</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC4zMzMzMzMzMzMzAA</bytes>
@@ -234,7 +234,7 @@
 					<object class="IBUILabel" id="175103232">
 						<reference key="NSNextResponder" ref="353028653"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{26, 436}, {266, 21}}</string>
+						<string key="NSFrame">{{26, 466}, {266, 21}}</string>
 						<reference key="NSSuperview" ref="353028653"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="146474111"/>
@@ -243,7 +243,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">3.1</string>
+						<string key="IBUIText">3.1.1</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4wMTU2OTA4NjUwNiAwLjM5Njk5MTIxNTMgMC41MzkzODEzNzc2AA</bytes>
@@ -285,14 +285,50 @@
 							<string key="NSResourceName">title_small.png</string>
 						</object>
 					</object>
+					<object class="IBUILabel" id="1030506615">
+						<reference key="NSNextResponder" ref="353028653"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{87, 389}, {145, 60}}</string>
+						<reference key="NSSuperview" ref="353028653"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="175103232"/>
+						<string key="NSReuseIdentifierKey">_NS:345</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<string key="IBUIText">Happy 2012</string>
+						<object class="NSColor" key="IBUITextColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC44MDU1MjQ1NTM2IDAuMjEyNDc1MTI3NCAwLjE0MjQwMzE4MzUAA</bytes>
+						</object>
+						<nil key="IBUIHighlightedColor"/>
+						<reference key="IBUIShadowColor" ref="476146521"/>
+						<string key="IBUIShadowOffset">{0, 1}</string>
+						<int key="IBUIBaselineAdjustment">1</int>
+						<float key="IBUIMinimumFontSize">10</float>
+						<int key="IBUITextAlignment">1</int>
+						<object class="IBUIFontDescription" key="IBUIFontDescription">
+							<string key="name">SnellRoundhand-Bold</string>
+							<string key="family">Snell Roundhand</string>
+							<int key="traits">3</int>
+							<double key="pointSize">20</double>
+						</object>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">SnellRoundhand-Bold</string>
+							<double key="NSSize">20</double>
+							<int key="NSfFlags">16</int>
+						</object>
+					</object>
 				</object>
 				<string key="NSFrameSize">{312, 532}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="416380013"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
-					<int key="NSColorSpace">3</int>
-					<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
+					<int key="NSColorSpace">1</int>
+					<bytes key="NSRGB">MC44NjU1NTMyNTI2IDAuODU1NzE3NDIwMSAwLjg1NTcxNzQyMDEAA</bytes>
 				</object>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
@@ -397,6 +433,7 @@
 							<reference ref="175103232"/>
 							<reference ref="146474111"/>
 							<reference ref="135169929"/>
+							<reference ref="1030506615"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">AboutView</string>
@@ -441,6 +478,11 @@
 						<reference key="object" ref="135169929"/>
 						<reference key="parent" ref="353028653"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">27</int>
+						<reference key="object" ref="1030506615"/>
+						<reference key="parent" ref="353028653"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -456,6 +498,7 @@
 					<string>14.IBPluginDependency</string>
 					<string>20.IBPluginDependency</string>
 					<string>22.IBPluginDependency</string>
+					<string>27.IBPluginDependency</string>
 					<string>4.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>8.IBPluginDependency</string>
@@ -466,6 +509,7 @@
 					<string>AboutViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -490,7 +534,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">26</int>
+			<int key="maxID">27</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
