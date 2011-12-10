@@ -770,8 +770,8 @@
     NSLog(@"2");
     
     if (link) {
-        //        InnerBroswerViewController* browser = [[InnerBroswerViewController alloc] init];
-        InnerBroswerViewController* browser = [InnerBroswerViewController browser];
+        InnerBroswerViewController* browser = [[InnerBroswerViewController alloc] init];
+        //        InnerBroswerViewController* browser = [InnerBroswerViewController browser];
         browser.targetURL = link;
         [[UIApplication sharedApplication] presentModalViewController:browser atHeight:0];
         [browser loadLink:link];
