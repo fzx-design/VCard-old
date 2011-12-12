@@ -401,7 +401,7 @@
          commentOrigin:NO];
     }
     else {
-        if (self.rightImageView.image) {
+        if (!self.camaraButton.enabled && self.rightImageView.image) {
             [client post:status withImage:self.rightImageView.image];
         }
         else {
