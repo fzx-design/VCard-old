@@ -29,6 +29,14 @@
 @synthesize currentUser = _currentUser;
 @synthesize dataSource = _dataSource;
 
+- (void)dealloc
+{
+    [_cardFrames release];
+    [_castView release];
+    [_fetchedResultsController release];
+    [super dealloc];
+}
+
 - (void)initialSetUp
 {
 	self.castView.pageSize = CastViewPageSize;

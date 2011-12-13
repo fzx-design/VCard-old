@@ -50,6 +50,11 @@
 	[_repostSwitchView release];
 	[_postingRoundImageView release];
 	[_postingCircleImageView release];
+    [_atView release];
+    [_atScreenNames release];
+    [_emotionsView release];
+    [_alsoRepostLabel release];
+    [_repostSwitchView release];
     [super dealloc];
 }
 

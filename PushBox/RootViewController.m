@@ -360,7 +360,7 @@
 			[self.castViewController loadAllFavoritesWithCompletion:nil];
 			[self showCardTableView];
 			[self showDockView];
-			[self showMessagesView];
+//			[self showMessagesView];
 			[self.dockViewController hideLoadingView];
             
             [self setRefreshButton];

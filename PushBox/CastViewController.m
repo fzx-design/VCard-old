@@ -51,6 +51,20 @@
     
 }
 
+- (void)dealloc
+{
+    [_regionLeftDetectButton release];
+    [_regionRightDetectButton release];
+    [_blurImageView release];
+    [_rootShadowLeft release];
+    [_castView release];
+    [_meImageView release];
+    [_user release];
+    [_castViewManager release];
+    [_castViewPileUpController release];
+    [super dealloc];
+}
+
 #pragma mark - Tools
 
 - (BOOL)pileUpEnabled
