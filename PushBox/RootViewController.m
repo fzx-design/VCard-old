@@ -312,9 +312,7 @@
 }
 
 - (void)getFriends
-{
-    [self initSpe];
-    
+{    
     getFriendsRequestCount = 0;
     
     int cursor = -1;
@@ -341,6 +339,46 @@
     [client getEmotionsWithType:nil language:nil];
 }
 
+- (void)updateBackgroundImageAnimated:(BOOL)animated background:(int)background
+{    
+    NSString *fileName = [BackgroundManViewController backgroundImageFilePathFromEnum:background];
+    NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"jpg"];
+    UIImage *img = [UIImage imageWithContentsOfFile:path];
+    
+    CGRect myImageRect = CGRectMake(0.0, 642.0, img.size.width, 46);
+    UIImage *originalImage = img;	
+    CGImageRef imageRef = originalImage.CGImage;
+    CGImageRef subImageRef = CGImageCreateWithImageInRect(imageRef, myImageRect);
+    
+    CGSize size = CGSizeMake(1024, 46);
+    
+    UIGraphicsBeginImageContext(size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextDrawImage(context, myImageRect, subImageRef);
+    UIImage* cutImage = [UIImage imageWithCGImage:subImageRef];
+    UIGraphicsEndImageContext();
+    
+    //    if (_tmpImage == nil) {
+    //        _tmpImage = [cutImage retain];
+    //    } else {
+    //        self.bottomStateInvisibleView.image = cutImage;
+    //    }
+    
+    self.bottomStateInvisibleView.image = cutImage;
+    
+    if (animated) {
+        CATransition *transition = [CATransition animation];
+        transition.duration = 1.0;
+        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        transition.type = kCATransitionFade;
+        [self.backgroundImageView.layer addAnimation:transition forKey:nil];
+        [self.bottomStateInvisibleView.layer addAnimation:transition forKey:nil];
+    }
+    
+    self.backgroundImageView.image = img;
+    
+}
+
 - (void)initCastView
 {
 	WeiboClient *client = [WeiboClient client];
@@ -350,7 +388,18 @@
             self.currentUser = [User insertUser:userDict inManagedObjectContext:self.managedObjectContext];
         }
 		
-		[self updateBackgroundImageAnimated:YES];
+        // Special BG change 3.1.1
+        Boolean spe = [[NSUserDefaults standardUserDefaults] boolForKey:@"kSpecialBGChange311"];
+        if (!spe)
+        {
+            [self updateBackgroundImageAnimated:YES background:PBBackgroundImageRedrice];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:PBBackgroundImageRedrice] forKey:kUserDefaultKeyBackground];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kSpecialBGChange311"];
+        }
+        // No special BG change 3.1.1
+        else {
+            [self updateBackgroundImageAnimated:YES];
+        }
 		
 		[[UIApplication sharedApplication] showLoadingView];
         
@@ -404,22 +453,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Special BG change
-    id speid = [[NSUserDefaults standardUserDefaults] valueForKey:@"kSpecialBGChange"];
-    if (!speid)
-    {
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:PBBackgroundImageRedrice] forKey:kUserDefaultKeyBackground];
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kSpecialBGChange"];
-    }
-    else
-    {
-        Boolean spe = [speid boolValue];
-        if (spe) {
-            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:PBBackgroundImageRedrice] forKey:kUserDefaultKeyBackground];
-            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kSpecialBGChange"];
-        }
-    }
     
     [self setDefaultBackgroundImage:NO];
     
