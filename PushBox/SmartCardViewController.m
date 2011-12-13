@@ -767,13 +767,18 @@
 
 - (void)openLinkInInnerBroswer:(NSString*)link
 {
+    NSLog(@"2");
+    
     if (link) {
         InnerBroswerViewController* browser = [[InnerBroswerViewController alloc] init];
+        //        InnerBroswerViewController* browser = [InnerBroswerViewController browser];
         browser.targetURL = link;
         [[UIApplication sharedApplication] presentModalViewController:browser atHeight:0];
         [browser loadLink:link];
         [browser release];
     }
+    
+    NSLog(@"3");
 }
 
 - (IBAction)playButtonClicked:(id)sender
@@ -1231,7 +1236,7 @@
     [actionSheet addButtonWithTitle:NSLocalizedString(@"转发", nil)];
     [actionSheet addButtonWithTitle:NSLocalizedString(@"发表评论", nil)];
     [actionSheet addButtonWithTitle:NSLocalizedString(@"查看评论", nil)];
-
+    
     [actionSheet addButtonWithTitle:NSLocalizedString(@"邮件分享", nil)];
     if ([self.status.author.userID isEqualToString:self.currentUser.userID]) {
         [actionSheet addButtonWithTitle:NSLocalizedString(@"删除微博", nil)];
@@ -1576,6 +1581,7 @@
         
     }
     else if ([type compare:@"/lk/"] == NSOrderedSame) {
+        NSLog(@"1");
         [self openLinkInInnerBroswer:para];
     }
     

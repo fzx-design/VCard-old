@@ -19,12 +19,16 @@
     BOOL isIpodPlaying;
     
     NSString* _targetURL;
+    
+    InnerBroswerViewController* _browser;
 }
 
 - (void)loadLink:(NSString*)link;
 
 - (IBAction)closeButtonClicked:(id)sender;
 - (IBAction)goSafariButtonClicked:(id)sender;
+
++ (InnerBroswerViewController*)browser;
 
 @property (nonatomic, retain) IBOutlet UIWebView* webView;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loadingIndicator;

@@ -118,7 +118,7 @@ NSString *TWITTERFON_FORM_BOUNDARY = @"0194784892923";
 + (id)client
 {
     //autorelease intentially ommited here
-    return [[WeiboClient alloc] init];
+    return [[WeiboClient alloc] init]; 
 }
 
 - (id)init
