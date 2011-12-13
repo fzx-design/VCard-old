@@ -203,7 +203,7 @@
     [_dockViewController release];	
 	[_castViewController release];
 	
-//	[_tmpImage release];
+    //	[_tmpImage release];
 	[_notificationView release];
 	[_notiNewCommentLabel release];
     [_notiNewFollowerLabel release];
@@ -312,9 +312,7 @@
 }
 
 - (void)getFriends
-{
-    [self initSpe];
-    
+{    
     getFriendsRequestCount = 0;
     
     int cursor = -1;
@@ -341,6 +339,46 @@
     [client getEmotionsWithType:nil language:nil];
 }
 
+- (void)updateBackgroundImageAnimated:(BOOL)animated background:(int)background
+{    
+    NSString *fileName = [BackgroundManViewController backgroundImageFilePathFromEnum:background];
+    NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"jpg"];
+    UIImage *img = [UIImage imageWithContentsOfFile:path];
+    
+    CGRect myImageRect = CGRectMake(0.0, 642.0, img.size.width, 46);
+    UIImage *originalImage = img;	
+    CGImageRef imageRef = originalImage.CGImage;
+    CGImageRef subImageRef = CGImageCreateWithImageInRect(imageRef, myImageRect);
+    
+    CGSize size = CGSizeMake(1024, 46);
+    
+    UIGraphicsBeginImageContext(size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextDrawImage(context, myImageRect, subImageRef);
+    UIImage* cutImage = [UIImage imageWithCGImage:subImageRef];
+    UIGraphicsEndImageContext();
+    
+    //    if (_tmpImage == nil) {
+    //        _tmpImage = [cutImage retain];
+    //    } else {
+    //        self.bottomStateInvisibleView.image = cutImage;
+    //    }
+    
+    self.bottomStateInvisibleView.image = cutImage;
+    
+    if (animated) {
+        CATransition *transition = [CATransition animation];
+        transition.duration = 1.0;
+        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        transition.type = kCATransitionFade;
+        [self.backgroundImageView.layer addAnimation:transition forKey:nil];
+        [self.bottomStateInvisibleView.layer addAnimation:transition forKey:nil];
+    }
+    
+    self.backgroundImageView.image = img;
+    
+}
+
 - (void)initCastView
 {
 	WeiboClient *client = [WeiboClient client];
@@ -350,7 +388,18 @@
             self.currentUser = [User insertUser:userDict inManagedObjectContext:self.managedObjectContext];
         }
 		
-		[self updateBackgroundImageAnimated:YES];
+        // Special BG change 3.1.1
+        Boolean spe = [[NSUserDefaults standardUserDefaults] boolForKey:@"kSpecialBGChange311"];
+        if (!spe)
+        {
+            [self updateBackgroundImageAnimated:YES background:PBBackgroundImageRedrice];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:PBBackgroundImageRedrice] forKey:kUserDefaultKeyBackground];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kSpecialBGChange311"];
+        }
+        // No special BG change 3.1.1
+        else {
+            [self updateBackgroundImageAnimated:YES];
+        }
 		
 //		[[UIApplication sharedApplication] showLoadingView];
         
@@ -472,7 +521,7 @@
 	self.bottomStateView.hidden = YES;
 	self.notificationView.hidden = YES;
     self.groupView.hidden = YES;
-        
+    
 	_commandCenterFlag = NO;
 	
     if ([WeiboClient authorized]) {
@@ -527,10 +576,10 @@
 		
 		[WeiboClient signout];
 		
-//		if (_tmpImage != nil) {
-//			[_tmpImage release];
-//		}
-//		_tmpImage = nil;
+        //		if (_tmpImage != nil) {
+        //			[_tmpImage release];
+        //		}
+        //		_tmpImage = nil;
 		
 		if (_searchCoverImageView != nil) {
 			[_searchCoverImageView release];
@@ -592,7 +641,7 @@
     self.bottomSearchBG.frame = kSearchBGFrame;
     
     [self.view addSubview:self.bottomSearchBG];
-//    [self.view addSubview:self.bottomSearchTextField];
+    //    [self.view addSubview:self.bottomSearchTextField];
     [self.view insertSubview:self.bottomSearchTextField aboveSubview:self.bottomSearchBG];
     
     [self.bottomSearchTextField becomeFirstResponder];
@@ -651,7 +700,7 @@
     [self.bottomSearchBG removeFromSuperview];
     [self.bottomSearchTextField removeFromSuperview];
     [self.view addSubview:self.bottomSearchBG];
-//    [self.view addSubview:self.bottomSearchTextField];
+    //    [self.view addSubview:self.bottomSearchTextField];
     [self.view insertSubview:self.bottomSearchTextField aboveSubview:self.bottomSearchBG];
     
     [self.bottomSearchTextField resignFirstResponder];
@@ -756,7 +805,7 @@
         } else {
             
             if (self.castViewController.dataSource == CastViewDataSourceSearch) {
-
+                
                 [UIView animateWithDuration:0.3 animations:^{
                     self.bottomStateLabel.alpha = 0.0;
                     self.bottomSearchBG.alpha = 1.0;
@@ -792,7 +841,7 @@
         }
     }
     
-
+    
 }
 
 - (void)hideBottomStateView
@@ -819,7 +868,7 @@
         }];
     }
     
-
+    
 }
 
 - (void)popBottomStateView
@@ -859,7 +908,7 @@
                 self.bottomStateLabel.hidden = YES;
             }];
             
-
+            
         } else {
             self.bottomSearchBG.hidden = YES;
             self.bottomStateLabel.hidden = NO;
@@ -867,7 +916,7 @@
         }
         
     }
-
+    
 }
 
 - (void)shouldShowUserTimelineNotification:(id)sender
@@ -1290,11 +1339,11 @@
     UIImage* cutImage = [UIImage imageWithCGImage:subImageRef];
     UIGraphicsEndImageContext();
     
-//    if (_tmpImage == nil) {
-//        _tmpImage = [cutImage retain];
-//    } else {
-//        self.bottomStateInvisibleView.image = cutImage;
-//    }
+    //    if (_tmpImage == nil) {
+    //        _tmpImage = [cutImage retain];
+    //    } else {
+    //        self.bottomStateInvisibleView.image = cutImage;
+    //    }
     
     self.bottomStateInvisibleView.image = cutImage;
     
@@ -1320,7 +1369,7 @@
 {
     if (self.dockViewController.refreshButton.enabled) {
         [self.dockViewController showLoadingView];
-//        [self.cardTableViewController refresh];
+        //        [self.cardTableViewController refresh];
 		[self.castViewController refresh];
     }
 }
@@ -1586,7 +1635,7 @@
 
 - (void)showCommandCenter
 {
-
+    
     [self.dockViewController setCommandCenter];
     
     [self hideMEImageView];

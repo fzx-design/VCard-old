@@ -269,18 +269,10 @@
 					break;
 				case 1:
                 {
-                    User *u = ((RootViewController*)[[UIApplication sharedApplication]rootViewController]).currentUser;
-                    if ([u.screenName compare:@"sharon\u8bd7"] == NSOrderedSame) {
-                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                        cell.textLabel.text = NSLocalizedString(@"\u4eb2\u7231\u7684\u751f\u65e5\u5feb\u4e50\uff01\uff01\uff01", nil);
-                        cell.imageView.image = [UIImage imageNamed:@"options_icon_legal.png"];
-                    }
-                    else
-                    {
-                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                        cell.textLabel.text = NSLocalizedString(@"版权", nil);
-                        cell.imageView.image = [UIImage imageNamed:@"options_icon_legal.png"];
-					}
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    cell.textLabel.text = NSLocalizedString(@"版权", nil);
+                    cell.imageView.image = [UIImage imageNamed:@"options_icon_legal.png"];
+					
                     break;
                 }
 			}
@@ -370,16 +362,7 @@
 			if (indexPath.row == 0) {
 				[self showAbout];
 			} else {
-                User *u = ((RootViewController*)[[UIApplication sharedApplication]rootViewController]).currentUser;
-                User *speUser = ((RootViewController*)[[UIApplication sharedApplication]rootViewController]).speUser;
-                if ([u.screenName compare:@"sharon\u8bd7"] == NSOrderedSame) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameShouldDismissUserCard object:self];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameShouldShowUserTimeline object:speUser];
-                }
-                else
-                {
-                    [self showLegacy];
-                }
+                [self showLegacy];
 			}
     }
 }
