@@ -352,7 +352,7 @@
 		
 		[self updateBackgroundImageAnimated:YES];
 		
-		[[UIApplication sharedApplication] showLoadingView];
+//		[[UIApplication sharedApplication] showLoadingView];
         
 		self.castViewController.dataSource = CastViewDataSourceFriendsTimeline;
 		self.castViewController.prevDataSource = self.castViewController.dataSource;
@@ -360,11 +360,11 @@
 			[self.castViewController loadAllFavoritesWithCompletion:nil];
 			[self showCardTableView];
 			[self showDockView];
-//			[self showMessagesView];
 			[self.dockViewController hideLoadingView];
             
             [self setRefreshButton];
 		}];
+
 		
     }];
 	
