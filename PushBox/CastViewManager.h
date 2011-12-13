@@ -37,6 +37,7 @@
 - (void)initialSetUp;
 - (void)refreshCards;
 - (void)reloadCards;
+- (void)reloadCurrentCard;
 
 - (void)pushNewViews;
 - (void)popNewViews:(CastViewInfo *)info;

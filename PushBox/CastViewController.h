@@ -88,6 +88,8 @@
 @property (nonatomic, retain) NSString* searchString;
 @property (nonatomic, assign) int statusTypeID;
 
+@property (nonatomic, assign) BOOL receivedMemoryWarning;
+
 - (void)pushCardWithCompletion:(void (^)())completion;
 - (void)popCardWithCompletion:(void (^)())completion;
 - (void)switchToSearchCards:(void (^)())completion;

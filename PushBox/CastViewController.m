@@ -45,8 +45,12 @@
 
 @synthesize infoStack = _infoStack;
 
+@synthesize receivedMemoryWarning = _receivedMemoryWarning;
+
 - (void)didReceiveMemoryWarning
 {
+    _receivedMemoryWarning = YES;
+    
     [super didReceiveMemoryWarning];
     
 }
@@ -103,6 +107,8 @@
     _statusTypeID = 0;
     _meImageView.hidden = YES;
     _addMoreViewsFlag = NO;
+    
+    _receivedMemoryWarning = NO;
     
     _startDate = [[NSDate date] retain];
 }
@@ -999,6 +1005,11 @@
 
 - (IBAction)dismissRegionTouched:(id)sender
 {
+    if (_receivedMemoryWarning) {
+        _receivedMemoryWarning = NO;
+        [self.castViewManager reloadCurrentCard];
+    }
+    
 	[self disableDismissRegion];
     [UserCardNaviViewController sharedUserCardDismiss];
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameModalCardDismissed object:self];

@@ -1221,6 +1221,13 @@
     [self performSelector:@selector(update) withObject:nil afterDelay:0.2];
 }
 
+- (void)reloadSmartCard
+{
+    [self viewDidLoad];
+    [self prepare];
+    [self performSelector:@selector(update) withObject:nil afterDelay:0.2];
+}
+
 - (IBAction)actionsButtonClicked:(UIButton *)sender {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
                                                              delegate:self 

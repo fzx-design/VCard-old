@@ -257,6 +257,18 @@
 	[self.castView reloadViews];
 }
 
+- (void)reloadCurrentCard
+{
+    for (CardFrameViewController *cardFrameViewController in self.cardFrames) {
+		if (abs(cardFrameViewController.index - self.currentIndex) == 0) {
+            [cardFrameViewController.contentViewController reloadSmartCard];
+//            Status *status = cardFrameViewController.contentViewController.status;
+            
+            break;
+		}
+	}
+}
+
 - (void)refreshCards
 {
 	[self prepareForMovingCards];

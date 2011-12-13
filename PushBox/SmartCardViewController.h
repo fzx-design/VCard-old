@@ -119,6 +119,8 @@ UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UserCardViewControll
 
 - (void)clear;
 
+- (void)reloadSmartCard;
+
 - (IBAction)actionsButtonClicked:(UIButton *)sender;
 - (IBAction)profileImageButtonClicked:(id)sender;
 - (IBAction)commentButtonClicked:(id)sender;
