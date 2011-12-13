@@ -293,7 +293,7 @@
 		FE72B4CC144FFD3000C3EE5B /* smartcard.css in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4C8144FFD3000C3EE5B /* smartcard.css */; };
 		FE72B4CD144FFD3000C3EE5B /* smartcard.html in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4C9144FFD3000C3EE5B /* smartcard.html */; };
 		FE72B4CE144FFD3000C3EE5B /* webview_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4CA144FFD3000C3EE5B /* webview_bg.jpg */; };
-		FE72B4F51450AE9A00C3EE5B /* sc_image_default 2.png in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4F41450AE9A00C3EE5B /* sc_image_default 2.png */; };
+		FE72B4F51450AE9A00C3EE5B /* sc_image_default.png in Resources */ = {isa = PBXBuildFile; fileRef = FE72B4F41450AE9A00C3EE5B /* sc_image_default.png */; };
 		FE777CC814568C3A00849B5B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE777CC714568C3A00849B5B /* MediaPlayer.framework */; };
 		FE7ADDC5145D554F00C403DF /* weibopop_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FE7ADDC3145D554F00C403DF /* weibopop_bg.png */; };
 		FE7ADDC6145D554F00C403DF /* weibopop_repost_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FE7ADDC4145D554F00C403DF /* weibopop_repost_bg.png */; };
@@ -702,7 +702,7 @@
 		FE72B4C9144FFD3000C3EE5B /* smartcard.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = smartcard.html; sourceTree = "<group>"; };
 		FE72B4CA144FFD3000C3EE5B /* webview_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = webview_bg.jpg; sourceTree = "<group>"; };
 		FE72B4E5145084D500C3EE5B /* smartcard.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = smartcard.js; sourceTree = "<group>"; };
-		FE72B4F41450AE9A00C3EE5B /* sc_image_default 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sc_image_default 2.png"; sourceTree = "<group>"; };
+		FE72B4F41450AE9A00C3EE5B /* sc_image_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc_image_default.png; sourceTree = "<group>"; };
 		FE777CC714568C3A00849B5B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		FE7ADDC3145D554F00C403DF /* weibopop_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibopop_bg.png; sourceTree = "<group>"; };
 		FE7ADDC4145D554F00C403DF /* weibopop_repost_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibopop_repost_bg.png; sourceTree = "<group>"; };
@@ -1219,7 +1219,7 @@
 				9B11290514510978001CE64E /* sc_repost_icon.png */,
 				9B11290614510978001CE64E /* sc_track_button_default.png */,
 				9B11290814510978001CE64E /* status_button_comment.png */,
-				FE72B4F41450AE9A00C3EE5B /* sc_image_default 2.png */,
+				FE72B4F41450AE9A00C3EE5B /* sc_image_default.png */,
 			);
 			name = statuscard;
 			sourceTree = "<group>";
@@ -1618,7 +1618,7 @@
 				FE72B4CC144FFD3000C3EE5B /* smartcard.css in Resources */,
 				FE72B4CD144FFD3000C3EE5B /* smartcard.html in Resources */,
 				FE72B4CE144FFD3000C3EE5B /* webview_bg.jpg in Resources */,
-				FE72B4F51450AE9A00C3EE5B /* sc_image_default 2.png in Resources */,
+				FE72B4F51450AE9A00C3EE5B /* sc_image_default.png in Resources */,
 				9B11291614510978001CE64E /* button_sendmsg_grey.png in Resources */,
 				9B11291714510978001CE64E /* card_cover_bottom.png in Resources */,
 				9B11291814510978001CE64E /* card_cover_top.png in Resources */,
