@@ -49,6 +49,12 @@
             case PBBackgroundImageBlossom:
                 imageName = NSLocalizedString(@"桃花", nil);
                 break;
+            case PBBackgroundImageWheat:
+                imageName = NSLocalizedString(@"麦穗", nil);
+                break;
+            case PBBackgroundImageRedrice:
+                imageName = NSLocalizedString(@"红米", nil);
+                break;
         }
         return imageName;
     }
@@ -86,6 +92,12 @@
         case PBBackgroundImageBlossom:
 			imageName = @"bg_flower";
             break;
+        case PBBackgroundImageWheat:
+			imageName = @"bg_xmas";
+            break;
+        case PBBackgroundImageRedrice:
+			imageName = @"bg_newyear";
+            break;
 	}
 	return imageName;
 }
@@ -121,6 +133,12 @@
         case PBBackgroundImageBlossom:
 			imageName = @"bg_icon_flower";
             break;
+        case PBBackgroundImageWheat:
+			imageName = @"bg_icon_xmas";
+            break;
+        case PBBackgroundImageRedrice:
+			imageName = @"bg_icon_newyear";
+            break;
 	}
 	return imageName;
 }
@@ -146,7 +164,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 9;
+    return 11;
 }
 
 
