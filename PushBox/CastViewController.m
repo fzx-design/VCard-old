@@ -503,21 +503,34 @@
 
 - (NSString*)pileLastID
 {
-    Status* status = [self.fetchedResultsController.fetchedObjects objectAtIndex:[self.castViewPileUpController lastIndex]];
+    int lastIndex = [self.castViewPileUpController lastIndex];
     
-    return [NSString stringWithFormat:@"%lld", [status.statusID longLongValue] - 1];
+    if ([self.fetchedResultsController.fetchedObjects count] > 0 && lastIndex < [self.fetchedResultsController.fetchedObjects count]) {
+        
+        Status* status = [self.fetchedResultsController.fetchedObjects objectAtIndex:lastIndex];
+        
+        return [NSString stringWithFormat:@"%lld", [status.statusID longLongValue] - 1];
+    } else {
+        return [NSString stringWithFormat:@"%lld", (long long)MAXFLOAT];
+    }
+    
+    
+}
+
+- (void)castViewAddMoreViews
+{
+    [self.castView addMoreViewsWithoutSection];
 }
 
 - (void)checkPiles
 {
 	if (![self.castViewManager gotEnoughViewsToShow]) {
 		[self loadMoreDataCompletion:^{
-            if (_addMoreViewsFlag) {
-                [self.castView addMoreViewsWithoutSection];
-            }
-            _addMoreViewsFlag = NO;
+            
         }];
-	}
+	} else {
+        _addMoreViewsFlag = NO;
+    }
 }
 
 - (void)setPiles
@@ -653,10 +666,10 @@
 							  feature:0];
 }
 
-- (void)loadMoreDataCompletion:(void (^)())completion
+- (BOOL)loadMoreDataCompletion:(void (^)())completion
 {
     if (_loading) {
-        return;
+        return NO;
     }
     _loading = YES;
     
@@ -675,7 +688,7 @@
 			_loading = NO;
         }];
         
-        return;
+        return YES;
     }
     
     
@@ -705,7 +718,7 @@
 			if (_refreshFlag || _shouldRefreshCardView) {
                 
 				_refreshFlag = NO;
-                //				
+
 				long long statusID = 0;
 				
 				if (self.fetchedResultsController.fetchedObjects.count) {
@@ -732,10 +745,6 @@
                     }
 					
                     [self.castViewManager refreshCards];
-                    
-                    //					[self clearData];
-                    //					
-                    //					[self insertStatusFromClient:client];
 					
 					
 				} else {
@@ -743,9 +752,7 @@
 					_currentNextPage = _oldNextPage;
 				}
 			}
-			
-			[self performSelector:@selector(configureUsability) withObject:nil afterDelay:0.5];
-			
+						
 			[self didScrollToIndex:self.castViewManager.currentIndex];
 			
 		} else {
@@ -762,6 +769,7 @@
                 
                 [self.castViewManager refreshCards];
             }
+            
 //			[ErrorNotification showLoadingError];
 		}
 		
@@ -813,6 +821,7 @@
 		[client getTrendsStatuses:self.searchString];
 	}
     
+    return YES;
 }
 
 - (void)reload:(void (^)())completion
@@ -1024,9 +1033,12 @@
         [self.castView addMoreViews];
     } else {
         _addMoreViewsFlag = YES;
-        [self loadMoreDataCompletion:^(){
+        BOOL result = [self loadMoreDataCompletion:^(){
             [self.castView addMoreViews];
         }];
+        if (!result) {
+            [self.castView addMoreViewsWithoutSection];
+        }
     }
 }
 

@@ -106,6 +106,7 @@
     
     long long aID = [self.contentViewController.status.statusID longLongValue];
     long long bID = [status.statusID longLongValue];
+    
     if (aID != bID) {
         self.contentViewController.status = status;
     }
@@ -116,7 +117,7 @@
     self.pileCoverButton.hidden = !result;
     self.pileImageView.hidden = !result;
     self.pileBounderShadow.hidden = !result;
-    
+
     if ([self readTagEnabled]) {
         self.contentViewController.readImageView.hidden = ![pile isRead];
     } else {
@@ -129,6 +130,7 @@
     self.dateRangeLabel.text = [string stringByAppendingString:[endDate customString]];
     
     self.cardNumberLabel.text = [NSString stringWithFormat:@"%d 张卡片", [pile numberOfCardsInPile]];
+    
     return YES;
 }
 

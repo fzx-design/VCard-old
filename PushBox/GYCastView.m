@@ -100,12 +100,15 @@
 - (void)setDistantPage:(int)page WithView:(UIView*)view
 {
 	int index = [self currentPage] + page;
+    
+    NSLog(@"______Set to index : %d", index);
 	
 	CGRect viewFrame = view.frame;
 	viewFrame.origin.x = viewFrame.size.width * index;
 	viewFrame.origin.y = 0;
 	
 	view.frame = viewFrame;
+    
 	if (view.superview == nil) {
 		[self.scrollView addSubview:view];
 	}
@@ -309,17 +312,34 @@
 	[self setScrollEnabled:NO];
 	
 	int page = (int)[self currentPage];
-		
+
 	self.scrollView.contentSize = CGSizeMake((pageNum + 3) * self.scrollView.frame.size.width, scrollView.frame.size.height);
+    
 	[self setRefreshPage:FirstPageIndex WithView:firstView];
 	[self setRefreshPage:SecondPageIndex WithView:secondView];
-	
-	self.pageNum = [self.delegate itemCount:self];
-	
+	    
+    NSLog(@"______frame is :%d", (int)firstView.frame.origin.x);
+    NSLog(@"______frame is :%d", (int)secondView.frame.origin.x);
+    
+    
 	[UIView animateWithDuration:1.25 animations:^(){
-		[self.delegate didScrollToIndex:0];
-		[self.scrollView setContentOffset:CGPointMake((page + MoveCardsOffsetPage + RefreshCardsOffsetPage) * self.scrollView.frame.size.width, 0)];
+
+//        CGRect frame = self.scrollView.frame;
+//        frame.origin.x -= (MoveCardsOffsetPage + RefreshCardsOffsetPage) * self.scrollView.frame.size.width;
+//        self.scrollView.frame = frame;
+        
+        float offsetX = (page + MoveCardsOffsetPage + RefreshCardsOffsetPage) * self.scrollView.frame.size.width;
+        
+        NSLog(@"______offsetx: %f", offsetX);
+        
+		[self.scrollView setContentOffset:CGPointMake(offsetX , 0)];
+        
 	} completion:^(BOOL finished) {
+        
+        NSLog(@"%f", self.scrollView.contentOffset.x);
+        
+        NSLog(@"%f, %f", firstView.frame.origin.x, secondView.frame.origin.x);
+        
         [self reset];
         [self setScrollEnabled:YES];
 	}];

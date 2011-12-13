@@ -97,7 +97,7 @@
 - (void)getUnread;
 
 - (void)loadAllFavoritesWithCompletion:(void (^)())completion;
-- (void)loadMoreDataCompletion:(void (^)())completion;
+- (BOOL)loadMoreDataCompletion:(void (^)())completion;
 - (void)clearData;
 - (void)reload:(void (^)())completion;
 - (void)refresh;

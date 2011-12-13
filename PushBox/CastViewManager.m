@@ -273,6 +273,10 @@
         vc2 = nil;
     }
     
+    NSLog(@"First text is %@____ index: %d", vc1.contentViewController.status.text, vc1.index);
+    
+    NSLog(@"Second text is %@____ index: %d", vc2.contentViewController.status.text, vc2.index);
+    
     NSLog(@"The result is first page %d, second page : %d", result1, result2);
     
 	[self.castView refreshViewsWithFirstPage:vc1.view andSecondPage:vc2.view];
