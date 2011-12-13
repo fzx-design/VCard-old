@@ -41,6 +41,7 @@
 
 #define kUserDefaultKeyFirstTime @"kUserDefaultKeyFirstTime"
 #define kUserDefaultKeyEmoticonNumber @"kUserDefaultKeyEmoticonNumber"
+#define kUserDefaultKeyEmoticonCount @"kUserDefaultKeyEmoticonCount"
 
 @interface RootViewController(private)
 - (void)showBottomStateView;
@@ -242,7 +243,7 @@
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
 	NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:30];
 	[dict setObject:[NSNumber numberWithBool:YES] forKey:kUserDefaultKeyFirstTime];
-	[dict setObject:[NSNumber numberWithInt:0] forKey:kUserDefaultKeyEmoticonNumber];
+	[dict setObject:[NSNumber numberWithInt:0] forKey:kUserDefaultKeyEmoticonCount];
 	[userDefault registerDefaults:dict];
 }
 
@@ -325,13 +326,13 @@
     WeiboClient *client = [WeiboClient client];
     [client setCompletionBlock:^(WeiboClient *client) {
         if (!client.hasError) {
-            int sum = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeyEmoticonNumber];
+            int sum = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultKeyEmoticonCount];
             NSArray *dictArray = client.responseJSONObject;
             if (sum < [dictArray count]) {
                 for (NSDictionary *dict in dictArray) {
                     [Emotion insertEmotion:dict inManagedObjectContext:self.managedObjectContext];
                 }
-                [[NSUserDefaults standardUserDefaults] setInteger:[[[NSNumber alloc] initWithInt:[dictArray count]] integerValue] forKey:kUserDefaultKeyEmoticonNumber];
+                [[NSUserDefaults standardUserDefaults] setInteger:[[[NSNumber alloc] initWithInt:[dictArray count]] integerValue] forKey:kUserDefaultKeyEmoticonCount];
             }
         }
     }];
