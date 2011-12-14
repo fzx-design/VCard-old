@@ -81,6 +81,8 @@
 
 @synthesize speUser = _speUser;
 
+@synthesize searchCoverButton = _searchCoverButton;
+
 @synthesize bottomSearchBG = _bottomSearchBG;
 @synthesize castViewController = _castViewController;
 
@@ -647,6 +649,8 @@
     
     [self.bottomSearchTextField becomeFirstResponder];
     
+    [self.searchCoverButton setHidden:YES];
+
     [self.bottomSearchView addSubview:self.bottomSearchBG]; 
     [self.bottomSearchView addSubview:self.bottomSearchTextField]; 
 }
@@ -667,7 +671,7 @@
     self.bottomSearchTextField.frame = kSearchTextFieldInputWait;
     self.bottomSearchBG.hidden = NO;
     self.bottomSearchBG.frame = kSearchBGInputWait;
-    
+                
     [self.bottomSearchBG removeFromSuperview];
     [self.bottomSearchTextField removeFromSuperview];
     [self.bottomStateView addSubview:self.bottomSearchBG]; 
@@ -677,6 +681,9 @@
 	[UIView animateWithDuration:1.0 animations:^{
 		self.bottomSearchTextField.alpha = 1.0;
 	}];
+    
+    [self.view addSubview:self.searchCoverButton];
+    [self.searchCoverButton setHidden:NO];
     
     [self.bottomSearchTextField resignFirstResponder];
 }

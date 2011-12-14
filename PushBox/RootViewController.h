@@ -79,6 +79,8 @@
     int getFriendsRequestCount;
 
     User* _speUser;
+    
+    UIButton* _searchCoverButton;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView* backgroundImageView;
@@ -94,6 +96,8 @@
 @property(nonatomic, retain) IBOutlet UIView* bottomSearchView;
 @property(nonatomic, retain) IBOutlet UILabel* bottomSearchLabel;
 @property(nonatomic, retain) IBOutlet UITextField* bottomSearchTextField;
+
+@property(nonatomic, retain) IBOutlet UIButton* searchCoverButton;
 
 @property(nonatomic, retain) IBOutlet UIView *notificationView;
 @property(nonatomic, retain) IBOutlet UILabel *notiNewCommentLabel;
